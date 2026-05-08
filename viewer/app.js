@@ -74,7 +74,6 @@ function matchesKeyword(paper, keyword) {
     paper.arxiv_id,
     paper.title,
     paper.authors,
-    paper.affiliations,
     paper.categories,
     paper.summary_cn,
     paper.abstract,
@@ -136,7 +135,6 @@ function renderCards(papers) {
       tags.appendChild(span);
     });
 
-    node.querySelector(".affiliations").textContent = text(p.affiliations) || "未提供";
     node.querySelector(".summary-cn").textContent = text(p.summary_cn) || "未提供";
     node.querySelector(".abstract").textContent = text(p.abstract) || "未提供";
 
