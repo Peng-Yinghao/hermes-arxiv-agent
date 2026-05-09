@@ -1,39 +1,56 @@
 let allPapers = [];
 let favorites = new Set();
-const FAVORITES_STORAGE_KEY = "hermes-arxiv-agent:favorites";
+let deleted = new Set();
+const STORAGE_FAVORITES = "hermes-arxiv-agent:favorites";
+const STORAGE_DELETED = "hermes-arxiv-agent:deleted";
 
-function loadFavorites() {
+function loadSet(key) {
   try {
-    const raw = window.localStorage.getItem(FAVORITES_STORAGE_KEY);
+    const raw = window.localStorage.getItem(key);
     const payload = raw ? JSON.parse(raw) : [];
     const arr = Array.isArray(payload) ? payload : [];
-    favorites = new Set(arr.map((x) => String(x)));
+    return new Set(arr.map((x) => String(x)));
   } catch (err) {
-    console.warn("加载本地收藏失败", err);
-    favorites = new Set();
+    console.warn(`加载 ${key} 失败`, err);
+    return new Set();
   }
 }
 
-function saveFavorites() {
+function saveSet(key, setObj) {
   try {
-    window.localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(Array.from(favorites)));
+    window.localStorage.setItem(key, JSON.stringify(Array.from(setObj)));
   } catch (err) {
-    throw new Error(`保存收藏失败: ${err.message || err}`);
+    throw new Error(`保存失败: ${err.message || err}`);
   }
 }
 
-function isFavorite(arxivId) {
-  return favorites.has(String(arxivId));
-}
+function loadFavorites() { favorites = loadSet(STORAGE_FAVORITES); }
+function saveFavorites() { saveSet(STORAGE_FAVORITES, favorites); }
+function loadDeleted() { deleted = loadSet(STORAGE_DELETED); }
+function saveDeleted() { saveSet(STORAGE_DELETED, deleted); }
+
+function isFavorite(arxivId) { return favorites.has(String(arxivId)); }
+function isDeleted(arxivId) { return deleted.has(String(arxivId)); }
 
 async function toggleFavorite(arxivId) {
   const key = String(arxivId);
-  if (favorites.has(key)) {
-    favorites.delete(key);
-  } else {
-    favorites.add(key);
-  }
+  favorites.has(key) ? favorites.delete(key) : favorites.add(key);
   await saveFavorites();
+}
+
+async function deletePaper(arxivId) {
+  const key = String(arxivId);
+  if (deleted.has(key)) {
+    deleted.delete(key);
+    await saveDeleted();
+    return false;
+  } else {
+    deleted.add(key);
+    favorites.delete(key);
+    await saveDeleted();
+    await saveFavorites();
+    return true;
+  }
 }
 
 function text(v) {
@@ -119,6 +136,26 @@ function renderCards(papers) {
       }
     });
 
+    const delBtn = node.querySelector(".delete-btn");
+    const removed = isDeleted(p.arxiv_id);
+    delBtn.classList.toggle("active", removed);
+    delBtn.textContent = removed ? "↩" : "✕";
+    delBtn.title = removed ? "恢复此论文" : "删除此论文";
+    if (removed) {
+      node.querySelector(".card").classList.add("deleted");
+    }
+    delBtn.addEventListener("click", async () => {
+      delBtn.disabled = true;
+      try {
+        await deletePaper(p.arxiv_id);
+        applyFilter();
+      } catch (err) {
+        alert(err.message || "操作失败");
+      } finally {
+        delBtn.disabled = false;
+      }
+    });
+
     node.querySelector(".meta").textContent =
       `抓取: ${text(p.crawled_date) || "-"} | 发表: ${text(p.published_date) || "-"}` +
       `\n作者: ${text(p.authors) || "-"}`;
@@ -148,16 +185,20 @@ function applyFilter() {
   const end = document.getElementById("endDate").value;
   const keyword = document.getElementById("keyword").value.trim();
   const favoriteOnly = document.getElementById("favoriteOnly").checked;
+  const showDeleted = document.getElementById("showDeleted").checked;
 
   const papers = allPapers.filter((p) =>
     inRange(text(p[dateMode]), start, end) &&
     matchesKeyword(p, keyword) &&
-    (!favoriteOnly || isFavorite(p.arxiv_id))
+    (!favoriteOnly || isFavorite(p.arxiv_id)) &&
+    (showDeleted || !isDeleted(p.arxiv_id))
   );
   renderCards(papers);
 
+  const totalDeleted = deleted.size;
   const summary = document.getElementById("summary");
-  summary.textContent = `共 ${allPapers.length} 篇，收藏 ${favorites.size} 篇，当前展示 ${papers.length} 篇（按 ${dateMode === "crawled_date" ? "抓取日期" : "发表日期"} 筛选）`;
+  summary.textContent =
+    `共 ${allPapers.length} 篇，收藏 ${favorites.size} 篇，已删 ${totalDeleted} 篇，当前展示 ${papers.length} 篇（按 ${dateMode === "crawled_date" ? "抓取日期" : "发表日期"} 筛选）`;
 }
 
 function resetFilter(defaultMin, defaultMax) {
@@ -166,6 +207,7 @@ function resetFilter(defaultMin, defaultMax) {
   document.getElementById("endDate").value = defaultMax || "";
   document.getElementById("keyword").value = "";
   document.getElementById("favoriteOnly").checked = false;
+  document.getElementById("showDeleted").checked = false;
   applyFilter();
 }
 
@@ -212,6 +254,7 @@ async function init() {
   const payload = await res.json();
   allPapers = payload.papers || [];
   loadFavorites();
+  loadDeleted();
 
   const defaultMin = payload.crawled_date_min || "";
   const defaultMax = payload.crawled_date_max || "";
@@ -227,6 +270,7 @@ async function init() {
   document.getElementById("applyBtn").addEventListener("click", applyFilter);
   document.getElementById("resetBtn").addEventListener("click", () => resetFilter(defaultMin, defaultMax));
   document.getElementById("favoriteOnly").addEventListener("change", applyFilter);
+  document.getElementById("showDeleted").addEventListener("change", applyFilter);
   document.getElementById("quickRange").addEventListener("click", (e) => {
     const btn = e.target.closest("button[data-range]");
     if (!btn) {

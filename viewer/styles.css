@@ -257,6 +257,41 @@ input[type="date"] {
   font-weight: 700;
 }
 
+.delete-btn {
+  margin-left: 6px;
+  border: 1px solid #d8cfbe;
+  background: #fff;
+  color: #9ca3af;
+  border-radius: 999px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  font-size: 14px;
+  line-height: 26px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.delete-btn:hover {
+  border-color: #ef4444;
+  color: #dc2626;
+  background: #fef2f2;
+}
+
+.delete-btn.active {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.card.deleted {
+  opacity: 0.45;
+  filter: grayscale(0.6);
+}
+
 .pill {
   background: var(--accent-soft);
   border: 1px solid #99f6e4;
