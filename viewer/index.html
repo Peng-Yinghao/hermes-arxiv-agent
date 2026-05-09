@@ -64,6 +64,34 @@
         <input id="keyword" type="text" placeholder="标题/作者/摘要关键词">
       </div>
 
+      <div class="field scene-field">
+        <label for="sceneFilter">应用场景</label>
+        <select id="sceneFilter">
+          <option value="">全部</option>
+          <option>个人助手</option><option>代码Agent</option><option>Web Agent</option>
+          <option>具身Agent</option><option>多智能体模拟</option><option>通用/其他</option>
+        </select>
+      </div>
+
+      <div class="field form-field">
+        <label for="formFilter">记忆形式</label>
+        <select id="formFilter">
+          <option value="">全部</option>
+          <option>文本</option><option>向量</option><option>结构化</option>
+          <option>参数化</option><option>潜变量</option><option>混合/其他</option>
+        </select>
+      </div>
+
+      <div class="field memtype-field">
+        <label for="memTypeFilter">记忆类型</label>
+        <select id="memTypeFilter">
+          <option value="">全部</option>
+          <option>上下文/摘要型</option><option>检索型</option><option>反思经验型</option>
+          <option>分层管理型</option><option>结构化图谱型</option><option>参数/潜变量型</option>
+          <option>其他</option>
+        </select>
+      </div>
+
       <div class="field favorite-only-field">
         <label for="favoriteOnly">收藏筛选</label>
         <label class="switch-label">

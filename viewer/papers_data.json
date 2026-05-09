@@ -17,6 +17,9 @@
       "pdf_filename": "2605.06601.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "代码Agent",
+      "form": "文本",
+      "mem_type": "其他",
       "pdf_url": "https://arxiv.org/pdf/2605.06601"
     },
     {
@@ -31,6 +34,9 @@
       "pdf_filename": "2605.06534.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "其他",
+      "mem_type": "其他",
       "pdf_url": "https://arxiv.org/pdf/2605.06534"
     },
     {
@@ -45,6 +51,9 @@
       "pdf_filename": "2605.06346.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "潜变量",
+      "mem_type": "参数/潜变量型",
       "pdf_url": "https://arxiv.org/pdf/2605.06346"
     },
     {
@@ -59,6 +68,9 @@
       "pdf_filename": "2605.06064.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "具身Agent",
+      "form": "参数化",
+      "mem_type": "参数/潜变量型",
       "pdf_url": "https://arxiv.org/pdf/2605.06064"
     },
     {
@@ -73,6 +85,9 @@
       "pdf_filename": "2605.05991.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "多智能体模拟",
+      "form": "文本",
+      "mem_type": "反思经验型",
       "pdf_url": "https://arxiv.org/pdf/2605.05991"
     },
     {
@@ -87,6 +102,9 @@
       "pdf_filename": "2605.05765.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "个人助手",
+      "form": "混合/其他",
+      "mem_type": "分层管理型",
       "pdf_url": "https://arxiv.org/pdf/2605.05765"
     },
     {
@@ -101,6 +119,9 @@
       "pdf_filename": "2605.05704.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "结构化",
+      "mem_type": "分层管理型",
       "pdf_url": "https://arxiv.org/pdf/2605.05704"
     },
     {
@@ -115,6 +136,9 @@
       "pdf_filename": "2605.05499.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "个人助手",
+      "form": "结构化",
+      "mem_type": "分层管理型",
       "pdf_url": "https://arxiv.org/pdf/2605.05499"
     },
     {
@@ -129,6 +153,9 @@
       "pdf_filename": "2605.05475.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "其他",
+      "mem_type": "其他",
       "pdf_url": "https://arxiv.org/pdf/2605.05475"
     },
     {
@@ -143,6 +170,9 @@
       "pdf_filename": "2605.04811.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "多智能体模拟",
+      "form": "混合/其他",
+      "mem_type": "分层管理型",
       "pdf_url": "https://arxiv.org/pdf/2605.04811"
     },
     {
@@ -157,6 +187,9 @@
       "pdf_filename": "2605.04264.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "多智能体模拟",
+      "form": "结构化",
+      "mem_type": "反思经验型",
       "pdf_url": "https://arxiv.org/pdf/2605.04264"
     },
     {
@@ -171,6 +204,9 @@
       "pdf_filename": "2605.04000.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "代码Agent",
+      "form": "参数化",
+      "mem_type": "参数/潜变量型",
       "pdf_url": "https://arxiv.org/pdf/2605.04000"
     },
     {
@@ -185,6 +221,9 @@
       "pdf_filename": "2605.03989.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "混合/其他",
+      "mem_type": "检索型",
       "pdf_url": "https://arxiv.org/pdf/2605.03989"
     },
     {
@@ -199,6 +238,9 @@
       "pdf_filename": "2605.03882.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "个人助手",
+      "form": "混合/其他",
+      "mem_type": "上下文/摘要型",
       "pdf_url": "https://arxiv.org/pdf/2605.03882"
     },
     {
@@ -213,6 +255,9 @@
       "pdf_filename": "2605.03804.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "个人助手",
+      "form": "混合/其他",
+      "mem_type": "分层管理型",
       "pdf_url": "https://arxiv.org/pdf/2605.03804"
     },
     {
@@ -227,6 +272,9 @@
       "pdf_filename": "2605.03675.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "混合/其他",
+      "mem_type": "分层管理型",
       "pdf_url": "https://arxiv.org/pdf/2605.03675"
     },
     {
@@ -241,6 +289,9 @@
       "pdf_filename": "2605.03354.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "其他",
+      "mem_type": "其他",
       "pdf_url": "https://arxiv.org/pdf/2605.03354"
     },
     {
@@ -255,6 +306,9 @@
       "pdf_filename": "2605.03312.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "混合/其他",
+      "mem_type": "分层管理型",
       "pdf_url": "https://arxiv.org/pdf/2605.03312"
     },
     {
@@ -269,6 +323,9 @@
       "pdf_filename": "2605.03288.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "具身Agent",
+      "form": "参数化",
+      "mem_type": "参数/潜变量型",
       "pdf_url": "https://arxiv.org/pdf/2605.03288"
     },
     {
@@ -283,6 +340,9 @@
       "pdf_filename": "2605.03228.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "结构化",
+      "mem_type": "分层管理型",
       "pdf_url": "https://arxiv.org/pdf/2605.03228"
     },
     {
@@ -297,6 +357,9 @@
       "pdf_filename": "2605.03213.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "其他",
+      "mem_type": "其他",
       "pdf_url": "https://arxiv.org/pdf/2605.03213"
     },
     {
@@ -311,6 +374,9 @@
       "pdf_filename": "2605.03208.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "其他",
+      "mem_type": "其他",
       "pdf_url": "https://arxiv.org/pdf/2605.03208"
     },
     {
@@ -325,6 +391,9 @@
       "pdf_filename": "2605.02868.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "代码Agent",
+      "form": "结构化",
+      "mem_type": "结构化图谱型",
       "pdf_url": "https://arxiv.org/pdf/2605.02868"
     },
     {
@@ -339,6 +408,9 @@
       "pdf_filename": "2605.02812.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "多智能体模拟",
+      "form": "文本",
+      "mem_type": "其他",
       "pdf_url": "https://arxiv.org/pdf/2605.02812"
     },
     {
@@ -353,6 +425,9 @@
       "pdf_filename": "2605.02681.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "结构化",
+      "mem_type": "其他",
       "pdf_url": "https://arxiv.org/pdf/2605.02681"
     },
     {
@@ -367,6 +442,9 @@
       "pdf_filename": "2605.02431.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "代码Agent",
+      "form": "结构化",
+      "mem_type": "结构化图谱型",
       "pdf_url": "https://arxiv.org/pdf/2605.02431"
     },
     {
@@ -381,6 +459,9 @@
       "pdf_filename": "2605.02411.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "文本",
+      "mem_type": "检索型",
       "pdf_url": "https://arxiv.org/pdf/2605.02411"
     },
     {
@@ -395,6 +476,9 @@
       "pdf_filename": "2605.02396.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "参数化",
+      "mem_type": "参数/潜变量型",
       "pdf_url": "https://arxiv.org/pdf/2605.02396"
     },
     {
@@ -409,6 +493,9 @@
       "pdf_filename": "2605.02199.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "向量",
+      "mem_type": "其他",
       "pdf_url": "https://arxiv.org/pdf/2605.02199"
     },
     {
@@ -423,6 +510,9 @@
       "pdf_filename": "2605.02168.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "多智能体模拟",
+      "form": "混合/其他",
+      "mem_type": "分层管理型",
       "pdf_url": "https://arxiv.org/pdf/2605.02168"
     },
     {
@@ -437,6 +527,9 @@
       "pdf_filename": "2605.02162.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "向量",
+      "mem_type": "检索型",
       "pdf_url": "https://arxiv.org/pdf/2605.02162"
     },
     {
@@ -451,6 +544,9 @@
       "pdf_filename": "2605.02130.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "具身Agent",
+      "form": "其他",
+      "mem_type": "其他",
       "pdf_url": "https://arxiv.org/pdf/2605.02130"
     },
     {
@@ -465,6 +561,9 @@
       "pdf_filename": "2605.01970.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "文本",
+      "mem_type": "检索型",
       "pdf_url": "https://arxiv.org/pdf/2605.01970"
     },
     {
@@ -479,6 +578,9 @@
       "pdf_filename": "2605.01708.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "向量",
+      "mem_type": "其他",
       "pdf_url": "https://arxiv.org/pdf/2605.01708"
     },
     {
@@ -493,6 +595,9 @@
       "pdf_filename": "2605.01694.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "潜变量",
+      "mem_type": "参数/潜变量型",
       "pdf_url": "https://arxiv.org/pdf/2605.01694"
     },
     {
@@ -507,6 +612,9 @@
       "pdf_filename": "2605.01688.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "个人助手",
+      "form": "结构化",
+      "mem_type": "结构化图谱型",
       "pdf_url": "https://arxiv.org/pdf/2605.01688"
     },
     {
@@ -521,6 +629,9 @@
       "pdf_filename": "2605.06614.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "结构化",
+      "mem_type": "反思经验型",
       "pdf_url": "https://arxiv.org/pdf/2605.06614"
     },
     {
@@ -535,6 +646,9 @@
       "pdf_filename": "2605.06527.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "个人助手",
+      "form": "结构化",
+      "mem_type": "反思经验型",
       "pdf_url": "https://arxiv.org/pdf/2605.06527"
     },
     {
@@ -549,6 +663,9 @@
       "pdf_filename": "2605.06472.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "向量",
+      "mem_type": "其他",
       "pdf_url": "https://arxiv.org/pdf/2605.06472"
     },
     {
@@ -563,6 +680,9 @@
       "pdf_filename": "2605.06416.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "混合/其他",
+      "mem_type": "上下文/摘要型",
       "pdf_url": "https://arxiv.org/pdf/2605.06416"
     },
     {
@@ -577,6 +697,9 @@
       "pdf_filename": "2605.06365.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "结构化",
+      "mem_type": "结构化图谱型",
       "pdf_url": "https://arxiv.org/pdf/2605.06365"
     },
     {
@@ -591,6 +714,9 @@
       "pdf_filename": "2605.06132.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "向量",
+      "mem_type": "检索型",
       "pdf_url": "https://arxiv.org/pdf/2605.06132"
     },
     {
@@ -605,6 +731,9 @@
       "pdf_filename": "2605.05716.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "混合/其他",
+      "mem_type": "其他",
       "pdf_url": "https://arxiv.org/pdf/2605.05716"
     },
     {
@@ -619,6 +748,9 @@
       "pdf_filename": "2605.05583.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "结构化",
+      "mem_type": "检索型",
       "pdf_url": "https://arxiv.org/pdf/2605.05583"
     },
     {
@@ -633,6 +765,9 @@
       "pdf_filename": "2605.05373.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "具身Agent",
+      "form": "潜变量",
+      "mem_type": "参数/潜变量型",
       "pdf_url": "https://arxiv.org/pdf/2605.05373"
     },
     {
@@ -647,6 +782,9 @@
       "pdf_filename": "2605.05191.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "Web Agent",
+      "form": "混合/其他",
+      "mem_type": "分层管理型",
       "pdf_url": "https://arxiv.org/pdf/2605.05191"
     },
     {
@@ -661,6 +799,9 @@
       "pdf_filename": "2605.04939.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "多智能体模拟",
+      "form": "参数化",
+      "mem_type": "参数/潜变量型",
       "pdf_url": "https://arxiv.org/pdf/2605.04939"
     },
     {
@@ -675,6 +816,9 @@
       "pdf_filename": "2605.04897.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "混合/其他",
+      "mem_type": "检索型",
       "pdf_url": "https://arxiv.org/pdf/2605.04897"
     },
     {
@@ -689,6 +833,9 @@
       "pdf_filename": "2605.04050.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "代码Agent",
+      "form": "结构化",
+      "mem_type": "分层管理型",
       "pdf_url": "https://arxiv.org/pdf/2605.04050"
     },
     {
@@ -703,6 +850,9 @@
       "pdf_filename": "2605.03941.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "混合/其他",
+      "mem_type": "其他",
       "pdf_url": "https://arxiv.org/pdf/2605.03941"
     },
     {
@@ -717,6 +867,9 @@
       "pdf_filename": "2605.03482.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "向量",
+      "mem_type": "检索型",
       "pdf_url": "https://arxiv.org/pdf/2605.03482"
     },
     {
@@ -731,6 +884,9 @@
       "pdf_filename": "2604.23088.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "代码Agent",
+      "form": "文本",
+      "mem_type": "上下文/摘要型",
       "pdf_url": "https://arxiv.org/pdf/2604.23088"
     },
     {
@@ -745,6 +901,9 @@
       "pdf_filename": "2604.07595.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "通用/其他",
+      "form": "结构化",
+      "mem_type": "结构化图谱型",
       "pdf_url": "https://arxiv.org/pdf/2604.07595"
     },
     {
@@ -759,6 +918,9 @@
       "pdf_filename": "2603.07880.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "多智能体模拟",
+      "form": "文本",
+      "mem_type": "上下文/摘要型",
       "pdf_url": "https://arxiv.org/pdf/2603.07880"
     },
     {
@@ -773,6 +935,9 @@
       "pdf_filename": "2602.04129.pdf",
       "crawled_date": "2026-05-08",
       "notes": "",
+      "scene": "多智能体模拟",
+      "form": "结构化",
+      "mem_type": "结构化图谱型",
       "pdf_url": "https://arxiv.org/pdf/2602.04129"
     }
   ]

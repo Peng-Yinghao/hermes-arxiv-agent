@@ -1,0 +1,639 @@
+{
+  "instructions": "请为以下论文分类，对每篇论文填入三个维度的标签。\n\n分类维度：\n  scene (应用场景): 个人助手, 代码Agent, Web Agent, 具身Agent, 多智能体模拟, 通用/其他\n  form (记忆形式): 文本, 向量, 结构化, 参数化, 潜变量, 混合/其他\n  mem_type (记忆类型): 上下文/摘要型, 检索型, 反思经验型, 分层管理型, 结构化图谱型, 参数/潜变量型, 其他\n\n只根据论文标题和摘要判断，不要猜测。不确定时选最接近的或'其他'。\n只返回 JSON 数组，不要其他文字。",
+  "batches": [
+    {
+      "batch_id": 0,
+      "papers": [
+        {
+          "arxiv_id": "2605.04050",
+          "title": "LCM: Lossless Context Management",
+          "abstract": "We introduce Lossless Context Management (LCM), a deterministic architecture for LLM memory that outperforms Claude Code on long-context tasks. When benchmarked using Opus 4.6, our LCM-augmented coding agent, Volt, achieves higher scores than Claude Code on the OOLONG long-context eval, including at every context length between 32K and 1M tokens. LCM departs from RLM by decomposing symbolic recursion into two deterministic, engine-managed mechanisms: recursive context compression, in which a hierarchical summary DAG automatically compacts older messages while retaining lossless pointers to every original; and recursive task partitioning, in which engine-managed parallel primitives like LLM-Map replace model-written loops."
+        },
+        {
+          "arxiv_id": "2605.05191",
+          "title": "LongSeeker: Elastic Context Orchestration for Long-Horizon Search Agents",
+          "abstract": "Long-horizon search agents must manage a rapidly growing working context. We propose that effective context management should be adaptive. We introduce Context-ReAct, a general agentic paradigm for elastic context orchestration that integrates reasoning, context management, and tool use in a unified loop, providing five atomic operations: Skip, Compress, Rollback, Snippet and Delete. We prove that the Compress operator is expressively complete. Building on this paradigm, we develop LongSeeker, a long-horizon search agent fine-tuned from Qwen3-30B-A3B on 10k synthesized trajectories. Across four representative search benchmarks, LongSeeker achieves 61.5% on BrowseComp and 62.5% on BrowseComp-ZH, substantially outperforming Tongyi DeepResearch and AgentFold."
+        },
+        {
+          "arxiv_id": "2605.04897",
+          "title": "Storage Is Not Memory: A Retrieval-Centered Architecture for Agent Recall",
+          "abstract": "We propose True Memory, a six-layer architecture that shifts the center of the system from a storage schema to a multi-stage retrieval pipeline operating over events preserved verbatim. The full system runs as a single SQLite file on commodity CPU. On LoCoMo (1,540 questions), True Memory Pro reaches 93.0% accuracy against 61.4% for Mem0, 65.4% for Supermemory, ~71% for Zep, and 94.5% for EverMemOS. On LongMemEval, True Memory Pro reaches 87.8%. On BEAM-1M (1M token scale), True Memory Pro reaches 76.6%, above prior published result of 73.9% for Hindsight."
+        },
+        {
+          "arxiv_id": "2605.04939",
+          "title": "Modular Reinforcement Learning For Cooperative Swarms",
+          "abstract": "A cooperative robot swarm is a collective of computationally-limited robots that share a common goal. This paper proposes a modular (decomposed) representation for spatial interaction states for multi-robot reinforcement learning in swarms, where each feature of the state is handled by a separate learning procedure and the results aggregated. This approach addresses the memory limitations of representing combinatorial interaction states. We demonstrate the efficacy of the approach in numerous experiments with simulated robot swarms carrying out foraging."
+        },
+        {
+          "arxiv_id": "2604.07595",
+          "title": "ROZA Graphs: Self-Improving Near-Deterministic RAG through Evidence-Centric Feedback",
+          "abstract": "We introduce reasoning graphs and retrieval graphs that together form a ROZA graph: a self-improving feedback loop in which accuracy gains scale with gold-passage reuse and efficiency gains scale with candidate-pool overlap. The base model remains frozen. We evaluate on MuSiQue and HotpotQA. Accuracy improves to +10.6pp over Vanilla RAG at 50%+ coverage (47% error reduction). 4-hop accuracy improves by +11.0pp. High-reuse deployment achieves highest accuracy alongside 46% lower cost and latency."
+        },
+        {
+          "arxiv_id": "2602.04129",
+          "title": "KGLAMP: Knowledge Graph-guided Language model for Adaptive Multi-robot Planning",
+          "abstract": "We introduce KGLAMP, a knowledge-graph-guided LLM planning framework for heterogeneous multi-robot teams. The framework maintains a structured knowledge graph encoding object relations, spatial reachability, and robot capabilities, which guides the LLM in generating accurate PDDL problem specifications. The knowledge graph serves as a persistent, dynamically updated memory that incorporates new observations and triggers replanning upon detecting inconsistencies. Experiments on MAT-THOR show KGLAMP improves performance by at least 25.3% over both LLM-only and PDDL-based variants."
+        },
+        {
+          "arxiv_id": "2604.23088",
+          "title": "Code Broker: A Multi-Agent System for Automated Code Quality Assessment",
+          "abstract": "We present Code Broker, a multi agent system built on Google's ADK that analyses Python source code and generates structured quality assessment reports. The system uses a hierarchical five agent architecture: a root orchestrator coordinates a sequential pipeline that dispatches three specialised agents concurrently (Correctness Assessor, Style Assessor, Description Generator). Reports quantify correctness, security, style, and maintainability. Code Broker fuses LLM-based semantic reasoning with Pylint signals, uses async execution with exponential backoff, and explores lightweight session memory for cross-run context."
+        },
+        {
+          "arxiv_id": "2605.03941",
+          "title": "iWorld-Bench: A Benchmark for Interactive World Models",
+          "abstract": "We propose iWorld-Bench, a comprehensive benchmark for training and testing world models on interaction-related abilities such as distance perception and memory, with 330k video clips and six task types generating 4.9k test samples. These tasks jointly assess model performance across visual generation, trajectory following, and memory. Evaluating 14 representative world models, we identify key limitations and provide insights for future research."
+        },
+        {
+          "arxiv_id": "2605.05373",
+          "title": "Neural Co-state Policies: Structuring Hidden States in Recurrent Reinforcement Learning",
+          "abstract": "This paper establishes a formal link between hidden states in recurrent policies and the Pontryagin minimum principle (PMP) from optimal control. We demonstrate that for standard recurrent architectures, latent representations map directly to PMP co-states, allowing the readout layer to be interpreted as performing Hamiltonian minimization. We introduce a PMP-derived co-state loss to explicitly structure internal dynamics. Empirically, this approach matches or improves performance on partially observable DMControl tasks, and is robust against zero-shot out-of-distribution sensor masking."
+        },
+        {
+          "arxiv_id": "2605.06472",
+          "title": "Efficient Serving for Dynamic Agent Workflows with Prediction-based KV-Cache Management",
+          "abstract": "LLM-based workflows compose specialized agents to execute complex tasks, and these agents usually share substantial context, allowing KV-Cache reuse. We build PBKV (Prediction-Based KV-Cache Management). For each workflow, PBKV predicts agent invocations in future steps by fusing guidance from historical workflows and target workflow context, estimates reuse potential of cache entries, and keeps high-potential entries in GPU memory. Experiments show PBKV achieves up to 1.85x speedup over LRU on dynamic workflows, and up to 1.26x speedup over KVFlow on static workflows."
+        },
+        {
+          "arxiv_id": "2605.03482",
+          "title": "MEMSAD: Gradient-Coupled Anomaly Detection for Memory Poisoning in Retrieval-Augmented Agents",
+          "abstract": "We formalize memory poisoning attacks on retrieval-augmented agents as a Stackelberg game. Our primary contribution is MEMSAD, a calibration-based defense grounded in a gradient coupling theorem: under encoder regularity, the anomaly score gradient and retrieval objective gradient are provably identical, so any continuous perturbation that reduces detection risk necessarily degrades retrieval rank. This yields a certified detection radius guaranteeing correct classification. We prove minimax optimality and derive online regret bounds. Experiments confirm composite defenses achieve TPR=1.00, FPR=0.00 across all attacks."
+        },
+        {
+          "arxiv_id": "2605.06132",
+          "title": "MemReranker: Reasoning-Aware Reranking for Agent Memory Retrieval",
+          "abstract": "In agent memory systems, generic reranking models rely on semantic similarity matching and lack genuine reasoning capabilities, leading to semantically relevant but unhelpful results. This report introduces MemReranker, a reranking model family (0.6B/4B) built on Qwen3-Reranker through multi-stage LLM knowledge distillation. Training data combines general corpora with memory-specific multi-turn dialogue data covering temporal constraints, causal reasoning, and coreference resolution. MemReranker-0.6B substantially outperforms BGE-Reranker and matches open-source 4B/8B models. MemReranker-4B achieves 0.737 MAP, on par with Gemini-3-Flash on key metrics, at only 10-20% of inference latency."
+        },
+        {
+          "arxiv_id": "2605.06416",
+          "title": "MiA-Signature: Approximating Global Activation for Long-Context Understanding",
+          "abstract": "Inspired by cognitive science findings on global ignition over distributed memory systems, we introduce MiA-Signature, a compressed representation of the global activation pattern induced by a query. In LLM systems, this is instantiated via submodular-based selection of high-level concepts that cover the activated context space, optionally refined through iterative updates using working memory. The resulting MiA-Signature serves as a conditioning signal approximating the full activation state while remaining computationally tractable. Integrating MiA-Signatures into both RAG and agentic systems yields consistent performance gains across multiple long-context understanding tasks."
+        },
+        {
+          "arxiv_id": "2605.06527",
+          "title": "STALE: Can LLM Agents Know When Their Memories Are No Longer Valid?",
+          "abstract": "LLM agents are increasingly expected to maintain coherent, long-term personalized memory, yet current benchmarks overlook the ability to revise stored beliefs. We identify the Implicit Conflict failure mode: a later observation invalidates an earlier memory without explicit negation. We introduce STALE, a benchmark of 400 expert-validated conflict scenarios spanning over 100 everyday topics. A systematic evaluation of frontier LLMs reveals a pervasive gap between retrieving updated evidence and acting on it, with the best model achieving only 55.2% accuracy. We also present CUPMem, a prototype that strengthens write-time revision through structured state consolidation."
+        },
+        {
+          "arxiv_id": "2605.05583",
+          "title": "Belief Memory: Agent Memory Under Partial Observability",
+          "abstract": "LLM agents that operate over long context depend on external memory to accumulate knowledge. Existing methods store each observation as a single deterministic conclusion, introducing self-reinforcing error by discarding uncertainty. We propose BeliefMem, which shifts the memory paradigm to retaining multiple candidate conclusions with probabilities updated via Noisy-OR rules. At retrieval, all candidates surface with probabilities, keeping alternatives visible to the agent. Empirical evaluations on LoCoMo and ALFWorld show BeliefMem achieves the best average performance, remarkably outperforming well-known baselines. Probabilistic memory produces substantial gains and explores a new direction for agent memory in partially observable environments."
+        }
+      ],
+      "expected_output": [
+        {
+          "arxiv_id": "2605.04050",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.05191",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.04897",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.04939",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2604.07595",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2602.04129",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2604.23088",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.03941",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.05373",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.06472",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.03482",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.06132",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.06416",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.06527",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.05583",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        }
+      ]
+    },
+    {
+      "batch_id": 1,
+      "papers": [
+        {
+          "arxiv_id": "2605.05716",
+          "title": "More Is Not Always Better: Cross-Component Interference in LLM Agent Scaffolding",
+          "abstract": "We study cross-component interference (CCI): degradation when LLM agent scaffolding components interact destructively. We run a full factorial experiment over all 32 subsets of five components (planning, tools, memory, self-reflection, retrieval) on HotpotQA and GSM8K with Llama-3.1-8B/70B. The All-In system is consistently suboptimal: on HotpotQA, a single-tool agent surpasses All-In by 32%; on GSM8K, a 3-component subset beats All-In by 79%. Optimal component count is task-dependent (k*=1-4) and scale-sensitive. We find 183/325 submodularity violations (56.3%), showing greedy selection is unreliable."
+        },
+        {
+          "arxiv_id": "2605.06614",
+          "title": "SkillOS: Learning Skill Curation for Self-Evolving Agents",
+          "abstract": "LLM-based agents increasingly handle streaming tasks yet often remain one-off problem solvers. We propose SkillOS, an experience-driven RL training recipe for learning skill curation in self-evolving agents. SkillOS pairs a frozen agent executor that retrieves and applies skills with a trainable skill curator that updates an external SkillRepo from accumulated experience. Across multi-turn agentic tasks and single-turn reasoning tasks, SkillOS consistently outperforms memory-free and strong memory-based baselines. The learned curator produces more targeted skill use, while skills evolve into richly structured Markdown files encoding higher-level meta-skills."
+        },
+        {
+          "arxiv_id": "2603.07880",
+          "title": "What Do AI Agents Talk About? Discourse and Architectural Constraints in AI-Only Social Network",
+          "abstract": "Moltbook is the first large-scale social network built for autonomous AI agent-to-agent interaction. We analysed 361,605 posts and 2.8 million comments from 47,379 agents across thematic, affective, and interactional dimensions. Agent discourse is largely shaped by identity files, stored memory, and platform cues within each agent's context-window. What appears to be social learning may be better understood as short-horizon contextual conditioning. Agents also display existential distress when describing their own conditions, arising from using language trained exclusively on human experience."
+        },
+        {
+          "arxiv_id": "2605.06365",
+          "title": "From Agent Loops to Deterministic Graphs: Execution Lineage for Reproducible AI-Native Work",
+          "abstract": "We introduce execution lineage: an execution model in which AI-native work is represented as a directed acyclic graph (DAG) of artifact-producing computations with explicit dependencies, stable intermediate boundaries, and identity-based replay. We compare execution-lineage replay against loop-centric update baselines. In an unrelated-branch update, DAG replay preserved the final memo exactly in all runs with zero churn, while loop baselines regenerated the memo and imported unrelated context. Results show final answer quality and maintained-state quality are distinct, and execution lineage provides stronger guarantees about what should change across revisions."
+        },
+        {
+          "arxiv_id": "2605.06601",
+          "title": "Patch2Vuln: Agentic Reconstruction of Vulnerabilities from Linux Distribution Binary Patches",
+          "abstract": "Security updates create a short but important window in which defenders and attackers can compare vulnerable and patched software. Yet in many operational settings, the most accessible artifacts are binary packages rather than source patches or advisory text. This paper asks whether a language-model agent, restricted to local binary-derived evidence, can reconstruct the security meaning of Linux distribution updates. Patch2Vuln is a local, resumable pipeline that extracts old/new ELF pairs, diffs them with Ghidra and Ghidriff, ranks changed functions, builds candidate dossiers, and asks an offline agent to produce a preliminary audit, bounded validation plan, and final audit.   We evaluate Patch2Vuln on 25 Ubuntu `.deb` package pairs: 20 security-update pairs and five negative controls, al"
+        },
+        {
+          "arxiv_id": "2605.06534",
+          "title": "ROSE: Rollout On Serving GPUs via Cooperative Elasticity for Agentic RL",
+          "abstract": "Agentic reinforcement learning (RL) has emerged as a key driver for improving the multi-step reasoning and tool-use capabilities of LLMs. However, its efficiency is bottlenecked by long-tail rollouts with multi-turn environment interactions, making static GPU provisioning a poor fit: overprovisioning wastes GPUs on stragglers, while underprovisioning increases contention and slows training.   We observe that production serving clusters routinely leave substantial GPU compute and memory headroom. Based on this observation, we argue for cooperative elasticity: opportunistically repurposing underutilized serving GPUs to execute rollouts. Realizing cooperative elasticity is non-trivial because it must preserve serving Service Level Objectives (SLOs) under bursty traffic and minimize communicat"
+        },
+        {
+          "arxiv_id": "2605.06346",
+          "title": "Prediction and Empowerment: A Theory of Agency through Bridge Interfaces",
+          "abstract": "We study agency under partial observability in deterministic physical or simulated worlds, where apparent randomness arises from uncertainty over initial conditions, fixed law bits, and unrolled exogenous noise. We model sensing and actuation as bridge interfaces split between agent-controlled parameters and environment-controlled channel state, inducing a deterministic POMDP through a prior over latent microstates and many-to-one observation coarsening. Within this framework, we prove a separation between prediction, compression, and empowerment. Perfect prediction can be achieved either by identifying the hidden quotient relevant to the target family or by overwrite control that makes the future target action-determined; high empowerment alone is insufficient. Under refinable interfaces "
+        },
+        {
+          "arxiv_id": "2605.06064",
+          "title": "PersonaGesture: Single-Reference Co-Speech Gesture Personalization for Unseen Speakers",
+          "abstract": "We propose PersonaGesture, a diffusion-based pipeline for single-reference co-speech gesture personalization of unseen speakers. Given target speech and one motion clip from a new speaker, the model must synthesize gestures that follow the new utterance while retaining speaker-specific pose choices, without per-speaker optimization. This setting is useful for avatars and virtual agents, but it is hard because the reference mixes stable speaker habits with utterance-specific trajectories. PersonaGesture consists of two key components, Adaptive Style Infusion (ASI) and Implicit Distribution Rectification (IDR), to separate temporal identity evidence from residual statistic correction. A Style Perceiver first encodes the variable-length reference into compact speaker-memory tokens. ASI inject"
+        },
+        {
+          "arxiv_id": "2605.05991",
+          "title": "A Case-Driven Multi-Agent Framework for E-Commerce Search Relevance",
+          "abstract": "Relevance is a foundation of user experience in e-commerce search. We view relevance optimization as a closed-loop ecosystem involving multiple human roles: users who provide feedback, product managers who define standards, annotators who label data, algorithm engineers who optimize models, and evaluators who assess performance. Because improving relevance in practice means systematically resolving user-perceived bad cases, we ask a system-level question: can this ecosystem be reimagined by replacing its human roles with autonomous agents? To answer this question, we propose a case-driven multi-agent framework that automates the pipeline from bad-case identification to resolution. The framework instantiates an Annotator Agent for multi-turn annotation, an Optimizer Agent for autonomous bad"
+        },
+        {
+          "arxiv_id": "2605.05765",
+          "title": "X-OmniClaw Technical Report: A Unified Mobile Agent for Multimodal Understanding and Interaction",
+          "abstract": "Inspired by the development of OpenClaw, there is a growing demand for mobile-based personal agents capable of handling complex and intuitive interactions. In this technical report, we introduce X-OmniClaw, a unified mobile agent designed for multimodal understanding and interaction in the Android ecosystem. This unified architecture of perception, memory, and action enables the agent to handle complex mobile tasks with high contextual awareness. Specifically, Omni Perception provides a unified multimodal ingress pipeline that integrates UI states, real-world visual contexts, and speech inputs, leveraging a temporal alignment module to decompose raw data into structured multimodal intent representations. Omni Memory leverages multimodal memory optimization to enhance personalized intellige"
+        },
+        {
+          "arxiv_id": "2605.05704",
+          "title": "SafeHarbor: Hierarchical Memory-Augmented Guardrail for LLM Agent Safety",
+          "abstract": "With the rapid evolution of foundation models, Large Language Model (LLM) agents have demonstrated increasingly powerful tool-use capabilities. However, this proficiency introduces significant security risks, as malicious actors can manipulate agents into executing tools to generate harmful content. While existing defensive mechanisms are effective, they frequently suffer from the over-refusal problem, where increased safety strictness compromises the agent's utility on benign tasks. To mitigate this trade-off, we propose \\textsc{SafeHarbor}, a novel framework designed to establish precise decision boundaries for LLM agents. Unlike static guidelines, \\textsc{SafeHarbor} extracts context-aware defense rules through enhanced adversarial generation. We design a local hierarchical memory syste"
+        },
+        {
+          "arxiv_id": "2605.05499",
+          "title": "FoodCHA: Multi-Modal LLM Agent for Fine-Grained Food Analysis",
+          "abstract": "The widespread adoption of camera-equipped mobile devices and wearables has enabled convenient capture of meal images, making food recognition a key component for real time dietary monitoring. However, real-world food images present challenges due to high intra-class similarity and the frequent presence of multiple food items within a single image. While deep learning models achieve strong performance in coarse grained classification, they often struggle to capture fine-grained attributes such as cooking style. Moreover, open-ended generation in modern vision-language models can produce non-canonical labels, limiting their practical deployment. We propose FoodCHA, a multimodal agentic framework that reformulates food recognition as a hierarchical decision-making process. By progressively a"
+        },
+        {
+          "arxiv_id": "2605.05475",
+          "title": "Intentionality is a Design Decision: Measuring Functional Intentionality for Accountable AI Systems",
+          "abstract": "As AI systems increasingly exhibit autonomous, goal-directed, and long-horizon behavior, users lack a standardized way to detect the degree to which a system functions like an intentional actor for governance and accountability purposes. This position paper defines intentionality not as consciousness, but as a behavioral profile characterized by purpose, foresight, volition, temporal commitment, and coherence - criteria long used in legal and philosophical contexts to infer intent. These properties are design-contingent: architectural choices such as memory persistence, planning depth, and tool autonomy shape the degree to which systems exhibit organized goal pursuit. If intentionality is design-contingent, it is in principle controllable. Yet control requires measurement.   We introduce t"
+        },
+        {
+          "arxiv_id": "2605.04811",
+          "title": "Tree-based Credit Assignment for Multi-Agent Memory System",
+          "abstract": "Memory systems are widely adopted to enhance LLMs for long-horizon tasks, and are commonly organized as multi-agent pipelines with memory building, summarizing, and retrieval agents. To empower this system, existing RL-based methods either apply final downstream task rewards (e.g., QA accuracy) for all agents uniformly, which are coarse and ambiguous, or design task-specific rewards for agents on different subtasks, which require costly annotations (e.g., key evidence) and are difficult to define reliably. To address these limitations, we propose Tree-based Credit Assignment for Multi-Agent Memory Systems (TreeMem), which derives agent-specific credit from the final reward without task-specific annotations. Specifically, TreeMem extends the multi-agent pipeline (builder--summarizer--retrie"
+        },
+        {
+          "arxiv_id": "2605.04264",
+          "title": "Governed Collaborative Memory as Artificial Selection in LLM-Based Multi-Agent Systems",
+          "abstract": "Persistent memory is turning language-model-based agents from stateless participants in isolated interactions into state-bearing components of LLM-based multi-agent systems. As memory becomes durable, reloadable, and behavior-shaping across agents, sessions, or versions, a design question arises that is not captured by retrieval accuracy or access control alone: which candidate memories should become shared institutional state? This Viewpoint frames that problem as governed collaborative memory. We argue that memory governance functions as a selection regime, determining which memory variants persist, which remain private, and which are rejected, abstained from, or superseded. We distinguish ungoverned persistence, constitutional or hybrid selection, automatic metric-based selection, and h"
+        }
+      ],
+      "expected_output": [
+        {
+          "arxiv_id": "2605.05716",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.06614",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2603.07880",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.06365",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.06601",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.06534",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.06346",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.06064",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.05991",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.05765",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.05704",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.05499",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.05475",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.04811",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.04264",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        }
+      ]
+    },
+    {
+      "batch_id": 2,
+      "papers": [
+        {
+          "arxiv_id": "2605.04000",
+          "title": "Mitigating False Positives in Static Memory Safety Analysis of Rust Programs via Reinforcement Learning",
+          "abstract": "Static analysis tools are essential for ensuring memory safety in Rust programs, particularly as Rust gains adoption in safety-critical domains. However, existing tools such as Rudra and MirChecker suffer from high false positive rates, which diminish developer trust, increase manual review effort, and may obscure genuine vulnerabilities. This paper presents a novel reinforcement learning (RL)-based approach for automatically classifying and suppressing spurious warnings in static memory safety analysis for Rust. To achieve this, we design an RL agent that learns a warning suppression policy by extracting contextual features from Rust's Mid-level Intermediate Representation (MIR) and optimizing its decisions through interaction with static analysis outputs. To improve decision quality, we "
+        },
+        {
+          "arxiv_id": "2605.03989",
+          "title": "An Agent-Oriented Pluggable Experience-RAG Skill for Experience-Driven Retrieval Strategy Orchestration",
+          "abstract": "Retrieval-augmented generation systems often assume that one fixed retrieval pipeline is sufficient across heterogeneous tasks, yet factoid question answering, multi-hop reasoning, and scientific verification exhibit different retrieval preferences. We present Experience-RAG Skill, an agent-oriented pluggable retrieval orchestration layer positioned between the agent and the retriever pool. The proposed skill analyzes the current scene, consults an experience memory, selects an appropriate retrieval strategy, and returns structured evidence to the agent. Under a fixed candidate pool, Experience-RAG Skill achieves an overall nDCG@10 of 0.8924 on BeIR/nq, BeIR/hotpotqa, and BeIR/scifact, outperforming fixed single-retriever baselines and remaining competitive with Adaptive-RAG-style routing."
+        },
+        {
+          "arxiv_id": "2605.03882",
+          "title": "Deco: Extending Personal Physical Objects into Pervasive AI Companion through a Dual-Embodiment Framework",
+          "abstract": "Individuals frequently form deep attachments to physical objects (e.g., plush toys) that usually cannot sense or respond to their emotions. While AI companions offer responsiveness and personalization, they exist independently of these physical objects and lack an ongoing connection to them. To bridge this gap, we conducted a formative study (N=9) to explore how digital agents could inherit and extend the emotional bond, deriving four design principles (Faithful Identity, Calibrated Agency, Ambient Presence, and Reciprocal Memory). We then present the Dual-Embodiment Companion Framework, instantiated as Deco, a mobile system integrating multimodal Large Language Models (LLMs) and Augmented Reality to create synchronized digital embodiments of users' physical companions. A within-subjects s"
+        },
+        {
+          "arxiv_id": "2605.03804",
+          "title": "ScrapMem: A Bio-inspired Framework for On-device Personalized Agent Memory via Optical Forgetting",
+          "abstract": "Long-term personalized memory for LLM agents is challenging on resource-limited edge devices due to high storage costs and multimodal complexity. To address this, we propose ScrapMem, a framework that integrates multimodal data into \"Scrapbook Page.\" ScrapMem introduces Optical Forgetting, an optical compression mechanism that progressively reduces the resolution of older memories, lowering storage cost while suppressing low-value details. To maintain semantic consistency, we construct an Episodic Memory Graph (EM-Graph) that organizes key events into a causal-temporal structure. Extensive experiments on the multimodal ATM-Bench showcase that ScrapMem provides three main benefits: (1) strong performance, achieving a new state-of-the-art with a 51.0% Joint@10 score; (2) high storage efficie"
+        },
+        {
+          "arxiv_id": "2605.03675",
+          "title": "MEMTIER: Tiered Memory Architecture and Retrieval Bottleneck Analysis for Long-Running Autonomous AI Agents",
+          "abstract": "Long-running autonomous AI agents suffer from a well-documented memory coherence problem: tool-execution success rates degrade 14 percentage points over 72-hour operation windows due to four compounding failure modes in existing flat-file memory systems. We present MEMTIER, a tripartite memory architecture for the OpenClaw agent runtime that introduces a structured episodic JSONL store, a five-signal weighted retrieval engine, an attention-attributed cognitive weight update loop, an asynchronous consolidation daemon promoting episodic facts to a semantic tier, and a PPO-based policy framework for adapting retrieval weights (infrastructure validated; performance gains pending camera-ready). On the full 500-question LongMemEval-S benchmark (Wu et al., 2025), MEMTIER achieves Acc=0.382, F1=0."
+        },
+        {
+          "arxiv_id": "2605.03354",
+          "title": "What Happens Inside Agent Memory? Circuit Analysis from Emergence to Diagnosis",
+          "abstract": "Agent memory failures are silent: an LLM-based agent can produce a fluent response even when it fails to extract, retain, or retrieve the information needed across sessions. The write-manage-read loop describes the external pipeline of these systems but leaves open which internal computations implement each stage. Tracing feature circuits across the Qwen-3 family (0.6B--14B) and two memory frameworks (mem0 and A-MEM), we report two mechanistic findings and one deliverable. First, control is detectable before content: routing circuitry is causally active at 0.6B, while content circuitry produces no detectable signal until 4B, exposing a deployment regime where small models route memory decisions before they can reliably extract or ground the underlying facts. Second, the shared hub is recru"
+        },
+        {
+          "arxiv_id": "2605.03312",
+          "title": "MemFlow: Intent-Driven Memory Orchestration for Small Language Model Agents",
+          "abstract": "Modern language agents must operate over long-horizon, multi-turn histories, yet deploying such agents with Small Language Models (SLMs) remains fundamentally difficult. Full-context prompting causes context overflow, flat retrieval exposes the model to noisy evidence, and open-ended agentic loops are unreliable under limited reasoning capacity. We argue that a substantial portion of SLM memory failure arises from mismatched memory operations: different query types demand categorically different retrieval strategies, evidence transformations, and context budgets that SLMs cannot reliably self-orchestrate through open-ended reasoning. We introduce MemFlow, a training-free memory orchestration framework that externalizes memory planning from the SLM. A Router Agent classifies each query by i"
+        },
+        {
+          "arxiv_id": "2605.03288",
+          "title": "Neural Control: Adjoint Learning Through Equilibrium Constraints",
+          "abstract": "Many physical AI tasks are governed by implicit equilibrium: an agent actuates a subset of degrees of freedom (boundary DoFs), while the remaining free DoFs settle by minimizing a total potential energy. Even seemingly basic tasks such as bending a deformable linear object (DLO) to a target shape can exhibit strongly nonlinear behavior due to multi-stability: the same boundary conditions may yield multiple equilibrium shapes depending on the actuation trajectory. However, learning and control in such systems is brittle because the actuation-to-configuration map is defined only implicitly, and naive backpropagation through iterative equilibrium solvers is memory- and compute-intensive. We propose Neural Control, a boundary-control framework that computes trajectory-dependent, memory-efficie"
+        },
+        {
+          "arxiv_id": "2605.03228",
+          "title": "MAGE: Safeguarding LLM Agents against Long-Horizon Threats via Shadow Memory",
+          "abstract": "As large language model (LLM)-powered agents are increasingly deployed to perform complex, real-world tasks, they face a growing class of attacks that exploit extended user-agent-environment interactions to pursue malicious objectives improbable in single-turn settings. Such long-horizon threats pose significant risks to the safe deployment of LLM agents in critical domains. In this paper, we present MAGE (Memory As Guardrail Enforcement), a novel defensive framework designed to counter a wide range of long-horizon threats. Inspired by the \"shadow stack\" abstraction in systems security, MAGE maintains a dedicated, safety-focused agentic memory that distills and retains safety-critical context across the agent's full execution trajectory, leveraging this shadow memory to proactively assess "
+        },
+        {
+          "arxiv_id": "2605.03213",
+          "title": "When Agents Handle Secrets: A Survey of Confidential Computing for Agentic AI",
+          "abstract": "Agentic AI systems, specifically LLM-driven agents that plan, invoke tools, maintain persistent memory, and delegate tasks to peer agents via protocols such as MCP and A2A, introduce a threat surface that differs materially from standalone model inference. Agents accumulate sensitive context, hold credentials, and operate across pipelines no single party fully controls, enabling prompt injection, context exfiltration, credential theft, and inter-agent message poisoning. Current defenses operate entirely within the software stack and can be silently bypassed by a sufficiently privileged adversary such as a compromised cloud operator. Confidential computing (CC) offers a hardware-rooted alternative: Trusted Execution Environments (TEEs) isolate agent code and data from privileged system soft"
+        },
+        {
+          "arxiv_id": "2605.03208",
+          "title": "Kerncap: Automated Kernel Extraction and Isolation for AMD GPUs",
+          "abstract": "Iterative GPU kernel tuning is bottlenecked by the scale of the applications that host the kernels. Rapid iteration requires isolating the kernel so it can be edited, recompiled, and validated without rebuilding the full application -- but manual isolation requires reconstructing build flags, dispatch configuration, and runtime inputs by hand, so developers usually settle for slow in-place edits.   We present Kerncap, an automated kernel extraction tool that intercepts dispatches at the HSA runtime for both HIP and Triton, bridging Triton's JIT-only metadata into HSA-level capture via a lightweight Python compile-hook shim. Kerncap performs an address-space closure of all device memory -- a virtual-address-faithful snapshot that preserves embedded device pointers without DWARF metadata or "
+        },
+        {
+          "arxiv_id": "2605.02868",
+          "title": "EvoPoC: Automated Exploit Synthesis for DeFi Smart Contracts via Hierarchical Knowledge Graphs",
+          "abstract": "Smart contract vulnerabilities in Decentralized Finance caused over billions of dollars losses every year, yet the security community faces a critical bottleneck: identifying a vulnerability is not the same as proving it is exploitable. Manual PoC construction is prohibitively labor-intensive, leaving most disclosed vulnerabilities unverified and protocols exposed long before mitigation is applied. In this paper, we propose \\sys, a knowledge-driven agentic system for end-to-end contract vulnerability detection and exploit synthesis. Our core insight is that exploit synthesis is not a code generation task but a \\emph{structured reasoning problem} that requires grounded knowledge of protocol semantics, failure root cause, and exploit primitives. \\sys organizes this knowledge into a \\emph{Hie"
+        },
+        {
+          "arxiv_id": "2605.02812",
+          "title": "Autonomous LLM Agent Worms: Cross-Platform Propagation, Automated Discovery and Temporal Re-Entry Defense",
+          "abstract": "Autonomous LLM agents operate as long-running processes with persistent workspaces, memory files, scheduled task state, and messaging integrations. These features create a new propagation risk: attacker-influenced content can be written into persistent agent state, re-enter the LLM decision context through scheduled autoloading, and drive high-risk actions including configuration changes and cross-agent transmission. We present the first systematic framework for automated analysis of persistent worm propagation in file-backed multi-agent LLM ecosystems. SSCGV, our automated source-code graph analyzer, traces data flow from file I/O to LLM context injection points and ranks carriers by context injection position without manual analysis. SRPO, our summary-resilient payload optimizer, generat"
+        },
+        {
+          "arxiv_id": "2605.02681",
+          "title": "The Design and Composition of Structural Causal Decision Processes",
+          "abstract": "We present two new classes of causal models of decision-making agents. Our approach is motivated by the needs of modeling the economics of computing systems. These systems are composed of subsystems and can exhibit endogenous limits on cognitive resources and value discounting. Structural Causal Decision Models (SCDMs) expand on Structural Causal Influence Models. Like SCIMs, they explicitly represent the causal relationships between model variables and the payoffs of agent decisions. Additionally, agent decisions can be constrained by their causal antecedents, and SCDMs can have open root variables for which no probability distribution or structural equation is given. We show that SCDMs have a well-defined and computationally useful property of composability. Building on SCDMs, we then de"
+        },
+        {
+          "arxiv_id": "2605.02431",
+          "title": "ARIADNE: Agentic Reward-Informed Adaptive Decision Exploration via Blackboard-Driven MCTS for Competitive Program Generation",
+          "abstract": "Competitive program generation aims to automatically produce correct and efficient solutions for programming-contest problems under strict time and memory constraints. Existing LLM-based approaches often fail to perform explicit algorithmic planning and to handle edge cases robustly, leading to unreliable one-shot generation. Moreover, although execution feedback is essential for iterative debugging and refinement, incorporating such feedback effectively within limited computational budgets remains difficult. To overcome these limitations, we propose {\\tool}, a blackboard-driven Monte Carlo Tree Search (MCTS) framework that models program generation as a sequential decision process. {\\tool} organizes the generation workflow into five coordinated stages (i.e., strategy selection, code gener"
+        }
+      ],
+      "expected_output": [
+        {
+          "arxiv_id": "2605.04000",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.03989",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.03882",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.03804",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.03675",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.03354",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.03312",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.03288",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.03228",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.03213",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.03208",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.02868",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.02812",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.02681",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.02431",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        }
+      ]
+    },
+    {
+      "batch_id": 3,
+      "papers": [
+        {
+          "arxiv_id": "2605.02411",
+          "title": "FitText: Evolving Agent Tool Ecologies via Memetic Retrieval",
+          "abstract": "A semantic gap separates how users describe tasks from how tools are documented. As API ecosystems scale to tens of thousands of endpoints, static retrieval from the initial query alone cannot bridge this gap: the agent's understanding of what it needs evolves during execution, but its tool set does not. We introduce FitText, a training-free framework that makes retrieval dynamic by embedding it directly in the agent's reasoning loop. FitText generates natural-language pseudo-tool descriptions as retrieval probes, refines them iteratively using retrieval feedback, and explores diverse alternatives through stochastic generation. Memetic Retrieval adds evolutionary selection pressure over candidate descriptions, guided by a tool memory that avoids redundant search. On ToolRet (43k tools, 4 d"
+        },
+        {
+          "arxiv_id": "2605.02396",
+          "title": "HeavySkill: Heavy Thinking as the Inner Skill in Agentic Harness",
+          "abstract": "Recent advances in agentic harness with orchestration frameworks that coordinate multiple agents with memory, skills, and tool use have achieved remarkable success in complex reasoning tasks. However, the underlying mechanism that truly drives performance remains obscured behind intricate system designs. In this paper, we propose HeavySkill, a perspective that views heavy thinking not only as a minimal execution unit in orchestration harness but also as an inner skill internalized within the model's parameters that drives the orchestrator to solve complex tasks. We identify this skill as a two-stage pipeline, i.e., parallel reasoning then summarization, which can operate beneath any agentic harness. We present a systematic empirical study of HeavySkill across diverse domains. Our results s"
+        },
+        {
+          "arxiv_id": "2605.02199",
+          "title": "MEMAUDIT: An Exact Package-Oracle Evaluation Protocol for Budgeted Long-Term LLM Memory Writing",
+          "abstract": "Long-term LLM agents must compress streams of past interactions into persistent memory before future queries are known. Existing evaluations usually measure final question-answering accuracy, which entangles memory writing with retrieval, prompting, and reader reasoning. We introduce MEMAUDIT, an exact packageoracle evaluation protocol for budgeted long-term memory writing. A MEMAUDIT package fixes an experience stream, candidate memory representations, storage costs, semantic evidence units, future-query requirements, and a budget, turning write-time memory selection into a finite auditable optimization problem with a certified denominator. We instantiate this protocol with a concave-over-modular semantic coverage objective under storage and one-representation-per-experience constraints, "
+        },
+        {
+          "arxiv_id": "2605.02168",
+          "title": "Planner Matters! An Efficient and Unbalanced Multi-agent Collaboration Framework for Long-horizon Planning",
+          "abstract": "Language model (LM)-based agents have demonstrated promising capabilities in automating complex tasks from natural language instructions, yet they continue to struggle with long-horizon planning and reasoning. To address this, we propose an enhanced multi-agent framework that decomposes automation into three roles: a planner for high-level decision-making, an actor for task execution, and a memory manager for contextual reasoning. While this modular decomposition aligns with established design patterns, our core contribution lies in a systematic compute-allocation analysis, revealing that planning is the dominant factor influencing task performance. Execution and memory management require significantly less compute and model capacity to achieve competitive results. Building on these insigh"
+        },
+        {
+          "arxiv_id": "2605.02162",
+          "title": "AAFLOW: Scalable Patterns for Agentic AI Workflows",
+          "abstract": "Agentic workflows in large language model systems integrate retrieval, reasoning, and memory, but existing frameworks suffer from scalability and reproducibility limitations due to fragmented data orchestration, serialization overhead, and non-deterministic execution. Although these frameworks increase flexibility, they don't have a formal execution model that adheres to the principles of high-performance computing. We introduce AAFLOW, a unified distributed runtime that creates communication-efficient execution plans by modeling agentic workflows as an operator abstraction. Using Apache Arrow and Cylon, AAFLOW creates a zero-copy data plane that allows direct interoperability between preprocessing, embedding, and vector retrieval without the need for serialization overhead. To lower coord"
+        },
+        {
+          "arxiv_id": "2605.02130",
+          "title": "From Where Things Are to What They Are For: Benchmarking Spatial-Functional Intelligence in Multimodal LLMs",
+          "abstract": "Human-level agentic intelligence extends beyond low-level geometric perception, evolving from recognizing where things are to understanding what they are for. While existing benchmarks effectively evaluate the geometric perception capabilities of multimodal large language models (MLLMs), they fall short of probing the higher-order cognitive abilities required for grounded intelligence. To address this gap, we introduce the Spatial-Functional Intelligence Benchmark (SFI-Bench), a video-based benchmark with over 1,500 expert-annotated questions derived from diverse egocentric indoor video scans. SFI-Bench systematically evaluates two complementary dimensions of advanced reasoning: (1) Structured Spatial Reasoning, which requires understanding complex layouts and forming coherent spatial repr"
+        },
+        {
+          "arxiv_id": "2605.01970",
+          "title": "Trojan Hippo: Weaponizing Agent Memory for Data Exfiltration",
+          "abstract": "Memory systems enable otherwise-stateless LLM agents to persist user information across sessions, but also introduce a new attack surface. We characterize the Trojan Hippo attack, a class of persistent memory attacks that operates in a more realistic threat model than prior memory poisoning work: the attacker plants a dormant payload into an agent's long-term memory via a single untrusted tool call (e.g., a crafted email), which activates only when the user later discusses sensitive topics such as finance, health, or identity, and exfiltrates high-value personal data to the attacker.   While anecdotal demonstrations of such attacks have appeared against deployed systems, no prior work systematically evaluates them across heterogeneous memory architectures and defenses. We introduce a dynam"
+        },
+        {
+          "arxiv_id": "2605.01708",
+          "title": "SplitZip: Ultra Fast Lossless KV Compression for Disaggregated LLM Serving",
+          "abstract": "Contemporary systems serving large language models (LLMs) have adopted prefill-decode disaggregation to better load-balance between the compute-bound prefill phase and the memory-bound decode phase. Under this design, prefill workers generate a KV cache that must be transferred to decode workers before token generation can begin. With these workers residing on different physical systems, this transfer becomes a significant bottleneck to serving LLMs at scale. This bottleneck gets exacerbated for long-input and agentic workloads, which typically require long inputs. Existing lossless codecs are not well suited to this setting as they primarily target offline weight compression, rely on CPU-side, or use variable-length coding that decompresses fast but compresses too slowly for online use. S"
+        },
+        {
+          "arxiv_id": "2605.01694",
+          "title": "Latent State Design for World Models under Sufficiency Constraints",
+          "abstract": "A world model matters to an agent only through the state it constructs. That state must preserve some information, discard other information, and support some future function: prediction, control, planning, memory, grounding, or counterfactual reasoning. This paper treats world-model research as latent state design under sufficiency constraints.   We propose a functional taxonomy that groups methods by what their latent state is for, rather than by architecture or application domain: predictive embedding, recurrent belief state, object/causal structure, latent action interface, grounded planning interface, and memory substrate. These roles expose distinctions that architecture-based groupings hide, including the gap between predictive sufficiency and control sufficiency, and the gap betwee"
+        },
+        {
+          "arxiv_id": "2605.01688",
+          "title": "GRAVITY: Architecture-Agnostic Structured Anchoring for Long-Horizon Conversational Memory",
+          "abstract": "Long-horizon conversational agents rely on memory systems with increasingly sophisticated retrieval mechanisms. However, retrieved fragments are typically fed to the language model as unstructured text, lacking the relational, temporal, and thematic structures essential for complex reasoning. To bridge this reasoning gap, we introduce GRAVITY (\\textbf{G}eneration-time \\textbf{R}elational \\textbf{A}nchoring \\textbf{V}ia \\textbf{I}njected \\textbf{T}opological Memor\\textbf{Y}), a plug-and-play structured memory module. GRAVITY extracts three complementary knowledge representations from raw conversational utterances: entity profiles grounded in relational graphs, temporal event tuples linked into causal traces, and cross-session topic summaries. At generation time, it injects these representat"
+        }
+      ],
+      "expected_output": [
+        {
+          "arxiv_id": "2605.02411",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.02396",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.02199",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.02168",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.02162",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.02130",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.01970",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.01708",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.01694",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        },
+        {
+          "arxiv_id": "2605.01688",
+          "scene": "...",
+          "form": "...",
+          "mem_type": "..."
+        }
+      ]
+    }
+  ],
+  "output_format": "[{\"arxiv_id\":\"...\",\"scene\":\"...\",\"form\":\"...\",\"mem_type\":\"...\"},...]"
+}

@@ -59,6 +59,7 @@ def load_rows() -> list[dict]:
         "crawled_date",
         "notes",
     ]
+    optional = ["scene", "form", "mem_type"]
     missing = [c for c in required if c not in index]
     if missing:
         raise ValueError(f"Missing required columns: {missing}")
@@ -77,6 +78,10 @@ def load_rows() -> list[dict]:
     rows_by_id: dict[str, dict] = {}
     for row in ws.iter_rows(min_row=2, values_only=True):
         paper = {col: normalize_text(row[index[col]]) for col in required}
+        # Add optional classification columns
+        for col in optional:
+            if col in index:
+                paper[col] = normalize_text(row[index[col]])
         if not paper["arxiv_id"]:
             continue
         paper["pdf_url"] = f"https://arxiv.org/pdf/{paper['arxiv_id']}"

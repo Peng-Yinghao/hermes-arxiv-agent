@@ -240,6 +240,17 @@ function renderCards(papers) {
 
     node.querySelector(".summary-cn").textContent = text(p.summary_cn) || "未提供";
     node.querySelector(".abstract").textContent = text(p.abstract) || "未提供";
+
+    // Classification tags
+    const clsContainer = document.createElement("div");
+    clsContainer.className = "cls-tags";
+    if (p.scene) clsContainer.appendChild(makeClsTag("🎯 " + p.scene, "scene"));
+    if (p.form) clsContainer.appendChild(makeClsTag("💾 " + p.form, "form"));
+    if (p.mem_type) clsContainer.appendChild(makeClsTag("🧠 " + p.mem_type, "mem"));
+    if (clsContainer.children.length) {
+      node.querySelector(".section").before(clsContainer);
+    }
+
     container.appendChild(node);
   });
 }
@@ -253,6 +264,13 @@ function showToast(msg, type) {
   setTimeout(() => { t.style.opacity = "0"; setTimeout(() => t.remove(), 300); }, 3000);
 }
 
+function makeClsTag(text, kind) {
+  const s = document.createElement("span");
+  s.className = `cls-tag cls-${kind}`;
+  s.textContent = text;
+  return s;
+}
+
 // ── Filter ──
 function applyFilter() {
   const dateMode = document.getElementById("dateMode").value;
@@ -261,12 +279,18 @@ function applyFilter() {
   const keyword = document.getElementById("keyword").value.trim();
   const favoriteOnly = document.getElementById("favoriteOnly").checked;
   const showDeleted = document.getElementById("showDeleted").checked;
+  const scene = document.getElementById("sceneFilter").value;
+  const form = document.getElementById("formFilter").value;
+  const memType = document.getElementById("memTypeFilter").value;
 
   const papers = allPapers.filter(p =>
     inRange(text(p[dateMode]), start, end) &&
     matchesKeyword(p, keyword) &&
     (!favoriteOnly || isFavorite(p.arxiv_id)) &&
-    (showDeleted || !isDeleted(p.arxiv_id))
+    (showDeleted || !isDeleted(p.arxiv_id)) &&
+    (!scene || (p.scene || "").includes(scene)) &&
+    (!form || (p.form || "").includes(form)) &&
+    (!memType || (p.mem_type || "").includes(memType))
   );
   renderCards(papers);
 
@@ -281,6 +305,9 @@ function resetFilter(dmin, dmax) {
   document.getElementById("keyword").value = "";
   document.getElementById("favoriteOnly").checked = false;
   document.getElementById("showDeleted").checked = false;
+  document.getElementById("sceneFilter").value = "";
+  document.getElementById("formFilter").value = "";
+  document.getElementById("memTypeFilter").value = "";
   applyFilter();
 }
 
@@ -318,6 +345,9 @@ async function init() {
   document.getElementById("resetBtn").addEventListener("click", () => resetFilter(payload.crawled_date_min, payload.crawled_date_max));
   document.getElementById("favoriteOnly").addEventListener("change", applyFilter);
   document.getElementById("showDeleted").addEventListener("change", applyFilter);
+  document.getElementById("sceneFilter").addEventListener("change", applyFilter);
+  document.getElementById("formFilter").addEventListener("change", applyFilter);
+  document.getElementById("memTypeFilter").addEventListener("change", applyFilter);
   document.getElementById("quickRange").addEventListener("click", e => {
     const btn = e.target.closest("button[data-range]");
     if (btn) applyQuickRange(btn.dataset.range);

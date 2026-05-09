@@ -595,6 +595,25 @@ summary {
 .toast-error { background: #991b1b; color: #fecaca; }
 .toast-info { background: #1e40af; color: #dbeafe; }
 
+/* ── Classification tags ── */
+.cls-tags {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin: 8px 0;
+}
+.cls-tag {
+  padding: 2px 10px; border-radius: 999px;
+  font-size: 12px; font-weight: 500;
+}
+.cls-scene { background: #dbeafe; color: #1e40af; }
+.cls-form  { background: #fce7f3; color: #9d174d; }
+.cls-mem   { background: #d1fae5; color: #065f46; }
+
+/* ── Classification select fields (compact) ── */
+.scene-field select, .form-field select, .memtype-field select {
+  min-width: 100px;
+  max-width: 130px;
+}
+
 /* ── MD button ── */
 .md-btn {
   margin-left: 4px;
