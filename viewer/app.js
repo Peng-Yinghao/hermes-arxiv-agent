@@ -211,17 +211,19 @@ function renderCards(papers) {
     });
 
     // MD button — full markdown from arxiv2md
-    node.querySelector(".md-btn").addEventListener("click", async () => {
-      const btn = node.querySelector(".md-btn");
-      btn.disabled = true;
-      btn.textContent = "⏳";
+    const mdBtn = node.querySelector(".md-btn");
+    if (!mdBtn) { console.error("MD button not found in template"); return; }
+    mdBtn.addEventListener("click", async () => {
+      mdBtn.disabled = true;
+      mdBtn.textContent = "⏳";
       try {
-        await showMarkdownModal(p, "full");
+        await showMarkdownModal(p);
       } catch (err) {
-        showToast("加载失败: " + err.message, "error");
+        console.error("MD load error:", err);
+        alert("加载失败: " + (err.message || err));
       } finally {
-        btn.disabled = false;
-        btn.textContent = "MD";
+        mdBtn.disabled = false;
+        mdBtn.textContent = "MD";
       }
     });
 
@@ -404,17 +406,32 @@ ${p.abstract || "（暂未提供）"}
 let currentMdPaper = null;
 let showMdRaw = false;
 
-async function showMarkdownModal(p, mode) {
+async function showMarkdownModal(p) {
+  const modal = document.getElementById("mdModal");
+  const title = document.getElementById("mdModalTitle");
+  const body = document.getElementById("mdModalBody");
+  if (!modal || !title || !body) {
+    throw new Error("Markdown 弹窗组件缺失，请刷新页面");
+  }
+
   currentMdPaper = p;
   showMdRaw = false;
-  document.getElementById("mdModalTitle").textContent = p.title || p.arxiv_id;
+  title.textContent = p.title || p.arxiv_id;
 
+  console.log("Loading full MD for", p.arxiv_id);
   const resp = await fetch(`markdown_full/${p.arxiv_id}.md`);
-  if (!resp.ok) throw new Error(`全文 Markdown 未生成（HTTP ${resp.status}）`);
+  if (!resp.ok) throw new Error(`全文 Markdown 未部署（HTTP ${resp.status}）。部署后等待 GitHub Actions 完成。`);
   const md = await resp.text();
+  console.log("Loaded", md.length, "chars");
 
-  updateMdBody(md);
-  document.getElementById("mdModal").style.display = "flex";
+  if (typeof marked !== "undefined" && marked.parse) {
+    body.innerHTML = marked.parse(md);
+  } else {
+    body.innerHTML = `<pre class="md-raw">${escapeHtml(md)}</pre>`;
+    console.warn("marked.js not loaded, showing raw markdown");
+  }
+
+  modal.style.display = "flex";
   document.body.style.overflow = "hidden";
 }
 
