@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "viewer/**"
+      - "deleted_ids.txt"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 

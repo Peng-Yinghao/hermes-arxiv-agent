@@ -529,3 +529,52 @@ summary {
   from { transform: translateX(-50%) translateY(20px); opacity: 0; }
   to { transform: translateX(-50%) translateY(0); opacity: 1; }
 }
+
+/* ── Token modal ── */
+.token-modal {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 2000;
+  display: flex; align-items: center; justify-content: center;
+}
+.token-modal-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 32px;
+  max-width: 440px; width: 90%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  font-size: 14px; line-height: 1.7;
+}
+.token-modal-box h3 { margin: 0 0 12px; font-size: 18px; }
+.token-modal-box p { margin: 0 0 6px; color: #555; }
+.token-modal-box a { color: #2563eb; }
+.token-modal-box input {
+  width: 100%; padding: 10px 12px; margin: 12px 0;
+  border: 1px solid #d1d5db; border-radius: 8px;
+  font-size: 13px; font-family: monospace;
+}
+.token-modal-btns { display: flex; gap: 8px; margin-top: 8px; }
+.token-modal-btns .btn { flex: 1; padding: 8px; border-radius: 8px; font-size: 13px; cursor: pointer; }
+.token-modal-btns .btn-primary { background: #2563eb; color: #fff; border: none; }
+.token-modal-btns .btn { background: #fff; border: 1px solid #d1d5db; color: #555; }
+.token-hint { font-size: 12px; color: #999; margin-top: 10px; }
+
+/* ── Token hint bar ── */
+.token-hint-bar {
+  background: #fef3c7; color: #92400e;
+  padding: 6px 16px; font-size: 13px;
+  border-radius: 0 0 8px 8px;
+}
+.token-hint-bar a { color: #b45309; font-weight: 600; }
+
+/* ── Toast ── */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  padding: 10px 24px; border-radius: 10px;
+  font-size: 14px; z-index: 3000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  transition: opacity 0.3s;
+}
+.toast-success { background: #065f46; color: #d1fae5; }
+.toast-error { background: #991b1b; color: #fecaca; }
+.toast-info { background: #1e40af; color: #dbeafe; }
