@@ -24,11 +24,15 @@ EXCEL_FILE = BASE_DIR / "papers_record.xlsx"
 VIEWER_JSON = BASE_DIR / "viewer" / "papers_data.json"
 CRAWLED_IDS_FILE = BASE_DIR / "crawled_ids.txt"
 PENDING_LLM_IDS_FILE = BASE_DIR / "pending_llm_ids.txt"
+DELETED_IDS_FILE = BASE_DIR / "deleted_ids.txt"
 KEYWORDS_FILE = BASE_DIR / "search_keywords.txt"
 OUTPUT_JSON = BASE_DIR / "new_papers.json"   # 输出给 hermes agent 的中间文件
 
-# arxiv API 配置
-ARXIV_API = "https://export.arxiv.org/api/query"
+# arxiv API 配置 — try multiple endpoints in order
+ARXIV_API_URLS = [
+    "https://export.arxiv.org/api/query",
+    "http://export.arxiv.org/api/query",
+]
 MAX_RESULTS = 50
 REQUEST_INTERVAL = 3  # 秒
 
@@ -39,6 +43,19 @@ def load_crawled_ids() -> set:
         return set()
     with open(CRAWLED_IDS_FILE, "r", encoding="utf-8") as f:
         return set(line.strip() for line in f if line.strip())
+
+
+def load_deleted_ids() -> set:
+    """Load arxiv IDs that have been permanently deleted by the user."""
+    if not DELETED_IDS_FILE.exists():
+        return set()
+    ids = set()
+    with open(DELETED_IDS_FILE, encoding="utf-8") as f:
+        for line in f:
+            sid = line.strip()
+            if sid and not sid.startswith("#"):
+                ids.add(sid)
+    return ids
 
 
 def load_excel_ids() -> set:
@@ -103,16 +120,69 @@ def load_search_keywords() -> str:
 
 
 def search_arxiv_papers(keywords: str, max_results: int = MAX_RESULTS) -> list[dict]:
-    url = (
-        f"{ARXIV_API}?search_query={keywords}"
-        f"&max_results={max_results}"
-        f"&sortBy=submittedDate"
-        f"&sortOrder=descending"
-    )
+    """Search arXiv API with proper rate limiting (max 1 req/sec per arXiv policy).
+    Uses Retry-After header on 429 responses per arXiv best practices.
+    Tries multiple API endpoints (HTTPS then HTTP fallback).
+    """
+    import time
 
     print(f"[INFO] Searching arxiv: {keywords}")
-    response = requests.get(url, timeout=30)
-    response.raise_for_status()
+    headers = {
+        "User-Agent": "HermesArxivAgent/1.0 (https://github.com/Peng-Yinghao/hermes-arxiv-agent; hermes@arxiv-agent.dev)"
+    }
+
+    # Rate limiting: arXiv allows 1 request per second max
+    if not hasattr(search_arxiv_papers, "_last_request"):
+        search_arxiv_papers._last_request = 0.0
+
+    # Try each API endpoint
+    for api_idx, api_base in enumerate(ARXIV_API_URLS):
+        url = (
+            f"{api_base}?search_query={keywords}"
+            f"&max_results={max_results}"
+            f"&sortBy=submittedDate"
+            f"&sortOrder=descending"
+        )
+        if api_idx > 0:
+            print(f"[INFO] Switching to fallback endpoint: {api_base}")
+
+        max_retries = 4
+        for attempt in range(max_retries):
+            if attempt > 0:
+                wait = min(2 ** attempt * 5, 120)  # 10, 20, 40, 120
+                print(f"[INFO] Retry {attempt}/{max_retries - 1} after {wait}s...")
+                time.sleep(wait)
+            elapsed = time.time() - search_arxiv_papers._last_request
+            if elapsed < 3.0:
+                time.sleep(3.0 - elapsed)
+            search_arxiv_papers._last_request = time.time()
+            try:
+                response = requests.get(url, timeout=30, headers=headers)
+            except requests.exceptions.ConnectionError as e:
+                print(f"[INFO] Connection error: {e}")
+                break  # try next endpoint
+            except requests.exceptions.ReadTimeout:
+                print(f"[INFO] Read timeout on {api_base}")
+                break  # try next endpoint
+            if response.status_code == 429:
+                retry_after = response.headers.get("Retry-After", "60")
+                try:
+                    wait_sec = int(retry_after)
+                except ValueError:
+                    wait_sec = 60
+                print(f"[INFO] Got 429, Retry-After={retry_after}s. Waiting {wait_sec}s...")
+                time.sleep(wait_sec)
+                continue
+            response.raise_for_status()
+            break
+        else:
+            if api_idx < len(ARXIV_API_URLS) - 1:
+                print(f"[INFO] Endpoint {api_base} exhausted, trying next...")
+                continue
+            response.raise_for_status()
+        break  # success
+
+    search_arxiv_papers._last_request = time.time()
 
     ns = {"a": "http://www.w3.org/2005/Atom"}
     root = ET.fromstring(response.content)
@@ -428,7 +498,7 @@ def load_incomplete_papers_from_excel() -> dict[str, dict]:
         arxiv_id = paper["arxiv_id"]
         if not arxiv_id:
             continue
-        if paper["affiliations"] and paper["summary_cn"]:
+        if paper["summary_cn"]:
             continue
         paper["summary"] = paper["abstract"]
         paper["pdf_url"] = f"https://arxiv.org/pdf/{arxiv_id}"
@@ -440,7 +510,7 @@ def load_incomplete_papers_from_excel() -> dict[str, dict]:
 def write_llm_output_json(
     papers_to_process: list[dict],
     fresh_downloaded_count: int = 0,
-    feishu_msg: str = "",
+    wechat_msg: str = "",
 ):
     """输出当前待处理状态，供 Hermes agent 继续执行或安全重试。"""
     output = {
@@ -451,7 +521,7 @@ def write_llm_output_json(
         "papers_dir": str(PAPERS_DIR),
         "new_papers": papers_to_process,
         "papers_to_process": papers_to_process,
-        "feishu_msg": feishu_msg,
+        "wechat_msg": wechat_msg,
     }
     with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
@@ -493,14 +563,15 @@ def main():
     # 加载已爬取 ID（查重）：Excel 为主，txt 为兜底缓存。
     crawled_ids_txt = load_crawled_ids()
     crawled_ids_excel = load_excel_ids()
-    crawled_ids = crawled_ids_txt | crawled_ids_excel
+    deleted_ids = load_deleted_ids()
+    crawled_ids = crawled_ids_txt | crawled_ids_excel | deleted_ids
     pending_ids_file = load_pending_llm_ids()
     incomplete_excel_papers = load_incomplete_papers_from_excel()
     pending_ids = pending_ids_file | set(incomplete_excel_papers.keys())
     save_pending_llm_ids(pending_ids)
     print(
         f"[INFO] crawled IDs loaded | txt={len(crawled_ids_txt)} "
-        f"excel={len(crawled_ids_excel)} merged={len(crawled_ids)}"
+        f"excel={len(crawled_ids_excel)} deleted={len(deleted_ids)} merged={len(crawled_ids)}"
     )
     print(
         f"[INFO] pending LLM IDs loaded | file={len(pending_ids_file)} "
@@ -549,7 +620,7 @@ def main():
             "pending_count": 0,
             "new_papers": [],
             "papers_to_process": [],
-            "feishu_msg": f"✅ 今日（{date.today().isoformat()}）未发现新的 LLM 量化论文。",
+            "wechat_msg": f"✅ 今日（{date.today().isoformat()}）未发现新的 LLM 量化论文。",
         }
         with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
             json.dump(output, f, ensure_ascii=False, indent=2)
@@ -583,7 +654,7 @@ def main():
     print("  2. 对每篇论文的 abstract 生成 150 字以内的中文总结（summary_cn）")
     print("  3. 将结果更新回 papers_record.xlsx 对应行")
     print("  4. 重建 viewer/papers_data.json")
-    print("  5. 构建飞书 Markdown 消息并输出（cronjob 自动投递到飞书）")
+    print("  5. 构建微信 Markdown 消息并输出（cronjob 自动投递到微信）")
     print("=" * 60)
 
 

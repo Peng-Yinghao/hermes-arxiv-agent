@@ -16,6 +16,20 @@ from openpyxl import load_workbook
 BASE_DIR = Path(__file__).resolve().parent.parent
 EXCEL_PATH = BASE_DIR / "papers_record.xlsx"
 OUTPUT_PATH = Path(__file__).resolve().parent / "papers_data.json"
+DELETED_IDS_PATH = BASE_DIR / "deleted_ids.txt"
+
+
+def load_deleted_ids() -> set[str]:
+    """Load arxiv IDs that should be excluded from the viewer."""
+    if not DELETED_IDS_PATH.exists():
+        return set()
+    ids = set()
+    with open(DELETED_IDS_PATH, encoding="utf-8") as f:
+        for line in f:
+            sid = line.strip()
+            if sid and not sid.startswith("#"):
+                ids.add(sid)
+    return ids
 
 
 def normalize_text(value: object) -> str:
@@ -79,6 +93,12 @@ def load_rows() -> list[dict]:
 
 def main() -> None:
     papers = load_rows()
+    deleted_ids = load_deleted_ids()
+
+    if deleted_ids:
+        before = len(papers)
+        papers = [p for p in papers if p["arxiv_id"] not in deleted_ids]
+        print(f"[INFO] Filtered out {before - len(papers)} deleted papers")
 
     crawled_dates = sorted({p["crawled_date"] for p in papers if p["crawled_date"]})
     published_dates = sorted({p["published_date"] for p in papers if p["published_date"]})

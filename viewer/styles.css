@@ -482,3 +482,50 @@ summary {
     margin-left: 0;
   }
 }
+
+/* Delete hint popup */
+.delete-hint {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e293b;
+  color: #f1f5f9;
+  border-radius: 12px;
+  padding: 16px 20px;
+  max-width: 420px;
+  width: 90%;
+  z-index: 1000;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  font-size: 13px;
+  line-height: 1.6;
+  animation: slideUp 0.3s ease;
+}
+
+.delete-hint p { margin: 0 0 8px; }
+.delete-hint p:last-of-type { margin-bottom: 10px; }
+.delete-hint code {
+  background: #334155;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.delete-hint .btn-small {
+  border: 1px solid #475569;
+  background: #334155;
+  color: #e2e8f0;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-right: 6px;
+  transition: all 0.15s;
+}
+.delete-hint .btn-small:hover { background: #475569; }
+.delete-hint .dismiss-hint-btn { background: transparent; border-color: transparent; color: #94a3b8; }
+
+@keyframes slideUp {
+  from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+  to { transform: translateX(-50%) translateY(0); opacity: 1; }
+}

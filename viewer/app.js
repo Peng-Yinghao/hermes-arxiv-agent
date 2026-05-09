@@ -147,7 +147,24 @@ function renderCards(papers) {
     delBtn.addEventListener("click", async () => {
       delBtn.disabled = true;
       try {
-        await deletePaper(p.arxiv_id);
+        const wasDeleted = await deletePaper(p.arxiv_id);
+        if (wasDeleted) {
+          // Show hint for permanent deletion
+          const permHint = document.createElement("div");
+          permHint.className = "delete-hint";
+          permHint.innerHTML = `<p>已隐藏「${p.arxiv_id}」。</p>
+            <p>永久删除：在 GitHub 仓库编辑 <code>deleted_ids.txt</code>，添加一行 <code>${p.arxiv_id}</code>，提交后自动生效。</p>
+            <button class="btn btn-small copy-id-btn" data-id="${p.arxiv_id}">📋 复制 ID</button>
+            <button class="btn btn-small dismiss-hint-btn">关闭</button>`;
+          document.body.appendChild(permHint);
+          permHint.querySelector(".copy-id-btn").addEventListener("click", () => {
+            navigator.clipboard.writeText(p.arxiv_id).then(() => {
+              permHint.querySelector(".copy-id-btn").textContent = "✓ 已复制";
+            });
+          });
+          permHint.querySelector(".dismiss-hint-btn").addEventListener("click", () => permHint.remove());
+          setTimeout(() => { if (permHint.parentNode) permHint.remove(); }, 8000);
+        }
         applyFilter();
       } catch (err) {
         alert(err.message || "操作失败");
