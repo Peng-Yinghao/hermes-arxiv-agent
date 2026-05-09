@@ -52,12 +52,15 @@ body {
   background: rgba(247, 245, 239, 0.85);
   border-bottom: 1px solid var(--line);
   z-index: 10;
-}
-
-.brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
   padding: 16px 20px;
+}
+
+.brand {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -70,6 +73,19 @@ body {
   background: linear-gradient(135deg, #0d9488, #eab308);
   box-shadow: 0 0 0 6px rgba(13, 148, 136, 0.12);
 }
+
+.settings-btn {
+  width: 40px; height: 40px;
+  border: 1px solid #d8cfbe;
+  background: #fff;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.settings-btn:hover { background: #f5f3ff; border-color: #7c3aed; }
 
 h1 {
   font-family: "Manrope", sans-serif;

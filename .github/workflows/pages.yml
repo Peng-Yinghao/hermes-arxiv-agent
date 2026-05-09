@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "viewer/**"
+      - "markdown_full/**"
       - "deleted_ids.txt"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
@@ -35,6 +36,12 @@ jobs:
       - name: Inject Cloudflare Analytics token
         run: |
           sed -i "s/__CF_TOKEN_PLACEHOLDER__/${{ secrets.CF_ANALYTICS_TOKEN }}/" viewer/index.html
+
+      - name: Copy markdown_full into viewer
+        run: |
+          if [ -d markdown_full ]; then
+            cp -r markdown_full viewer/markdown_full
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

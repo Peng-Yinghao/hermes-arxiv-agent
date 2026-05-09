@@ -326,6 +326,13 @@ async function init() {
 
   applyFilter();
 
+  // Settings button
+  document.getElementById("settingsBtn").addEventListener("click", () => {
+    showTokenSetup((hasToken) => {
+      if (hasToken) showToast("✓ Token 已保存，删除功能已启用", "success");
+    });
+  });
+
   // Markdown modal handlers
   document.getElementById("mdModalClose").addEventListener("click", hideMarkdownModal);
   document.getElementById("mdModal").addEventListener("click", e => {
@@ -402,7 +409,7 @@ async function showMarkdownModal(p, mode) {
   showMdRaw = false;
   document.getElementById("mdModalTitle").textContent = p.title || p.arxiv_id;
 
-  const resp = await fetch(`../markdown_full/${p.arxiv_id}.md`);
+  const resp = await fetch(`markdown_full/${p.arxiv_id}.md`);
   if (!resp.ok) throw new Error(`全文 Markdown 未生成（HTTP ${resp.status}）`);
   const md = await resp.text();
 
