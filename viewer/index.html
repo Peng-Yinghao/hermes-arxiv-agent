@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <!-- Cloudflare Web Analytics -->
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "__CF_TOKEN_PLACEHOLDER__"}'></script>
   <!-- End Cloudflare Web Analytics -->
@@ -96,6 +97,7 @@
         <a class="title" target="_blank" rel="noopener noreferrer"></a>
         <button class="favorite-btn" type="button" aria-label="收藏">☆ 收藏</button>
         <button class="delete-btn" type="button" aria-label="删除" title="删除此论文">✕</button>
+        <button class="md-btn" type="button" aria-label="Markdown" title="查看 Markdown">MD</button>
       </div>
       <div class="meta"></div>
       <div class="tags"></div>
@@ -111,5 +113,19 @@
   </template>
 
   <script src="app.js"></script>
+
+  <div class="md-modal" id="mdModal" style="display:none">
+    <div class="md-modal-box">
+      <div class="md-modal-head">
+        <span id="mdModalTitle"></span>
+        <button id="mdModalClose" class="md-modal-close">&times;</button>
+      </div>
+      <div class="md-modal-body" id="mdModalBody"></div>
+      <div class="md-modal-foot">
+        <button id="mdCopyBtn" class="btn">📋 复制 Markdown</button>
+        <button id="mdRawBtn" class="btn">查看源码</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

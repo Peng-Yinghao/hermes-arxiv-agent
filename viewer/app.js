@@ -210,6 +210,11 @@ function renderCards(papers) {
       }
     });
 
+    // MD button
+    node.querySelector(".md-btn").addEventListener("click", () => {
+      showMarkdownModal(p);
+    });
+
     node.querySelector(".meta").textContent =
       `抓取: ${text(p.crawled_date)||"-"} | 发表: ${text(p.published_date)||"-"}\n作者: ${text(p.authors)||"-"}`;
 
@@ -311,6 +316,28 @@ async function init() {
 
   applyFilter();
 
+  // Markdown modal handlers
+  document.getElementById("mdModalClose").addEventListener("click", hideMarkdownModal);
+  document.getElementById("mdModal").addEventListener("click", e => {
+    if (e.target === document.getElementById("mdModal")) hideMarkdownModal();
+  });
+  document.getElementById("mdCopyBtn").addEventListener("click", () => {
+    if (currentMdPaper) {
+      const md = generateMarkdown(currentMdPaper);
+      navigator.clipboard.writeText(md).then(() => {
+        showToast("✓ Markdown 已复制到剪贴板", "success");
+      });
+    }
+  });
+  document.getElementById("mdRawBtn").addEventListener("click", () => {
+    showMdRaw = !showMdRaw;
+    document.getElementById("mdRawBtn").textContent = showMdRaw ? "查看渲染" : "查看源码";
+    if (currentMdPaper) updateMdBody(generateMarkdown(currentMdPaper));
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") hideMarkdownModal();
+  });
+
   // Show token hint if not set
   if (!ghToken) {
     const hint = document.createElement("div");
@@ -327,3 +354,64 @@ async function init() {
 init().catch(err => {
   document.getElementById("summary").textContent = err.message;
 });
+
+// ── Markdown generation & modal ──
+function generateMarkdown(p) {
+  const today = new Date().toISOString().slice(0, 10);
+  return `# ${p.title || p.arxiv_id}
+
+**arXiv ID**: [${p.arxiv_id}](https://arxiv.org/abs/${p.arxiv_id})  
+**Authors**: ${p.authors || "-"}  
+**Published**: ${p.published_date || "-"} | **Crawled**: ${p.crawled_date || "-"}  
+**Categories**: ${p.categories || "-"}  
+**PDF**: [${p.pdf_filename || p.arxiv_id + ".pdf"}](https://arxiv.org/pdf/${p.arxiv_id})
+
+---
+
+## 中文摘要
+
+${p.summary_cn || "（暂未提供）"}
+
+---
+
+## Abstract
+
+${p.abstract || "（暂未提供）"}
+
+---
+
+> Auto-generated on ${today}
+`;
+}
+
+let currentMdPaper = null;
+let showMdRaw = false;
+
+function showMarkdownModal(p) {
+  currentMdPaper = p;
+  showMdRaw = false;
+  const md = generateMarkdown(p);
+  document.getElementById("mdModalTitle").textContent = p.title || p.arxiv_id;
+  updateMdBody(md);
+  document.getElementById("mdModal").style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+
+function hideMarkdownModal() {
+  document.getElementById("mdModal").style.display = "none";
+  document.body.style.overflow = "";
+  currentMdPaper = null;
+}
+
+function updateMdBody(md) {
+  const body = document.getElementById("mdModalBody");
+  if (showMdRaw) {
+    body.innerHTML = `<pre class="md-raw">${escapeHtml(md)}</pre>`;
+  } else {
+    body.innerHTML = marked.parse(md);
+  }
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
