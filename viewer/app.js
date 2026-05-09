@@ -210,23 +210,18 @@ function renderCards(papers) {
       }
     });
 
-    // MD button (summary)
-    node.querySelector(".md-btn").addEventListener("click", () => {
-      showMarkdownModal(p, "summary");
-    });
-
-    // MD full button (arxiv2md)
-    node.querySelector(".md-full-btn").addEventListener("click", async () => {
-      const btn = node.querySelector(".md-full-btn");
+    // MD button — full markdown from arxiv2md
+    node.querySelector(".md-btn").addEventListener("click", async () => {
+      const btn = node.querySelector(".md-btn");
       btn.disabled = true;
       btn.textContent = "⏳";
       try {
         await showMarkdownModal(p, "full");
       } catch (err) {
-        showToast("全文加载失败: " + err.message, "error");
+        showToast("加载失败: " + err.message, "error");
       } finally {
         btn.disabled = false;
-        btn.textContent = "MD+";
+        btn.textContent = "MD";
       }
     });
 
@@ -405,18 +400,11 @@ let showMdRaw = false;
 async function showMarkdownModal(p, mode) {
   currentMdPaper = p;
   showMdRaw = false;
+  document.getElementById("mdModalTitle").textContent = p.title || p.arxiv_id;
 
-  let md;
-  if (mode === "full") {
-    document.getElementById("mdModalTitle").textContent = `[全文] ${p.title || p.arxiv_id}`;
-    // Load from markdown_full/ via fetch
-    const resp = await fetch(`../markdown_full/${p.arxiv_id}.md`);
-    if (!resp.ok) throw new Error(`全文 Markdown 未生成（HTTP ${resp.status}）。请先运行 build_markdown_full.py`);
-    md = await resp.text();
-  } else {
-    document.getElementById("mdModalTitle").textContent = p.title || p.arxiv_id;
-    md = generateMarkdown(p);
-  }
+  const resp = await fetch(`../markdown_full/${p.arxiv_id}.md`);
+  if (!resp.ok) throw new Error(`全文 Markdown 未生成（HTTP ${resp.status}）`);
+  const md = await resp.text();
 
   updateMdBody(md);
   document.getElementById("mdModal").style.display = "flex";
