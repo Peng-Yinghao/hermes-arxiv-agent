@@ -341,9 +341,8 @@ async function init() {
     if (e.target === document.getElementById("mdModal")) hideMarkdownModal();
   });
   document.getElementById("mdCopyBtn").addEventListener("click", () => {
-    if (currentMdPaper) {
-      const md = generateMarkdown(currentMdPaper);
-      navigator.clipboard.writeText(md).then(() => {
+    if (currentMdRaw) {
+      navigator.clipboard.writeText(currentMdRaw).then(() => {
         showToast("✓ Markdown 已复制到剪贴板", "success");
       });
     }
@@ -351,7 +350,12 @@ async function init() {
   document.getElementById("mdRawBtn").addEventListener("click", () => {
     showMdRaw = !showMdRaw;
     document.getElementById("mdRawBtn").textContent = showMdRaw ? "查看渲染" : "查看源码";
-    if (currentMdPaper) updateMdBody(generateMarkdown(currentMdPaper));
+    const body = document.getElementById("mdModalBody");
+    if (currentMdRaw) {
+      body.innerHTML = showMdRaw
+        ? `<pre class="md-raw">${escapeHtml(currentMdRaw)}</pre>`
+        : renderMarkdown(currentMdRaw);
+    }
   });
   document.addEventListener("keydown", e => {
     if (e.key === "Escape") hideMarkdownModal();
@@ -374,37 +378,10 @@ init().catch(err => {
   document.getElementById("summary").textContent = err.message;
 });
 
-// ── Markdown generation & modal ──
-function generateMarkdown(p) {
-  const today = new Date().toISOString().slice(0, 10);
-  return `# ${p.title || p.arxiv_id}
-
-**arXiv ID**: [${p.arxiv_id}](https://arxiv.org/abs/${p.arxiv_id})  
-**Authors**: ${p.authors || "-"}  
-**Published**: ${p.published_date || "-"} | **Crawled**: ${p.crawled_date || "-"}  
-**Categories**: ${p.categories || "-"}  
-**PDF**: [${p.pdf_filename || p.arxiv_id + ".pdf"}](https://arxiv.org/pdf/${p.arxiv_id})
-
----
-
-## 中文摘要
-
-${p.summary_cn || "（暂未提供）"}
-
----
-
-## Abstract
-
-${p.abstract || "（暂未提供）"}
-
----
-
-> Auto-generated on ${today}
-`;
-}
-
+// ── Markdown modal ──
 let currentMdPaper = null;
 let showMdRaw = false;
+let currentMdRaw = "";  // raw markdown text
 
 async function showMarkdownModal(p) {
   const modal = document.getElementById("mdModal");
@@ -421,15 +398,9 @@ async function showMarkdownModal(p) {
   console.log("Loading full MD for", p.arxiv_id);
   const resp = await fetch(`markdown_full/${p.arxiv_id}.md`);
   if (!resp.ok) throw new Error(`全文 Markdown 未部署（HTTP ${resp.status}）。部署后等待 GitHub Actions 完成。`);
-  const md = await resp.text();
-  console.log("Loaded", md.length, "chars");
-
-  if (typeof marked !== "undefined" && marked.parse) {
-    body.innerHTML = marked.parse(md);
-  } else {
-    body.innerHTML = `<pre class="md-raw">${escapeHtml(md)}</pre>`;
-    console.warn("marked.js not loaded, showing raw markdown");
-  }
+  currentMdRaw = await resp.text();
+  console.log("Loaded", currentMdRaw.length, "chars");
+  body.innerHTML = renderMarkdown(currentMdRaw);
 
   modal.style.display = "flex";
   document.body.style.overflow = "hidden";
@@ -441,15 +412,90 @@ function hideMarkdownModal() {
   currentMdPaper = null;
 }
 
-function updateMdBody(md) {
-  const body = document.getElementById("mdModalBody");
-  if (showMdRaw) {
-    body.innerHTML = `<pre class="md-raw">${escapeHtml(md)}</pre>`;
-  } else {
-    body.innerHTML = marked.parse(md);
-  }
-}
-
 function escapeHtml(s) {
   return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+// ── Built-in markdown renderer (no CDN dependency) ──
+function renderMarkdown(md) {
+  // Remove YAML frontmatter
+  md = md.replace(/^---[\s\S]*?---\n*/, "");
+
+  let html = md;
+
+  // Code blocks (must be first)
+  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) =>
+    `<pre><code class="language-${lang}">${escapeHtml(code.trim())}</code></pre>`);
+
+  // Inline code
+  html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
+
+  // Headers
+  html = html.replace(/^#### (.+)$/gm, "<h4>$1</h4>");
+  html = html.replace(/^### (.+)$/gm, "<h3>$1</h3>");
+  html = html.replace(/^## (.+)$/gm, "<h2>$1</h2>");
+  html = html.replace(/^# (.+)$/gm, "<h1>$1</h1>");
+
+  // Bold and italic
+  html = html.replace(/\*\*\*(.+?)\*\*\*/g, "<strong><em>$1</em></strong>");
+  html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  html = html.replace(/\*(.+?)\*/g, "<em>$1</em>");
+
+  // Links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+
+  // Images
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
+
+  // Horizontal rules
+  html = html.replace(/^---$/gm, "<hr>");
+
+  // Blockquotes
+  html = html.replace(/^&gt; (.+)$/gm, "<blockquote>$1</blockquote>");
+  html = html.replace(/^> (.+)$/gm, "<blockquote>$1</blockquote>");
+
+  // Ordered lists
+  html = html.replace(/^(\d+)\. (.+)$/gm, (_, num, text) => `<li value="${num}">${text}</li>`);
+
+  // Unordered lists
+  html = html.replace(/^- (.+)$/gm, "<li>$1</li>");
+
+  // Wrap consecutive <li> in <ol>/<ul>
+  html = html.replace(/((?:<li(?: value="\d+")?>.*<\/li>\n?)+)/g, (m) => {
+    if (m.includes('value="')) return `<ol>\n${m}</ol>`;
+    return `<ul>\n${m}</ul>`;
+  });
+
+  // Paragraphs: wrap lines that aren't already HTML tags
+  const lines = html.split("\n");
+  const out = [];
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) { out.push(""); continue; }
+    if (/^<(h[1-4]|pre|ul|ol|li|blockquote|hr|table|div)/.test(trimmed)) {
+      out.push(trimmed);
+    } else {
+      out.push(`<p>${trimmed}</p>`);
+    }
+  }
+  html = out.join("\n");
+
+  // Tables (simple)
+  html = html.replace(/<p>\|(.+)\|<\/p>\n<p>\|[-| :]+\|<\/p>\n((?:<p>\|.+\|<\/p>\n?)+)/g, (_, header, rows) => {
+    const hcells = header.split("|").filter(c => c.trim());
+    const rlines = rows.match(/<p>\|(.+)\|<\/p>/g) || [];
+    let table = "<table><thead><tr>";
+    hcells.forEach(c => { table += `<th>${c.trim()}</th>`; });
+    table += "</tr></thead><tbody>";
+    rlines.forEach(r => {
+      const cells = r.replace(/<\/?p>/g, "").split("|").filter(c => c.trim());
+      table += "<tr>";
+      cells.forEach(c => { table += `<td>${c.trim()}</td>`; });
+      table += "</tr>";
+    });
+    table += "</tbody></table>";
+    return table;
+  });
+
+  return html;
 }
