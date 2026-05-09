@@ -34,7 +34,7 @@ if [[ -f pending_llm_ids.txt ]] && [[ -s pending_llm_ids.txt ]]; then
 fi
 
 changed_paths=()
-for path in viewer/papers_data.json viewer/index.html viewer/app.js viewer/styles.css deleted_ids.txt markdown/; do
+for path in viewer/papers_data.json viewer/index.html viewer/app.js viewer/styles.css deleted_ids.txt markdown/ markdown_full/; do
   if [[ -n "$(git status --porcelain -- "$path")" ]]; then
     changed_paths+=("$path")
   fi

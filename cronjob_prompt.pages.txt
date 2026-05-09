@@ -54,7 +54,15 @@ cd /path/to/hermes-arxiv-agent && python3 build_markdown.py
 
 确认 `markdown/` 目录下已生成每篇论文的 `.md` 文件和 `README.md` 索引。
 
-### 第七步：同步待处理队列
+### 第七步：生成全文 Markdown（arxiv2md）
+在项目根目录执行：
+```bash
+cd /path/to/hermes-arxiv-agent && python3 build_markdown_full.py
+```
+
+该脚本使用 arxiv2md 从 arXiv HTML 版本下载论文全文 Markdown，存入 `markdown_full/` 目录（每篇论文一个 `.md` 文件，包含完整章节结构）。对于没有 HTML 版本的旧论文会自动跳过。
+
+### 第八步：同步待处理队列
 在项目根目录执行：
 ```bash
 cd /path/to/hermes-arxiv-agent && python3 monitor.py --sync-pending-state
@@ -66,7 +74,7 @@ cd /path/to/hermes-arxiv-agent && python3 monitor.py --sync-pending-state
 - 若全部论文都已完成中文总结，应自动清空 `pending_llm_ids.txt`
 - 该步骤还会同步刷新 `new_papers.json`，避免 agent 重试时继续读取旧的待处理论文列表
 
-### 第八步：发布静态网站
+### 第九步：发布静态网站
 在项目根目录执行：
 ```bash
 cd /path/to/hermes-arxiv-agent && bash scripts/publish_viewer.sh
@@ -78,7 +86,7 @@ cd /path/to/hermes-arxiv-agent && bash scripts/publish_viewer.sh
 - push 到你自己的 GitHub fork 后会触发 GitHub Actions 更新 GitHub Pages
 - 当前仓库必须是你自己的 fork，或 `PUBLISH_REMOTE` 必须明确指向你自己的可写远端
 
-### 第九步：构建微信 Markdown 消息
+### 第十步：构建微信 Markdown 消息
 输出格式：
 ```
 📚 **论文日报** | YYYY-MM-DD
