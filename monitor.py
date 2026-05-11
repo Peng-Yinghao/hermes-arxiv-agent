@@ -25,6 +25,7 @@ VIEWER_JSON = BASE_DIR / "viewer" / "papers_data.json"
 CRAWLED_IDS_FILE = BASE_DIR / "crawled_ids.txt"
 PENDING_LLM_IDS_FILE = BASE_DIR / "pending_llm_ids.txt"
 DELETED_IDS_FILE = BASE_DIR / "deleted_ids.txt"
+EXCLUDE_KEYWORDS_FILE = BASE_DIR / "exclude_keywords.txt"
 KEYWORDS_FILE = BASE_DIR / "search_keywords.txt"
 OUTPUT_JSON = BASE_DIR / "new_papers.json"   # 输出给 hermes agent 的中间文件
 
@@ -56,6 +57,28 @@ def load_deleted_ids() -> set:
             if sid and not sid.startswith("#"):
                 ids.add(sid)
     return ids
+
+
+def load_exclude_keywords() -> list[str]:
+    """Load title keywords that mark a paper as irrelevant (LLM quantization, GPU memory, etc)."""
+    if not EXCLUDE_KEYWORDS_FILE.exists():
+        return []
+    keywords = []
+    with open(EXCLUDE_KEYWORDS_FILE, encoding="utf-8") as f:
+        for line in f:
+            kw = line.strip().lower()
+            if kw and not kw.startswith("#"):
+                keywords.append(kw)
+    return keywords
+
+
+def should_exclude(paper: dict, exclude_keywords: list[str]) -> bool:
+    """Check if paper title matches any exclude keyword."""
+    title_lower = paper.get("title", "").lower()
+    for kw in exclude_keywords:
+        if kw in title_lower:
+            return True
+    return False
 
 
 def load_excel_ids() -> set:
@@ -147,6 +170,7 @@ def search_arxiv_papers(keywords: str, max_results: int = MAX_RESULTS) -> list[d
             print(f"[INFO] Switching to fallback endpoint: {api_base}")
 
         max_retries = 4
+        try_next_endpoint = False
         for attempt in range(max_retries):
             if attempt > 0:
                 wait = min(2 ** attempt * 5, 120)  # 10, 20, 40, 120
@@ -160,10 +184,12 @@ def search_arxiv_papers(keywords: str, max_results: int = MAX_RESULTS) -> list[d
                 response = requests.get(url, timeout=30, headers=headers)
             except requests.exceptions.ConnectionError as e:
                 print(f"[INFO] Connection error: {e}")
-                break  # try next endpoint
+                try_next_endpoint = True
+                break
             except requests.exceptions.ReadTimeout:
                 print(f"[INFO] Read timeout on {api_base}")
-                break  # try next endpoint
+                try_next_endpoint = True
+                break
             if response.status_code == 429:
                 retry_after = response.headers.get("Retry-After", "60")
                 try:
@@ -174,13 +200,26 @@ def search_arxiv_papers(keywords: str, max_results: int = MAX_RESULTS) -> list[d
                 time.sleep(wait_sec)
                 continue
             response.raise_for_status()
+            if not response.content or not response.content.strip():
+                print(f"[INFO] Empty response body from {api_base}, retrying...")
+                continue
             break
+        if try_next_endpoint:
+            continue
         else:
             if api_idx < len(ARXIV_API_URLS) - 1:
                 print(f"[INFO] Endpoint {api_base} exhausted, trying next...")
                 continue
-            response.raise_for_status()
+            # Last endpoint exhausted all retries
+            try:
+                response.raise_for_status()
+            except Exception as e:
+                print(f"[ERROR] All arXiv endpoints exhausted ({e})")
+                return []
         break  # success
+    else:
+        print("[ERROR] All arXiv endpoints exhausted, no data retrieved")
+        return []
 
     search_arxiv_papers._last_request = time.time()
 
@@ -582,6 +621,13 @@ def main():
     keywords = load_search_keywords()
     all_papers = search_arxiv_papers(keywords)
     print(f"[INFO] Retrieved {len(all_papers)} papers from arxiv")
+
+    # 排除无关论文（LLM量化、GPU内存等）
+    exclude_keywords = load_exclude_keywords()
+    if exclude_keywords:
+        before = len(all_papers)
+        all_papers = [p for p in all_papers if not should_exclude(p, exclude_keywords)]
+        print(f"[INFO] Filtered out {before - len(all_papers)} papers by exclude_keywords")
 
     # 查重
     new_papers = [p for p in all_papers if p["arxiv_id"] not in crawled_ids]

@@ -1,0 +1,35 @@
+# Papers matching these keywords in TITLE will be excluded from search results.
+# One keyword per line. Case-insensitive match.
+quantization
+quantized
+quantize
+bit-width
+low-bit
+4-bit
+8-bit
+1-bit
+ternary
+binary neural
+GPU accelerator
+FPGA
+hardware accelerator
+PIM
+processing-in-memory
+HBM
+compression
+lossless compression
+pruning
+sparsity
+fine-tuning
+pretraining
+fine-tune
+pretrain
+KV-cache
+KV cache
+token compression
+mixed-precision
+weight-only
+activation quantization
+calibration
+post-training
+knowledge distillation
