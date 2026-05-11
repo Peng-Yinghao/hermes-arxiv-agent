@@ -134,6 +134,7 @@
         <button class="favorite-btn" type="button" aria-label="收藏">☆ 收藏</button>
         <button class="delete-btn" type="button" aria-label="删除" title="删除此论文">✕</button>
         <button class="md-btn" type="button" aria-label="Markdown全文" title="查看全文 Markdown (arxiv2md)">MD</button>
+        <button class="review-btn" type="button" aria-label="AI精读" title="AI 精读分析（不同 LLM 生成）">🤖 精读</button>
       </div>
       <div class="meta"></div>
       <div class="tags"></div>
@@ -160,6 +161,20 @@
       <div class="md-modal-foot">
         <button id="mdCopyBtn" class="btn">📋 复制 Markdown</button>
         <button id="mdRawBtn" class="btn">查看源码</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="review-modal" id="reviewModal" style="display:none">
+    <div class="review-modal-box">
+      <div class="review-modal-head">
+        <span id="reviewModalTitle"></span>
+        <button id="reviewModalClose" class="review-modal-close">&times;</button>
+      </div>
+      <div class="review-modal-body" id="reviewModalBody"></div>
+      <div class="review-modal-foot">
+        <button id="reviewCopyBtn" class="btn">📋 复制精读</button>
+        <button id="reviewRawBtn" class="btn">查看源码</button>
       </div>
     </div>
   </div>

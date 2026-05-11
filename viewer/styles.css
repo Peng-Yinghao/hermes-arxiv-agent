@@ -632,6 +632,24 @@ summary {
 }
 .md-btn:hover { border-color: #7c3aed; color: #6d28d9; background: #f5f3ff; }
 
+/* Review button */
+.review-btn {
+  margin-left: 4px;
+  border: 1px solid #c7d2fe;
+  background: linear-gradient(135deg, #ede9fe, #f0fdf4);
+  color: #4b5563;
+  border-radius: 999px;
+  padding: 0 9px;
+  height: 28px;
+  font-size: 11px; font-weight: 700;
+  line-height: 26px; text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.review-btn:hover { border-color: #059669; color: #047857; background: #ecfdf5; }
+
 /* ── MD modal ── */
 .md-modal {
   position: fixed; inset: 0;
@@ -676,3 +694,50 @@ summary {
   border-radius: 8px; background: #fff; cursor: pointer; font-size: 13px;
 }
 .md-modal-foot .btn:hover { background: #f9fafb; }
+
+/* ── Review modal (mirrors md-modal with green accent) ── */
+.review-modal {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 2600;
+  display: flex; align-items: center; justify-content: center;
+}
+.review-modal-box {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 780px; width: 92%;
+  max-height: 85vh;
+  display: flex; flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.review-modal-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 24px; border-bottom: 1px solid #e5e7eb;
+  font-size: 18px; font-weight: 700;
+  background: linear-gradient(135deg, #f0fdf4, #ede9fe);
+  border-radius: 16px 16px 0 0;
+}
+.review-modal-close {
+  background: none; border: none; font-size: 28px;
+  cursor: pointer; color: #9ca3af; line-height: 1;
+}
+.review-modal-close:hover { color: #111; }
+.review-modal-body {
+  flex: 1; overflow-y: auto; padding: 24px;
+  font-size: 15px; line-height: 1.8; color: #1f2937;
+}
+.review-modal-body h1 { font-size: 22px; margin-bottom: 12px; }
+.review-modal-body h2 { font-size: 17px; margin: 16px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #e5e7eb; }
+.review-modal-body p { margin: 0 0 8px; }
+.review-modal-body a { color: #2563eb; }
+.review-modal-body blockquote { border-left: 3px solid #059669; margin: 12px 0; padding: 4px 16px; color: #6b7280; }
+.review-modal-body pre { background: #1e293b; color: #e2e8f0; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 13px; }
+.review-modal-foot {
+  display: flex; gap: 8px;
+  padding: 14px 24px; border-top: 1px solid #e5e7eb;
+}
+.review-modal-foot .btn {
+  padding: 8px 16px; border: 1px solid #d1d5db;
+  border-radius: 8px; background: #fff; cursor: pointer; font-size: 13px;
+}
+.review-modal-foot .btn:hover { background: #f9fafb; }

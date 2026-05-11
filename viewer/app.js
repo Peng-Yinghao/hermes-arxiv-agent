@@ -227,6 +227,28 @@ function renderCards(papers) {
       }
     });
 
+    // Review button — AI deep analysis from different LLM
+    const reviewBtn = node.querySelector(".review-btn");
+    if (reviewBtn) {
+      reviewBtn.addEventListener("click", async () => {
+        reviewBtn.disabled = true;
+        reviewBtn.textContent = "⏳";
+        try {
+          await showReviewModal(p);
+        } catch (err) {
+          console.error("Review load error:", err);
+          if (err.message === "NOT_FOUND") {
+            alert("该论文的 AI 精读尚未生成，请稍后再试。");
+          } else {
+            alert("加载失败: " + (err.message || err));
+          }
+        } finally {
+          reviewBtn.disabled = false;
+          reviewBtn.textContent = "🤖 精读";
+        }
+      });
+    }
+
     node.querySelector(".meta").textContent =
       `抓取: ${text(p.crawled_date)||"-"} | 发表: ${text(p.published_date)||"-"}\n作者: ${text(p.authors)||"-"}`;
 
@@ -395,7 +417,33 @@ async function init() {
     }
   });
   document.addEventListener("keydown", e => {
-    if (e.key === "Escape") hideMarkdownModal();
+    if (e.key === "Escape") {
+      if (document.getElementById("reviewModal").style.display === "flex") hideReviewModal();
+      else if (document.getElementById("mdModal").style.display === "flex") hideMarkdownModal();
+    }
+  });
+
+  // Review modal handlers
+  document.getElementById("reviewModalClose").addEventListener("click", hideReviewModal);
+  document.getElementById("reviewModal").addEventListener("click", e => {
+    if (e.target === document.getElementById("reviewModal")) hideReviewModal();
+  });
+  document.getElementById("reviewCopyBtn").addEventListener("click", () => {
+    if (currentReviewRaw) {
+      navigator.clipboard.writeText(currentReviewRaw).then(() => {
+        showToast("✓ 精读已复制到剪贴板", "success");
+      });
+    }
+  });
+  document.getElementById("reviewRawBtn").addEventListener("click", () => {
+    showReviewRaw = !showReviewRaw;
+    document.getElementById("reviewRawBtn").textContent = showReviewRaw ? "查看渲染" : "查看源码";
+    const body = document.getElementById("reviewModalBody");
+    if (currentReviewRaw) {
+      body.innerHTML = showReviewRaw
+        ? `<pre class="md-raw">${escapeHtml(currentReviewRaw)}</pre>`
+        : renderMarkdown(currentReviewRaw);
+    }
   });
 
   // Show token hint if not set
@@ -447,6 +495,43 @@ function hideMarkdownModal() {
   document.getElementById("mdModal").style.display = "none";
   document.body.style.overflow = "";
   currentMdPaper = null;
+}
+
+// ── Review modal (AI deep analysis) ──
+let currentReviewPaper = null;
+let showReviewRaw = false;
+let currentReviewRaw = "";
+
+async function showReviewModal(p) {
+  const modal = document.getElementById("reviewModal");
+  const title = document.getElementById("reviewModalTitle");
+  const body = document.getElementById("reviewModalBody");
+  if (!modal || !title || !body) {
+    throw new Error("精读弹窗组件缺失，请刷新页面");
+  }
+
+  currentReviewPaper = p;
+  showReviewRaw = false;
+  title.textContent = "🤖 " + (p.title || p.arxiv_id);
+
+  console.log("Loading review for", p.arxiv_id);
+  const resp = await fetch(`review_md/${p.arxiv_id}.md`);
+  if (resp.status === 404) {
+    throw new Error("NOT_FOUND");
+  }
+  if (!resp.ok) throw new Error(`精读加载失败（HTTP ${resp.status}）`);
+  currentReviewRaw = await resp.text();
+  console.log("Loaded review", currentReviewRaw.length, "chars");
+  body.innerHTML = renderMarkdown(currentReviewRaw);
+
+  modal.style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+
+function hideReviewModal() {
+  document.getElementById("reviewModal").style.display = "none";
+  document.body.style.overflow = "";
+  currentReviewPaper = null;
 }
 
 function escapeHtml(s) {
