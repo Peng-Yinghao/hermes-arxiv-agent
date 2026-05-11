@@ -607,6 +607,7 @@ summary {
 .cls-scene { background: #dbeafe; color: #1e40af; }
 .cls-form  { background: #fce7f3; color: #9d174d; }
 .cls-mem   { background: #d1fae5; color: #065f46; }
+.cls-peer  { background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; }
 
 /* ── Classification select fields (compact) ── */
 .scene-field select, .form-field select, .memtype-field select {

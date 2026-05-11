@@ -20,6 +20,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.06366"
     },
     {
@@ -37,6 +39,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.05482"
     },
     {
@@ -54,6 +58,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.01546"
     },
     {
@@ -71,6 +77,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.00519"
     },
     {
@@ -88,6 +96,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.02933"
     },
     {
@@ -105,6 +115,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.00257"
     },
     {
@@ -122,6 +134,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2604.27491"
     },
     {
@@ -139,6 +153,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2604.21035"
     },
     {
@@ -156,6 +172,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2604.19342"
     },
     {
@@ -173,6 +191,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2604.19167"
     },
     {
@@ -190,6 +210,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2604.18655"
     },
     {
@@ -207,6 +229,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2604.18566"
     },
     {
@@ -224,6 +248,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2604.17384"
     },
     {
@@ -241,6 +267,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2604.17041"
     },
     {
@@ -258,6 +286,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2604.14922"
     },
     {
@@ -275,6 +305,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2604.11655"
     },
     {
@@ -292,6 +324,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2505.23422"
     },
     {
@@ -309,6 +343,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2503.21760"
     },
     {
@@ -326,6 +362,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2502.16090"
     },
     {
@@ -343,6 +381,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2501.14119"
     },
     {
@@ -360,6 +400,8 @@
       "scene": "",
       "form": "",
       "mem_type": "",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2501.11739"
     },
     {
@@ -377,6 +419,8 @@
       "scene": "代码Agent",
       "form": "文本",
       "mem_type": "其他",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.06601"
     },
     {
@@ -394,6 +438,8 @@
       "scene": "通用/其他",
       "form": "其他",
       "mem_type": "其他",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.06534"
     },
     {
@@ -411,6 +457,8 @@
       "scene": "通用/其他",
       "form": "潜变量",
       "mem_type": "参数/潜变量型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.06346"
     },
     {
@@ -428,6 +476,8 @@
       "scene": "具身Agent",
       "form": "参数化",
       "mem_type": "参数/潜变量型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.06064"
     },
     {
@@ -445,6 +495,8 @@
       "scene": "多智能体模拟",
       "form": "文本",
       "mem_type": "反思经验型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.05991"
     },
     {
@@ -462,6 +514,8 @@
       "scene": "个人助手",
       "form": "混合/其他",
       "mem_type": "分层管理型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.05765"
     },
     {
@@ -479,6 +533,8 @@
       "scene": "通用/其他",
       "form": "结构化",
       "mem_type": "分层管理型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.05704"
     },
     {
@@ -496,6 +552,8 @@
       "scene": "个人助手",
       "form": "结构化",
       "mem_type": "分层管理型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.05499"
     },
     {
@@ -513,6 +571,8 @@
       "scene": "通用/其他",
       "form": "其他",
       "mem_type": "其他",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.05475"
     },
     {
@@ -530,6 +590,8 @@
       "scene": "多智能体模拟",
       "form": "混合/其他",
       "mem_type": "分层管理型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.04811"
     },
     {
@@ -547,6 +609,8 @@
       "scene": "多智能体模拟",
       "form": "结构化",
       "mem_type": "反思经验型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.04264"
     },
     {
@@ -564,6 +628,8 @@
       "scene": "代码Agent",
       "form": "参数化",
       "mem_type": "参数/潜变量型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.04000"
     },
     {
@@ -581,6 +647,8 @@
       "scene": "通用/其他",
       "form": "混合/其他",
       "mem_type": "检索型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.03989"
     },
     {
@@ -598,6 +666,8 @@
       "scene": "个人助手",
       "form": "混合/其他",
       "mem_type": "上下文/摘要型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.03882"
     },
     {
@@ -615,6 +685,8 @@
       "scene": "个人助手",
       "form": "混合/其他",
       "mem_type": "分层管理型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.03804"
     },
     {
@@ -632,6 +704,8 @@
       "scene": "通用/其他",
       "form": "混合/其他",
       "mem_type": "分层管理型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.03675"
     },
     {
@@ -649,6 +723,8 @@
       "scene": "通用/其他",
       "form": "其他",
       "mem_type": "其他",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.03354"
     },
     {
@@ -666,6 +742,8 @@
       "scene": "通用/其他",
       "form": "混合/其他",
       "mem_type": "分层管理型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.03312"
     },
     {
@@ -683,6 +761,8 @@
       "scene": "具身Agent",
       "form": "参数化",
       "mem_type": "参数/潜变量型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.03288"
     },
     {
@@ -700,6 +780,8 @@
       "scene": "通用/其他",
       "form": "结构化",
       "mem_type": "分层管理型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.03228"
     },
     {
@@ -717,6 +799,8 @@
       "scene": "通用/其他",
       "form": "其他",
       "mem_type": "其他",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.03213"
     },
     {
@@ -734,6 +818,8 @@
       "scene": "通用/其他",
       "form": "其他",
       "mem_type": "其他",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.03208"
     },
     {
@@ -751,6 +837,8 @@
       "scene": "代码Agent",
       "form": "结构化",
       "mem_type": "结构化图谱型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.02868"
     },
     {
@@ -768,6 +856,8 @@
       "scene": "多智能体模拟",
       "form": "文本",
       "mem_type": "其他",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.02812"
     },
     {
@@ -785,6 +875,8 @@
       "scene": "通用/其他",
       "form": "结构化",
       "mem_type": "其他",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.02681"
     },
     {
@@ -802,6 +894,8 @@
       "scene": "代码Agent",
       "form": "结构化",
       "mem_type": "结构化图谱型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.02431"
     },
     {
@@ -819,6 +913,8 @@
       "scene": "通用/其他",
       "form": "文本",
       "mem_type": "检索型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.02411"
     },
     {
@@ -836,6 +932,8 @@
       "scene": "通用/其他",
       "form": "参数化",
       "mem_type": "参数/潜变量型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.02396"
     },
     {
@@ -853,6 +951,8 @@
       "scene": "通用/其他",
       "form": "向量",
       "mem_type": "其他",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.02199"
     },
     {
@@ -870,6 +970,8 @@
       "scene": "多智能体模拟",
       "form": "混合/其他",
       "mem_type": "分层管理型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.02168"
     },
     {
@@ -887,6 +989,8 @@
       "scene": "通用/其他",
       "form": "向量",
       "mem_type": "检索型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.02162"
     },
     {
@@ -904,6 +1008,8 @@
       "scene": "具身Agent",
       "form": "其他",
       "mem_type": "其他",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.02130"
     },
     {
@@ -921,6 +1027,8 @@
       "scene": "通用/其他",
       "form": "文本",
       "mem_type": "检索型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.01970"
     },
     {
@@ -938,6 +1046,8 @@
       "scene": "通用/其他",
       "form": "潜变量",
       "mem_type": "参数/潜变量型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.01694"
     },
     {
@@ -955,6 +1065,8 @@
       "scene": "个人助手",
       "form": "结构化",
       "mem_type": "结构化图谱型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.01688"
     },
     {
@@ -972,6 +1084,8 @@
       "scene": "通用/其他",
       "form": "结构化",
       "mem_type": "反思经验型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.06614"
     },
     {
@@ -989,6 +1103,8 @@
       "scene": "个人助手",
       "form": "结构化",
       "mem_type": "反思经验型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.06527"
     },
     {
@@ -1006,6 +1122,8 @@
       "scene": "通用/其他",
       "form": "混合/其他",
       "mem_type": "上下文/摘要型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.06416"
     },
     {
@@ -1023,6 +1141,8 @@
       "scene": "通用/其他",
       "form": "结构化",
       "mem_type": "结构化图谱型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.06365"
     },
     {
@@ -1040,6 +1160,8 @@
       "scene": "通用/其他",
       "form": "向量",
       "mem_type": "检索型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.06132"
     },
     {
@@ -1057,6 +1179,8 @@
       "scene": "通用/其他",
       "form": "混合/其他",
       "mem_type": "其他",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.05716"
     },
     {
@@ -1074,6 +1198,8 @@
       "scene": "通用/其他",
       "form": "结构化",
       "mem_type": "检索型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.05583"
     },
     {
@@ -1091,6 +1217,8 @@
       "scene": "具身Agent",
       "form": "潜变量",
       "mem_type": "参数/潜变量型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.05373"
     },
     {
@@ -1108,6 +1236,8 @@
       "scene": "Web Agent",
       "form": "混合/其他",
       "mem_type": "分层管理型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.05191"
     },
     {
@@ -1125,6 +1255,8 @@
       "scene": "多智能体模拟",
       "form": "参数化",
       "mem_type": "参数/潜变量型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.04939"
     },
     {
@@ -1142,6 +1274,8 @@
       "scene": "通用/其他",
       "form": "混合/其他",
       "mem_type": "检索型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.04897"
     },
     {
@@ -1159,6 +1293,8 @@
       "scene": "代码Agent",
       "form": "结构化",
       "mem_type": "分层管理型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.04050"
     },
     {
@@ -1176,6 +1312,8 @@
       "scene": "通用/其他",
       "form": "混合/其他",
       "mem_type": "其他",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.03941"
     },
     {
@@ -1193,6 +1331,8 @@
       "scene": "通用/其他",
       "form": "向量",
       "mem_type": "检索型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.03482"
     },
     {
@@ -1210,6 +1350,8 @@
       "scene": "代码Agent",
       "form": "文本",
       "mem_type": "上下文/摘要型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2604.23088"
     },
     {
@@ -1227,6 +1369,8 @@
       "scene": "通用/其他",
       "form": "结构化",
       "mem_type": "结构化图谱型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2604.07595"
     },
     {
@@ -1244,6 +1388,8 @@
       "scene": "多智能体模拟",
       "form": "文本",
       "mem_type": "上下文/摘要型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2603.07880"
     },
     {
@@ -1261,6 +1407,8 @@
       "scene": "多智能体模拟",
       "form": "结构化",
       "mem_type": "结构化图谱型",
+      "peer_reviewed": "",
+      "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2602.04129"
     }
   ]

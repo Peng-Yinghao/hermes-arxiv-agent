@@ -247,6 +247,9 @@ function renderCards(papers) {
     if (p.scene) clsContainer.appendChild(makeClsTag("🎯 " + p.scene, "scene"));
     if (p.form) clsContainer.appendChild(makeClsTag("💾 " + p.form, "form"));
     if (p.mem_type) clsContainer.appendChild(makeClsTag("🧠 " + p.mem_type, "mem"));
+    if (p.peer_reviewed && p.peer_reviewed.startsWith("✓")) {
+      clsContainer.appendChild(makeClsTag("✓ 同行评议", "peer"));
+    }
     if (clsContainer.children.length) {
       node.querySelector(".section").before(clsContainer);
     }
@@ -279,6 +282,7 @@ function applyFilter() {
   const keyword = document.getElementById("keyword").value.trim();
   const favoriteOnly = document.getElementById("favoriteOnly").checked;
   const showDeleted = document.getElementById("showDeleted").checked;
+  const peerReviewOnly = document.getElementById("peerReviewOnly").checked;
   const scene = document.getElementById("sceneFilter").value;
   const form = document.getElementById("formFilter").value;
   const memType = document.getElementById("memTypeFilter").value;
@@ -288,6 +292,7 @@ function applyFilter() {
     matchesKeyword(p, keyword) &&
     (!favoriteOnly || isFavorite(p.arxiv_id)) &&
     (showDeleted || !isDeleted(p.arxiv_id)) &&
+    (!peerReviewOnly || (p.peer_reviewed || "").startsWith("✓")) &&
     (!scene || (p.scene || "").includes(scene)) &&
     (!form || (p.form || "").includes(form)) &&
     (!memType || (p.mem_type || "").includes(memType))
@@ -305,6 +310,7 @@ function resetFilter(dmin, dmax) {
   document.getElementById("keyword").value = "";
   document.getElementById("favoriteOnly").checked = false;
   document.getElementById("showDeleted").checked = false;
+  document.getElementById("peerReviewOnly").checked = false;
   document.getElementById("sceneFilter").value = "";
   document.getElementById("formFilter").value = "";
   document.getElementById("memTypeFilter").value = "";
@@ -345,6 +351,7 @@ async function init() {
   document.getElementById("resetBtn").addEventListener("click", () => resetFilter(payload.crawled_date_min, payload.crawled_date_max));
   document.getElementById("favoriteOnly").addEventListener("change", applyFilter);
   document.getElementById("showDeleted").addEventListener("change", applyFilter);
+  document.getElementById("peerReviewOnly").addEventListener("change", applyFilter);
   document.getElementById("sceneFilter").addEventListener("change", applyFilter);
   document.getElementById("formFilter").addEventListener("change", applyFilter);
   document.getElementById("memTypeFilter").addEventListener("change", applyFilter);

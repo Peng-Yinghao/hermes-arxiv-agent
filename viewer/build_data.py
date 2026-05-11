@@ -59,7 +59,7 @@ def load_rows() -> list[dict]:
         "crawled_date",
         "notes",
     ]
-    optional = ["scene", "form", "mem_type"]
+    optional = ["scene", "form", "mem_type", "peer_reviewed", "peer_venue"]
     missing = [c for c in required if c not in index]
     if missing:
         raise ValueError(f"Missing required columns: {missing}")
