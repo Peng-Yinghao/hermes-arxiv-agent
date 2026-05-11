@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Episodic memory in ai agents poses risks that should be studied and mitigated</title>
+<!--Generated on Wed Jan 22 15:07:34 2025 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<meta content="
+safety,  trustworthy " lang="en" name="keywords"/>
+<base href="/html/2501.11739v2/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S1" title="In Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">I </span><span class="ltx_text ltx_font_smallcaps">Introduction</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S2" title="In Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II </span><span class="ltx_text ltx_font_smallcaps">Related work</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S2.SS1" title="In II Related work ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">II-A</span> </span><span class="ltx_text ltx_font_smallcaps">ai<span class="ltx_text ltx_font_italic"> agents</span></span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S2.SS2" title="In II Related work ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">II-B</span> </span><span class="ltx_text ltx_font_italic">Memory in <span class="ltx_text ltx_font_smallcaps">ai</span></span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S2.SS3" title="In II Related work ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">II-C</span> </span><span class="ltx_text ltx_font_italic">Safe and trustworthy <span class="ltx_text ltx_font_smallcaps">ai</span></span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S3" title="In Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III </span><span class="ltx_text ltx_font_smallcaps">Episodic memory</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S3.SS1" title="In III Episodic memory ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-A</span> </span><span class="ltx_text ltx_font_italic">Taxonomy of memory types</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S3.SS2" title="In III Episodic memory ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-B</span> </span><span class="ltx_text ltx_font_italic">The stages of episodic memory</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S3.SS3" title="In III Episodic memory ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-C</span> </span><span class="ltx_text ltx_font_italic">The uses of episodic memory</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S3.SS4" title="In III Episodic memory ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-D</span> </span><span class="ltx_text ltx_font_italic">Can an <span class="ltx_text ltx_font_smallcaps">ai</span> agent have episodic memories?</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S4" title="In Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV </span><span class="ltx_text ltx_font_smallcaps">Risks of Episodic Memory</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S4.SS1" title="In IV Risks of Episodic Memory ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-A</span> </span><span class="ltx_text ltx_font_italic">Deception</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S4.SS2" title="In IV Risks of Episodic Memory ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-B</span> </span><span class="ltx_text ltx_font_italic">Unwanted retention of knowledge</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S4.SS3" title="In IV Risks of Episodic Memory ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-C</span> </span><span class="ltx_text ltx_font_italic">The unpredictability of memory</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S4.SS4" title="In IV Risks of Episodic Memory ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-D</span> </span><span class="ltx_text ltx_font_italic">Improved situational awareness</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S5" title="In Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">V </span><span class="ltx_text ltx_font_smallcaps">Safety benefits of episodic memory</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S5.SS1" title="In V Safety benefits of episodic memory ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">V-A</span> </span><span class="ltx_text ltx_font_italic">Monitoring</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S5.SS2" title="In V Safety benefits of episodic memory ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">V-B</span> </span><span class="ltx_text ltx_font_italic">Control</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S5.SS3" title="In V Safety benefits of episodic memory ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">V-C</span> </span><span class="ltx_text ltx_font_italic">Explainability</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S5.SS4" title="In V Safety benefits of episodic memory ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">V-D</span> </span><span class="ltx_text ltx_font_italic">Uniquely controllable type of information</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S6" title="In Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VI </span><span class="ltx_text ltx_font_smallcaps">Principles for enabling safe<span class="ltx_text"> </span>and trustworthy episodic memory</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S6.SS1" title="In VI Principles for enabling safe and trustworthy episodic memory ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">VI-A</span> </span><span class="ltx_text ltx_font_italic">Interpretability of memories</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S6.SS2" title="In VI Principles for enabling safe and trustworthy episodic memory ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">VI-B</span> </span><span class="ltx_text ltx_font_italic">Addition or deletion of memories</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S6.SS3" title="In VI Principles for enabling safe and trustworthy episodic memory ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">VI-C</span> </span><span class="ltx_text ltx_font_italic">Detachable and isolatable memory format</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S6.SS4" title="In VI Principles for enabling safe and trustworthy episodic memory ‣ Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">VI-D</span> </span><span class="ltx_text ltx_font_italic">Memories not editable by <span class="ltx_text ltx_font_smallcaps">ai</span> agents</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S7" title="In Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VII </span><span class="ltx_text ltx_font_smallcaps">Safe episodic memory: research questions</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#S8" title="In Episodic memory in ai agents poses risks that should be studied and mitigated"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VIII </span><span class="ltx_text ltx_font_smallcaps">Conclusion</span></span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Episodic memory in <span class="ltx_text ltx_font_smallcaps" id="id1.id1">ai</span> agents poses
+<br class="ltx_break"/>risks that should be studied and mitigated</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+Chad DeChant
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation">Computer Science Department 
+<br class="ltx_break"/>Columbia University
+<br class="ltx_break"/>New York, NY, 10027, USA
+<br class="ltx_break"/>chad.dechant@columbia.edu
+</span></span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id2.id1">Most current <span class="ltx_text ltx_font_smallcaps" id="id2.id1.1">ai</span> models have little ability to store and later retrieve a record or representation of what they do. In human cognition, episodic memories play an important role in both recall of the past as well as planning for the future. The ability to form and use episodic memories would similarly enable a broad range of improved capabilities in an <span class="ltx_text ltx_font_smallcaps" id="id2.id1.2">ai</span> agent that interacts with and takes actions in the world. Researchers have begun directing more attention to developing memory abilities in <span class="ltx_text ltx_font_smallcaps" id="id2.id1.3">ai</span> models. It is therefore likely that models with such capability will be become widespread in the near future. This could in some ways contribute to making such <span class="ltx_text ltx_font_smallcaps" id="id2.id1.4">ai</span> agents safer by enabling users to better monitor, understand, and control their actions. However, as a new capability with wide applications, we argue that it will also introduce significant new risks that researchers should begin to study and address. We outline these risks and benefits and propose four principles to guide the development of episodic memory capabilities so that these will enhance, rather than undermine, the effort to keep <span class="ltx_text ltx_font_smallcaps" id="id2.id1.5">ai</span> safe and trustworthy.</p>
+</div>
+<div class="ltx_keywords">
+<h6 class="ltx_title ltx_title_keywords">Index Terms: </h6>
+safety, trustworthy <span class="ltx_text ltx_font_smallcaps" id="id3.id1">ai</span>, episodic memory
+
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">I </span><span class="ltx_text ltx_font_smallcaps" id="S1.1.1">Introduction</span>
+</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Among the most significant ways in which current <span class="ltx_text ltx_font_smallcaps" id="S1.p1.1.1">ai</span> models are unlike human cognition is their lack of comparable memory abilities. Very few make any attempt to develop and use an important type of memory on which humans depend, <span class="ltx_text ltx_font_italic" id="S1.p1.1.2">episodic memory</span>. Episodic memory is memory of particular past events which one participated in personally and can, in some way, recall <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib1" title="">1</a>]</cite>. For <span class="ltx_text ltx_font_smallcaps" id="S1.p1.1.3">ai</span> models, this would mean the ability to form and retrieve memories of events — not merely newly acquired facts — that happen post-deployment, at runtime.
+Most models that incorporate such memory do so in relatively simple ways which are poor approximations of human episodic memory and do not scale to longer, more realistic lengths of time. However, this is beginning to change as more work is done in the area <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib2" title="">2</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib3" title="">3</a>]</cite>. Making use of episodic memories would enable significant new capabilities and can therefore be expected to be a burgeoning area of research interest in the coming years.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">There is simultaneously a growing interest in developing <span class="ltx_text ltx_font_smallcaps" id="S1.p2.1.1">ai</span> <span class="ltx_text ltx_font_italic" id="S1.p2.1.2">agents</span>, models that are trained and equipped to take actions that affect the world <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib4" title="">4</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib5" title="">5</a>]</cite>. Whether these are robots in the real world or virtual agents, they will, by design, be able to impact the world in a more direct way than previous <span class="ltx_text ltx_font_smallcaps" id="S1.p2.1.3">ai</span> models.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S1.p3">
+<p class="ltx_p ltx_parbox ltx_align_middle" id="S1.p3.1" style="width:433.6pt;"><span class="ltx_text" id="S1.p3.1.1" style="font-size:80%;">Accepted for publication at the 2025 Conference on Secure and Trustworthy Machine Learning (SaTML). The final version will be available on IEEE Xplore.</span></p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">While episodic memory plays an important part in many of the cognitive processes which contribute to human intelligence <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib7" title="">7</a>]</cite>, it has not played a large part in the development of <span class="ltx_text ltx_font_smallcaps" id="S1.p4.1.1">ai</span> agents. This is understandable: until recently, most such agents were limited in the range of actions they could perform and the time horizon over which they could act. They therefore had less need for episodic memories than agents that are the current focus of development.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">When <span class="ltx_text ltx_font_smallcaps" id="S1.p5.1.1">ai</span> agents are able to make full use of rich episodic memory abilities, there will be significant implications for their safe deployment. Episodic memories may come to play a role analogous to that which they play in humans, facilitating a wide range of capabilities. These include better planning, problem solving, decision making, and learning <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib8" title="">8</a>]</cite>. Such capabilities would make any agent equipped with them harder to understand and, in some ways, control.</p>
+</div>
+<div class="ltx_para" id="S1.p6">
+<p class="ltx_p" id="S1.p6.1">There is currently an opportunity to prevent episodic memory abilities from making <span class="ltx_text ltx_font_smallcaps" id="S1.p6.1.1">ai</span> agents more dangerous. The implementation and deployment of these abilities are still at an early stage, allowing the research community to study the problem. Possible dangers and benefits of episodic memory can be examined. Most importantly, the results of these studies can be used to guide the implementation of artificial episodic memory to make it safer. There will be a wide variety of ways to implement episodic memory abilities. If the safety implications of these various approaches are understood in advance, research can be directed toward safe techniques and away from more dangerous ones.</p>
+</div>
+<div class="ltx_para" id="S1.p7">
+<p class="ltx_p" id="S1.p7.1">We seek in this paper to draw attention to the risks and benefits of episodic memory in <span class="ltx_text ltx_font_smallcaps" id="S1.p7.1.1">ai</span> agents and motivate a program of research into ways to implement it safely. We begin by summarizing key points of what is known about human episodic memory, including how it differs from other forms of memory more familiar to the artificial intelligence community. In order to show the possible impacts of bringing episodic memory abilities to <span class="ltx_text ltx_font_smallcaps" id="S1.p7.1.2">ai</span> agents, we highlight some of the ways in which humans are thought to use episodic memories, paying particular attention to the many ways episodic memories are used in human cognition beyond simply recalling the past. We also consider whether it is possible for <span class="ltx_text ltx_font_smallcaps" id="S1.p7.1.3">ai</span> to have episodic memories in the way in which humans or, possibly, animals do.</p>
+</div>
+<div class="ltx_pagination ltx_role_newpage"></div>
+<div class="ltx_para" id="S1.p8">
+<p class="ltx_p" id="S1.p8.1">We then outline and explain risks posed by episodic memory abilities in artificial intelligence: deception; retention of knowledge; improved situational awareness; and the unpredictability of memory. We follow this with a discussion of ways in which memories could be used to make <span class="ltx_text ltx_font_smallcaps" id="S1.p8.1.1">ai</span> safer and more trustworthy by facilitating more thorough monitoring, control, and explanations of their actions. We also explain how, counterintuitively, <span class="ltx_text ltx_font_smallcaps" id="S1.p8.1.2">ai</span> agents’ own episodic memories may be more easily kept from them than other forms of information, making such memories a crucial element of any effective strategy to control such agents.</p>
+</div>
+<div class="ltx_para" id="S1.p9">
+<p class="ltx_p" id="S1.p9.1">In response to the risks we outline, we propose four principles for implementing episodic memory capabilities in a way that promotes, rather than undermines, the safety and reliability of systems with such abilities:</p>
+<ol class="ltx_enumerate" id="S1.I1">
+<li class="ltx_item" id="S1.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span>
+<div class="ltx_para" id="S1.I1.i1.p1">
+<p class="ltx_p" id="S1.I1.i1.p1.1">Memories should be interpretable by users</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span>
+<div class="ltx_para" id="S1.I1.i2.p1">
+<p class="ltx_p" id="S1.I1.i2.p1.1">Users should be able to add or delete memories</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">3.</span>
+<div class="ltx_para" id="S1.I1.i3.p1">
+<p class="ltx_p" id="S1.I1.i3.p1.1">Memories should be in a format which enables users to isolate and detach them from the rest of the system they are part of</p>
+</div>
+</li>
+<li class="ltx_item" id="S1.I1.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">4.</span>
+<div class="ltx_para" id="S1.I1.i4.p1">
+<p class="ltx_p" id="S1.I1.i4.p1.1">Memories should not be editable by <span class="ltx_text ltx_font_smallcaps" id="S1.I1.i4.p1.1.1">ai</span> agents</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="ltx_para" id="S1.p10">
+<p class="ltx_p" id="S1.p10.1">Finally, we propose some open research areas and questions to encourage further research in this area.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">II </span><span class="ltx_text ltx_font_smallcaps" id="S2.1.1">Related work</span>
+</h2>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S2.SS1.4.1.1">II-A</span> </span><span class="ltx_text ltx_font_smallcaps" id="S2.SS1.5.2">ai<span class="ltx_text ltx_font_italic" id="S2.SS1.5.2.1"> agents</span></span>
+</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.1"><span class="ltx_text ltx_font_smallcaps" id="S2.SS1.p1.1.1">ai</span> agents have been the subject of study for many decades <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib9" title="">9</a>]</cite>. The most widely used artificial intelligence textbook defines an agent as “anything that can be viewed as perceiving its environment through sensors and acting upon that environment through actuators” <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib10" title="">10</a>]</cite>, where an agent may be a robot operating in the real world or a purely software-based agent operating in a virtual or internet-based environment. <span class="ltx_text ltx_font_smallcaps" id="S2.SS1.p1.1.2">ai</span> agents may also be referred to as <span class="ltx_text ltx_font_italic" id="S2.SS1.p1.1.3">autonomous <span class="ltx_text ltx_font_smallcaps" id="S2.SS1.p1.1.3.1">ai</span></span>, where autonomous is meant to convey that such systems can “plan, act in the world, and pursue goals” <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib11" title="">11</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p2">
+<p class="ltx_p" id="S2.SS1.p2.1">There are many examples of <span class="ltx_text ltx_font_smallcaps" id="S2.SS1.p2.1.1">ai</span> agents in a wide variety of contexts. Robots operating autonomously in the real world are perhaps the prototypical example of such agents as it is easy to see both their independence and tangible effects of their actions. It has been proposed that <span class="ltx_text ltx_font_smallcaps" id="S2.SS1.p2.1.2">ai</span> agents operating as biomedical “<span class="ltx_text ltx_font_smallcaps" id="S2.SS1.p2.1.3">ai</span> scientists” could develop hypotheses, test them in the real world, and have a form of memory to store experimental results <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib12" title="">12</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p3">
+<p class="ltx_p" id="S2.SS1.p3.1">In recent years there has been an increasing amount of work on <span class="ltx_text ltx_font_smallcaps" id="S2.SS1.p3.1.1">ai</span> agents which have a large language model as a component. In these works, <span class="ltx_text ltx_font_smallcaps" id="S2.SS1.p3.1.2">llm</span>s are often used to help an agent plan its actions <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib4" title="">4</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib13" title="">13</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib14" title="">14</a>]</cite>, despite evidence that they may not be capable of reliably planning <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib15" title="">15</a>]</cite>. Games have provided environments for the training of agents of various kinds, including an <span class="ltx_text ltx_font_smallcaps" id="S2.SS1.p3.1.3">llm</span>-based agent with a memory capacity for newly acquired skills <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib16" title="">16</a>]</cite>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S2.SS2.4.1.1">II-B</span> </span><span class="ltx_text ltx_font_italic" id="S2.SS2.5.2">Memory in <span class="ltx_text ltx_font_smallcaps" id="S2.SS2.5.2.1">ai</span></span>
+</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.1">Techniques patterned after or inspired by episodic memory have been explored in the machine learning literature. This has included work on the efficiency of reinforcement learning through episodic replay <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib17" title="">17</a>]</cite>; planning <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib18" title="">18</a>]</cite>; improving world models <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib19" title="">19</a>]</cite>; remembering the values of states or actions <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib20" title="">20</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib21" title="">21</a>]</cite>; and more complex memory structures designed to solve tasks which require episodic memories <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib22" title="">22</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib23" title="">23</a>]</cite>. Robotics researchers have developed techniques to store and recall information about robots’ past actions for use in summarization, question answering, and planning <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib24" title="">24</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib25" title="">25</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib26" title="">26</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib27" title="">27</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p2">
+<p class="ltx_p" id="S2.SS2.p2.1">Architectures for incorporating different kinds of memory-like functions have led in the past to meaningful improvements in capabilities. These included Long Short Term Memory modules <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib28" title="">28</a>]</cite>, Neural Turing Machines <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib29" title="">29</a>]</cite>, Differentiable Neural Computers <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib30" title="">30</a>]</cite>, Hopfield networks <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib31" title="">31</a>]</cite>, and Modern Hopfield Networks <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib32" title="">32</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p3">
+<p class="ltx_p" id="S2.SS2.p3.1">The increasing length of context windows in large language models may raise the question of whether forming representations of episodic memories will ultimately be necessary. Instead, it might be thought that it could eventually be possible to give such a model an agent’s entire history as input in a relatively raw format. However, this is unlikely for several reasons. First, it would be very inefficient to reprocess an entire history at every time step an agent acts. Second, the sheer length of time that agents will eventually operate (e.g. decades) would almost certainly be too large for even future long-context models. Third, it possible that such very long context windows will continue to lead to degraded performance, as has been seen in current models <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib33" title="">33</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p4">
+<p class="ltx_p" id="S2.SS2.p4.1">The potential for various kinds of memory has received particular attention in the natural language processing community <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib34" title="">34</a>]</cite>. The need to circumvent a fixed length for input to large language models has inspired many ways of compressing information and storing it for later use by models, including in retrieval augmented generation <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib35" title="">35</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib36" title="">36</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib37" title="">37</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib38" title="">38</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib39" title="">39</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib40" title="">40</a>]</cite>.
+Moving closer to an agentic framework, recent works have given models greater control over the retrieval and use of information <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib41" title="">41</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib42" title="">42</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p5">
+<p class="ltx_p" id="S2.SS2.p5.1">The existing work which comes closest to our conceptualization of the role of memory introduces a virtual environment of interacting <span class="ltx_text ltx_font_smallcaps" id="S2.SS2.p5.1.1">llm</span>-based agents that record and later consult natural language records of their actions, using these to better understand their environment and make coherent and relevant plans <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib3" title="">3</a>]</cite>. Partially instantiating our speculation about the utility of past episodes for planning, recent works have developed systems to store and retrieve episodes of action to help guide future decision making in a reinforcement learning context <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib43" title="">43</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib44" title="">44</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p6">
+<p class="ltx_p" id="S2.SS2.p6.1">Though a comprehensive overview of different types of memory employed by <span class="ltx_text ltx_font_smallcaps" id="S2.SS2.p6.1.1">llm</span>-based <span class="ltx_text ltx_font_smallcaps" id="S2.SS2.p6.1.2">ai</span> agents is beyond the scope of this work, a recent paper provides just such a thorough survey <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib2" title="">2</a>]</cite>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S2.SS3.4.1.1">II-C</span> </span><span class="ltx_text ltx_font_italic" id="S2.SS3.5.2">Safe and trustworthy <span class="ltx_text ltx_font_smallcaps" id="S2.SS3.5.2.1">ai</span></span>
+</h3>
+<div class="ltx_para" id="S2.SS3.p1">
+<p class="ltx_p" id="S2.SS3.p1.1">Concerns about the risks posed by artificial intelligence extend back to its earliest days <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib45" title="">45</a>]</cite>. Research on various kinds of harms that artificial intelligence might cause is now the subject of several research communities with a variety of interests <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib46" title="">46</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib47" title="">47</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib48" title="">48</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib49" title="">49</a>]</cite>. We focus here on work that most closely concerns risks which could be amplified or reduced by episodic memory.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p2">
+<p class="ltx_p" id="S2.SS3.p2.1">Given the potential of agentic <span class="ltx_text ltx_font_smallcaps" id="S2.SS3.p2.1.1">ai</span> to take actions in and affect the world, special attention to the possible harms of <span class="ltx_text ltx_font_smallcaps" id="S2.SS3.p2.1.2">ai</span> agents is warranted. There is, therefore, a growing body of research on the possible dangers of such systems and techniques for ensuring they operate safely and understandably <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib50" title="">50</a>]</cite>. Attention has been given to developing ways to make robots’ actions explainable <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib51" title="">51</a>]</cite>, for example in the case of autonomous vehicles <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib52" title="">52</a>]</cite>. <span class="ltx_text ltx_font_smallcaps" id="S2.SS3.p2.1.3">llm</span>-based agents, including those operating on the internet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib53" title="">53</a>]</cite>, pose several ethical and safety challenges which are actively being studied. Agents’ use of tools is the focus of a framework that pairs emulation and evaluation of <span class="ltx_text ltx_font_smallcaps" id="S2.SS3.p2.1.4">llm</span>-based agents <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib54" title="">54</a>]</cite>. A recent paper surveying the risks potentially posed by <span class="ltx_text ltx_font_smallcaps" id="S2.SS3.p2.1.5">llm</span>s includes a section on the particular risks of <span class="ltx_text ltx_font_smallcaps" id="S2.SS3.p2.1.6">llm</span>-based agents <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib55" title="">55</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p3">
+<p class="ltx_p" id="S2.SS3.p3.1">Researchers have given particular consideration to the risks particular to agentic <span class="ltx_text ltx_font_smallcaps" id="S2.SS3.p3.1.1">ai</span> that can act autonomously in pursuit of goals its users do not intend, either because of a malicious actor or by accident <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib11" title="">11</a>]</cite>. It has been proposed that due to reward misspecification during training, an <span class="ltx_text ltx_font_smallcaps" id="S2.SS3.p3.1.2">llm</span>-based agent trained using deep learning and reinforcement learning from human feedback might develop undesirable internal goals, particularly if such agents can determine if they are currently being trained, evaluated, or deployed and operate over long time horizons<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib56" title="">56</a>]</cite>. <span class="ltx_text ltx_font_smallcaps" id="S2.SS3.p3.1.3">ai</span> agents have been found by many researchers to engage in various kinds of deception <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib57" title="">57</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p4">
+<p class="ltx_p" id="S2.SS3.p4.1">Episodic memories could be used to invade a user’s privacy. Ways in which machine learning can violate users’ expectations of privacy have been extensively studied <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib58" title="">58</a>]</cite>, along with approaches to mitigate these invasions of privacy <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib59" title="">59</a>]</cite>. Of particular relevance is work which examines the potential for mass surveillance which modern machine learning techniques afford and which widespread agents with episodic memories might contribute to <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib60" title="">60</a>]</cite>. Dialog agents might have a range of negative effects on their users, including invasions of privacy <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib61" title="">61</a>]</cite>.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">III </span><span class="ltx_text ltx_font_smallcaps" id="S3.1.1">Episodic memory</span>
+</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">In this section we present a brief overview of episodic memory in humans. Our goal is to provide a short introduction to the topic and to highlight ways in which implementing episodic memory could be useful in creating more capable artificial intelligence. We pay particular attention to the links between episodic memory and other abilities, at least in humans, as these are potentially surprising and are especially significant for considering the effects of memory abilities on <span class="ltx_text ltx_font_smallcaps" id="S3.p1.1.1">ai</span> agents.</p>
+</div>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS1.4.1.1">III-A</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS1.5.2">Taxonomy of memory types</span>
+</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1"><span class="ltx_text ltx_font_italic" id="S3.SS1.p1.1.1">Episodic</span> memory in humans is memory for events in which someone personally participated. The psychologist Endel Tulving is recognized as being the first to propose a distinction between episodic memory and <span class="ltx_text ltx_font_italic" id="S3.SS1.p1.1.2">semantic</span> memory, which is memory of facts about events and the world <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib62" title="">62</a>]</cite>. For example, someone remembering a trip to Paris that they took a few years earlier would be using their episodic memory, while someone remembering that Paris is the capital of France would be using semantic memory. Although semantic memory is typically about impersonal information such as geographical knowledge, it might also be about factual information about oneself which does not call to mind a particular associated episode. For example, remembering which city one was born in would be considered an example of personal semantic memory.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p2">
+<p class="ltx_p" id="S3.SS1.p2.1">Both episodic and semantic memory are referred to as types of declarative memory
+<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib63" title="">63</a>]</cite>. Their contents can (to some extent) typically be described using language. A third kind of memory, <span class="ltx_text ltx_font_italic" id="S3.SS1.p2.1.1">procedural</span> memory, is sometimes included in taxonomies of memory types and is considered nondeclarative. Procedural memory is memory of how to do something, such as riding a bicycle or other skill or ability which had to be learned <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib64" title="">64</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p3">
+<p class="ltx_p" id="S3.SS1.p3.1">Much — indeed, perhaps most — machine learning research involves either what we have just described as semantic or procedural memory, though these are not typically described as forms of memory in a machine learning context. Large language models are valued in large part for their semantic memory of facts about the world. This kind of memory has, for example, recently been investigated in the many papers asking what <span class="ltx_text ltx_font_smallcaps" id="S3.SS1.p3.1.1">llm</span>s “know” <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib65" title="">65</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib66" title="">66</a>]</cite>. Procedural memory for learned skills and abilities is the objective of much machine learning work such as that on learning navigation, game playing, automobile driving, robotic manipulation, etc.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS2.4.1.1">III-B</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS2.5.2">The stages of episodic memory</span>
+</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">While there are many theories and debates about the way in which episodic memories are formed and maintained in the brain <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib67" title="">67</a>]</cite>, in broad outline the process consists of the following stages:</p>
+<ol class="ltx_enumerate" id="S3.I1">
+<li class="ltx_item" id="S3.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span>
+<div class="ltx_para" id="S3.I1.i1.p1">
+<p class="ltx_p" id="S3.I1.i1.p1.1"><span class="ltx_text ltx_font_italic" id="S3.I1.i1.p1.1.1">Encoding:</span> Raw sensory and other (e.g. emotional) information about an episode needs to be compressed and structured into a suitable representation. Forming representations of episodic memories critically depends on the hippocampus.and nearby structures in the medial temporal lobe. Damage to the hippocampus is known to impair the ability to store new episodic but not semantic memories <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib68" title="">68</a>]</cite>.
+<br class="ltx_break"/>Episodic memories do not depend only on the hippocampus, however. According to the hippocampal indexing theory <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib69" title="">69</a>]</cite>, an encoding of an episode in the hippocampus serves as a kind of index that points to and binds together representations in the neocortex that form the basis of the episode, such as multimodal sensory representations along with associated emotional and conceptual information <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib70" title="">70</a>]</cite>.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span>
+<div class="ltx_para" id="S3.I1.i2.p1">
+<p class="ltx_p" id="S3.I1.i2.p1.1"><span class="ltx_text ltx_font_italic" id="S3.I1.i2.p1.1.1">Storage:</span> After a memory is encoded, it undergoes a period of so-called <span class="ltx_text ltx_font_italic" id="S3.I1.i2.p1.1.2">consolidation</span> or transformation into a long term form <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib71" title="">71</a>]</cite>. This is commonly thought to involve moving the representation from the hippocampus to the neocortex, either partly <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib72" title="">72</a>]</cite> or entirely <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib63" title="">63</a>]</cite>.
+<br class="ltx_break"/>The memory must then <span class="ltx_text ltx_font_italic" id="S3.I1.i2.p1.1.3">persist</span> in its stored form <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib73" title="">73</a>]</cite>. There is evidence that a memory is in some way destabilized when it is retrieved or activated, leading it to undergo <span class="ltx_text ltx_font_italic" id="S3.I1.i2.p1.1.4">reconsolidation</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib74" title="">74</a>]</cite>.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">3.</span>
+<div class="ltx_para" id="S3.I1.i3.p1">
+<p class="ltx_p" id="S3.I1.i3.p1.1"><span class="ltx_text ltx_font_italic" id="S3.I1.i3.p1.1.1">Retrieval:</span> Retrieval is the recovery of a previously encoded episodic memory <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib75" title="">75</a>]</cite>. A <span class="ltx_text ltx_font_italic" id="S3.I1.i3.p1.1.2">cue</span>, which could be an activation of part of the pattern that was stored in memory, triggers the associated hippocampal index representation. This index is then thought to activate the associated neurons in the neocortex which made up the original encoding of the episode <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib76" title="">76</a>]</cite>.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="ltx_para" id="S3.SS2.p2">
+<p class="ltx_p" id="S3.SS2.p2.1">From this necessarily quite abbreviated account, we may draw a few conclusions relevant to the consideration of episodic memory in artificial intelligence. First, episodic memories depend on many brain regions for their creation and persistence. Episodic memories are not located in just one area that is easy to study and manipulate. Second, humans’ episodic memories are not simply left untouched after their creation; they are neither static nor unchanging. Third, there would be many points of possible intervention in an artificial process that mimics the above stages. Such forms of intervention could be used to enact the recommendations for safe episodic memory proposed later in this paper.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS3.4.1.1">III-C</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS3.5.2">The uses of episodic memory</span>
+</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.1">Episodic memories are thought to be involved in a variety of important cognitive processes beyond simply recalling past events. Evidence for this comes from two primary sources. First, brain imaging studies have shown that similar brain regions are recruited during recall of episodic memories and other tasks <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib77" title="">77</a>]</cite>. Second, people with impairments in episodic memory abilities are found to also have deficiencies when performing other tasks <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib78" title="">78</a>]</cite>. These two kinds of evidence, along with theoretical accounts that seek to explain the observed relationships, suggest that episodic memories — or at least the ability to form episodic memories and its associated cognitive architecture — are used when performing many other important cognitive functions.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p2">
+<p class="ltx_p" id="S3.SS3.p2.1">Episodic memories are, as memories, naturally of events in the past. They are used, however, to influence the future. Indeed, some have argued on evolutionary grounds that memory should be considered to be primarily concerned with the future, helping us act in whatever new circumstances the future presents us <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib79" title="">79</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p3">
+<p class="ltx_p" id="S3.SS3.p3.1"><span class="ltx_text ltx_font_bold" id="S3.SS3.p3.1.1">Planning</span> Especially relevant to the concerns of this paper is the way memories are used when planning future actions: according to some theories, memories serve as “building blocks”, allowing elements of particular episodes to be reused and reassembled in different ways in order to respond to novel situations <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib80" title="">80</a>]</cite>. Some psychologists have gone so far as to suggest that “episodic reconstruction is just an adaptive feature of the future planning system” <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib81" title="">81</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p4">
+<p class="ltx_p" id="S3.SS3.p4.1"><span class="ltx_text ltx_font_bold" id="S3.SS3.p4.1.1">Imagination and prediction</span>
+Accumulating evidence shows that episodic memory — and the brain systems that support it — is involved in predicting and imagining the future. Patients with damage to hippocampal and non-hippocampal regions involved in memory have unusually poor performance when asked to predict or imagine future scenarios. Such patients imagine impoverished scenarios lacking in detail and coherence <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib82" title="">82</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib83" title="">83</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p5">
+<p class="ltx_p" id="S3.SS3.p5.1"><span class="ltx_text ltx_font_bold" id="S3.SS3.p5.1.1">Problem solving</span> As long ago as the nineteenth century it was observed that patients with amnesia lacked the ability to engage in flexible thinking, with one doctor observing of his amnesiac patients that the “circle of ideas in which the patient’s intelligence moves becomes very restricted” <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib84" title="">84</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib82" title="">82</a>]</cite>. An association has been found between having deficits in episodic memory functioning and being unable to generate relevant details in an open-ended problem solving task <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib85" title="">85</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p6">
+<p class="ltx_p" id="S3.SS3.p6.1"><span class="ltx_text ltx_font_bold" id="S3.SS3.p6.1.1">Decision making</span> One proposed psychological model demonstrates how episodic memories can help in learning a new task by allowing successful episodes to be recalled and emulated <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib86" title="">86</a>]</cite>. This approach was extended to show how similar memories could be sampled in order to estimate the value of possible actions <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib87" title="">87</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p7">
+<p class="ltx_p" id="S3.SS3.p7.1"><span class="ltx_text ltx_font_bold" id="S3.SS3.p7.1.1">Learning from episodic memories</span>
+Episodic memory has been described as “epistemically generative” in the sense that it enables learning from past experiences <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib88" title="">88</a>]</cite>. Past events may, for example, be recalled and reinterpreted in light of newly acquired information, allowing one to learn from remembered aspects of the past events which had previously been misunderstood.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS4.4.1.1">III-D</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS4.5.2">Can an <span class="ltx_text ltx_font_smallcaps" id="S3.SS4.5.2.1">ai</span> agent have episodic memories?</span>
+</h3>
+<div class="ltx_para" id="S3.SS4.p1">
+<p class="ltx_p" id="S3.SS4.p1.1">The wide variety of ways episodic memories are used by humans suggests that the incorporation of true episodic memory abilities into <span class="ltx_text ltx_font_smallcaps" id="S3.SS4.p1.1.1">ai</span> agents would greatly expand their range of capabilities. But some may question whether it is even possible for <span class="ltx_text ltx_font_smallcaps" id="S3.SS4.p1.1.2">ai</span> agents to have actual episodic memories. Indeed, Endel Tulving himself described the phenomenon of recalling episodic memories in terms which cast doubt on the very idea. He wrote that remembering a past episode is a kind of “mental time travel,” a “conscious awareness of what had happened in the past” which has an “experiential flavor” <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib89" title="">89</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS4.p2">
+<p class="ltx_p" id="S3.SS4.p2.1">Some psychologists and philosophers have concluded that episodic memory is therefore a uniquely human phenomenon, lacking even in non-human animals — much less <span class="ltx_text ltx_font_smallcaps" id="S3.SS4.p2.1.1">ai</span> agents. According to this view, animals are “stuck in time,” without either episodic memory or “the ability to anticipate long-range future events” which we have seen is associated with episodic memory <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib90" title="">90</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS4.p3">
+<p class="ltx_p" id="S3.SS4.p3.1">Others, however, have taken a more expansive view of what constitutes episodic memory as well as who has it. Rather than focusing on phenomenological aspects of memory, it is possible instead to consider episodic memory as simply combining memory for <span class="ltx_text ltx_font_italic" id="S3.SS4.p3.1.1">what</span> happened, <span class="ltx_text ltx_font_italic" id="S3.SS4.p3.1.2">when</span> it happened, and <span class="ltx_text ltx_font_italic" id="S3.SS4.p3.1.3">where</span> it happened <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib91" title="">91</a>]</cite>. While we do not know what non-human animals experience, we can study their behavior. Some studies have indeed found evidence for episodic memory in animals. For example, an experiment demonstrated that birds (scrub jays) reliably behaved as if they remembered what kind of food they had hidden, where they had hidden it, and when they had hidden it <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib92" title="">92</a>]</cite>. Another study on scrub jays demonstrated that they also appear to plan for the future when hiding food <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib93" title="">93</a>]</cite>. Others argue that episodic memory has a long evolutionary history that predates humans and point to brain areas in other mammals as well as birds which they claim correspond to areas in the human brain responsible for episodic memory <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib94" title="">94</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS4.p4">
+<p class="ltx_p" id="S3.SS4.p4.1">If non-human animals do have episodic memory, that would reinforce the concerns which motivate this paper. If it turns out that episodic memories are necessary to achieve a level of intelligence on par with such animals, it would be much more likely that artificial intelligence researchers will conclude that similar memory abilities are needed in <span class="ltx_text ltx_font_smallcaps" id="S3.SS4.p4.1.1">ai</span> systems, including agents. Of course, we have seen that researchers are not waiting for this debate to be resolved to move ahead with attempts to engineer episodic memory into <span class="ltx_text ltx_font_smallcaps" id="S3.SS4.p4.1.2">ai</span> agents.</p>
+</div>
+<div class="ltx_para" id="S3.SS4.p5">
+<p class="ltx_p" id="S3.SS4.p5.1">Despite the concerns mentioned at the beginning of this section, we suggest that it does make sense to think about <span class="ltx_text ltx_font_smallcaps" id="S3.SS4.p5.1.1">ai</span> agents’ having episodic memory abilities, at least at the level of animals. It is likely that that researchers will develop architectures that enable combining representations of what, when, and where an agent performed certain actions or witnessed certain events, thus endowing <span class="ltx_text ltx_font_smallcaps" id="S3.SS4.p5.1.2">ai</span> agents with at least the functional equivalent of episodic memory.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">IV </span><span class="ltx_text ltx_font_smallcaps" id="S4.1.1">Risks of Episodic Memory</span>
+</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">Equipping an <span class="ltx_text ltx_font_smallcaps" id="S4.p1.1.1">ai</span> system with episodic memory will allow such a system to operate in new and different ways, some of which present novel risks. These risks include:</p>
+</div>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS1.4.1.1">IV-A</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS1.5.2">Deception</span>
+</h3>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.1">Episodic memories can be used to enable an agent to engage in sophisticated forms of deception. It is of course true that one does not need to have episodic memory in order to attempt to deceive others. For example, simply having a policy of always denying that an undesirable action occurred or is planned for the future is a simple form of deception which requires no access to relevant memories or plans (e.g. “I did not do that”, “I will not do that”).</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p2">
+<p class="ltx_p" id="S4.SS1.p2.1">However, more complex forms of deception would be difficult or impossible to carry out without some kind of episodic memory. If an agent is to execute a multi-stage plan over an extended period of time, the agent will have to keep track of both what it has done as well as what it is has already reported to others about its actions in order to maintain an effective deception.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p3">
+<p class="ltx_p" id="S4.SS1.p3.1">There is already some evidence to support this concern about deception. For example, one experiment <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib95" title="">95</a>]</cite> provided an <span class="ltx_text ltx_font_smallcaps" id="S4.SS1.p3.1.1">llm</span> (<span class="ltx_text ltx_font_smallcaps" id="S4.SS1.p3.1.2">gpt-4</span>) with a simple text scratchpad to record its “chain of thought” <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib96" title="">96</a>]</cite> reasoning, which functions as a crude form of memory. When “pressured” to perform an illegal act in a simulation, an <span class="ltx_text ltx_font_smallcaps" id="S4.SS1.p3.1.3">llm</span> <span class="ltx_text ltx_font_italic" id="S4.SS1.p3.1.4">with</span> a scratchpad was found to engage in “strategic deception” <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib57" title="">57</a>]</cite> approximately three times as often as the same <span class="ltx_text ltx_font_smallcaps" id="S4.SS1.p3.1.5">llm</span> <span class="ltx_text ltx_font_italic" id="S4.SS1.p3.1.6">without</span> a scratchpad.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS2.4.1.1">IV-B</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS2.5.2">Unwanted retention of knowledge</span>
+</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">An <span class="ltx_text ltx_font_smallcaps" id="S4.SS2.p1.1.1">ai</span> agent equipped with episodic memory might remember things its user would prefer that it not remember. It could then share that knowledge with people or organizations its user does not want to share it with, possibly constituting significant risks to the user’s privacy or personal safety. Invasions of privacy are likely to occur in several domains:</p>
+<ol class="ltx_enumerate" id="S4.I1">
+<li class="ltx_item" id="S4.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span>
+<div class="ltx_para" id="S4.I1.i1.p1">
+<p class="ltx_p" id="S4.I1.i1.p1.1"><span class="ltx_text ltx_font_italic" id="S4.I1.i1.p1.1.1">Interpersonal:</span> One person could use an <span class="ltx_text ltx_font_smallcaps" id="S4.I1.i1.p1.1.2">ai</span> agent to spy on another. For example, someone could use a household robot’s episodic memories to covertly monitor other members of the household.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span>
+<div class="ltx_para" id="S4.I1.i2.p1">
+<p class="ltx_p" id="S4.I1.i2.p1.1"><span class="ltx_text ltx_font_italic" id="S4.I1.i2.p1.1.1">Commercial:</span> Corporations could use <span class="ltx_text ltx_font_smallcaps" id="S4.I1.i2.p1.1.2">ai</span> agents, particularly those they sell or rent, to gather commercially valuable information about their users.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">3.</span>
+<div class="ltx_para" id="S4.I1.i3.p1">
+<p class="ltx_p" id="S4.I1.i3.p1.1"><span class="ltx_text ltx_font_italic" id="S4.I1.i3.p1.1.1">Governmental:</span> Governments, especially but not exclusively authoritarian ones, might demand or secretly access the memories of <span class="ltx_text ltx_font_smallcaps" id="S4.I1.i3.p1.1.2">ai</span> agents looking for evidence of forbidden political organizing or the expression of unwanted views.</p>
+</div>
+</li>
+</ol>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS3.4.1.1">IV-C</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS3.5.2">The unpredictability of memory</span>
+</h3>
+<div class="ltx_para" id="S4.SS3.p1">
+<p class="ltx_p" id="S4.SS3.p1.1">We summarized research into humans’ use of episodic memories in thinking about the future in Section III(C). If, as we discussed there, episodic memories are used to form the building blocks of future action plans, <span class="ltx_text ltx_font_smallcaps" id="S4.SS3.p1.1.1">ai</span> agents might engage in complicated and unpredictable behaviors as a result. This unpredictability derives from two sources: the unknown sources of memories and the difficulty of foreseeing how memories might be utilized.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p2">
+<p class="ltx_p" id="S4.SS3.p2.1"><span class="ltx_text ltx_font_bold" id="S4.SS3.p2.1.1">Unpredictable sources of memories</span>
+An <span class="ltx_text ltx_font_smallcaps" id="S4.SS3.p2.1.2">ai</span> agent with the ability to form episodic memories will in the course of its operation store many memories that record the various actions it takes and events it participates in. Because these events will themselves be influenced by the actions of humans and, perhaps, other <span class="ltx_text ltx_font_smallcaps" id="S4.SS3.p2.1.3">ai</span> agents, what constitutes the stock of memories an agent will come to have must be unknowable before the agent is deployed, acts and, in so doing, creates memories. It will also be constantly changing. Without a significant effort to put limitations on the characteristics of new memories which may be allowed to affect an agent’s actions, their influence would be unpredictable.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p3">
+<p class="ltx_p" id="S4.SS3.p3.1"><span class="ltx_text ltx_font_bold" id="S4.SS3.p3.1.1">Unpredictable uses of memories</span>
+As we reviewed earlier, humans make extensive use of their episodic memories to understand and act in new situations. If <span class="ltx_text ltx_font_smallcaps" id="S4.SS3.p3.1.2">ai</span> agents come to have this ability, the ways that they use that memory will be similarly hard to predict.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p4">
+<p class="ltx_p" id="S4.SS3.p4.1">Users may be surprised by how such agents use their memories. They may, for example, remember the location of objects that they then use when the user would prefer that they not use them. An agent may participate in a complex action episode while not fully understanding what is happening in the episode; if it later tried to use that episode as an example to draw on when planning a new sequence of actions, its faulty understanding may lead to undesirable and unexpected results. A household robot may, for example, observe one instance of its owner going over to the next door neighbor’s apartment to borrow some sugar and then try to do the same when it is asked to bake cookies, not understanding that the asking and receiving of permission from the neighbor is a prerequisite of entering their apartment.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p5">
+<p class="ltx_p" id="S4.SS3.p5.1">Our hypothesis that episodic memories could be recalled and used in ways which lead to unpredictable and potentially undesirable agent behavior has a strong parallel in existing work on the effects of examples given to large language models. A significant part of the success of <span class="ltx_text ltx_font_smallcaps" id="S4.SS3.p5.1.1">llms</span> is their ability to learn new tasks by being given even a few examples as context in their prompts <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib97" title="">97</a>]</cite>. Several research groups have demonstrated that such few-shot in context learning presents opportunities to undermine or defeat elements of the models’ training which are meant to keep them aligned to particular values such as being harmless <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib98" title="">98</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib99" title="">99</a>]</cite>. Recent work has also shown that the use of a large number (e.g. several hundred) of examples has even greater potential to override <span class="ltx_text ltx_font_smallcaps" id="S4.SS3.p5.1.2">llm</span>s’ safeguards <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib100" title="">100</a>]</cite>. We suggest that a set of recalled episodic memories, assembled on the fly as needed and functioning in a way analagous to in context examples, could be a source of similar so-called “jail-breaking.” Such a collection of episodes with the ability to negatively influence <span class="ltx_text ltx_font_smallcaps" id="S4.SS3.p5.1.3">llm</span> outputs might be assembled accidentally or through some intentional effort on the part of a bad actor. It has been argued that their vulnerability to dangerous in context examples may be an inherent limitation of transformer-based <span class="ltx_text ltx_font_smallcaps" id="S4.SS3.p5.1.4">llms</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib101" title="">101</a>]</cite>; if so, such a vulnerability could be equally difficult to overcome in similar systems augmented with episodic memory abilities.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS4.4.1.1">IV-D</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS4.5.2">Improved situational awareness</span>
+</h3>
+<div class="ltx_para" id="S4.SS4.p1">
+<p class="ltx_p" id="S4.SS4.p1.1">Many contemporary large language models have a great deal of knowledge of the world in general <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib102" title="">102</a>]</cite>; they can somewhat reliably (hallucinations <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib103" title="">103</a>]</cite> notwithstanding) answer factual questions about information that was in their training data. However, they have little understanding of their own particular circumstances outside of whatever prompt they may be given. Researchers have employed the term “situational awareness” to refer to a model’s ability to connect the general information it has about the world with the details of its own particular circumstances <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib104" title="">104</a>]</cite>. Some have employed the term in a more restricted sense, to refer specifically to a model’s knowledge of whether at any given time it is deployed or undergoing testing (e.g. to test its truthfulness or harmlessness) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib105" title="">105</a>]</cite>. Models that have better situational awareness in the general sense might be more broadly capable and better able to take actions which affect the world while those with knowledge of their own training status might evade safety tests by responding in approved ways during training and testing but going on to act in undesirable ways during deployment.</p>
+</div>
+<div class="ltx_para" id="S4.SS4.p2">
+<p class="ltx_p" id="S4.SS4.p2.1">Several experiments using purpose-built datasets have been conducted to test large language models’ levels of situational awareness <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib106" title="">106</a>]</cite>. Some of these experiments have shown that current models have only weak situational awareness <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib107" title="">107</a>]</cite> while others suggest the level might be higher <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib56" title="">56</a>]</cite>, although it is unclear how much of what appears to be awareness of its own situation might be derived from either its prompt or a combination of its prompt and information about <span class="ltx_text ltx_font_smallcaps" id="S4.SS4.p2.1.1">llms</span> in general.</p>
+</div>
+<div class="ltx_para" id="S4.SS4.p3">
+<p class="ltx_p" id="S4.SS4.p3.1">We propose that a model without episodic memory can have only a very limited form of situational awareness. With no understanding of what actions it has taken in the distant or recent past, what environments it has seen or tasks it has completed, an agent could not be said to have much awareness of its situation. Endowing it with episodic memories would allow it to develop a better, more complete picture of the world and its role in it, allowing for more effective planning and action taking to influence the environment and to achieve objectives. It could use its episodic memories to build up an understanding of those with whom it interacts, the kinds of tasks it performs, and the contexts in which it performs them. It would also develop a knowledge of its own capabilities and limitations that can in some cases only come from observing and later recalling one’s own actions, successes, and failures.</p>
+</div>
+<div class="ltx_para" id="S4.SS4.p4">
+<p class="ltx_p" id="S4.SS4.p4.1">Ideally, this would simply lead to an agent better able to perform the tasks its users assign it. But without some check, this improved awareness could represent an enhanced danger in a misaligned agent or one under the direction of a bad actor. For example, episodic memories could allow an agent to learn regularities in the timing or content of safety audits which might be performed either before or during deployment, and thus to evade them.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">V </span><span class="ltx_text ltx_font_smallcaps" id="S5.1.1">Safety benefits of episodic memory</span>
+</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">In contrast to the concerns elaborated upon above, episodic memory could also be used to make <span class="ltx_text ltx_font_smallcaps" id="S5.p1.1.1">ai</span> safer in multiple ways:</p>
+</div>
+<section class="ltx_subsection" id="S5.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S5.SS1.4.1.1">V-A</span> </span><span class="ltx_text ltx_font_italic" id="S5.SS1.5.2">Monitoring</span>
+</h3>
+<div class="ltx_para" id="S5.SS1.p1">
+<p class="ltx_p" id="S5.SS1.p1.1">We cannot ensure that <span class="ltx_text ltx_font_smallcaps" id="S5.SS1.p1.1.1">ai</span> operates safely unless we know what it is doing. As <span class="ltx_text ltx_font_smallcaps" id="S5.SS1.p1.1.2">ai</span> agents become more capable, they will increasingly operate outside of direct human supervision. Robots may undertake long and complicated tasks that take them far away from their operators; non-embodied <span class="ltx_text ltx_font_smallcaps" id="S5.SS1.p1.1.3">ai</span> agents may direct and supervise the operation of complicated systems such as power grids or engage in virtual consultations with humans over medical or legal matters. In these cases and many others it will be impractical or impossible for any human to watch everything that such an <span class="ltx_text ltx_font_smallcaps" id="S5.SS1.p1.1.4">ai</span> agent does. It will instead be necessary to rely on <span class="ltx_text ltx_font_smallcaps" id="S5.SS1.p1.1.5">ai</span> agents to remember, recall, and share information about their actions.</p>
+</div>
+<div class="ltx_para" id="S5.SS1.p2">
+<p class="ltx_p" id="S5.SS1.p2.1">Several methods were recently proposed to achieve “visibility into <span class="ltx_text ltx_font_smallcaps" id="S5.SS1.p2.1.1">ai</span> agents,” one of which was <span class="ltx_text ltx_font_italic" id="S5.SS1.p2.1.2">activity logging</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib108" title="">108</a>]</cite>. Episodic memories could be used one way to achieve such logging, as well as to address other calls for research into “scalable oversight” <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib109" title="">109</a>]</cite> and “monitoring” <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib110" title="">110</a>]</cite>. Artificial episodic memory representations could, though, be structured to be more useful and accessible than simple logging.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S5.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S5.SS2.4.1.1">V-B</span> </span><span class="ltx_text ltx_font_italic" id="S5.SS2.5.2">Control</span>
+</h3>
+<div class="ltx_para" id="S5.SS2.p1">
+<p class="ltx_p" id="S5.SS2.p1.1">Maintaining and sharing episodic memories with an appropriate authority could be used as a means to ensure an <span class="ltx_text ltx_font_smallcaps" id="S5.SS2.p1.1.1">ai</span> agent is operating as intended and is therefore under control. It could, for example, help prevent the misuse of dual-use technology. Dual-use technology, which can be used for civilian or military purposes, is a particularly significant problem for artificial intelligence, given the general purpose nature of much current machine learning research. It has been plausibly claimed that most <span class="ltx_text ltx_font_smallcaps" id="S5.SS2.p1.1.2">ai</span> is dual-use <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib111" title="">111</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S5.SS2.p2">
+<p class="ltx_p" id="S5.SS2.p2.1">Having access to an <span class="ltx_text ltx_font_smallcaps" id="S5.SS2.p2.1.1">ai</span> system’s memories would be one way for a corporation or government to ensure it was not being used in violation of an understanding that it only be used for peaceful purposes, perhaps as part of an export control regime <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib112" title="">112</a>]</cite>. Given the high risks associated with the weaponization of <span class="ltx_text ltx_font_smallcaps" id="S5.SS2.p2.1.2">ai</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib113" title="">113</a>]</cite>, techniques and frameworks could be developed to use episodic memories of potentially dual-use <span class="ltx_text ltx_font_smallcaps" id="S5.SS2.p2.1.3">ai</span> agents to maintain control over them.</p>
+</div>
+<div class="ltx_para" id="S5.SS2.p3">
+<p class="ltx_p" id="S5.SS2.p3.1">If systems are developed that explicitly make use of episodic memories as building blocks for planning actions, new avenues for control would be opened up. As we will discuss further in Section VI(B), an agent’s collection of memories could be curated in order to shape its future actions.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S5.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S5.SS3.4.1.1">V-C</span> </span><span class="ltx_text ltx_font_italic" id="S5.SS3.5.2">Explainability</span>
+</h3>
+<div class="ltx_para" id="S5.SS3.p1">
+<p class="ltx_p" id="S5.SS3.p1.1">An accurate history of <em class="ltx_emph ltx_font_italic" id="S5.SS3.p1.1.1">what</em> an agent did is a prerequisite for trying to explain <em class="ltx_emph ltx_font_italic" id="S5.SS3.p1.1.2">why</em> it acted as it did. Thorough memories should include both information about an agent’s perceptions of the environment as well as some record of how its internal states, such as goal representations, interacted with those perceptions to lead to specific actions.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S5.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S5.SS4.4.1.1">V-D</span> </span><span class="ltx_text ltx_font_italic" id="S5.SS4.5.2">Uniquely controllable type of information</span>
+</h3>
+<div class="ltx_para" id="S5.SS4.p1">
+<p class="ltx_p" id="S5.SS4.p1.1">Several aspects of <span class="ltx_text ltx_font_smallcaps" id="S5.SS4.p1.1.1">llm</span>-based agents make it difficult to control what information, or even skills, they may have after deployment. First, although there is a great deal of research effort going into deleting information from their weights after they are trained <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib114" title="">114</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib115" title="">115</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib116" title="">116</a>]</cite>, it is not yet clear how to do this reliably. Information that was thought to be deleted may, in some circumstances, be recoverable <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib117" title="">117</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib118" title="">118</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S5.SS4.p2">
+<p class="ltx_p" id="S5.SS4.p2.1">Second, and more significantly, given access to the internet, <span class="ltx_text ltx_font_smallcaps" id="S5.SS4.p2.1.1">llm</span>-based <span class="ltx_text ltx_font_smallcaps" id="S5.SS4.p2.1.2">ai</span> agents could find anything available there, potentially giving them access to information that was deliberately excluded from their training data. This could include examples of skills or behaviors which the agent was not trained on but which it could learn through one- or few-shot incorporation into its context window. <span class="ltx_text ltx_font_smallcaps" id="S5.SS4.p2.1.3">ai</span> agents are able to both search the internet <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib119" title="">119</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib120" title="">120</a>]</cite> and learn new skills in this manner today <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib97" title="">97</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib121" title="">121</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S5.SS4.p3">
+<p class="ltx_p" id="S5.SS4.p3.1">Any publicly available information about the world in general and about skills an agent might acquire will therefore be difficult to keep from an <span class="ltx_text ltx_font_smallcaps" id="S5.SS4.p3.1.1">ai</span> agent. By contrast, information about an agent itself and its own unique history will not be widely available. If episodic memories about an agent’s past actions are stored, controlled, and managed in the ways suggested in this paper, information about an agent and its own past would be the easiest to selectively keep from it.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">VI </span><span class="ltx_text ltx_font_smallcaps" id="S6.1.1">Principles for enabling safe
+<br class="ltx_break"/>and trustworthy episodic memory</span>
+</h2>
+<div class="ltx_para" id="S6.p1">
+<p class="ltx_p" id="S6.p1.1">We suggest the following four principles to guide research and implementation of episodic memory abilities in <span class="ltx_text ltx_font_smallcaps" id="S6.p1.1.1">ai</span>:</p>
+</div>
+<section class="ltx_subsection" id="S6.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S6.SS1.4.1.1">VI-A</span> </span><span class="ltx_text ltx_font_italic" id="S6.SS1.5.2">Interpretability of memories</span>
+</h3>
+<div class="ltx_para" id="S6.SS1.p1">
+<p class="ltx_p" id="S6.SS1.p1.1">Memories should be accurately interpretable by humans, either directly or indirectly. <em class="ltx_emph ltx_font_italic" id="S6.SS1.p1.1.1">Directly</em> interpretable memories would be in a readily understandable form such as video, images, or natural language. It might in some limited cases be possible to equip an <span class="ltx_text ltx_font_smallcaps" id="S6.SS1.p1.1.2">ai</span> agent with useful memory which consists entirely of records in such formats by, for example, recording raw video before it is processed through a vision system.</p>
+</div>
+<div class="ltx_para" id="S6.SS1.p2">
+<p class="ltx_p" id="S6.SS1.p2.1">It is likely, however, that memory records entirely in such raw formats (especially video) would be impractical; they might be excessively large and difficult to search, access, and make use of. In practice memories are likely to be compressed into smaller representations which would then need to be <em class="ltx_emph ltx_font_italic" id="S6.SS1.p2.1.1">indirectly</em> interpretable. Memories might be indirectly but still reliably interpretable if the memories could yield accurate information which is complete and relevant to a user’s specific interests in monitoring them. A memory might be summarized in natural language <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib25" title="">25</a>]</cite>, giving the most important events which took place in a given episode; systems could be trained to produce safety-specific summaries, reporting only actions which could be dangerous or otherwise raise concerns about an agent’s reliability.</p>
+</div>
+<div class="ltx_para" id="S6.SS1.p3">
+<p class="ltx_p" id="S6.SS1.p3.1">Memories should also be usable for question answering. If a user wants to know something specific about an episode, perhaps in response to a summary, memories should be queryable in natural language. Such queries should not be limited to one episode at a time; memories ought to be able to be compared to other memories, allowing such questions as, “what was different this time?” Memories should also be easily searchable using natural language, allowing users to ask if a particular agent has ever done something, or when something was done, for example. Finally, if the method of compressed representation of episodes allows it, memories might to some extent be visualizable.</p>
+</div>
+<div class="ltx_para" id="S6.SS1.p4">
+<p class="ltx_p" id="S6.SS1.p4.1">In addition to the above methods for users to be able to interpret memories, techniques from the growing field of research on the interpretability of machine learning methods <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib122" title="">122</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib123" title="">123</a>]</cite> can be applied to the memory representations and help to guide the development of such representations to be intelligible and controllable.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S6.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S6.SS2.4.1.1">VI-B</span> </span><span class="ltx_text ltx_font_italic" id="S6.SS2.5.2">Addition or deletion of memories</span>
+</h3>
+<div class="ltx_para" id="S6.SS2.p1">
+<p class="ltx_p" id="S6.SS2.p1.1">Users should have complete control over the memories retained by an <span class="ltx_text ltx_font_smallcaps" id="S6.SS2.p1.1.1">ai</span> agent. Most importantly, a user should be able to delete memories of particular episodes. A user might not want an agent to remember something for a variety of reasons, from safety-related concerns to more mundane issues, including concerns about privacy or maintenance of trade or government secrets. Conversely, it might be useful for users to add memories of episodes which a particular agent did not itself experience to its store of memories.</p>
+</div>
+<div class="ltx_para" id="S6.SS2.p2">
+<p class="ltx_p" id="S6.SS2.p2.1">The addition or deletion of memories might be particularly important if, as discussed above, <span class="ltx_text ltx_font_smallcaps" id="S6.SS2.p2.1.1">ai</span> agents will be able to use and recompose memories to construct new plans for future action. Such episodes might be positive examples of action sequences which a user wishes an agent to repeat or draw upon to incorporate in future plans. Alternatively, it may be useful to give agents memory-like records of episodes which represent undesirable actions; such episodes could function as a kind of warning to allow agents to recognize if they are beginning to carry out actions which are similar to those in an episode added to the agent in order to serve as a negative example. In other cases it might be better for agents not to remember things which their users do not want them to be able to repeat or call upon when planning.</p>
+</div>
+<div class="ltx_para" id="S6.SS2.p3">
+<p class="ltx_p" id="S6.SS2.p3.1">If agents make use of their memories when planning actions, the addition or deletion of memories could help produce either standardized or specialized agents. In some circumstances it might be best for all agents to have the same stock of memories which might influence their actions, helping to ensure that their behavior is predictable and regular. In others cases, there may be a need for particular agents to maintain their own memories which are never shared, in order to prevent the spread of potentially dangerous information.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S6.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S6.SS3.4.1.1">VI-C</span> </span><span class="ltx_text ltx_font_italic" id="S6.SS3.5.2">Detachable and isolatable memory format</span>
+</h3>
+<div class="ltx_para" id="S6.SS3.p1">
+<p class="ltx_p" id="S6.SS3.p1.1">Memories must therefore be in a format which allows for their addition or complete deletion by users. This will impose some design constraints on how episodic memories are instantiated in an <span class="ltx_text ltx_font_smallcaps" id="S6.SS3.p1.1.1">ai</span> agent because they will have to be in a format which can be cleanly separated from the rest of the system’s architecture. As we saw earlier, the mechanics of human memory are much messier: although some areas (notably, the hippocampus) are more centrally involved in human memory formation and retrieval than others, complete episodic memories are thought to be composed of elements distributed in many areas of the brain <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib76" title="">76</a>]</cite>. According to some theories of memory, regions with a relative specialization in particular modalities (e.g. vision) are also responsible for storing their respective modality-specific components of a particular memory <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib67" title="">67</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S6.SS3.p2">
+<p class="ltx_p" id="S6.SS3.p2.1">Memories which are tightly integrated with and spread throughout many areas would be difficult to delete or add to, so it is likely that memory will have to be designed very differently in <span class="ltx_text ltx_font_smallcaps" id="S6.SS3.p2.1.1">ai</span> systems than it is in humans if it is to be implemented in accordance with these safety-oriented principles. This might mean that some of the ways in which humans are able to use memories effectively would not be directly translatable to artificial intelligence, thereby limiting such artificial capabilities relative to those in humans. However, alternative implementations of episodic memory which conform to the above principles may be invented which would allow for memory capabilities which are both safe and effective.</p>
+</div>
+<div class="ltx_para" id="S6.SS3.p3">
+<p class="ltx_p" id="S6.SS3.p3.1">The potential difficulty of removing memories that are tightly integrated into an <span class="ltx_text ltx_font_smallcaps" id="S6.SS3.p3.1.1">llm</span> is demonstrated by the body of work done on “machine unlearning” <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib124" title="">124</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib125" title="">125</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib114" title="">114</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib115" title="">115</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib116" title="">116</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib126" title="">126</a>]</cite>. Techniques to remove information from <span class="ltx_text ltx_font_smallcaps" id="S6.SS3.p3.1.2">llm</span>s have been found to be not yet consistently reliable <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib117" title="">117</a>, <a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib118" title="">118</a>]</cite>. It is important to note that these techniques are currently not directly applicable to the problem of removing episodic memory because they focus on deleting information found in <span class="ltx_text ltx_font_smallcaps" id="S6.SS3.p3.1.3">llm</span>’s weights as a result of its training. By contrast, episodic memories would only be accumulated and stored after training is complete. If future attempts to retain episodic memories involve storing them in a distributed fashion throughout an <span class="ltx_text ltx_font_smallcaps" id="S6.SS3.p3.1.4">llm</span>, these techniques might be useful, though only if they develop to be more reliable.</p>
+</div>
+<div class="ltx_para" id="S6.SS3.p4">
+<p class="ltx_p" id="S6.SS3.p4.1">The most straightforward method for storing and retrieving representations of episodic memories for <span class="ltx_text ltx_font_smallcaps" id="S6.SS3.p4.1.1">llm</span>-based agents would likely be similar to retrieval augmented generation (<span class="ltx_text ltx_font_smallcaps" id="S6.SS3.p4.1.2">rag</span>) systems. Indeed, a recent <span class="ltx_text ltx_font_smallcaps" id="S6.SS3.p4.1.3">llm</span>-based system with an implementation of episodic memory-like abilities for episode sub-trajectories employs <span class="ltx_text ltx_font_smallcaps" id="S6.SS3.p4.1.4">rag</span> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib44" title="">44</a>]</cite>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S6.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S6.SS4.4.1.1">VI-D</span> </span><span class="ltx_text ltx_font_italic" id="S6.SS4.5.2">Memories not editable by <span class="ltx_text ltx_font_smallcaps" id="S6.SS4.5.2.1">ai</span> agents</span>
+</h3>
+<div class="ltx_para" id="S6.SS4.p1">
+<p class="ltx_p" id="S6.SS4.p1.1">In contrast to — and in some tension with — the principle that memories should be able to be easily added or deleted by users is the countervailing principle that memories should not be editable by <span class="ltx_text ltx_font_smallcaps" id="S6.SS4.p1.1.1">ai</span> agents themselves. Although memories will have to ‘edited’ when they are created, they should afterwards be left intact and unaltered by the agent. This is necessary in order to ensure that memories remain accurate and uncorrupted. An <span class="ltx_text ltx_font_smallcaps" id="S6.SS4.p1.1.2">ai</span> agent should not be able to add, delete, or change its memories. Otherwise, a memory-facilitated form of reward hacking <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2501.11739v2#bib.bib109" title="">109</a>]</cite> might occur: if a reinforcement learning-based agent’s reward were tied to a measure of performance which it reports using its memory, it might find that it can achieve a higher reward by altering its memory of its actions rather than by changing what actions it takes.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S7">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">VII </span><span class="ltx_text ltx_font_smallcaps" id="S7.1.1">Safe episodic memory: research questions</span>
+</h2>
+<div class="ltx_para" id="S7.p1">
+<p class="ltx_p" id="S7.p1.1">Because episodic memory in <span class="ltx_text ltx_font_smallcaps" id="S7.p1.1.1">ai</span> agents is still at an early stage of development, there is a great deal of work to do to better understand how it will affect agents’ abilities in practice and what its effects will be from a trust and safety perspective. Building off of the preceding discussion of risks and benefits, in this section we propose research questions in four broad areas.</p>
+</div>
+<div class="ltx_para" id="S7.p2">
+<p class="ltx_p" id="S7.p2.1"><span class="ltx_text ltx_font_bold" id="S7.p2.1.1">Understanding and mitigating risks</span> Most importantly, research should be conducted to understand whether and under what circumstances episodic memories can lead to unwanted behavior on the part of <span class="ltx_text ltx_font_smallcaps" id="S7.p2.1.2">ai</span> agents. This can be simultaneously complimented with investigations of how to prevent the undesirable behavior that episodic memory might enable. The creation of datasets with tasks designed to test the relative alignment of models with and without various forms of episodic memory would be useful.</p>
+</div>
+<div class="ltx_para" id="S7.p3">
+<p class="ltx_p" id="S7.p3.1">Particularly initially, experiments could be done with episodic memories which are <span class="ltx_text ltx_font_italic" id="S7.p3.1.1">directly interpretable</span>, as discussed in Section VI(A). If memories are made up of natural language descriptions of events, possibly together with images from such events, it will be easier for researchers to understand the role that such memory representations play in shaping agent behavior.</p>
+</div>
+<div class="ltx_para" id="S7.p4">
+<p class="ltx_p" id="S7.p4.1"><span class="ltx_text ltx_font_bold" id="S7.p4.1.1">Using memories for safety</span>
+We suggest two main directions for research into how memory can be used to enhance the safety of <span class="ltx_text ltx_font_smallcaps" id="S7.p4.1.2">ai</span> agents. First, methods could be developed to put into practice our proposals about using episodic memories for monitoring and control. In order to do so, many questions will have to be addressed, including the structure of the memories, how to enable arbitrary unanticipated queries of the memories, and what kinds of information is most important to store and present to users or other safety monitors. Because some aspects of memory representations might be designed or discovered during a learning process, it should be possible to influence these representations to make safety-relevant features of the remembered episodes easily retrievable.</p>
+</div>
+<div class="ltx_para" id="S7.p5">
+<p class="ltx_p" id="S7.p5.1">Second, research will be needed to determine how to use episodic memories (or parts thereof) as components in an agent’s planning process. Questions to be addressed here include determining what kind of training and guidance will be required for agents to learn to use the memories in a useful way; whether and how it is possible to make use of examples of undesirable actions in order to prevent similar actions in the future; and how to design a procedure that allows for certain kinds of newly acquired memories to influence future actions while disallowing others.</p>
+</div>
+<div class="ltx_para" id="S7.p6">
+<p class="ltx_p" id="S7.p6.1"><span class="ltx_text ltx_font_bold" id="S7.p6.1.1">Episodic memory architectures designed for safety</span>
+We believe that how episodic memories are represented, stored, and accessed by an <span class="ltx_text ltx_font_smallcaps" id="S7.p6.1.2">ai</span> agent will soon be a popular and important field of research. How to do this without making agent behavior less safe, for example according to our proposed principles or others which may be developed, should be the focus of safety-minded efforts in this area. A significant question is whether there will be a trade-off between safety and usefulness according to some metric (e.g. accuracy, speed, memory use). Relatedly, how dissimilar to human memory in some respects (e.g. interpretability and controllability) can artificial episodic memory be while still enabling the range of functions that human memory does?</p>
+</div>
+<div class="ltx_para" id="S7.p7">
+<p class="ltx_p" id="S7.p7.1"><span class="ltx_text ltx_font_bold" id="S7.p7.1.1">Governance responses to episodic memory capabilities</span>
+Episodic memory in <span class="ltx_text ltx_font_smallcaps" id="S7.p7.1.2">ai</span> agents is an important topic for researchers working on <span class="ltx_text ltx_font_smallcaps" id="S7.p7.1.3">ai</span> governance in two ways. First, memories might be employed as part of an <span class="ltx_text ltx_font_smallcaps" id="S7.p7.1.4">ai</span> governance strategy. How this might be implemented, in which domains might memories be most useful, and how memories can be used for governance purposes while preserving user privacy are some of the questions that will have to be addressed.</p>
+</div>
+<div class="ltx_para" id="S7.p8">
+<p class="ltx_p" id="S7.p8.1">Second, if, as we have argued here, artificial episodic memories are a significant potential source of risk, work will have to be done to determine how governance efforts might best mitigate that risk. What kind of regulations or standards should govern agents’ use of episodic memories? How would limitations or oversight differ when dealing with a new type of capability such as episodic memory rather than considering the amount of computing resources used or the size of a model?</p>
+</div>
+</section>
+<section class="ltx_section" id="S8">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">VIII </span><span class="ltx_text ltx_font_smallcaps" id="S8.1.1">Conclusion</span>
+</h2>
+<div class="ltx_para" id="S8.p1">
+<p class="ltx_p" id="S8.p1.1">We have examined some of the risks and benefits of episodic memory in <span class="ltx_text ltx_font_smallcaps" id="S8.p1.1.1">ai</span> agents.
+We note that there is some overlap between the sources of risks and benefits: positive aspects of episodic memory from the perspective of one of these may be negative when seen from the other. What might constitute a risk may also be seen as a benefit. For example, the ability to record, store, and recall information about what an agent does is beneficial for monitoring and control of the agent but poses risks to the privacy of the people interacting with the agent. How to balance these and other such trade-offs will benefit from broad and inclusive participation and investigation.</p>
+</div>
+<div class="ltx_para" id="S8.p2">
+<p class="ltx_p" id="S8.p2.1">At the moment, many of the risks we warn about have not yet been seen in deployed models. Though we have been careful to ground our concerns in a discussion of the role of episodic memory in humans, some may view them as speculative. We contend, however, that the best time to begin considering the dangers of a new technology or technique is precisely when the risks are still open to speculation rather than already upon us.</p>
+</div>
+<div class="ltx_para" id="S8.p3">
+<p class="ltx_p" id="S8.p3.1">Developing the ability for <span class="ltx_text ltx_font_smallcaps" id="S8.p3.1.1">ai</span> agents to form, retrieve, and reason over episodic memories would introduce significant new capabilities and would represent a major milestone along the road to more advanced artificial intelligence. It is fortunate that these capabilities did not develop before concerns about <span class="ltx_text ltx_font_smallcaps" id="S8.p3.1.2">ai</span> reliability, safety, and alignment became more common within the <span class="ltx_text ltx_font_smallcaps" id="S8.p3.1.3">ai</span> research community. This presents the community with an opportunity to deliberatively and cautiously develop a potentially dangerous capability to ensure that it makes <span class="ltx_text ltx_font_smallcaps" id="S8.p3.1.4">ai</span> safer rather than more dangerous. We hope by bringing attention to this topic to foster a wider discussion of the risks and benefits of artificial episodic memory and contribute to the establishment of a research community to address them.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+E. Tulving, <em class="ltx_emph ltx_font_italic" id="bib.bib1.1.1">Elements of episodic memory</em>.   Oxford University Press, 1985.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+Z. Zhang, X. Bo, C. Ma, R. Li, X. Chen, Q. Dai, J. Zhu, Z. Dong, and J.-R. Wen, “A survey on the memory mechanism of large language model based agents,” 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+J. S. Park, J. O’Brien, C. J. Cai, M. R. Morris, P. Liang, and M. S. Bernstein, “Generative agents: Interactive simulacra of human behavior,” in <em class="ltx_emph ltx_font_italic" id="bib.bib3.1.1">Proceedings of the 36th annual acm symposium on user interface software and technology</em>, 2023, pp. 1–22.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+T. Masterman, S. Besen, M. Sawtell, and A. Chao, “The landscape of emerging ai agent architectures for reasoning, planning, and tool calling: A survey,” <em class="ltx_emph ltx_font_italic" id="bib.bib4.1.1">arXiv preprint arXiv:2404.11584</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock">
+Z. Xi, W. Chen, X. Guo, W. He, Y. Ding, B. Hong, M. Zhang, J. Wang, S. Jin, E. Zhou, R. Zheng, X. Fan, X. Wang, L. Xiong, Y. Zhou, W. Wang, C. Jiang, Y. Zou, X. Liu, Z. Yin, S. Dou, R. Weng, W. Cheng, Q. Zhang, W. Qin, Y. Zheng, X. Qiu, X. Huang, and T. Gui, “The rise and potential of large language model based agents: A survey,” 2023. [Online]. Available: https://arxiv.org/abs/2309.07864
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock">
+D. L. Schacter and K. P. Madore, “Remembering the past and imagining the future: Identifying and enhancing the contribution of episodic memory,” <em class="ltx_emph ltx_font_italic" id="bib.bib6.1.1">Memory Studies</em>, vol. 9, no. 3, pp. 245–255, 2016.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock">
+A. Boyle, “The mnemonic functions of episodic memory,” <em class="ltx_emph ltx_font_italic" id="bib.bib7.1.1">Philosophical Psychology</em>, vol. 35, no. 3, pp. 327–349, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock">
+D. R. Addis and A. Tanguay, “Prospective cognition and its links with memory,” 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock">
+M. Wooldridge and N. R. Jennings, “Agent theories, architectures, and languages: a survey,” in <em class="ltx_emph ltx_font_italic" id="bib.bib9.1.1">International Workshop on Agent Theories, Architectures, and Languages</em>.   Springer, 1994, pp. 1–39.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock">
+S. J. Russell and P. Norvig, <em class="ltx_emph ltx_font_italic" id="bib.bib10.1.1">Artificial intelligence: a modern approach</em>.   Pearson, 2016.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock">
+Y. Bengio, G. Hinton, A. Yao, D. Song, P. Abbeel, Y. N. Harari, Y.-Q. Zhang, L. Xue, S. Shalev-Shwartz, G. Hadfield <em class="ltx_emph ltx_font_italic" id="bib.bib11.1.1">et al.</em>, “Managing ai risks in an era of rapid progress,” <em class="ltx_emph ltx_font_italic" id="bib.bib11.2.2">arXiv preprint arXiv:2310.17688</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock">
+S. Gao, A. Fang, Y. Huang, V. Giunchiglia, A. Noori, J. R. Schwarz, Y. Ektefaie, J. Kondic, and M. Zitnik, “Empowering biomedical discovery with ai agents,” <em class="ltx_emph ltx_font_italic" id="bib.bib12.1.1">arXiv preprint arXiv:2404.02831</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock">
+W. Huang, P. Abbeel, D. Pathak, and I. Mordatch, “Language models as zero-shot planners: Extracting actionable knowledge for embodied agents,” in <em class="ltx_emph ltx_font_italic" id="bib.bib13.1.1">International Conference on Machine Learning</em>.   PMLR, 2022, pp. 9118–9147.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock">
+M. Ahn, A. Brohan, N. Brown, Y. Chebotar, O. Cortes, B. David, C. Finn, K. Gopalakrishnan, K. Hausman, A. Herzog <em class="ltx_emph ltx_font_italic" id="bib.bib14.1.1">et al.</em>, “Do as i can, not as i say: Grounding language in robotic affordances,” <em class="ltx_emph ltx_font_italic" id="bib.bib14.2.2">arXiv preprint arXiv:2204.01691</em>, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock">
+K. Valmeekam, M. Marquez, S. Sreedharan, and S. Kambhampati, “On the planning abilities of large language models-a critical investigation,” <em class="ltx_emph ltx_font_italic" id="bib.bib15.1.1">Advances in Neural Information Processing Systems</em>, vol. 36, pp. 75 993–76 005, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock">
+G. Wang, Y. Xie, Y. Jiang, A. Mandlekar, C. Xiao, Y. Zhu, L. Fan, and A. Anandkumar, “Voyager: An open-ended embodied agent with large language models,” <em class="ltx_emph ltx_font_italic" id="bib.bib16.1.1">arXiv preprint arXiv:2305.16291</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock">
+T. Schaul, J. Quan, I. Antonoglou, and D. Silver, “Prioritized experience replay,” <em class="ltx_emph ltx_font_italic" id="bib.bib17.1.1">arXiv preprint arXiv:1511.05952</em>, 2015.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock">
+B. Eysenbach, R. R. Salakhutdinov, and S. Levine, “Search on the replay buffer: Bridging planning and reinforcement learning,” <em class="ltx_emph ltx_font_italic" id="bib.bib18.1.1">Advances in Neural Information Processing Systems</em>, vol. 32, 2019.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock">
+J. Coda-Forno, C. Yu, Q. Guo, Z. Fountas, and N. Burgess, “Leveraging episodic memory to improve world models for reinforcement learning,” 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock">
+C. Blundell, B. Uria, A. Pritzel, Y. Li, A. Ruderman, J. Z. Leibo, J. Rae, D. Wierstra, and D. Hassabis, “Model-free episodic control,” <em class="ltx_emph ltx_font_italic" id="bib.bib20.1.1">arXiv preprint arXiv:1606.04460</em>, 2016.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock">
+H. Le, T. Karimpanal George, M. Abdolshah, T. Tran, and S. Venkatesh, “Model-based episodic memory induces dynamic hybrid controls,” <em class="ltx_emph ltx_font_italic" id="bib.bib21.1.1">Advances in Neural Information Processing Systems</em>, vol. 34, pp. 30 313–30 325, 2021.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock">
+A. Lampinen, S. Chan, A. Banino, and F. Hill, “Towards mental time travel: a hierarchical memory for reinforcement learning agents,” <em class="ltx_emph ltx_font_italic" id="bib.bib22.1.1">Advances in Neural Information Processing Systems</em>, vol. 34, pp. 28 182–28 195, 2021.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock">
+M. R. Samsami, A. Zholus, J. Rajendran, and S. Chandar, “Mastering memory tasks with world models,” <em class="ltx_emph ltx_font_italic" id="bib.bib23.1.1">arXiv preprint arXiv:2403.04253</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock">
+L. Bärmann and A. Waibel, “Where did i leave my keys?-episodic-memory-based question answering on egocentric videos,” in <em class="ltx_emph ltx_font_italic" id="bib.bib24.1.1">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em>, 2022, pp. 1560–1568.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock">
+C. DeChant, I. Akinola, and D. Bauer, “Learning to summarize and answer questions about a virtual robot’s past actions,” <em class="ltx_emph ltx_font_italic" id="bib.bib25.1.1">Autonomous Robots</em>, vol. 47, no. 8, pp. 1103–1118, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock">
+A. Anwar, J. Welsh, J. Biswas, S. Pouya, and Y. Chang, “Remembr: Building and reasoning over long-horizon spatio-temporal memory for robot navigation,” <em class="ltx_emph ltx_font_italic" id="bib.bib26.1.1">arXiv preprint arXiv:2409.13682</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock">
+G. Pointeau, S. Mirliaz, A.-L. Mealier, and P. F. Dominey, “Learning to use narrative function words for the organization and communication of experience,” <em class="ltx_emph ltx_font_italic" id="bib.bib27.1.1">Frontiers in Psychology</em>, vol. 12, 2021. [Online]. Available: https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.591703
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock">
+S. Hochreiter and J. Schmidhuber, “Long short-term memory,” <em class="ltx_emph ltx_font_italic" id="bib.bib28.1.1">Neural computation</em>, vol. 9, no. 8, pp. 1735–1780, 1997.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock">
+A. Graves, G. Wayne, and I. Danihelka, “Neural turing machines,” <em class="ltx_emph ltx_font_italic" id="bib.bib29.1.1">arXiv preprint arXiv:1410.5401</em>, 2014.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock">
+A. Graves, G. Wayne, M. Reynolds, T. Harley, I. Danihelka, A. Grabska-Barwińska, S. G. Colmenarejo, E. Grefenstette, T. Ramalho, J. Agapiou <em class="ltx_emph ltx_font_italic" id="bib.bib30.1.1">et al.</em>, “Hybrid computing using a neural network with dynamic external memory,” <em class="ltx_emph ltx_font_italic" id="bib.bib30.2.2">Nature</em>, vol. 538, no. 7626, pp. 471–476, 2016.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_tag_bibitem">[31]</span>
+<span class="ltx_bibblock">
+J. J. Hopfield, “Neural networks and physical systems with emergent collective computational abilities.” <em class="ltx_emph ltx_font_italic" id="bib.bib31.1.1">Proceedings of the national academy of sciences</em>, vol. 79, no. 8, pp. 2554–2558, 1982.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_tag_bibitem">[32]</span>
+<span class="ltx_bibblock">
+H. Ramsauer, B. Schäfl, J. Lehner, P. Seidl, M. Widrich, T. Adler, L. Gruber, M. Holzleitner, M. Pavlović, G. K. Sandve <em class="ltx_emph ltx_font_italic" id="bib.bib32.1.1">et al.</em>, “Hopfield networks is all you need,” <em class="ltx_emph ltx_font_italic" id="bib.bib32.2.2">arXiv preprint arXiv:2008.02217</em>, 2020.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_tag_bibitem">[33]</span>
+<span class="ltx_bibblock">
+M. Levy, A. Jacoby, and Y. Goldberg, “Same task, more tokens: the impact of input length on the reasoning performance of large language models,” <em class="ltx_emph ltx_font_italic" id="bib.bib33.1.1">arXiv preprint arXiv:2402.14848</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib34">
+<span class="ltx_tag ltx_tag_bibitem">[34]</span>
+<span class="ltx_bibblock">
+A. Nematzadeh, S. Ruder, and D. Yogatama, “On memory in human and artificial language processing systems,” in <em class="ltx_emph ltx_font_italic" id="bib.bib34.1.1">Proceedings of ICLR Workshop on Bridging AI and Cognitive Science</em>, 2020.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib35">
+<span class="ltx_tag ltx_tag_bibitem">[35]</span>
+<span class="ltx_bibblock">
+W. Wang, L. Dong, H. Cheng, X. Liu, X. Yan, J. Gao, and F. Wei, “Augmenting language models with long-term memory,” <em class="ltx_emph ltx_font_italic" id="bib.bib35.1.1">Advances in Neural Information Processing Systems</em>, vol. 36, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib36">
+<span class="ltx_tag ltx_tag_bibitem">[36]</span>
+<span class="ltx_bibblock">
+W. Zhong, L. Guo, Q. Gao, H. Ye, and Y. Wang, “Memorybank: Enhancing large language models with long-term memory,” in <em class="ltx_emph ltx_font_italic" id="bib.bib36.1.1">Proceedings of the AAAI Conference on Artificial Intelligence</em>, vol. 38, no. 17, 2024, pp. 19 724–19 731.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib37">
+<span class="ltx_tag ltx_tag_bibitem">[37]</span>
+<span class="ltx_bibblock">
+G. Xue, “From remembering to reconstruction: The transformative neural representation of episodic memory,” <em class="ltx_emph ltx_font_italic" id="bib.bib37.1.1">Progress in Neurobiology</em>, p. 102351, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib38">
+<span class="ltx_tag ltx_tag_bibitem">[38]</span>
+<span class="ltx_bibblock">
+Q. Wu, Z. Lan, K. Qian, J. Gu, A. Geramifard, and Z. Yu, “Memformer: A memory-augmented transformer for sequence modeling,” <em class="ltx_emph ltx_font_italic" id="bib.bib38.1.1">arXiv preprint arXiv:2010.06891</em>, 2020.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib39">
+<span class="ltx_tag ltx_tag_bibitem">[39]</span>
+<span class="ltx_bibblock">
+P. Lewis, E. Perez, A. Piktus, F. Petroni, V. Karpukhin, N. Goyal, H. Küttler, M. Lewis, W.-t. Yih, T. Rocktäschel <em class="ltx_emph ltx_font_italic" id="bib.bib39.1.1">et al.</em>, “Retrieval-augmented generation for knowledge-intensive nlp tasks,” <em class="ltx_emph ltx_font_italic" id="bib.bib39.2.2">Advances in Neural Information Processing Systems</em>, vol. 33, pp. 9459–9474, 2020.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib40">
+<span class="ltx_tag ltx_tag_bibitem">[40]</span>
+<span class="ltx_bibblock">
+K. Guu, K. Lee, Z. Tung, P. Pasupat, and M. Chang, “Retrieval augmented language model pre-training,” in <em class="ltx_emph ltx_font_italic" id="bib.bib40.1.1">International conference on machine learning</em>.   PMLR, 2020, pp. 3929–3938.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib41">
+<span class="ltx_tag ltx_tag_bibitem">[41]</span>
+<span class="ltx_bibblock">
+C. Packer, V. Fang, S. G. Patil, K. Lin, S. Wooders, and J. E. Gonzalez, “Memgpt: Towards llms as operating systems,” <em class="ltx_emph ltx_font_italic" id="bib.bib41.1.1">arXiv preprint arXiv:2310.08560</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib42">
+<span class="ltx_tag ltx_tag_bibitem">[42]</span>
+<span class="ltx_bibblock">
+Z. Jiang, F. F. Xu, L. Gao, Z. Sun, Q. Liu, J. Dwivedi-Yu, Y. Yang, J. Callan, and G. Neubig, “Active retrieval augmented generation,” <em class="ltx_emph ltx_font_italic" id="bib.bib42.1.1">arXiv preprint arXiv:2305.06983</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib43">
+<span class="ltx_tag ltx_tag_bibitem">[43]</span>
+<span class="ltx_bibblock">
+M. Laskin, L. Wang, J. Oh, E. Parisotto, S. Spencer, R. Steigerwald, D. Strouse, S. S. Hansen, A. Filos, E. Brooks <em class="ltx_emph ltx_font_italic" id="bib.bib43.1.1">et al.</em>, “In-context reinforcement learning with algorithm distillation,” in <em class="ltx_emph ltx_font_italic" id="bib.bib43.2.2">International Conference on Learning Representations</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib44">
+<span class="ltx_tag ltx_tag_bibitem">[44]</span>
+<span class="ltx_bibblock">
+T. Schmied, F. Paischer, V. Patil, M. Hofmarcher, R. Pascanu, and S. Hochreiter, “Retrieval-augmented decision transformer: External memory for in-context rl.” [Online]. Available: https://arxiv.org/abs/2410.07071
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib45">
+<span class="ltx_tag ltx_tag_bibitem">[45]</span>
+<span class="ltx_bibblock">
+A. Turing, “465Intelligent Machinery, A Heretical Theory (c.1951),” in <em class="ltx_emph ltx_font_italic" id="bib.bib45.1.1">The Essential Turing</em>.   Oxford University Press, 09 2004. [Online]. Available: https://doi.org/10.1093/oso/9780198250791.003.0018
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib46">
+<span class="ltx_tag ltx_tag_bibitem">[46]</span>
+<span class="ltx_bibblock">
+S. Russell, D. Dewey, and M. Tegmark, “Research priorities for robust and beneficial artificial intelligence,” <em class="ltx_emph ltx_font_italic" id="bib.bib46.1.1">AI magazine</em>, vol. 36, no. 4, pp. 105–114, 2015.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib47">
+<span class="ltx_tag ltx_tag_bibitem">[47]</span>
+<span class="ltx_bibblock">
+A. Birhane, P. Kalluri, D. Card, W. Agnew, R. Dotan, and M. Bao, “The values encoded in machine learning research,” in <em class="ltx_emph ltx_font_italic" id="bib.bib47.1.1">Proceedings of the 2022 ACM Conference on Fairness, Accountability, and Transparency</em>, 2022, pp. 173–184.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib48">
+<span class="ltx_tag ltx_tag_bibitem">[48]</span>
+<span class="ltx_bibblock">
+S. Barocas, M. Hardt, and A. Narayanan, <em class="ltx_emph ltx_font_italic" id="bib.bib48.1.1">Fairness and machine learning: Limitations and opportunities</em>.   MIT Press, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib49">
+<span class="ltx_tag ltx_tag_bibitem">[49]</span>
+<span class="ltx_bibblock">
+L. Weidinger, J. Mellor, M. Rauh, C. Griffin, J. Uesato, P.-S. Huang, M. Cheng, M. Glaese, B. Balle, A. Kasirzadeh <em class="ltx_emph ltx_font_italic" id="bib.bib49.1.1">et al.</em>, “Ethical and social risks of harm from language models,” <em class="ltx_emph ltx_font_italic" id="bib.bib49.2.2">arXiv preprint arXiv:2112.04359</em>, 2021.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib50">
+<span class="ltx_tag ltx_tag_bibitem">[50]</span>
+<span class="ltx_bibblock">
+S. Anjomshoae, A. Najjar, D. Calvaresi, and K. Främling, “Explainable agents and robots: Results from a systematic literature review,” in <em class="ltx_emph ltx_font_italic" id="bib.bib50.1.1">18th International Conference on Autonomous Agents and Multiagent Systems (AAMAS 2019), Montreal, Canada, May 13–17, 2019</em>.   International Foundation for Autonomous Agents and Multiagent Systems, 2019, pp. 1078–1088.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib51">
+<span class="ltx_tag ltx_tag_bibitem">[51]</span>
+<span class="ltx_bibblock">
+T. Sakai and T. Nagai, “Explainable autonomous robots: a survey and perspective,” <em class="ltx_emph ltx_font_italic" id="bib.bib51.1.1">Advanced Robotics</em>, vol. 36, no. 5-6, pp. 219–238, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib52">
+<span class="ltx_tag ltx_tag_bibitem">[52]</span>
+<span class="ltx_bibblock">
+L. Chen, O. Sinavski, J. Hünermann, A. Karnsund, A. J. Willmott, D. Birch, D. Maund, and J. Shotton, “Driving with llms: Fusing object-level vector modality for explainable autonomous driving,” <em class="ltx_emph ltx_font_italic" id="bib.bib52.1.1">arXiv preprint arXiv:2310.01957</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib53">
+<span class="ltx_tag ltx_tag_bibitem">[53]</span>
+<span class="ltx_bibblock">
+R. Nakano, J. Hilton, S. Balaji, J. Wu, L. Ouyang, C. Kim, C. Hesse, S. Jain, V. Kosaraju, W. Saunders <em class="ltx_emph ltx_font_italic" id="bib.bib53.1.1">et al.</em>, “Webgpt: Browser-assisted question-answering with human feedback,” <em class="ltx_emph ltx_font_italic" id="bib.bib53.2.2">arXiv preprint arXiv:2112.09332</em>, 2021.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib54">
+<span class="ltx_tag ltx_tag_bibitem">[54]</span>
+<span class="ltx_bibblock">
+Y. Ruan, H. Dong, A. Wang, S. Pitis, Y. Zhou, J. Ba, Y. Dubois, C. J. Maddison, and T. Hashimoto, “Identifying the risks of lm agents with an lm-emulated sandbox,” <em class="ltx_emph ltx_font_italic" id="bib.bib54.1.1">arXiv preprint arXiv:2309.15817</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib55">
+<span class="ltx_tag ltx_tag_bibitem">[55]</span>
+<span class="ltx_bibblock">
+U. Anwar, A. Saparov, J. Rando, D. Paleka, M. Turpin, P. Hase, E. S. Lubana, E. Jenner, S. Casper, O. Sourbut <em class="ltx_emph ltx_font_italic" id="bib.bib55.1.1">et al.</em>, “Foundational challenges in assuring alignment and safety of large language models,” <em class="ltx_emph ltx_font_italic" id="bib.bib55.2.2">arXiv preprint arXiv:2404.09932</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib56">
+<span class="ltx_tag ltx_tag_bibitem">[56]</span>
+<span class="ltx_bibblock">
+R. Ngo, L. Chan, and S. Mindermann, “The alignment problem from a deep learning perspective,” in <em class="ltx_emph ltx_font_italic" id="bib.bib56.1.1">International Conference on Learning Representations</em>, 2024. [Online]. Available: https://openreview.net/forum?id=0IOX0YcCdTn
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib57">
+<span class="ltx_tag ltx_tag_bibitem">[57]</span>
+<span class="ltx_bibblock">
+P. S. Park, S. Goldstein, A. O’Gara, M. Chen, and D. Hendrycks, “Ai deception: A survey of examples, risks, and potential solutions,” <em class="ltx_emph ltx_font_italic" id="bib.bib57.1.1">Patterns</em>, vol. 5, no. 5, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib58">
+<span class="ltx_tag ltx_tag_bibitem">[58]</span>
+<span class="ltx_bibblock">
+B. Liu, M. Ding, S. Shaham, W. Rahayu, F. Farokhi, and Z. Lin, “When machine learning meets privacy: A survey and outlook,” <em class="ltx_emph ltx_font_italic" id="bib.bib58.1.1">ACM Computing Surveys (CSUR)</em>, vol. 54, no. 2, pp. 1–36, 2021.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib59">
+<span class="ltx_tag ltx_tag_bibitem">[59]</span>
+<span class="ltx_bibblock">
+M. Abadi, A. Chu, I. Goodfellow, H. B. McMahan, I. Mironov, K. Talwar, and L. Zhang, “Deep learning with differential privacy,” in <em class="ltx_emph ltx_font_italic" id="bib.bib59.1.1">Proceedings of the 2016 ACM SIGSAC conference on computer and communications security</em>, 2016, pp. 308–318.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib60">
+<span class="ltx_tag ltx_tag_bibitem">[60]</span>
+<span class="ltx_bibblock">
+P. R. Kalluri, W. Agnew, M. Cheng, K. Owens, L. Soldaini, and A. Birhane, “The surveillance ai pipeline,” <em class="ltx_emph ltx_font_italic" id="bib.bib60.1.1">arXiv preprint arXiv:2309.15084</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib61">
+<span class="ltx_tag ltx_tag_bibitem">[61]</span>
+<span class="ltx_bibblock">
+E. Ruane, A. Birhane, and A. Ventresque, “Conversational ai: Social and ethical considerations.” in <em class="ltx_emph ltx_font_italic" id="bib.bib61.1.1">AICS</em>, 2019, pp. 104–115.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib62">
+<span class="ltx_tag ltx_tag_bibitem">[62]</span>
+<span class="ltx_bibblock">
+E. Tulving, “Episodic and semantic memory.” 1972.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib63">
+<span class="ltx_tag ltx_tag_bibitem">[63]</span>
+<span class="ltx_bibblock">
+L. R. Squire, “The neuropsychology of human memory,” <em class="ltx_emph ltx_font_italic" id="bib.bib63.1.1">Annual review of neuroscience</em>, vol. 5, no. 1, pp. 241–273, 1982.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib64">
+<span class="ltx_tag ltx_tag_bibitem">[64]</span>
+<span class="ltx_bibblock">
+L. R. Squire and J. T. Wixted, “The cognitive neuroscience of human memory since hm,” <em class="ltx_emph ltx_font_italic" id="bib.bib64.1.1">Annual review of neuroscience</em>, vol. 34, pp. 259–288, 2011.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib65">
+<span class="ltx_tag ltx_tag_bibitem">[65]</span>
+<span class="ltx_bibblock">
+C. Burns, H. Ye, D. Klein, and J. Steinhardt, “Discovering latent knowledge in language models without supervision,” <em class="ltx_emph ltx_font_italic" id="bib.bib65.1.1">arXiv preprint arXiv:2212.03827</em>, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib66">
+<span class="ltx_tag ltx_tag_bibitem">[66]</span>
+<span class="ltx_bibblock">
+A. Roberts, C. Raffel, and N. Shazeer, “How much knowledge can you pack into the parameters of a language model?” <em class="ltx_emph ltx_font_italic" id="bib.bib66.1.1">arXiv preprint arXiv:2002.08910</em>, 2020.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib67">
+<span class="ltx_tag ltx_tag_bibitem">[67]</span>
+<span class="ltx_bibblock">
+T. Amer and L. Davachi, “Oxford handbook of memory: Neural mechanisms of memory,” 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib68">
+<span class="ltx_tag ltx_tag_bibitem">[68]</span>
+<span class="ltx_bibblock">
+F. Vargha-Khadem, D. G. Gadian, K. E. Watkins, A. Connelly, W. Van Paesschen, and M. Mishkin, “Differential effects of early hippocampal pathology on episodic and semantic memory,” <em class="ltx_emph ltx_font_italic" id="bib.bib68.1.1">Science</em>, vol. 277, no. 5324, pp. 376–380, 1997.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib69">
+<span class="ltx_tag ltx_tag_bibitem">[69]</span>
+<span class="ltx_bibblock">
+T. J. Teyler and P. DiScenna, “The hippocampal memory indexing theory.” <em class="ltx_emph ltx_font_italic" id="bib.bib69.1.1">Behavioral neuroscience</em>, vol. 100, no. 2, p. 147, 1986.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib70">
+<span class="ltx_tag ltx_tag_bibitem">[70]</span>
+<span class="ltx_bibblock">
+M. Moscovitch, R. Cabeza, G. Winocur, and L. Nadel, “Episodic memory and beyond: the hippocampus and neocortex in transformation,” <em class="ltx_emph ltx_font_italic" id="bib.bib70.1.1">Annual review of psychology</em>, vol. 67, pp. 105–134, 2016.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib71">
+<span class="ltx_tag ltx_tag_bibitem">[71]</span>
+<span class="ltx_bibblock">
+Y. Dudai, “The restless engram: consolidations never end,” <em class="ltx_emph ltx_font_italic" id="bib.bib71.1.1">Annual review of neuroscience</em>, vol. 35, pp. 227–247, 2012.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib72">
+<span class="ltx_tag ltx_tag_bibitem">[72]</span>
+<span class="ltx_bibblock">
+L. Nadel, A. Samsonovich, L. Ryan, and M. Moscovitch, “Multiple trace theory of human memory: computational, neuroimaging, and neuropsychological results,” <em class="ltx_emph ltx_font_italic" id="bib.bib72.1.1">Hippocampus</em>, vol. 10, no. 4, pp. 352–368, 2000.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib73">
+<span class="ltx_tag ltx_tag_bibitem">[73]</span>
+<span class="ltx_bibblock">
+H. Eichenbaum, R. F. Thompson, and J. E. Lisman, “Persistence,” in <em class="ltx_emph ltx_font_italic" id="bib.bib73.1.1">Science of memory: Concepts</em>, H. L. Roediger III, Y. Dudai, and S. M. Fitzpatrick, Eds.   Oxford University Press, 2007, pp. 190–206.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib74">
+<span class="ltx_tag ltx_tag_bibitem">[74]</span>
+<span class="ltx_bibblock">
+K. Nader, G. E. Schafe, and J. E. Le Doux, “Fear memories require protein synthesis in the amygdala for reconsolidation after retrieval,” <em class="ltx_emph ltx_font_italic" id="bib.bib74.1.1">Nature</em>, vol. 406, no. 6797, pp. 722–726, 2000.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib75">
+<span class="ltx_tag ltx_tag_bibitem">[75]</span>
+<span class="ltx_bibblock">
+J. M. Gardiner, “Retrieval: On its essence and related concepts,” in <em class="ltx_emph ltx_font_italic" id="bib.bib75.1.1">Science of memory: Concepts</em>, H. L. Roediger III, Y. Dudai, and S. M. Fitzpatrick, Eds.   Oxford University Press, 2007, pp. 221–224.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib76">
+<span class="ltx_tag ltx_tag_bibitem">[76]</span>
+<span class="ltx_bibblock">
+T. J. Teyler and J. W. Rudy, “The hippocampal indexing theory and episodic memory: updating the index,” <em class="ltx_emph ltx_font_italic" id="bib.bib76.1.1">Hippocampus</em>, vol. 17, no. 12, pp. 1158–1169, 2007.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib77">
+<span class="ltx_tag ltx_tag_bibitem">[77]</span>
+<span class="ltx_bibblock">
+K. K. Szpunar, J. M. Watson, and K. B. McDermott, “Neural substrates of envisioning the future,” <em class="ltx_emph ltx_font_italic" id="bib.bib77.1.1">Proceedings of the National Academy of Sciences</em>, vol. 104, no. 2, pp. 642–647, 2007.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib78">
+<span class="ltx_tag ltx_tag_bibitem">[78]</span>
+<span class="ltx_bibblock">
+S. B. Klein, J. Loftus, and J. F. Kihlstrom, “Memory and temporal experience: The effects of episodic memory loss on an amnesic patient’s ability to remember the past and imagine the future,” <em class="ltx_emph ltx_font_italic" id="bib.bib78.1.1">Social Cognition</em>, vol. 20, no. 5, pp. 353–379, 2002.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib79">
+<span class="ltx_tag ltx_tag_bibitem">[79]</span>
+<span class="ltx_bibblock">
+S. B. Klein, “The temporal orientation of memory: It’s time for a change of direction,” <em class="ltx_emph ltx_font_italic" id="bib.bib79.1.1">Journal of Applied Research in Memory and Cognition</em>, vol. 2, no. 4, pp. 222–234, 2013.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib80">
+<span class="ltx_tag ltx_tag_bibitem">[80]</span>
+<span class="ltx_bibblock">
+D. L. Schacter, D. R. Addis, and R. L. Buckner, “Remembering the past to imagine the future: the prospective brain,” <em class="ltx_emph ltx_font_italic" id="bib.bib80.1.1">Nature reviews neuroscience</em>, vol. 8, no. 9, pp. 657–661, 2007.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib81">
+<span class="ltx_tag ltx_tag_bibitem">[81]</span>
+<span class="ltx_bibblock">
+T. Suddendorf and J. Busby, “Making decisions with the future in mind: Developmental and comparative identification of mental time travel,” <em class="ltx_emph ltx_font_italic" id="bib.bib81.1.1">Learning and Motivation</em>, vol. 36, no. 2, pp. 110–125, 2005.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib82">
+<span class="ltx_tag ltx_tag_bibitem">[82]</span>
+<span class="ltx_bibblock">
+R. L. Buckner, “The role of the hippocampus in prediction and imagination,” <em class="ltx_emph ltx_font_italic" id="bib.bib82.1.1">Annual review of psychology</em>, vol. 61, pp. 27–48, 2010.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib83">
+<span class="ltx_tag ltx_tag_bibitem">[83]</span>
+<span class="ltx_bibblock">
+D. Hassabis, D. Kumaran, S. D. Vann, and E. A. Maguire, “Patients with hippocampal amnesia cannot imagine new experiences,” <em class="ltx_emph ltx_font_italic" id="bib.bib83.1.1">Proceedings of the National Academy of Sciences</em>, vol. 104, no. 5, pp. 1726–1731, 2007.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib84">
+<span class="ltx_tag ltx_tag_bibitem">[84]</span>
+<span class="ltx_bibblock">
+Korsakoff, “Etude médico-psychologique sur une forme des maladies de la mémoire,” <em class="ltx_emph ltx_font_italic" id="bib.bib84.1.1">Revue philosophique de la France et de l’étranger</em>, vol. 28, pp. 501–530, 1889.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib85">
+<span class="ltx_tag ltx_tag_bibitem">[85]</span>
+<span class="ltx_bibblock">
+S. Sheldon, M. P. McAndrews, and M. Moscovitch, “Episodic memory processes mediated by the medial temporal lobes contribute to open-ended problem solving,” <em class="ltx_emph ltx_font_italic" id="bib.bib85.1.1">Neuropsychologia</em>, vol. 49, no. 9, pp. 2439–2447, 2011.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib86">
+<span class="ltx_tag ltx_tag_bibitem">[86]</span>
+<span class="ltx_bibblock">
+M. Lengyel and P. Dayan, “Hippocampal contributions to control: the third way,” <em class="ltx_emph ltx_font_italic" id="bib.bib86.1.1">Advances in neural information processing systems</em>, vol. 20, 2007.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib87">
+<span class="ltx_tag ltx_tag_bibitem">[87]</span>
+<span class="ltx_bibblock">
+S. J. Gershman and N. D. Daw, “Reinforcement learning and episodic memory in humans and animals: an integrative framework,” <em class="ltx_emph ltx_font_italic" id="bib.bib87.1.1">Annual review of psychology</em>, vol. 68, pp. 101–128, 2017.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib88">
+<span class="ltx_tag ltx_tag_bibitem">[88]</span>
+<span class="ltx_bibblock">
+A. Boyle, “Learning from the past: Epistemic generativity and the function of episodic memory,” <em class="ltx_emph ltx_font_italic" id="bib.bib88.1.1">Journal of Consciousness Studies</em>, vol. 26, no. 5-6, pp. 242–251, 2019.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib89">
+<span class="ltx_tag ltx_tag_bibitem">[89]</span>
+<span class="ltx_bibblock">
+E. Tulving, “Episodic memory: From mind to brain,” <em class="ltx_emph ltx_font_italic" id="bib.bib89.1.1">Annual review of psychology</em>, vol. 53, no. 1, pp. 1–25, 2002.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib90">
+<span class="ltx_tag ltx_tag_bibitem">[90]</span>
+<span class="ltx_bibblock">
+W. A. Roberts, “Are animals stuck in time?” <em class="ltx_emph ltx_font_italic" id="bib.bib90.1.1">Psychological bulletin</em>, vol. 128, no. 3, p. 473, 2002.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib91">
+<span class="ltx_tag ltx_tag_bibitem">[91]</span>
+<span class="ltx_bibblock">
+D. Griffiths, A. Dickinson, and N. Clayton, “Episodic memory: what can animals remember about their past?” <em class="ltx_emph ltx_font_italic" id="bib.bib91.1.1">Trends in cognitive sciences</em>, vol. 3, no. 2, pp. 74–80, 1999.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib92">
+<span class="ltx_tag ltx_tag_bibitem">[92]</span>
+<span class="ltx_bibblock">
+N. S. Clayton and A. Dickinson, “Scrub jays (aphelocoma coerulescens) remember the relative time of caching as well as the location and content of their caches.” <em class="ltx_emph ltx_font_italic" id="bib.bib92.1.1">Journal of Comparative Psychology</em>, vol. 113, no. 4, p. 403, 1999.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib93">
+<span class="ltx_tag ltx_tag_bibitem">[93]</span>
+<span class="ltx_bibblock">
+C. R. Raby, D. M. Alexis, A. Dickinson, and N. S. Clayton, “Planning for the future by western scrub-jays,” <em class="ltx_emph ltx_font_italic" id="bib.bib93.1.1">Nature</em>, vol. 445, no. 7130, pp. 919–921, 2007.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib94">
+<span class="ltx_tag ltx_tag_bibitem">[94]</span>
+<span class="ltx_bibblock">
+T. A. Allen and N. J. Fortin, “The evolution of episodic memory,” <em class="ltx_emph ltx_font_italic" id="bib.bib94.1.1">Proceedings of the National Academy of Sciences</em>, vol. 110, no. supplement_2, pp. 10 379–10 386, 2013.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib95">
+<span class="ltx_tag ltx_tag_bibitem">[95]</span>
+<span class="ltx_bibblock">
+J. Scheurer, M. Balesni, and M. Hobbhahn, “Large language models can strategically deceive their users when put under pressure,” in <em class="ltx_emph ltx_font_italic" id="bib.bib95.1.1">ICLR 2024 Workshop on Large Language Model (LLM) Agents</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib96">
+<span class="ltx_tag ltx_tag_bibitem">[96]</span>
+<span class="ltx_bibblock">
+J. Wei, X. Wang, D. Schuurmans, M. Bosma, F. Xia, E. Chi, Q. V. Le, D. Zhou <em class="ltx_emph ltx_font_italic" id="bib.bib96.1.1">et al.</em>, “Chain-of-thought prompting elicits reasoning in large language models,” <em class="ltx_emph ltx_font_italic" id="bib.bib96.2.2">Advances in neural information processing systems</em>, vol. 35, pp. 24 824–24 837, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib97">
+<span class="ltx_tag ltx_tag_bibitem">[97]</span>
+<span class="ltx_bibblock">
+T. B. Brown, B. Mann, N. Ryder, M. Subbiah, J. Kaplan, P. Dhariwal, A. Neelakantan, P. Shyam, G. Sastry, A. Askell <em class="ltx_emph ltx_font_italic" id="bib.bib97.1.1">et al.</em>, “Language models are few-shot learners,” <em class="ltx_emph ltx_font_italic" id="bib.bib97.2.2">Advances in Neural Information Processing Systems</em>, vol. 33, pp. 1877–1901, 2020.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib98">
+<span class="ltx_tag ltx_tag_bibitem">[98]</span>
+<span class="ltx_bibblock">
+A. S. Rao, A. R. Naik, S. Vashistha, S. Aditya, and M. Choudhury, “Tricking llms into disobedience: Formalizing, analyzing, and detecting jailbreaks,” in <em class="ltx_emph ltx_font_italic" id="bib.bib98.1.1">Proceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2024)</em>, 2024, pp. 16 802–16 830.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib99">
+<span class="ltx_tag ltx_tag_bibitem">[99]</span>
+<span class="ltx_bibblock">
+Z. Wei, Y. Wang, and Y. Wang, “Jailbreak and guard aligned language models with only few in-context demonstrations,” <em class="ltx_emph ltx_font_italic" id="bib.bib99.1.1">arXiv preprint arXiv:2310.06387</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib100">
+<span class="ltx_tag ltx_tag_bibitem">[100]</span>
+<span class="ltx_bibblock">
+C. Anil <em class="ltx_emph ltx_font_italic" id="bib.bib100.1.1">et al.</em>, “Many-shot jailbreaking,” <em class="ltx_emph ltx_font_italic" id="bib.bib100.2.2">Anthropic Research</em>, 2024. [Online]. Available: https://www.anthropic.com/Many_Shot_Jailbreaking__2024_04_02_0936.pdf
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib101">
+<span class="ltx_tag ltx_tag_bibitem">[101]</span>
+<span class="ltx_bibblock">
+R. Millière, “The alignment problem in context,” <em class="ltx_emph ltx_font_italic" id="bib.bib101.1.1">arXiv preprint arXiv:2311.02147</em>, 2023. [Online]. Available: https://arxiv.org/abs/2311.02147
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib102">
+<span class="ltx_tag ltx_tag_bibitem">[102]</span>
+<span class="ltx_bibblock">
+H. Chang, J. Park, S. Ye, S. Yang, Y. Seo, D.-S. Chang, and M. Seo, “How do large language models acquire factual knowledge during pretraining?” 2024. [Online]. Available: https://arxiv.org/abs/2406.11813
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib103">
+<span class="ltx_tag ltx_tag_bibitem">[103]</span>
+<span class="ltx_bibblock">
+Z. Ji, N. Lee, R. Frieske, T. Yu, D. Su, Y. Xu, E. Ishii, Y. Bang, A. Madotto, and P. Fung, “Survey of hallucination in natural language generation,” <em class="ltx_emph ltx_font_italic" id="bib.bib103.1.1">ACM Computing Surveys (CSUR)</em>, vol. 55, no. 12, pp. 1–38, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib104">
+<span class="ltx_tag ltx_tag_bibitem">[104]</span>
+<span class="ltx_bibblock">
+A. Cotra, “Without specific countermeasures, the easiest path to transformative ai likely leads to ai takeover,” https://www.alignmentforum.org/posts/pRkFkzwKZ2zfa3R6H/without-specific-countermeasures-the-easiest-path-to, 2021, accessed on [Insert access date].
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib105">
+<span class="ltx_tag ltx_tag_bibitem">[105]</span>
+<span class="ltx_bibblock">
+T. Shevlane, S. Farquhar, B. Garfinkel, M. Phuong, J. Whittlestone, J. Leung, D. Kokotajlo, N. Marchal, M. Anderljung, N. Kolt <em class="ltx_emph ltx_font_italic" id="bib.bib105.1.1">et al.</em>, “Model evaluation for extreme risks,” <em class="ltx_emph ltx_font_italic" id="bib.bib105.2.2">arXiv preprint arXiv:2305.15324</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib106">
+<span class="ltx_tag ltx_tag_bibitem">[106]</span>
+<span class="ltx_bibblock">
+R. Laine, A. Meinke, and O. Evans, “Towards a situational awareness benchmark for llms,” in <em class="ltx_emph ltx_font_italic" id="bib.bib106.1.1">Socially responsible language modelling research</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib107">
+<span class="ltx_tag ltx_tag_bibitem">[107]</span>
+<span class="ltx_bibblock">
+E. Perez, S. Ringer, K. Lukosiute, K. Nguyen, E. Chen, S. Heiner, C. Pettit, C. Olsson, S. Kundu, S. Kadavath, A. Jones, A. Chen, B. Mann, B. Israel, B. Seethor, C. McKinnon, C. Olah, D. Yan, D. Amodei, D. Amodei, D. Drain, D. Li, E. Tran-Johnson, G. Khundadze, J. Kernion, J. Landis, J. Kerr, J. Mueller, J. Hyun, J. Landau, K. Ndousse, L. Goldberg, L. Lovitt, M. Lucas, M. Sellitto, M. Zhang, N. Kingsland, N. Elhage, N. Joseph, N. Mercado, N. DasSarma, O. Rausch, R. Larson, S. McCandlish, S. Johnston, S. Kravec, S. El Showk, T. Lanham, T. Telleen-Lawton, T. Brown, T. Henighan, T. Hume, Y. Bai, Z. Hatfield-Dodds, J. Clark, S. R. Bowman, A. Askell, R. Grosse, D. Hernandez, D. Ganguli, E. Hubinger, N. Schiefer, and J. Kaplan, “Discovering language model behaviors with model-written evaluations,” in <em class="ltx_emph ltx_font_italic" id="bib.bib107.1.1">Findings of the Association for Computational Linguistics: ACL 2023</em>, A. Rogers, J. Boyd-Graber, and N. Okazaki, Eds.   Toronto, Canada: Association for Computational
+Linguistics, Jul. 2023, pp. 13 387–13 434. [Online]. Available: https://aclanthology.org/2023.findings-acl.847
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib108">
+<span class="ltx_tag ltx_tag_bibitem">[108]</span>
+<span class="ltx_bibblock">
+A. Chan, C. Ezell, M. Kaufmann, K. Wei, L. Hammond, H. Bradley, E. Bluemke, N. Rajkumar, D. Krueger, N. Kolt <em class="ltx_emph ltx_font_italic" id="bib.bib108.1.1">et al.</em>, “Visibility into ai agents,” <em class="ltx_emph ltx_font_italic" id="bib.bib108.2.2">arXiv preprint arXiv:2401.13138</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib109">
+<span class="ltx_tag ltx_tag_bibitem">[109]</span>
+<span class="ltx_bibblock">
+D. Amodei, C. Olah, J. Steinhardt, P. Christiano, J. Schulman, and D. Mané, “Concrete problems in ai safety,” <em class="ltx_emph ltx_font_italic" id="bib.bib109.1.1">arXiv preprint arXiv:1606.06565</em>, 2016.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib110">
+<span class="ltx_tag ltx_tag_bibitem">[110]</span>
+<span class="ltx_bibblock">
+D. Hendrycks, N. Carlini, J. Schulman, and J. Steinhardt, “Unsolved problems in ml safety,” <em class="ltx_emph ltx_font_italic" id="bib.bib110.1.1">arXiv preprint arXiv:2109.13916</em>, 2021.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib111">
+<span class="ltx_tag ltx_tag_bibitem">[111]</span>
+<span class="ltx_bibblock">
+Á. G. De Ágreda, “Ethics of autonomous weapons systems and its applicability to any ai systems,” <em class="ltx_emph ltx_font_italic" id="bib.bib111.1.1">Telecommunications Policy</em>, vol. 44, no. 6, p. 101953, 2020.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib112">
+<span class="ltx_tag ltx_tag_bibitem">[112]</span>
+<span class="ltx_bibblock">
+K. Brockmann, “Applying export controls to ai: Current coverage and potential future controls,” <em class="ltx_emph ltx_font_italic" id="bib.bib112.1.1">Armament, Arms Control and Artificial Intelligence: The Janus-faced Nature of Machine Learning in the Military Realm</em>, pp. 193–209, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib113">
+<span class="ltx_tag ltx_tag_bibitem">[113]</span>
+<span class="ltx_bibblock">
+R. Simmons-Edler, R. Badman, S. Longpre, and K. Rajan, “Ai-powered autonomous weapons risk geopolitical instability and threaten ai research,” <em class="ltx_emph ltx_font_italic" id="bib.bib113.1.1">arXiv preprint arXiv:2405.01859</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib114">
+<span class="ltx_tag ltx_tag_bibitem">[114]</span>
+<span class="ltx_bibblock">
+E. Mitchell, C. Lin, A. Bosselut, C. Finn, and C. D. Manning, “Fast model editing at scale,” in <em class="ltx_emph ltx_font_italic" id="bib.bib114.1.1">International Conference on Learning Representations</em>, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib115">
+<span class="ltx_tag ltx_tag_bibitem">[115]</span>
+<span class="ltx_bibblock">
+K. Meng, D. Bau, A. Andonian, and Y. Belinkov, “Locating and editing factual associations in gpt,” in <em class="ltx_emph ltx_font_italic" id="bib.bib115.1.1">Proceedings of the 36th International Conference on Neural Information Processing Systems</em>, 2022, pp. 17 359–17 372.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib116">
+<span class="ltx_tag ltx_tag_bibitem">[116]</span>
+<span class="ltx_bibblock">
+K. Meng, A. Sen Sharma, A. Andonian, Y. Belinkov, and D. Bau, “Mass editing memory in a transformer,” <em class="ltx_emph ltx_font_italic" id="bib.bib116.1.1">The Eleventh International Conference on Learning Representations (ICLR)</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib117">
+<span class="ltx_tag ltx_tag_bibitem">[117]</span>
+<span class="ltx_bibblock">
+V. Patil, P. Hase, and M. Bansal, “Can sensitive information be deleted from llms? objectives for defending against extraction attacks,” in <em class="ltx_emph ltx_font_italic" id="bib.bib117.1.1">The Twelfth International Conference on Learning Representations</em>.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib118">
+<span class="ltx_tag ltx_tag_bibitem">[118]</span>
+<span class="ltx_bibblock">
+J. Łucki, B. Wei, Y. Huang, P. Henderson, F. Tramèr, and J. Rando, “An adversarial perspective on machine unlearning for ai safety,” 2024. [Online]. Available: https://arxiv.org/abs/2409.18025
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib119">
+<span class="ltx_tag ltx_tag_bibitem">[119]</span>
+<span class="ltx_bibblock">
+R. Nakano, J. Hilton, S. Balaji, J. Wu, L. Ouyang, C. Kim, C. Hesse, S. Jain, V. Kosaraju, W. Saunders <em class="ltx_emph ltx_font_italic" id="bib.bib119.1.1">et al.</em>, “Webgpt: Browser-assisted question-answering with human feedback,” <em class="ltx_emph ltx_font_italic" id="bib.bib119.2.2">arXiv preprint arXiv:2112.09332</em>, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib120">
+<span class="ltx_tag ltx_tag_bibitem">[120]</span>
+<span class="ltx_bibblock">
+X. Xiang, Z. Shen, Y. Zhang, X. Han, Y. Li, W. Chen, and Z. Wang, “Webcpm: Interactive web browsing with chain-of-program reasoning,” <em class="ltx_emph ltx_font_italic" id="bib.bib120.1.1">arXiv preprint arXiv:2309.09008</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib121">
+<span class="ltx_tag ltx_tag_bibitem">[121]</span>
+<span class="ltx_bibblock">
+J. Li, Y. Hou, M. Sachan, and R. Cotterell, “What do language models learn in context? the structured task hypothesis.” in <em class="ltx_emph ltx_font_italic" id="bib.bib121.1.1">Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)</em>, L.-W. Ku, A. Martins, and V. Srikumar, Eds.   Bangkok, Thailand: Association for Computational Linguistics, Aug. 2024, pp. 12 365–12 379. [Online]. Available: https://aclanthology.org/2024.acl-long.669
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib122">
+<span class="ltx_tag ltx_tag_bibitem">[122]</span>
+<span class="ltx_bibblock">
+S. Casper, T. Rauker, A. Ho, and D. Hadfield-Menell, “Sok: Toward transparent ai: A survey on interpreting the inner structures of deep neural networks,” in <em class="ltx_emph ltx_font_italic" id="bib.bib122.1.1">First IEEE Conference on Secure and Trustworthy Machine Learning</em>, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib123">
+<span class="ltx_tag ltx_tag_bibitem">[123]</span>
+<span class="ltx_bibblock">
+N. Nanda, L. Chan, T. Lieberum, J. Smith, and J. Steinhardt, “Progress measures for grokking via mechanistic interpretability,” <em class="ltx_emph ltx_font_italic" id="bib.bib123.1.1">arXiv preprint arXiv:2301.05217</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib124">
+<span class="ltx_tag ltx_tag_bibitem">[124]</span>
+<span class="ltx_bibblock">
+Y. Cao and J. Yang, “Towards making systems forget with machine unlearning,” in <em class="ltx_emph ltx_font_italic" id="bib.bib124.1.1">2015 IEEE symposium on security and privacy</em>.   IEEE, 2015, pp. 463–480.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib125">
+<span class="ltx_tag ltx_tag_bibitem">[125]</span>
+<span class="ltx_bibblock">
+L. Bourtoule, V. Chandrasekaran, C. A. Choquette-Choo, H. Jia, A. Travers, B. Zhang, D. Lie, and N. Papernot, “Machine unlearning,” in <em class="ltx_emph ltx_font_italic" id="bib.bib125.1.1">2021 IEEE Symposium on Security and Privacy (SP)</em>.   IEEE, 2021, pp. 141–159.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib126">
+<span class="ltx_tag ltx_tag_bibitem">[126]</span>
+<span class="ltx_bibblock">
+N. Li, A. Pan, A. Gopal, S. Yue, D. Berrios, A. Gatti, J. D. Li, A.-K. Dombrowski, S. Goel, L. Phan <em class="ltx_emph ltx_font_italic" id="bib.bib126.1.1">et al.</em>, “The wmdp benchmark: Measuring and reducing malicious use with unlearning,” <em class="ltx_emph ltx_font_italic" id="bib.bib126.2.2">arXiv preprint arXiv:2403.03218</em>, 2024.
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Wed Jan 22 15:07:34 2025 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,1228 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting</title>
+<!--Generated on Fri Apr 17 07:51:02 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="/static/browse/0.3.4/css/arxiv-html-papers-20260131.css" type="text/css">
+<script src="/static/browse/0.3.4/js/arxiv-html-papers-20260131.js"></script>
+<script>
+  // Restore the saved color scheme preference, or
+  // enact the browser preference if "automatic", 
+  // without expecting DOM load to have completed.
+  //
+  // Also restore any saved readingmode and ToC display preferences.
+  function initializeReadingPreferences() {
+    let saved_theme = localStorage.getItem("ar5iv_theme") || "automatic";
+    if (saved_theme === "automatic") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        saved_theme = "dark";
+      }
+    }
+    if (saved_theme == "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    const tocDisplay = localStorage.getItem('arxiv_html_paper_toc_display');
+    if (tocDisplay) {
+      document.documentElement.setAttribute("data-toc-display", tocDisplay);
+    }
+    const readingMode = localStorage.getItem('arxiv_html_paper_reading_mode');
+    if (readingMode) {
+      document.documentElement.setAttribute("data-reading-mode", readingMode);
+    }
+  }
+  // Run as soon as JS starts, to minimize repainting
+  initializeReadingPreferences();
+</script>
+<link rel="apple-touch-icon" sizes="180x180"
+  href="/static/browse/0.3.4/images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+  href="/static/browse/0.3.4/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+  href="/static/browse/0.3.4/images/icons/favicon-16x16.png">
+<link rel="manifest" href="/static/browse/0.3.4/images/icons/site.webmanifest">
+<link rel="mask-icon" href="/static/browse/0.3.4/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="stylesheet" type="text/css" media="screen" href="https://use.typekit.net/utz6mli.css">
+</head>
+<body>
+<dialog id="modal-form" aria-labelledby="modal-title" closedby="any">
+  <form id="modal-form-content" method="dialog" enctype="multipart/form-data">
+    <header class="modal-header">
+      <h5 id="modal-title" class="modal-title">Report GitHub Issue</h5>
+      <button type="submit" formnovalidate class="modal-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="modal-body">
+      <label for="form_title">Title:</label>
+      <input class="form-control" id="form_title" name="form_title" required placeholder="Enter title">
+
+      <p id="selectedTextModalDescription" hidden>Content selection saved. Describe the issue below:</p>
+
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description" required maxlength="500"
+        placeholder="500 characters maximum"></textarea>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="submit" value="internal-report" class="sr-only modal-submit">Submit without GitHub</button>
+      <button type="submit" value="github-report" class="modal-submit">Submit in GitHub</button>
+    </footer>
+  </form>
+</dialog>
+
+<header class="arxiv-html-header">
+  <div class="html-header-logo">
+    <a href="/">
+      <img alt="arXiv logo" class="logo desktop-only" width="100"
+        src="/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg">
+      <span class="sr-only">Back to arXiv</span>
+    </a>
+  </div>
+  <!--TOC, dark mode, links-->
+  <nav class="html-header-nav">
+    <a class="header-button hover-effect desktop-only" href="https://info.arxiv.org/about/accessible_HTML.html"
+      target="_blank">Why HTML?</a>
+    <a class="header-button" title="Report an Issue" href="#" title="Report an issue"
+      onclick="event.preventDefault(); showModalForm();">
+      <svg role="presentation" class="mobile-only toggle-icon" aria-hidden="true" height="1.25rem"
+        viewBox="0 0 640 640">
+        <path
+          d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+      </svg>
+      <span class="desktop-only">Report Issue</span></a>
+    <!--back to abstract-->
+    <a class="header-button" title="Back to abstract page" aria-label="Back to abstract page"
+      href="/abs/2604.15794v1">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 512 512" fill="#ffffff"
+        aria-hidden="true">
+        <path
+          d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z">
+        </path>
+      </svg>
+      <span class="desktop-only">Back to Abstract</span>
+    </a>
+    <!-- PDF download link -->
+    <a class="header-button" title="Download PDF" href="/pdf/2604.15794v1"
+      target="_blank">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 576 542">
+        <path
+          d="M208 48L96 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l80 0 0 48-80 0c-35.3 0-64-28.7-64-64L32 64C32 28.7 60.7 0 96 0L229.5 0c17 0 33.3 6.7 45.3 18.7L397.3 141.3c12 12 18.7 28.3 18.7 45.3l0 149.5-48 0 0-128-88 0c-39.8 0-72-32.2-72-72l0-88zM348.1 160L256 67.9 256 136c0 13.3 10.7 24 24 24l68.1 0zM240 380l32 0c33.1 0 60 26.9 60 60s-26.9 60-60 60l-12 0 0 28c0 11-9 20-20 20s-20-9-20-20l0-128c0-11 9-20 20-20zm32 80c11 0 20-9 20-20s-9-20-20-20l-12 0 0 40 12 0zm96-80l32 0c28.7 0 52 23.3 52 52l0 64c0 28.7-23.3 52-52 52l-32 0c-11 0-20-9-20-20l0-128c0-11 9-20 20-20zm32 128c6.6 0 12-5.4 12-12l0-64c0-6.6-5.4-12-12-12l-12 0 0 88 12 0zm76-108c0-11 9-20 20-20l48 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 24 28 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 44c0 11-9 20-20 20s-20-9-20-20l0-128z" />
+      </svg>
+      <span class="desktop-only">Download PDF</span></a>
+    <!-- navigational table of contents toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleNavTOC();" title="Toggle navigation"
+      aria-label="Toggle navigation">
+      <svg height="1.25rem" role="presentation" viewBox="0 0 512 512">
+        <path
+          d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z">
+        </path>
+      </svg>
+    </a>
+    <!--- collapsable header / reading mode toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleReadingMode();"
+      title="Disable reading mode, show header and footer">
+      <svg role="presentation" height="1.25rem"
+        viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+        <path
+          d="M32 32C14.3 32 0 46.3 0 64l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 32zM64 352c0-17.7-14.3-32-32-32S0 334.3 0 352l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96z" />
+      </svg>
+    </a>
+    <!--- colored theme toggle -->
+    <button type="button" class="header-button color-tog" onclick="toggleColorScheme();" title="Toggle dark/light mode" aria-label="Toggle color scheme">
+      <span class="toggle-icon automatic-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon light-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon dark-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+    </button>
+  </nav>
+</header><nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_abstract"><a href="#abstract1" title="In Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Abstract</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S1" title="In Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S2" title="In Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Related Work</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S2.SS0.SSS0.Px1" title="In 2 Related Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Catastrophic Forgetting in LLMs.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S2.SS0.SSS0.Px2" title="In 2 Related Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Model Compression and Performance Degradation.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S2.SS0.SSS0.Px3" title="In 2 Related Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Self-Distillation Fine-Tuning.</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S3" title="In Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Recovery Framework</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS1" title="In 3 Recovery Framework ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Problem Formulation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS2" title="In 3 Recovery Framework ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Recovery Solutions</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S4" title="In Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S4.SS1" title="In 4 Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S4.SS2" title="In 4 Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Problem Formulation and Manifold Definition</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S4.SS3" title="In 4 Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.3 </span>Calculation Procedure</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S4.SS4" title="In 4 Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.4 </span>Theoretical Explanation</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S5" title="In Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Experiments</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#S5.SS1" title="In 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.1 </span>Recovery from Catastrophic Forgetting</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S5.SS1.SSS0.Px1" title="In 5.1 Recovery from Catastrophic Forgetting ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Results.</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#S5.SS2" title="In 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.2 </span>Recovery from Compression</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S5.SS2.SSS0.Px1" title="In 5.2 Recovery from Compression ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Quantization: task-specific recovery.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S5.SS2.SSS0.Px2" title="In 5.2 Recovery from Compression ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Quantization: general capability preservation.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S5.SS2.SSS0.Px3" title="In 5.2 Recovery from Compression ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Pruning: a harder recovery problem.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S5.SS2.SSS0.Px4" title="In 5.2 Recovery from Compression ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Cross-compression comparison.</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#S5.SS3" title="In 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.3 </span>Extending to Small Models</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S5.SS3.SSS0.Px1" title="In 5.3 Extending to Small Models ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Setup.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S5.SS3.SSS0.Px2" title="In 5.3 Extending to Small Models ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Results.</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#S5.SS4" title="In 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.4 </span>Manifold Alignment Validation</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S5.SS4.SSS0.Px1" title="In 5.4 Manifold Alignment Validation ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Setup.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S5.SS4.SSS0.Px2" title="In 5.4 Manifold Alignment Validation ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">CKA recovery in multi-stage pipelines.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S5.SS4.SSS0.Px3" title="In 5.4 Manifold Alignment Validation ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Teacher choice introduces a diagnostic trade-off.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S5.SS4.SSS0.Px4" title="In 5.4 Manifold Alignment Validation ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">CKA misalignment predicts forgetting severity.</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S6" title="In Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Discussion &amp; Future Work</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#S6.SS1" title="In 6 Discussion &amp; Future Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6.1 </span>Discussion</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S6.SS1.SSS0.Px1" title="In 6.1 Discussion ‣ 6 Discussion &amp; Future Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Geometric Structure vs. Output Distribution.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S6.SS1.SSS0.Px2" title="In 6.1 Discussion ‣ 6 Discussion &amp; Future Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Dependency on Teacher Quality.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S6.SS1.SSS0.Px3" title="In 6.1 Discussion ‣ 6 Discussion &amp; Future Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Correlation vs. Causation.</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#S6.SS2" title="In 6 Discussion &amp; Future Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6.2 </span>Future Work</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S6.SS2.SSS0.Px1" title="In 6.2 Future Work ‣ 6 Discussion &amp; Future Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">Quantifying the Geometry-Performance Relationship.</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S7" title="In Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">7 </span>Conclusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_bibliography"><a href="#bib" title="In Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_title">References</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div id="infobox" class="infobox">
+  <a id="license-tr" href="https://info.arxiv.org/help/license/index.html#licenses-available">
+    License: CC BY 4.0
+  </a>
+  <div id="watermark-tr">
+arXiv:2604.15794v1 [cs.LG] 17 Apr 2026</div>
+</div><div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Chi Liu  Xin Chen  Xu Zhou  Fangbo Tu  Srinivasan Manoharan 
+<br class="ltx_break">PayPal AI
+</span></span>
+</div>
+
+<div id="abstract1" class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p">Large Language Models (LLMs) have achieved remarkable success, underpinning diverse AI applications. However, they often suffer from performance degradation due to factors such as catastrophic forgetting during Supervised Fine-Tuning (SFT), quantization, and pruning. In this work, we introduce a performance recovery framework based on Self-Distillation Fine-Tuning (SDFT) that effectively restores model capabilities. Complementing this practical contribution, we provide a rigorous theoretical explanation for the underlying recovery mechanism. We posit that an LLM’s generative capability fundamentally relies on the high-dimensional manifold constructed by its hidden layers. To investigate this, we employ Centered Kernel Alignment (CKA) to quantify the alignment between student and teacher activation trajectories, leveraging its invariance to orthogonal transformations and scaling. Our experiments demonstrate a strong correlation between performance recovery and manifold alignment, substantiating the claim that self-distillation effectively aligns the student’s high-dimensional manifold with the optimal structure represented by the teacher. This study bridges the gap between practical recovery frameworks and geometric representation theory, offering new insights into the internal mechanisms of self-distillation.</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+
+<div id="S1.p1" class="ltx_para ltx_noindent">
+<p id="S1.p1.1" class="ltx_p">Large Language Models (LLMs) have revolutionized natural language understanding, reasoning, and generation. However, deploying generic base models into real-world applications necessitates further adaptation. To align with specific downstream tasks, models typically undergo Supervised Fine-Tuning (SFT); simultaneously, to meet resource constraints, techniques such as pruning and quantization become indispensable.</p>
+</div>
+<div id="S1.p2" class="ltx_para ltx_noindent">
+<p id="S1.p2.1" class="ltx_p">However, these operations often incur significant performance degradation. In continuous learning, multi-round SFT frequently triggers Catastrophic Forgetting, where models lose original general knowledge and skills while acquiring new domain-specific knowledge and task capabilities. Similarly, aggressive compression disrupts internal parameter distributions, leading to declines in accuracy and logical consistency. This "capability trade-off" forces difficult choices between specialization and generalization. Once a model degrades, traditional repair methods are often computationally prohibitive, sometimes requiring retraining from scratch, a very inefficient solution in the context of scarce computational resources.</p>
+</div>
+<div id="S1.p3" class="ltx_para ltx_noindent">
+<p id="S1.p3.1" class="ltx_p">In this paper, we propose an effective "Recovery Mechanism" for model degradation, leveraging Self-Distillation Fine-Tuning (SDFT) <cite class="ltx_cite ltx_citemacro_citep">(Shenfeld<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib14" title="Self-distillation enables continual learning" class="ltx_ref">2026</a>)</cite>, a specialized paradigm of Self-Distillation (SD) <cite class="ltx_cite ltx_citemacro_citep">(Hinton<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib73" title="Distilling the knowledge in a neural network" class="ltx_ref">2015</a>)</cite>. While traditional SD focuses on improving generalization bounds through self-imitation, we argue that when a model suffers from distribution shift due to SFT or compression, the regularization effect of SDFT acts as an "anchor." This mechanism pulls degraded parameters back toward the original high-performance manifold. Crucially, our approach relies solely on the model’s own historical states without relying on an external teacher, thereby facilitating efficient performance recovery.</p>
+</div>
+<div id="S1.p4" class="ltx_para ltx_noindent">
+<p id="S1.p4.1" class="ltx_p">Building on this insight, we establish a unified recovery framework and validate it across diverse degradation scenarios. With a primary emphasis on catastrophic forgetting in multi-round SFT, we further demonstrate the framework’s efficacy against compression artifacts. Empirical results demonstrate that SDFT effectively restores model performance across multiple evaluation benchmarks, validating both its practical efficacy and theoretical foundation.</p>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Related Work</h2>
+
+<section id="S2.SS0.SSS0.Px1" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Catastrophic Forgetting in LLMs.</h4>
+
+<div id="S2.SS0.SSS0.Px1.p1" class="ltx_para ltx_noindent">
+<p id="S2.SS0.SSS0.Px1.p1.1" class="ltx_p">Catastrophic Forgetting (CF) refers to the phenomenon wherein neural networks to suddenly and significantly lose previously learned knowledge when trained on new data <cite class="ltx_cite ltx_citemacro_citep">(De Lange<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib71" title="A continual learning survey: defying forgetting in classification tasks" class="ltx_ref">2021</a>)</cite>. In the context of LLMs, this phenomenon manifests when multi-round Supervised Fine-Tuning (SFT) overwrites the knowledge and skills acquired in previous trainings <cite class="ltx_cite ltx_citemacro_citep">(Li and Hoiem, <a href="#bib.bib75" title="Learning without forgetting" class="ltx_ref">2017</a>)</cite>. Existing mitigation strategies generally fall into three categories: (1) Replay-based methods, which store a subset of old data to interleave with new training <cite class="ltx_cite ltx_citemacro_citep">(De Lange<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib71" title="A continual learning survey: defying forgetting in classification tasks" class="ltx_ref">2021</a>)</cite>; (2) Regularization-based methods, such as Elastic Weight Consolidation (EWC), which penalize changes to important parameters <cite class="ltx_cite ltx_citemacro_citep">(Kirkpatrick<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib74" title="Overcoming catastrophic forgetting in neural networks" class="ltx_ref">2017</a>)</cite>; and (3) Parameter-isolation methods, which allocate separate parameters for different tasks <cite class="ltx_cite ltx_citemacro_citep">(Rusu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib83" title="Progressive neural networks" class="ltx_ref">2016</a>)</cite>. While effective to some extent, these approaches often incur high computational costs, require access to historical data, or complicate model architecture. Crucially, most existing work focuses on preventing forgetting during new training, rather than recovering performance after degradation has occurred.</p>
+</div>
+</section>
+<section id="S2.SS0.SSS0.Px2" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Model Compression and Performance Degradation.</h4>
+
+<div id="S2.SS0.SSS0.Px2.p1" class="ltx_para ltx_noindent">
+<p id="S2.SS0.SSS0.Px2.p1.1" class="ltx_p">To deploy LLMs efficiently, techniques such as pruning <cite class="ltx_cite ltx_citemacro_citep">(Ma<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib82" title="LLM-Pruner: on the structural pruning of large language models" class="ltx_ref">2024</a>)</cite> and quantization <cite class="ltx_cite ltx_citemacro_citep">(Dettmers<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib76" title="QLoRA: efficient finetuning of quantized language models" class="ltx_ref">2023</a>)</cite> are widely adopted. However, these operations inevitably introduce performance degradation. Aggressive pruning removes redundant neurons but may disrupt critical knowledge pathways, while low-bit quantization introduces noise that affects logical consistency and factual accuracy <cite class="ltx_cite ltx_citemacro_citep">(Frantar<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib79" title="GPTQ: accurate post-training quantization for generative pre-trained transformers" class="ltx_ref">2023</a>)</cite>. Traditional remedies often rely on Knowledge Distillation (KD), where a compressed student model is trained to mimic a larger teacher [Hinton et al., 2015]. While external strong teachers (e.g., larger LLMs or API-based models) are theoretically applicable, they often introduce distribution shifts, high computational overhead, or privacy constraints that limit their practicality for post-degradation recovery. In contrast, Self-Distillation offers a self-contained alternative that leverages the model’s own historical states, avoiding external dependencies while preserving task alignment. This makes SD particularly suitable for lightweight, privacy-sensitive, or distribution-consistent recovery scenarios.</p>
+</div>
+</section>
+<section id="S2.SS0.SSS0.Px3" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Self-Distillation Fine-Tuning.</h4>
+
+<div id="S2.SS0.SSS0.Px3.p1" class="ltx_para ltx_noindent">
+<p id="S2.SS0.SSS0.Px3.p1.1" class="ltx_p">Self-Distillation (SD) has emerged as a powerful technique for enhancing model generalization without relying on an external teacher. Early works demonstrated that training a model to mimic its own deeper layers or earlier checkpoints acts as an effective regularizer, reducing overfitting and improving accuracy <cite class="ltx_cite ltx_citemacro_citep">(Furlanello<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib81" title="Born again neural networks" class="ltx_ref">2018</a>)</cite>. More recently, studies have extended SD to Self-Distillation Fine-Tuning (SDFT), enabling on-policy learning directly from demonstrations. By leveraging in-context learning, SDFT uses the model itself as a teacher to generate training signals that preserve prior capabilities while acquiring new skills. Across various tasks, SDFT consistently outperforms conventional SFT, achieving higher new-task accuracy while mitigating catastrophic forgetting. However, existing SDFT approaches primarily focus on preventing forgetting during the training process, often assuming the teacher and student are synchronized. In this paper, we extend SDFT to a more general framework where the teacher can be any historical state of the model, not just the current iteration. Crucially, we reposition this generalized SDFT as a post-hoc recovery mechanism, designed to restore performance after degradation has occurred, rather than merely preventing it during training.</p>
+</div>
+</section>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Recovery Framework</h2>
+
+<section id="S3.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Problem Formulation</h3>
+
+<div id="S3.SS1.p1" class="ltx_para ltx_noindent">
+<p id="S3.SS1.p1.6" class="ltx_p">Let LLM <math id="S3.SS1.p1.1.m1" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> denote the original base model with parameters <math id="S3.SS1.p1.2.m2" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>. After undergoing degradation processes such as multi-round SFT or compression, the model becomes LLM <math id="S3.SS1.p1.3.m3" class="ltx_Math" alttext="\theta_{1}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\theta_{1}</annotation></semantics></math> with parameters <math id="S3.SS1.p1.4.m4" class="ltx_Math" alttext="\theta_{1}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\theta_{1}</annotation></semantics></math>, exhibiting performance drops in general knowledge and skills. Our goal is to obtain a recovered model LLM <math id="S3.SS1.p1.5.m5" class="ltx_Math" alttext="\theta_{2}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>2</mn></msub><annotation encoding="application/x-tex">\theta_{2}</annotation></semantics></math> with parameters <math id="S3.SS1.p1.6.m6" class="ltx_Math" alttext="\theta_{2}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>2</mn></msub><annotation encoding="application/x-tex">\theta_{2}</annotation></semantics></math> that maximizes performance on both original capabilities and new tasks.</p>
+</div>
+</section>
+<section id="S3.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Recovery Solutions</h3>
+
+<figure id="S3.F1" class="ltx_figure"><img src="2604.15794v1/figure1.png" id="S3.F1.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="598" height="380" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>The Self-Distillation Recovery Framework for Catastrophic Forgetting</figcaption>
+</figure>
+<div id="S3.SS2.p1" class="ltx_para ltx_noindent">
+<p id="S3.SS2.p1.2" class="ltx_p">Figure 1 illustrates the overall architecture of our proposed Self-Distillation Recovery Framework in catastrophic forgetting scenario. Unlike traditional Fine-Tuning pipelines that solely optimize for new task performance, our framework introduces a dual-objective optimization process aimed at both capability recovery and task adaptation. The framework consists of three main components: (1) the Teacher LLM <math id="S3.SS2.p1.1.m1" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>, constructed from the model’s own historical checkpoints or earlier training states; (2) the Degraded Model <math id="S3.SS2.p1.2.m2" class="ltx_Math" alttext="\theta_{1}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\theta_{1}</annotation></semantics></math>, which serves as the initial student state suffering from performance loss due to prior multiple rounds of SFTs; and (3) the SDFT Recovery Process, where the student learns to mimic the teacher’s output distribution while adapting to the datasets used in previous multiple rounds of SFTs. This self-contained process ensures that performance recovery is achieved without relying on external high-performance models or any external datasets.</p>
+</div>
+<figure id="S3.F2" class="ltx_figure"><img src="2604.15794v1/figure2.png" id="S3.F2.g1" class="ltx_graphics ltx_centering ltx_img_square" width="598" height="493" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>The Self-Distillation Recovery Framework for Compression</figcaption>
+</figure>
+<div id="S3.SS2.p2" class="ltx_para ltx_noindent">
+<p id="S3.SS2.p2.1" class="ltx_p">Figure 2 extends the proposed recovery framework to compression scenarios. When an LLM is subjected to pruning or quantization, it inevitably incurs varying degrees of performance degradation. To facilitate recovery, the framework necessitates the curation of expert demonstration datasets aligned with the degraded capabilities. For example, if the tool-calling task shows performance degradation, related datasets are needed for recovery; if general knowledge shows degradation, then SFT datasets used in post-training are required. Notably, apart from this data selection strategy, the underlying recovery mechanism remains identical to the catastrophic forgetting scenario, demonstrating the unified nature of our approach across different degradation types.</p>
+</div>
+<figure id="S3.F3" class="ltx_figure"><img src="2604.15794v1/figure3.png" id="S3.F3.g1" class="ltx_graphics ltx_centering ltx_img_square" width="598" height="516" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>The Self-Distillation Recovery Framework for Small Scale LLM</figcaption>
+</figure>
+<div id="S3.SS2.p3" class="ltx_para ltx_noindent">
+<p id="S3.SS2.p3.1" class="ltx_p">However, the original SDFT formulation exhibits a significant limitation at smaller scales (e.g., 3B variants), where insufficient in-context learning (ICL) capabilities fail to provide meaningful self-guidance, resulting in performance inferior to standard SFT. To address this, we propose an extended recovery strategy that introduces a single preliminary step while preserving the unified nature of our framework.</p>
+</div>
+<div id="S3.SS2.p4" class="ltx_para ltx_noindent">
+<p id="S3.SS2.p4.1" class="ltx_p">Figure 3 illustrates this enhanced workflow. The ineffectiveness of SDFT in small-scale models stems from its heavy reliance on robust ICL, which is typically underdeveloped in smaller architectures. Consequently, we first employ off-policy distillation using a large-scale LLM as the teacher to bootstrap the small model’s ICL capabilities. While this step enhances ICL, it inevitably leads to degradation in general and domain-specific capabilities. Subsequently, we apply our SDFT recovery mechanism to restore these degraded capabilities. Ultimately, this two-stage process enables the small-scale model to retain its original capabilities while achieving improved ICL performance, effectively extending the applicability of our recovery framework to resource-constrained scenarios.</p>
+</div>
+<div id="S3.SS2.p5" class="ltx_para ltx_noindent">
+<p id="S3.SS2.p5.1" class="ltx_p">The external teacher is used only once to bootstrap ICL capabilities (enabling SDFT), whereas the core recovery process remains self-contained via SDFT. This hybrid approach balances practicality with the efficiency of self-distillation.</p>
+</div>
+</section>
+</section>
+<section id="S4" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment</h2>
+
+<section id="S4.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Introduction</h3>
+
+<div id="S4.SS1.p1" class="ltx_para ltx_noindent">
+<p id="S4.SS1.p1.1" class="ltx_p">Previous chapters have primarily focused on the empirical analysis of the recovery framework, leaving the underlying theoretical mechanisms unexplored. Why does self-distillation effectively recover model performance, and is there a geometric metric aligned with this phenomenon?</p>
+</div>
+<div id="S4.SS1.p2" class="ltx_para ltx_noindent">
+<p id="S4.SS1.p2.1" class="ltx_p">In this chapter, we answer these questions by shifting the focus from output distributions to internal representations. We posit that the generative capability of an LLM fundamentally relies on the high-dimensional manifold constructed by its hidden layers, and consequently the core function of self-distillation is not merely optimizing output probabilities but regularizing the spatial structure of hidden states to align the student’s manifold with the teacher’s. Building on this premise, we propose a theoretical framework grounded in high-dimensional manifold geometry.</p>
+</div>
+<div id="S4.SS1.p3" class="ltx_para ltx_noindent">
+<p id="S4.SS1.p3.1" class="ltx_p">To validate this theoretical framework, we employ Centered Kernel Alignment (CKA) <cite class="ltx_cite ltx_citemacro_citep">(Kornblith<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib78" title="Similarity of neural network representations revisited" class="ltx_ref">2019</a>)</cite> as a metric to quantify the alignment of manifold structures between the student and the teacher, leveraging its critical advantage over metrics like Mean Squared Error (MSE) — namely, invariance to orthogonal transformations and scaling.</p>
+</div>
+</section>
+<section id="S4.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Problem Formulation and Manifold Definition</h3>
+
+<div id="S4.SS2.p1" class="ltx_para ltx_noindent">
+<p id="S4.SS2.p1.6" class="ltx_p">Given an input sequence <math id="S4.SS2.p1.1.m1" class="ltx_Math" alttext="X=(x_{1},x_{2},\ldots,x_{L})" display="inline" intent=":literal"><semantics><mrow><mi>X</mi><mo>=</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>x</mi><mi>L</mi></msub><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">X=(x_{1},x_{2},\ldots,x_{L})</annotation></semantics></math>, where <math id="S4.SS2.p1.2.m2" class="ltx_Math" alttext="L" display="inline" intent=":literal"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math> denotes the sequence length. For a certain hidden layer of an LLM (e.g., the last hidden layer), each token <math id="S4.SS2.p1.3.m3" class="ltx_Math" alttext="x_{t}" display="inline" intent=":literal"><semantics><msub><mi>x</mi><mi>t</mi></msub><annotation encoding="application/x-tex">x_{t}</annotation></semantics></math> corresponds to a <math id="S4.SS2.p1.4.m4" class="ltx_Math" alttext="d" display="inline" intent=":literal"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>-dimensional activation vector <math id="S4.SS2.p1.5.m5" class="ltx_Math" alttext="h_{t}\in\mathbb{R}^{d}" display="inline" intent=":literal"><semantics><mrow><msub><mi>h</mi><mi>t</mi></msub><mo>∈</mo><msup><mi>ℝ</mi><mi>d</mi></msup></mrow><annotation encoding="application/x-tex">h_{t}\in\mathbb{R}^{d}</annotation></semantics></math>. We stack the activation vectors of all tokens from a complete forward pass to form the Activation Matrix <math id="S4.SS2.p1.6.m6" class="ltx_Math" alttext="H\in\mathbb{R}^{L\times d}" display="inline" intent=":literal"><semantics><mrow><mi>H</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>L</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>d</mi></mrow></msup></mrow><annotation encoding="application/x-tex">H\in\mathbb{R}^{L\times d}</annotation></semantics></math>:</p>
+<table id="S4.E1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.E1.m1" class="ltx_Math" alttext="H=\begin{bmatrix}h_{1}^{T}\\
+h_{2}^{T}\\
+\vdots\\
+h_{L}^{T}\end{bmatrix}" display="block" intent=":literal"><semantics><mrow><mi>H</mi><mo>=</mo><mrow><mo>[</mo><mtable displaystyle="true" rowspacing="0pt"><mtr><mtd><msubsup><mi>h</mi><mn>1</mn><mi>T</mi></msubsup></mtd></mtr><mtr><mtd><msubsup><mi>h</mi><mn>2</mn><mi>T</mi></msubsup></mtd></mtr><mtr><mtd><mi mathvariant="normal">⋮</mi></mtd></mtr><mtr><mtd><msubsup><mi>h</mi><mi>L</mi><mi>T</mi></msubsup></mtd></mtr></mtable><mo>]</mo></mrow></mrow><annotation encoding="application/x-tex">H=\begin{bmatrix}h_{1}^{T}\\
+h_{2}^{T}\\
+\vdots\\
+h_{L}^{T}\end{bmatrix}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S4.SS2.p2" class="ltx_para ltx_noindent">
+<p id="S4.SS2.p2.7" class="ltx_p">From the perspective of manifold learning, each row in <math id="S4.SS2.p2.1.m1" class="ltx_Math" alttext="H" display="inline" intent=":literal"><semantics><mi>H</mi><annotation encoding="application/x-tex">H</annotation></semantics></math> represents a sample point on the high-dimensional semantic manifold <math id="S4.SS2.p2.2.m2" class="ltx_Math" alttext="\mathcal{M}" display="inline" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">ℳ</mi><annotation encoding="application/x-tex">\mathcal{M}</annotation></semantics></math>, and the entire matrix <math id="S4.SS2.p2.3.m3" class="ltx_Math" alttext="H" display="inline" intent=":literal"><semantics><mi>H</mi><annotation encoding="application/x-tex">H</annotation></semantics></math> constitutes a discrete trajectory of the sequence on this manifold. The student model <math id="S4.SS2.p2.4.m4" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math> and the teacher model <math id="S4.SS2.p2.5.m5" class="ltx_Math" alttext="T" display="inline" intent=":literal"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math> generate activation matrices <math id="S4.SS2.p2.6.m6" class="ltx_Math" alttext="H_{S}" display="inline" intent=":literal"><semantics><msub><mi>H</mi><mi>S</mi></msub><annotation encoding="application/x-tex">H_{S}</annotation></semantics></math> and <math id="S4.SS2.p2.7.m7" class="ltx_Math" alttext="H_{T}" display="inline" intent=":literal"><semantics><msub><mi>H</mi><mi>T</mi></msub><annotation encoding="application/x-tex">H_{T}</annotation></semantics></math>, respectively. Our objective is to measure the geometric alignment between these two trajectories. It is important to clarify that we do not compare the complete underlying manifolds of the student and teacher models directly. Instead, we utilize activation trajectories, which serve as discrete samples from these manifolds. This approach is both theoretically representative and computationally feasible.</p>
+</div>
+<div id="S4.SS2.p3" class="ltx_para ltx_noindent">
+<p id="S4.SS2.p3.2" class="ltx_p">Directly comparing the element values of activation matrices <math id="S4.SS2.p3.1.m1" class="ltx_Math" alttext="H_{S}" display="inline" intent=":literal"><semantics><msub><mi>H</mi><mi>S</mi></msub><annotation encoding="application/x-tex">H_{S}</annotation></semantics></math> and <math id="S4.SS2.p3.2.m2" class="ltx_Math" alttext="H_{T}" display="inline" intent=":literal"><semantics><msub><mi>H</mi><mi>T</mi></msub><annotation encoding="application/x-tex">H_{T}</annotation></semantics></math> (e.g., using MSE) is inappropriate because neural network representations possess rotation invariance. Semantically identical features may exist along different coordinate axes in the hidden space. To capture the intrinsic structure of the manifold, we must measure the relative relationships between tokens rather than their absolute coordinates.</p>
+</div>
+<div id="S4.SS2.p4" class="ltx_para ltx_noindent">
+<p id="S4.SS2.p4.1" class="ltx_p">We compute the Linear Kernel Matrix <math id="S4.SS2.p4.1.m1" class="ltx_Math" alttext="K\in\mathbb{R}^{L\times L}" display="inline" intent=":literal"><semantics><mrow><mi>K</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>L</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>L</mi></mrow></msup></mrow><annotation encoding="application/x-tex">K\in\mathbb{R}^{L\times L}</annotation></semantics></math>:</p>
+<table id="S4.E2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.E2.m1" class="ltx_Math" alttext="K=HH^{T}" display="block" intent=":literal"><semantics><mrow><mi>K</mi><mo>=</mo><mrow><mi>H</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>H</mi><mi>T</mi></msup></mrow></mrow><annotation encoding="application/x-tex">K=HH^{T}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S4.SS2.p5" class="ltx_para ltx_noindent">
+<p id="S4.SS2.p5.4" class="ltx_p">Here, the element <math id="S4.SS2.p5.1.m1" class="ltx_Math" alttext="K_{ij}=h_{i}\cdot h_{j}" display="inline" intent=":literal"><semantics><mrow><msub><mi>K</mi><mrow><mi>i</mi><mo lspace="0em" rspace="0em">​</mo><mi>j</mi></mrow></msub><mo>=</mo><mrow><msub><mi>h</mi><mi>i</mi></msub><mo lspace="0.222em" rspace="0.222em">⋅</mo><msub><mi>h</mi><mi>j</mi></msub></mrow></mrow><annotation encoding="application/x-tex">K_{ij}=h_{i}\cdot h_{j}</annotation></semantics></math> represents the similarity between the <math id="S4.SS2.p5.2.m2" class="ltx_Math" alttext="i" display="inline" intent=":literal"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>-th and <math id="S4.SS2.p5.3.m3" class="ltx_Math" alttext="j" display="inline" intent=":literal"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>-th tokens in the hidden space. The matrix <math id="S4.SS2.p5.4.m4" class="ltx_Math" alttext="K" display="inline" intent=":literal"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math> encodes the semantic dependency structure within the sequence and serves as a representation of the geometric properties of the manifold.</p>
+</div>
+</section>
+<section id="S4.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.3 </span>Calculation Procedure</h3>
+
+<div id="S4.SS3.p1" class="ltx_para ltx_noindent">
+<p id="S4.SS3.p1.2" class="ltx_p">We follow the six steps below to calculate the manifold alignment degree between <math id="S4.SS3.p1.1.m1" class="ltx_Math" alttext="H_{S}" display="inline" intent=":literal"><semantics><msub><mi>H</mi><mi>S</mi></msub><annotation encoding="application/x-tex">H_{S}</annotation></semantics></math> and <math id="S4.SS3.p1.2.m2" class="ltx_Math" alttext="H_{T}" display="inline" intent=":literal"><semantics><msub><mi>H</mi><mi>T</mi></msub><annotation encoding="application/x-tex">H_{T}</annotation></semantics></math>:</p>
+<ol id="S4.I1" class="ltx_enumerate">
+<li id="S4.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span> 
+<div id="S4.I1.i1.p1" class="ltx_para">
+<p id="S4.I1.i1.p1.1" class="ltx_p"><span id="S4.I1.i1.p1.1.1" class="ltx_text ltx_font_bold">Input Consistency:</span> Input the identical sequence (Prompt + Ground Truth) into both the student and teacher models to ensure one-to-one correspondence of token positions.</p>
+</div>
+</li>
+<li id="S4.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span> 
+<div id="S4.I1.i2.p1" class="ltx_para">
+<p id="S4.I1.i2.p1.1" class="ltx_p"><span id="S4.I1.i2.p1.1.1" class="ltx_text ltx_font_bold">Activation Extraction:</span> Extract the same layer activation matrices <math id="S4.I1.i2.p1.1.m1" class="ltx_Math" alttext="H_{S},H_{T}\in\mathbb{R}^{L\times d}" display="inline" intent=":literal"><semantics><mrow><mrow><msub><mi>H</mi><mi>S</mi></msub><mo>,</mo><msub><mi>H</mi><mi>T</mi></msub></mrow><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>L</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>d</mi></mrow></msup></mrow><annotation encoding="application/x-tex">H_{S},H_{T}\in\mathbb{R}^{L\times d}</annotation></semantics></math>.</p>
+</div>
+</li>
+<li id="S4.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">3.</span> 
+<div id="S4.I1.i3.p1" class="ltx_para">
+<p id="S4.I1.i3.p1.2" class="ltx_p"><span id="S4.I1.i3.p1.2.1" class="ltx_text ltx_font_bold">Kernel Matrix Computation:</span> Compute the linear kernel matrices <math id="S4.I1.i3.p1.1.m1" class="ltx_Math" alttext="K_{S}=H_{S}H_{S}^{T}" display="inline" intent=":literal"><semantics><mrow><msub><mi>K</mi><mi>S</mi></msub><mo>=</mo><mrow><msub><mi>H</mi><mi>S</mi></msub><mo lspace="0em" rspace="0em">​</mo><msubsup><mi>H</mi><mi>S</mi><mi>T</mi></msubsup></mrow></mrow><annotation encoding="application/x-tex">K_{S}=H_{S}H_{S}^{T}</annotation></semantics></math> and <math id="S4.I1.i3.p1.2.m2" class="ltx_Math" alttext="K_{T}=H_{T}H_{T}^{T}" display="inline" intent=":literal"><semantics><mrow><msub><mi>K</mi><mi>T</mi></msub><mo>=</mo><mrow><msub><mi>H</mi><mi>T</mi></msub><mo lspace="0em" rspace="0em">​</mo><msubsup><mi>H</mi><mi>T</mi><mi>T</mi></msubsup></mrow></mrow><annotation encoding="application/x-tex">K_{T}=H_{T}H_{T}^{T}</annotation></semantics></math>.</p>
+</div>
+</li>
+<li id="S4.I1.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">4.</span> 
+<div id="S4.I1.i4.p1" class="ltx_para">
+<p id="S4.I1.i4.p1.3" class="ltx_p"><span id="S4.I1.i4.p1.3.1" class="ltx_text ltx_font_bold">Centering Operation:</span> Construct the centering matrix <math id="S4.I1.i4.p1.1.m1" class="ltx_Math" alttext="C=I_{L}-\frac{1}{L}\mathbf{1}\mathbf{1}^{T}" display="inline" intent=":literal"><semantics><mrow><mi>C</mi><mo>=</mo><mrow><msub><mi>I</mi><mi>L</mi></msub><mo>−</mo><mrow><mfrac><mn>1</mn><mi>L</mi></mfrac><mo lspace="0em" rspace="0em">​</mo><msup><mn>𝟏𝟏</mn><mi>T</mi></msup></mrow></mrow></mrow><annotation encoding="application/x-tex">C=I_{L}-\frac{1}{L}\mathbf{1}\mathbf{1}^{T}</annotation></semantics></math>. Compute the centered kernel matrices <math id="S4.I1.i4.p1.2.m2" class="ltx_Math" alttext="K_{SC}=CK_{S}C" display="inline" intent=":literal"><semantics><mrow><msub><mi>K</mi><mrow><mi>S</mi><mo lspace="0em" rspace="0em">​</mo><mi>C</mi></mrow></msub><mo>=</mo><mrow><mi>C</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>K</mi><mi>S</mi></msub><mo lspace="0em" rspace="0em">​</mo><mi>C</mi></mrow></mrow><annotation encoding="application/x-tex">K_{SC}=CK_{S}C</annotation></semantics></math> and <math id="S4.I1.i4.p1.3.m3" class="ltx_Math" alttext="K_{TC}=CK_{T}C" display="inline" intent=":literal"><semantics><mrow><msub><mi>K</mi><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>C</mi></mrow></msub><mo>=</mo><mrow><mi>C</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>K</mi><mi>T</mi></msub><mo lspace="0em" rspace="0em">​</mo><mi>C</mi></mrow></mrow><annotation encoding="application/x-tex">K_{TC}=CK_{T}C</annotation></semantics></math>. This step eliminates global biases in activation values, ensuring the metric focuses solely on relative structure.</p>
+</div>
+</li>
+<li id="S4.I1.i5" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">5.</span> 
+<div id="S4.I1.i5.p1" class="ltx_para">
+<p id="S4.I1.i5.p1.2" class="ltx_p"><span id="S4.I1.i5.p1.2.1" class="ltx_text ltx_font_bold">Hilbert-Schmidt Independence Criterion (HSIC) <cite class="ltx_cite ltx_citemacro_citep">(Gretton<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib77" title="Measuring statistical dependence with hilbert-schmidt norms" class="ltx_ref">2005</a>)</cite> Computation:</span> Compute the Frobenius inner product of the two centered kernel matrices, which is the Trace of their product:</p>
+<table id="S4.E3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.E3.m1" class="ltx_Math" alttext="\text{HSIC}(H_{S},H_{T})=\text{tr}(K_{SC}K_{TC})=\text{tr}(K_{S}CK_{T}C)" display="block" intent=":literal"><semantics><mrow><mrow><mtext>HSIC</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msub><mi>H</mi><mi>S</mi></msub><mo>,</mo><msub><mi>H</mi><mi>T</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mtext>tr</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>K</mi><mrow><mi>S</mi><mo lspace="0em" rspace="0em">​</mo><mi>C</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>K</mi><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>C</mi></mrow></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mtext>tr</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>K</mi><mi>S</mi></msub><mo lspace="0em" rspace="0em">​</mo><mi>C</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>K</mi><mi>T</mi></msub><mo lspace="0em" rspace="0em">​</mo><mi>C</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\text{HSIC}(H_{S},H_{T})=\text{tr}(K_{SC}K_{TC})=\text{tr}(K_{S}CK_{T}C)</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+<p id="S4.I1.i5.p1.1" class="ltx_p">The original HSIC definition includes a scaling factor <math id="S4.I1.i5.p1.1.m1" class="ltx_Math" alttext="\frac{1}{(L-1)^{2}}" display="inline" intent=":literal"><semantics><mfrac><mn>1</mn><msup><mrow><mo stretchy="false">(</mo><mrow><mi>L</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mn>2</mn></msup></mfrac><annotation encoding="application/x-tex">\frac{1}{(L-1)^{2}}</annotation></semantics></math> for unbiased estimation, as the factor cancels out in the normalized CKA ratio and is thus omitted for simplicity.</p>
+</div>
+</li>
+<li id="S4.I1.i6" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">6.</span> 
+<div id="S4.I1.i6.p1" class="ltx_para">
+<p id="S4.I1.i6.p1.1" class="ltx_p"><span id="S4.I1.i6.p1.1.1" class="ltx_text ltx_font_bold">CKA Normalization:</span> The final alignment score is calculated as:</p>
+<table id="S4.E4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.E4.m1" class="ltx_Math" alttext="\text{CKA}(H_{S},H_{T})=\frac{\text{HSIC}(H_{S},H_{T})}{\sqrt{\text{HSIC}(H_{S},H_{S})\cdot\text{HSIC}(H_{T},H_{T})}}" display="block" intent=":literal"><semantics><mrow><mrow><mtext>CKA</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msub><mi>H</mi><mi>S</mi></msub><mo>,</mo><msub><mi>H</mi><mi>T</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mfrac><mrow><mtext>HSIC</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msub><mi>H</mi><mi>S</mi></msub><mo>,</mo><msub><mi>H</mi><mi>T</mi></msub><mo stretchy="false">)</mo></mrow></mrow><msqrt><mrow><mrow><mrow><mtext>HSIC</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msub><mi>H</mi><mi>S</mi></msub><mo>,</mo><msub><mi>H</mi><mi>S</mi></msub><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">⋅</mo><mtext>HSIC</mtext></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msub><mi>H</mi><mi>T</mi></msub><mo>,</mo><msub><mi>H</mi><mi>T</mi></msub><mo stretchy="false">)</mo></mrow></mrow></msqrt></mfrac></mrow><annotation encoding="application/x-tex">\text{CKA}(H_{S},H_{T})=\frac{\text{HSIC}(H_{S},H_{T})}{\sqrt{\text{HSIC}(H_{S},H_{S})\cdot\text{HSIC}(H_{T},H_{T})}}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(4)</span></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+</ol>
+</div>
+<div id="S4.SS3.p2" class="ltx_para ltx_noindent">
+<p id="S4.SS3.p2.1" class="ltx_p">The value of CKA ranges from <math id="S4.SS3.p2.1.m1" class="ltx_Math" alttext="[0,1]" display="inline" intent=":literal"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math>. A score closer to 1 indicates that the geometric structure of the student’s activation trajectory highly coincides with that of the teacher, implying the student has successfully recovered the high-dimensional manifold constructed by the teacher.</p>
+</div>
+</section>
+<section id="S4.SS4" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.4 </span>Theoretical Explanation</h3>
+
+<div id="S4.SS4.p1" class="ltx_para ltx_noindent">
+<p id="S4.SS4.p1.1" class="ltx_p">In summary, our theoretical analysis posits that self-distillation can recover LLM performance because LLM generative capability fundamentally relies on the high-dimensional manifold constructed by the hidden layers, and self-distillation can align the student’s manifold with the teacher’s optimal manifold structure. Furthermore, we identify CKA as a robust metric to quantify this degree of manifold alignment.</p>
+</div>
+<div id="S4.SS4.p2" class="ltx_para ltx_noindent">
+<p id="S4.SS4.p2.1" class="ltx_p">Based on this theory, we have constructed a comprehensive analysis framework that mathematically formalizes activation trajectories as manifold samples and derived a CKA-based alignment scoring method.</p>
+</div>
+<div id="S4.SS4.p3" class="ltx_para ltx_noindent">
+<p id="S4.SS4.p3.1" class="ltx_p">In the following chapter, we will show empirical results that validate our theoretical analysis.</p>
+</div>
+</section>
+</section>
+<section id="S5" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Experiments</h2>
+
+<div id="S5.p1" class="ltx_para ltx_noindent">
+<p id="S5.p1.1" class="ltx_p">This section empirically validates the recovery framework (Section <a href="#S3" title="3 Recovery Framework ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>) and the manifold alignment theory (Section <a href="#S4" title="4 Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>) across the three degradation scenarios proposed in Figures <a href="#S3.F1" title="Figure 1 ‣ 3.2 Recovery Solutions ‣ 3 Recovery Framework ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>–<a href="#S3.F3" title="Figure 3 ‣ 3.2 Recovery Solutions ‣ 3 Recovery Framework ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>: catastrophic forgetting (Section <a href="#S5.SS1" title="5.1 Recovery from Catastrophic Forgetting ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5.1</span></a>), compression (Section <a href="#S5.SS2" title="5.2 Recovery from Compression ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5.2</span></a>), and small-model bootstrapping (Section <a href="#S5.SS3" title="5.3 Extending to Small Models ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5.3</span></a>). Experiments are conducted on Qwen2.5-3B-Instruct and Qwen2.5-7B-Instruct <cite class="ltx_cite ltx_citemacro_citep">(Qwen<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib37" title="Qwen2.5 technical report" class="ltx_ref">2024</a>)</cite> across two task domains — Tooluse (structured tool-use) and Science (scientific QA) — with general capability preservation assessed on MMLU and Winogrande (5-shot). Compression is applied via NF4 quantization and 10% structured FFN pruning, with recovery via standard SDFT as described in Section <a href="#S3" title="3 Recovery Framework ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>.</p>
+</div>
+<section id="S5.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.1 </span>Recovery from Catastrophic Forgetting</h3>
+
+<div id="S5.SS1.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS1.p1.1" class="ltx_p">We first validate the recovery framework (Section <a href="#S3" title="3 Recovery Framework ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>) and the manifold alignment theory (Section <a href="#S4" title="4 Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>) on catastrophic forgetting: a model trained on task A loses its capabilities after subsequent SFT on task B. We construct a three-stage pipeline on Qwen2.5-3B-Instruct — (1) train an SDFT expert on Science, (2) apply standard SFT on Tooluse (inducing forgetting), (3) apply recovery SDFT — and measure both task accuracy and last-layer CKA against the original Science expert at each stage.</p>
+</div>
+<figure id="S5.F4" class="ltx_figure"><img src="2604.15794v1/x1.png" id="S5.F4.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="830" height="268" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 4: </span>Three-stage forgetting–recovery pipeline. Stage 1 trains a Science expert via SDFT. Stage 2 applies standard SFT on Tooluse, inducing catastrophic forgetting of Science. Stage 3 applies recovery SDFT to restore Science capabilities.</figcaption>
+</figure>
+<figure id="S5.T1" class="ltx_table">
+<table id="S5.T1.2" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S5.T1.2.3.1" class="ltx_tr">
+<th id="S5.T1.2.3.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt">Pipeline Stage</th>
+<th id="S5.T1.2.3.1.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">Tooluse</th>
+<th id="S5.T1.2.3.1.3" class="ltx_td ltx_nopad_r ltx_align_center ltx_th ltx_th_column ltx_border_tt">Science</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S5.T1.2.4.1" class="ltx_tr">
+<th id="S5.T1.2.4.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">Science expert</th>
+<td id="S5.T1.2.4.1.2" class="ltx_td ltx_align_center ltx_border_t">19.59%</td>
+<td id="S5.T1.2.4.1.3" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">59.96%</td>
+</tr>
+<tr id="S5.T1.2.5.2" class="ltx_tr">
+<th id="S5.T1.2.5.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">+ SFT Tooluse</th>
+<td id="S5.T1.2.5.2.2" class="ltx_td ltx_align_center">64.95%</td>
+<td id="S5.T1.2.5.2.3" class="ltx_td ltx_nopad_r ltx_align_center">37.87%</td>
+</tr>
+<tr id="S5.T1.1.1" class="ltx_tr">
+<th id="S5.T1.1.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">+ Recovery (<math id="S5.T1.1.1.1.m1" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>=base)</th>
+<td id="S5.T1.1.1.2" class="ltx_td ltx_align_center">65.98%</td>
+<td id="S5.T1.1.1.3" class="ltx_td ltx_nopad_r ltx_align_center">61.54%</td>
+</tr>
+<tr id="S5.T1.2.2" class="ltx_tr">
+<th id="S5.T1.2.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">+ Recovery (<math id="S5.T1.2.2.1.m1" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>=expert)</th>
+<td id="S5.T1.2.2.2" class="ltx_td ltx_align_center ltx_border_bb">57.73%</td>
+<td id="S5.T1.2.2.3" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_bb">65.48%</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 1: </span>Three-stage forgetting–recovery pipeline on Qwen2.5-3B-Instruct. SFT on Tooluse induces catastrophic forgetting of Science (37.87%, down from 59.96%). Recovery SDFT restores Science while preserving Tooluse.</figcaption>
+</figure>
+<section id="S5.SS1.SSS0.Px1" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Results.</h4>
+
+<div id="S5.SS1.SSS0.Px1.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS1.SSS0.Px1.p1.2" class="ltx_p">Table <a href="#S5.T1" title="Table 1 ‣ 5.1 Recovery from Catastrophic Forgetting ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a> demonstrates that recovery SDFT effectively reverses catastrophic forgetting. Recovery with <math id="S5.SS1.SSS0.Px1.p1.1.m1" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>=base restores Science from 37.87% to 61.54% (+23.67%) while preserving Tooluse at 65.98%, demonstrating that both task capabilities can coexist after recovery. Recovery with <math id="S5.SS1.SSS0.Px1.p1.2.m2" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>=expert further boosts Science to 65.48% at a moderate Tooluse trade-off (57.73%). The manifold alignment analysis underlying this recovery is presented in Section <a href="#S5.SS4" title="5.4 Manifold Alignment Validation ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5.4</span></a>.</p>
+</div>
+</section>
+</section>
+<section id="S5.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.2 </span>Recovery from Compression</h3>
+
+<div id="S5.SS2.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS2.p1.1" class="ltx_p">We next validate the recovery framework on compression-induced degradation, testing two complementary methods — NF4 quantization and structured FFN pruning — which produce fundamentally different degradation patterns.</p>
+</div>
+<figure id="S5.F5" class="ltx_figure"><img src="2604.15794v1/x2.png" id="S5.F5.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="830" height="300" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 5: </span>Compression recovery pipeline. Stage 1: original bf16 model <math id="S5.F5.5.m1" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>. Stage 2: NF4 quantization produces <math id="S5.F5.6.m2" class="ltx_Math" alttext="\theta_{1}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\theta_{1}</annotation></semantics></math>. Stage 3: SDFT recovers <math id="S5.F5.7.m3" class="ltx_Math" alttext="\theta_{2}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>2</mn></msub><annotation encoding="application/x-tex">\theta_{2}</annotation></semantics></math> on task-specific data using <math id="S5.F5.8.m4" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> as teacher.</figcaption>
+</figure>
+<div id="S5.SS2.p2" class="ltx_para ltx_noindent">
+<p id="S5.SS2.p2.8" class="ltx_p">Figure <a href="#S5.F5" title="Figure 5 ‣ 5.2 Recovery from Compression ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a> illustrates the three-stage pipeline. Starting from the original bf16 model <math id="S5.SS2.p2.1.m1" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> (Stage 1), NF4 quantization compresses <math id="S5.SS2.p2.2.m2" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> to a 4-bit model <math id="S5.SS2.p2.3.m3" class="ltx_Math" alttext="\theta_{1}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\theta_{1}</annotation></semantics></math> (Stage 2), which largely preserves task accuracy but introduces latent manifold misalignment. In Stage 3, SDFT uses <math id="S5.SS2.p2.4.m4" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> as a static teacher to distill task-specific knowledge into <math id="S5.SS2.p2.5.m5" class="ltx_Math" alttext="\theta_{1}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\theta_{1}</annotation></semantics></math> on target-domain data, producing the recovered model <math id="S5.SS2.p2.6.m6" class="ltx_Math" alttext="\theta_{2}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>2</mn></msub><annotation encoding="application/x-tex">\theta_{2}</annotation></semantics></math> — which substantially exceeds both <math id="S5.SS2.p2.7.m7" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> and <math id="S5.SS2.p2.8.m8" class="ltx_Math" alttext="\theta_{1}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\theta_{1}</annotation></semantics></math>.</p>
+</div>
+<section id="S5.SS2.SSS0.Px1" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Quantization: task-specific recovery.</h4>
+
+<figure id="S5.T2" class="ltx_table">
+<table id="S5.T2.5" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S5.T2.5.6.1" class="ltx_tr">
+<th id="S5.T2.5.6.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt">Config</th>
+<th id="S5.T2.5.6.1.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">3B Tooluse</th>
+<th id="S5.T2.5.6.1.3" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">3B Science</th>
+<th id="S5.T2.5.6.1.4" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">7B Tooluse</th>
+<th id="S5.T2.5.6.1.5" class="ltx_td ltx_nopad_r ltx_align_center ltx_th ltx_th_column ltx_border_tt">7B Science</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S5.T2.1.1" class="ltx_tr">
+<th id="S5.T2.1.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">bf16 (<math id="S5.T2.1.1.1.m1" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>)</th>
+<td id="S5.T2.1.1.2" class="ltx_td ltx_align_center ltx_border_t">29.20%</td>
+<td id="S5.T2.1.1.3" class="ltx_td ltx_align_center ltx_border_t">31.80%</td>
+<td id="S5.T2.1.1.4" class="ltx_td ltx_align_center ltx_border_t">42.40%</td>
+<td id="S5.T2.1.1.5" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">33.90%</td>
+</tr>
+<tr id="S5.T2.2.2" class="ltx_tr">
+<th id="S5.T2.2.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">NF4 (<math id="S5.T2.2.2.1.m1" class="ltx_Math" alttext="\theta_{1}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\theta_{1}</annotation></semantics></math>)</th>
+<td id="S5.T2.2.2.2" class="ltx_td ltx_align_center">28.70%</td>
+<td id="S5.T2.2.2.3" class="ltx_td ltx_align_center">30.40%</td>
+<td id="S5.T2.2.2.4" class="ltx_td ltx_align_center">41.60%</td>
+<td id="S5.T2.2.2.5" class="ltx_td ltx_nopad_r ltx_align_center">33.00%</td>
+</tr>
+<tr id="S5.T2.3.3" class="ltx_tr">
+<th id="S5.T2.3.3.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">SDFT (<math id="S5.T2.3.3.1.m1" class="ltx_Math" alttext="\theta_{2}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>2</mn></msub><annotation encoding="application/x-tex">\theta_{2}</annotation></semantics></math>)</th>
+<td id="S5.T2.3.3.2" class="ltx_td ltx_align_center"><span id="S5.T2.3.3.2.1" class="ltx_text ltx_font_bold">50.52%</span></td>
+<td id="S5.T2.3.3.3" class="ltx_td ltx_align_center"><span id="S5.T2.3.3.3.1" class="ltx_text ltx_font_bold">45.36%</span></td>
+<td id="S5.T2.3.3.4" class="ltx_td ltx_align_center"><span id="S5.T2.3.3.4.1" class="ltx_text ltx_font_bold">62.89%</span></td>
+<td id="S5.T2.3.3.5" class="ltx_td ltx_nopad_r ltx_align_center"><span id="S5.T2.3.3.5.1" class="ltx_text ltx_font_bold">52.30%</span></td>
+</tr>
+<tr id="S5.T2.4.4" class="ltx_tr">
+<th id="S5.T2.4.4.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">SDFT gain (<math id="S5.T2.4.4.1.m1" class="ltx_Math" alttext="\theta_{2}{-}\theta_{1}" display="inline" intent=":literal"><semantics><mrow><msub><mi>θ</mi><mn>2</mn></msub><mo>−</mo><msub><mi>θ</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\theta_{2}{-}\theta_{1}</annotation></semantics></math>)</th>
+<td id="S5.T2.4.4.2" class="ltx_td ltx_align_center ltx_border_t">+21.82%</td>
+<td id="S5.T2.4.4.3" class="ltx_td ltx_align_center ltx_border_t">+14.96%</td>
+<td id="S5.T2.4.4.4" class="ltx_td ltx_align_center ltx_border_t">+21.29%</td>
+<td id="S5.T2.4.4.5" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">+19.30%</td>
+</tr>
+<tr id="S5.T2.5.5" class="ltx_tr">
+<th id="S5.T2.5.5.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">Net vs bf16 (<math id="S5.T2.5.5.1.m1" class="ltx_Math" alttext="\theta_{2}{-}\theta" display="inline" intent=":literal"><semantics><mrow><msub><mi>θ</mi><mn>2</mn></msub><mo>−</mo><mi>θ</mi></mrow><annotation encoding="application/x-tex">\theta_{2}{-}\theta</annotation></semantics></math>)</th>
+<td id="S5.T2.5.5.2" class="ltx_td ltx_align_center ltx_border_bb">+21.32%</td>
+<td id="S5.T2.5.5.3" class="ltx_td ltx_align_center ltx_border_bb">+13.56%</td>
+<td id="S5.T2.5.5.4" class="ltx_td ltx_align_center ltx_border_bb">+20.49%</td>
+<td id="S5.T2.5.5.5" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_bb">+18.40%</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 2: </span>Task-specific accuracy across the quantization recovery pipeline. SDFT not only recovers capabilities lost to quantization but actively enhances them beyond the original bf16 model.</figcaption>
+</figure>
+<div id="S5.SS2.SSS0.Px1.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS2.SSS0.Px1.p1.1" class="ltx_p">Table <a href="#S5.T2" title="Table 2 ‣ Quantization: task-specific recovery. ‣ 5.2 Recovery from Compression ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a> shows that SDFT yields +15–22% task-specific gains across all configurations, with recovered models substantially exceeding the original bf16 <math id="S5.SS2.SSS0.Px1.p1.1.m1" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>. This validates the core prediction of the recovery framework: on-policy distillation anchors parameters near the pre-compression manifold while simultaneously adapting to the task distribution.</p>
+</div>
+</section>
+<section id="S5.SS2.SSS0.Px2" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Quantization: general capability preservation.</h4>
+
+<figure id="S5.T3" class="ltx_table">
+<table id="S5.T3.8" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr id="S5.T3.8.9.1" class="ltx_tr">
+<th id="S5.T3.8.9.1.1" class="ltx_td ltx_th ltx_th_row ltx_border_tt"></th>
+<td id="S5.T3.8.9.1.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" colspan="3">3B</td>
+<td id="S5.T3.8.9.1.3" class="ltx_td ltx_align_center ltx_border_tt" colspan="3">7B</td>
+</tr>
+<tr id="S5.T3.8.10.2" class="ltx_tr">
+<th id="S5.T3.8.10.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">Config</th>
+<td id="S5.T3.8.10.2.2" class="ltx_td ltx_align_center">MMLU</td>
+<td id="S5.T3.8.10.2.3" class="ltx_td ltx_align_center">Wino</td>
+<td id="S5.T3.8.10.2.4" class="ltx_td ltx_align_center ltx_border_r">Avg</td>
+<td id="S5.T3.8.10.2.5" class="ltx_td ltx_align_center">MMLU</td>
+<td id="S5.T3.8.10.2.6" class="ltx_td ltx_align_center">Wino</td>
+<td id="S5.T3.8.10.2.7" class="ltx_td ltx_nopad_r ltx_align_center">Avg</td>
+</tr>
+<tr id="S5.T3.1.1" class="ltx_tr">
+<th id="S5.T3.1.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">bf16 (<math id="S5.T3.1.1.1.m1" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>)</th>
+<td id="S5.T3.1.1.2" class="ltx_td ltx_align_center ltx_border_t">65.47</td>
+<td id="S5.T3.1.1.3" class="ltx_td ltx_align_center ltx_border_t">68.75</td>
+<td id="S5.T3.1.1.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">67.11</td>
+<td id="S5.T3.1.1.5" class="ltx_td ltx_align_center ltx_border_t">71.80</td>
+<td id="S5.T3.1.1.6" class="ltx_td ltx_align_center ltx_border_t">70.48</td>
+<td id="S5.T3.1.1.7" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">71.14</td>
+</tr>
+<tr id="S5.T3.2.2" class="ltx_tr">
+<th id="S5.T3.2.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">NF4 (<math id="S5.T3.2.2.1.m1" class="ltx_Math" alttext="\theta_{1}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\theta_{1}</annotation></semantics></math>)</th>
+<td id="S5.T3.2.2.2" class="ltx_td ltx_align_center">64.34</td>
+<td id="S5.T3.2.2.3" class="ltx_td ltx_align_center">67.56</td>
+<td id="S5.T3.2.2.4" class="ltx_td ltx_align_center ltx_border_r">65.95</td>
+<td id="S5.T3.2.2.5" class="ltx_td ltx_align_center">71.08</td>
+<td id="S5.T3.2.2.6" class="ltx_td ltx_align_center">69.14</td>
+<td id="S5.T3.2.2.7" class="ltx_td ltx_nopad_r ltx_align_center">70.11</td>
+</tr>
+<tr id="S5.T3.3.3" class="ltx_tr">
+<th id="S5.T3.3.3.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">SDFT-tooluse (<math id="S5.T3.3.3.1.m1" class="ltx_Math" alttext="\theta_{2}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>2</mn></msub><annotation encoding="application/x-tex">\theta_{2}</annotation></semantics></math>)</th>
+<td id="S5.T3.3.3.2" class="ltx_td ltx_align_center">64.25</td>
+<td id="S5.T3.3.3.3" class="ltx_td ltx_align_center">67.72</td>
+<td id="S5.T3.3.3.4" class="ltx_td ltx_align_center ltx_border_r">65.99</td>
+<td id="S5.T3.3.3.5" class="ltx_td ltx_align_center">71.20</td>
+<td id="S5.T3.3.3.6" class="ltx_td ltx_align_center">69.53</td>
+<td id="S5.T3.3.3.7" class="ltx_td ltx_nopad_r ltx_align_center">70.37</td>
+</tr>
+<tr id="S5.T3.4.4" class="ltx_tr">
+<th id="S5.T3.4.4.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">SDFT-science (<math id="S5.T3.4.4.1.m1" class="ltx_Math" alttext="\theta_{2}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>2</mn></msub><annotation encoding="application/x-tex">\theta_{2}</annotation></semantics></math>)</th>
+<td id="S5.T3.4.4.2" class="ltx_td ltx_align_center">64.55</td>
+<td id="S5.T3.4.4.3" class="ltx_td ltx_align_center">67.96</td>
+<td id="S5.T3.4.4.4" class="ltx_td ltx_align_center ltx_border_r">66.26</td>
+<td id="S5.T3.4.4.5" class="ltx_td ltx_align_center">71.20</td>
+<td id="S5.T3.4.4.6" class="ltx_td ltx_align_center">70.56</td>
+<td id="S5.T3.4.4.7" class="ltx_td ltx_nopad_r ltx_align_center">70.88</td>
+</tr>
+<tr id="S5.T3.7.7" class="ltx_tr">
+<th id="S5.T3.5.5.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">Compression loss (<math id="S5.T3.5.5.1.m1" class="ltx_Math" alttext="\theta_{1}{-}\theta" display="inline" intent=":literal"><semantics><mrow><msub><mi>θ</mi><mn>1</mn></msub><mo>−</mo><mi>θ</mi></mrow><annotation encoding="application/x-tex">\theta_{1}{-}\theta</annotation></semantics></math>)</th>
+<td id="S5.T3.6.6.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t" colspan="3">
+<math id="S5.T3.6.6.2.m1" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>1.16%</td>
+<td id="S5.T3.7.7.3" class="ltx_td ltx_align_center ltx_border_t" colspan="3">
+<math id="S5.T3.7.7.3.m1" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>1.03%</td>
+</tr>
+<tr id="S5.T3.8.8" class="ltx_tr">
+<th id="S5.T3.8.8.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">Best SDFT recovery (<math id="S5.T3.8.8.1.m1" class="ltx_Math" alttext="\theta_{2}{-}\theta_{1}" display="inline" intent=":literal"><semantics><mrow><msub><mi>θ</mi><mn>2</mn></msub><mo>−</mo><msub><mi>θ</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\theta_{2}{-}\theta_{1}</annotation></semantics></math>)</th>
+<td id="S5.T3.8.8.2" class="ltx_td ltx_align_center ltx_border_bb ltx_border_r" colspan="3">+0.31%</td>
+<td id="S5.T3.8.8.3" class="ltx_td ltx_align_center ltx_border_bb" colspan="3">+0.77%</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 3: </span>General capability preservation under quantization. SDFT achieves +15–22% task-specific gains (Table <a href="#S5.T2" title="Table 2 ‣ Quantization: task-specific recovery. ‣ 5.2 Recovery from Compression ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>) while actively recovering general capabilities: the best 7B variant restores 75% of the compression loss (+0.77% of <math id="S5.T3.10.m1" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>1.03%).</figcaption>
+</figure>
+<div id="S5.SS2.SSS0.Px2.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS2.SSS0.Px2.p1.2" class="ltx_p">Table <a href="#S5.T3" title="Table 3 ‣ Quantization: general capability preservation. ‣ 5.2 Recovery from Compression ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a> confirms that SDFT does not trade task gains for general degradation. NF4 quantization introduces modest compression loss (<math id="S5.SS2.SSS0.Px2.p1.1.m1" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>1.16% for 3B, <math id="S5.SS2.SSS0.Px2.p1.2.m2" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>1.03% for 7B), and SDFT actively recovers this gap rather than widening it. The best 7B variant restores 75% of the compression loss (+0.77%), validating the anchoring mechanism proposed in Section <a href="#S1" title="1 Introduction ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>: on-policy distillation stabilizes the parameter distribution, a phenomenon we formalize as manifold realignment in Section <a href="#S4" title="4 Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>.</p>
+</div>
+</section>
+<section id="S5.SS2.SSS0.Px3" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Pruning: a harder recovery problem.</h4>
+
+<figure id="S5.T4" class="ltx_table">
+<table id="S5.T4.15" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr id="S5.T4.2.2" class="ltx_tr">
+<th id="S5.T4.2.2.3" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_tt">Config</th>
+<td id="S5.T4.2.2.4" class="ltx_td ltx_align_center ltx_border_tt">Tooluse</td>
+<td id="S5.T4.2.2.5" class="ltx_td ltx_align_center ltx_border_tt">Science</td>
+<td id="S5.T4.2.2.6" class="ltx_td ltx_align_center ltx_border_tt">MMLU</td>
+<td id="S5.T4.2.2.2" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_tt">MMLU <math id="S5.T4.1.1.1.m1" class="ltx_Math" alttext="\Delta" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Δ</mi><annotation encoding="application/x-tex">\Delta</annotation></semantics></math> vs <math id="S5.T4.2.2.2.m2" class="ltx_Math" alttext="\theta_{1}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\theta_{1}</annotation></semantics></math>
+</td>
+</tr>
+<tr id="S5.T4.3.3" class="ltx_tr">
+<th id="S5.T4.3.3.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">Original (<math id="S5.T4.3.3.1.m1" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>)</th>
+<td id="S5.T4.3.3.2" class="ltx_td ltx_align_center ltx_border_t">29.86%</td>
+<td id="S5.T4.3.3.3" class="ltx_td ltx_align_center ltx_border_t">38.78%</td>
+<td id="S5.T4.3.3.4" class="ltx_td ltx_align_center ltx_border_t">66.21%</td>
+<td id="S5.T4.3.3.5" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">—</td>
+</tr>
+<tr id="S5.T4.4.4" class="ltx_tr">
+<th id="S5.T4.4.4.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">Pruned (<math id="S5.T4.4.4.1.m1" class="ltx_Math" alttext="\theta_{1}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>1</mn></msub><annotation encoding="application/x-tex">\theta_{1}</annotation></semantics></math>)</th>
+<td id="S5.T4.4.4.2" class="ltx_td ltx_align_center">28.52%</td>
+<td id="S5.T4.4.4.3" class="ltx_td ltx_align_center">33.66%</td>
+<td id="S5.T4.4.4.4" class="ltx_td ltx_align_center">59.09%</td>
+<td id="S5.T4.4.4.5" class="ltx_td ltx_nopad_r ltx_align_center">—</td>
+</tr>
+<tr id="S5.T4.5.5" class="ltx_tr">
+<th id="S5.T4.5.5.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">SDFT-tooluse (<math id="S5.T4.5.5.1.m1" class="ltx_Math" alttext="\theta_{2}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>2</mn></msub><annotation encoding="application/x-tex">\theta_{2}</annotation></semantics></math>)</th>
+<td id="S5.T4.5.5.2" class="ltx_td ltx_align_center"><span id="S5.T4.5.5.2.1" class="ltx_text ltx_font_bold">34.08%</span></td>
+<td id="S5.T4.5.5.3" class="ltx_td ltx_align_center">35.75%</td>
+<td id="S5.T4.5.5.4" class="ltx_td ltx_align_center">63.66%</td>
+<td id="S5.T4.5.5.5" class="ltx_td ltx_nopad_r ltx_align_center">+4.57%</td>
+</tr>
+<tr id="S5.T4.7.7" class="ltx_tr">
+<th id="S5.T4.6.6.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">SDFT-science (<math id="S5.T4.6.6.1.m1" class="ltx_Math" alttext="\theta_{2}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mn>2</mn></msub><annotation encoding="application/x-tex">\theta_{2}</annotation></semantics></math>)</th>
+<td id="S5.T4.7.7.3" class="ltx_td ltx_align_center">32.99%</td>
+<td id="S5.T4.7.7.4" class="ltx_td ltx_align_center"><span id="S5.T4.7.7.4.1" class="ltx_text ltx_font_bold">43.39%</span></td>
+<td id="S5.T4.7.7.5" class="ltx_td ltx_align_center">57.66%</td>
+<td id="S5.T4.7.7.2" class="ltx_td ltx_nopad_r ltx_align_center">
+<math id="S5.T4.7.7.2.m1" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>1.43%</td>
+</tr>
+<tr id="S5.T4.11.11" class="ltx_tr">
+<th id="S5.T4.8.8.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">Pruning degradation (<math id="S5.T4.8.8.1.m1" class="ltx_Math" alttext="\theta_{1}{-}\theta" display="inline" intent=":literal"><semantics><mrow><msub><mi>θ</mi><mn>1</mn></msub><mo>−</mo><mi>θ</mi></mrow><annotation encoding="application/x-tex">\theta_{1}{-}\theta</annotation></semantics></math>)</th>
+<td id="S5.T4.9.9.2" class="ltx_td ltx_align_center ltx_border_t">
+<math id="S5.T4.9.9.2.m1" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>1.34%</td>
+<td id="S5.T4.10.10.3" class="ltx_td ltx_align_center ltx_border_t">
+<math id="S5.T4.10.10.3.m1" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>5.12%</td>
+<td id="S5.T4.11.11.4" class="ltx_td ltx_align_center ltx_border_t">
+<math id="S5.T4.11.11.4.m1" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>7.12%</td>
+<td id="S5.T4.11.11.5" class="ltx_td ltx_nopad_r ltx_border_t"></td>
+</tr>
+<tr id="S5.T4.12.12" class="ltx_tr">
+<th id="S5.T4.12.12.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">Best SDFT recovery (<math id="S5.T4.12.12.1.m1" class="ltx_Math" alttext="\theta_{2}{-}\theta_{1}" display="inline" intent=":literal"><semantics><mrow><msub><mi>θ</mi><mn>2</mn></msub><mo>−</mo><msub><mi>θ</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\theta_{2}{-}\theta_{1}</annotation></semantics></math>)</th>
+<td id="S5.T4.12.12.2" class="ltx_td ltx_align_center">+5.56%</td>
+<td id="S5.T4.12.12.3" class="ltx_td ltx_align_center">+9.73%</td>
+<td id="S5.T4.12.12.4" class="ltx_td ltx_align_center">+4.57%</td>
+<td id="S5.T4.12.12.5" class="ltx_td ltx_nopad_r"></td>
+</tr>
+<tr id="S5.T4.15.15" class="ltx_tr">
+<th id="S5.T4.14.14.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">Best net vs <math id="S5.T4.13.13.1.m1" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> (<math id="S5.T4.14.14.2.m2" class="ltx_Math" alttext="\theta_{2}{-}\theta" display="inline" intent=":literal"><semantics><mrow><msub><mi>θ</mi><mn>2</mn></msub><mo>−</mo><mi>θ</mi></mrow><annotation encoding="application/x-tex">\theta_{2}{-}\theta</annotation></semantics></math>)</th>
+<td id="S5.T4.15.15.4" class="ltx_td ltx_align_center ltx_border_bb">+4.22%</td>
+<td id="S5.T4.15.15.5" class="ltx_td ltx_align_center ltx_border_bb">+4.61%</td>
+<td id="S5.T4.15.15.3" class="ltx_td ltx_align_center ltx_border_bb">
+<math id="S5.T4.15.15.3.m1" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>2.55%</td>
+<td id="S5.T4.15.15.6" class="ltx_td ltx_nopad_r ltx_border_bb"></td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 4: </span>SDFT recovery on FFN-pruned Qwen2.5-7B-Instruct (10% pruning). SDFT-tooluse recovers 64% of MMLU degradation (+4.57%) while achieving +5.56% on Tooluse. SDFT-science trades MMLU (<math id="S5.T4.17.m1" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>1.43%) for stronger Science gains (+9.73%).</figcaption>
+</figure>
+<div id="S5.SS2.SSS0.Px3.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS2.SSS0.Px3.p1.3" class="ltx_p">Unlike quantization, pruning physically removes neurons, producing more severe and asymmetric degradation (<math id="S5.SS2.SSS0.Px3.p1.1.m1" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>7.12% MMLU). Table <a href="#S5.T4" title="Table 4 ‣ Pruning: a harder recovery problem. ‣ 5.2 Recovery from Compression ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a> shows that SDFT still recovers effectively: SDFT-tooluse restores 64% of the MMLU gap while exceeding <math id="S5.SS2.SSS0.Px3.p1.2.m2" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> on both target tasks. Notably, SDFT exhibits positive cross-domain transfer — SDFT-science improves Tool-use from 28.52% to 32.99% (+4.47%) without any tool-use training data, surpassing even <math id="S5.SS2.SSS0.Px3.p1.3.m3" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> (29.86%). This indicates that SDFT recovers general representational capacity rather than memorizing task-specific patterns.</p>
+</div>
+</section>
+<section id="S5.SS2.SSS0.Px4" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Cross-compression comparison.</h4>
+
+<figure id="S5.F6" class="ltx_figure"><img src="2604.15794v1/x3.png" id="S5.F6.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="830" height="328" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 6: </span>Cross-compression comparison. (a) Compression damage profile. (b) SDFT recovery gains. Quantization yields larger task improvements with full general preservation; pruning presents a harder recovery problem but SDFT still restores the majority of lost capabilities.</figcaption>
+</figure>
+<div id="S5.SS2.SSS0.Px4.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS2.SSS0.Px4.p1.2" class="ltx_p">Figure <a href="#S5.F6" title="Figure 6 ‣ Cross-compression comparison. ‣ 5.2 Recovery from Compression ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">6</span></a> summarizes the contrast: quantization recovery yields +15–22% task gains while actively recovering general capabilities, whereas pruning recovery demonstrates stronger cross-domain transfer but incomplete MMLU restoration (<math id="S5.SS2.SSS0.Px4.p1.1.m1" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>2.55% net vs <math id="S5.SS2.SSS0.Px4.p1.2.m2" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>). This difference reflects the nature of each degradation — quantization introduces noise while preserving architecture; pruning permanently removes capacity. Together, these results confirm that SDFT operates as a general-purpose recovery mechanism across compression types, consistent with the framework proposed in Section <a href="#S3" title="3 Recovery Framework ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>.</p>
+</div>
+</section>
+</section>
+<section id="S5.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.3 </span>Extending to Small Models</h3>
+
+<div id="S5.SS3.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS3.p1.1" class="ltx_p">The recovery framework relies on the teacher’s in-context learning quality to generate effective training signals (Section <a href="#S3" title="3 Recovery Framework ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>). At smaller scales such as 3B, ICL capabilities are insufficient for standard SDFT to reach its full potential. We validate the two-stage pipeline proposed in Figure <a href="#S3.F3" title="Figure 3 ‣ 3.2 Recovery Solutions ‣ 3 Recovery Framework ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>: (1) bootstrap ICL capabilities via off-policy distillation from a larger teacher, then (2) apply standard SDFT to recover general capabilities while strengthening task performance.</p>
+</div>
+<figure id="S5.F7" class="ltx_figure"><img src="2604.15794v1/x4.png" id="S5.F7.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="830" height="260" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 7: </span>Two-stage small-model pipeline. Stage 1: base 3B model <math id="S5.F7.3.m1" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> with weak ICL. Stage 2: off-policy distillation from 7B teacher activates ICL but degrades general capabilities. Stage 3: on-policy SDFT recovers general capabilities while strengthening task performance, completing the “degradation <math id="S5.F7.4.m2" class="ltx_Math" alttext="\to" display="inline" intent=":literal"><semantics><mo stretchy="false">→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math> recovery” loop.</figcaption>
+</figure>
+<section id="S5.SS3.SSS0.Px1" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Setup.</h4>
+
+<div id="S5.SS3.SSS0.Px1.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS3.SSS0.Px1.p1.1" class="ltx_p">In Stage 1, Qwen2.5-7B-Instruct serves as teacher: both teacher and student are conditioned on the task prompt and an expert demonstration, and the 3B student minimizes KL divergence against the 7B teacher’s output distribution. This off-policy step activates the 3B model’s ICL capabilities but degrades general knowledge. In Stage 2, standard SDFT recovers general capabilities via on-policy self-distillation — the same “degradation <math id="S5.SS3.SSS0.Px1.p1.1.m1" class="ltx_Math" alttext="\to" display="inline" intent=":literal"><semantics><mo stretchy="false">→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math> recovery” loop validated in Sections <a href="#S5.SS1" title="5.1 Recovery from Catastrophic Forgetting ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5.1</span></a> and <a href="#S5.SS2" title="5.2 Recovery from Compression ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5.2</span></a>.</p>
+</div>
+<figure id="S5.T5" class="ltx_table">
+<table id="S5.T5.4" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S5.T5.4.5.1" class="ltx_tr">
+<th id="S5.T5.4.5.1.1" class="ltx_td ltx_th ltx_th_column ltx_th_row ltx_border_tt"></th>
+<th id="S5.T5.4.5.1.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt" colspan="2">Tooluse</th>
+<th id="S5.T5.4.5.1.3" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="2">Science</th>
+</tr>
+<tr id="S5.T5.4.6.2" class="ltx_tr">
+<th id="S5.T5.4.6.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row">Config</th>
+<th id="S5.T5.4.6.2.2" class="ltx_td ltx_align_center ltx_th ltx_th_column">Task Acc</th>
+<th id="S5.T5.4.6.2.3" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r">MMLU</th>
+<th id="S5.T5.4.6.2.4" class="ltx_td ltx_align_center ltx_th ltx_th_column">Task Acc</th>
+<th id="S5.T5.4.6.2.5" class="ltx_td ltx_nopad_r ltx_align_center ltx_th ltx_th_column">MMLU</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S5.T5.1.1" class="ltx_tr">
+<th id="S5.T5.1.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">Base (<math id="S5.T5.1.1.1.m1" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math>)</th>
+<td id="S5.T5.1.1.2" class="ltx_td ltx_align_center ltx_border_t">31.96%</td>
+<td id="S5.T5.1.1.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">65.47%</td>
+<td id="S5.T5.1.1.4" class="ltx_td ltx_align_center ltx_border_t">30.77%</td>
+<td id="S5.T5.1.1.5" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">65.47%</td>
+</tr>
+<tr id="S5.T5.4.7.1" class="ltx_tr">
+<th id="S5.T5.4.7.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">Direct SDFT</th>
+<td id="S5.T5.4.7.1.2" class="ltx_td ltx_align_center">50.52%</td>
+<td id="S5.T5.4.7.1.3" class="ltx_td ltx_align_center ltx_border_r">64.95%</td>
+<td id="S5.T5.4.7.1.4" class="ltx_td ltx_align_center">54.24%</td>
+<td id="S5.T5.4.7.1.5" class="ltx_td ltx_nopad_r ltx_align_center">64.31%</td>
+</tr>
+<tr id="S5.T5.4.8.2" class="ltx_tr">
+<th id="S5.T5.4.8.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">Two-stage (ours)</th>
+<td id="S5.T5.4.8.2.2" class="ltx_td ltx_align_center"><span id="S5.T5.4.8.2.2.1" class="ltx_text ltx_font_bold">67.01%</span></td>
+<td id="S5.T5.4.8.2.3" class="ltx_td ltx_align_center ltx_border_r">63.83%</td>
+<td id="S5.T5.4.8.2.4" class="ltx_td ltx_align_center"><span id="S5.T5.4.8.2.4.1" class="ltx_text ltx_font_bold">63.12%</span></td>
+<td id="S5.T5.4.8.2.5" class="ltx_td ltx_nopad_r ltx_align_center">64.02%</td>
+</tr>
+<tr id="S5.T5.4.4" class="ltx_tr">
+<th id="S5.T5.2.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb ltx_border_t">
+<math id="S5.T5.2.2.1.m1" class="ltx_Math" alttext="\Delta" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Δ</mi><annotation encoding="application/x-tex">\Delta</annotation></semantics></math> vs Direct SDFT</th>
+<td id="S5.T5.4.4.4" class="ltx_td ltx_align_center ltx_border_bb ltx_border_t">+16.49%</td>
+<td id="S5.T5.3.3.2" class="ltx_td ltx_align_center ltx_border_bb ltx_border_r ltx_border_t">
+<math id="S5.T5.3.3.2.m1" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>1.12%</td>
+<td id="S5.T5.4.4.5" class="ltx_td ltx_align_center ltx_border_bb ltx_border_t">+8.88%</td>
+<td id="S5.T5.4.4.3" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_bb ltx_border_t">
+<math id="S5.T5.4.4.3.m1" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>0.29%</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 5: </span>Two-stage distillation on Qwen2.5-3B-Instruct. Stage 1: off-policy distillation from 7B teacher bootstraps ICL. Stage 2: on-policy SDFT recovers general capabilities. The two-stage pipeline achieves +16.49% (Tooluse) and +8.88% (Science) over direct SDFT, with MMLU within 1.5% of the base model.</figcaption>
+</figure>
+</section>
+<section id="S5.SS3.SSS0.Px2" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Results.</h4>
+
+<div id="S5.SS3.SSS0.Px2.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS3.SSS0.Px2.p1.1" class="ltx_p">Table <a href="#S5.T5" title="Table 5 ‣ Setup. ‣ 5.3 Extending to Small Models ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a> validates the two-stage pipeline. On Tooluse, the two-stage approach reaches 67.01% — a +16.49% improvement over direct SDFT (50.52%) and +35.05% over the base model. On Science, it reaches 63.12%, +8.88% above direct SDFT. These gains confirm that bootstrapping ICL via off-policy distillation unlocks the full potential of subsequent on-policy SDFT.</p>
+</div>
+<div id="S5.SS3.SSS0.Px2.p2" class="ltx_para ltx_noindent">
+<p id="S5.SS3.SSS0.Px2.p2.1" class="ltx_p">Crucially, the SDFT recovery step in Stage 2 fulfills its theoretical role: despite the off-policy distillation degrading MMLU, the final two-stage models preserve general capabilities within 1.5% of the base model (63.83% vs 65.47% on Tooluse; 64.02% vs 65.47% on Science). The MMLU gap between two-stage and direct SDFT is less than 1.2% on both tasks, confirming that on-policy self-distillation recovers the general capabilities lost during off-policy training. This validates the “degradation <math id="S5.SS3.SSS0.Px2.p2.1.m1" class="ltx_Math" alttext="\to" display="inline" intent=":literal"><semantics><mo stretchy="false">→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math> SDFT recovery” loop proposed in Section <a href="#S3" title="3 Recovery Framework ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a> as a general mechanism that extends beyond compression to any form of capability loss.</p>
+</div>
+</section>
+</section>
+<section id="S5.SS4" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.4 </span>Manifold Alignment Validation</h3>
+
+<div id="S5.SS4.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS4.p1.1" class="ltx_p">Section <a href="#S4" title="4 Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a> posits that self-distillation recovers performance by realigning the student’s high-dimensional manifold with the teacher’s, and derives CKA as a rotation- and scale-invariant metric for quantifying this alignment. We now validate this theoretical framework empirically by testing two falsifiable predictions: (1) recovery SDFT should increase CKA between the recovered model and the pre-degradation expert, reversing the drift induced by intermediate fine-tuning; and (2) the magnitude of CKA misalignment should predict the severity of capability loss, establishing CKA as a diagnostic tool for forgetting.</p>
+</div>
+<section id="S5.SS4.SSS0.Px1" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Setup.</h4>
+
+<div id="S5.SS4.SSS0.Px1.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS4.SSS0.Px1.p1.3" class="ltx_p">We compute linear CKA following the procedure in Section <a href="#S4" title="4 Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>. For each evaluation sample, we extract the <math id="S5.SS4.SSS0.Px1.p1.1.m1" class="ltx_Math" alttext="d" display="inline" intent=":literal"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>-dimensional activation vector from a given layer, forming the activation matrix <math id="S5.SS4.SSS0.Px1.p1.2.m2" class="ltx_Math" alttext="H\in\mathbb{R}^{n\times d}" display="inline" intent=":literal"><semantics><mrow><mi>H</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>d</mi></mrow></msup></mrow><annotation encoding="application/x-tex">H\in\mathbb{R}^{n\times d}</annotation></semantics></math> where <math id="S5.SS4.SSS0.Px1.p1.3.m3" class="ltx_Math" alttext="n" display="inline" intent=":literal"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> is the number of evaluation samples. We analyze the last hidden layer (Layer 35) of Qwen2.5-3B-Instruct (36 transformer layers). Activation matrices are centered and scaled (zero-mean, unit-variance per dimension) before computing kernel matrices.</p>
+</div>
+</section>
+<section id="S5.SS4.SSS0.Px2" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">CKA recovery in multi-stage pipelines.</h4>
+
+<div id="S5.SS4.SSS0.Px2.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS4.SSS0.Px2.p1.1" class="ltx_p">To test whether SDFT recovery restores manifold alignment, we construct the three-stage pipeline from Section <a href="#S5.SS1" title="5.1 Recovery from Catastrophic Forgetting ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5.1</span></a>: (1) train an SDFT expert on Science, (2) apply standard SFT on Tooluse (inducing forgetting of Science), and (3) apply recovery SDFT to restore Science capabilities.</p>
+</div>
+<figure id="S5.T6" class="ltx_table">
+<table id="S5.T6.2" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S5.T6.2.3.1" class="ltx_tr">
+<th id="S5.T6.2.3.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt">Pipeline Stage</th>
+<th id="S5.T6.2.3.1.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">Tooluse</th>
+<th id="S5.T6.2.3.1.3" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">Science</th>
+<th id="S5.T6.2.3.1.4" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">CKA(Sci)</th>
+<th id="S5.T6.2.3.1.5" class="ltx_td ltx_nopad_r ltx_align_center ltx_th ltx_th_column ltx_border_tt">CKA(Tool)</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S5.T6.2.4.1" class="ltx_tr">
+<th id="S5.T6.2.4.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">Science expert</th>
+<td id="S5.T6.2.4.1.2" class="ltx_td ltx_align_center ltx_border_t">19.59%</td>
+<td id="S5.T6.2.4.1.3" class="ltx_td ltx_align_center ltx_border_t">59.96%</td>
+<td id="S5.T6.2.4.1.4" class="ltx_td ltx_align_center ltx_border_t">1.0000</td>
+<td id="S5.T6.2.4.1.5" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">1.0000</td>
+</tr>
+<tr id="S5.T6.2.5.2" class="ltx_tr">
+<th id="S5.T6.2.5.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">+ SFT Tooluse</th>
+<td id="S5.T6.2.5.2.2" class="ltx_td ltx_align_center">64.95%</td>
+<td id="S5.T6.2.5.2.3" class="ltx_td ltx_align_center">37.87%</td>
+<td id="S5.T6.2.5.2.4" class="ltx_td ltx_align_center">0.9767</td>
+<td id="S5.T6.2.5.2.5" class="ltx_td ltx_nopad_r ltx_align_center">0.9388</td>
+</tr>
+<tr id="S5.T6.1.1" class="ltx_tr">
+<th id="S5.T6.1.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">+ Recovery (<math id="S5.T6.1.1.1.m1" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>=base)</th>
+<td id="S5.T6.1.1.2" class="ltx_td ltx_align_center">65.98%</td>
+<td id="S5.T6.1.1.3" class="ltx_td ltx_align_center">61.54%</td>
+<td id="S5.T6.1.1.4" class="ltx_td ltx_align_center">0.9909</td>
+<td id="S5.T6.1.1.5" class="ltx_td ltx_nopad_r ltx_align_center">0.9425</td>
+</tr>
+<tr id="S5.T6.2.2" class="ltx_tr">
+<th id="S5.T6.2.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">+ Recovery (<math id="S5.T6.2.2.1.m1" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>=expert)</th>
+<td id="S5.T6.2.2.2" class="ltx_td ltx_align_center ltx_border_bb">57.73%</td>
+<td id="S5.T6.2.2.3" class="ltx_td ltx_align_center ltx_border_bb">65.48%</td>
+<td id="S5.T6.2.2.4" class="ltx_td ltx_align_center ltx_border_bb">0.9877</td>
+<td id="S5.T6.2.2.5" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_bb">0.9408</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 6: </span>Multi-stage pipeline: Science expert <math id="S5.T6.5.m1" class="ltx_Math" alttext="\to" display="inline" intent=":literal"><semantics><mo stretchy="false">→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math> SFT Tooluse (forgetting) <math id="S5.T6.6.m2" class="ltx_Math" alttext="\to" display="inline" intent=":literal"><semantics><mo stretchy="false">→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math> Recovery SDFT. CKA is computed at Layer 35 (Science eval, 507 samples) against the original Science expert. All four recovery configurations restore CKA toward the expert while recovering Science accuracy, confirming the manifold realignment mechanism proposed in Section <a href="#S4" title="4 Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>.</figcaption>
+</figure>
+<div id="S5.SS4.SSS0.Px2.p2" class="ltx_para ltx_noindent">
+<p id="S5.SS4.SSS0.Px2.p2.1" class="ltx_p">Table <a href="#S5.T6" title="Table 6 ‣ CKA recovery in multi-stage pipelines. ‣ 5.4 Manifold Alignment Validation ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">6</span></a> presents the central result. Across all four recovery configurations, SDFT increases CKA between the model and the original Science expert — without exception. This directly validates the theoretical prediction in Section <a href="#S4" title="4 Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a> that self-distillation acts as a manifold realignment mechanism, not merely a behavioral correction at the output level.</p>
+</div>
+<div id="S5.SS4.SSS0.Px2.p3" class="ltx_para ltx_noindent">
+<p id="S5.SS4.SSS0.Px2.p3.2" class="ltx_p">The complete accuracy data reveals further insights. SFT on Tooluse drops Science by <math id="S5.SS4.SSS0.Px2.p3.1.m1" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>22.09%, inducing severe forgetting. Yet recovery with <math id="S5.SS4.SSS0.Px2.p3.2.m2" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>=base restores Science from 37.87% to 61.54% (+23.67%), nearly matching the original expert (59.96%), while preserving Tooluse at 65.98%.</p>
+</div>
+</section>
+<section id="S5.SS4.SSS0.Px3" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Teacher choice introduces a diagnostic trade-off.</h4>
+
+<div id="S5.SS4.SSS0.Px3.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS4.SSS0.Px3.p1.4" class="ltx_p">The choice of teacher produces a trade-off visible in both accuracy and CKA: <math id="S5.SS4.SSS0.Px3.p1.1.m1" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>=base produces higher CKA recovery (<math id="S5.SS4.SSS0.Px3.p1.2.m2" class="ltx_Math" alttext="\Delta\text{CKA}" display="inline" intent=":literal"><semantics><mrow><mi mathvariant="normal">Δ</mi><mo lspace="0em" rspace="0em">​</mo><mtext>CKA</mtext></mrow><annotation encoding="application/x-tex">\Delta\text{CKA}</annotation></semantics></math> +0.014) with accuracy restored to original levels, while <math id="S5.SS4.SSS0.Px3.p1.3.m3" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>=expert produces lower CKA recovery (<math id="S5.SS4.SSS0.Px3.p1.4.m4" class="ltx_Math" alttext="\Delta\text{CKA}" display="inline" intent=":literal"><semantics><mrow><mi mathvariant="normal">Δ</mi><mo lspace="0em" rspace="0em">​</mo><mtext>CKA</mtext></mrow><annotation encoding="application/x-tex">\Delta\text{CKA}</annotation></semantics></math> +0.011) but pushes accuracy beyond the original expert (+5.52%). The expert teacher overshoots the original manifold geometry to achieve higher task accuracy, while the base teacher acts as a regularizer that faithfully restores the pre-degradation representation structure.</p>
+</div>
+<div id="S5.SS4.SSS0.Px3.p2" class="ltx_para ltx_noindent">
+<p id="S5.SS4.SSS0.Px3.p2.1" class="ltx_p">Table <a href="#S5.T7" title="Table 7 ‣ Teacher choice introduces a diagnostic trade-off. ‣ 5.4 Manifold Alignment Validation ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a> quantifies this recovery magnitude: <math id="S5.SS4.SSS0.Px3.p2.1.m1" class="ltx_Math" alttext="\Delta\text{CKA}" display="inline" intent=":literal"><semantics><mrow><mi mathvariant="normal">Δ</mi><mo lspace="0em" rspace="0em">​</mo><mtext>CKA</mtext></mrow><annotation encoding="application/x-tex">\Delta\text{CKA}</annotation></semantics></math> is positive without exception.</p>
+</div>
+<figure id="S5.T7" class="ltx_table">
+<table id="S5.T7.3" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S5.T7.1.1" class="ltx_tr">
+<th id="S5.T7.1.1.2" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt">Teacher</th>
+<th id="S5.T7.1.1.3" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">CKA(SFT)</th>
+<th id="S5.T7.1.1.4" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">CKA(Recovered)</th>
+<th id="S5.T7.1.1.1" class="ltx_td ltx_nopad_r ltx_align_center ltx_th ltx_th_column ltx_border_tt">
+<math id="S5.T7.1.1.1.m1" class="ltx_Math" alttext="\Delta" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Δ</mi><annotation encoding="application/x-tex">\Delta</annotation></semantics></math>CKA</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S5.T7.2.2" class="ltx_tr">
+<th id="S5.T7.2.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">
+<math id="S5.T7.2.2.1.m1" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>=base</th>
+<td id="S5.T7.2.2.2" class="ltx_td ltx_align_center ltx_border_t">0.9767</td>
+<td id="S5.T7.2.2.3" class="ltx_td ltx_align_center ltx_border_t">0.9909</td>
+<td id="S5.T7.2.2.4" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">+0.0142</td>
+</tr>
+<tr id="S5.T7.3.3" class="ltx_tr">
+<th id="S5.T7.3.3.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">
+<math id="S5.T7.3.3.1.m1" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>=expert</th>
+<td id="S5.T7.3.3.2" class="ltx_td ltx_align_center ltx_border_bb">0.9767</td>
+<td id="S5.T7.3.3.3" class="ltx_td ltx_align_center ltx_border_bb">0.9877</td>
+<td id="S5.T7.3.3.4" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_bb">+0.0110</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 7: </span>CKA recovery magnitude (Layer 35, Science-first pipeline). In both recovery configurations, SDFT increases CKA toward the pre-degradation Science expert (<math id="S5.T7.5.m1" class="ltx_Math" alttext="\Delta\text{CKA}&gt;0" display="inline" intent=":literal"><semantics><mrow><mrow><mi mathvariant="normal">Δ</mi><mo lspace="0em" rspace="0em">​</mo><mtext>CKA</mtext></mrow><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\Delta\text{CKA}&gt;0</annotation></semantics></math>), confirming manifold realignment.</figcaption>
+</figure>
+</section>
+<section id="S5.SS4.SSS0.Px4" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">CKA misalignment predicts forgetting severity.</h4>
+
+<div id="S5.SS4.SSS0.Px4.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS4.SSS0.Px4.p1.3" class="ltx_p">A key prediction of our theoretical framework is that greater manifold misalignment should correspond to more severe performance degradation. Figure <a href="#S5.F8" title="Figure 8 ‣ CKA misalignment predicts forgetting severity. ‣ 5.4 Manifold Alignment Validation ‣ 5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">8</span></a> confirms this: SFT Tooluse produces a CKA misalignment of 0.023 from the Science expert, corresponding to <math id="S5.SS4.SSS0.Px4.p1.1.m1" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>22.09% Science accuracy drop, while recovery SDFT reduces this misalignment to 0.009 (<math id="S5.SS4.SSS0.Px4.p1.2.m2" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>=base) and 0.012 (<math id="S5.SS4.SSS0.Px4.p1.3.m3" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>=expert), restoring accuracy accordingly. This establishes last-layer CKA as a quantitative predictor of forgetting severity, providing empirical grounding for the CKA metric derived in Section <a href="#S4" title="4 Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>.</p>
+</div>
+<figure id="S5.F8" class="ltx_figure"><img src="2604.15794v1/x5.png" id="S5.F8.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="623" height="241" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 8: </span>CKA misalignment at the last hidden layer (Layer 35) vs. accuracy change across all pipeline stages. Larger CKA misalignment from the expert corresponds to more severe capability loss. Recovery SDFT reduces misalignment while restoring accuracy, validating CKA as a diagnostic metric for forgetting severity as proposed in Section <a href="#S4" title="4 Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>.</figcaption>
+</figure>
+</section>
+</section>
+</section>
+<section id="S6" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6 </span>Discussion &amp; Future Work</h2>
+
+<section id="S6.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">6.1 </span>Discussion</h3>
+
+<section id="S6.SS1.SSS0.Px1" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Geometric Structure vs. Output Distribution.</h4>
+
+<div id="S6.SS1.SSS0.Px1.p1" class="ltx_para ltx_noindent">
+<p id="S6.SS1.SSS0.Px1.p1.1" class="ltx_p">Our findings suggest that matching output distributions (logits) is effective, but manifold alignment provides a more fundamental explanation for performance recovery. The strong correlation between CKA scores and task performance indicates that aligning the internal geometric structure is a more fundamental mechanism. This supports the view that LLM capabilities are encoded in the topology of hidden representations rather than solely in output probabilities.</p>
+</div>
+</section>
+<section id="S6.SS1.SSS0.Px2" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Dependency on Teacher Quality.</h4>
+
+<div id="S6.SS1.SSS0.Px2.p1" class="ltx_para ltx_noindent">
+<p id="S6.SS1.SSS0.Px2.p1.1" class="ltx_p">While SDFT effectively recovers performance, it inherently relies on the quality of the teacher model. If the teacher’s manifold itself is suboptimal, the student will align to this suboptimal structure. This highlights the importance of selecting a robust teacher or employing ensemble teachers to define a more reliable reference manifold for alignment.</p>
+</div>
+</section>
+<section id="S6.SS1.SSS0.Px3" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Correlation vs. Causation.</h4>
+
+<div id="S6.SS1.SSS0.Px3.p1" class="ltx_para ltx_noindent">
+<p id="S6.SS1.SSS0.Px3.p1.1" class="ltx_p">We observe a strong empirical correlation between manifold alignment and performance recovery. While our theoretical framework posits a causal link, we acknowledge that CKA measures structural similarity rather than direct functional capability. Future work should explore whether maximizing CKA directly as a loss function yields further improvements, which would provide interventional evidence to strengthen the causal relationship.</p>
+</div>
+</section>
+</section>
+<section id="S6.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">6.2 </span>Future Work</h3>
+
+<section id="S6.SS2.SSS0.Px1" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Quantifying the Geometry-Performance Relationship.</h4>
+
+<div id="S6.SS2.SSS0.Px1.p1" class="ltx_para ltx_noindent">
+<p id="S6.SS2.SSS0.Px1.p1.1" class="ltx_p">While our experiments establish a strong correlation between manifold alignment (CKA) and performance recovery, the precise quantitative mapping remains unexplored. For instance, a given percentage increase in CKA does not necessarily translate to a proportional gain in task accuracy, suggesting a non-linear or saturating relationship. Future work should aim to formulate a predictive theory that links geometric alignment metrics to functional performance bounds. Establishing such a relationship would allow CKA to serve as a proxy metric for early stopping or hyperparameter tuning, eliminating the need for expensive downstream evaluations during training.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="S7" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">7 </span>Conclusion</h2>
+
+<div id="S7.p1" class="ltx_para ltx_noindent">
+<p id="S7.p1.1" class="ltx_p">In this work, we have addressed the critical challenge of performance degradation in LLMs caused by factors such as catastrophic forgetting during Supervised Fine-Tuning (SFT), quantization, and pruning. We have provided both a practical framework for LLM performance recovery and a rigorous theoretical explanation for its effectiveness. By shifting the focus from output distributions to internal geometric structures, we offer new insights into the internal mechanisms of self-distillation. We hope this research inspires further exploration of manifold-based analysis in deep learning, ultimately leading to more robust, interpretable, and efficient language models.</p>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul id="bib.L1" class="ltx_biblist">
+<li id="bib.bib71" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">M. De Lange, R. Aljundi, M. Masana, S. Parisot, X. Jia, A. Leonardis, G. Slabaugh, and T. Tuytelaars (2021)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A continual learning survey: defying forgetting in classification tasks</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">IEEE transactions on pattern analysis and machine intelligence</span> <span class="ltx_text ltx_bib_volume">44</span> (<span class="ltx_text ltx_bib_number">7</span>), <span class="ltx_text ltx_bib_pages"> pp. 3366–3385</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.SS0.SSS0.Px1.p1.1" title="Catastrophic Forgetting in LLMs. ‣ 2 Related Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib76" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">T. Dettmers, A. Pagnoni, A. Holtzman, and L. Zettlemoyer (2023)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">QLoRA: efficient finetuning of quantized language models</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Advances in Neural Information Processing Systems</span> <span class="ltx_text ltx_bib_volume">36</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.SS0.SSS0.Px2.p1.1" title="Model Compression and Performance Degradation. ‣ 2 Related Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib79" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">E. Frantar, S. Ashkboos, T. Hoefler, and D. Alistarh (2023)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">GPTQ: accurate post-training quantization for generative pre-trained transformers</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">International Conference on Learning Representations</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.SS0.SSS0.Px2.p1.1" title="Model Compression and Performance Degradation. ‣ 2 Related Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib81" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">T. Furlanello, Z. C. Lipton, M. Tschannen, L. Itti, and A. Anandkumar (2018)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Born again neural networks</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 35th International Conference on Machine Learning (ICML 2018)</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 1607–1616</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.SS0.SSS0.Px3.p1.1" title="Self-Distillation Fine-Tuning. ‣ 2 Related Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib77" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">A. Gretton, O. Bousquet, A. Smola, and B. Schölkopf (2005)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Measuring statistical dependence with hilbert-schmidt norms</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Algorithmic Learning Theory</span>, <span class="ltx_text ltx_bib_pages"> pp. 63–77</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.I1.i5.p1.2.1" title="In 4.3 Calculation Procedure ‣ 4 Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">item 5</span></a>.
+</span>
+</li>
+<li id="bib.bib73" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">G. Hinton, O. Vinyals, and J. Dean (2015)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Distilling the knowledge in a neural network</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:1503.02531</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p3.1" title="1 Introduction ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib74" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">J. Kirkpatrick, R. Pascanu, N. Rabinowitz, J. Veness, G. Desjardins, A. A. Rusu, K. Milan, J. Quan, T. Ramalho, A. Grabska-Barwinska, <span class="ltx_text ltx_bib_etal">et al.</span> (2017)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Overcoming catastrophic forgetting in neural networks</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proceedings of the national academy of sciences</span> <span class="ltx_text ltx_bib_volume">114</span> (<span class="ltx_text ltx_bib_number">13</span>), <span class="ltx_text ltx_bib_pages"> pp. 3521–3526</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.SS0.SSS0.Px1.p1.1" title="Catastrophic Forgetting in LLMs. ‣ 2 Related Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib78" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">S. Kornblith, M. Norouzi, H. Lee, and G. Hinton (2019)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Similarity of neural network representations revisited</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">International Conference on Machine Learning</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 3519–3529</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.SS1.p3.1" title="4.1 Introduction ‣ 4 Theoretical Analysis of Self-Distillation via High-Dimensional Manifold Alignment ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.1</span></a>.
+</span>
+</li>
+<li id="bib.bib75" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Z. Li and D. Hoiem (2017)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Learning without forgetting</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">IEEE transactions on pattern analysis and machine intelligence</span> <span class="ltx_text ltx_bib_volume">40</span> (<span class="ltx_text ltx_bib_number">12</span>), <span class="ltx_text ltx_bib_pages"> pp. 2935–2947</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.SS0.SSS0.Px1.p1.1" title="Catastrophic Forgetting in LLMs. ‣ 2 Related Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib82" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">X. Ma, G. Fang, and X. Wang (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">LLM-Pruner: on the structural pruning of large language models</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Advances in Neural Information Processing Systems</span> <span class="ltx_text ltx_bib_volume">36</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.SS0.SSS0.Px2.p1.1" title="Model Compression and Performance Degradation. ‣ 2 Related Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib37" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">T. Qwen, A. Yang, B. Yang, B. Zhang, B. Hui, B. Zheng, B. Yu, C. Li, D. Liu, F. Huang, <span class="ltx_text ltx_bib_etal">et al.</span> (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Qwen2.5 technical report</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2412.15115</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.p1.1" title="5 Experiments ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib83" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">A. A. Rusu, N. C. Rabinowitz, G. Desjardins, H. Sober, K. Kavukcuoglu, and R. Hadsell (2016)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Progressive neural networks</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">arXiv preprint arXiv:1606.04671</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.SS0.SSS0.Px1.p1.1" title="Catastrophic Forgetting in LLMs. ‣ 2 Related Work ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib14" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">I. Shenfeld, M. Damani, J. Hübotter, and P. Agrawal (2026)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Self-distillation enables continual learning</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2601.19897</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p3.1" title="1 Introduction ‣ Self-Distillation as a Performance Recovery Mechanism for LLMs: Counteracting Compression and Catastrophic Forgetting" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+</div>
+<footer class="arxiv-html-footer">
+  <div class="ltx_page_logo">
+    Experimental support, please
+    <a href="./2604.15794v1/__stdout.txt" class="ltx_ref"
+    target="_blank" rel="nofollow">view the build logs</a>
+    for errors. Generated by
+    <a href="https://math.nist.gov/~BMiller/LaTeXML/" target="_blank" class="ltx_ref ltx_LaTeXML_logo">
+      <span style="letter-spacing: -0.2em; margin-right: 0.1em;">
+        L
+        <span style="font-size: 70%; position: relative; bottom: 2.2pt;">A</span>
+        T
+        <span style="position: relative; bottom: -0.4ex;">E</span>
+      </span>
+      <span class="ltx_font_smallcaps">xml</span>
+      <img alt="[LOGO]"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==">
+    </a>.
+  </div>
+  <div class="keyboard-glossary">
+    <h2>Instructions for reporting errors</h2>
+    <p>We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below:</p>
+    <ul>
+      <li>Click the "Report Issue" <span class="mobile-only">(<svg role="presentation"
+            style="display: inline-block; vertical-align: middle; fill: var(--text-color);" aria-hidden="true"
+            height="1em" viewBox="0 0 640 640">
+            <path
+              d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+          </svg>)</span> button, located in the page header.</li>
+    </ul>
+    <p><strong>Tip:</strong> You can select the relevant text first, to include it in your report.</p>
+    <p>Our team has already identified <a class="ltx_ref" href="https://github.com/arXiv/html_feedback/issues"
+        target="_blank">the following issues</a>. We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all.</p>
+    <p>Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a <a
+        class="ltx_ref" href="https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML"
+        target="_blank">list of packages that need conversion</a>, and welcome <a class="ltx_ref"
+        href="https://github.com/brucemiller/LaTeXML/issues" target="_blank">developer contributions</a>.</p>
+  </div>
+</footer>
+<div id="fixed-buttons-container">
+  <div id="beta-badge" aria-hidden="true">BETA</div>
+  <a id="disable-reading-mode-btn" class="header-button" href="javascript:toggleReadingMode();"
+    title="Disable reading mode, show header and footer">
+    <svg role="presentation" height="1.25rem"
+      viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </a>
+</div></body>
+</html>

@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents</title>
+<!--Generated on Sun Jan  4 06:35:13 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/browse/0.3.4/css/arxiv-html-papers-20250916.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2508.15294v3/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S1" title="In A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S2" title="In A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Related Work</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S2.SS1" title="In 2 Related Work ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>Cognitive Psychology Acting on Memory</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S2.SS2" title="In 2 Related Work ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2 </span>Memory system for diverse content</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S3" title="In A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Method</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S3.SS1" title="In 3 Method ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Overview</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S3.SS2" title="In 3 Method ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Construction of Long-term Memory Units</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S3.SS3" title="In 3 Method ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Retrieval of Long-term Memory Units</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S3.SS4" title="In 3 Method ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.4 </span>Utilization of Long-term Memory Units</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S4" title="In A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Experimental Setup</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S4.SS1" title="In 4 Experimental Setup ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Datasets</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S4.SS2" title="In 4 Experimental Setup ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Evaluation Metrics</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S4.SS3" title="In 4 Experimental Setup ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.3 </span>Baselines</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S4.SS4" title="In 4 Experimental Setup ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.4 </span>Implementation Details</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S5" title="In A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Results and Discussion</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S5.SS1" title="In 5 Results and Discussion ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.1 </span>Recall Results</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S5.SS2" title="In 5 Results and Discussion ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.2 </span>Answer Results</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S5.SS3" title="In 5 Results and Discussion ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.3 </span>Ablation Study</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S5.SS4" title="In 5 Results and Discussion ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.4 </span>Analyze Long-term Memory Units</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S5.SS5" title="In 5 Results and Discussion ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.5 </span>Robustness of the Number of Memories</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S5.SS6" title="In 5 Results and Discussion ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.6 </span>Analysis of Token and Latency Overhead</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S6" title="In A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Conclusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S7" title="In A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">7 </span>Limitations</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S8" title="In A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">8 </span>Ethics Statement</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_appendix"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#A1" title="In A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A </span>Prompts</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_appendix"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#A2" title="In A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">B </span>Ablation Experiment</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_appendix"><a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#A3" title="In A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">C </span>Peformance</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document">
+<h1 class="ltx_title ltx_title_document">A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+Gaoke Zhang<sup class="ltx_sup" id="id9.9.id1"><span class="ltx_text ltx_font_italic" id="id9.9.id1.1">1</span></sup>,
+Bo Wang<sup class="ltx_sup" id="id10.10.id2"><span class="ltx_text ltx_font_italic" id="id10.10.id2.1">1</span></sup>,
+Yunlong Ma<sup class="ltx_sup" id="id11.11.id3"><span class="ltx_text ltx_font_italic" id="id11.11.id3.1">1</span></sup>,
+Dongming Zhao<sup class="ltx_sup" id="id12.12.id4"><span class="ltx_text ltx_font_italic" id="id12.12.id4.1">2</span></sup>,
+Zifei Yu<sup class="ltx_sup" id="id13.13.id5"><span class="ltx_text ltx_font_italic" id="id13.13.id5.1">3</span></sup>
+<br class="ltx_break"/><sup class="ltx_sup" id="id14.14.id6"><span class="ltx_text ltx_font_italic" id="id14.14.id6.1">1</span></sup>College of Intelligence and Computing, Tianjin University 
+<br class="ltx_break"/><sup class="ltx_sup" id="id15.15.id7"><span class="ltx_text ltx_font_italic" id="id15.15.id7.1">2</span></sup>AI Lab, China Mobile Communication Group Tianjin Co., Ltd 
+<br class="ltx_break"/><sup class="ltx_sup" id="id16.16.id8"><span class="ltx_text ltx_font_italic" id="id16.16.id8.1">3</span></sup>Huizhi Xingyuan Information Technology Co., Ltd 
+<br class="ltx_break"/><span class="ltx_text ltx_font_typewriter" id="id17.17.id9">{zhanggaoke, bo_wang}@tju.edu.cn</span>
+</span><span class="ltx_author_notes"> Bo Wang is the corresponding author.</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id18.id1">In the current field of agent memory, extensive explorations have been conducted in the area of memory retrieval, yet few studies have focused on exploring the memory content. Most research simply stores summarized versions of historical dialogues, as exemplified by methods like A-MEM and MemoryBank. However, when humans form long-term memories, the process involves multi-dimensional and multi-component generation, rather than merely creating simple summaries. The low-quality memory content generated by existing methods can adversely affect recall performance and response quality. In order to better construct high-quality long-term memory content, we have designed a multi-memory segment system (MMS) inspired by cognitive psychology theory. The system processes short-term memory into multiple long-term memory segments, and constructs retrieval memory units and contextual memory units based on these segments, with a one-to-one correspondence between the two. During the retrieval phase, MMS will match the most relevant retrieval memory units based on the user’s query. Then, the corresponding contextual memory units is obtained as the context for the response stage to enhance knowledge, thereby effectively utilizing historical data. We conducted experiments on the LoCoMo dataset and further performed ablation experiments, experiments on the robustness regarding the number of input memories, and overhead experiments, which demonstrated the effectiveness and practical value of our method.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="p1">
+<div class="ltx_block ltx_align_bottom" id="p1.8">
+<p class="ltx_p ltx_align_center" id="p1.8.9"><span class="ltx_text ltx_font_bold" id="p1.8.9.1">A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents</span></p>
+<p class="ltx_p ltx_align_center" id="p1.8.8" style="width:345.0pt;"><span class="ltx_text ltx_inline-block" id="p1.8.8.8" style="width:0.0pt;">
+<span class="ltx_tabular ltx_align_top" id="p1.8.8.8.8">
+<span class="ltx_tbody">
+<span class="ltx_tr" id="p1.5.5.5.5.5">
+<span class="ltx_td ltx_align_center" id="p1.5.5.5.5.5.5"><span class="ltx_text ltx_font_bold" id="p1.5.5.5.5.5.5.5">
+Gaoke Zhang<sup class="ltx_sup" id="p1.5.5.5.5.5.5.5.1"><span class="ltx_text ltx_font_medium ltx_font_italic" id="p1.5.5.5.5.5.5.5.1.1">1</span></sup>,
+Bo Wang<sup class="ltx_sup" id="p1.5.5.5.5.5.5.5.2"><span class="ltx_text ltx_font_medium ltx_font_italic" id="p1.5.5.5.5.5.5.5.2.1">1</span></sup><span class="ltx_note ltx_role_thanks" id="p1.5.5.5.5.5.5.5.3"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">thanks: </span>  Bo Wang is the corresponding author.</span></span></span>,
+Yunlong Ma<sup class="ltx_sup" id="p1.5.5.5.5.5.5.5.4"><span class="ltx_text ltx_font_medium ltx_font_italic" id="p1.5.5.5.5.5.5.5.4.1">1</span></sup>,
+Dongming Zhao<sup class="ltx_sup" id="p1.5.5.5.5.5.5.5.5"><span class="ltx_text ltx_font_medium ltx_font_italic" id="p1.5.5.5.5.5.5.5.5.1">2</span></sup>,
+Zifei Yu<sup class="ltx_sup" id="p1.5.5.5.5.5.5.5.6"><span class="ltx_text ltx_font_medium ltx_font_italic" id="p1.5.5.5.5.5.5.5.6.1">3</span></sup></span></span></span>
+<span class="ltx_tr" id="p1.6.6.6.6.6">
+<span class="ltx_td ltx_align_center" id="p1.6.6.6.6.6.1"><sup class="ltx_sup" id="p1.6.6.6.6.6.1.1"><span class="ltx_text ltx_font_italic" id="p1.6.6.6.6.6.1.1.1">1</span></sup>College of Intelligence and Computing, Tianjin University</span></span>
+<span class="ltx_tr" id="p1.7.7.7.7.7">
+<span class="ltx_td ltx_align_center" id="p1.7.7.7.7.7.1"><sup class="ltx_sup" id="p1.7.7.7.7.7.1.1"><span class="ltx_text ltx_font_italic" id="p1.7.7.7.7.7.1.1.1">2</span></sup>AI Lab, China Mobile Communication Group Tianjin Co., Ltd</span></span>
+<span class="ltx_tr" id="p1.8.8.8.8.8">
+<span class="ltx_td ltx_align_center" id="p1.8.8.8.8.8.1"><sup class="ltx_sup" id="p1.8.8.8.8.8.1.1"><span class="ltx_text ltx_font_italic" id="p1.8.8.8.8.8.1.1.1">3</span></sup>Huizhi Xingyuan Information Technology Co., Ltd</span></span>
+<span class="ltx_tr" id="p1.8.8.8.8.9.1">
+<span class="ltx_td ltx_align_center" id="p1.8.8.8.8.9.1.1"><span class="ltx_text ltx_font_typewriter" id="p1.8.8.8.8.9.1.1.1">{zhanggaoke, bo_wang}@tju.edu.cn</span></span></span>
+</span>
+</span></span></p>
+</div>
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Agents driven by large language models (LLMs) have emerged as an effective approach to addressing dialogue system challenges <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">xi2025rise</span></cite>. The memory capabilities of agents are gradually becoming a pivotal factor in propelling them towards higher-level cognition and autonomous behavior <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">packer2023memgpt</span>; <span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2024survey</span>; <span class="ltx_ref ltx_missing_citation ltx_ref_self">zhou2025memento</span></cite>. Traditional short-term memory mechanisms are inadequate for meeting the demands of complex tasks, which require contextual understanding, long-term reasoning, and personalized responses <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">wang2024survey</span></cite>. Consequently, constructing a memory system with durability, structure, and adaptability has become one of the core challenges in realizing truly "intelligent" agents.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">To address this issue, researchers have explored both parametric and non-parametric approaches to optimize the performance of LLMs in long-form tasks. Parametrically, by augmenting LLMs with additional parameters, knowledge can be retained for future use <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">wang2023augmenting</span></cite>. The Elastic Weight Consolidation algorithm <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">huszar2018note</span></cite> , developed through collaboration between DeepMind and Imperial College London, enables neural networks to retain knowledge from previous tasks while learning new ones, mitigating the "catastrophic forgetting" problem and marking a significant step towards continuous learning in AI. However, parametric memory is prone to generating distorted and non-factual outputs and lacks interpretability <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">ji2023survey</span></cite>. Non-parametrically, external components are employed to enhance the long-term memory capabilities of LLMs. The external memory module of an agent can store historical dialogue content, often using the Retrieval-Augmented Generation (RAG) approach to store long-term memories as vectors in a database. When a new query arises, relevant vectors are matched from the vector database to serve as memory content <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">gao2023retrieval</span>; <span class="ltx_ref ltx_missing_citation ltx_ref_self">alonso2024toward</span></cite>. However, simply storing historical dialogues in a database does not adequately simulate the human memory formation process, nor does it effectively match information from historical dialogues.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">Despite the proposal of various memory architectures, such as A-MEM <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">xu2025amem</span></cite>, which extracts keywords, constructs summaries, and creates tags from dialogues as memory units, employing the Zettelkasten method to dynamically index and link knowledge networks, and MemoryBank <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">zhong2024memorybank</span></cite>, which summarizes dialogue content and analyzes user personality and mood to serve as memory units, these approaches often fall short in practical scenarios. Users pose questions from diverse perspectives, yet the aforementioned methods simply extract keywords and summaries, saving them as memory content. This leads to a gap between users’ queries and the content in memory units, with the memory content often lacking in quality, thereby affecting retrieval recall effectiveness. To enhance retrieval performance, we integrate Tulving’s memory system classification <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">tulving1985many</span></cite> and the encoding specificity principle <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">tulving1973encoding</span></cite>, extracting episodic memory, semantic memory, cognitive perspectives, and keywords as our memory units content. This approach provides higher-quality memory content, thereby improving our retrieval recall effectiveness.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">Currently, AI agents’ memory systems encompass various types, including Short-Term Memory (STM), Long-Term Memory (LTM), Episodic Memory, Semantic Memory, and Procedural Memory <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">sumers2023cognitive</span></cite>. STM is utilized for processing immediate contexts, such as the context window in dialogue systems. LTM, on the other hand, enables cross-session information storage and retrieval through databases, knowledge graphs, or vector embeddings <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">gutierrez2024hipporag</span>; <span class="ltx_ref ltx_missing_citation ltx_ref_self">xi2025rise</span>; <span class="ltx_ref ltx_missing_citation ltx_ref_self">hu2023chatdb</span></cite>. Episodic Memory allows agents to recall specific events, supporting case-based reasoning <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">tulving1972episodic</span></cite>. Semantic Memory stores structured factual knowledge, facilitating logical reasoning and knowledge retrieval <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">tulving1986episodic</span></cite>. We have designed a multi-
+memory segment system based on cognitive psychology theory to generate high-quality long-term memory.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">Our contributions are as follows:</p>
+</div>
+<div class="ltx_para" id="S1.p6">
+<p class="ltx_p" id="S1.p6.1">(1) Current research rarely considers memory content quality, leading to its poor state. To address the issue of low-quality memory content in memory systems, we are inspired by multiple memory systems theory, encoding specificity principle, and levels of processing theory to propose a multi-
+memory segment system to enhance the long-term memory capabilities of agents. The memory system extract keywords, multiple cognitive perspectives, episodic memory, and semantic memory as memory segments through the analysis and processing of short-term memory to construct high-quality long-term memory content.</p>
+</div>
+<div class="ltx_para" id="S1.p7">
+<p class="ltx_p" id="S1.p7.1">(2) In order to meet the requirements of different tasks in the retrieval stage and generation stage, we have built retrieval memory units for relevance matching with queries and contextual memory units as context for knowledge enhancement during generation.</p>
+</div>
+<div class="ltx_para" id="S1.p8">
+<p class="ltx_p" id="S1.p8.1">(3) We conducted experiments on the LoCoMo dataset to evaluate the retrieval and generation capabilities, and also performed ablation study. These experimental results demonstrate the effectiveness of our method.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Related Work</h2>
+<figure class="ltx_figure" id="S2.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="263" id="S2.F1.g1" src="Figs/framework.png" width="476"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>Schematic of multi-memory system process: After acquiring short-term memory, MMS processes it into memory segments and constructs retrieval units and contextual memory units. During retrieval, the k most relevant retrieval units are matched to the query, and their corresponding contextual units are then used as context input for the agent’s response.</figcaption>
+</figure>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>Cognitive Psychology Acting on Memory</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.1">The theory of multiple memory systems <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">tulving1985many</span></cite> posits that memory is not processed by a single system, but rather consists of multiple subsystems that are functionally independent and have different structural foundations. These systems are responsible for different types of information processing and storage, with specific neural bases and behavioral characteristics. Endel Tulving <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">tulving1972episodic</span></cite> proposed a three-category classification model in 1985, including: Procedural Memory: involving the learning of skills and habits, such as riding a bicycle. Semantic Memory: Stores factual and conceptual knowledge, such as the name of a capital city. Episodic memory: Recording personal experiences and events, such as the last birthday party. The Levels of Processing Theory <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">craik1972levels</span></cite> suggests that the formation of memory does not depend on independent storage systems such as short-term memory and long-term memory, but rather on the depth and manner of information processing. The Encoding Specificity Principle <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">tulving1973encoding</span></cite> states that the memory effect of information depends on its processing method and context during encoding. Specifically, when information is encoded, the environment, emotional state, sensory stimulation, and so on will all become part of the memory trace. Therefore, only when the conditions during retrieval match those during encoding, the retrieval of memory is most effective.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p2">
+<p class="ltx_p" id="S2.SS1.p2.1">Inspired by the levels of processing theory, we process short-term memory content via a multi-level approach to form long-term memory representations. Considering the multiple memory theory, we categorize semantic and episodic memories as long-term memory components. Recognizing users’ diverse questions, which reflect varied perspectives on the initial memory content they have, we are considering the encoding specificity principle to enhance recall by aligning coding content closely with the question’s context. We integrate keywords from short-term memory and diverse cognitive angles derived from short-term into long-term memory representations to boost matching efficacy.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>Memory system for diverse content</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.1">In recent years, research on the long-term memory mechanisms of agents has exhibited a diversifying trend. MemoryBank <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">zhong2024memorybank</span></cite> achieves long-term storage and retrieval of knowledge in multi-turn dialogues by introducing an external memory bank, integrating three modules—a writer, a retriever, and a reader—and leveraging the Ebbinghaus memory curve theory. It boasts strong scalability and modularity advantages, yet it suffers from issues such as coarse-grained memory content and suboptimal memory selection effects. MemoChat <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">lu2023memochat</span></cite>, on the other hand, injects user-related information into the model in the form of static summaries using concise, manually constructed "memos," significantly enhancing consistency and efficiency in open-domain dialogues. However, it relies on high-quality memo construction and lacks the capability for dynamic learning and memory adjustment. Think-in-Memory <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">liu2023think</span></cite> proposes a "pre-recollection + post-reflection" framework that mimics human-like cognition, explicitly separating retrieval and integrated reasoning into distinct stages and introducing a self-reflection mechanism to enhance reasoning capabilities, making it suitable for complex tasks. Nevertheless, it incurs high reasoning costs, is sensitive to retrieval, and demands significant prompt engineering efforts.
+Integrating Dynamic
+Human-like Memory Recall and Consolidation in LLM-Based
+Agents <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">hou2024my</span></cite> divides memory into short-term and long-term categories, dynamically updating and managing memories based on factors such as usage frequency and temporal proximity. ChatDB <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">hu2023chatdb</span></cite> employs a database as the symbolic memory for LLMs. Its approach involves structuring textual data and storing it in a database, enabling LLMs to swiftly retrieve accurate knowledge through database queries when relevant information is needed. Human memory is characterized by features such as forgetting, consolidation, and association. Mem0 <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">chhikara2025mem0</span></cite> forms memories by summarizing the content of conversations and dynamically organizes these memories and retrieves information from them. Memory-R1 <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">yan2025memory</span></cite> has constructed two agents, enabling them to learn how to manage and utilize memory through reinforcement learning.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p2">
+<p class="ltx_p" id="S2.SS2.p2.1">These methods lack detailed design for the most critical aspect of the memory module—the quality of the memory content. Instead, they only obtain basic information, such as simple keywords and summaries, as the memory content. We believe that high-quality memory content is the key to improving recall and response abilities. We will combine cognitive psychology theories and focus on designing high-quality long-term memory segments to improve these two abilities.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Method</h2>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Overview</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.8">The multi-memory segment system constructs short-term memory content into different memory segments and stores them as long-term memory. It utilizes the content of a round of dialogue <math alttext="C" class="ltx_Math" display="inline" id="S3.SS1.p1.1.m1" intent=":literal"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math> as short-term memory <math alttext="M_{short}" class="ltx_Math" display="inline" id="S3.SS1.p1.2.m2" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>h</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">M_{short}</annotation></semantics></math>, extracts key information <math alttext="M_{key}" class="ltx_Math" display="inline" id="S3.SS1.p1.3.m3" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>k</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">M_{key}</annotation></semantics></math> from the dialogue, and further processes and analyzes the original dialogue to construct different cognitive perspectives <math alttext="M_{cog}" class="ltx_Math" display="inline" id="S3.SS1.p1.4.m4" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>g</mi></mrow></msub><annotation encoding="application/x-tex">M_{cog}</annotation></semantics></math>, episodic memory <math alttext="M_{epi}" class="ltx_Math" display="inline" id="S3.SS1.p1.5.m5" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mi>i</mi></mrow></msub><annotation encoding="application/x-tex">M_{epi}</annotation></semantics></math>, and semantic memory <math alttext="M_{sem}" class="ltx_Math" display="inline" id="S3.SS1.p1.6.m6" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi></mrow></msub><annotation encoding="application/x-tex">M_{sem}</annotation></semantics></math>. Then, these memory segments are used to construct retrieval memory units <math alttext="MU_{ret}" class="ltx_Math" display="inline" id="S3.SS1.p1.7.m7" intent=":literal"><semantics><mrow><mi>M</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>U</mi><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">MU_{ret}</annotation></semantics></math> and contextual memory units <math alttext="MU_{cont}" class="ltx_Math" display="inline" id="S3.SS1.p1.8.m8" intent=":literal"><semantics><mrow><mi>M</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>U</mi><mrow><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>n</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">MU_{cont}</annotation></semantics></math>, which are used for memory retrieval and memory use, respectively.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p2">
+<p class="ltx_p" id="S3.SS1.p2.1">Our multi-memory segment system involves three processes: the construction of long-term memory units, the retrieval of long-term memory units, and the use of contextual memory units. The process of the system processing short-term memory into long-term memory is shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S2.F1" title="Figure 1 ‣ 2 Related Work ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_tag">1</span></a>. We employ prompt engineering techniques to extract individual memory segments, with the specific prompt words detailed in Table <a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#A1.T5" title="Table 5 ‣ Appendix A Prompts ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_tag">5</span></a> of Appendix <a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#A1" title="Appendix A Prompts ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_tag">A</span></a>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Construction of Long-term Memory Units</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">The process of converting short-term memory into long-term memory involves two parts. First, the information in short-term memory is processed to generate multiple types of memory segments. Then, these memory segments are used to construct retrieval and matching memory units for retrieval and matching, and contextual memory units for the context of LLM.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p2">
+<p class="ltx_p" id="S3.SS2.p2.9"><span class="ltx_text ltx_font_bold" id="S3.SS2.p2.9.1">Short-term Memory Processing</span> The memory system processes information into <math alttext="M_{longterm}" class="ltx_Math" display="inline" id="S3.SS2.p2.1.m1" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>l</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>n</mi><mo lspace="0em" rspace="0em">​</mo><mi>g</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi></mrow></msub><annotation encoding="application/x-tex">M_{longterm}</annotation></semantics></math>, analyzes <math alttext="M_{short}" class="ltx_Math" display="inline" id="S3.SS2.p2.2.m2" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>h</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">M_{short}</annotation></semantics></math> through LLM, and constructing <math alttext="M_{key}" class="ltx_Math" display="inline" id="S3.SS2.p2.3.m3" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>k</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">M_{key}</annotation></semantics></math>, <math alttext="M_{cog}" class="ltx_Math" display="inline" id="S3.SS2.p2.4.m4" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>g</mi></mrow></msub><annotation encoding="application/x-tex">M_{cog}</annotation></semantics></math>, <math alttext="M_{epi}" class="ltx_Math" display="inline" id="S3.SS2.p2.5.m5" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mi>i</mi></mrow></msub><annotation encoding="application/x-tex">M_{epi}</annotation></semantics></math>, and <math alttext="M_{sem}" class="ltx_Math" display="inline" id="S3.SS2.p2.6.m6" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi></mrow></msub><annotation encoding="application/x-tex">M_{sem}</annotation></semantics></math>. First, keywords are extracted from <math alttext="M_{short}" class="ltx_Math" display="inline" id="S3.SS2.p2.7.m7" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>h</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">M_{short}</annotation></semantics></math> as important textual identification information in short-term memory. Cognitively analyze short-term memory from different perspectives, and construct a multi-dimensional cognition of the short-term memory to enhance the matching effect. Event information such as plot events is used as <math alttext="M_{epi}" class="ltx_Math" display="inline" id="S3.SS2.p2.8.m8" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mi>i</mi></mrow></msub><annotation encoding="application/x-tex">M_{epi}</annotation></semantics></math>, and MMS are used to analyze factual information in short-term memory, constructing it as plot memory content. Taking knowledge points as factual knowledge, using cognitive modules to analyze the content of knowledge points in short-term memory, and constructing them as <math alttext="M_{cog}" class="ltx_Math" display="inline" id="S3.SS2.p2.9.m9" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>g</mi></mrow></msub><annotation encoding="application/x-tex">M_{cog}</annotation></semantics></math>. The disclosure of fragmented memory and long-term memory is as follows:</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p3">
+<table class="ltx_equation ltx_eqn_table" id="S3.E1">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="M_{key},M_{cog},M_{epi},M_{sem}=LLM(M_{short})" class="ltx_Math" display="block" id="S3.E1.m1" intent=":literal"><semantics><mrow><mrow><msub><mi>M</mi><mrow><mi>k</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi></mrow></msub><mo>,</mo><msub><mi>M</mi><mrow><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>g</mi></mrow></msub><mo>,</mo><msub><mi>M</mi><mrow><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mi>i</mi></mrow></msub><mo>,</mo><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi></mrow></msub></mrow><mo>=</mo><mrow><mi>L</mi><mo lspace="0em" rspace="0em">​</mo><mi>L</mi><mo lspace="0em" rspace="0em">​</mo><mi>M</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>h</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">M_{key},M_{cog},M_{epi},M_{sem}=LLM(M_{short})</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div class="ltx_para" id="S3.SS2.p4">
+<table class="ltx_equation ltx_eqn_table" id="S3.E2">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="M_{longterm}=(M_{key},M_{short},M_{cog},M_{epi},M_{sem})" class="ltx_Math" display="block" id="S3.E2.m1" intent=":literal"><semantics><mrow><msub><mi>M</mi><mrow><mi>l</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>n</mi><mo lspace="0em" rspace="0em">​</mo><mi>g</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi></mrow></msub><mo>=</mo><mrow><mo stretchy="false">(</mo><msub><mi>M</mi><mrow><mi>k</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi></mrow></msub><mo>,</mo><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>h</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><mo>,</mo><msub><mi>M</mi><mrow><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>g</mi></mrow></msub><mo>,</mo><msub><mi>M</mi><mrow><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mi>i</mi></mrow></msub><mo>,</mo><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">M_{longterm}=(M_{key},M_{short},M_{cog},M_{epi},M_{sem})</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S3.SS2.p4.12"><span class="ltx_text ltx_font_bold" id="S3.SS2.p4.12.1">Long-term Memory Segment Storing</span> After completing information processing, we have five parts that constitute the long-term memory <math alttext="M_{longterm}" class="ltx_Math" display="inline" id="S3.SS2.p4.1.m1" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>l</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>n</mi><mo lspace="0em" rspace="0em">​</mo><mi>g</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi></mrow></msub><annotation encoding="application/x-tex">M_{longterm}</annotation></semantics></math>: <math alttext="M_{key}" class="ltx_Math" display="inline" id="S3.SS2.p4.2.m2" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>k</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">M_{key}</annotation></semantics></math>, <math alttext="M_{short}" class="ltx_Math" display="inline" id="S3.SS2.p4.3.m3" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>h</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">M_{short}</annotation></semantics></math>, <math alttext="M_{cog}" class="ltx_Math" display="inline" id="S3.SS2.p4.4.m4" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>g</mi></mrow></msub><annotation encoding="application/x-tex">M_{cog}</annotation></semantics></math>, <math alttext="M_{epi}" class="ltx_Math" display="inline" id="S3.SS2.p4.5.m5" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mi>i</mi></mrow></msub><annotation encoding="application/x-tex">M_{epi}</annotation></semantics></math> and <math alttext="M_{sem}" class="ltx_Math" display="inline" id="S3.SS2.p4.6.m6" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi></mrow></msub><annotation encoding="application/x-tex">M_{sem}</annotation></semantics></math>. We will store long-term memory into two types, one for retrieval and matching, and the other for context-based knowledge enhancement. The keywords in long-term memory, the original short-term memory content, the various cognitive perspectives of short-term memory, and the sentence characteristics of episodic memory in short-term memory are more relevant to the semantic form of the user’s query. However, the semantic memory of short-term memory is listed in the form of knowledge points, which is a higher-level knowledge extraction of short-term memory content. It may have some differences from the user’s query language form and is suitable for user knowledge enhancement, but not for retrieval matching. Therefore, considering the principle of encoding specificity, We use <math alttext="M_{key}" class="ltx_Math" display="inline" id="S3.SS2.p4.7.m7" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>k</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">M_{key}</annotation></semantics></math>, <math alttext="M_{short}" class="ltx_Math" display="inline" id="S3.SS2.p4.8.m8" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>h</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">M_{short}</annotation></semantics></math>, <math alttext="M_{cog}" class="ltx_Math" display="inline" id="S3.SS2.p4.9.m9" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>g</mi></mrow></msub><annotation encoding="application/x-tex">M_{cog}</annotation></semantics></math> and <math alttext="M_{epi}" class="ltx_Math" display="inline" id="S3.SS2.p4.10.m10" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mi>i</mi></mrow></msub><annotation encoding="application/x-tex">M_{epi}</annotation></semantics></math> as retrieval memory units <math alttext="MU_{ret}" class="ltx_Math" display="inline" id="S3.SS2.p4.11.m11" intent=":literal"><semantics><mrow><mi>M</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>U</mi><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">MU_{ret}</annotation></semantics></math>, and construct them into vectors <math alttext="V_{memory}" class="ltx_Math" display="inline" id="S3.SS2.p4.12.m12" intent=":literal"><semantics><msub><mi>V</mi><mrow><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">V_{memory}</annotation></semantics></math> for use in the retrieval matching stage.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p5">
+<p class="ltx_p" id="S3.SS2.p5.1">Episodic memory describes event information, which is similar to the semantics of short-term memory information, and LLM have the ability to understand its content through short-term memory alone. Therefore, we believe that the content of episodic memory does not need to be input as contextual content into large models, only keywords, short-term memory, multiple cognitive perspectives, and semantic memory are required. Therefore, the composition of the retrieval memory units and the context memory units is as follows:</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p6">
+<table class="ltx_equation ltx_eqn_table" id="S3.E3">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="MU_{ret}=(M_{key},M_{short},M_{cog},M_{epi})" class="ltx_Math" display="block" id="S3.E3.m1" intent=":literal"><semantics><mrow><mrow><mi>M</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>U</mi><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub></mrow><mo>=</mo><mrow><mo stretchy="false">(</mo><msub><mi>M</mi><mrow><mi>k</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi></mrow></msub><mo>,</mo><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>h</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><mo>,</mo><msub><mi>M</mi><mrow><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>g</mi></mrow></msub><mo>,</mo><msub><mi>M</mi><mrow><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mi>i</mi></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">MU_{ret}=(M_{key},M_{short},M_{cog},M_{epi})</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div class="ltx_para" id="S3.SS2.p7">
+<table class="ltx_equation ltx_eqn_table" id="S3.E4">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="MU_{cont}=(M_{key},M_{short},M_{cog},M_{sem})" class="ltx_Math" display="block" id="S3.E4.m1" intent=":literal"><semantics><mrow><mrow><mi>M</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>U</mi><mrow><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>n</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub></mrow><mo>=</mo><mrow><mo stretchy="false">(</mo><msub><mi>M</mi><mrow><mi>k</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi></mrow></msub><mo>,</mo><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>h</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><mo>,</mo><msub><mi>M</mi><mrow><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>g</mi></mrow></msub><mo>,</mo><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">MU_{cont}=(M_{key},M_{short},M_{cog},M_{sem})</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(4)</span></td>
+</tr></tbody>
+</table>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3 </span>Retrieval of Long-term Memory Units</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.4">The retrieval part will convert the user query <math alttext="Q" class="ltx_Math" display="inline" id="S3.SS3.p1.1.m1" intent=":literal"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math> into a vector form, and then use the cosine similarity formula to calculate the similarity value between the user query vector <math alttext="V_{query}" class="ltx_Math" display="inline" id="S3.SS3.p1.2.m2" intent=":literal"><semantics><msub><mi>V</mi><mrow><mi>q</mi><mo lspace="0em" rspace="0em">​</mo><mi>u</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">V_{query}</annotation></semantics></math> and the constructed vector <math alttext="V_{memory}" class="ltx_Math" display="inline" id="S3.SS3.p1.3.m3" intent=":literal"><semantics><msub><mi>V</mi><mrow><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">V_{memory}</annotation></semantics></math>, selecting the top-k vectors <math alttext="V_{k}=\{V_{1},V_{2},...,V_{K}\}" class="ltx_Math" display="inline" id="S3.SS3.p1.4.m4" intent=":literal"><semantics><mrow><msub><mi>V</mi><mi>k</mi></msub><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><msub><mi>V</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>V</mi><mi>K</mi></msub><mo stretchy="false">}</mo></mrow></mrow><annotation encoding="application/x-tex">V_{k}=\{V_{1},V_{2},...,V_{K}\}</annotation></semantics></math> as the selected vectors. The cosine similarity used is disclosed as follows:</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p2">
+<table class="ltx_equation ltx_eqn_table" id="S3.E5">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\text{cos\_sim}(\mathbf{q},\mathbf{v})=\frac{\mathbf{q}\cdot\mathbf{v}}{\|\mathbf{q}\|\,\|\mathbf{v}\|}" class="ltx_Math" display="block" id="S3.E5.m1" intent=":literal"><semantics><mrow><mrow><mtext>cos_sim</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>𝐪</mi><mo>,</mo><mi>𝐯</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mfrac><mrow><mi>𝐪</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>𝐯</mi></mrow><mrow><mrow><mo stretchy="false">‖</mo><mi>𝐪</mi><mo stretchy="false">‖</mo></mrow><mo lspace="0.170em" rspace="0em">​</mo><mrow><mo stretchy="false">‖</mo><mi>𝐯</mi><mo stretchy="false">‖</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\text{cos\_sim}(\mathbf{q},\mathbf{v})=\frac{\mathbf{q}\cdot\mathbf{v}}{\|\mathbf{q}\|\,\|\mathbf{v}\|}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(5)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div class="ltx_para" id="S3.SS3.p3">
+<p class="ltx_p" id="S3.SS3.p3.1">where q and v are respectively the query vector and the vector stored in the memory system.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.4 </span>Utilization of Long-term Memory Units</h3>
+<div class="ltx_para" id="S3.SS4.p1">
+<p class="ltx_p" id="S3.SS4.p1.11">Based on the selection of top-k vectors <math alttext="V_{k}=\{V_{1},V_{2},...,V_{K}\}" class="ltx_Math" display="inline" id="S3.SS4.p1.1.m1" intent=":literal"><semantics><mrow><msub><mi>V</mi><mi>k</mi></msub><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>V</mi><mn>1</mn></msub><mo>,</mo><msub><mi>V</mi><mn>2</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>V</mi><mi>K</mi></msub><mo stretchy="false">}</mo></mrow></mrow><annotation encoding="application/x-tex">V_{k}=\{V_{1},V_{2},...,V_{K}\}</annotation></semantics></math>, these retrieval memory units <math alttext="MU_{ret}" class="ltx_Math" display="inline" id="S3.SS4.p1.2.m2" intent=":literal"><semantics><mrow><mi>M</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>U</mi><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">MU_{ret}</annotation></semantics></math> are mapped to corresponding contextual memory units <math alttext="MU_{cont}" class="ltx_Math" display="inline" id="S3.SS4.p1.3.m3" intent=":literal"><semantics><mrow><mi>M</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>U</mi><mrow><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>n</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">MU_{cont}</annotation></semantics></math>. <math alttext="M_{key}" class="ltx_Math" display="inline" id="S3.SS4.p1.4.m4" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>k</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi></mrow></msub><annotation encoding="application/x-tex">M_{key}</annotation></semantics></math>, <math alttext="M_{short}" class="ltx_Math" display="inline" id="S3.SS4.p1.5.m5" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>h</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">M_{short}</annotation></semantics></math>, <math alttext="M_{cog}" class="ltx_Math" display="inline" id="S3.SS4.p1.6.m6" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>g</mi></mrow></msub><annotation encoding="application/x-tex">M_{cog}</annotation></semantics></math>, <math alttext="M_{epi}" class="ltx_Math" display="inline" id="S3.SS4.p1.7.m7" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mi>i</mi></mrow></msub><annotation encoding="application/x-tex">M_{epi}</annotation></semantics></math>, and <math alttext="M_{sem}" class="ltx_Math" display="inline" id="S3.SS4.p1.8.m8" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi></mrow></msub><annotation encoding="application/x-tex">M_{sem}</annotation></semantics></math> are used as contextu <math alttext="C_{m}" class="ltx_Math" display="inline" id="S3.SS4.p1.9.m9" intent=":literal"><semantics><msub><mi>C</mi><mi>m</mi></msub><annotation encoding="application/x-tex">C_{m}</annotation></semantics></math> inputs to LLM to response the user’s query <math alttext="Q" class="ltx_Math" display="inline" id="S3.SS4.p1.10.m10" intent=":literal"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math> and obtain a response <math alttext="R" class="ltx_Math" display="inline" id="S3.SS4.p1.11.m11" intent=":literal"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>.</p>
+</div>
+<div class="ltx_para" id="S3.SS4.p2">
+<table class="ltx_equation ltx_eqn_table" id="S3.E6">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="R=LLM(MU_{longterm},Q)" class="ltx_Math" display="block" id="S3.E6.m1" intent=":literal"><semantics><mrow><mi>R</mi><mo>=</mo><mrow><mi>L</mi><mo lspace="0em" rspace="0em">​</mo><mi>L</mi><mo lspace="0em" rspace="0em">​</mo><mi>M</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>M</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>U</mi><mrow><mi>l</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>n</mi><mo lspace="0em" rspace="0em">​</mo><mi>g</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi></mrow></msub></mrow><mo>,</mo><mi>Q</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">R=LLM(MU_{longterm},Q)</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(6)</span></td>
+</tr></tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Experimental Setup</h2>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Datasets</h3>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.1">The LoCoMo dataset <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">maharana2024evaluating</span></cite> is designed to evaluate the long-term dialogue memory capability of large language models. Its primary task is to determine whether these models can accurately recall information from earlier dialogue after multiple rounds. The dataset contains 10 extended sessions, with each session averaging around 600 conversations and 26,000 tokens. Each conversation includes an average of 200 questions along with their corresponding correct answers. This dataset supports multiple evaluation scenarios and is currently a widely adopted authoritative dataset.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p2">
+<p class="ltx_p" id="S4.SS1.p2.1">There are five problem types: (1) <span class="ltx_text ltx_font_bold" id="S4.SS1.p2.1.1">Single-hop questions</span>: Test the memory system’s basic retention by requiring accurate extraction of a single fact from long dialogue history. (2) <span class="ltx_text ltx_font_bold" id="S4.SS1.p2.1.2">Multi-hop questions</span>: Assess the system’s ability to integrate information across multiple dialogue rounds for reasoning. (3) <span class="ltx_text ltx_font_bold" id="S4.SS1.p2.1.3">Temporal reasoning questions</span>: Evaluate if the system can understand event sequences and time evolution to construct a clear timeline. (4) <span class="ltx_text ltx_font_bold" id="S4.SS1.p2.1.4">Open-domain knowledge questions</span>: Examine the system’s recall and retrieval ability by combining dialogue context with external knowledge. (5) <span class="ltx_text ltx_font_bold" id="S4.SS1.p2.1.5">Adversarial questions</span>: Challenge the system’s resistance to forgetting and misleading by inserting interference information.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Evaluation Metrics</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">We evaluate the performance of memory system using several standard metrics, including Recall@N (R@1, R@3, R@5), F1 score, and BLEU-1.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p2">
+<p class="ltx_p" id="S4.SS2.p2.1"><span class="ltx_text ltx_font_bold" id="S4.SS2.p2.1.1">Recall@N(R@N)</span> measures the average proportion of ground-truth answers retrieved within the top-N results. When the number of ground-truth items is less than N, the denominator is adjusted using <math alttext="\min(N,|\text{Gold}_{i}|)" class="ltx_Math" display="inline" id="S4.SS2.p2.1.m1" intent=":literal"><semantics><mrow><mi>min</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>N</mi><mo>,</mo><mrow><mo stretchy="false">|</mo><msub><mtext>Gold</mtext><mi>i</mi></msub><mo stretchy="false">|</mo></mrow><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\min(N,|\text{Gold}_{i}|)</annotation></semantics></math> to ensure fair evaluation. Formally:</p>
+<table class="ltx_equation ltx_eqn_table" id="S4.E7">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\text{Recall@}N=\frac{1}{|Q|}\sum_{i=1}^{|Q|}\frac{|\text{Top-}N_{i}\cap\text{Gold}_{i}|}{\min(N,|\text{Gold}_{i}|)}" class="ltx_Math" display="block" id="S4.E7.m1" intent=":literal"><semantics><mrow><mrow><mtext>Recall@</mtext><mo lspace="0em" rspace="0em">​</mo><mi>N</mi></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><mrow><mo stretchy="false">|</mo><mi>Q</mi><mo stretchy="false">|</mo></mrow></mfrac><mo lspace="0em" rspace="0em">​</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mo stretchy="false">|</mo><mi>Q</mi><mo stretchy="false">|</mo></mrow></munderover><mfrac><mrow><mo stretchy="false">|</mo><mrow><mrow><mtext>Top-</mtext><mo lspace="0em" rspace="0em">​</mo><msub><mi>N</mi><mi>i</mi></msub></mrow><mo>∩</mo><msub><mtext>Gold</mtext><mi>i</mi></msub></mrow><mo stretchy="false">|</mo></mrow><mrow><mi>min</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mi>N</mi><mo>,</mo><mrow><mo stretchy="false">|</mo><msub><mtext>Gold</mtext><mi>i</mi></msub><mo stretchy="false">|</mo></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow></mrow></mrow><annotation encoding="application/x-tex">\text{Recall@}N=\frac{1}{|Q|}\sum_{i=1}^{|Q|}\frac{|\text{Top-}N_{i}\cap\text{Gold}_{i}|}{\min(N,|\text{Gold}_{i}|)}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(7)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S4.SS2.p2.7">where <math alttext="Q" class="ltx_Math" display="inline" id="S4.SS2.p2.2.m1" intent=":literal"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math> is the set of all evaluation queries, <math alttext="i" class="ltx_Math" display="inline" id="S4.SS2.p2.3.m2" intent=":literal"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math> indexes a specific query, <math alttext="\text{Gold}_{i}" class="ltx_Math" display="inline" id="S4.SS2.p2.4.m3" intent=":literal"><semantics><msub><mtext>Gold</mtext><mi>i</mi></msub><annotation encoding="application/x-tex">\text{Gold}_{i}</annotation></semantics></math> denotes the set of ground-truth answers for the <math alttext="i" class="ltx_Math" display="inline" id="S4.SS2.p2.5.m4" intent=":literal"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>-th query, <math alttext="|\text{Gold}_{i}|" class="ltx_Math" display="inline" id="S4.SS2.p2.6.m5" intent=":literal"><semantics><mrow><mo stretchy="false">|</mo><msub><mtext>Gold</mtext><mi>i</mi></msub><mo stretchy="false">|</mo></mrow><annotation encoding="application/x-tex">|\text{Gold}_{i}|</annotation></semantics></math> is the number of ground-truth answers for that query, and <math alttext="\text{Top-}N_{i}" class="ltx_Math" display="inline" id="S4.SS2.p2.7.m6" intent=":literal"><semantics><mrow><mtext>Top-</mtext><mo lspace="0em" rspace="0em">​</mo><msub><mi>N</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\text{Top-}N_{i}</annotation></semantics></math> is the set of top-N results retrieved by the system for that query.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p3">
+<p class="ltx_p" id="S4.SS2.p3.3"><span class="ltx_text ltx_font_bold" id="S4.SS2.p3.3.1">F1 Score</span> is the harmonic mean of precision and recall. Let <math alttext="TP" class="ltx_Math" display="inline" id="S4.SS2.p3.1.m1" intent=":literal"><semantics><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi></mrow><annotation encoding="application/x-tex">TP</annotation></semantics></math>, <math alttext="FP" class="ltx_Math" display="inline" id="S4.SS2.p3.2.m2" intent=":literal"><semantics><mrow><mi>F</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi></mrow><annotation encoding="application/x-tex">FP</annotation></semantics></math>, and <math alttext="FN" class="ltx_Math" display="inline" id="S4.SS2.p3.3.m3" intent=":literal"><semantics><mrow><mi>F</mi><mo lspace="0em" rspace="0em">​</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">FN</annotation></semantics></math> denote the number of true positives, false positives, and false negatives, respectively:</p>
+<table class="ltx_equationgroup ltx_eqn_align ltx_eqn_table" id="A3.EGx1">
+<tbody id="S4.E8"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><span class="ltx_text ltx_markedasmath" id="S4.E8.2.1.1.1">Precision</span></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math alttext="\displaystyle=\frac{TP}{TP+FP}" class="ltx_Math" display="inline" id="S4.E8.m2" intent=":literal"><semantics><mrow><mi></mi><mo>=</mo><mstyle displaystyle="true"><mfrac><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi></mrow><mrow><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi></mrow><mo>+</mo><mrow><mi>F</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi></mrow></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle=\frac{TP}{TP+FP}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(8)</span></td>
+</tr></tbody>
+<tbody id="S4.E9"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><span class="ltx_text ltx_markedasmath" id="S4.E9.2.1.1.1">Recall</span></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math alttext="\displaystyle=\frac{TP}{TP+FN}" class="ltx_Math" display="inline" id="S4.E9.m2" intent=":literal"><semantics><mrow><mi></mi><mo>=</mo><mstyle displaystyle="true"><mfrac><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi></mrow><mrow><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi></mrow><mo>+</mo><mrow><mi>F</mi><mo lspace="0em" rspace="0em">​</mo><mi>N</mi></mrow></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle=\frac{TP}{TP+FN}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(9)</span></td>
+</tr></tbody>
+<tbody id="S4.E10"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><span class="ltx_text ltx_markedasmath" id="S4.E10.2.1.1.1">F1</span></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math alttext="\displaystyle=\frac{2\cdot\text{Precision}\cdot\text{Recall}}{\text{Precision}+\text{Recall}}" class="ltx_Math" display="inline" id="S4.E10.m2" intent=":literal"><semantics><mrow><mi></mi><mo>=</mo><mstyle displaystyle="true"><mfrac><mrow><mn>2</mn><mo lspace="0.222em" rspace="0.222em">⋅</mo><mtext>Precision</mtext><mo lspace="0.222em" rspace="0.222em">⋅</mo><mtext>Recall</mtext></mrow><mrow><mtext>Precision</mtext><mo>+</mo><mtext>Recall</mtext></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle=\frac{2\cdot\text{Precision}\cdot\text{Recall}}{\text{Precision}+\text{Recall}}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(10)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S4.SS2.p3.4">F1 is widely used in classification and span-level extraction tasks, such as named entity recognition or QA.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p4">
+<p class="ltx_p" id="S4.SS2.p4.1"><span class="ltx_text ltx_font_bold" id="S4.SS2.p4.1.1">BLEU-1</span> evaluates unigram precision between the generated output and the reference. BLEU-1 is computed as:</p>
+<table class="ltx_equation ltx_eqn_table" id="S4.E11">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\text{BLEU-1}=\frac{\#\text{ matching unigrams}}{\#\text{ unigrams in hypothesis}}" class="ltx_Math" display="block" id="S4.E11.m1" intent=":literal"><semantics><mrow><mtext>BLEU-1</mtext><mo>=</mo><mfrac><mrow><mi mathvariant="normal">#</mi><mo lspace="0em" rspace="0em">​</mo><mtext> matching unigrams</mtext></mrow><mrow><mi mathvariant="normal">#</mi><mo lspace="0em" rspace="0em">​</mo><mtext> unigrams in hypothesis</mtext></mrow></mfrac></mrow><annotation encoding="application/x-tex">\text{BLEU-1}=\frac{\#\text{ matching unigrams}}{\#\text{ unigrams in hypothesis}}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(11)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S4.SS2.p4.2">A brevity penalty is typically applied to discourage overly short outputs. BLEU-1 is appropriate for tasks like machine translation and text generation where word-level overlap is informative.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.3 </span>Baselines</h3>
+<div class="ltx_para" id="S4.SS3.p1">
+<p class="ltx_p" id="S4.SS3.p1.1">Our goal is to explore high-quality memory content, and we adopt the representative methods for studying memory content currently employed in research.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p2">
+<p class="ltx_p" id="S4.SS3.p2.1"><span class="ltx_text ltx_font_bold" id="S4.SS3.p2.1.1">Naive RAG</span> Only the character’s dialogue content is vectorized as memory. For a question, it’s vectorized and compared with all memory vectors for similarity. The top-k vectors of original dialogue are chosen as context for answering.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p3">
+<p class="ltx_p" id="S4.SS3.p3.1"><span class="ltx_text ltx_font_bold" id="S4.SS3.p3.1.1">MemoryBank</span> <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">zhong2024memorybank</span></cite> The memory content involved in this method includes: daily chat records, time summaries, user personality traits, and emotional assessments.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p4">
+<p class="ltx_p" id="S4.SS3.p4.1"><span class="ltx_text ltx_font_bold" id="S4.SS3.p4.1.1">A-MEM</span> <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">xu2025amem</span></cite> The memory content involved in this method includes: dialogue content, timestamps, keywords, tags, context, and the creation of memory notes via links.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p5">
+<p class="ltx_p" id="S4.SS3.p5.1">We primarily focus on the impact of memory content on memory effectiveness, and the aforementioned three approaches encompass the distinctive characteristics of different cutting-edge memory contents at present.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.4 </span>Implementation Details</h3>
+<div class="ltx_para" id="S4.SS4.p1">
+<p class="ltx_p" id="S4.SS4.p1.1">We employed GPT-4o <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">hurst2024gpt</span></cite>, Qwen2.5-14B <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">yang2024qwen2</span></cite>, and Gemini-2.5-pro-preview <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">comanici2025gemini</span></cite> as base models, setting temperature to 0.5 for memory generation and 0.7 for question answering. For the latter, we input the top 5 most relevant contextual memory units (based on retrieval memory units) as context for the agent. We employ an embedding-based retrieval approach, utilizing all-MiniLM-L6-v2 <cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_ref ltx_missing_citation ltx_ref_self">reimers2021allminilm</span></cite> as the embedding model.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Results and Discussion</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">We conducted an experimental comparative analysis on memory retrieval and memory use ability. In terms of memory retrieval, the recall rates (R@1, R@2, and R@5) were compared and analyzed. In terms of memory usage, F1, which measures the accuracy of responses, and BLEU-1, which measures the quality of responses, were compared and analyzed.</p>
+</div>
+<section class="ltx_subsection" id="S5.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.1 </span>Recall Results</h3>
+<figure class="ltx_table" id="S5.T1">
+<div class="ltx_inline-block ltx_align_center ltx_transformed_outer" id="S5.T1.1" style="width:345.0pt;height:58pt;vertical-align:-28.0pt;"><span class="ltx_transformed_inner" style="transform:translate(-265.8pt,44.6pt) scale(0.39361,0.39361) ;">
+<p class="ltx_p" id="S5.T1.1.1"><span class="ltx_text" id="S5.T1.1.1.1">
+<span class="ltx_inline-block ltx_transformed_outer" id="S5.T1.1.1.1.1" style="width:876.5pt;height:147.2pt;vertical-align:-71.1pt;"><span class="ltx_transformed_inner" style="transform:translate(0.0pt,0.0pt) scale(1,1) ;">
+<span class="ltx_p" id="S5.T1.1.1.1.1.1"><span class="ltx_text" id="S5.T1.1.1.1.1.1.1">
+<span class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S5.T1.1.1.1.1.1.1.1">
+<span class="ltx_thead">
+<span class="ltx_tr" id="S5.T1.1.1.1.1.1.1.1.1.1">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="S5.T1.1.1.1.1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.1.1.1.1">Model</span></span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="S5.T1.1.1.1.1.1.1.1.1.1.2"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.1.1.2.1">Method</span></span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_3" id="S5.T1.1.1.1.1.1.1.1.1.1.3">Single Hop</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_3" id="S5.T1.1.1.1.1.1.1.1.1.1.4">Multi Hop</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_3" id="S5.T1.1.1.1.1.1.1.1.1.1.5">Temporal</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_3" id="S5.T1.1.1.1.1.1.1.1.1.1.6">Open Domain</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_3" id="S5.T1.1.1.1.1.1.1.1.1.1.7">Adversarial</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_3" id="S5.T1.1.1.1.1.1.1.1.1.1.8">Average</span></span>
+<span class="ltx_tr" id="S5.T1.1.1.1.1.1.1.1.2.2">
+<span class="ltx_td ltx_th ltx_th_row" id="S5.T1.1.1.1.1.1.1.1.2.2.1"></span>
+<span class="ltx_td ltx_th ltx_th_column ltx_th_row" id="S5.T1.1.1.1.1.1.1.1.2.2.2"></span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.3">R@1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.4">R@3</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.5">R@5</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.6">R@1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.7">R@3</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.8">R@5</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.9">R@1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.10">R@3</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.11">R@5</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.12">R@1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.13">R@3</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.14">R@5</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.15">R@1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.16">R@3</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.17">R@5</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.18">R@1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.19">R@3</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.2.2.20">R@5</span></span>
+<span class="ltx_tr" id="S5.T1.1.1.1.1.1.1.1.3.3">
+<span class="ltx_td ltx_th ltx_th_row" id="S5.T1.1.1.1.1.1.1.1.3.3.1"></span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.2">NaiveRAG</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.3">14.89</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.4">15.07</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.5">20.90</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.6">26.79</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.7">37.23</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.8">44.11</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.9">7.61</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.10">14.49</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.11">19.38</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.12">20.45</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.13">34.52</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.14">42.15</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.15">9.64</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.16">20.18</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.17">28.81</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.18">15.88</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.19">24.30</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.3.3.20">31.07</span></span>
+</span>
+<span class="ltx_tbody">
+<span class="ltx_tr" id="S5.T1.1.1.1.1.1.1.1.4.1">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t ltx_rowspan ltx_rowspan_3" id="S5.T1.1.1.1.1.1.1.1.4.1.1"><span class="ltx_text" id="S5.T1.1.1.1.1.1.1.1.4.1.1.1">GPT-4o</span></span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.2">MemoryBank</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.3">15.60</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.4">12.59</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.5">14.99</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.6">23.05</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.7">30.52</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.8">36.47</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.9">9.78</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.10">13.41</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.11">15.80</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.12">13.67</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.13">20.87</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.14">26.38</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.15">8.52</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.16">17.15</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.17">23.99</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.18">14.12</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.19">18.93</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.4.1.20">23.53</span></span>
+<span class="ltx_tr" id="S5.T1.1.1.1.1.1.1.1.5.2">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T1.1.1.1.1.1.1.1.5.2.1">A-MEM</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.2">24.82</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.3">23.76</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.4">29.73</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.5">33.02</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.6">49.79</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.7">58.96</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.8">16.30</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.9">22.28</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.10">30.02</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.11">29.01</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.12">44.81</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.13">53.90</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.14">10.54</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.15">20.96</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.16">25.11</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.17">22.74</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.18">32.32</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.5.2.19">39.54</span></span>
+<span class="ltx_tr" id="S5.T1.1.1.1.1.1.1.1.6.3">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T1.1.1.1.1.1.1.1.6.3.1"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.1.1">MMS</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.2"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.2.1">28.53</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.3"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.3.1">30.18</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.4"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.4.1">34.06</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.5"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.5.1">44.18</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.6"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.6.1">59.87</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.7"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.7.1">67.05</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.8"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.8.1">23.73</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.9"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.9.1">26.63</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.10"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.10.1">32.23</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.11"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.11.1">34.98</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.12"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.12.1">53.01</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.13"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.13.1">62.04</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.14"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.14.1">15.31</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.15"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.15.1">31.46</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.16"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.16.1">37.65</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.17"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.17.1">29.35</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.18"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.18.1">40.23</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.6.3.19"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.6.3.19.1">46.61</span></span></span>
+<span class="ltx_tr" id="S5.T1.1.1.1.1.1.1.1.7.4">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t ltx_rowspan ltx_rowspan_3" id="S5.T1.1.1.1.1.1.1.1.7.4.1"><span class="ltx_text" id="S5.T1.1.1.1.1.1.1.1.7.4.1.1">Qwen2.5-14B</span></span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.2">MemoryBank</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.3">21.63</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.4">22.75</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.5">26.51</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.6">32.71</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.7">47.35</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.8">55.78</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.9">13.04</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.10">20.83</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.11">25.09</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.12">26.04</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.13">39.36</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.14">47.23</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.15">9.64</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.16">18.27</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.17">24.89</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.18">20.62</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.19">29.71</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.7.4.20">35.90</span></span>
+<span class="ltx_tr" id="S5.T1.1.1.1.1.1.1.1.8.5">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T1.1.1.1.1.1.1.1.8.5.1">A-MEM</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.2"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.8.5.2.1">25.21</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.3">25.71</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.4">27.45</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.5">39.19</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.6">52.49</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.7">59.01</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.8">21.73</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.9">23.19</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.10">32.46</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.11">31.27</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.12">46.63</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.13">54.82</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.14">14.57</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.15"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.8.5.15.1">27.58</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.16">32.85</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.17">26.39</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.18">35.12</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.8.5.19">41.32</span></span>
+<span class="ltx_tr" id="S5.T1.1.1.1.1.1.1.1.9.6">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T1.1.1.1.1.1.1.1.9.6.1"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.1.1">MMS</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.2">23.76</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.3"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.3.1">27.93</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.4"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.4.1">27.83</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.5"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.5.1">39.25</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.6"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.6.1">53.58</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.7"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.7.1">59.13</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.8"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.8.1">23.39</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.9"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.9.1">25.72</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.10"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.10.1">32.59</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.11"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.11.1">30.67</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.12"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.12.1">48.61</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.13"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.13.1">57.57</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.14"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.14.1">16.14</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.15">27.46</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.16"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.16.1">34.64</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.17"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.17.1">26.64</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.18"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.18.1">36.66</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.9.6.19"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.9.6.19.1">42.35</span></span></span>
+<span class="ltx_tr" id="S5.T1.1.1.1.1.1.1.1.10.7">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb ltx_border_t ltx_rowspan ltx_rowspan_3" id="S5.T1.1.1.1.1.1.1.1.10.7.1"><span class="ltx_text" id="S5.T1.1.1.1.1.1.1.1.10.7.1.1">Gemini-2.5-pro-preview</span></span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.2">MemoryBank</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.3">14.89</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.4">13.23</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.5">14.10</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.6">28.03</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.7">35.10</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.8">40.58</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.9">8.70</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.10">11.05</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.11">12.63</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.12">14.98</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.13">25.02</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.14">30.42</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.15">11.88</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.16">20.52</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.17">28.04</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.18">15.70</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.19">21.07</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T1.1.1.1.1.1.1.1.10.7.20">25.15</span></span>
+<span class="ltx_tr" id="S5.T1.1.1.1.1.1.1.1.11.8">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T1.1.1.1.1.1.1.1.11.8.1">A-MEM</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.2">17.73</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.3">17.43</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.4">22.42</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.5">25.55</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.6">38.32</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.7">46.73</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.8">10.87</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.9">15.04</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.10">19.93</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.11">22.47</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.12">37.06</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.13">43.32</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.14"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.11.8.14.1">13.46</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.15">23.99</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.16">29.93</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.17">18.02</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.18">26.37</span>
+<span class="ltx_td ltx_align_center" id="S5.T1.1.1.1.1.1.1.1.11.8.19">32.47</span></span>
+<span class="ltx_tr" id="S5.T1.1.1.1.1.1.1.1.12.9">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.1"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.1.1">MMS</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.2"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.2.1">26.60</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.3"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.3.1">23.46</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.4"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.4.1">31.27</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.5"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.5.1">34.58</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.6"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.6.1">49.84</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.7"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.7.1">55.56</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.8"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.8.1">16.30</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.9"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.9.1">23.55</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.10"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.10.1">25.85</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.11"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.11.1">31.15</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.12"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.12.1">48.19</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.13"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.13.1">54.30</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.14">12.78</span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.15"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.15.1">27.01</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.16"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.16.1">35.20</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.17"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.17.1">23.68</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.18"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.18.1">34.41</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T1.1.1.1.1.1.1.1.12.9.19"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1.12.9.19.1">40.44</span></span></span>
+</span>
+</span></span></span>
+</span></span></span></p>
+</span></div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 1: </span>The recall performance comparison of each method in five task scenarios. The gold truth corresponding to a single query may consist of multiple documents. For R@N, we use the minimum value between N and the number of documents in the gold truth as the denominator. Therefore, the denominators for R@1, R@3, and R@5 may differ, and it is reasonable to observe scenarios where, for example, R@3 has a lower value than R@1.</figcaption>
+</figure>
+<figure class="ltx_table" id="S5.T2">
+<div class="ltx_inline-block ltx_align_center ltx_transformed_outer" id="S5.T2.1" style="width:345.0pt;height:83.5pt;vertical-align:-40.5pt;"><span class="ltx_transformed_inner" style="transform:translate(-180.5pt,43.7pt) scale(0.48866,0.48866) ;">
+<p class="ltx_p" id="S5.T2.1.1"><span class="ltx_text" id="S5.T2.1.1.1">
+<span class="ltx_inline-block ltx_transformed_outer" id="S5.T2.1.1.1.1" style="width:706.0pt;height:170.8pt;vertical-align:-82.9pt;"><span class="ltx_transformed_inner" style="transform:translate(0.0pt,0.0pt) scale(1,1) ;">
+<span class="ltx_p" id="S5.T2.1.1.1.1.1"><span class="ltx_text" id="S5.T2.1.1.1.1.1.1">
+<span class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S5.T2.1.1.1.1.1.1.1">
+<span class="ltx_thead">
+<span class="ltx_tr" id="S5.T2.1.1.1.1.1.1.1.1.1">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="S5.T2.1.1.1.1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.1.1.1.1">Model</span></span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="S5.T2.1.1.1.1.1.1.1.1.1.2"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.1.1.2.1">Method</span></span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_2" id="S5.T2.1.1.1.1.1.1.1.1.1.3">Single Hop</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_2" id="S5.T2.1.1.1.1.1.1.1.1.1.4">Multi Hop</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_2" id="S5.T2.1.1.1.1.1.1.1.1.1.5">Temporal</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_2" id="S5.T2.1.1.1.1.1.1.1.1.1.6">Open Domain</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_2" id="S5.T2.1.1.1.1.1.1.1.1.1.7">Adversarial</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_2" id="S5.T2.1.1.1.1.1.1.1.1.1.8">Average</span></span>
+<span class="ltx_tr" id="S5.T2.1.1.1.1.1.1.1.2.2">
+<span class="ltx_td ltx_th ltx_th_row" id="S5.T2.1.1.1.1.1.1.1.2.2.1"></span>
+<span class="ltx_td ltx_th ltx_th_column ltx_th_row" id="S5.T2.1.1.1.1.1.1.1.2.2.2"></span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.2.2.3">F1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.2.2.4">BLEU-1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.2.2.5">F1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.2.2.6">BLEU-1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.2.2.7">F1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.2.2.8">BLEU-1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.2.2.9">F1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.2.2.10">BLEU-1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.2.2.11">F1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.2.2.12">BLEU-1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.2.2.13">F1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.2.2.14">BLEU-1</span></span>
+</span>
+<span class="ltx_tbody">
+<span class="ltx_tr" id="S5.T2.1.1.1.1.1.1.1.3.1">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t ltx_rowspan ltx_rowspan_4" id="S5.T2.1.1.1.1.1.1.1.3.1.1"><span class="ltx_text" id="S5.T2.1.1.1.1.1.1.1.3.1.1.1">GPT-4o</span></span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.3.1.2">NaiveRAG</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.3.1.3">18.04</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.3.1.4">12.24</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.3.1.5">33.03</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.3.1.6">28.28</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.3.1.7">14.03</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.3.1.8">12.15</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.3.1.9">31.74</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.3.1.10">26.78</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.3.1.11">7.60</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.3.1.12">6.90</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.3.1.13">20.89</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.3.1.14">17.27</span></span>
+<span class="ltx_tr" id="S5.T2.1.1.1.1.1.1.1.4.2">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T2.1.1.1.1.1.1.1.4.2.1">MemoryBank</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.4.2.2">15.39</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.4.2.3">11.18</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.4.2.4">28.44</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.4.2.5">24.18</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.4.2.6">11.91</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.4.2.7">11.23</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.4.2.8">22.04</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.4.2.9">18.86</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.4.2.10">8.65</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.4.2.11">7.93</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.4.2.12">17.29</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.4.2.13">14.68</span></span>
+<span class="ltx_tr" id="S5.T2.1.1.1.1.1.1.1.5.3">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T2.1.1.1.1.1.1.1.5.3.1">A-MEM</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.5.3.2">22.98</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.5.3.3">15.98</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.5.3.4">34.35</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.5.3.5">29.57</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.5.3.6">14.66</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.5.3.7">13.21</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.5.3.8">35.64</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.5.3.9">30.19</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.5.3.10">9.24</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.5.3.11">8.58</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.5.3.12">23.37</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.5.3.13">19.65</span></span>
+<span class="ltx_tr" id="S5.T2.1.1.1.1.1.1.1.6.4">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T2.1.1.1.1.1.1.1.6.4.1"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.6.4.1.1">MMS</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.6.4.2"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.6.4.2.1">28.67</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.6.4.3"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.6.4.3.1">20.96</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.6.4.4"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.6.4.4.1">47.37</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.6.4.5"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.6.4.5.1">39.98</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.6.4.6"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.6.4.6.1">20.81</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.6.4.7"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.6.4.7.1">19.07</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.6.4.8"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.6.4.8.1">42.98</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.6.4.9"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.6.4.9.1">36.89</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.6.4.10"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.6.4.10.1">12.87</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.6.4.11"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.6.4.11.1">11.67</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.6.4.12"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.6.4.12.1">30.54</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.6.4.13"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.6.4.13.1">25.74</span></span></span>
+<span class="ltx_tr" id="S5.T2.1.1.1.1.1.1.1.7.5">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t ltx_rowspan ltx_rowspan_4" id="S5.T2.1.1.1.1.1.1.1.7.5.1"><span class="ltx_text" id="S5.T2.1.1.1.1.1.1.1.7.5.1.1">Qwen2.5-14B</span></span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.7.5.2">NaiveRAG</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.7.5.3">18.56</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.7.5.4">12.31</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.7.5.5">29.26</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.7.5.6">25.44</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.7.5.7">13.90</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.7.5.8">12.28</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.7.5.9">31.60</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.7.5.10">27.40</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.7.5.11">10.77</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.7.5.12">9.46</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.7.5.13">20.82</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.7.5.14">17.38</span></span>
+<span class="ltx_tr" id="S5.T2.1.1.1.1.1.1.1.8.6">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T2.1.1.1.1.1.1.1.8.6.1">MemoryBank</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.8.6.2">21.37</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.8.6.3">14.79</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.8.6.4">28.41</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.8.6.5">24.26</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.8.6.6">13.97</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.8.6.7">12.13</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.8.6.8">32.99</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.8.6.9">28.28</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.8.6.10">11.03</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.8.6.11">10.04</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.8.6.12">21.55</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.8.6.13">17.90</span></span>
+<span class="ltx_tr" id="S5.T2.1.1.1.1.1.1.1.9.7">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T2.1.1.1.1.1.1.1.9.7.1">A-MEM</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.9.7.2"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.9.7.2.1">30.71</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.9.7.3"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.9.7.3.1">23.44</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.9.7.4">32.46</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.9.7.5">28.55</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.9.7.6">14.08</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.9.7.7">13.97</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.9.7.8">43.02</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.9.7.9">37.69</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.9.7.10">11.38</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.9.7.11">10.11</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.9.7.12">26.33</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.9.7.13">22.75</span></span>
+<span class="ltx_tr" id="S5.T2.1.1.1.1.1.1.1.10.8">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T2.1.1.1.1.1.1.1.10.8.1"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.10.8.1.1">MMS</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.10.8.2">28.91</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.10.8.3">22.40</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.10.8.4"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.10.8.4.1">34.00</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.10.8.5"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.10.8.5.1">29.40</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.10.8.6"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.10.8.6.1">14.52</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.10.8.7"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.10.8.7.1">14.01</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.10.8.8"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.10.8.8.1">44.69</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.10.8.9"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.10.8.9.1">38.76</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.10.8.10"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.10.8.10.1">13.28</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.10.8.11"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.10.8.11.1">11.98</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.10.8.12"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.10.8.12.1">27.08</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.10.8.13"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.10.8.13.1">23.31</span></span></span>
+<span class="ltx_tr" id="S5.T2.1.1.1.1.1.1.1.11.9">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb ltx_border_t ltx_rowspan ltx_rowspan_4" id="S5.T2.1.1.1.1.1.1.1.11.9.1"><span class="ltx_text" id="S5.T2.1.1.1.1.1.1.1.11.9.1.1">Gemini-2.5-pro-preview</span></span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.11.9.2">NaiveRAG</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.11.9.3">23.80</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.11.9.4">17.27</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.11.9.5">34.96</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.11.9.6">26.92</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.11.9.7">14.24</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.11.9.8">12.50</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.11.9.9">30.64</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.11.9.10">26.43</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.11.9.11">5.76</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.11.9.12">5.15</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.11.9.13">21.88</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T2.1.1.1.1.1.1.1.11.9.14">17.65</span></span>
+<span class="ltx_tr" id="S5.T2.1.1.1.1.1.1.1.12.10">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T2.1.1.1.1.1.1.1.12.10.1">MemoryBank</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.12.10.2">14.12</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.12.10.3">9.30</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.12.10.4">34.15</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.12.10.5">29.36</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.12.10.6">8.55</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.12.10.7">6.48</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.12.10.8">25.82</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.12.10.9">22.17</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.12.10.10">4.62</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.12.10.11">3.92</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.12.10.12">17.45</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.12.10.13">14.25</span></span>
+<span class="ltx_tr" id="S5.T2.1.1.1.1.1.1.1.13.11">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T2.1.1.1.1.1.1.1.13.11.1">A-MEM</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.13.11.2">22.69</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.13.11.3">15.83</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.13.11.4">40.97</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.13.11.5">35.63</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.13.11.6">12.42</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.13.11.7">11.11</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.13.11.8">36.23</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.13.11.9">31.42</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.13.11.10"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.13.11.10.1">7.20</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.13.11.11"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.13.11.11.1">7.02</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.13.11.12">23.90</span>
+<span class="ltx_td ltx_align_center" id="S5.T2.1.1.1.1.1.1.1.13.11.13">20.20</span></span>
+<span class="ltx_tr" id="S5.T2.1.1.1.1.1.1.1.14.12">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb" id="S5.T2.1.1.1.1.1.1.1.14.12.1"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.14.12.1.1">MMS</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.1.1.1.1.1.1.1.14.12.2"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.14.12.2.1">25.96</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.1.1.1.1.1.1.1.14.12.3"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.14.12.3.1">18.96</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.1.1.1.1.1.1.1.14.12.4"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.14.12.4.1">41.49</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.1.1.1.1.1.1.1.14.12.5"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.14.12.5.1">36.99</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.1.1.1.1.1.1.1.14.12.6"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.14.12.6.1">12.91</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.1.1.1.1.1.1.1.14.12.7"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.14.12.7.1">11.32</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.1.1.1.1.1.1.1.14.12.8"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.14.12.8.1">42.00</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.1.1.1.1.1.1.1.14.12.9"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.14.12.9.1">36.59</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.1.1.1.1.1.1.1.14.12.10">7.09</span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.1.1.1.1.1.1.1.14.12.11">6.81</span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.1.1.1.1.1.1.1.14.12.12"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.14.12.12.1">25.89</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb" id="S5.T2.1.1.1.1.1.1.1.14.12.13"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1.14.12.13.1">22.13</span></span></span>
+</span>
+</span></span></span>
+</span></span></span></p>
+</span></div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 2: </span>Comparison of Generation Performance of Four Methods on the LoCoMo Dataset</figcaption>
+</figure>
+<div class="ltx_para" id="S5.SS1.p1">
+<p class="ltx_p" id="S5.SS1.p1.1">The experimental results show in Table <a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S5.T1" title="Table 1 ‣ 5.1 Recall Results ‣ 5 Results and Discussion ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_tag">1</span></a> that MMS is superior to other methods in most cases, with a significant overall improvement effect. The improvement effect is most obvious in the Multi Hop scenario, achieving the maximum improvement across models and tasks in the three metrics of R@1, R@3, and R@5. GPT-4o and Gemini, in particular, improved recall by 8-11 points on the Multi Hop task compared to A-MEM. Multi Hop tasks rely on deep-level associative reasoning among multiple documents. The multi-memory segment strategy of the MMS is more suitable for this complex retrieval scenario, enhancing the effectiveness of cross-document integration and reasoning. Significant improvements have also been observed in Open Domain and Temporal scenarios, indicating that MMS exhibits robustness in contexts with ambiguous and uncertain information structures. In the Single Hop scenario, most cases outperform other methods, but a few cases slightly underperform. This may introduce some redundancy in a simple MMS like Single Hop.</p>
+</div>
+<div class="ltx_para" id="S5.SS1.p2">
+<p class="ltx_p" id="S5.SS1.p2.1">Overall, we think that incorporating this part of content from multiple cognitive perspectives as long-term memory fragments can indeed enhance high recall rates. This aligns with our initial intuitive insight: different users may pose questions from various angles, and by preserving different cognitive perspectives, we can improve the matching degree when questions are asked from different angles.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S5.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.2 </span>Answer Results</h3>
+<div class="ltx_para" id="S5.SS2.p1">
+<p class="ltx_p" id="S5.SS2.p1.1">MMS has achieved leading performance on multiple mainstream large language models, significantly outperforming existing methods such as NaiveRAG, MemoryBank, and A-MEM. Whether it is F1 or BLEU-1, MMS achieves comprehensive improvement in five types of tasks: single-hop, multi-hop, temporal, open-domain, and adversarial question answering. In particular, it has particularly outstanding advantages in multi-hop reasoning and open-domain tasks, demonstrating excellent information integration and reasoning depth. The strong performance of MMS may be due to its use of a multi-level memory structure, which has obvious advantages in improving question-answering accuracy, handling complex logical relationships, and resisting input interference. The experimental results are shown in Table <a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S5.T2" title="Table 2 ‣ 5.1 Recall Results ‣ 5 Results and Discussion ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_tag">2</span></a>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S5.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.3 </span>Ablation Study</h3>
+<div class="ltx_para" id="S5.SS3.p1">
+<p class="ltx_p" id="S5.SS3.p1.1">We conducted ablation experiments on each module of the MMS. When the keyword part is not included, the R@1 metric under the Single Hop task and the R@5 metric under the Open Domain task perform the best. We believe that when the keyword part is not included. When multiple cognitive perspectives are not included, the R@3 metric under the Multi Hop task, the R@5 metric under the Temporal task, and the R@1 metric under the Adversarial task perform the best. We believe that different memory segments can be used to construct retrieval units based on different character scenarios. In a broader general scenario, the retrieval units composed of keywords, short-term memory, multiple cognitive perspectives, and episodic memory can achieve the best performance in most tasks. The experimental results are shown in Table <a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S5.T3" title="Table 3 ‣ 5.3 Ablation Study ‣ 5 Results and Discussion ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_tag">3</span></a>.</p>
+</div>
+<div class="ltx_para" id="S5.SS3.p2">
+<p class="ltx_p" id="S5.SS3.p2.1">Similarly, we can also observe from Table <a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#S5.T4" title="Table 4 ‣ 5.3 Ablation Study ‣ 5 Results and Discussion ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_tag">4</span></a> that keywords yield greater benefits for inferential questions (single-hop, multi-hop, and adversarial), whereas for temporal questions, multiple cognitive perspectives and semantic memory bring more benefits. In terms of a broader range of domain-specific questions, the memory content encompassed by our MMS better enhances the quality of generated content.</p>
+</div>
+<figure class="ltx_table" id="S5.T3">
+<div class="ltx_inline-block ltx_align_center ltx_transformed_outer" id="S5.T3.1" style="width:345.0pt;height:38.4pt;vertical-align:-18.1pt;"><span class="ltx_transformed_inner" style="transform:translate(-213.2pt,23.8pt) scale(0.44721,0.44721) ;">
+<p class="ltx_p" id="S5.T3.1.1"><span class="ltx_text" id="S5.T3.1.1.1">
+<span class="ltx_inline-block ltx_transformed_outer" id="S5.T3.1.1.1.1" style="width:771.4pt;height:86pt;vertical-align:-40.5pt;"><span class="ltx_transformed_inner" style="transform:translate(0.0pt,0.0pt) scale(1,1) ;">
+<span class="ltx_p" id="S5.T3.1.1.1.1.1"><span class="ltx_text" id="S5.T3.1.1.1.1.1.1">
+<span class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S5.T3.1.1.1.1.1.1.1">
+<span class="ltx_thead">
+<span class="ltx_tr" id="S5.T3.1.1.1.1.1.1.1.1.1">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="S5.T3.1.1.1.1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.1.1.1.1">Method</span></span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row ltx_border_tt ltx_colspan ltx_colspan_3" id="S5.T3.1.1.1.1.1.1.1.1.1.2"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.1.1.2.1">Single Hop</span></span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_3" id="S5.T3.1.1.1.1.1.1.1.1.1.3"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.1.1.3.1">Multi Hop</span></span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_3" id="S5.T3.1.1.1.1.1.1.1.1.1.4"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.1.1.4.1">Temporal</span></span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_3" id="S5.T3.1.1.1.1.1.1.1.1.1.5"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.1.1.5.1">Open Domain</span></span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_3" id="S5.T3.1.1.1.1.1.1.1.1.1.6"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.1.1.6.1">Adversarial</span></span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_3" id="S5.T3.1.1.1.1.1.1.1.1.1.7"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.1.1.7.1">Avg</span></span></span>
+<span class="ltx_tr" id="S5.T3.1.1.1.1.1.1.1.2.2">
+<span class="ltx_td ltx_th ltx_th_row" id="S5.T3.1.1.1.1.1.1.1.2.2.1"></span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.2">R@1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.3">R@3</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.4">R@5</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.5">R@1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.6">R@3</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.7">R@5</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.8">R@1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.9">R@3</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.10">R@5</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.11">R@1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.12">R@3</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.13">R@5</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.14">R@1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.15">R@3</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.16">R@5</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.17">R@1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.18">R@3</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.2.2.19">R@5</span></span>
+</span>
+<span class="ltx_tbody">
+<span class="ltx_tr" id="S5.T3.1.1.1.1.1.1.1.3.1">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.1">w/o Key</span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.2"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.3.1.2.1">30.85</span></span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.3">29.72</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.4">34.02</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.5">42.68</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.6">59.29</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.7">66.17</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.8">23.21</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.9">23.55</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.10">31.86</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.11">34.60</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.12">52.55</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.13"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.3.1.13.1">62.18</span></span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.14">11.88</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.15">27.36</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.16">33.40</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.17">28.64</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.18">38.49</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.3.1.19">45.53</span></span>
+<span class="ltx_tr" id="S5.T3.1.1.1.1.1.1.1.4.2">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T3.1.1.1.1.1.1.1.4.2.1">w/o Cog</span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T3.1.1.1.1.1.1.1.4.2.2">26.24</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.3">26.06</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.4">32.73</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.5">43.61</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.6"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.4.2.6.1">59.96</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.7">66.33</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.8">20.65</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.9"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.4.2.9.1">27.53</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.10">31.83</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.11">31.98</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.12">49.36</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.13">59.53</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.14"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.4.2.14.1">15.47</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.15">30.49</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.16">37.57</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.17">27.59</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.18">38.68</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.4.2.19">45.60</span></span>
+<span class="ltx_tr" id="S5.T3.1.1.1.1.1.1.1.5.3">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T3.1.1.1.1.1.1.1.5.3.1">w/o Epi</span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T3.1.1.1.1.1.1.1.5.3.2">27.66</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.3">27.30</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.4">33.17</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.5">42.37</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.6">59.03</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.7">68.38</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.8">18.47</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.9">24.99</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.10">31.68</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.11">31.51</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.12">47.98</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.13">57.51</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.14">15.02</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.15">29.48</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.16">37.00</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.17">27.01</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.18">37.76</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.5.3.19">45.55</span></span>
+<span class="ltx_tr" id="S5.T3.1.1.1.1.1.1.1.6.4">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T3.1.1.1.1.1.1.1.6.4.1">w/o Cog &amp; EPi</span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T3.1.1.1.1.1.1.1.6.4.2">21.99</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.3">20.57</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.4">24.21</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.5">37.69</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.6">55.40</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.7">62.12</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.8">13.04</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.9">21.20</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.10">23.82</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.11">26.75</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.12">41.52</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.13">48.79</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.14">13.00</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.15">26.01</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.16">35.99</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.17">22.49</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.18">32.94</span>
+<span class="ltx_td ltx_align_center" id="S5.T3.1.1.1.1.1.1.1.6.4.19">38.99</span></span>
+<span class="ltx_tr" id="S5.T3.1.1.1.1.1.1.1.7.5">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.1">MMS</span>
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.2">28.53</span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.3"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.7.5.3.1">30.18</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.4"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.7.5.4.1">34.06</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.5"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.7.5.5.1">44.18</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.6">59.87</span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.7"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.7.5.7.1">67.05</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.8"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.7.5.8.1">23.73</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.9">26.63</span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.10"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.7.5.10.1">32.23</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.11"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.7.5.11.1">34.98</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.12"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.7.5.12.1">53.01</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.13">62.04</span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.14">15.31</span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.15"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.7.5.15.1">31.46</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.16"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.7.5.16.1">37.65</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.17"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.7.5.17.1">29.35</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.18"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.7.5.18.1">40.23</span></span>
+<span class="ltx_td ltx_align_center ltx_border_bb ltx_border_t" id="S5.T3.1.1.1.1.1.1.1.7.5.19"><span class="ltx_text ltx_font_bold" id="S5.T3.1.1.1.1.1.1.1.7.5.19.1">46.61</span></span></span>
+</span>
+</span></span></span>
+</span></span></span></p>
+</span></div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 3: </span>The ablation experiment using GPT-4o as the base model of MMS method. The symbol "w/o" indicates an experiment in which a specific module was removed. Key represents the key words of short-term memory, Cog represents multiple cognitive perspectives on short-term memory, and Epi represents episodic memory of short-term memory.</figcaption>
+</figure>
+<figure class="ltx_table" id="S5.T4">
+<div class="ltx_inline-block ltx_align_center ltx_transformed_outer" id="S5.T4.1" style="width:596.2pt;height:86pt;vertical-align:-40.5pt;"><span class="ltx_transformed_inner" style="transform:translate(0.0pt,0.0pt) scale(1,1) ;">
+<p class="ltx_p" id="S5.T4.1.1"><span class="ltx_text" id="S5.T4.1.1.1">
+<span class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S5.T4.1.1.1.1">
+<span class="ltx_thead">
+<span class="ltx_tr" id="S5.T4.1.1.1.1.1.1">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="S5.T4.1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S5.T4.1.1.1.1.1.1.1.1">Method</span></span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_2" id="S5.T4.1.1.1.1.1.1.2">Single Hop</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_2" id="S5.T4.1.1.1.1.1.1.3">Multi Hop</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_2" id="S5.T4.1.1.1.1.1.1.4">Temporal</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_2" id="S5.T4.1.1.1.1.1.1.5">Open Domain</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_2" id="S5.T4.1.1.1.1.1.1.6">Adversarial</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt ltx_colspan ltx_colspan_2" id="S5.T4.1.1.1.1.1.1.7">Average</span></span>
+<span class="ltx_tr" id="S5.T4.1.1.1.1.2.2">
+<span class="ltx_td ltx_th ltx_th_row" id="S5.T4.1.1.1.1.2.2.1"></span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T4.1.1.1.1.2.2.2">F1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T4.1.1.1.1.2.2.3">BLEU-1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T4.1.1.1.1.2.2.4">F1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T4.1.1.1.1.2.2.5">BLEU-1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T4.1.1.1.1.2.2.6">F1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T4.1.1.1.1.2.2.7">BLEU-1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T4.1.1.1.1.2.2.8">F1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T4.1.1.1.1.2.2.9">BLEU-1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T4.1.1.1.1.2.2.10">F1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T4.1.1.1.1.2.2.11">BLEU-1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T4.1.1.1.1.2.2.12">F1</span>
+<span class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S5.T4.1.1.1.1.2.2.13">BLEU-1</span></span>
+</span>
+<span class="ltx_tbody">
+<span class="ltx_tr" id="S5.T4.1.1.1.1.3.1">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S5.T4.1.1.1.1.3.1.1">w/o Key</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T4.1.1.1.1.3.1.2">27.51</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T4.1.1.1.1.3.1.3">18.53</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T4.1.1.1.1.3.1.4">44.24</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T4.1.1.1.1.3.1.5">36.52</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T4.1.1.1.1.3.1.6">19.28</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T4.1.1.1.1.3.1.7">16.12</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T4.1.1.1.1.3.1.8">41.27</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T4.1.1.1.1.3.1.9">35.53</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T4.1.1.1.1.3.1.10">10.88</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T4.1.1.1.1.3.1.11">10.12</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T4.1.1.1.1.3.1.12">28.64</span>
+<span class="ltx_td ltx_align_center ltx_border_t" id="S5.T4.1.1.1.1.3.1.13">23.36</span></span>
+<span class="ltx_tr" id="S5.T4.1.1.1.1.4.2">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T4.1.1.1.1.4.2.1">w/o Cog</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.4.2.2">27.77</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.4.2.3">19.77</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.4.2.4">45.68</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.4.2.5">38.46</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.4.2.6">17.36</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.4.2.7">15.47</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.4.2.8"><span class="ltx_text ltx_font_bold" id="S5.T4.1.1.1.1.4.2.8.1">43.01</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.4.2.9">36.87</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.4.2.10">12.27</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.4.2.11">11.65</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.4.2.12">29.22</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.4.2.13">24.44</span></span>
+<span class="ltx_tr" id="S5.T4.1.1.1.1.5.3">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T4.1.1.1.1.5.3.1">w/o Sem</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.5.3.2">27.79</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.5.3.3">19.16</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.5.3.4">45.31</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.5.3.5">37.94</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.5.3.6">19.51</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.5.3.7">18.50</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.5.3.8">42.69</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.5.3.9">36.60</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.5.3.10">12.45</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.5.3.11">11.44</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.5.3.12">29.55</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.5.3.13">24.73</span></span>
+<span class="ltx_tr" id="S5.T4.1.1.1.1.6.4">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S5.T4.1.1.1.1.6.4.1">w/o Cog&amp;Sem</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.6.4.2">28.24</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.6.4.3">20.24</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.6.4.4">45.05</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.6.4.5">38.34</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.6.4.6">17.92</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.6.4.7">15.44</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.6.4.8">42.71</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.6.4.9"><span class="ltx_text ltx_font_bold" id="S5.T4.1.1.1.1.6.4.9.1">37.42</span></span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.6.4.10">12.83</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.6.4.11">11.53</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.6.4.12">29.35</span>
+<span class="ltx_td ltx_align_center" id="S5.T4.1.1.1.1.6.4.13">24.59</span></span>
+<span class="ltx_tr" id="S5.T4.1.1.1.1.7.5">
+<span class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_t" id="S5.T4.1.1.1.1.7.5.1"><span class="ltx_text ltx_font_bold" id="S5.T4.1.1.1.1.7.5.1.1">MMS</span></span>
+<span class="ltx_td ltx_align_center ltx_border_b ltx_border_t" id="S5.T4.1.1.1.1.7.5.2"><span class="ltx_text ltx_font_bold" id="S5.T4.1.1.1.1.7.5.2.1">28.67</span></span>
+<span class="ltx_td ltx_align_center ltx_border_b ltx_border_t" id="S5.T4.1.1.1.1.7.5.3"><span class="ltx_text ltx_font_bold" id="S5.T4.1.1.1.1.7.5.3.1">20.96</span></span>
+<span class="ltx_td ltx_align_center ltx_border_b ltx_border_t" id="S5.T4.1.1.1.1.7.5.4"><span class="ltx_text ltx_font_bold" id="S5.T4.1.1.1.1.7.5.4.1">47.37</span></span>
+<span class="ltx_td ltx_align_center ltx_border_b ltx_border_t" id="S5.T4.1.1.1.1.7.5.5"><span class="ltx_text ltx_font_bold" id="S5.T4.1.1.1.1.7.5.5.1">39.98</span></span>
+<span class="ltx_td ltx_align_center ltx_border_b ltx_border_t" id="S5.T4.1.1.1.1.7.5.6"><span class="ltx_text ltx_font_bold" id="S5.T4.1.1.1.1.7.5.6.1">20.81</span></span>
+<span class="ltx_td ltx_align_center ltx_border_b ltx_border_t" id="S5.T4.1.1.1.1.7.5.7"><span class="ltx_text ltx_font_bold" id="S5.T4.1.1.1.1.7.5.7.1">19.07</span></span>
+<span class="ltx_td ltx_align_center ltx_border_b ltx_border_t" id="S5.T4.1.1.1.1.7.5.8">42.98</span>
+<span class="ltx_td ltx_align_center ltx_border_b ltx_border_t" id="S5.T4.1.1.1.1.7.5.9">36.89</span>
+<span class="ltx_td ltx_align_center ltx_border_b ltx_border_t" id="S5.T4.1.1.1.1.7.5.10"><span class="ltx_text ltx_font_bold" id="S5.T4.1.1.1.1.7.5.10.1">12.87</span></span>
+<span class="ltx_td ltx_align_center ltx_border_b ltx_border_t" id="S5.T4.1.1.1.1.7.5.11"><span class="ltx_text ltx_font_bold" id="S5.T4.1.1.1.1.7.5.11.1">11.67</span></span>
+<span class="ltx_td ltx_align_center ltx_border_b ltx_border_t" id="S5.T4.1.1.1.1.7.5.12"><span class="ltx_text ltx_font_bold" id="S5.T4.1.1.1.1.7.5.12.1">30.54</span></span>
+<span class="ltx_td ltx_align_center ltx_border_b ltx_border_t" id="S5.T4.1.1.1.1.7.5.13"><span class="ltx_text ltx_font_bold" id="S5.T4.1.1.1.1.7.5.13.1">25.74</span></span></span>
+</span>
+</span></span></p>
+</span></div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 4: </span>The ablation experiment using GPT-4o as the base model of MMS method. The symbol "w/o" indicates an experiment in which a specific module was removed. Key represents the key words of short-term memory, Cog represents multiple cognitive perspectives on short-term memory, and Sem represents semantic memory of short-term memory.</figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S5.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.4 </span>Analyze Long-term Memory Units</h3>
+<div class="ltx_para" id="S5.SS4.p1">
+<p class="ltx_p" id="S5.SS4.p1.1">We used GPT-4o as the base to compare the effects of adding the remaining memory segments in the MMS retrieval units and contextual memory units. For retrieval, retrieval memory units includes keywords, short-term memory, multiple cognitive perspectives, and episodic memory. We add semantic memory for comparison, and find recall rate decreases. This is because generated semantic memory is a high-level overview of factual knowledge in short-term memory, creating a gap with the semantic form of user’s question. For generation, contextual memory units of MMS consists of keywords, short-term memory, multiple cognitive perspectives, and semantic memory. We add contextual memory for comparison and find generation quality decreases after adding episodic memory. As episodic memory describes event-related content already present in original short-term memory, adding more can lead to redundancy and lower generation quality. Thus, the composition modules of retrieval and contextual memory units we use are reasonable. The experimental results are shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#A2.F2" title="Figure 2 ‣ Appendix B Ablation Experiment ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_tag">2</span></a>.
+In general, during the retrieval process, emphasis should be placed on keywords, multi-perspective, and event-oriented information to ensure that the "net" of the search is sufficiently broad and precise. During the generation process, focus should be on facts, keywords, and high-level semantics to ensure that the model, while understanding the general meaning, is not confused by repetitive event descriptions. Therefore, our MMS will achieve high-quality results.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S5.SS5">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.5 </span>Robustness of the Number of Memories</h3>
+<div class="ltx_para" id="S5.SS5.p1">
+<p class="ltx_p" id="S5.SS5.p1.1">We manipulated the quantities of memory segments to evaluate the impact on performance. As the value of n increased, performance exhibited enhancement notwithstanding the introduction of noise, owing to the high-caliber memory contents facilitating the differentiation between pivotal and noisy data. This demonstrates the resilience of our method with respect to the quantities of memory segments. The results can be viewed in Table <a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#A3.T6" title="Table 6 ‣ Appendix C Peformance ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_tag">6</span></a> of Appendix <a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#A3" title="Appendix C Peformance ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_tag">C</span></a>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S5.SS6">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.6 </span>Analysis of Token and Latency Overhead</h3>
+<div class="ltx_para" id="S5.SS6.p1">
+<p class="ltx_p" id="S5.SS6.p1.1">We analyzed token and latency overhead for different methods experimentally, specifically calculating the average overhead needed to generate the memory content for each query. Compared to A-MEM, our approach proves to be faster and more resource-efficient. Although there’s a slight rise in latency and overhead compared to the memory repository, its long-term memory is overly simplistic and of low quality, resulting in poor performance. Conversely, our method generates a larger volume of high-quality memory content despite the increased overhead, with only a minimal latency increase that barely affects user experience. Our method holds practical value. The results can be viewed in Table <a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#A3.T7" title="Table 7 ‣ Appendix C Peformance ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_tag">7</span></a> of Appendix <a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#A3" title="Appendix C Peformance ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_tag">C</span></a>.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6 </span>Conclusion</h2>
+<div class="ltx_para" id="S6.p1">
+<p class="ltx_p" id="S6.p1.1">This paper creates a multi-memory system by integrating with cognitive psychology to build effective long-term memory, boosting recall and generation quality. Multiple memory theory suggests human memory comes in many forms. Current methods don’t consider the variety of human memory segments and just use summarization, leading to low-quality content. Since people understand problems from different angles, we view short-term memory’s various cognitive aspects as long-term memory segments. Levels-of-processing theory states that deeper encoding leads to better memory retention. MMS turns short-term memory into long-term segments like keywords, different cognitive views, episodic and semantic memories. It constructs retrieval units from these for recall and builds contextual units to enhance knowledge. Experiments indicate MMS enhances recall and generation at lower cost, proving practical value. Our analysis under varying memory segment counts reveals high-quality content ensures sustained gains and noise resilience. Our approach effectively integrates cognitive psychology into the research on agent memory within artificial intelligence for future studies.</p>
+</div>
+</section>
+<section class="ltx_section" id="S7">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">7 </span>Limitations</h2>
+<div class="ltx_para" id="S7.p1">
+<p class="ltx_p" id="S7.p1.1">Our current experiments have demonstrated the effectiveness of our method on both open-source and closed-source models. We are considering constructing a dedicated memory model in the future specifically for generating high-quality memories, employing Supervised Fine-Tuning and Reinforcement Learning techniques to better enhance the model’s capability in generating high-quality long-term memories.</p>
+</div>
+</section>
+<section class="ltx_section" id="S8">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">8 </span>Ethics Statement</h2>
+<div class="ltx_para" id="S8.p1">
+<p class="ltx_p" id="S8.p1.1">We guarantee that the dataset we use are public dataset and do not involve data leakage or other issues. Our method is a universal way of processing knowledge, without involving issues such as racial discrimination and moral hazard.</p>
+</div>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</section>
+<section class="ltx_appendix" id="A1">
+<h2 class="ltx_title ltx_title_appendix">
+<span class="ltx_tag ltx_tag_appendix">Appendix A </span>Prompts</h2>
+<div class="ltx_para" id="A1.p1">
+<p class="ltx_p" id="A1.p1.1">We construct keywords, multiple cognitive perspectives, episodic memory, and semantic memory based on the content in short-term memory. Here, episodic memory mainly describes the event information that occurred at a specific time and place, so we label it as situations in the prompt. Semantic memory mainly contains factual world knowledge, so we label it as knowledge points. The specific content is shown in Table <a class="ltx_ref" href="https://arxiv.org/html/2508.15294v3#A1.T5" title="Table 5 ‣ Appendix A Prompts ‣ A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents"><span class="ltx_text ltx_ref_tag">5</span></a>.</p>
+</div>
+<figure class="ltx_table" id="A1.T5">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="A1.T5.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="A1.T5.1.1.1">
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_t" id="A1.T5.1.1.1.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.1.1.1.1">
+<span class="ltx_p" id="A1.T5.1.1.1.1.1.1" style="width:426.8pt;"><span class="ltx_text ltx_font_bold" id="A1.T5.1.1.1.1.1.1.1">Prompt</span></span>
+</span>
+</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="A1.T5.1.2.1">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_t" id="A1.T5.1.2.1.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.2.1.1.1">
+<span class="ltx_p" id="A1.T5.1.2.1.1.1.1" style="width:426.8pt;">You are a linguistics expert. Please generate the following required content based on the context and dialogue below.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.3.2">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.3.2.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.3.2.1.1">
+<span class="ltx_p" id="A1.T5.1.3.2.1.1.1" style="width:426.8pt;">Dialogue time: {time}</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.4.3">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.4.3.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.4.3.1.1">
+<span class="ltx_p" id="A1.T5.1.4.3.1.1.1" style="width:426.8pt;">Context: {context}</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.5.4">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.5.4.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.5.4.1.1">
+<span class="ltx_p" id="A1.T5.1.5.4.1.1.1" style="width:426.8pt;">Dialogue: {content}</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.6.5">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.6.5.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.6.5.1.1">
+<span class="ltx_p" id="A1.T5.1.6.5.1.1.1" style="width:426.8pt;">1. Analyze the key words in the above dialogue.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.7.6">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.7.6.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.7.6.1.1">
+<span class="ltx_p" id="A1.T5.1.7.6.1.1.1" style="width:426.8pt;">2. Analyze the dialogue content from different cognitive perspectives based on the context and the content of the dialogue.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.8.7">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.8.7.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.8.7.1.1">
+<span class="ltx_p" id="A1.T5.1.8.7.1.1.1" style="width:426.8pt;">3. Analyze the situations that can serve as episodic memory from the dialogue.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.9.8">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.9.8.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.9.8.1.1">
+<span class="ltx_p" id="A1.T5.1.9.8.1.1.1" style="width:426.8pt;">3. Analyze the knowledge points in the dialogue.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.10.9">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.10.9.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.10.9.1.1">
+<span class="ltx_p" id="A1.T5.1.10.9.1.1.1" style="width:426.8pt;">4. You must output in the required format.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.11.10">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.11.10.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.11.10.1.1">
+<span class="ltx_p" id="A1.T5.1.11.10.1.1.1" style="width:426.8pt;">Format the response as a JSON object:</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.12.11">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.12.11.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.12.11.1.1">
+<span class="ltx_p" id="A1.T5.1.12.11.1.1.1" style="width:426.8pt;">{{</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.13.12">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.13.12.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.13.12.1.1">
+<span class="ltx_p" id="A1.T5.1.13.12.1.1.1" style="width:426.8pt;">  "keywords": [</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.14.13">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.14.13.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.14.13.1.1">
+<span class="ltx_p" id="A1.T5.1.14.13.1.1.1" style="width:426.8pt;">   // The key information should be able to represent the dialogue, such as: characters, intentions, topics, time, place, events and other important information.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.15.14">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.15.14.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.15.14.1.1">
+<span class="ltx_p" id="A1.T5.1.15.14.1.1.1" style="width:426.8pt;">   // Only analyze the key words in the dialogue, not those in the context.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.16.15">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.16.15.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.16.15.1.1">
+<span class="ltx_p" id="A1.T5.1.16.15.1.1.1" style="width:426.8pt;">  ],</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.17.16">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.17.16.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.17.16.1.1">
+<span class="ltx_p" id="A1.T5.1.17.16.1.1.1" style="width:426.8pt;">  "cognitive_perspectives": [</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.18.17">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.18.17.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.18.17.1.1">
+<span class="ltx_p" id="A1.T5.1.18.17.1.1.1" style="width:426.8pt;">   // Context information is provided to help you understand the entire chat process and assist you in analysis.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.19.18">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.19.18.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.19.18.1.1">
+<span class="ltx_p" id="A1.T5.1.19.18.1.1.1" style="width:426.8pt;">   // Only analyze the content in the dialogue, not the content in the context.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.20.19">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.20.19.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.20.19.1.1">
+<span class="ltx_p" id="A1.T5.1.20.19.1.1.1" style="width:426.8pt;">  ],</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.21.20">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.21.20.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.21.20.1.1">
+<span class="ltx_p" id="A1.T5.1.21.20.1.1.1" style="width:426.8pt;">  "situations": [</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.22.21">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.22.21.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.22.21.1.1">
+<span class="ltx_p" id="A1.T5.1.22.21.1.1.1" style="width:426.8pt;">   // An event that occurs at a specific time and place.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.23.22">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.23.22.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.23.22.1.1">
+<span class="ltx_p" id="A1.T5.1.23.22.1.1.1" style="width:426.8pt;">   // Extract the situations that can be part of episodic memory from the dialogue.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.24.23">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.24.23.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.24.23.1.1">
+<span class="ltx_p" id="A1.T5.1.24.23.1.1.1" style="width:426.8pt;">   // Only analyze the key words in the dialogue, not those in the context.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.25.24">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.25.24.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.25.24.1.1">
+<span class="ltx_p" id="A1.T5.1.25.24.1.1.1" style="width:426.8pt;">  ],</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.26.25">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.26.25.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.26.25.1.1">
+<span class="ltx_p" id="A1.T5.1.26.25.1.1.1" style="width:426.8pt;">  "knowledge_points": [</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.27.26">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.27.26.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.27.26.1.1">
+<span class="ltx_p" id="A1.T5.1.27.26.1.1.1" style="width:426.8pt;">   // Only extract the knowledge points from the dialog that can be part of semantic memory. The context merely helps you understand the background.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.28.27">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.28.27.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.28.27.1.1">
+<span class="ltx_p" id="A1.T5.1.28.27.1.1.1" style="width:426.8pt;">   // Only analyze the key words in the dialogue, not those in the context.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.29.28">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="A1.T5.1.29.28.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.29.28.1.1">
+<span class="ltx_p" id="A1.T5.1.29.28.1.1.1" style="width:426.8pt;">  ]</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="A1.T5.1.30.29">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b" id="A1.T5.1.30.29.1">
+<span class="ltx_inline-block ltx_align_top" id="A1.T5.1.30.29.1.1">
+<span class="ltx_p" id="A1.T5.1.30.29.1.1.1" style="width:426.8pt;">}}</span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 5: </span>Prompt for generating long-term memory content. time is the dialogue time, context is the context summary information provided in the dialogue dataset, and content is the content of this round of dialogue.</figcaption>
+</figure>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</section>
+<section class="ltx_appendix" id="A2">
+<h2 class="ltx_title ltx_title_appendix">
+<span class="ltx_tag ltx_tag_appendix">Appendix B </span>Ablation Experiment</h2>
+<figure class="ltx_figure" id="A2.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="84" id="A2.F2.g1" src="Figs/all_comparision.png" width="381"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>Compare the impact on performance after adding other segments. In terms of recall metrics, MMS and MMS+Sem were compared. In terms of generation, MMS and MMS+Epi were compared. Sem refers to semantic memory, and Epi refers to episodic memory.</figcaption>
+</figure>
+</section>
+<section class="ltx_appendix" id="A3">
+<h2 class="ltx_title ltx_title_appendix">
+<span class="ltx_tag ltx_tag_appendix">Appendix C </span>Peformance</h2>
+<figure class="ltx_table" id="A3.T6">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 6: </span>Performance comparison for different values of n</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="A3.T6.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="A3.T6.1.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="A3.T6.1.1.1.1"><span class="ltx_text ltx_font_bold" id="A3.T6.1.1.1.1.1">Metrics</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A3.T6.1.1.1.2"><span class="ltx_text ltx_font_bold" id="A3.T6.1.1.1.2.1">n=1</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A3.T6.1.1.1.3"><span class="ltx_text ltx_font_bold" id="A3.T6.1.1.1.3.1">n=3</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A3.T6.1.1.1.4"><span class="ltx_text ltx_font_bold" id="A3.T6.1.1.1.4.1">n=5</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A3.T6.1.1.1.5"><span class="ltx_text ltx_font_bold" id="A3.T6.1.1.1.5.1">n=7</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="A3.T6.1.1.1.6"><span class="ltx_text ltx_font_bold" id="A3.T6.1.1.1.6.1">n=9</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="A3.T6.1.2.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="A3.T6.1.2.1.1">Avg Fl</th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A3.T6.1.2.1.2">20.74</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A3.T6.1.2.1.3">25.07</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A3.T6.1.2.1.4">30.54</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A3.T6.1.2.1.5">34.81</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A3.T6.1.2.1.6">36.13</td>
+</tr>
+<tr class="ltx_tr" id="A3.T6.1.3.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb" id="A3.T6.1.3.2.1">Avg BLUE-1</th>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A3.T6.1.3.2.2">17.44</td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A3.T6.1.3.2.3">21.39</td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A3.T6.1.3.2.4">25.74</td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A3.T6.1.3.2.5">28.95</td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A3.T6.1.3.2.6">31.28</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure class="ltx_table" id="A3.T7">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 7: </span>Comparison of Latency Overhead and Token Overhead</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="A3.T7.1">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="A3.T7.1.1.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_tt" id="A3.T7.1.1.1.1"><span class="ltx_text ltx_font_bold" id="A3.T7.1.1.1.1.1">Metrics</span></th>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="A3.T7.1.1.1.2"><span class="ltx_text ltx_font_bold" id="A3.T7.1.1.1.2.1">MMS</span></td>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="A3.T7.1.1.1.3"><span class="ltx_text ltx_font_bold" id="A3.T7.1.1.1.3.1">A-MEM</span></td>
+<td class="ltx_td ltx_align_center ltx_border_tt" id="A3.T7.1.1.1.4"><span class="ltx_text ltx_font_bold" id="A3.T7.1.1.1.4.1">Memory Bank</span></td>
+</tr>
+<tr class="ltx_tr" id="A3.T7.1.2.2">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_t" id="A3.T7.1.2.2.1">Avg Latency</th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A3.T7.1.2.2.2">1.309</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A3.T7.1.2.2.3">3.931</td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="A3.T7.1.2.2.4">0.949</td>
+</tr>
+<tr class="ltx_tr" id="A3.T7.1.3.3">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_bb" id="A3.T7.1.3.3.1">Avg Tokens</th>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A3.T7.1.3.3.2">744</td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A3.T7.1.3.3.3">1429</td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="A3.T7.1.3.3.4">238</td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Jan  4 06:35:13 2026 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,1766 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM</title>
+<!--Generated on Fri Apr 24 17:18:02 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="/static/browse/0.3.4/css/arxiv-html-papers-20260131.css" type="text/css">
+<script src="/static/browse/0.3.4/js/arxiv-html-papers-20260131.js"></script>
+<script>
+  // Restore the saved color scheme preference, or
+  // enact the browser preference if "automatic", 
+  // without expecting DOM load to have completed.
+  //
+  // Also restore any saved readingmode and ToC display preferences.
+  function initializeReadingPreferences() {
+    let saved_theme = localStorage.getItem("ar5iv_theme") || "automatic";
+    if (saved_theme === "automatic") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        saved_theme = "dark";
+      }
+    }
+    if (saved_theme == "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    const tocDisplay = localStorage.getItem('arxiv_html_paper_toc_display');
+    if (tocDisplay) {
+      document.documentElement.setAttribute("data-toc-display", tocDisplay);
+    }
+    const readingMode = localStorage.getItem('arxiv_html_paper_reading_mode');
+    if (readingMode) {
+      document.documentElement.setAttribute("data-reading-mode", readingMode);
+    }
+  }
+  // Run as soon as JS starts, to minimize repainting
+  initializeReadingPreferences();
+</script>
+<link rel="apple-touch-icon" sizes="180x180"
+  href="/static/browse/0.3.4/images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+  href="/static/browse/0.3.4/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+  href="/static/browse/0.3.4/images/icons/favicon-16x16.png">
+<link rel="manifest" href="/static/browse/0.3.4/images/icons/site.webmanifest">
+<link rel="mask-icon" href="/static/browse/0.3.4/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="stylesheet" type="text/css" media="screen" href="https://use.typekit.net/utz6mli.css">
+</head>
+<body>
+<dialog id="modal-form" aria-labelledby="modal-title" closedby="any">
+  <form id="modal-form-content" method="dialog" enctype="multipart/form-data">
+    <header class="modal-header">
+      <h5 id="modal-title" class="modal-title">Report GitHub Issue</h5>
+      <button type="submit" formnovalidate class="modal-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="modal-body">
+      <label for="form_title">Title:</label>
+      <input class="form-control" id="form_title" name="form_title" required placeholder="Enter title">
+
+      <p id="selectedTextModalDescription" hidden>Content selection saved. Describe the issue below:</p>
+
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description" required maxlength="500"
+        placeholder="500 characters maximum"></textarea>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="submit" value="internal-report" class="sr-only modal-submit">Submit without GitHub</button>
+      <button type="submit" value="github-report" class="modal-submit">Submit in GitHub</button>
+    </footer>
+  </form>
+</dialog>
+
+<header class="arxiv-html-header">
+  <div class="html-header-logo">
+    <a href="/">
+      <img alt="arXiv logo" class="logo desktop-only" width="100"
+        src="/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg">
+      <span class="sr-only">Back to arXiv</span>
+    </a>
+  </div>
+  <!--TOC, dark mode, links-->
+  <nav class="html-header-nav">
+    <a class="header-button hover-effect desktop-only" href="https://info.arxiv.org/about/accessible_HTML.html"
+      target="_blank">Why HTML?</a>
+    <a class="header-button" title="Report an Issue" href="#" title="Report an issue"
+      onclick="event.preventDefault(); showModalForm();">
+      <svg role="presentation" class="mobile-only toggle-icon" aria-hidden="true" height="1.25rem"
+        viewBox="0 0 640 640">
+        <path
+          d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+      </svg>
+      <span class="desktop-only">Report Issue</span></a>
+    <!--back to abstract-->
+    <a class="header-button" title="Back to abstract page" aria-label="Back to abstract page"
+      href="/abs/2604.18655v2">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 512 512" fill="#ffffff"
+        aria-hidden="true">
+        <path
+          d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z">
+        </path>
+      </svg>
+      <span class="desktop-only">Back to Abstract</span>
+    </a>
+    <!-- PDF download link -->
+    <a class="header-button" title="Download PDF" href="/pdf/2604.18655v2"
+      target="_blank">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 576 542">
+        <path
+          d="M208 48L96 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l80 0 0 48-80 0c-35.3 0-64-28.7-64-64L32 64C32 28.7 60.7 0 96 0L229.5 0c17 0 33.3 6.7 45.3 18.7L397.3 141.3c12 12 18.7 28.3 18.7 45.3l0 149.5-48 0 0-128-88 0c-39.8 0-72-32.2-72-72l0-88zM348.1 160L256 67.9 256 136c0 13.3 10.7 24 24 24l68.1 0zM240 380l32 0c33.1 0 60 26.9 60 60s-26.9 60-60 60l-12 0 0 28c0 11-9 20-20 20s-20-9-20-20l0-128c0-11 9-20 20-20zm32 80c11 0 20-9 20-20s-9-20-20-20l-12 0 0 40 12 0zm96-80l32 0c28.7 0 52 23.3 52 52l0 64c0 28.7-23.3 52-52 52l-32 0c-11 0-20-9-20-20l0-128c0-11 9-20 20-20zm32 128c6.6 0 12-5.4 12-12l0-64c0-6.6-5.4-12-12-12l-12 0 0 88 12 0zm76-108c0-11 9-20 20-20l48 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 24 28 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 44c0 11-9 20-20 20s-20-9-20-20l0-128z" />
+      </svg>
+      <span class="desktop-only">Download PDF</span></a>
+    <!-- navigational table of contents toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleNavTOC();" title="Toggle navigation"
+      aria-label="Toggle navigation">
+      <svg height="1.25rem" role="presentation" viewBox="0 0 512 512">
+        <path
+          d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z">
+        </path>
+      </svg>
+    </a>
+    <!--- collapsable header / reading mode toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleReadingMode();"
+      title="Disable reading mode, show header and footer">
+      <svg role="presentation" height="1.25rem"
+        viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+        <path
+          d="M32 32C14.3 32 0 46.3 0 64l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 32zM64 352c0-17.7-14.3-32-32-32S0 334.3 0 352l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96z" />
+      </svg>
+    </a>
+    <!--- colored theme toggle -->
+    <button type="button" class="header-button color-tog" onclick="toggleColorScheme();" title="Toggle dark/light mode" aria-label="Toggle color scheme">
+      <span class="toggle-icon automatic-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon light-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon dark-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+    </button>
+  </nav>
+</header><nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_abstract"><a href="#abstract1" title="In Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title">Abstract</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S1" title="In Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S2" title="In Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Reported Works</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S3" title="In Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Proposed Method</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS1" title="In 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>LLM architecture and LoRA updates</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS2" title="In 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Multi-LoRA enablement on device</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#S3.SS3" title="In 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Model Optimizations for On-Device LLM</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S3.SS3.SSS0.Px1" title="In 3.3 Model Optimizations for On-Device LLM ‣ 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title">Attention Parallelism.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S3.SS3.SSS0.Px2" title="In 3.3 Model Optimizations for On-Device LLM ‣ 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title">Linear-to-Convolutional Layer Transformation.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S3.SS3.SSS0.Px3" title="In 3.3 Model Optimizations for On-Device LLM ‣ 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title">Constant Folding and Graph Simplification.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S3.SS3.SSS0.Px4" title="In 3.3 Model Optimizations for On-Device LLM ‣ 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title">LLM Quantization</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS4" title="In 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.4 </span>Concurrent token generation (CTG)</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#S3.SS5" title="In 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.5 </span>Dynamic Self Speculative Decoding</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S3.SS5.SSS0.Px1" title="In 3.5 Dynamic Self Speculative Decoding ‣ 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title">Optimal Branch Configuration.</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S4" title="In Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Experiments &amp; Methods</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S4.SS1" title="In 4 Experiments &amp; Methods ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Experiments on GS24 with 1B LLM</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#S4.SS2" title="In 4 Experiments &amp; Methods ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Scaling to a 3B LLM on GS25 with DS2D</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S4.SS2.SSS0.Px1" title="In 4.2 Scaling to a 3B LLM on GS25 with DS2D ‣ 4 Experiments &amp; Methods ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title">Appendix</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S5" title="In Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Conclusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S6" title="In Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Limitations</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_bibliography"><a href="#bib" title="In Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title">References</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_appendix">
+<a href="#A1" title="In Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A </span>Appendix</span></a>
+<ol class="ltx_toclist ltx_toclist_appendix">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#A1.SS1" title="In Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.1 </span>Concurrent token generation (CTG)</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#A1.SS2" title="In Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.2 </span>Dynamic Self Speculative Decoding</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#A1.SS2.SSS0.Px1" title="In A.2 Dynamic Self Speculative Decoding ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title">Optimal Branch Configuration</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#A1.SS3" title="In Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.3 </span>Experiments</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a href="#A1.SS3.SSS1" title="In A.3 Experiments ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.3.1 </span>Deploying a 1B LLM on GS24</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a href="#A1.SS3.SSS2" title="In A.3 Experiments ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.3.2 </span>Scaling to a 3B LLM with DS2D</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div id="infobox" class="infobox">
+  <a id="license-tr" href="https://info.arxiv.org/help/license/index.html#licenses-available">
+    License: CC BY 4.0
+  </a>
+  <div id="watermark-tr">
+arXiv:2604.18655v2 [cs.DC] 24 Apr 2026</div>
+</div><div class="ltx_page_content">
+<article class="ltx_document">
+<h1 class="ltx_title ltx_title_document">Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+<span id="id1.1.1" class="ltx_text ltx_font_bold">Sravanth Kodavanti<sup id="id1.1.1.1" class="ltx_sup"><math id="id1.1.1.1.m1" class="ltx_Math" alttext="\dagger,*" display="inline" intent=":literal"><semantics><mrow><mo rspace="0em">†</mo><mo rspace="0em">,</mo><mo lspace="0em">∗</mo></mrow><annotation encoding="application/x-tex">\dagger,*</annotation></semantics></math><span id="id1.1.1.1.1" class="ltx_text ltx_font_medium">, 🖂</span></sup></span>, 
+<span id="id2.2.2" class="ltx_text ltx_font_bold">Sowmya Vajrala<sup id="id2.2.2.1" class="ltx_sup"><math id="id2.2.2.1.m1" class="ltx_Math" alttext="\dagger,*" display="inline" intent=":literal"><semantics><mrow><mo rspace="0em">†</mo><mo rspace="0em">,</mo><mo lspace="0em">∗</mo></mrow><annotation encoding="application/x-tex">\dagger,*</annotation></semantics></math></sup></span>, 
+<span id="id3.3.3" class="ltx_text ltx_font_bold">Srinivas Miriyala<sup id="id3.3.3.1" class="ltx_sup"><math id="id3.3.3.1.m1" class="ltx_Math" alttext="\dagger,*" display="inline" intent=":literal"><semantics><mrow><mo rspace="0em">†</mo><mo rspace="0em">,</mo><mo lspace="0em">∗</mo></mrow><annotation encoding="application/x-tex">\dagger,*</annotation></semantics></math></sup></span> 
+<br class="ltx_break">
+<span id="id4.4.4" class="ltx_text ltx_font_bold">Utsav Tiwari<sup id="id4.4.4.1" class="ltx_sup"><math id="id4.4.4.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup></span>, 
+<span id="id5.5.5" class="ltx_text ltx_font_bold">Uttam Kumar<sup id="id5.5.5.1" class="ltx_sup"><math id="id5.5.5.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup></span>, 
+<span id="id6.6.6" class="ltx_text ltx_font_bold">Utkarsh Kumar Mahawar<sup id="id6.6.6.1" class="ltx_sup"><math id="id6.6.6.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup></span>, 
+<span id="id7.7.7" class="ltx_text ltx_font_bold">Achal Pratap Singh<sup id="id7.7.7.1" class="ltx_sup"><math id="id7.7.7.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup></span> 
+<br class="ltx_break">
+<span id="id8.8.8" class="ltx_text ltx_font_bold">Arya D<sup id="id8.8.8.1" class="ltx_sup"><math id="id8.8.8.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup></span>, 
+<span id="id9.9.9" class="ltx_text ltx_font_bold">Narendra Mutyala<sup id="id9.9.9.1" class="ltx_sup"><math id="id9.9.9.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup></span>, 
+<span id="id10.10.10" class="ltx_text ltx_font_bold">Vikram Nelvoy Rajendiran<sup id="id10.10.10.1" class="ltx_sup"><math id="id10.10.10.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup></span>, 
+<span id="id11.11.11" class="ltx_text ltx_font_bold">Sharan Kumar Allur<sup id="id11.11.11.1" class="ltx_sup"><math id="id11.11.11.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup></span> 
+<br class="ltx_break">
+<span id="id12.12.12" class="ltx_text ltx_font_bold">Euntaik Lee<sup id="id12.12.12.1" class="ltx_sup"><math id="id12.12.12.1.m1" class="ltx_Math" alttext="\ddagger" display="inline" intent=":literal"><semantics><mo>‡</mo><annotation encoding="application/x-tex">\ddagger</annotation></semantics></math></sup></span>, 
+<span id="id13.13.13" class="ltx_text ltx_font_bold">Dohyoung Kim<sup id="id13.13.13.1" class="ltx_sup"><math id="id13.13.13.1.m1" class="ltx_Math" alttext="\ddagger" display="inline" intent=":literal"><semantics><mo>‡</mo><annotation encoding="application/x-tex">\ddagger</annotation></semantics></math></sup></span>, 
+<span id="id14.14.14" class="ltx_text ltx_font_bold">HyeonSu Lee<sup id="id14.14.14.1" class="ltx_sup"><math id="id14.14.14.1.m1" class="ltx_Math" alttext="\ddagger" display="inline" intent=":literal"><semantics><mo>‡</mo><annotation encoding="application/x-tex">\ddagger</annotation></semantics></math></sup></span>, 
+<span id="id15.15.15" class="ltx_text ltx_font_bold">Gyusung Cho<sup id="id15.15.15.1" class="ltx_sup"><math id="id15.15.15.1.m1" class="ltx_Math" alttext="\ddagger" display="inline" intent=":literal"><semantics><mo>‡</mo><annotation encoding="application/x-tex">\ddagger</annotation></semantics></math></sup></span>, 
+<span id="id16.16.16" class="ltx_text ltx_font_bold">JungBae Kim<sup id="id16.16.16.1" class="ltx_sup"><math id="id16.16.16.1.m1" class="ltx_Math" alttext="\ddagger" display="inline" intent=":literal"><semantics><mo>‡</mo><annotation encoding="application/x-tex">\ddagger</annotation></semantics></math></sup></span> 
+<br class="ltx_break">
+<sup id="id17.17.17" class="ltx_sup"><math id="id17.17.17.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup> Samsung Research Institute Bangalore, India,
+<sup id="id18.18.18" class="ltx_sup"><math id="id18.18.18.m1" class="ltx_Math" alttext="\ddagger" display="inline" intent=":literal"><semantics><mo>‡</mo><annotation encoding="application/x-tex">\ddagger</annotation></semantics></math></sup> Samsung Electronics, Suwon, South Korea 
+<br class="ltx_break">
+<sup id="id19.19.id1" class="ltx_sup">*</sup> Equal Contribution 
+<br class="ltx_break"><sup id="id20.20.id2" class="ltx_sup">🖂</sup> Corresponding author: k.sravanth@samsung.com
+</span></span>
+</div>
+
+<div id="abstract1" class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p">Deploying large language models (LLMs) on smartphones poses significant engineering challenges due to stringent constraints on memory, latency, and runtime flexibility. In this work, we present a hardware-aware framework for efficient on-device inference of a LLaMA-based multilingual foundation model supporting multiple use cases on Samsung Galaxy S24 and S25 devices with SM8650 and SM8750 Qualcomm chipsets respectively. Our approach integrates application-specific LoRAs as runtime inputs to a single frozen inference graph, enabling dynamic task switching without recompilation or memory overhead. We further introduce a multi-stream decoding mechanism that concurrently generates stylistic variations - such as formal, polite, or jovial responses - within a single forward pass, reducing latency by up to 6×. To accelerate token generation, we apply Dynamic Self-Speculative Decoding (DS2D), a tree-based strategy that predicts future tokens without requiring a draft model, yielding up to 2.3× speedup in decode time. Combined with quantization to INT4 and architecture-level optimizations, our system achieves 4-6× overall improvements in memory and latency while maintaining accuracy across 9 languages and 8 tasks. These results demonstrate practical feasibility of deploying multi-use-case LLMs on edge devices, advancing the commercial viability of Generative AI in mobile platforms.</p>
+</div>
+<div id="p1" class="ltx_para ltx_noindent">
+<div id="p1.18" class="ltx_block ltx_align_bottom">
+<p id="p1.18.19" class="ltx_p ltx_align_center"><span id="p1.18.19.1" class="ltx_text ltx_font_bold">Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM</span></p>
+<p id="p1.18.18" class="ltx_p ltx_align_center" style="width:345.0pt;"><span id="p1.18.18.18" class="ltx_text ltx_inline-block" style="width:0.0pt;">
+<span id="p1.18.18.18.18" class="ltx_tabular ltx_align_top">
+<span class="ltx_tbody">
+<span id="p1.3.3.3.3.3" class="ltx_tr">
+<span id="p1.3.3.3.3.3.3" class="ltx_td ltx_align_center" style="padding-bottom:2.0pt;"><span id="p1.3.3.3.3.3.3.3" class="ltx_text ltx_font_bold">
+Sravanth Kodavanti<sup id="p1.1.1.1.1.1.1.1.1" class="ltx_sup"><math id="p1.1.1.1.1.1.1.1.1.m1" class="ltx_Math" alttext="\dagger,*" display="inline" intent=":literal"><semantics><mrow><mo rspace="0em">†</mo><mo rspace="0em">,</mo><mo lspace="0em">∗</mo></mrow><annotation encoding="application/x-tex">\dagger,*</annotation></semantics></math>, 🖂</sup>, 
+Sowmya Vajrala<sup id="p1.2.2.2.2.2.2.2.2" class="ltx_sup"><math id="p1.2.2.2.2.2.2.2.2.m1" class="ltx_Math" alttext="\dagger,*" display="inline" intent=":literal"><semantics><mrow><mo rspace="0em">†</mo><mo rspace="0em">,</mo><mo lspace="0em">∗</mo></mrow><annotation encoding="application/x-tex">\dagger,*</annotation></semantics></math></sup>, 
+Srinivas Miriyala<sup id="p1.3.3.3.3.3.3.3.3" class="ltx_sup"><math id="p1.3.3.3.3.3.3.3.3.m1" class="ltx_Math" alttext="\dagger,*" display="inline" intent=":literal"><semantics><mrow><mo rspace="0em">†</mo><mo rspace="0em">,</mo><mo lspace="0em">∗</mo></mrow><annotation encoding="application/x-tex">\dagger,*</annotation></semantics></math></sup></span></span></span>
+<span id="p1.7.7.7.7.7" class="ltx_tr">
+<span id="p1.7.7.7.7.7.4" class="ltx_td ltx_align_center" style="padding-bottom:2.0pt;"><span id="p1.4.4.4.4.4.1.1" class="ltx_text ltx_font_bold">Utsav Tiwari<sup id="p1.4.4.4.4.4.1.1.1" class="ltx_sup"><math id="p1.4.4.4.4.4.1.1.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup></span>, 
+<span id="p1.5.5.5.5.5.2.2" class="ltx_text ltx_font_bold">Uttam Kumar<sup id="p1.5.5.5.5.5.2.2.1" class="ltx_sup"><math id="p1.5.5.5.5.5.2.2.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup></span>, 
+<span id="p1.6.6.6.6.6.3.3" class="ltx_text ltx_font_bold">Utkarsh Kumar Mahawar<sup id="p1.6.6.6.6.6.3.3.1" class="ltx_sup"><math id="p1.6.6.6.6.6.3.3.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup></span>, 
+<span id="p1.7.7.7.7.7.4.4" class="ltx_text ltx_font_bold">Achal Pratap Singh<sup id="p1.7.7.7.7.7.4.4.1" class="ltx_sup"><math id="p1.7.7.7.7.7.4.4.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup></span></span></span>
+<span id="p1.11.11.11.11.11" class="ltx_tr">
+<span id="p1.11.11.11.11.11.4" class="ltx_td ltx_align_center" style="padding-bottom:2.0pt;"><span id="p1.8.8.8.8.8.1.1" class="ltx_text ltx_font_bold">Arya D<sup id="p1.8.8.8.8.8.1.1.1" class="ltx_sup"><math id="p1.8.8.8.8.8.1.1.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup></span>, 
+<span id="p1.9.9.9.9.9.2.2" class="ltx_text ltx_font_bold">Narendra Mutyala<sup id="p1.9.9.9.9.9.2.2.1" class="ltx_sup"><math id="p1.9.9.9.9.9.2.2.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup></span>, 
+<span id="p1.10.10.10.10.10.3.3" class="ltx_text ltx_font_bold">Vikram Nelvoy Rajendiran<sup id="p1.10.10.10.10.10.3.3.1" class="ltx_sup"><math id="p1.10.10.10.10.10.3.3.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup></span>, 
+<span id="p1.11.11.11.11.11.4.4" class="ltx_text ltx_font_bold">Sharan Kumar Allur<sup id="p1.11.11.11.11.11.4.4.1" class="ltx_sup"><math id="p1.11.11.11.11.11.4.4.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup></span></span></span>
+<span id="p1.16.16.16.16.16" class="ltx_tr">
+<span id="p1.16.16.16.16.16.5" class="ltx_td ltx_align_center" style="padding-bottom:2.0pt;"><span id="p1.12.12.12.12.12.1.1" class="ltx_text ltx_font_bold">Euntaik Lee<sup id="p1.12.12.12.12.12.1.1.1" class="ltx_sup"><math id="p1.12.12.12.12.12.1.1.1.m1" class="ltx_Math" alttext="\ddagger" display="inline" intent=":literal"><semantics><mo>‡</mo><annotation encoding="application/x-tex">\ddagger</annotation></semantics></math></sup></span>, 
+<span id="p1.13.13.13.13.13.2.2" class="ltx_text ltx_font_bold">Dohyoung Kim<sup id="p1.13.13.13.13.13.2.2.1" class="ltx_sup"><math id="p1.13.13.13.13.13.2.2.1.m1" class="ltx_Math" alttext="\ddagger" display="inline" intent=":literal"><semantics><mo>‡</mo><annotation encoding="application/x-tex">\ddagger</annotation></semantics></math></sup></span>, 
+<span id="p1.14.14.14.14.14.3.3" class="ltx_text ltx_font_bold">HyeonSu Lee<sup id="p1.14.14.14.14.14.3.3.1" class="ltx_sup"><math id="p1.14.14.14.14.14.3.3.1.m1" class="ltx_Math" alttext="\ddagger" display="inline" intent=":literal"><semantics><mo>‡</mo><annotation encoding="application/x-tex">\ddagger</annotation></semantics></math></sup></span>, 
+<span id="p1.15.15.15.15.15.4.4" class="ltx_text ltx_font_bold">Gyusung Cho<sup id="p1.15.15.15.15.15.4.4.1" class="ltx_sup"><math id="p1.15.15.15.15.15.4.4.1.m1" class="ltx_Math" alttext="\ddagger" display="inline" intent=":literal"><semantics><mo>‡</mo><annotation encoding="application/x-tex">\ddagger</annotation></semantics></math></sup></span>, 
+<span id="p1.16.16.16.16.16.5.5" class="ltx_text ltx_font_bold">JungBae Kim<sup id="p1.16.16.16.16.16.5.5.1" class="ltx_sup"><math id="p1.16.16.16.16.16.5.5.1.m1" class="ltx_Math" alttext="\ddagger" display="inline" intent=":literal"><semantics><mo>‡</mo><annotation encoding="application/x-tex">\ddagger</annotation></semantics></math></sup></span></span></span>
+<span id="p1.18.18.18.18.18" class="ltx_tr">
+<span id="p1.18.18.18.18.18.2" class="ltx_td ltx_align_center" style="padding-bottom:2.0pt;"><sup id="p1.17.17.17.17.17.1.1" class="ltx_sup"><math id="p1.17.17.17.17.17.1.1.m1" class="ltx_Math" alttext="\dagger" display="inline" intent=":literal"><semantics><mo>†</mo><annotation encoding="application/x-tex">\dagger</annotation></semantics></math></sup> Samsung Research Institute Bangalore, India,
+<sup id="p1.18.18.18.18.18.2.2" class="ltx_sup"><math id="p1.18.18.18.18.18.2.2.m1" class="ltx_Math" alttext="\ddagger" display="inline" intent=":literal"><semantics><mo>‡</mo><annotation encoding="application/x-tex">\ddagger</annotation></semantics></math></sup> Samsung Electronics, Suwon, South Korea</span></span>
+<span id="p1.18.18.18.18.19.1" class="ltx_tr">
+<span id="p1.18.18.18.18.19.1.1" class="ltx_td ltx_align_center"><sup id="p1.18.18.18.18.19.1.1.1" class="ltx_sup">*</sup> Equal Contribution</span></span>
+<span id="p1.18.18.18.18.20.2" class="ltx_tr">
+<span id="p1.18.18.18.18.20.2.1" class="ltx_td ltx_align_center"><sup id="p1.18.18.18.18.20.2.1.1" class="ltx_sup">🖂</sup> Corresponding author: k.sravanth@samsung.com</span></span>
+</span>
+</span></span></p>
+</div>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p id="S1.p1.1" class="ltx_p">Deploying Large Language Models (LLMs) on mobile devices promises significant benefits in privacy, latency, and offline accessibility. However, bringing the flexibility of server-scale LLM adaptation-especially via Parameter-Efficient Fine-Tuning (PEFT) methods like LoRA-into the constrained environment of on-device inference presents several non-trivial challenges.</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p id="S1.p2.1" class="ltx_p">Unlike server-side systems, where models can be fine-tuned, recompiled, and dynamically loaded, on-device deployment must operate with frozen inference graphs, minimal memory, and strict runtime performance guarantees. Bridging the disconnect between flexible model development and the immutability of on-device inference demands a fundamental shift in how adaptable LLMs are engineered for real-world deployment.</p>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p id="S1.p3.1" class="ltx_p">In this work, we present a practical framework for real-time, multilingual, multi-use case LLM inference on Qualcomm’s Neural Processing Unit (NPU) on SM8650 and SM8750 chipsets deployed on commercial smartphones, specifically the Samsung Galaxy S24 and S25. Our solution builds on a quantized LLaMA-based model integrated with eight application-specific LoRA modules across nine languages. Unlike conventional LoRA usage, where models are statically merged during training, we treat LoRAs as runtime inputs to the frozen inference graph, enabling dynamic task switching without recompilation or re-quantization. This design significantly reduces storage requirements and supports plug-and-play use cases on embedded device.</p>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p id="S1.p4.1" class="ltx_p">To meet hardware efficiency constraints, we perform targeted architectural transformations, including converting multi-head attention into parallel single-head paths, reparameterizing linear layers into convolutions, and quantizing both activations and weights to 4-bit precision (INT4) while utilizing mixed precision strategies to balance accuracy. These optimizations achieve substantial improvements in memory and latency while maintaining accuracy within acceptable limits.</p>
+</div>
+<div id="S1.p5" class="ltx_para">
+<p id="S1.p5.1" class="ltx_p">Beyond architectural and quantization enhancements, we introduce a multi-stream token generation strategy that enables simultaneous inference across stylistic variants within a single decoding pass. For use cases such as tone transfer or stylistic rewriting (e.g., converting input into polite, formal, or jovial responses), traditional inference would require eight separate decoding iterations-one per style. By exploiting the fact that all use cases share the same frozen graph and memory layout, and that stylistic variants often are driven by the first token, we design a masked decoding scheme that modifies the first-token sampling and allows concurrent generation of eight distinct outputs over a shared KV-cache and tensor layout. This yields up to 6× latency and memory reduction for stylistic generation without any change to the model binary or graph.</p>
+</div>
+<div id="S1.p6" class="ltx_para">
+<p id="S1.p6.1" class="ltx_p">Finally, to address decode-time latency bottlenecks, we propose a speculative sampling strategy based on tree-based branching with prefix tuning. Our method operates without needing a separate draft model or retraining, making it fully compatible with frozen, single-graph inference pipelines. This enables semi-autoregressive decoding with up to 2× improvement in tokens-per-second throughput, further pushing the boundary of what’s achievable in mobile LLM deployment without reliance on cloud infrastructure.</p>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Reported Works</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p id="S2.p1.1" class="ltx_p">The Transformer architecture has played a pivotal role in the advancement of generative AI, enabling large language models (LLMs) like LLAMA <cite class="ltx_cite ltx_citemacro_cite">Touvron<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib8" title="Llama 2: open foundation and fine-tuned chat models" class="ltx_ref">2023</a>)</cite>, GPT <cite class="ltx_cite ltx_citemacro_cite">Achiam<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib11" title="Gpt-4 technical report" class="ltx_ref">2023</a>)</cite> to produce high-quality, human-like text and opening up new possibilities for applications such as language translation, text summarization, and content generation. However, the increasing size and complexity of these models have also raised concerns about their computational efficiency and environmental sustainability. To address these challenges, researchers have proposed various techniques to optimize LLMs for deployment on resource-constrained devices.</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p id="S2.p2.1" class="ltx_p">Recent works have focused on developing efficient LLMs that can be deployed on mobile and edge devices. MobiLlama <cite class="ltx_cite ltx_citemacro_cite">Thawakar<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib17" title="Mobillama: towards accurate and lightweight fully transparent gpt" class="ltx_ref">2024</a>)</cite> is one such model that has gained significant attention due to its compact size and competitive performance.</p>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p id="S2.p3.1" class="ltx_p">Quantization, on the other hand, is a widely used technique to reduce the precision of model weights and activations, thereby reducing memory footprint and computational requirements. QLoRA <cite class="ltx_cite ltx_citemacro_cite">Dettmers<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib12" title="Qlora: efficient finetuning of quantized llms" class="ltx_ref">2023</a>)</cite> and QaLoRA <cite class="ltx_cite ltx_citemacro_cite">Xu<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib13" title="Qa-lora: quantization-aware low-rank adaptation of large language models" class="ltx_ref">2023</a>)</cite> quantization-based low-rank adaptation techniques that have shown promising results in reducing the precision of LLMs while maintaining their performance.</p>
+</div>
+<div id="S2.p4" class="ltx_para">
+<p id="S2.p4.1" class="ltx_p">Low-Rank Adaptation (LoRA) <cite class="ltx_cite ltx_citemacro_citep">(Hu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib10" title="Lora: low-rank adaptation of large language models." class="ltx_ref">2022</a>)</cite> is a technique used to adapt large language models (LLMs) to specific tasks or domains by applying low-rank matrices to the model weights. Quantization, on the other hand, is a widely used technique to reduce the precision of model weights and activations, thereby reducing memory footprint and computational requirements. QLoRA <cite class="ltx_cite ltx_citemacro_cite">Dettmers<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib12" title="Qlora: efficient finetuning of quantized llms" class="ltx_ref">2023</a>)</cite> and QaLoRA <cite class="ltx_cite ltx_citemacro_cite">Xu<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib13" title="Qa-lora: quantization-aware low-rank adaptation of large language models" class="ltx_ref">2023</a>)</cite> are two recent quantization-based low-rank adaptation techniques that have shown promising results in reducing the precision of LLMs while maintaining their performance.</p>
+</div>
+<div id="S2.p5" class="ltx_para">
+<p id="S2.p5.1" class="ltx_p">These techniques have been applied to various NLP tasks, including language modeling and text classification.</p>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p id="S2.p6.1" class="ltx_p">In addition to quantization, model optimizations like Flash Attention <cite class="ltx_cite ltx_citemacro_cite">Dao<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib14" title="Fast and memory-efficient exact attention with io-awareness" class="ltx_ref">2022</a>)</cite> have been proposed to reduce the computational overhead of self-attention mechanisms in transformers. Flash Attention achieves this by using a novel attention mechanism that reduces the number of computations required.</p>
+</div>
+<div id="S2.p7" class="ltx_para">
+<p id="S2.p7.1" class="ltx_p">Apart from efficient attention, Speculative decoding is another prominent technique used to accelerate the inference speed of LLMs by predicting the output tokens in parallel. Eagle <cite class="ltx_cite ltx_citemacro_cite">Li<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib15" title="Eagle: speculative sampling requires rethinking feature uncertainty" class="ltx_ref">2024</a>)</cite>, Medusa <cite class="ltx_cite ltx_citemacro_cite">Cai<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib16" title="Medusa: simple llm inference acceleration framework with multiple decoding heads" class="ltx_ref">2024</a>)</cite>, and BiTA <cite class="ltx_cite ltx_citemacro_cite">Lin<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib9" title="Bita: bi-directional tuning for lossless acceleration in large language models" class="ltx_ref">2025</a>)</cite> are recent works that have proposed novel speculative decoding methods to improve the inference speed of LLMs.</p>
+</div>
+<div id="S2.p8" class="ltx_para">
+<p id="S2.p8.1" class="ltx_p">Despite the advancements in efficient large language models (LLMs), quantization techniques, and speculative decoding methods, deploying a single LLM for multiple tasks on resource-constrained devices remains a significant challenge. Even efficient models like MobiLlama are not sufficient to handle multiple tasks across different languages. Furthermore, optimizations like Flash Attention are not compatible with Neural Processing Units (NPUs), and draft-based speculative decoding methods require additional memory, which is a scarce resource on constrained devices. It is essential to develop a one-for-all foundation model along with effective optimization methods to facilitate its deployment on resource-constrained devices.</p>
+</div>
+<figure id="S2.F1" class="ltx_figure"><img src="2604.18655v2/figures/fig1.jpg" id="S2.F1.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="476" height="295" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>Proposed method for enabling multiple LoRA with a single LLM on embedded device.</figcaption>
+</figure>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Proposed Method</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p id="S3.p1.1" class="ltx_p">This work outlines the process starting from a trained foundation model with LoRAs, optimizing and deploying it on smartphones for no-cloud, fully on-device execution. It focuses on multi-LoRA enablement, inference optimizations, a novel lossless strategy for concurrent token generation, and speculative decoding for decode time acceleration. The authors refrain from describing the details of training the proprietary foundation model and LoRAs and solely focus on the innovations curated to ensure the on-device deployment. The readers are encouraged to refer to the seminal works on LLAMA <cite class="ltx_cite ltx_citemacro_citep">(Touvron<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib8" title="Llama 2: open foundation and fine-tuned chat models" class="ltx_ref">2023</a>)</cite> and LoRA <cite class="ltx_cite ltx_citemacro_citep">(Hu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib10" title="Lora: low-rank adaptation of large language models." class="ltx_ref">2022</a>)</cite>, which inspired the authors to build their foundation models.</p>
+</div>
+<section id="S3.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>LLM architecture and LoRA updates</h3>
+
+<div id="S3.SS1.p1" class="ltx_para">
+<p id="S3.SS1.p1.1" class="ltx_p">The authors experiment with 1-billion and 3-billion parameter LLAMA-based LLM models, employing a decoder-only architecture with D sequential decoders. Tokenization generates embeddings of size E, which are transformed into Query (Q), Key (K), and Value (V) through linear layers, RMS normalization, and Rotary Position Embedding (RoPE) applied to Q and K. Each decoder block includes a multi-head attention (MHA) sub-block with H heads, followed by RMS normalization and an MLP block. The MHA output map (O) is processed by a learnable linear layer, producing Q, K, V, and O projection matrices with dimensions E x L and L x E, respectively, where L is the latent dimension.</p>
+</div>
+<div id="S3.SS1.p2" class="ltx_para">
+<p id="S3.SS1.p2.1" class="ltx_p">In this work, LoRA weight updates are applied to these projection matrices (Eqs. 1–4), targeting the attention block. For each LoRA-supported layer, two parallel layers—LoRA-A and LoRA-B—are added. LoRA-A has dimensions E x d and d x L for Q, K, V, while LoRA-B has dimensions L x d and d x E for O projection, where d represents the LoRA dimension (rank). A scale factor s is introduced to control the impact of LoRA weights. In Eqs. 1 to 4, W denotes the projection weight matrix, and A and B represent the LoRA weights.</p>
+</div>
+<div id="S3.SS1.p3" class="ltx_para">
+<table id="S3.E1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E1.m1" class="ltx_Math" alttext="Y^{Q}=QW^{Q}+Q(sA^{Q}B^{Q})" display="block" intent=":literal"><semantics><mrow><msup><mi>Y</mi><mi>Q</mi></msup><mo>=</mo><mrow><mrow><mi>Q</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>W</mi><mi>Q</mi></msup></mrow><mo>+</mo><mrow><mi>Q</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>A</mi><mi>Q</mi></msup><mo lspace="0em" rspace="0em">​</mo><msup><mi>B</mi><mi>Q</mi></msup></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">Y^{Q}=QW^{Q}+Q(sA^{Q}B^{Q})</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<table id="S3.E2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E2.m1" class="ltx_Math" alttext="Y^{K}=KW^{K}+K(sA^{K}B^{K})" display="block" intent=":literal"><semantics><mrow><msup><mi>Y</mi><mi>K</mi></msup><mo>=</mo><mrow><mrow><mi>K</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>W</mi><mi>K</mi></msup></mrow><mo>+</mo><mrow><mi>K</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>A</mi><mi>K</mi></msup><mo lspace="0em" rspace="0em">​</mo><msup><mi>B</mi><mi>K</mi></msup></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">Y^{K}=KW^{K}+K(sA^{K}B^{K})</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+<table id="S3.E3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E3.m1" class="ltx_Math" alttext="Y^{V}=VW^{V}+V(sA^{V}B^{V})" display="block" intent=":literal"><semantics><mrow><msup><mi>Y</mi><mi>V</mi></msup><mo>=</mo><mrow><mrow><mi>V</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>W</mi><mi>V</mi></msup></mrow><mo>+</mo><mrow><mi>V</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>A</mi><mi>V</mi></msup><mo lspace="0em" rspace="0em">​</mo><msup><mi>B</mi><mi>V</mi></msup></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">Y^{V}=VW^{V}+V(sA^{V}B^{V})</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+<table id="S3.E4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E4.m1" class="ltx_Math" alttext="Y^{O}=OW^{O}+O(sA^{O}B^{O})" display="block" intent=":literal"><semantics><mrow><msup><mi>Y</mi><mi>O</mi></msup><mo>=</mo><mrow><mrow><mi>O</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>W</mi><mi>O</mi></msup></mrow><mo>+</mo><mrow><mi>O</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>A</mi><mi>O</mi></msup><mo lspace="0em" rspace="0em">​</mo><msup><mi>B</mi><mi>O</mi></msup></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">Y^{O}=OW^{O}+O(sA^{O}B^{O})</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(4)</span></td>
+</tr></tbody>
+</table>
+</div>
+</section>
+<section id="S3.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Multi-LoRA enablement on device</h3>
+
+<div id="S3.SS2.p1" class="ltx_para">
+<p id="S3.SS2.p1.1" class="ltx_p">An overview of the proposed framework for LoRA enablement and runtime switching is presented in Figure <a href="#S2.F1" title="Figure 1 ‣ 2 Reported Works ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>. The framework has three approaches with various pros and cons.</p>
+</div>
+<div id="S3.SS2.p2" class="ltx_para">
+<p id="S3.SS2.p2.1" class="ltx_p">In the first one (see Figure  <a href="#S2.F1" title="Figure 1 ‣ 2 Reported Works ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>a), different graphs are prepared for different LoRA enabled tasks and the weights of the layers where LoRA is not applied, are shared between the graphs. During runtime, the corresponding graph is triggered. This ensures saving a significant amount of memory.</p>
+</div>
+<div id="S3.SS2.p3" class="ltx_para">
+<p id="S3.SS2.p3.1" class="ltx_p">The second approach (see Figure  <a href="#S2.F1" title="Figure 1 ‣ 2 Reported Works ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>b) maintains a single graph with multiple LoRAs and facilitates dynamic switching between different tasks by applying one-hot encoded mask on the LoRAs. This approach provides inference benefit but increases the memory footprint.</p>
+</div>
+<div id="S3.SS2.p4" class="ltx_para">
+<p id="S3.SS2.p4.1" class="ltx_p">The third approach (see Figure  <a href="#S2.F1" title="Figure 1 ‣ 2 Reported Works ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>c) provides both latency and memory benefits by creating the foundation LLM graph with placeholders for LoRA weights and passing the LoRA weights as inputs along with tokens, assuming that LoRA weights for all use cases are of same dimensions. This simple yet elegant solution successfully enabled multiple LoRAs on device with low latency and memory.</p>
+</div>
+</section>
+<section id="S3.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3 </span>Model Optimizations for On-Device LLM</h3>
+
+<div id="S3.SS3.p1" class="ltx_para">
+<p id="S3.SS3.p1.1" class="ltx_p">Deploying Large Language Models (LLMs) on edge devices necessitates rigorous architectural and computational optimizations to meet the constraints of memory, latency, and power consumption while preserving functional accuracy. This section discusses several key model-level transformations and compilation-aware optimizations that enable efficient inference of LLMs on-device, tailored for modern NPUs and embedded GPUs.</p>
+</div>
+<section id="S3.SS3.SSS0.Px1" class="ltx_paragraph">
+<h5 class="ltx_title ltx_title_paragraph">Attention Parallelism.</h5>
+
+<div id="S3.SS3.SSS0.Px1.p1" class="ltx_para">
+<p id="S3.SS3.SSS0.Px1.p1.1" class="ltx_p">Multi-head attention (MHA), a core component of transformer-based LLMs, presents challenges in hardware execution due to its sequential dependencies and shared projection layers. To facilitate parallel processing on hardware accelerators, we decompose the MHA into multiple single-head attention (SHA) operations. Each SHA can be independently mapped to a parallel core, improving throughput.</p>
+</div>
+<div id="S3.SS3.SSS0.Px1.p2" class="ltx_para">
+<p id="S3.SS3.SSS0.Px1.p2.1" class="ltx_p">This fine-grained decomposition also enables head-wise scheduling and execution on heterogeneous compute units, aligning with the architectural strengths of NPUs designed for independent low-dimensional matrix operations.</p>
+</div>
+</section>
+<section id="S3.SS3.SSS0.Px2" class="ltx_paragraph">
+<h5 class="ltx_title ltx_title_paragraph">Linear-to-Convolutional Layer Transformation.</h5>
+
+<div id="S3.SS3.SSS0.Px2.p1" class="ltx_para">
+<p id="S3.SS3.SSS0.Px2.p1.1" class="ltx_p">Another major optimization involves reinterpreting linear (dense) layers as 1x1 convolutions. While mathematically equivalent in functionality, this transformation allows the model to exploit highly optimized convolution kernels present in embedded hardware backends. Modern mobile NPUs and GPUs, originally optimized for vision tasks, offer superior support for convolutional operations via Winograd algorithms, tiling strategies, and pipelined execution units. By casting dense layers in the form of point-wise convolutions, we enable efficient reuse of existing high-performance operators, reducing both latency and energy overheads.</p>
+</div>
+</section>
+<section id="S3.SS3.SSS0.Px3" class="ltx_paragraph">
+<h5 class="ltx_title ltx_title_paragraph">Constant Folding and Graph Simplification.</h5>
+
+<div id="S3.SS3.SSS0.Px3.p1" class="ltx_para">
+<p id="S3.SS3.SSS0.Px3.p1.1" class="ltx_p">During graph-level compilation, we apply constant folding to precompute operations involving static weights or configuration tensors. Examples include pre-multiplication of learned scale parameters in layer normalization or static reshaping and permutation of input dimensions. These algebraic simplifications reduce runtime computation and memory access, streamlining the execution graph. In combination with operator fusion—where adjacent linear and activation layers are merged into a single kernel—these techniques reduce kernel launch overhead and improve data locality in memory-constrained environments.</p>
+</div>
+</section>
+<section id="S3.SS3.SSS0.Px4" class="ltx_paragraph">
+<h5 class="ltx_title ltx_title_paragraph">LLM Quantization</h5>
+
+<div id="S3.SS3.SSS0.Px4.p1" class="ltx_para">
+<p id="S3.SS3.SSS0.Px4.p1.1" class="ltx_p">Precision quantization plays a central role in enabling LLM inference on resource-constrained devices. In our framework, we employ Quantization-Aware Training (QAT) to simulate low-precision effects during training, allowing the model to learn robust representations under quantized conditions. We adopt a mixed-precision regime, where activations are quantized to per-tensor scaling for runtime simplicity to Int8 and weights per-channel to Int4, ensuring a trade-off between accuracy and compression.</p>
+</div>
+<figure id="S3.F2" class="ltx_figure"><img src="2604.18655v2/figures/fig2.jpg" id="S3.F2.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="238" height="132" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>Schematic for Concurrent token generation</figcaption>
+</figure>
+</section>
+</section>
+<section id="S3.SS4" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.4 </span>Concurrent token generation (CTG)</h3>
+
+<div id="S3.SS4.p1" class="ltx_para">
+<p id="S3.SS4.p1.1" class="ltx_p">To improve user experience, the LLM model generates multiple response options for personalization. For example, Smart-Reply provides 8 diverse prompts for users to choose from. However, this requires running the LoRA-enabled LLM sequentially 8 times, increasing latency by 8x. To address this, the proposed LoRA approaches enable handling multiple output streams simultaneously. The multi-stream token generation algorithm allows concurrent creation of n output streams, as shown in Figure  <a href="#S3.F2" title="Figure 2 ‣ LLM Quantization ‣ 3.3 Model Optimizations for On-Device LLM ‣ 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>. More elaborate details on the flowsheet of on-device execution and the mask used for implementing the method are presented in the Appendix  <a href="#A1.SS1" title="A.1 Concurrent token generation (CTG) ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">A.1</span></a>.</p>
+</div>
+</section>
+<section id="S3.SS5" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.5 </span>Dynamic Self Speculative Decoding</h3>
+
+<div id="S3.SS5.p1" class="ltx_para">
+<p id="S3.SS5.p1.1" class="ltx_p">Speculative decoding has emerged as a promising approach to overcome inference-time inefficiencies in LLMs, which typically suffer from sequential, memory-bound decoding constraints. Some techniques use draft models and additional heads but they incur additional memory, while some early exit based methods require retraining the whole model to make the intermediate layers predict proper tokens. To avoid these issues, we utilized Prefix tuning based parameter efficient mechanism to fine-tune the foundational LLM, such that it generates multiple tokens in addition to the auto regressive token in one step.</p>
+</div>
+<div id="S3.SS5.p2" class="ltx_para">
+<p id="S3.SS5.p2.1" class="ltx_p">In this method inspired from BiTA <cite class="ltx_cite ltx_citemacro_citep">(Lin<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib9" title="Bita: bi-directional tuning for lossless acceleration in large language models" class="ltx_ref">2025</a>)</cite> task-specific m forecast embeddings are appended to the prompt embedding. These additional m forecast embedding ensure that the model predicts 1+m tokens at a time, thus converting its nature from auto-regressive to semi-auto-regressive (SAR). While the first token is sampled from the frozen LLM’s distribution, ensuring it to be same as the case without the forecast embedding, the remaining m tokens are generated with reduced fidelity, thus requiring verification during the inference. The fine-tuning procedure to generate SAR tokens is facilitated through the prefix tuning method (see Appendix  <a href="#A1.SS2" title="A.2 Dynamic Self Speculative Decoding ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">A.2</span></a> for further details).</p>
+</div>
+<div id="S3.SS5.p3" class="ltx_para">
+<p id="S3.SS5.p3.1" class="ltx_p">As illustrated in Figure  <a href="#S3.F3" title="Figure 3 ‣ 3.5 Dynamic Self Speculative Decoding ‣ 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>, during the inference step 1, the forecast prefix (shape: p×d), prompt embeddings (shape: q×d), and forecast embeddings (shape: m × d) are passed as inputs to the LLM. In the output logits, the token marked in orange is generated from the prompt and is referred to as the "last verified token,". For the logits derived from the forecast embeddings, a softmax operation is performed, followed by sampling to generate multiple draft tokens. In the example provided in Figure  <a href="#S3.F3" title="Figure 3 ‣ 3.5 Dynamic Self Speculative Decoding ‣ 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>, with m = 2, i.e., 2 forecast embeddings, (3, 2) branch configuration is implemented.
+In inference step 1, the top 3 and top 2 tokens are sampled from the logits of the first and second forecast embedding, respectively. These draft tokens are used to build a tree-based structure, as depicted in Figure  <a href="#S3.F3" title="Figure 3 ‣ 3.5 Dynamic Self Speculative Decoding ‣ 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>. In inference step 2, the generated draft tokens undergo verification along with new draft token generation. Verification is done by appending the 9 draft tokens to the prompt token, and new draft generation is done by appending a set of m forecast embeddings for each target and draft token. In this case, a total of 10 tokens and 20 forecast embeddings are passed as input. Based on the acceptance of the current draft tokens, the next draft tokens will be generated. In Figure  <a href="#S3.F3" title="Figure 3 ‣ 3.5 Dynamic Self Speculative Decoding ‣ 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>, since tokens 1-3-5 are accepted, drafts are generated from the output logits of forecast embeddings corresponding to token 5. The on-device deployment of this dynamic selection is facilitated through a mask described in the Appendix  <a href="#A1.SS2" title="A.2 Dynamic Self Speculative Decoding ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">A.2</span></a>.</p>
+</div>
+<figure id="S3.F3" class="ltx_figure"><img src="2604.18655v2/figures/fig3.jpg" id="S3.F3.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="476" height="243" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>Approach for self-speculative decoding and the procedure for fine-tuning the model with Prefix tuning.</figcaption>
+</figure>
+<section id="S3.SS5.SSS0.Px1" class="ltx_paragraph">
+<h5 class="ltx_title ltx_title_paragraph">Optimal Branch Configuration.</h5>
+
+<div id="S3.SS5.SSS0.Px1.p1" class="ltx_para">
+<p id="S3.SS5.SSS0.Px1.p1.1" class="ltx_p">As shown in Figure  <a href="#S3.F3" title="Figure 3 ‣ 3.5 Dynamic Self Speculative Decoding ‣ 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>, the input shape (mainly rows) during inference (step 2) for a branch configuration of 3,2 corresponds to p+q+30 tokens. Since KV Cache mechanism will be implemented the p forecast prefix and all the prompt tokens except the previous token will be cached. Thus, the number of rows in input is 30. Since these inputs will be processed in parallel by the Transformer architecture, they are analogous to the batch size used during training or inference. Owing to the optimized architecture design of NPU (or GPUs), we consider the input size to be 32 (powers of 2) to ensure maximum benefit. Given the input size as 32, we can try different branch configurations that can result in a total of 31 tokens in the input + 1 previous token. Among all those configurations, the optimal configuration for use-case is determined as the one which results in maximum acceptance rate. Since, the branch configuration can be determined optimally for</p>
+</div>
+</section>
+</section>
+</section>
+<section id="S4" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Experiments &amp; Methods</h2>
+
+<section id="S4.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Experiments on GS24 with 1B LLM</h3>
+
+<figure id="S4.T1" class="ltx_table">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 1: </span>On-Device Performance of LoRA weight sharing</figcaption>
+<table id="S4.T1.1" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr id="S4.T1.1.1.1" class="ltx_tr">
+<th id="S4.T1.1.1.1.1" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;"></th>
+<td id="S4.T1.1.1.1.2" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_center ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;" colspan="2"><span id="S4.T1.1.1.1.2.1" class="ltx_text ltx_font_bold">Base</span></td>
+<td id="S4.T1.1.1.1.3" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_center ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;" colspan="2"><span id="S4.T1.1.1.1.3.1" class="ltx_text ltx_font_bold">LoRA (2-tasks)</span></td>
+</tr>
+<tr id="S4.T1.1.2.2" class="ltx_tr">
+<th id="S4.T1.1.2.2.1" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_th ltx_th_row ltx_border_l ltx_border_r" style="padding-left:1.0pt;padding-right:1.0pt;"></th>
+<td id="S4.T1.1.2.2.2" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_center ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;"><span id="S4.T1.1.2.2.2.1" class="ltx_text ltx_font_bold">1st Token</span></td>
+<td id="S4.T1.1.2.2.3" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_center ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;"><span id="S4.T1.1.2.2.3.1" class="ltx_text ltx_font_bold">Gen. model</span></td>
+<td id="S4.T1.1.2.2.4" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_center ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;"><span id="S4.T1.1.2.2.4.1" class="ltx_text ltx_font_bold">1st Token</span></td>
+<td id="S4.T1.1.2.2.5" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_center ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;"><span id="S4.T1.1.2.2.5.1" class="ltx_text ltx_font_bold">Gen. model</span></td>
+</tr>
+<tr id="S4.T1.1.3.3" class="ltx_tr">
+<th id="S4.T1.1.3.3.1" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;"><span id="S4.T1.1.3.3.1.1" class="ltx_text ltx_font_bold">Num. graphs</span></th>
+<td id="S4.T1.1.3.3.2" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_center ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;" colspan="2">2</td>
+<td id="S4.T1.1.3.3.3" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_center ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;" colspan="2">4</td>
+</tr>
+<tr id="S4.T1.1.4.4" class="ltx_tr">
+<th id="S4.T1.1.4.4.1" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;"><span id="S4.T1.1.4.4.1.1" class="ltx_text ltx_font_bold">Size</span></th>
+<td id="S4.T1.1.4.4.2" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_center ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;" colspan="2">718 MB</td>
+<td id="S4.T1.1.4.4.3" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_center ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;" colspan="2">1.1 GB</td>
+</tr>
+<tr id="S4.T1.1.5.5" class="ltx_tr">
+<th id="S4.T1.1.5.5.1" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_l ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;"><span id="S4.T1.1.5.5.1.1" class="ltx_text ltx_font_bold">Latency</span></th>
+<td id="S4.T1.1.5.5.2" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_center ltx_border_b ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;">45ms</td>
+<td id="S4.T1.1.5.5.3" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_center ltx_border_b ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;">22ms</td>
+<td id="S4.T1.1.5.5.4" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_center ltx_border_b ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;">45ms</td>
+<td id="S4.T1.1.5.5.5" class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_center ltx_border_b ltx_border_r ltx_border_t" style="padding-left:1.0pt;padding-right:1.0pt;">22ms</td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure id="S4.T2" class="ltx_table">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 2: </span>On-Device Performance of LoRA weight masking and LoRA as input approaches measured on 2 tasks</figcaption>
+<div id="S4.T2.1" class="ltx_inline-block ltx_align_center ltx_transformed_outer" style="width:172.5pt;height:40.5pt;vertical-align:-18.9pt;"><span class="ltx_transformed_inner" style="transform:translate(-74.1pt,17.4pt) scale(0.537860390930971,0.537860390930971) ;">
+<table id="S4.T2.1.1" class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr id="S4.T2.1.1.1.1" class="ltx_tr">
+<th id="S4.T2.1.1.1.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T2.1.1.1.1.1.1" class="ltx_text ltx_font_bold">Approach</span></th>
+<th id="S4.T2.1.1.1.1.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T2.1.1.1.1.2.1" class="ltx_text ltx_font_bold">Metric</span></th>
+<td id="S4.T2.1.1.1.1.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t" colspan="2"><span id="S4.T2.1.1.1.1.3.1" class="ltx_text ltx_font_bold">Prefill Mode</span></td>
+<td id="S4.T2.1.1.1.1.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t" colspan="2"><span id="S4.T2.1.1.1.1.4.1" class="ltx_text ltx_font_bold">Generative Mode</span></td>
+</tr>
+<tr id="S4.T2.1.1.2.2" class="ltx_tr">
+<td id="S4.T2.1.1.2.2.1" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T2.1.1.2.2.1.1" class="ltx_text ltx_font_bold">Base</span></td>
+<td id="S4.T2.1.1.2.2.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T2.1.1.2.2.2.1" class="ltx_text ltx_font_bold">LoRA</span></td>
+<td id="S4.T2.1.1.2.2.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T2.1.1.2.2.3.1" class="ltx_text ltx_font_bold">Base</span></td>
+<td id="S4.T2.1.1.2.2.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T2.1.1.2.2.4.1" class="ltx_text ltx_font_bold">LoRA</span></td>
+</tr>
+<tr id="S4.T2.1.1.3.3" class="ltx_tr">
+<th id="S4.T2.1.1.3.3.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T2.1.1.3.3.1.1" class="ltx_text">Masking</span></th>
+<th id="S4.T2.1.1.3.3.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t">Size</th>
+<td id="S4.T2.1.1.3.3.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">718 MB</td>
+<td id="S4.T2.1.1.3.3.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">894 MB</td>
+<td id="S4.T2.1.1.3.3.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">718 MB</td>
+<td id="S4.T2.1.1.3.3.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">894 MB</td>
+</tr>
+<tr id="S4.T2.1.1.4.4" class="ltx_tr">
+<th id="S4.T2.1.1.4.4.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t">Latency</th>
+<td id="S4.T2.1.1.4.4.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">45ms</td>
+<td id="S4.T2.1.1.4.4.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">75ms</td>
+<td id="S4.T2.1.1.4.4.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">22ms</td>
+<td id="S4.T2.1.1.4.4.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">30ms</td>
+</tr>
+<tr id="S4.T2.1.1.5.5" class="ltx_tr">
+<th id="S4.T2.1.1.5.5.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_l ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T2.1.1.5.5.1.1" class="ltx_text">LoRA as Input</span></th>
+<th id="S4.T2.1.1.5.5.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t">Size</th>
+<td id="S4.T2.1.1.5.5.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">718 MB</td>
+<td id="S4.T2.1.1.5.5.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">686 MB</td>
+<td id="S4.T2.1.1.5.5.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">718 MB</td>
+<td id="S4.T2.1.1.5.5.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">686 MB</td>
+</tr>
+<tr id="S4.T2.1.1.6.6" class="ltx_tr">
+<th id="S4.T2.1.1.6.6.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_r ltx_border_t">Latency</th>
+<td id="S4.T2.1.1.6.6.2" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">45ms</td>
+<td id="S4.T2.1.1.6.6.3" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">52ms</td>
+<td id="S4.T2.1.1.6.6.4" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">22ms</td>
+<td id="S4.T2.1.1.6.6.5" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">25ms</td>
+</tr>
+</tbody>
+</table>
+</span></div>
+</figure>
+<figure id="S4.T3" class="ltx_table">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 3: </span>Inference time analysis with CTG</figcaption>
+<div id="S4.T3.2" class="ltx_inline-block ltx_align_center ltx_transformed_outer" style="width:172.5pt;height:19.6pt;vertical-align:-8.5pt;"><span class="ltx_transformed_inner" style="transform:translate(-79.7pt,9.0pt) scale(0.51981389998782,0.51981389998782) ;">
+<table id="S4.T3.2.2" class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S4.T3.2.2.3.1" class="ltx_tr">
+<th id="S4.T3.2.2.3.1.1" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_l ltx_border_r ltx_border_t"><span id="S4.T3.2.2.3.1.1.1" class="ltx_text ltx_font_bold">Streams</span></th>
+<th id="S4.T3.2.2.3.1.2" class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_r ltx_border_t">
+<span id="S4.T3.2.2.3.1.2.1" class="ltx_inline-block ltx_align_top">
+<span id="S4.T3.2.2.3.1.2.1.1" class="ltx_p" style="width:56.9pt;"><span id="S4.T3.2.2.3.1.2.1.1.1" class="ltx_text ltx_font_bold">Prefill Latency (ms)</span></span>
+</span>
+</th>
+<th id="S4.T3.2.2.3.1.3" class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_r ltx_border_t">
+<span id="S4.T3.2.2.3.1.3.1" class="ltx_inline-block ltx_align_top">
+<span id="S4.T3.2.2.3.1.3.1.1" class="ltx_p" style="width:56.9pt;"><span id="S4.T3.2.2.3.1.3.1.1.1" class="ltx_text ltx_font_bold">AR Latency (ms)</span></span>
+</span>
+</th>
+<th id="S4.T3.2.2.3.1.4" class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_r ltx_border_t">
+<span id="S4.T3.2.2.3.1.4.1" class="ltx_inline-block ltx_align_top">
+<span id="S4.T3.2.2.3.1.4.1.1" class="ltx_p" style="width:56.9pt;"><span id="S4.T3.2.2.3.1.4.1.1.1" class="ltx_text ltx_font_bold">Total Time (ms)</span></span>
+</span>
+</th>
+<th id="S4.T3.2.2.3.1.5" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t"><span id="S4.T3.2.2.3.1.5.1" class="ltx_text ltx_font_bold">Formula</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S4.T3.1.1.1" class="ltx_tr">
+<td id="S4.T3.1.1.1.2" class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">1</td>
+<td id="S4.T3.1.1.1.3" class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t">
+<span id="S4.T3.1.1.1.3.1" class="ltx_inline-block ltx_align_top">
+<span id="S4.T3.1.1.1.3.1.1" class="ltx_p" style="width:56.9pt;">40</span>
+</span>
+</td>
+<td id="S4.T3.1.1.1.4" class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t">
+<span id="S4.T3.1.1.1.4.1" class="ltx_inline-block ltx_align_top">
+<span id="S4.T3.1.1.1.4.1.1" class="ltx_p" style="width:56.9pt;">23</span>
+</span>
+</td>
+<td id="S4.T3.1.1.1.5" class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t">
+<span id="S4.T3.1.1.1.5.1" class="ltx_inline-block ltx_align_top">
+<span id="S4.T3.1.1.1.5.1.1" class="ltx_p" style="width:56.9pt;">174</span>
+</span>
+</td>
+<td id="S4.T3.1.1.1.1" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><math id="S4.T3.1.1.1.1.m1" class="ltx_Math" alttext="(23\times 8)+40" display="inline" intent=":literal"><semantics><mrow><mrow><mo stretchy="false">(</mo><mrow><mn>23</mn><mo lspace="0.222em" rspace="0.222em">×</mo><mn>8</mn></mrow><mo stretchy="false">)</mo></mrow><mo>+</mo><mn>40</mn></mrow><annotation encoding="application/x-tex">(23\times 8)+40</annotation></semantics></math></td>
+</tr>
+<tr id="S4.T3.2.2.2" class="ltx_tr">
+<td id="S4.T3.2.2.2.2" class="ltx_td ltx_align_center ltx_border_b ltx_border_l ltx_border_r ltx_border_t">8</td>
+<td id="S4.T3.2.2.2.3" class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_r ltx_border_t">
+<span id="S4.T3.2.2.2.3.1" class="ltx_inline-block ltx_align_top">
+<span id="S4.T3.2.2.2.3.1.1" class="ltx_p" style="width:56.9pt;">40</span>
+</span>
+</td>
+<td id="S4.T3.2.2.2.4" class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_r ltx_border_t">
+<span id="S4.T3.2.2.2.4.1" class="ltx_inline-block ltx_align_top">
+<span id="S4.T3.2.2.2.4.1.1" class="ltx_p" style="width:56.9pt;">23</span>
+</span>
+</td>
+<td id="S4.T3.2.2.2.5" class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_r ltx_border_t">
+<span id="S4.T3.2.2.2.5.1" class="ltx_inline-block ltx_align_top">
+<span id="S4.T3.2.2.2.5.1.1" class="ltx_p" style="width:56.9pt;">63</span>
+</span>
+</td>
+<td id="S4.T3.2.2.2.1" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t"><math id="S4.T3.2.2.2.1.m1" class="ltx_Math" alttext="23+40" display="inline" intent=":literal"><semantics><mrow><mn>23</mn><mo>+</mo><mn>40</mn></mrow><annotation encoding="application/x-tex">23+40</annotation></semantics></math></td>
+</tr>
+</tbody>
+</table>
+</span></div>
+</figure>
+<div id="S4.SS1.p1" class="ltx_para">
+<p id="S4.SS1.p1.1" class="ltx_p">After quantizing the model (see Appendix  <a href="#A1.SS3.SSS1" title="A.3.1 Deploying a 1B LLM on GS24 ‣ A.3 Experiments ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">A.3.1</span></a> for detailed results) and performing model optimization for its on-device deployment, the on-device performance was profiled on the GS24, with the proposed multi-LoRA method tested across the three approaches for enabling dynamic runtime switching. Results are presented in Tables <a href="#S4.T1" title="Table 1 ‣ 4.1 Experiments on GS24 with 1B LLM ‣ 4 Experiments &amp; Methods ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>, <a href="#S4.T2" title="Table 2 ‣ 4.1 Experiments on GS24 with 1B LLM ‣ 4 Experiments &amp; Methods ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>, showing that while all three approaches performed similarly for fewer use-cases (e.g., Table <a href="#S4.T2" title="Table 2 ‣ 4.1 Experiments on GS24 with 1B LLM ‣ 4 Experiments &amp; Methods ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>), the weight-as-input approach proved scalable for multiple use-cases.</p>
+</div>
+<figure id="S4.T4" class="ltx_table">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 4: </span>1B LLM On-Device Accuracy Results (%) on GS24 Ultra.</figcaption>
+<div id="S4.T4.1" class="ltx_inline-block ltx_align_center ltx_transformed_outer" style="width:165.6pt;height:22.9pt;vertical-align:-10.3pt;"><span class="ltx_transformed_inner" style="transform:translate(-98.5pt,13.6pt) scale(0.456611539909682,0.456611539909682) ;">
+<table id="S4.T4.1.1" class="ltx_tabular ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr id="S4.T4.1.1.1.1" class="ltx_tr">
+<td id="S4.T4.1.1.1.1.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t"><span id="S4.T4.1.1.1.1.1.1" class="ltx_text ltx_font_bold">Task</span></td>
+<td id="S4.T4.1.1.1.1.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T4.1.1.1.1.2.1" class="ltx_text ltx_font_bold">Korean</span></td>
+<td id="S4.T4.1.1.1.1.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T4.1.1.1.1.3.1" class="ltx_text ltx_font_bold">English</span></td>
+<td id="S4.T4.1.1.1.1.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T4.1.1.1.1.4.1" class="ltx_text ltx_font_bold">German</span></td>
+<td id="S4.T4.1.1.1.1.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T4.1.1.1.1.5.1" class="ltx_text ltx_font_bold">Spanish</span></td>
+<td id="S4.T4.1.1.1.1.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T4.1.1.1.1.6.1" class="ltx_text ltx_font_bold">French</span></td>
+<td id="S4.T4.1.1.1.1.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T4.1.1.1.1.7.1" class="ltx_text ltx_font_bold">Italian</span></td>
+</tr>
+<tr id="S4.T4.1.1.2.2" class="ltx_tr">
+<td id="S4.T4.1.1.2.2.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">Correction</td>
+<td id="S4.T4.1.1.2.2.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">96.83</td>
+<td id="S4.T4.1.1.2.2.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">97.60</td>
+<td id="S4.T4.1.1.2.2.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">90.20</td>
+<td id="S4.T4.1.1.2.2.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">95.90</td>
+<td id="S4.T4.1.1.2.2.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">95.37</td>
+<td id="S4.T4.1.1.2.2.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">94.58</td>
+</tr>
+<tr id="S4.T4.1.1.3.3" class="ltx_tr">
+<td id="S4.T4.1.1.3.3.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">Style</td>
+<td id="S4.T4.1.1.3.3.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">97.41</td>
+<td id="S4.T4.1.1.3.3.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">97.72</td>
+<td id="S4.T4.1.1.3.3.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">96.71</td>
+<td id="S4.T4.1.1.3.3.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">98.62</td>
+<td id="S4.T4.1.1.3.3.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">96.48</td>
+<td id="S4.T4.1.1.3.3.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">98.58</td>
+</tr>
+<tr id="S4.T4.1.1.4.4" class="ltx_tr">
+<td id="S4.T4.1.1.4.4.1" class="ltx_td ltx_align_center ltx_border_b ltx_border_l ltx_border_r ltx_border_t">Smart Reply</td>
+<td id="S4.T4.1.1.4.4.2" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">103.40</td>
+<td id="S4.T4.1.1.4.4.3" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">111.13</td>
+<td id="S4.T4.1.1.4.4.4" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">97.36</td>
+<td id="S4.T4.1.1.4.4.5" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">96.02</td>
+<td id="S4.T4.1.1.4.4.6" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">97.37</td>
+<td id="S4.T4.1.1.4.4.7" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">100.79</td>
+</tr>
+</tbody>
+</table>
+</span></div>
+</figure>
+<div id="S4.SS1.p2" class="ltx_para">
+<p id="S4.SS1.p2.1" class="ltx_p">The accuracy of various tasks and languages measured on-device using the quantized LLM and LoRAs with proposed post-training quantization (PTQ) approaches is detailed in Table <a href="#S4.T4" title="Table 4 ‣ 4.1 Experiments on GS24 with 1B LLM ‣ 4 Experiments &amp; Methods ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>.</p>
+</div>
+<div id="S4.SS1.p3" class="ltx_para">
+<p id="S4.SS1.p3.1" class="ltx_p">We also evaluated the on-device accuracy of various tasks, such as correction, style, and Smart Reply, using the quantized LLM and LoRA with our proposed Post-Training Quantization (PTQ) approach. The results are presented in Table <a href="#S4.T4" title="Table 4 ‣ 4.1 Experiments on GS24 with 1B LLM ‣ 4 Experiments &amp; Methods ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>, which shows that our approach maintains accuracy while reducing latency. The one-for-all foundation model’s overall memory and generation performance on-device is presented in Table  <a href="#S4.T5" title="Table 5 ‣ 4.1 Experiments on GS24 with 1B LLM ‣ 4 Experiments &amp; Methods ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>. Exhaustive results and demonstrations are provided in Appendix  <a href="#A1.SS3.SSS1" title="A.3.1 Deploying a 1B LLM on GS24 ‣ A.3 Experiments ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">A.3.1</span></a>.</p>
+</div>
+<figure id="S4.T5" class="ltx_table">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 5: </span>On-device Performance of One-for-all LLM model</figcaption>
+<div id="S4.T5.1" class="ltx_inline-block ltx_align_center ltx_transformed_outer" style="width:138.0pt;height:55pt;vertical-align:-26.1pt;"><span class="ltx_transformed_inner" style="transform:translate(-54.3pt,21.7pt) scale(0.559782198294378,0.559782198294378) ;">
+<table id="S4.T5.1.1" class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S4.T5.1.1.1.1" class="ltx_tr">
+<th id="S4.T5.1.1.1.1.1" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row ltx_border_l ltx_border_r ltx_border_t" colspan="2"><span id="S4.T5.1.1.1.1.1.1" class="ltx_text ltx_font_bold">Memory and Initialization</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S4.T5.1.1.2.1" class="ltx_tr">
+<th id="S4.T5.1.1.2.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Peak Memory (MB)</th>
+<td id="S4.T5.1.1.2.1.2" class="ltx_td ltx_align_right ltx_border_r ltx_border_t">967</td>
+</tr>
+<tr id="S4.T5.1.1.3.2" class="ltx_tr">
+<th id="S4.T5.1.1.3.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r">Load Time (ms)</th>
+<td id="S4.T5.1.1.3.2.2" class="ltx_td ltx_align_right ltx_border_r">624.1</td>
+</tr>
+<tr id="S4.T5.1.1.4.3" class="ltx_tr">
+<th id="S4.T5.1.1.4.3.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r">First Token Latency (ms)</th>
+<td id="S4.T5.1.1.4.3.2" class="ltx_td ltx_align_right ltx_border_r">155.9</td>
+</tr>
+<tr id="S4.T5.1.1.5.4" class="ltx_tr">
+<th id="S4.T5.1.1.5.4.1" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row ltx_border_l ltx_border_r ltx_border_t" colspan="2"><span id="S4.T5.1.1.5.4.1.1" class="ltx_text ltx_font_bold">Generation Performance</span></th>
+</tr>
+<tr id="S4.T5.1.1.6.5" class="ltx_tr">
+<th id="S4.T5.1.1.6.5.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Per-Token Latency (ms)</th>
+<td id="S4.T5.1.1.6.5.2" class="ltx_td ltx_align_right ltx_border_r ltx_border_t">24.19</td>
+</tr>
+<tr id="S4.T5.1.1.7.6" class="ltx_tr">
+<th id="S4.T5.1.1.7.6.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r">Token Generation Rate (tokens/sec)</th>
+<td id="S4.T5.1.1.7.6.2" class="ltx_td ltx_align_right ltx_border_r">41.32</td>
+</tr>
+<tr id="S4.T5.1.1.8.7" class="ltx_tr">
+<th id="S4.T5.1.1.8.7.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_l ltx_border_r ltx_border_t">Total End-to-End Time (sec)</th>
+<td id="S4.T5.1.1.8.7.2" class="ltx_td ltx_align_right ltx_border_b ltx_border_r ltx_border_t">2.85</td>
+</tr>
+</tbody>
+</table>
+</span></div>
+</figure>
+<figure id="S4.T6" class="ltx_table">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 6: </span>3B LLM Performance for different use cases w/ &amp; w/o DS2D on GS25 Ultra</figcaption>
+<div id="S4.T6.1" class="ltx_inline-block ltx_align_center ltx_transformed_outer" style="width:310.5pt;height:66.3pt;vertical-align:-31.8pt;"><span class="ltx_transformed_inner" style="transform:translate(-129.5pt,27.6pt) scale(0.545303668729145,0.545303668729145) ;">
+<table id="S4.T6.1.1" class="ltx_tabular ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr id="S4.T6.1.1.1.1" class="ltx_tr">
+<td id="S4.T6.1.1.1.1.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T6.1.1.1.1.1.1" class="ltx_text ltx_font_bold">Use Case</span></td>
+<td id="S4.T6.1.1.1.1.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T6.1.1.1.1.2.1" class="ltx_text ltx_font_bold">Prefill (ms)</span></td>
+<td id="S4.T6.1.1.1.1.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t" colspan="2"><span id="S4.T6.1.1.1.1.3.1" class="ltx_text ltx_font_bold">Decode time (ms)</span></td>
+<td id="S4.T6.1.1.1.1.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t" colspan="2"><span id="S4.T6.1.1.1.1.4.1" class="ltx_text ltx_font_bold">Tokens/sec</span></td>
+<td id="S4.T6.1.1.1.1.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T6.1.1.1.1.5.1" class="ltx_text ltx_font_bold">Peak Mem (MB)</span></td>
+<td id="S4.T6.1.1.1.1.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T6.1.1.1.1.6.1" class="ltx_text ltx_font_bold">Init (ms)</span></td>
+</tr>
+<tr id="S4.T6.1.1.2.2" class="ltx_tr">
+<td id="S4.T6.1.1.2.2.1" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T6.1.1.2.2.1.1" class="ltx_text ltx_font_bold">w/o DS2D</span></td>
+<td id="S4.T6.1.1.2.2.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T6.1.1.2.2.2.1" class="ltx_text ltx_font_bold">w/ DS2D</span></td>
+<td id="S4.T6.1.1.2.2.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T6.1.1.2.2.3.1" class="ltx_text ltx_font_bold">w/o DS2D</span></td>
+<td id="S4.T6.1.1.2.2.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T6.1.1.2.2.4.1" class="ltx_text ltx_font_bold">w/ DS2D</span></td>
+</tr>
+<tr id="S4.T6.1.1.3.3" class="ltx_tr">
+<td id="S4.T6.1.1.3.3.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">Correction</td>
+<td id="S4.T6.1.1.3.3.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">208.72</td>
+<td id="S4.T6.1.1.3.3.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">50.17</td>
+<td id="S4.T6.1.1.3.3.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T6.1.1.3.3.4.1" class="ltx_text ltx_font_bold">22.3</span></td>
+<td id="S4.T6.1.1.3.3.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">19.93</td>
+<td id="S4.T6.1.1.3.3.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T6.1.1.3.3.6.1" class="ltx_text ltx_font_bold">44.84</span></td>
+<td id="S4.T6.1.1.3.3.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2463.44</td>
+<td id="S4.T6.1.1.3.3.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1507.96</td>
+</tr>
+<tr id="S4.T6.1.1.4.4" class="ltx_tr">
+<td id="S4.T6.1.1.4.4.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r">Composer</td>
+<td id="S4.T6.1.1.4.4.2" class="ltx_td ltx_align_center ltx_border_r">209.57</td>
+<td id="S4.T6.1.1.4.4.3" class="ltx_td ltx_align_center ltx_border_r">53.23</td>
+<td id="S4.T6.1.1.4.4.4" class="ltx_td ltx_align_center ltx_border_r"><span id="S4.T6.1.1.4.4.4.1" class="ltx_text ltx_font_bold">28.57</span></td>
+<td id="S4.T6.1.1.4.4.5" class="ltx_td ltx_align_center ltx_border_r">18.79</td>
+<td id="S4.T6.1.1.4.4.6" class="ltx_td ltx_align_center ltx_border_r"><span id="S4.T6.1.1.4.4.6.1" class="ltx_text ltx_font_bold">35.00</span></td>
+<td id="S4.T6.1.1.4.4.7" class="ltx_td ltx_align_center ltx_border_r">2468.51</td>
+<td id="S4.T6.1.1.4.4.8" class="ltx_td ltx_align_center ltx_border_r">1499</td>
+</tr>
+<tr id="S4.T6.1.1.5.5" class="ltx_tr">
+<td id="S4.T6.1.1.5.5.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r">Style</td>
+<td id="S4.T6.1.1.5.5.2" class="ltx_td ltx_align_center ltx_border_r">209.34</td>
+<td id="S4.T6.1.1.5.5.3" class="ltx_td ltx_align_center ltx_border_r">50.42</td>
+<td id="S4.T6.1.1.5.5.4" class="ltx_td ltx_align_center ltx_border_r"><span id="S4.T6.1.1.5.5.4.1" class="ltx_text ltx_font_bold">25.21</span></td>
+<td id="S4.T6.1.1.5.5.5" class="ltx_td ltx_align_center ltx_border_r">19.83</td>
+<td id="S4.T6.1.1.5.5.6" class="ltx_td ltx_align_center ltx_border_r"><span id="S4.T6.1.1.5.5.6.1" class="ltx_text ltx_font_bold">39.67</span></td>
+<td id="S4.T6.1.1.5.5.7" class="ltx_td ltx_align_center ltx_border_r">2465.42</td>
+<td id="S4.T6.1.1.5.5.8" class="ltx_td ltx_align_center ltx_border_r">1534.27</td>
+</tr>
+<tr id="S4.T6.1.1.6.6" class="ltx_tr">
+<td id="S4.T6.1.1.6.6.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r">Health</td>
+<td id="S4.T6.1.1.6.6.2" class="ltx_td ltx_align_center ltx_border_r">210.7</td>
+<td id="S4.T6.1.1.6.6.3" class="ltx_td ltx_align_center ltx_border_r">51.92</td>
+<td id="S4.T6.1.1.6.6.4" class="ltx_td ltx_align_center ltx_border_r"><span id="S4.T6.1.1.6.6.4.1" class="ltx_text ltx_font_bold">28.77</span></td>
+<td id="S4.T6.1.1.6.6.5" class="ltx_td ltx_align_center ltx_border_r">19.26</td>
+<td id="S4.T6.1.1.6.6.6" class="ltx_td ltx_align_center ltx_border_r"><span id="S4.T6.1.1.6.6.6.1" class="ltx_text ltx_font_bold">34.76</span></td>
+<td id="S4.T6.1.1.6.6.7" class="ltx_td ltx_align_center ltx_border_r">2468.52</td>
+<td id="S4.T6.1.1.6.6.8" class="ltx_td ltx_align_center ltx_border_r">1551.98</td>
+</tr>
+<tr id="S4.T6.1.1.7.7" class="ltx_tr">
+<td id="S4.T6.1.1.7.7.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r">Summarization</td>
+<td id="S4.T6.1.1.7.7.2" class="ltx_td ltx_align_center ltx_border_r">797.22</td>
+<td id="S4.T6.1.1.7.7.3" class="ltx_td ltx_align_center ltx_border_r">52.91</td>
+<td id="S4.T6.1.1.7.7.4" class="ltx_td ltx_align_center ltx_border_r"><span id="S4.T6.1.1.7.7.4.1" class="ltx_text ltx_font_bold">24.12</span></td>
+<td id="S4.T6.1.1.7.7.5" class="ltx_td ltx_align_center ltx_border_r">18.90</td>
+<td id="S4.T6.1.1.7.7.6" class="ltx_td ltx_align_center ltx_border_r"><span id="S4.T6.1.1.7.7.6.1" class="ltx_text ltx_font_bold">41.46</span></td>
+<td id="S4.T6.1.1.7.7.7" class="ltx_td ltx_align_center ltx_border_r">2486.98</td>
+<td id="S4.T6.1.1.7.7.8" class="ltx_td ltx_align_center ltx_border_r">1576.78</td>
+</tr>
+<tr id="S4.T6.1.1.8.8" class="ltx_tr">
+<td id="S4.T6.1.1.8.8.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r">Natural Language</td>
+<td id="S4.T6.1.1.8.8.2" class="ltx_td ltx_align_center ltx_border_r">209.8</td>
+<td id="S4.T6.1.1.8.8.3" class="ltx_td ltx_align_center ltx_border_r">51.87</td>
+<td id="S4.T6.1.1.8.8.4" class="ltx_td ltx_align_center ltx_border_r"><span id="S4.T6.1.1.8.8.4.1" class="ltx_text ltx_font_bold">23.64</span></td>
+<td id="S4.T6.1.1.8.8.5" class="ltx_td ltx_align_center ltx_border_r">19.28</td>
+<td id="S4.T6.1.1.8.8.6" class="ltx_td ltx_align_center ltx_border_r"><span id="S4.T6.1.1.8.8.6.1" class="ltx_text ltx_font_bold">42.30</span></td>
+<td id="S4.T6.1.1.8.8.7" class="ltx_td ltx_align_center ltx_border_r">2480.09</td>
+<td id="S4.T6.1.1.8.8.8" class="ltx_td ltx_align_center ltx_border_r">1547.54</td>
+</tr>
+<tr id="S4.T6.1.1.9.9" class="ltx_tr">
+<td id="S4.T6.1.1.9.9.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r">ST Energy</td>
+<td id="S4.T6.1.1.9.9.2" class="ltx_td ltx_align_center ltx_border_r">210.77</td>
+<td id="S4.T6.1.1.9.9.3" class="ltx_td ltx_align_center ltx_border_r">52.76</td>
+<td id="S4.T6.1.1.9.9.4" class="ltx_td ltx_align_center ltx_border_r"><span id="S4.T6.1.1.9.9.4.1" class="ltx_text ltx_font_bold">33.48</span></td>
+<td id="S4.T6.1.1.9.9.5" class="ltx_td ltx_align_center ltx_border_r">18.95</td>
+<td id="S4.T6.1.1.9.9.6" class="ltx_td ltx_align_center ltx_border_r"><span id="S4.T6.1.1.9.9.6.1" class="ltx_text ltx_font_bold">29.87</span></td>
+<td id="S4.T6.1.1.9.9.7" class="ltx_td ltx_align_center ltx_border_r">2486.3</td>
+<td id="S4.T6.1.1.9.9.8" class="ltx_td ltx_align_center ltx_border_r">1487.4</td>
+</tr>
+<tr id="S4.T6.1.1.10.10" class="ltx_tr">
+<td id="S4.T6.1.1.10.10.1" class="ltx_td ltx_align_center ltx_border_b ltx_border_l ltx_border_r">AI Brief</td>
+<td id="S4.T6.1.1.10.10.2" class="ltx_td ltx_align_center ltx_border_b ltx_border_r">404.88</td>
+<td id="S4.T6.1.1.10.10.3" class="ltx_td ltx_align_center ltx_border_b ltx_border_r">52.85</td>
+<td id="S4.T6.1.1.10.10.4" class="ltx_td ltx_align_center ltx_border_b ltx_border_r"><span id="S4.T6.1.1.10.10.4.1" class="ltx_text ltx_font_bold">37.75</span></td>
+<td id="S4.T6.1.1.10.10.5" class="ltx_td ltx_align_center ltx_border_b ltx_border_r">18.92</td>
+<td id="S4.T6.1.1.10.10.6" class="ltx_td ltx_align_center ltx_border_b ltx_border_r"><span id="S4.T6.1.1.10.10.6.1" class="ltx_text ltx_font_bold">26.49</span></td>
+<td id="S4.T6.1.1.10.10.7" class="ltx_td ltx_align_center ltx_border_b ltx_border_r">2484.68</td>
+<td id="S4.T6.1.1.10.10.8" class="ltx_td ltx_align_center ltx_border_b ltx_border_r">1509.68</td>
+</tr>
+</tbody>
+</table>
+</span></div>
+</figure>
+</section>
+<section id="S4.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Scaling to a 3B LLM on GS25 with DS2D</h3>
+
+<div id="S4.SS2.p1" class="ltx_para">
+<p id="S4.SS2.p1.1" class="ltx_p">With the deployment of a 3B LLM on GS25, we further accelerated the model using our proposed Dynamic Self-Speculative Decoding (DS2D) approach. The implementation of DS2D, which chooses the optimal branch for each use-case, resulted in a 2-fold improvement in tokens per second compared to non-speculative decoding, as shown in Table <a href="#S4.T6" title="Table 6 ‣ 4.1 Experiments on GS24 with 1B LLM ‣ 4 Experiments &amp; Methods ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">6</span></a>. Table  <a href="#S4.T7" title="Table 7 ‣ Appendix ‣ 4.2 Scaling to a 3B LLM on GS25 with DS2D ‣ 4 Experiments &amp; Methods ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a> presents the acceleration obtained with DS2D measured in average tokens per inference &amp; tokens per second on GS25 Ultra, with optimal branch configurations enabling a single graph for all use-cases. On-device accuracy comparisons between quantized and full-precision models across 9 languages
+are presented in Table  <a href="#S4.T8" title="Table 8 ‣ Appendix ‣ 4.2 Scaling to a 3B LLM on GS25 with DS2D ‣ 4 Experiments &amp; Methods ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">8</span></a>. This improvement led to the real-world deployment of our approach in the Galaxy S25 family. Additional results included in appendix  <a href="#A1.SS3.SSS2" title="A.3.2 Scaling to a 3B LLM with DS2D ‣ A.3 Experiments ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">A.3.2</span></a>.</p>
+</div>
+<section id="S4.SS2.SSS0.Px1" class="ltx_paragraph">
+<h5 class="ltx_title ltx_title_paragraph">Appendix</h5>
+
+<div id="S4.SS2.SSS0.Px1.p1" class="ltx_para">
+<p id="S4.SS2.SSS0.Px1.p1.1" class="ltx_p">Due to space constraints, the following details, extended experiments, and on-device demonstrations are provided in the appendix:</p>
+<ul id="S4.I1" class="ltx_itemize">
+<li id="S4.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S4.I1.i1.p1" class="ltx_para">
+<p id="S4.I1.i1.p1.1" class="ltx_p"><span id="S4.I1.i1.p1.1.1" class="ltx_text ltx_font_bold">Concurrent token generation (CTG):</span> Pipeline and mask for Concurrent token generation.</p>
+</div>
+</li>
+<li id="S4.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S4.I1.i2.p1" class="ltx_para">
+<p id="S4.I1.i2.p1.1" class="ltx_p"><span id="S4.I1.i2.p1.1.1" class="ltx_text ltx_font_bold">Dynamic Self Speculative Decoding:</span> Details of finetuning LLM for SAR generation and mask used during inference.</p>
+</div>
+</li>
+<li id="S4.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S4.I1.i3.p1" class="ltx_para">
+<p id="S4.I1.i3.p1.1" class="ltx_p"><span id="S4.I1.i3.p1.1.1" class="ltx_text ltx_font_bold">Deploying a 1B LLM:</span> Comparison between full precision and quantized models, latency improvements with proposed graph optimizations
+and on device demonstrations of smart reply and style suggestion usecases.</p>
+</div>
+</li>
+<li id="S4.I1.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S4.I1.i4.p1" class="ltx_para">
+<p id="S4.I1.i4.p1.1" class="ltx_p"><span id="S4.I1.i4.p1.1.1" class="ltx_text ltx_font_bold">Scaling to a 3B LLM:</span> Demonstrations on device for writing assist, summarization and health energy score use cases.</p>
+</div>
+</li>
+</ul>
+</div>
+<figure id="S4.T7" class="ltx_table">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 7: </span>Acceleration obtained in 8 different use-cases under different branch configurations on GS25 with SM8750 Qualcomm chipset</figcaption>
+<div id="S4.T7.1" class="ltx_inline-block ltx_align_center ltx_transformed_outer" style="width:345.0pt;height:50.9pt;vertical-align:-24.5pt;"><span class="ltx_transformed_inner" style="transform:translate(-291.6pt,43.0pt) scale(0.371708402357603,0.371708402357603) ;">
+<table id="S4.T7.1.1" class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S4.T7.1.1.1.1" class="ltx_tr">
+<th id="S4.T7.1.1.1.1.1" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_l ltx_border_r ltx_border_tt ltx_border_t" rowspan="2"><span id="S4.T7.1.1.1.1.1.1" class="ltx_text ltx_font_bold">Branch Config</span></th>
+<th id="S4.T7.1.1.1.1.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt ltx_border_t" colspan="2"><span id="S4.T7.1.1.1.1.2.1" class="ltx_text ltx_font_bold">Correction</span></th>
+<th id="S4.T7.1.1.1.1.3" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt ltx_border_t" colspan="2"><span id="S4.T7.1.1.1.1.3.1" class="ltx_text ltx_font_bold">Composer</span></th>
+<th id="S4.T7.1.1.1.1.4" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt ltx_border_t" colspan="2"><span id="S4.T7.1.1.1.1.4.1" class="ltx_text ltx_font_bold">Style</span></th>
+<th id="S4.T7.1.1.1.1.5" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt ltx_border_t" colspan="2"><span id="S4.T7.1.1.1.1.5.1" class="ltx_text ltx_font_bold">Health</span></th>
+<th id="S4.T7.1.1.1.1.6" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt ltx_border_t" colspan="2"><span id="S4.T7.1.1.1.1.6.1" class="ltx_text ltx_font_bold">Summarization</span></th>
+<th id="S4.T7.1.1.1.1.7" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt ltx_border_t" colspan="2"><span id="S4.T7.1.1.1.1.7.1" class="ltx_text ltx_font_bold">Gallery</span></th>
+<th id="S4.T7.1.1.1.1.8" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt ltx_border_t" colspan="2"><span id="S4.T7.1.1.1.1.8.1" class="ltx_text ltx_font_bold">ST Energy</span></th>
+<th id="S4.T7.1.1.1.1.9" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt ltx_border_t" colspan="2"><span id="S4.T7.1.1.1.1.9.1" class="ltx_text ltx_font_bold">AI Brief</span></th>
+</tr>
+<tr id="S4.T7.1.1.2.2" class="ltx_tr">
+<th id="S4.T7.1.1.2.2.1" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">tokens/inf</th>
+<th id="S4.T7.1.1.2.2.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">tokens/s</th>
+<th id="S4.T7.1.1.2.2.3" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">tokens/inf</th>
+<th id="S4.T7.1.1.2.2.4" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">tokens/s</th>
+<th id="S4.T7.1.1.2.2.5" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">tokens/inf</th>
+<th id="S4.T7.1.1.2.2.6" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">tokens/s</th>
+<th id="S4.T7.1.1.2.2.7" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">tokens/inf</th>
+<th id="S4.T7.1.1.2.2.8" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">tokens/s</th>
+<th id="S4.T7.1.1.2.2.9" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">tokens/inf</th>
+<th id="S4.T7.1.1.2.2.10" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">tokens/s</th>
+<th id="S4.T7.1.1.2.2.11" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">tokens/inf</th>
+<th id="S4.T7.1.1.2.2.12" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">tokens/s</th>
+<th id="S4.T7.1.1.2.2.13" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">tokens/inf</th>
+<th id="S4.T7.1.1.2.2.14" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">tokens/s</th>
+<th id="S4.T7.1.1.2.2.15" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">tokens/inf</th>
+<th id="S4.T7.1.1.2.2.16" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">tokens/s</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S4.T7.1.1.3.1" class="ltx_tr">
+<td id="S4.T7.1.1.3.1.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_tt">15</td>
+<td id="S4.T7.1.1.3.1.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt">1.7</td>
+<td id="S4.T7.1.1.3.1.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt">39.26</td>
+<td id="S4.T7.1.1.3.1.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt"><span id="S4.T7.1.1.3.1.4.1" class="ltx_text ltx_font_bold">1.72</span></td>
+<td id="S4.T7.1.1.3.1.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt"><span id="S4.T7.1.1.3.1.5.1" class="ltx_text ltx_font_bold">40.35</span></td>
+<td id="S4.T7.1.1.3.1.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt">1.7</td>
+<td id="S4.T7.1.1.3.1.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt">39.27</td>
+<td id="S4.T7.1.1.3.1.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt"><span id="S4.T7.1.1.3.1.8.1" class="ltx_text ltx_font_bold">1.54</span></td>
+<td id="S4.T7.1.1.3.1.9" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt"><span id="S4.T7.1.1.3.1.9.1" class="ltx_text ltx_font_bold">36.05</span></td>
+<td id="S4.T7.1.1.3.1.10" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt">1.76</td>
+<td id="S4.T7.1.1.3.1.11" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt">40.82</td>
+<td id="S4.T7.1.1.3.1.12" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt"><span id="S4.T7.1.1.3.1.12.1" class="ltx_text ltx_font_bold">1.59</span></td>
+<td id="S4.T7.1.1.3.1.13" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt"><span id="S4.T7.1.1.3.1.13.1" class="ltx_text ltx_font_bold">36.84</span></td>
+<td id="S4.T7.1.1.3.1.14" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt"><span id="S4.T7.1.1.3.1.14.1" class="ltx_text ltx_font_bold">1.45</span></td>
+<td id="S4.T7.1.1.3.1.15" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt"><span id="S4.T7.1.1.3.1.15.1" class="ltx_text ltx_font_bold">33.88</span></td>
+<td id="S4.T7.1.1.3.1.16" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt"><span id="S4.T7.1.1.3.1.16.1" class="ltx_text ltx_font_bold">1.57</span></td>
+<td id="S4.T7.1.1.3.1.17" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt"><span id="S4.T7.1.1.3.1.17.1" class="ltx_text ltx_font_bold">36.46</span></td>
+</tr>
+<tr id="S4.T7.1.1.4.2" class="ltx_tr">
+<td id="S4.T7.1.1.4.2.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">1,8</td>
+<td id="S4.T7.1.1.4.2.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.05</td>
+<td id="S4.T7.1.1.4.2.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">45.88</td>
+<td id="S4.T7.1.1.4.2.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.51</td>
+<td id="S4.T7.1.1.4.2.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">35.47</td>
+<td id="S4.T7.1.1.4.2.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.81</td>
+<td id="S4.T7.1.1.4.2.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">41.38</td>
+<td id="S4.T7.1.1.4.2.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.31</td>
+<td id="S4.T7.1.1.4.2.9" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">30.69</td>
+<td id="S4.T7.1.1.4.2.10" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.7</td>
+<td id="S4.T7.1.1.4.2.11" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">39.07</td>
+<td id="S4.T7.1.1.4.2.12" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.49</td>
+<td id="S4.T7.1.1.4.2.13" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">34.45</td>
+<td id="S4.T7.1.1.4.2.14" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.08</td>
+<td id="S4.T7.1.1.4.2.15" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">25.49</td>
+<td id="S4.T7.1.1.4.2.16" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.32</td>
+<td id="S4.T7.1.1.4.2.17" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">30.91</td>
+</tr>
+<tr id="S4.T7.1.1.5.3" class="ltx_tr">
+<td id="S4.T7.1.1.5.3.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">2,3</td>
+<td id="S4.T7.1.1.5.3.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.14</td>
+<td id="S4.T7.1.1.5.3.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">47.69</td>
+<td id="S4.T7.1.1.5.3.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.56</td>
+<td id="S4.T7.1.1.5.3.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">36.57</td>
+<td id="S4.T7.1.1.5.3.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.94</td>
+<td id="S4.T7.1.1.5.3.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">43.85</td>
+<td id="S4.T7.1.1.5.3.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.37</td>
+<td id="S4.T7.1.1.5.3.9" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">31.98</td>
+<td id="S4.T7.1.1.5.3.10" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.74</td>
+<td id="S4.T7.1.1.5.3.11" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">39.8</td>
+<td id="S4.T7.1.1.5.3.12" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.63</td>
+<td id="S4.T7.1.1.5.3.13" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">37.32</td>
+<td id="S4.T7.1.1.5.3.14" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.21</td>
+<td id="S4.T7.1.1.5.3.15" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">28.51</td>
+<td id="S4.T7.1.1.5.3.16" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.45</td>
+<td id="S4.T7.1.1.5.3.17" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">33.44</td>
+</tr>
+<tr id="S4.T7.1.1.6.4" class="ltx_tr">
+<td id="S4.T7.1.1.6.4.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">3,2</td>
+<td id="S4.T7.1.1.6.4.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.13</td>
+<td id="S4.T7.1.1.6.4.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">47.94</td>
+<td id="S4.T7.1.1.6.4.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.6</td>
+<td id="S4.T7.1.1.6.4.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">37.61</td>
+<td id="S4.T7.1.1.6.4.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T7.1.1.6.4.6.1" class="ltx_text ltx_font_bold">1.96</span></td>
+<td id="S4.T7.1.1.6.4.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T7.1.1.6.4.7.1" class="ltx_text ltx_font_bold">44.47</span></td>
+<td id="S4.T7.1.1.6.4.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.41</td>
+<td id="S4.T7.1.1.6.4.9" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">33.09</td>
+<td id="S4.T7.1.1.6.4.10" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T7.1.1.6.4.10.1" class="ltx_text ltx_font_bold">1.8</span></td>
+<td id="S4.T7.1.1.6.4.11" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T7.1.1.6.4.11.1" class="ltx_text ltx_font_bold">41.34</span></td>
+<td id="S4.T7.1.1.6.4.12" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.58</td>
+<td id="S4.T7.1.1.6.4.13" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">36.38</td>
+<td id="S4.T7.1.1.6.4.14" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.25</td>
+<td id="S4.T7.1.1.6.4.15" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">29.35</td>
+<td id="S4.T7.1.1.6.4.16" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.5</td>
+<td id="S4.T7.1.1.6.4.17" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">34.74</td>
+</tr>
+<tr id="S4.T7.1.1.7.5" class="ltx_tr">
+<td id="S4.T7.1.1.7.5.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">4,1</td>
+<td id="S4.T7.1.1.7.5.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.02</td>
+<td id="S4.T7.1.1.7.5.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">45.31</td>
+<td id="S4.T7.1.1.7.5.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.62</td>
+<td id="S4.T7.1.1.7.5.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">37.83</td>
+<td id="S4.T7.1.1.7.5.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.85</td>
+<td id="S4.T7.1.1.7.5.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">42.05</td>
+<td id="S4.T7.1.1.7.5.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.48</td>
+<td id="S4.T7.1.1.7.5.9" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">34.5</td>
+<td id="S4.T7.1.1.7.5.10" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.77</td>
+<td id="S4.T7.1.1.7.5.11" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">40.37</td>
+<td id="S4.T7.1.1.7.5.12" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.52</td>
+<td id="S4.T7.1.1.7.5.13" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">35.15</td>
+<td id="S4.T7.1.1.7.5.14" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.3</td>
+<td id="S4.T7.1.1.7.5.15" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">30.31</td>
+<td id="S4.T7.1.1.7.5.16" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.48</td>
+<td id="S4.T7.1.1.7.5.17" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">34.09</td>
+</tr>
+<tr id="S4.T7.1.1.8.6" class="ltx_tr">
+<td id="S4.T7.1.1.8.6.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">1,1,5</td>
+<td id="S4.T7.1.1.8.6.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.25</td>
+<td id="S4.T7.1.1.8.6.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">49.44</td>
+<td id="S4.T7.1.1.8.6.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.39</td>
+<td id="S4.T7.1.1.8.6.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">32.32</td>
+<td id="S4.T7.1.1.8.6.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.84</td>
+<td id="S4.T7.1.1.8.6.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">41.51</td>
+<td id="S4.T7.1.1.8.6.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.24</td>
+<td id="S4.T7.1.1.8.6.9" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">28.99</td>
+<td id="S4.T7.1.1.8.6.10" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.58</td>
+<td id="S4.T7.1.1.8.6.11" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">35.98</td>
+<td id="S4.T7.1.1.8.6.12" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.35</td>
+<td id="S4.T7.1.1.8.6.13" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">31.27</td>
+<td id="S4.T7.1.1.8.6.14" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.07</td>
+<td id="S4.T7.1.1.8.6.15" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">25.13</td>
+<td id="S4.T7.1.1.8.6.16" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.27</td>
+<td id="S4.T7.1.1.8.6.17" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">29.33</td>
+</tr>
+<tr id="S4.T7.1.1.9.7" class="ltx_tr">
+<td id="S4.T7.1.1.9.7.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">1,2,2</td>
+<td id="S4.T7.1.1.9.7.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T7.1.1.9.7.2.1" class="ltx_text ltx_font_bold">2.27</span></td>
+<td id="S4.T7.1.1.9.7.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T7.1.1.9.7.3.1" class="ltx_text ltx_font_bold">49.6</span></td>
+<td id="S4.T7.1.1.9.7.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.43</td>
+<td id="S4.T7.1.1.9.7.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">33.24</td>
+<td id="S4.T7.1.1.9.7.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.92</td>
+<td id="S4.T7.1.1.9.7.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">43.13</td>
+<td id="S4.T7.1.1.9.7.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.25</td>
+<td id="S4.T7.1.1.9.7.9" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">29.1</td>
+<td id="S4.T7.1.1.9.7.10" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.67</td>
+<td id="S4.T7.1.1.9.7.11" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">37.98</td>
+<td id="S4.T7.1.1.9.7.12" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.43</td>
+<td id="S4.T7.1.1.9.7.13" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">32.86</td>
+<td id="S4.T7.1.1.9.7.14" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.07</td>
+<td id="S4.T7.1.1.9.7.15" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">25.02</td>
+<td id="S4.T7.1.1.9.7.16" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.31</td>
+<td id="S4.T7.1.1.9.7.17" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">30.25</td>
+</tr>
+<tr id="S4.T7.1.1.10.8" class="ltx_tr">
+<td id="S4.T7.1.1.10.8.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">2,1,1</td>
+<td id="S4.T7.1.1.10.8.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2</td>
+<td id="S4.T7.1.1.10.8.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">44.55</td>
+<td id="S4.T7.1.1.10.8.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.49</td>
+<td id="S4.T7.1.1.10.8.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">34.36</td>
+<td id="S4.T7.1.1.10.8.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.8</td>
+<td id="S4.T7.1.1.10.8.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">40.58</td>
+<td id="S4.T7.1.1.10.8.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.32</td>
+<td id="S4.T7.1.1.10.8.9" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">30.48</td>
+<td id="S4.T7.1.1.10.8.10" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.64</td>
+<td id="S4.T7.1.1.10.8.11" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">37.43</td>
+<td id="S4.T7.1.1.10.8.12" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.46</td>
+<td id="S4.T7.1.1.10.8.13" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">33.39</td>
+<td id="S4.T7.1.1.10.8.14" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.21</td>
+<td id="S4.T7.1.1.10.8.15" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">27.92</td>
+<td id="S4.T7.1.1.10.8.16" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1.43</td>
+<td id="S4.T7.1.1.10.8.17" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">32.92</td>
+</tr>
+<tr id="S4.T7.1.1.11.9" class="ltx_tr">
+<td id="S4.T7.1.1.11.9.1" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_l ltx_border_r ltx_border_t">1,1,1,2</td>
+<td id="S4.T7.1.1.11.9.2" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_r ltx_border_t">2.14</td>
+<td id="S4.T7.1.1.11.9.3" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_r ltx_border_t">46.95</td>
+<td id="S4.T7.1.1.11.9.4" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_r ltx_border_t">1.37</td>
+<td id="S4.T7.1.1.11.9.5" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_r ltx_border_t">31.57</td>
+<td id="S4.T7.1.1.11.9.6" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_r ltx_border_t">1.81</td>
+<td id="S4.T7.1.1.11.9.7" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_r ltx_border_t">40.47</td>
+<td id="S4.T7.1.1.11.9.8" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_r ltx_border_t">1.24</td>
+<td id="S4.T7.1.1.11.9.9" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_r ltx_border_t">28.69</td>
+<td id="S4.T7.1.1.11.9.10" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_r ltx_border_t">1.53</td>
+<td id="S4.T7.1.1.11.9.11" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_r ltx_border_t">33.82</td>
+<td id="S4.T7.1.1.11.9.12" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_r ltx_border_t">1.35</td>
+<td id="S4.T7.1.1.11.9.13" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_r ltx_border_t">29.56</td>
+<td id="S4.T7.1.1.11.9.14" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_r ltx_border_t">1.07</td>
+<td id="S4.T7.1.1.11.9.15" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_r ltx_border_t">23.87</td>
+<td id="S4.T7.1.1.11.9.16" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_r ltx_border_t">1.26</td>
+<td id="S4.T7.1.1.11.9.17" class="ltx_td ltx_align_center ltx_border_bb ltx_border_b ltx_border_r ltx_border_t">28.39</td>
+</tr>
+</tbody>
+</table>
+</span></div>
+</figure>
+<figure id="S4.T8" class="ltx_table">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 8: </span>On-Device Accuracy measured for different use-cases in 9 languages on GS25. G-Eval measured with ChatGPT 4.5 as Evaluator Model and Relative Accuracy (RA) = <math id="S4.T8.2.m1" class="ltx_Math" alttext="100\times\frac{\text{OnDevice QAT Accuracy}}{\text{FP32 Accuracy}}" display="inline" intent=":literal"><semantics><mrow><mn>100</mn><mo lspace="0.222em" rspace="0.222em">×</mo><mfrac><mtext>OnDevice QAT Accuracy</mtext><mtext>FP32 Accuracy</mtext></mfrac></mrow><annotation encoding="application/x-tex">100\times\frac{\text{OnDevice QAT Accuracy}}{\text{FP32 Accuracy}}</annotation></semantics></math></figcaption>
+<table id="S4.T8.3" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr id="S4.T8.3.1.1" class="ltx_tr">
+<th id="S4.T8.3.1.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T8.3.1.1.1.1" class="ltx_text ltx_font_bold">Precision</span></th>
+<th id="S4.T8.3.1.1.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T8.3.1.1.2.1" class="ltx_text ltx_font_bold">Task/Language</span></th>
+<td id="S4.T8.3.1.1.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t" colspan="2"><span id="S4.T8.3.1.1.3.1" class="ltx_text ltx_font_bold">Korean</span></td>
+<td id="S4.T8.3.1.1.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t" colspan="2"><span id="S4.T8.3.1.1.4.1" class="ltx_text ltx_font_bold">English</span></td>
+<td id="S4.T8.3.1.1.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t" colspan="2"><span id="S4.T8.3.1.1.5.1" class="ltx_text ltx_font_bold">German</span></td>
+</tr>
+<tr id="S4.T8.3.2.2" class="ltx_tr">
+<td id="S4.T8.3.2.2.1" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.2.2.1.1" class="ltx_text ltx_font_bold">G-Eval</span></td>
+<td id="S4.T8.3.2.2.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.2.2.2.1" class="ltx_text ltx_font_bold">RA</span></td>
+<td id="S4.T8.3.2.2.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.2.2.3.1" class="ltx_text ltx_font_bold">G-Eval</span></td>
+<td id="S4.T8.3.2.2.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.2.2.4.1" class="ltx_text ltx_font_bold">RA</span></td>
+<td id="S4.T8.3.2.2.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.2.2.5.1" class="ltx_text ltx_font_bold">G-Eval</span></td>
+<td id="S4.T8.3.2.2.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.2.2.6.1" class="ltx_text ltx_font_bold">RA</span></td>
+</tr>
+<tr id="S4.T8.3.3.3" class="ltx_tr">
+<th id="S4.T8.3.3.3.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Fp32</th>
+<th id="S4.T8.3.3.3.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T8.3.3.3.2.1" class="ltx_text">Correction</span></th>
+<td id="S4.T8.3.3.3.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.53</td>
+<td id="S4.T8.3.3.3.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.3.3.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.664</td>
+<td id="S4.T8.3.3.3.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.3.3.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.35</td>
+<td id="S4.T8.3.3.3.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+</tr>
+<tr id="S4.T8.3.4.4" class="ltx_tr">
+<th id="S4.T8.3.4.4.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">QAT - On Device</th>
+<td id="S4.T8.3.4.4.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.52</td>
+<td id="S4.T8.3.4.4.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">99.6047</td>
+<td id="S4.T8.3.4.4.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.7424</td>
+<td id="S4.T8.3.4.4.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">102.943</td>
+<td id="S4.T8.3.4.4.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.3892</td>
+<td id="S4.T8.3.4.4.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">101.668</td>
+</tr>
+<tr id="S4.T8.3.5.5" class="ltx_tr">
+<th id="S4.T8.3.5.5.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Fp32</th>
+<th id="S4.T8.3.5.5.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T8.3.5.5.2.1" class="ltx_text">Style</span></th>
+<td id="S4.T8.3.5.5.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.94</td>
+<td id="S4.T8.3.5.5.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.5.5.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.935</td>
+<td id="S4.T8.3.5.5.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.5.5.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.806</td>
+<td id="S4.T8.3.5.5.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+</tr>
+<tr id="S4.T8.3.6.6" class="ltx_tr">
+<th id="S4.T8.3.6.6.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">QAT - On Device</th>
+<td id="S4.T8.3.6.6.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.96</td>
+<td id="S4.T8.3.6.6.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">100.51</td>
+<td id="S4.T8.3.6.6.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.928</td>
+<td id="S4.T8.3.6.6.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">99.7445</td>
+<td id="S4.T8.3.6.6.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.871</td>
+<td id="S4.T8.3.6.6.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">102.309</td>
+</tr>
+<tr id="S4.T8.3.7.7" class="ltx_tr">
+<th id="S4.T8.3.7.7.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Fp32</th>
+<th id="S4.T8.3.7.7.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T8.3.7.7.2.1" class="ltx_text">Smart Reply</span></th>
+<td id="S4.T8.3.7.7.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.7</td>
+<td id="S4.T8.3.7.7.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.7.7.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.834</td>
+<td id="S4.T8.3.7.7.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.7.7.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.621</td>
+<td id="S4.T8.3.7.7.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+</tr>
+<tr id="S4.T8.3.8.8" class="ltx_tr">
+<th id="S4.T8.3.8.8.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">QAT - On Device</th>
+<td id="S4.T8.3.8.8.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.67</td>
+<td id="S4.T8.3.8.8.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">99.0724</td>
+<td id="S4.T8.3.8.8.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.81</td>
+<td id="S4.T8.3.8.8.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">99.1531</td>
+<td id="S4.T8.3.8.8.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.56</td>
+<td id="S4.T8.3.8.8.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">97.6726</td>
+</tr>
+<tr id="S4.T8.3.9.9" class="ltx_tr">
+<th id="S4.T8.3.9.9.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Fp32</th>
+<th id="S4.T8.3.9.9.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T8.3.9.9.2.1" class="ltx_text">Summarization</span></th>
+<td id="S4.T8.3.9.9.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.71</td>
+<td id="S4.T8.3.9.9.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.9.9.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.65</td>
+<td id="S4.T8.3.9.9.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.9.9.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.65</td>
+<td id="S4.T8.3.9.9.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+</tr>
+<tr id="S4.T8.3.10.10" class="ltx_tr">
+<th id="S4.T8.3.10.10.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">QAT - On Device</th>
+<td id="S4.T8.3.10.10.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.693</td>
+<td id="S4.T8.3.10.10.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">99.3542</td>
+<td id="S4.T8.3.10.10.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.688</td>
+<td id="S4.T8.3.10.10.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">101.446</td>
+<td id="S4.T8.3.10.10.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.641</td>
+<td id="S4.T8.3.10.10.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">99.66031</td>
+</tr>
+<tr id="S4.T8.3.11.11" class="ltx_tr">
+<th id="S4.T8.3.11.11.1" class="ltx_td ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_tt" rowspan="2"></th>
+<th id="S4.T8.3.11.11.2" class="ltx_td ltx_th ltx_th_row ltx_border_r ltx_border_tt" rowspan="2"></th>
+<td id="S4.T8.3.11.11.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" colspan="2"><span id="S4.T8.3.11.11.3.1" class="ltx_text ltx_font_bold">Spanish</span></td>
+<td id="S4.T8.3.11.11.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" colspan="2"><span id="S4.T8.3.11.11.4.1" class="ltx_text ltx_font_bold">French</span></td>
+<td id="S4.T8.3.11.11.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" colspan="2"><span id="S4.T8.3.11.11.5.1" class="ltx_text ltx_font_bold">Italian</span></td>
+</tr>
+<tr id="S4.T8.3.12.12" class="ltx_tr">
+<td id="S4.T8.3.12.12.1" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.12.12.1.1" class="ltx_text ltx_font_bold">G-Eval</span></td>
+<td id="S4.T8.3.12.12.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.12.12.2.1" class="ltx_text ltx_font_bold">RA</span></td>
+<td id="S4.T8.3.12.12.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.12.12.3.1" class="ltx_text ltx_font_bold">G-Eval</span></td>
+<td id="S4.T8.3.12.12.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.12.12.4.1" class="ltx_text ltx_font_bold">RA</span></td>
+<td id="S4.T8.3.12.12.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.12.12.5.1" class="ltx_text ltx_font_bold">G-Eval</span></td>
+<td id="S4.T8.3.12.12.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.12.12.6.1" class="ltx_text ltx_font_bold">RA</span></td>
+</tr>
+<tr id="S4.T8.3.13.13" class="ltx_tr">
+<th id="S4.T8.3.13.13.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Fp32</th>
+<th id="S4.T8.3.13.13.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T8.3.13.13.2.1" class="ltx_text">Correction</span></th>
+<td id="S4.T8.3.13.13.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.48</td>
+<td id="S4.T8.3.13.13.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.13.13.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.64</td>
+<td id="S4.T8.3.13.13.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.13.13.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.715</td>
+<td id="S4.T8.3.13.13.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+</tr>
+<tr id="S4.T8.3.14.14" class="ltx_tr">
+<th id="S4.T8.3.14.14.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">QAT - On Device</th>
+<td id="S4.T8.3.14.14.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.535</td>
+<td id="S4.T8.3.14.14.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">102.22</td>
+<td id="S4.T8.3.14.14.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.608</td>
+<td id="S4.T8.3.14.14.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">98.769</td>
+<td id="S4.T8.3.14.14.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.635</td>
+<td id="S4.T8.3.14.14.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">97.053</td>
+</tr>
+<tr id="S4.T8.3.15.15" class="ltx_tr">
+<th id="S4.T8.3.15.15.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Fp32</th>
+<th id="S4.T8.3.15.15.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T8.3.15.15.2.1" class="ltx_text">Style</span></th>
+<td id="S4.T8.3.15.15.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.958</td>
+<td id="S4.T8.3.15.15.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.15.15.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.838</td>
+<td id="S4.T8.3.15.15.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.15.15.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.743</td>
+<td id="S4.T8.3.15.15.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+</tr>
+<tr id="S4.T8.3.16.16" class="ltx_tr">
+<th id="S4.T8.3.16.16.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">QAT - On Device</th>
+<td id="S4.T8.3.16.16.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.891</td>
+<td id="S4.T8.3.16.16.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">97.755</td>
+<td id="S4.T8.3.16.16.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.869</td>
+<td id="S4.T8.3.16.16.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">101.103</td>
+<td id="S4.T8.3.16.16.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.807</td>
+<td id="S4.T8.3.16.16.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">102.34</td>
+</tr>
+<tr id="S4.T8.3.17.17" class="ltx_tr">
+<th id="S4.T8.3.17.17.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Fp32</th>
+<th id="S4.T8.3.17.17.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T8.3.17.17.2.1" class="ltx_text">Smart Reply</span></th>
+<td id="S4.T8.3.17.17.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.675</td>
+<td id="S4.T8.3.17.17.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.17.17.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.595</td>
+<td id="S4.T8.3.17.17.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.17.17.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.588</td>
+<td id="S4.T8.3.17.17.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+</tr>
+<tr id="S4.T8.3.18.18" class="ltx_tr">
+<th id="S4.T8.3.18.18.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">QAT - On Device</th>
+<td id="S4.T8.3.18.18.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.65</td>
+<td id="S4.T8.3.18.18.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">99.065</td>
+<td id="S4.T8.3.18.18.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.68</td>
+<td id="S4.T8.3.18.18.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">103.276</td>
+<td id="S4.T8.3.18.18.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.63</td>
+<td id="S4.T8.3.18.18.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">101.62</td>
+</tr>
+<tr id="S4.T8.3.19.19" class="ltx_tr">
+<th id="S4.T8.3.19.19.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Fp32</th>
+<th id="S4.T8.3.19.19.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T8.3.19.19.2.1" class="ltx_text">Summarization</span></th>
+<td id="S4.T8.3.19.19.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.647</td>
+<td id="S4.T8.3.19.19.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.19.19.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.678</td>
+<td id="S4.T8.3.19.19.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.19.19.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.502</td>
+<td id="S4.T8.3.19.19.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+</tr>
+<tr id="S4.T8.3.20.20" class="ltx_tr">
+<th id="S4.T8.3.20.20.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">QAT - On Device</th>
+<td id="S4.T8.3.20.20.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.653</td>
+<td id="S4.T8.3.20.20.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">100.227</td>
+<td id="S4.T8.3.20.20.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.731</td>
+<td id="S4.T8.3.20.20.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">101.96</td>
+<td id="S4.T8.3.20.20.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.421</td>
+<td id="S4.T8.3.20.20.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">96.7619</td>
+</tr>
+<tr id="S4.T8.3.21.21" class="ltx_tr">
+<th id="S4.T8.3.21.21.1" class="ltx_td ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_tt" rowspan="2"></th>
+<th id="S4.T8.3.21.21.2" class="ltx_td ltx_th ltx_th_row ltx_border_r ltx_border_tt" rowspan="2"></th>
+<td id="S4.T8.3.21.21.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" colspan="2"><span id="S4.T8.3.21.21.3.1" class="ltx_text ltx_font_bold">Portuguese</span></td>
+<td id="S4.T8.3.21.21.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" colspan="2"><span id="S4.T8.3.21.21.4.1" class="ltx_text ltx_font_bold">Chinese</span></td>
+<td id="S4.T8.3.21.21.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_tt" colspan="2"><span id="S4.T8.3.21.21.5.1" class="ltx_text ltx_font_bold">Japanese</span></td>
+</tr>
+<tr id="S4.T8.3.22.22" class="ltx_tr">
+<td id="S4.T8.3.22.22.1" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.22.22.1.1" class="ltx_text ltx_font_bold">G-Eval</span></td>
+<td id="S4.T8.3.22.22.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.22.22.2.1" class="ltx_text ltx_font_bold">RA</span></td>
+<td id="S4.T8.3.22.22.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.22.22.3.1" class="ltx_text ltx_font_bold">G-Eval</span></td>
+<td id="S4.T8.3.22.22.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.22.22.4.1" class="ltx_text ltx_font_bold">RA</span></td>
+<td id="S4.T8.3.22.22.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.22.22.5.1" class="ltx_text ltx_font_bold">G-Eval</span></td>
+<td id="S4.T8.3.22.22.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="S4.T8.3.22.22.6.1" class="ltx_text ltx_font_bold">RA</span></td>
+</tr>
+<tr id="S4.T8.3.23.23" class="ltx_tr">
+<th id="S4.T8.3.23.23.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Fp32</th>
+<th id="S4.T8.3.23.23.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T8.3.23.23.2.1" class="ltx_text">Correction</span></th>
+<td id="S4.T8.3.23.23.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.418</td>
+<td id="S4.T8.3.23.23.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.23.23.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.24</td>
+<td id="S4.T8.3.23.23.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.23.23.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.385</td>
+<td id="S4.T8.3.23.23.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+</tr>
+<tr id="S4.T8.3.24.24" class="ltx_tr">
+<th id="S4.T8.3.24.24.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">QAT - On Device</th>
+<td id="S4.T8.3.24.24.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.638</td>
+<td id="S4.T8.3.24.24.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">109.078</td>
+<td id="S4.T8.3.24.24.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.174</td>
+<td id="S4.T8.3.24.24.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">97.031</td>
+<td id="S4.T8.3.24.24.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.305</td>
+<td id="S4.T8.3.24.24.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">96.6457</td>
+</tr>
+<tr id="S4.T8.3.25.25" class="ltx_tr">
+<th id="S4.T8.3.25.25.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Fp32</th>
+<th id="S4.T8.3.25.25.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T8.3.25.25.2.1" class="ltx_text">Style</span></th>
+<td id="S4.T8.3.25.25.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.783</td>
+<td id="S4.T8.3.25.25.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.25.25.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.929</td>
+<td id="S4.T8.3.25.25.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.25.25.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.928</td>
+<td id="S4.T8.3.25.25.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+</tr>
+<tr id="S4.T8.3.26.26" class="ltx_tr">
+<th id="S4.T8.3.26.26.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">QAT - On Device</th>
+<td id="S4.T8.3.26.26.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.836</td>
+<td id="S4.T8.3.26.26.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">101.919</td>
+<td id="S4.T8.3.26.26.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.878</td>
+<td id="S4.T8.3.26.26.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">98.228</td>
+<td id="S4.T8.3.26.26.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.91</td>
+<td id="S4.T8.3.26.26.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">99.392</td>
+</tr>
+<tr id="S4.T8.3.27.27" class="ltx_tr">
+<th id="S4.T8.3.27.27.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Fp32</th>
+<th id="S4.T8.3.27.27.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T8.3.27.27.2.1" class="ltx_text">Smart Reply</span></th>
+<td id="S4.T8.3.27.27.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.534</td>
+<td id="S4.T8.3.27.27.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.27.27.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.735</td>
+<td id="S4.T8.3.27.27.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.27.27.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.534</td>
+<td id="S4.T8.3.27.27.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+</tr>
+<tr id="S4.T8.3.28.28" class="ltx_tr">
+<th id="S4.T8.3.28.28.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">QAT - On Device</th>
+<td id="S4.T8.3.28.28.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.67</td>
+<td id="S4.T8.3.28.28.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">105.367</td>
+<td id="S4.T8.3.28.28.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.76</td>
+<td id="S4.T8.3.28.28.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">100.91</td>
+<td id="S4.T8.3.28.28.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.25</td>
+<td id="S4.T8.3.28.28.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">88.7924</td>
+</tr>
+<tr id="S4.T8.3.29.29" class="ltx_tr">
+<th id="S4.T8.3.29.29.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Fp32</th>
+<th id="S4.T8.3.29.29.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T8.3.29.29.2.1" class="ltx_text">Summarization</span></th>
+<td id="S4.T8.3.29.29.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.647</td>
+<td id="S4.T8.3.29.29.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.29.29.5" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.64</td>
+<td id="S4.T8.3.29.29.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+<td id="S4.T8.3.29.29.7" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">2.646</td>
+<td id="S4.T8.3.29.29.8" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">NA</td>
+</tr>
+<tr id="S4.T8.3.30.30" class="ltx_tr">
+<th id="S4.T8.3.30.30.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_l ltx_border_r ltx_border_t">QAT - On Device</th>
+<td id="S4.T8.3.30.30.2" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">2.624</td>
+<td id="S4.T8.3.30.30.3" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">99.13109</td>
+<td id="S4.T8.3.30.30.4" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">2.189</td>
+<td id="S4.T8.3.30.30.5" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">82.9167</td>
+<td id="S4.T8.3.30.30.6" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">2.535</td>
+<td id="S4.T8.3.30.30.7" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">95.8042</td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+</section>
+</section>
+<section id="S5" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Conclusion</h2>
+
+<div id="S5.p1" class="ltx_para">
+<p id="S5.p1.1" class="ltx_p">This work presents an effort to optimize the inference pipeline for deploying a single pre-trained foundation model to serve multiple Generative AI use-cases in the Galaxy AI feature of Samsung flagships. The proposed approach implements methods and optimizations for enabling multiple quantized low rank adapters capable of switching on demand at runtime. The empirical analysis demonstrates 8 different uses-cases with a single large language foundation model that results in 3 and 2 fold improvement in on-device memory and token rate, respectively.</p>
+</div>
+<div id="S5.p2" class="ltx_para">
+<p id="S5.p2.1" class="ltx_p">The framework proposed in this research is first-of-its-kind which led to the successful on-device deployment of Generative AI-based language understanding use-cases. This framework will serve as a guide for best practices in optimizing the memory-intensive foundation models for efficient on-device deployment. The concepts such as the quantization, beyond the foundation models for Generative AI and apply to all kinds of AI models, resulting in a much larger scope, and efficient and sustainable on-device AI.</p>
+</div>
+<div id="S5.p3" class="ltx_para">
+<p id="S5.p3.1" class="ltx_p">This work establishes a scalable and efficient approach for deploying LLMs fully on-device. Through model re-engineering, multi-LoRA handling and the development of novel Self-Speculative Decoding, we achieve real-time inference across multiple tasks and languages on mobile NPUs. Our framework successfully commercialized advanced LLM capabilities without cloud reliance, setting a new benchmark for edge AI.</p>
+</div>
+</section>
+<section id="S6" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6 </span>Limitations</h2>
+
+<div id="S6.p1" class="ltx_para">
+<p id="S6.p1.1" class="ltx_p">While our system achieves significant improvements in memory efficiency, latency, and multi-use-case deployment of LLMs on-device, it is subject to limitations which will be addressed in future works:</p>
+<ul id="S6.I1" class="ltx_itemize">
+<li id="S6.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S6.I1.i1.p1" class="ltx_para">
+<p id="S6.I1.i1.p1.1" class="ltx_p">LoRA Dimensions: Our LoRA-as-input design assumes that all LoRAs have identical dimensionality. This is necessary to maintain compatibility with the frozen inference graph and its fixed placeholder structure. Supporting heterogeneous LoRA sizes would require dynamic graph construction or runtime shape management, which is infeasible under current deployment
+constraints.</p>
+</div>
+</li>
+<li id="S6.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S6.I1.i2.p1" class="ltx_para">
+<p id="S6.I1.i2.p1.1" class="ltx_p">Forecast Embeddings Are Static in DS2D: In our Dynamic Self-Speculative Decoding (DS2D) approach, the forecast embeddings used to precompute semi-autoregressive (SAR) tokens remain static across inference steps. Since they are not conditioned on the evolving input sequence, this can lower the token acceptance rate, particularly for inputs with high semantic variance or long-term dependencies.</p>
+</div>
+</li>
+<li id="S6.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S6.I1.i3.p1" class="ltx_para">
+<p id="S6.I1.i3.p1.1" class="ltx_p">Predefined Style Variants: The multi-stream decoding strategy relies on a fixed set of stylistic variants defined at compile time. While this enables concurrent generation, it does not support dynamically defined or user-specified styles without recompilation or memory duplication.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul id="bib.L1" class="ltx_biblist">
+<li id="bib.bib11" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">J. Achiam, S. Adler, S. Agarwal, L. Ahmad, I. Akkaya, F. L. Aleman, D. Almeida, J. Altenschmidt, S. Altman, S. Anadkat, <span class="ltx_text ltx_bib_etal">et al.</span> (2023)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Gpt-4 technical report</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2303.08774</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2 Reported Works ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib16" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">T. Cai, Y. Li, Z. Geng, H. Peng, J. D. Lee, D. Chen, and T. Dao (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Medusa: simple llm inference acceleration framework with multiple decoding heads</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2401.10774</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p7.1" title="2 Reported Works ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib14" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">T. Dao, D. Fu, S. Ermon, A. Rudra, and C. F. Ré (2022)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Fast and memory-efficient exact attention with io-awareness</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">URL https://arxiv. org/abs/2205.14135</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p6.1" title="2 Reported Works ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib12" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">T. Dettmers, A. Pagnoni, A. Holtzman, and L. Zettlemoyer (2023)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Qlora: efficient finetuning of quantized llms</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Advances in neural information processing systems</span> <span class="ltx_text ltx_bib_volume">36</span>, <span class="ltx_text ltx_bib_pages"> pp. 10088–10115</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p3.1" title="2 Reported Works ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#S2.p4.1" title="2 Reported Works ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib10" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">E. J. Hu, Y. Shen, P. Wallis, Z. Allen-Zhu, Y. Li, S. Wang, L. Wang, W. Chen, <span class="ltx_text ltx_bib_etal">et al.</span> (2022)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Lora: low-rank adaptation of large language models.</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">ICLR</span> <span class="ltx_text ltx_bib_volume">1</span> (<span class="ltx_text ltx_bib_number">2</span>), <span class="ltx_text ltx_bib_pages"> pp. 3</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p4.1" title="2 Reported Works ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#S3.p1.1" title="3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib15" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Y. Li, F. Wei, C. Zhang, and H. Zhang (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Eagle: speculative sampling requires rethinking feature uncertainty</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2401.15077</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p7.1" title="2 Reported Works ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib9" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">F. Lin, H. Yi, Y. Yang, H. Li, X. Yu, G. Lu, and R. Xiao (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Bita: bi-directional tuning for lossless acceleration in large language models</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Expert Systems with Applications</span> <span class="ltx_text ltx_bib_volume">279</span>, <span class="ltx_text ltx_bib_pages"> pp. 127305</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p7.1" title="2 Reported Works ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#S3.SS5.p2.1" title="3.5 Dynamic Self Speculative Decoding ‣ 3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.5</span></a>.
+</span>
+</li>
+<li id="bib.bib17" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">O. Thawakar, A. Vayani, S. Khan, H. Cholakal, R. M. Anwer, M. Felsberg, T. Baldwin, E. P. Xing, and F. S. Khan (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Mobillama: towards accurate and lightweight fully transparent gpt</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2402.16840</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p2.1" title="2 Reported Works ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib8" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">H. Touvron, L. Martin, K. Stone, P. Albert, A. Almahairi, Y. Babaei, N. Bashlykov, S. Batra, P. Bhargava, S. Bhosale, <span class="ltx_text ltx_bib_etal">et al.</span> (2023)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Llama 2: open foundation and fine-tuned chat models</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2307.09288</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2 Reported Works ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#S3.p1.1" title="3 Proposed Method ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib13" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Y. Xu, L. Xie, X. Gu, X. Chen, H. Chang, H. Zhang, Z. Chen, X. Zhang, and Q. Tian (2023)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Qa-lora: quantization-aware low-rank adaptation of large language models</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2309.14717</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p3.1" title="2 Reported Works ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#S2.p4.1" title="2 Reported Works ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+</ul>
+</section>
+<section id="A1" class="ltx_appendix">
+<h2 class="ltx_title ltx_title_appendix">
+<span class="ltx_tag ltx_tag_appendix">Appendix A </span>Appendix</h2>
+
+<section id="A1.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">A.1 </span>Concurrent token generation (CTG)</h3>
+
+<div id="A1.SS1.p1" class="ltx_para">
+<p id="A1.SS1.p1.1" class="ltx_p">Figure  <a href="#A1.F4" title="Figure 4 ‣ A.1 Concurrent token generation (CTG) ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a> illustrates the pipeline for concurrent token generation. It starts with a single Prefill model execution, followed by a sampler generating 8 distinct output tokens. These tokens trigger the generative model flow for 8 sentences. An 8-fold generative model processes 8 inputs simultaneously, yielding 8 outputs. The KV-cache is divided into 8 isolated segments, with masks ensuring each token stream interacts only with its Prefill context and corresponding segment (see Figure  <a href="#A1.F5" title="Figure 5 ‣ A.1 Concurrent token generation (CTG) ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>).</p>
+</div>
+<figure id="A1.F4" class="ltx_figure"><img src="2604.18655v2/figures/fig4.jpg" id="A1.F4.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="476" height="124" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 4: </span>Flowsheet for the execution of Concurrent token generation (CTG) on device</figcaption>
+</figure>
+<figure id="A1.F5" class="ltx_figure"><img src="2604.18655v2/figures/fig5.jpg" id="A1.F5.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="476" height="75" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 5: </span>Mask used during CTG. KV Cache is divided into 5 parts: one for the common prefill cache and four for individual sentences (S1 - S4). The tokens (T1 - T4) attend to the prefill and their respective sentence tokens.All empty values are 0’s</figcaption>
+</figure>
+</section>
+<section id="A1.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">A.2 </span>Dynamic Self Speculative Decoding</h3>
+
+<div id="A1.SS2.p1" class="ltx_para">
+<p id="A1.SS2.p1.1" class="ltx_p">To enable the LLM to generate tokens semi-auto-regressively, Prefix Tuning is employed. The dataset can be generated from the frozen pre-trained LLM in auto-regressive manner and can be rearranged to facilitate the finetuning as shown in Figure  <a href="#A1.F6" title="Figure 6 ‣ A.2 Dynamic Self Speculative Decoding ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">6</span></a>. The forecast prefix induces the capacity of semi-auto regression into already trained and frozen LLM. Further the causal mask is modified to avoid the interaction of the forecast prefix with prompt token as shown in Figure  <a href="#A1.F7" title="Figure 7 ‣ Optimal Branch Configuration ‣ A.2 Dynamic Self Speculative Decoding ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>. Since the m new tokens are of low-fidelity, these tokens need to be validated during the next inference step, while generating new draft tokens simultaneously.</p>
+</div>
+<figure id="A1.F6" class="ltx_figure"><img src="2604.18655v2/figures/fig6.jpg" id="A1.F6.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="476" height="193" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 6: </span>Approach for self-speculative decoding and the procedure for fine-tuning the model with Prefix tuning.</figcaption>
+</figure>
+<section id="A1.SS2.SSS0.Px1" class="ltx_paragraph">
+<h5 class="ltx_title ltx_title_paragraph">Optimal Branch Configuration</h5>
+
+<div id="A1.SS2.SSS0.Px1.p1" class="ltx_para">
+<p id="A1.SS2.SSS0.Px1.p1.1" class="ltx_p">The configuration (3, 2) which results in 9 draft tokens, is dynamic and use-case specific, allowing the determination of optimal branching for each use-case. The dynamic selection is learnt during the fine-tuning step and facilitated during the inference step through the mask as shown in Figure  <a href="#A1.F7" title="Figure 7 ‣ Optimal Branch Configuration ‣ A.2 Dynamic Self Speculative Decoding ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>. Note that, since the first inference step does not have to validate any draft tokens, the mask used in inference step 1 will be much simpler than the one described in  <a href="#A1.F7" title="Figure 7 ‣ Optimal Branch Configuration ‣ A.2 Dynamic Self Speculative Decoding ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>.</p>
+</div>
+<figure id="A1.F7" class="ltx_figure"><img src="2604.18655v2/figures/fig7.jpg" id="A1.F7.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="476" height="197" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 7: </span>The mask used during inference step 2 in Figure 6. All the empty values indicate 0s. </figcaption>
+</figure>
+</section>
+</section>
+<section id="A1.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">A.3 </span>Experiments</h3>
+
+<section id="A1.SS3.SSS1" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">A.3.1 </span>Deploying a 1B LLM on GS24</h4>
+
+<div id="A1.SS3.SSS1.p1" class="ltx_para">
+<p id="A1.SS3.SSS1.p1.1" class="ltx_p">The first set of experiments focuses on deploying a 1B-parameter LLM on the GS24, utilizing the sm8650 chipset’s Neural Processing Unit (NPU). The study spans 36 use-cases across 4 tasks—text style/tone transfer, spelling/grammar correction, smart reply, and health summarization—in 9 languages: Korean, English, German, Spanish, Italian, French, Dutch, Chinese, and Japanese. Four distinct LoRAs were developed for these use-cases, and the results were evaluated after quantization, optimization, and deployment on-device.</p>
+</div>
+<figure id="A1.T9" class="ltx_table">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 9: </span>Memory comparison between full precision and quantized models with LoRA for 4 tasks</figcaption>
+<div id="A1.T9.1" class="ltx_inline-block ltx_align_center ltx_transformed_outer" style="width:138.0pt;height:29.5pt;vertical-align:-12.8pt;"><span class="ltx_transformed_inner" style="transform:translate(-19.0pt,4.1pt) scale(0.784265248279596,0.784265248279596) ;">
+<table id="A1.T9.1.1" class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="A1.T9.1.1.1.1" class="ltx_tr">
+<th id="A1.T9.1.1.1.1.1" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_l ltx_border_r ltx_border_t"><span id="A1.T9.1.1.1.1.1.1" class="ltx_text ltx_font_bold">Model</span></th>
+<th id="A1.T9.1.1.1.1.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t"><span id="A1.T9.1.1.1.1.2.1" class="ltx_text ltx_font_bold">ROM (MB)</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="A1.T9.1.1.2.1" class="ltx_tr">
+<td id="A1.T9.1.1.2.1.1" class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">FP16 LLM + LoRA</td>
+<td id="A1.T9.1.1.2.1.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">1800+120</td>
+</tr>
+<tr id="A1.T9.1.1.3.2" class="ltx_tr">
+<td id="A1.T9.1.1.3.2.1" class="ltx_td ltx_align_center ltx_border_b ltx_border_l ltx_border_r ltx_border_t">INT4 LLM + LoRA</td>
+<td id="A1.T9.1.1.3.2.2" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">600+120</td>
+</tr>
+</tbody>
+</table>
+</span></div>
+</figure>
+<div id="A1.SS3.SSS1.p2" class="ltx_para">
+<p id="A1.SS3.SSS1.p2.1" class="ltx_p">Memory comparisons between full-precision models and their quantized variants (with weights and activations in INT-4/INT-16 and LoRA weights in INT-16) are shown in Table <a href="#A1.T9" title="Table 9 ‣ A.3.1 Deploying a 1B LLM on GS24 ‣ A.3 Experiments ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">9</span></a> highlighting a 3x compression benefit from quantization. Graph optimizations, including scalar folding and LoRA multi-head splitting, are detailed in Table <a href="#A1.T10" title="Table 10 ‣ A.3.1 Deploying a 1B LLM on GS24 ‣ A.3 Experiments ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">10</span></a>, with the latter improving quantization accuracy without affecting latency. The one-for-all foundation model’s on-device performance is presented in Table <a href="#S4.T5" title="Table 5 ‣ 4.1 Experiments on GS24 with 1B LLM ‣ 4 Experiments &amp; Methods ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>.</p>
+</div>
+<figure id="A1.T10" class="ltx_table">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 10: </span>Performance improvement obtained with proposed Graph optimizations</figcaption>
+<div id="A1.T10.1" class="ltx_inline-block ltx_align_center ltx_transformed_outer" style="width:172.5pt;height:50.3pt;vertical-align:-23.9pt;"><span class="ltx_transformed_inner" style="transform:translate(-84.8pt,24.7pt) scale(0.504353831451982,0.504353831451982) ;">
+<table id="A1.T10.1.1" class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr id="A1.T10.1.1.1.1" class="ltx_tr">
+<th id="A1.T10.1.1.1.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t" rowspan="2"><span id="A1.T10.1.1.1.1.1.1" class="ltx_text ltx_font_bold">Model-Type</span></th>
+<td id="A1.T10.1.1.1.1.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t" colspan="2"><span id="A1.T10.1.1.1.1.2.1" class="ltx_text ltx_font_bold">Latency (ms)</span></td>
+</tr>
+<tr id="A1.T10.1.1.2.2" class="ltx_tr">
+<td id="A1.T10.1.1.2.2.1" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="A1.T10.1.1.2.2.1.1" class="ltx_text ltx_font_bold">First token</span></td>
+<td id="A1.T10.1.1.2.2.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span id="A1.T10.1.1.2.2.2.1" class="ltx_text ltx_font_bold">Generative model</span></td>
+</tr>
+<tr id="A1.T10.1.1.3.3" class="ltx_tr">
+<th id="A1.T10.1.1.3.3.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Scalar-folding</th>
+<td id="A1.T10.1.1.3.3.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">45.8</td>
+<td id="A1.T10.1.1.3.3.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">19.385</td>
+</tr>
+<tr id="A1.T10.1.1.4.4" class="ltx_tr">
+<th id="A1.T10.1.1.4.4.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Without Scalar-folding</th>
+<td id="A1.T10.1.1.4.4.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">47.3</td>
+<td id="A1.T10.1.1.4.4.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">20.51</td>
+</tr>
+<tr id="A1.T10.1.1.5.5" class="ltx_tr">
+<th id="A1.T10.1.1.5.5.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">LoRA-B splitting + Scalar folding</th>
+<td id="A1.T10.1.1.5.5.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">45.9</td>
+<td id="A1.T10.1.1.5.5.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">19.45</td>
+</tr>
+<tr id="A1.T10.1.1.6.6" class="ltx_tr">
+<th id="A1.T10.1.1.6.6.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">LoRA-B composite + Scalar folding</th>
+<td id="A1.T10.1.1.6.6.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">45.8</td>
+<td id="A1.T10.1.1.6.6.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">19.385</td>
+</tr>
+<tr id="A1.T10.1.1.7.7" class="ltx_tr">
+<th id="A1.T10.1.1.7.7.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">K-untransposed</th>
+<td id="A1.T10.1.1.7.7.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">52</td>
+<td id="A1.T10.1.1.7.7.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">23</td>
+</tr>
+<tr id="A1.T10.1.1.8.8" class="ltx_tr">
+<th id="A1.T10.1.1.8.8.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_l ltx_border_r ltx_border_t">K-transposed</th>
+<td id="A1.T10.1.1.8.8.2" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">45.8</td>
+<td id="A1.T10.1.1.8.8.3" class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">19.385</td>
+</tr>
+</tbody>
+</table>
+</span></div>
+</figure>
+<figure id="A1.F8" class="ltx_figure"><img src="2604.18655v2/figures/fig8.jpg" id="A1.F8.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="476" height="248" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 8: </span>Demonstration of User’s inputs, corresponding prompts to the LLM, and the outputs generated by the LLM model with deployment of corresponding LoRAs.</figcaption>
+</figure>
+<figure id="A1.F9" class="ltx_figure"><img src="2604.18655v2/figures/fig9.jpg" id="A1.F9.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="476" height="262" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 9: </span>Demonstration of Style suggestion (Professional, Polite, Emojify, Casual &amp; Social) on GS24 Ultra.</figcaption>
+</figure>
+<figure id="A1.F10" class="ltx_figure"><img src="2604.18655v2/figures/fig10.jpg" id="A1.F10.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="476" height="121" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 10: </span>Demonstration of Smart Reply in Samsung Galaxy Smart Watch</figcaption>
+</figure>
+<div id="A1.SS3.SSS1.p3" class="ltx_para">
+<p id="A1.SS3.SSS1.p3.1" class="ltx_p">The demonstration of User’s inputs, corresponding prompts to the LLM, and the outputs generated by the LLM model with deployment of corresponding LoRAs is illustrated in Figure <a href="#A1.F8" title="Figure 8 ‣ A.3.1 Deploying a 1B LLM on GS24 ‣ A.3 Experiments ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">8</span></a>. The on-device user inference for different tasks and languages was demonstrated on the GS24 and extended to the Samsung Galaxy Smartwatch via smart connectivity (Figures <a href="#A1.F9" title="Figure 9 ‣ A.3.1 Deploying a 1B LLM on GS24 ‣ A.3 Experiments ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">9</span></a> &amp; <a href="#A1.F10" title="Figure 10 ‣ A.3.1 Deploying a 1B LLM on GS24 ‣ A.3 Experiments ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">10</span></a>), showcasing the method’s applicability across devices.</p>
+</div>
+</section>
+<section id="A1.SS3.SSS2" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">A.3.2 </span>Scaling to a 3B LLM with DS2D</h4>
+
+<div id="A1.SS3.SSS2.p1" class="ltx_para">
+<p id="A1.SS3.SSS2.p1.1" class="ltx_p">Building on the success of the 1B LLM deployment, the second set of experiments scales up to a 3B-parameter model deployed on the GS25 Ultra, leveraging DS2D for further acceleration. The proposed method was applied to all 8 use-cases of language understanding commercialized in GS25 (Qualcomm) and planned for Galaxy Flip/Fold 7 (LSI-Exynos).</p>
+</div>
+<div id="A1.SS3.SSS2.p2" class="ltx_para">
+<p id="A1.SS3.SSS2.p2.1" class="ltx_p">Post-deployment demonstrations of LLM applications for writing assist, summarization and health energy score, and are shown in Figures <a href="#A1.F11" title="Figure 11 ‣ A.3.2 Scaling to a 3B LLM with DS2D ‣ A.3 Experiments ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">11</span></a> <a href="#A1.F12" title="Figure 12 ‣ A.3.2 Scaling to a 3B LLM with DS2D ‣ A.3 Experiments ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">12</span></a> &amp; <a href="#A1.F13" title="Figure 13 ‣ A.3.2 Scaling to a 3B LLM with DS2D ‣ A.3 Experiments ‣ Appendix A Appendix ‣ Unlocking the Edge deployment and ondevice acceleration of multi-LoRA enabled one-for-all foundational LLM" class="ltx_ref"><span class="ltx_text ltx_ref_tag">13</span></a> highlighting the method’s real-world applicability.</p>
+</div>
+<figure id="A1.F11" class="ltx_figure"><img src="2604.18655v2/figures/fig11.jpg" id="A1.F11.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="476" height="140" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 11: </span>Demonstration of writing assist usecase in chat on Samsung GS25 Ultra Smart Phone </figcaption>
+</figure>
+<figure id="A1.F12" class="ltx_figure"><img src="2604.18655v2/figures/fig12.jpg" id="A1.F12.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="476" height="332" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 12: </span>Demonstration of summarization usecase on Samsung GS25 Ultra Smart Phone </figcaption>
+</figure>
+<figure id="A1.F13" class="ltx_figure"><img src="2604.18655v2/figures/fig13.jpg" id="A1.F13.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="476" height="303" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 13: </span>Demonstration of Energy score usecase in health application on Samsung GS25 Ultra Smart Phone </figcaption>
+</figure>
+</section>
+</section>
+</section>
+</article>
+</div>
+</div>
+<footer class="arxiv-html-footer">
+  <div class="ltx_page_logo">
+    Experimental support, please
+    <a href="./2604.18655v2/__stdout.txt" class="ltx_ref"
+    target="_blank" rel="nofollow">view the build logs</a>
+    for errors. Generated by
+    <a href="https://math.nist.gov/~BMiller/LaTeXML/" target="_blank" class="ltx_ref ltx_LaTeXML_logo">
+      <span style="letter-spacing: -0.2em; margin-right: 0.1em;">
+        L
+        <span style="font-size: 70%; position: relative; bottom: 2.2pt;">A</span>
+        T
+        <span style="position: relative; bottom: -0.4ex;">E</span>
+      </span>
+      <span class="ltx_font_smallcaps">xml</span>
+      <img alt="[LOGO]"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==">
+    </a>.
+  </div>
+  <div class="keyboard-glossary">
+    <h2>Instructions for reporting errors</h2>
+    <p>We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below:</p>
+    <ul>
+      <li>Click the "Report Issue" <span class="mobile-only">(<svg role="presentation"
+            style="display: inline-block; vertical-align: middle; fill: var(--text-color);" aria-hidden="true"
+            height="1em" viewBox="0 0 640 640">
+            <path
+              d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+          </svg>)</span> button, located in the page header.</li>
+    </ul>
+    <p><strong>Tip:</strong> You can select the relevant text first, to include it in your report.</p>
+    <p>Our team has already identified <a class="ltx_ref" href="https://github.com/arXiv/html_feedback/issues"
+        target="_blank">the following issues</a>. We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all.</p>
+    <p>Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a <a
+        class="ltx_ref" href="https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML"
+        target="_blank">list of packages that need conversion</a>, and welcome <a class="ltx_ref"
+        href="https://github.com/brucemiller/LaTeXML/issues" target="_blank">developer contributions</a>.</p>
+  </div>
+</footer>
+<div id="fixed-buttons-container">
+  <div id="beta-badge" aria-hidden="true">BETA</div>
+  <a id="disable-reading-mode-btn" class="header-button" href="javascript:toggleReadingMode();"
+    title="Disable reading mode, show header and footer">
+    <svg role="presentation" height="1.25rem"
+      viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </a>
+</div></body>
+</html>

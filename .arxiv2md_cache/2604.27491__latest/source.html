@@ -1,0 +1,1376 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction</title>
+<!--Generated on Thu Apr 30 06:42:02 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="/static/browse/0.3.4/css/arxiv-html-papers-20260131.css" type="text/css">
+<script src="/static/browse/0.3.4/js/arxiv-html-papers-20260131.js"></script>
+<meta name="keywords" lang="en" content="Human-Object Interaction,  Motion generation,  Large Language Model">
+<script>
+  // Restore the saved color scheme preference, or
+  // enact the browser preference if "automatic", 
+  // without expecting DOM load to have completed.
+  //
+  // Also restore any saved readingmode and ToC display preferences.
+  function initializeReadingPreferences() {
+    let saved_theme = localStorage.getItem("ar5iv_theme") || "automatic";
+    if (saved_theme === "automatic") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        saved_theme = "dark";
+      }
+    }
+    if (saved_theme == "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    const tocDisplay = localStorage.getItem('arxiv_html_paper_toc_display');
+    if (tocDisplay) {
+      document.documentElement.setAttribute("data-toc-display", tocDisplay);
+    }
+    const readingMode = localStorage.getItem('arxiv_html_paper_reading_mode');
+    if (readingMode) {
+      document.documentElement.setAttribute("data-reading-mode", readingMode);
+    }
+  }
+  // Run as soon as JS starts, to minimize repainting
+  initializeReadingPreferences();
+</script>
+<link rel="apple-touch-icon" sizes="180x180"
+  href="/static/browse/0.3.4/images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+  href="/static/browse/0.3.4/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+  href="/static/browse/0.3.4/images/icons/favicon-16x16.png">
+<link rel="manifest" href="/static/browse/0.3.4/images/icons/site.webmanifest">
+<link rel="mask-icon" href="/static/browse/0.3.4/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="stylesheet" type="text/css" media="screen" href="https://use.typekit.net/utz6mli.css">
+</head>
+<body>
+<dialog id="modal-form" aria-labelledby="modal-title" closedby="any">
+  <form id="modal-form-content" method="dialog" enctype="multipart/form-data">
+    <header class="modal-header">
+      <h5 id="modal-title" class="modal-title">Report GitHub Issue</h5>
+      <button type="submit" formnovalidate class="modal-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="modal-body">
+      <label for="form_title">Title:</label>
+      <input class="form-control" id="form_title" name="form_title" required placeholder="Enter title">
+
+      <p id="selectedTextModalDescription" hidden>Content selection saved. Describe the issue below:</p>
+
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description" required maxlength="500"
+        placeholder="500 characters maximum"></textarea>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="submit" value="internal-report" class="sr-only modal-submit">Submit without GitHub</button>
+      <button type="submit" value="github-report" class="modal-submit">Submit in GitHub</button>
+    </footer>
+  </form>
+</dialog>
+
+<header class="arxiv-html-header">
+  <div class="html-header-logo">
+    <a href="/">
+      <img alt="arXiv logo" class="logo desktop-only" width="100"
+        src="/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg">
+      <span class="sr-only">Back to arXiv</span>
+    </a>
+  </div>
+  <!--TOC, dark mode, links-->
+  <nav class="html-header-nav">
+    <a class="header-button hover-effect desktop-only" href="https://info.arxiv.org/about/accessible_HTML.html"
+      target="_blank">Why HTML?</a>
+    <a class="header-button" title="Report an Issue" href="#" title="Report an issue"
+      onclick="event.preventDefault(); showModalForm();">
+      <svg role="presentation" class="mobile-only toggle-icon" aria-hidden="true" height="1.25rem"
+        viewBox="0 0 640 640">
+        <path
+          d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+      </svg>
+      <span class="desktop-only">Report Issue</span></a>
+    <!--back to abstract-->
+    <a class="header-button" title="Back to abstract page" aria-label="Back to abstract page"
+      href="/abs/2604.27491v1">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 512 512" fill="#ffffff"
+        aria-hidden="true">
+        <path
+          d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z">
+        </path>
+      </svg>
+      <span class="desktop-only">Back to Abstract</span>
+    </a>
+    <!-- PDF download link -->
+    <a class="header-button" title="Download PDF" href="/pdf/2604.27491v1"
+      target="_blank">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 576 542">
+        <path
+          d="M208 48L96 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l80 0 0 48-80 0c-35.3 0-64-28.7-64-64L32 64C32 28.7 60.7 0 96 0L229.5 0c17 0 33.3 6.7 45.3 18.7L397.3 141.3c12 12 18.7 28.3 18.7 45.3l0 149.5-48 0 0-128-88 0c-39.8 0-72-32.2-72-72l0-88zM348.1 160L256 67.9 256 136c0 13.3 10.7 24 24 24l68.1 0zM240 380l32 0c33.1 0 60 26.9 60 60s-26.9 60-60 60l-12 0 0 28c0 11-9 20-20 20s-20-9-20-20l0-128c0-11 9-20 20-20zm32 80c11 0 20-9 20-20s-9-20-20-20l-12 0 0 40 12 0zm96-80l32 0c28.7 0 52 23.3 52 52l0 64c0 28.7-23.3 52-52 52l-32 0c-11 0-20-9-20-20l0-128c0-11 9-20 20-20zm32 128c6.6 0 12-5.4 12-12l0-64c0-6.6-5.4-12-12-12l-12 0 0 88 12 0zm76-108c0-11 9-20 20-20l48 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 24 28 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 44c0 11-9 20-20 20s-20-9-20-20l0-128z" />
+      </svg>
+      <span class="desktop-only">Download PDF</span></a>
+    <!-- navigational table of contents toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleNavTOC();" title="Toggle navigation"
+      aria-label="Toggle navigation">
+      <svg height="1.25rem" role="presentation" viewBox="0 0 512 512">
+        <path
+          d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z">
+        </path>
+      </svg>
+    </a>
+    <!--- collapsable header / reading mode toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleReadingMode();"
+      title="Disable reading mode, show header and footer">
+      <svg role="presentation" height="1.25rem"
+        viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+        <path
+          d="M32 32C14.3 32 0 46.3 0 64l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 32zM64 352c0-17.7-14.3-32-32-32S0 334.3 0 352l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96z" />
+      </svg>
+    </a>
+    <!--- colored theme toggle -->
+    <button type="button" class="header-button color-tog" onclick="toggleColorScheme();" title="Toggle dark/light mode" aria-label="Toggle color scheme">
+      <span class="toggle-icon automatic-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon light-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon dark-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+    </button>
+  </nav>
+</header><nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_abstract"><a href="#abstract1" title="In Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title">Abstract.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S1" title="In Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S2" title="In Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Related Work</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S3" title="In Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Method</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS1" title="In 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Preliminary on Human-Object Interaction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS2" title="In 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Motion Tokenizer</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS3" title="In 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Uni-HOI: Unified framework for Text-Human-Object Modeling</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S4" title="In Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Experiments</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S4.SS1" title="In 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Experimental Setup</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S4.SS2" title="In 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Comparisons on HOI-relevant Tasks</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S4.SS3" title="In 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.3 </span>Ablation Studies</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S5" title="In Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Applications</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S6" title="In Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Limitations</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S7" title="In Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">7 </span>Conclusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_bibliography"><a href="#bib" title="In Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_title">References</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div id="infobox" class="infobox">
+  <a id="license-tr" href="https://info.arxiv.org/help/license/index.html#licenses-available">
+    License: arXiv.org perpetual non-exclusive license
+  </a>
+  <div id="watermark-tr">
+arXiv:2604.27491v1 [cs.CV] 30 Apr 2026</div>
+</div><div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Mengfei Zhang
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_email"><a href="2604.27491v1/mailto:zhangmengfei@whu.edu.cn">zhangmengfei@whu.edu.cn</a>
+</span>
+<span class="ltx_contact ltx_role_orcid"><a href="https://orcid.org/0009-0009-6736-4443" title="ORCID identifier" class="ltx_ref">0009-0009-6736-4443</a></span>
+
+<span class="ltx_contact ltx_role_affiliation"><span id="id1.1.id1" class="ltx_text ltx_affiliation_institution">Wuhan University</span><span id="id2.2.id2" class="ltx_text ltx_affiliation_city">Wuhan</span><span id="id3.3.id3" class="ltx_text ltx_affiliation_country">China</span>
+</span></span></span>
+<span class="ltx_author_before">, </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Jinlu Zhang
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_email"><a href="2604.27491v1/mailto:jinluzhang@stu.pku.edu.cn">jinluzhang@stu.pku.edu.cn</a>
+</span>
+<span class="ltx_contact ltx_role_affiliation"><span id="id4.1.id1" class="ltx_text ltx_affiliation_institution">Peking University</span><span id="id5.2.id2" class="ltx_text ltx_affiliation_city">Beijing</span><span id="id6.3.id3" class="ltx_text ltx_affiliation_country">China</span>
+</span></span></span>
+<span class="ltx_author_before"> and </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Zhigang Tu
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_email"><a href="2604.27491v1/mailto:tuzhigang@whu.edu.cn">tuzhigang@whu.edu.cn</a>
+</span>
+<span class="ltx_contact ltx_role_affiliation"><span id="id7.1.id1" class="ltx_text ltx_affiliation_institution">Wuhan University</span><span id="id8.2.id2" class="ltx_text ltx_affiliation_city">Wuhan</span><span id="id9.3.id3" class="ltx_text ltx_affiliation_country">China</span>
+</span></span></span>
+</div>
+<div class="ltx_dates">(2018)</div>
+
+<div id="abstract1" class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract.</h6>
+<p class="ltx_p">Modeling 4D human-object interaction (HOI) is a compelling challenge in computer vision and an essential technology powering virtual and mixed-reality applications.
+While existing works have achieved promising results on specific HOI tasks—such as text-conditioned HOI generation and human motion generation from object motion, they typically rely on task-specific architectures and lack a unified framework capable of handling diverse conditional inputs.
+Building on this, we propose Uni-HOI, a unified framework that learns the joint distribution among text, human motion, and object motion. By leveraging large language models (LLMs) and two motion-specific vector quantized variational autoencoders (VQ-VAEs), we convert heterogeneous motion data into token sequences compatible with LLM inputs, enabling seamless integration and joint modeling of all three modalities. We introduce a two-stage training strategy: the first stage performs multi-task learning on a large-scale HOI dataset to capture the underlying correlations among the three modalities, while the second stage fine-tunes the model on specific tasks to further enhance performance.
+Extensive experiments demonstrate that Uni-HOI achieves remarkable performances on multiple HOI-related tasks including text-driven HOI generation, object motion-driven human motion generation (optionally with text) and human motion-driven object motion prediction within a unified framework.</p>
+</div>
+<div class="ltx_keywords">Human-Object Interaction, Motion generation, Large Language Model
+</div>
+<span id="id1" class="ltx_note ltx_note_frontmatter ltx_role_copyright"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">copyright: </span>acmlicensed</span></span></span><span id="id2" class="ltx_note ltx_note_frontmatter ltx_role_journalyear"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">journalyear: </span>2018</span></span></span><span id="id3" class="ltx_note ltx_note_frontmatter ltx_role_doi"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">doi: </span>XXXXXXX.XXXXXXX</span></span></span><span id="id4" class="ltx_note ltx_note_frontmatter ltx_role_isbn"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">isbn: </span>978-1-4503-XXXX-X/2018/06</span></span></span><span id="id5" class="ltx_note ltx_note_frontmatter ltx_role_submissionid"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">submissionid: </span>1183</span></span></span><span id="id6" class="ltx_note ltx_note_frontmatter ltx_role_ccs"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">ccs: </span>Computing methodologies Computer vision</span></span></span>
+<figure id="S0.F1" class="ltx_figure ltx_teaserfigure"><img src="2604.27491v1/x1.png" id="S0.F1.g1" class="ltx_graphics ltx_img_landscape" width="660" height="251" alt="Refer to caption">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 1. </span>Uni-HOI learns the joint distribution of text and human-object interaction, thus it can serve multiple HOI-related tasks including text-driven interaction generation, object-guided motion generation(optionally with text) and object motion prediction. <span id="S0.F1.4.1" class="ltx_text ltx_font_bold">T</span>, <span id="S0.F1.5.2" class="ltx_text ltx_font_bold">H</span> and <span id="S0.F1.6.3" class="ltx_text ltx_font_bold">O</span> represent the text, human motion and object motion.</figcaption>
+</figure>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1. </span>Introduction</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p id="S1.p1.1" class="ltx_p">Every day, humans interact with a wide variety of objects to perform daily tasks. Accurately understanding and modeling these interactions, and furthermore, generating the motions of both the human and the objects involved, is of great significance to fields such as virtual reality <cite class="ltx_cite ltx_citemacro_citep">(Lee<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib24" title="HOICraft: in-situ vlm-based authoring tool for part-level hand-object interaction design in vr" class="ltx_ref">2026</a>)</cite>, embodied artificial intelligence <cite class="ltx_cite ltx_citemacro_citep">(Jia<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib27" title="PrimHOI: compositional human-object interaction via reusable primitives" class="ltx_ref">2025</a>; Jung<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib26" title="Decoupled generative modeling for human-object interaction synthesis" class="ltx_ref">2025</a>)</cite>, gaming <cite class="ltx_cite ltx_citemacro_citep">(Hu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib28" title="Hand-object interaction image generation" class="ltx_ref">2022b</a>)</cite>, and animation <cite class="ltx_cite ltx_citemacro_citep">(Cao<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib25" title="AvatarGO: zero-shot 4d human-object interaction generation and animation" class="ltx_ref">2024</a>)</cite>.</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p id="S1.p2.1" class="ltx_p">In the existing field of Human-Object Interaction (HOI), numerous studies have explored a variety of tasks. For instance, works such as HOI-Diff <cite class="ltx_cite ltx_citemacro_citep">(Peng<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib3" title="Hoi-diff: text-driven synthesis of 3d human-object interactions using diffusion models" class="ltx_ref">2025</a>)</cite> and ROG <cite class="ltx_cite ltx_citemacro_citep">(Xue<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib5" title="Guiding human-object interactions with rich geometry and relations" class="ltx_ref">2025</a>)</cite> have investigated text-conditioned HOI generation, OMOMO <cite class="ltx_cite ltx_citemacro_citep">(Li<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib4" title="Object motion guided human motion synthesis" class="ltx_ref">2023</a>)</cite> and SemGeoMo <cite class="ltx_cite ltx_citemacro_citep">(Cong<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib8" title="Semgeomo: dynamic contextual human motion generation with semantic and geometric guidance" class="ltx_ref">2025</a>)</cite> explore the generation of human motion based on object motion, and Interdiff <cite class="ltx_cite ltx_citemacro_citep">(Xu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib29" title="Interdiff: generating 3d human-object interactions with physics-informed diffusion" class="ltx_ref">2023</a>)</cite> addresses the task of HOI prediction. While these methods have achieved promising results on specific tasks within the HOI domain, there remains a lack of a unified framework capable of properly modeling the joint distribution among text, human motion, and object motion—thereby enabling a single framework to accomplish multiple tasks in the HOI field. TriDi <cite class="ltx_cite ltx_citemacro_citep">(Petrov<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib6" title="Tridi: trilateral diffusion of 3d humans, objects, and interactions" class="ltx_ref">2025</a>)</cite> attempts to address this by employing a diffusion model to generate human, object, and interaction modalities simultaneously through a novel three-way diffusion process. However, its application is limited to 3D HOI generation and does not extend to the broader scope of 4D HOI scenarios. By simultaneously modeling all modalities, such a joint framework can process arbitrary conditional inputs based on specific requirements, thereby accomplishing multiple HOI tasks with a unified framework. This a capability that previous works, relying on a single model, could not achieve.
+By jointly modeling text, human motion, and object motion within a single architecture, it eliminates the need for task-specific model designs, thereby reducing training complexity and improving parameter efficiency. This unified framework inherently supports flexible conditional generation—given any subset of modalities as input, it can coherently infer the missing ones, enabling seamless adaptation to diverse HOI task.</p>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p id="S1.p3.1" class="ltx_p">Building on this, we propose Uni-HOI, a unified framework designed to learn the joint distribution among text, human motion, and object motion, thereby serving a variety of tasks within the HOI domain. With the rapid advancement of large language models (LLMs) and the success of Motion-GPT <cite class="ltx_cite ltx_citemacro_citep">(Jiang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib7" title="Motiongpt: human motion as a foreign language" class="ltx_ref">2023a</a>)</cite>, leveraging LLMs to construct such a unified framework presents a promising direction.
+To this end, we first learn two motion-specific vector quantized variational autoencoder (VQ-VAE) <cite class="ltx_cite ltx_citemacro_citep">(Van Den Oord<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib13" title="Neural discrete representation learning" class="ltx_ref">2017b</a>)</cite> models to construct ”human motion vocabulary” and ”object motion vocabulary”. These two models can convert human motion and object motion into special sequence tokens. These tokens share a representational format analogous to the word tokens of LLMs, enabling them to be integrated and fed into a large language model for fine-tuning. Subsequently, these tokens are fed into a pre-trained large language model <cite class="ltx_cite ltx_citemacro_citep">(Chung<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib30" title="Scaling instruction-finetuned language models" class="ltx_ref">2024</a>; Raffel<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib10" title="Exploring the limits of transfer learning with a unified text-to-text transformer" class="ltx_ref">2020</a>; Yang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib54" title="F-hoi: toward fine-grained semantic-aligned 3d human-object interactions" class="ltx_ref">2024</a>)</cite>, which captures the underlying grammar and syntax of the human-object interaction language and learns how it relates to the corresponding textual descriptions.</p>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p id="S1.p4.1" class="ltx_p">Uni-HOI is first trained on the largest HOI dataset collected to date by randomly combining certain modalities as conditions to generate the remaining ones. In this process, leveraging the powerful modeling capabilities of large language models, Uni-HOI learns the associations among three distinct data distributions of human motion, object motion, and text. To further enhance performance of the model on various specific HOI tasks, we conduct a second-stage training for Uni-HOI under the input-output configurations of each specific task.
+We demonstrate the superiority of Uni-HOI, which establishes the first unified framework for learning and aligning the data distributions of human motion, object motion, and text in the HOI domain. Furthermore, Uni-HOI is capable of handling flexible inputs and accordingly generating the desired human motion, object motion or text. Remarkably, with only a single framework, Uni-HOI achieves superior performance over specially designed baselines across multiple HOI-related tasks.</p>
+</div>
+<div id="S1.p5" class="ltx_para">
+<p id="S1.p5.1" class="ltx_p">We summarize our contributions as follows:</p>
+</div>
+<div id="S1.p6" class="ltx_para">
+<p id="S1.p6.1" class="ltx_p">(1)We propose Uni-HOI, the first unified framework in the HOI domain capable of aligning the data distributions among text, human motion, and object motion. It can handle arbitrary combinations of these three modalities as input and generate corresponding outputs based on task requirements, thereby serving a variety of HOI tasks.</p>
+</div>
+<div id="S1.p7" class="ltx_para">
+<p id="S1.p7.1" class="ltx_p">(2) We propose a two-stage training strategy, which first performs multi-task training to learn the data distribution relationships between text and HOI, followed by a second stage of fine-tuning on specific tasks to further enhance the model’s performance on those particular tasks.</p>
+</div>
+<div id="S1.p8" class="ltx_para">
+<p id="S1.p8.1" class="ltx_p">(3) Extensive experimental results demonstrate that Uni-HOI, with only a single framework, outperforms specially designed baselines across multiple HOI tasks and highlights its superior performance and the significance of our proposed approach.</p>
+</div>
+<figure id="S1.F2" class="ltx_figure"><img src="2604.27491v1/x2.png" id="S1.F2.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="660" height="531" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2. </span>Overview of our Uni-HOI framework. Based on different task specifications, Uni-HOI can serve a variety of HOI tasks, including text-driven HOI generation (U(H,O—T)), human motion generation guided by object motion(optionally with text)(U(H—O[,T])) and object motion prediction guided by human motion(U(O—H)).</figcaption>
+</figure>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2. </span>Related Work</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p id="S2.p1.1" class="ltx_p"><span id="S2.p1.1.1" class="ltx_text ltx_font_bold">Text-driven Human-Object Interaction Generation</span>. Within the HOI domain, a particularly prominent and widely studied area is text-driven HOI generation. This task aims to synthesize semantically coherent and physically plausible human-object interaction sequences using only text as input, holding significant potential for applications in gaming and animation <cite class="ltx_cite ltx_citemacro_citep">(Peng<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib3" title="Hoi-diff: text-driven synthesis of 3d human-object interactions using diffusion models" class="ltx_ref">2025</a>; Dai<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib46" title="Interfusion: text-driven generation of 3d human-object interaction" class="ltx_ref">2024</a>; Wu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib47" title="Thor: text to human-object interaction diffusion via relation intervention" class="ltx_ref">2024</a>; Cai<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib48" title="InteractMove: text-controlled human-object interaction generation in 3d scenes with movable objects" class="ltx_ref">2025</a>; Xu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib49" title="Interdreamer: zero-shot text to 3d dynamic human-object interaction" class="ltx_ref">2024</a>; Li<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib50" title="GenHOI: generalizing text-driven 4d human-object interaction synthesis for unseen objects" class="ltx_ref">2025</a>; Wu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib51" title="Human-object interaction from human-level instructions" class="ltx_ref">2025</a>; Li<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib52" title="Controllable human-object interaction synthesis" class="ltx_ref">2024</a>; Geng<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib53" title="Auto-regressive diffusion for generating 3d human-object interactions" class="ltx_ref">2025</a>)</cite>. Numerous prior works have explored this direction. For example, HOI-Diff <cite class="ltx_cite ltx_citemacro_citep">(Peng<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib3" title="Hoi-diff: text-driven synthesis of 3d human-object interactions using diffusion models" class="ltx_ref">2025</a>)</cite> and OOD-HOI <cite class="ltx_cite ltx_citemacro_citep">(Zhang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib1" title="OOD-hoi: text-driven 3d whole-body human-object interactions generation beyond training domains" class="ltx_ref">2024</a>)</cite> investigate the use of diffusion models followed by post-processing optimization to generate HOI from text. CG-HOI <cite class="ltx_cite ltx_citemacro_citep">(Diller and Dai, <a href="#bib.bib2" title="Cg-hoi: contact-guided 3d human-object interaction generation" class="ltx_ref">2024</a>)</cite> synthesizes interactions using a single diffusion model with explicit contact modeling.
+Text2HOI <cite class="ltx_cite ltx_citemacro_citep">(Cha<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib45" title="Text2hoi: text-guided 3d motion generation for hand-object interaction" class="ltx_ref">2024</a>)</cite> introduces the first text-guided work for generating the sequence of hand-object interaction in 3D.
+OOD-HOI <cite class="ltx_cite ltx_citemacro_citep">(Zhang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib1" title="OOD-hoi: text-driven 3d whole-body human-object interactions generation beyond training domains" class="ltx_ref">2024</a>)</cite>, in particular, focuses on generating human hand manipulations of diverse objects, with an emphasis on hand-object contact.
+ROG <cite class="ltx_cite ltx_citemacro_citep">(Xue<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib5" title="Guiding human-object interactions with rich geometry and relations" class="ltx_ref">2025</a>)</cite> introduces a diffusion-based framework to synthesize realistic human-object interactions by modeling spatiotemporal relationships with rich geometric details from text description.
+It proposes an Interactive Distance Field (IDF) constructed from boundary-focused and finely sampled object key points to capture comprehensive spatial dynamics.
+These specially designed methods can only take text as conditioning and are unable to synthesize HOI under more general conditional settings.</p>
+</div>
+<div id="S2.p2" class="ltx_para ltx_noindent">
+<p id="S2.p2.1" class="ltx_p"><span id="S2.p2.1.1" class="ltx_text ltx_font_bold">Object motion-driven Human Motion Generation</span>. In the field of Human-Object Interaction (HOI), another research task that has garnered widespread attention is the generation of human motion guided by object motion. OMOMO <cite class="ltx_cite ltx_citemacro_citep">(Li<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib4" title="Object motion guided human motion synthesis" class="ltx_ref">2023</a>)</cite> achieved this through a two-stage approach that first predicts hand positions from object geometry and then generates full-body poses conditioned on the corrected hand positions with explicit contact constraints.
+BimArt <cite class="ltx_cite ltx_citemacro_citep">(Zhang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib12" title="Bimart: a unified approach for the synthesis of 3d bimanual interaction with articulated objects" class="ltx_ref">2025</a>)</cite> introduces a unified generative approach for synthesizing realistic 3D bimanual hand interactions with articulated objects from the object’s 7 DoF trajectory (6D global states + 1D articulation), eliminating the need for pre-defined grasps, coarse hand trajectories, or category-specific training.
+SemGeoMo <cite class="ltx_cite ltx_citemacro_citep">(Cong<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib8" title="Semgeomo: dynamic contextual human motion generation with semantic and geometric guidance" class="ltx_ref">2025</a>)</cite> proposes a novel approach for dynamic contextual human motion generation that generates semantically rational and geometrically accurate human interactive motions alongside corresponding textual descriptions from 4D sequential point clouds of dynamic interactive targets, addressing the limitations of prior work in lacking fine-grained semantic and geometric guidance. Uni-HOI utilizes a single unified network to not only generate human motion from object motion, but also to perform object motion generation from human motion and text.</p>
+</div>
+<div id="S2.p3" class="ltx_para ltx_noindent">
+<p id="S2.p3.1" class="ltx_p"><span id="S2.p3.1.1" class="ltx_text ltx_font_bold">Joint modeling Human-Object Interaction</span>. TriDi <cite class="ltx_cite ltx_citemacro_citep">(Petrov<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib6" title="Tridi: trilateral diffusion of 3d humans, objects, and interactions" class="ltx_ref">2025</a>)</cite> presents the first unified probabilistic model for 3D human-object interaction (HOI) that jointly models the three modalities of Human (H), Object (O), and Interaction (I), enabling sampling from seven conditional and joint distributions (e.g., P(H,I—O), P(O,I—H), P(H,O,I)) with a single network, thus unifying and extending prior one-way specialized methods. However, TriDi is limited to modeling 3D HOIs, a task that is considerably less challenging and has a narrower range of applications compared to 4D HOI tasks involving sequences. Furthermore, TriDi utilizes contact maps instead of more user-friendly text for modeling, which significantly diminishes its practical value. Uni-HOI is the first to simultaneously model text, human motion, and object motion in the 4D HOI domain, enabling a single model to serve multiple 4D HOI tasks.</p>
+</div>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3. </span>Method</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p id="S3.p1.1" class="ltx_p"><span id="S3.p1.1.1" class="ltx_text ltx_font_bold">Overview</span>. Our objective is to leverage the powerful modeling capabilities of large language models to construct a unified framework for the HOI domain, aimed at learning the distributional relationships among text, human motion, and object motion and serving for multiple HOI tasks. To enable the integration of human motion and object motion with text for joint modeling within a large language model, we first train two VQVAE <cite class="ltx_cite ltx_citemacro_citep">(Van Den Oord<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib13" title="Neural discrete representation learning" class="ltx_ref">2017b</a>)</cite> models, serving as a human motion tokenizer and an object motion tokenizer, respectively. These two VQVAEs convert human motion and object motion into discrete motion tokens, which can act as two distinct ”foreign languages” alongside text tokens, allowing a pre-trained large language model <cite class="ltx_cite ltx_citemacro_citep">(Raffel<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib10" title="Exploring the limits of transfer learning with a unified text-to-text transformer" class="ltx_ref">2020</a>; Kudo and Richardson, <a href="#bib.bib9" title="SentencePiece: a simple and language independent subword tokenizer and detokenizer for neural text processing" class="ltx_ref">2018</a>; Ouyang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib11" title="Training language models to follow instructions with human feedback" class="ltx_ref">2022</a>; Yang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib17" title="Qwen3 technical report" class="ltx_ref">2025</a>; Touvron<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib31" title="Llama: open and efficient foundation language models" class="ltx_ref">2023</a>; Radford<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib32" title="Improving language understanding by generative pre-training" class="ltx_ref">2018</a>)</cite> to learn the correspondences among the three modalities. To flexibly accommodate various input-output configurations and enhance performance on specific tasks, we propose a two-stage training strategy. Uni-HOI is first trained on the largest collected HOI dataset, tailored to the settings of multiple mainstream HOI tasks, aiming to learn the relationships among the three modalities under different input-output configurations. To further improve its performance on specific HOI task, we introduce a second-stage fine-tuning strategy, conducting additional training based on the task-specific input-output configurations of the three modalities to boost performance on those specific tasks.</p>
+</div>
+<section id="S3.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1. </span>Preliminary on Human-Object Interaction</h3>
+
+<div id="S3.SS1.p1" class="ltx_para">
+<p id="S3.SS1.p1.9" class="ltx_p">Human-object interaction primarily consists of a human motion sequence and an object motion sequence, aiming to model the interaction process between humans and various objects in the real world. The human motion sequence is represented by a series of human pose parameters, denoted as <math id="S3.SS1.p1.1.m1" class="ltx_Math" alttext="H" display="inline" intent=":literal"><semantics><mi>H</mi><annotation encoding="application/x-tex">H</annotation></semantics></math> = <math id="S3.SS1.p1.2.m2" class="ltx_Math" alttext="\{h_{i}\}\in\mathbb{R}^{L\times D_{h}}" display="inline" intent=":literal"><semantics><mrow><mrow><mo stretchy="false">{</mo><msub><mi>h</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>L</mi><mo lspace="0.222em" rspace="0.222em">×</mo><msub><mi>D</mi><mi>h</mi></msub></mrow></msup></mrow><annotation encoding="application/x-tex">\{h_{i}\}\in\mathbb{R}^{L\times D_{h}}</annotation></semantics></math>, where <math id="S3.SS1.p1.3.m3" class="ltx_Math" alttext="L" display="inline" intent=":literal"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math> is the length of the sequence and <math id="S3.SS1.p1.4.m4" class="ltx_Math" alttext="D_{h}" display="inline" intent=":literal"><semantics><msub><mi>D</mi><mi>h</mi></msub><annotation encoding="application/x-tex">D_{h}</annotation></semantics></math> is a parameterized representation of human pose using the SMPL-H <cite class="ltx_cite ltx_citemacro_citep">(Romero<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib23" title="Embodied hands: modeling and capturing hands and bodies together" class="ltx_ref">2022</a>)</cite> model with <math id="S3.SS1.p1.5.m5" class="ltx_Math" alttext="D_{h}=159" display="inline" intent=":literal"><semantics><mrow><msub><mi>D</mi><mi>h</mi></msub><mo>=</mo><mn>159</mn></mrow><annotation encoding="application/x-tex">D_{h}=159</annotation></semantics></math>, which includes root translation, orientation, and rotations of other joints in the pelvis space. For the object motion, it is obtained from the object mesh in a static state through a series of translation and rotation transformations. The object motion is denoted as <math id="S3.SS1.p1.6.m6" class="ltx_Math" alttext="O" display="inline" intent=":literal"><semantics><mi>O</mi><annotation encoding="application/x-tex">O</annotation></semantics></math> = <math id="S3.SS1.p1.7.m7" class="ltx_Math" alttext="\{o_{i}\}\in\mathbb{R}^{L\times D_{o}}" display="inline" intent=":literal"><semantics><mrow><mrow><mo stretchy="false">{</mo><msub><mi>o</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>L</mi><mo lspace="0.222em" rspace="0.222em">×</mo><msub><mi>D</mi><mi>o</mi></msub></mrow></msup></mrow><annotation encoding="application/x-tex">\{o_{i}\}\in\mathbb{R}^{L\times D_{o}}</annotation></semantics></math>, in which <math id="S3.SS1.p1.8.m8" class="ltx_Math" alttext="D_{o}=6" display="inline" intent=":literal"><semantics><mrow><msub><mi>D</mi><mi>o</mi></msub><mo>=</mo><mn>6</mn></mrow><annotation encoding="application/x-tex">D_{o}=6</annotation></semantics></math>. The object mesh is given as condition and we sample each object mesh to a point cloud consisting of 340 points, which is denoted as <math id="S3.SS1.p1.9.m9" class="ltx_Math" alttext="P\in\mathbb{R}^{340\times 3}" display="inline" intent=":literal"><semantics><mrow><mi>P</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mn>340</mn><mo lspace="0.222em" rspace="0.222em">×</mo><mn>3</mn></mrow></msup></mrow><annotation encoding="application/x-tex">P\in\mathbb{R}^{340\times 3}</annotation></semantics></math>.</p>
+</div>
+</section>
+<section id="S3.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2. </span>Motion Tokenizer</h3>
+
+<div id="S3.SS2.p1" class="ltx_para">
+<p id="S3.SS2.p1.5" class="ltx_p">In order to integrate the features of human motion and object motion into a large language model, we pre-train two motion tokenizers <math id="S3.SS2.p1.1.m1" class="ltx_Math" alttext="V_{h}" display="inline" intent=":literal"><semantics><msub><mi>V</mi><mi>h</mi></msub><annotation encoding="application/x-tex">V_{h}</annotation></semantics></math> and <math id="S3.SS2.p1.2.m2" class="ltx_Math" alttext="V_{o}" display="inline" intent=":literal"><semantics><msub><mi>V</mi><mi>o</mi></msub><annotation encoding="application/x-tex">V_{o}</annotation></semantics></math> based on the Vector Quantized Variational Autoencoder (VQ-VAE) <cite class="ltx_cite ltx_citemacro_citep">(Van Den Oord<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib13" title="Neural discrete representation learning" class="ltx_ref">2017b</a>)</cite> architecture adopted in <cite class="ltx_cite ltx_citemacro_citep">(Zhang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib15" title="Generating human motion from textual descriptions with discrete representations" class="ltx_ref">2023a</a>; Guo<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib14" title="Tm2t: stochastic and tokenized modeling for the reciprocal generation of 3d human motions and texts" class="ltx_ref">2022</a>; Jiang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib7" title="Motiongpt: human motion as a foreign language" class="ltx_ref">2023a</a>; Siyao<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib16" title="Bailando: 3d dance generation by actor-critic gpt with choreographic memory" class="ltx_ref">2022</a>; Van Den Oord<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib33" title="Neural discrete representation learning" class="ltx_ref">2017a</a>)</cite>. Our motion tokenizer comprises an encoder <math id="S3.SS2.p1.3.m3" class="ltx_Math" alttext="E" display="inline" intent=":literal"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math> and a decoder <math id="S3.SS2.p1.4.m4" class="ltx_Math" alttext="D" display="inline" intent=":literal"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>. The encoder generates discrete motion tokens with high information density, while the decoder reconstructs these tokens back into motion sequences <math id="S3.SS2.p1.5.m5" class="ltx_Math" alttext="\hat{\mathbf{M}}_{1:L}" display="inline" intent=":literal"><semantics><msub><mover accent="true"><mi>𝐌</mi><mo>^</mo></mover><mrow><mn>1</mn><mo lspace="0.278em" rspace="0.278em">:</mo><mi>L</mi></mrow></msub><annotation encoding="application/x-tex">\hat{\mathbf{M}}_{1:L}</annotation></semantics></math> . This paradigm enables efficient representation of motion as a discrete language, thereby facilitating the integration of motion and language for a variety of motion-related tasks.</p>
+</div>
+<div id="S3.SS2.p2" class="ltx_para">
+<p id="S3.SS2.p2.11" class="ltx_p">Specifically, the motion encoder <math id="S3.SS2.p2.1.m1" class="ltx_Math" alttext="E" display="inline" intent=":literal"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math> first applies 1D convolutions along the temporal dimension to the frame-wise motion features, producing latent vectors <math id="S3.SS2.p2.2.m2" class="ltx_Math" alttext="\hat{\mathbf{z}}_{1:m}=E(\mathbf{M}_{1:L})" display="inline" intent=":literal"><semantics><mrow><msub><mover accent="true"><mi>𝐳</mi><mo>^</mo></mover><mrow><mn>1</mn><mo lspace="0.278em" rspace="0.278em">:</mo><mi>m</mi></mrow></msub><mo>=</mo><mrow><mi>E</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msub><mi>𝐌</mi><mrow><mn>1</mn><mo lspace="0.278em" rspace="0.278em">:</mo><mi>L</mi></mrow></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\hat{\mathbf{z}}_{1:m}=E(\mathbf{M}_{1:L})</annotation></semantics></math>. Subsequently, <math id="S3.SS2.p2.3.m3" class="ltx_Math" alttext="\hat{\mathbf{z}}" display="inline" intent=":literal"><semantics><mover accent="true"><mi>𝐳</mi><mo>^</mo></mover><annotation encoding="application/x-tex">\hat{\mathbf{z}}</annotation></semantics></math> is transformed into a collection of codebook entries <math id="S3.SS2.p2.4.m4" class="ltx_Math" alttext="\mathbf{z}" display="inline" intent=":literal"><semantics><mi>𝐳</mi><annotation encoding="application/x-tex">\mathbf{z}</annotation></semantics></math> via discrete quantization. The learnable codebook <math id="S3.SS2.p2.5.m5" class="ltx_Math" alttext="\mathcal{Z}=\{\mathbf{z}_{k}\}_{k=1}^{K}\subset\mathbb{R}^{d}" display="inline" intent=":literal"><semantics><mrow><mi class="ltx_font_mathcaligraphic">𝒵</mi><mo>=</mo><msubsup><mrow><mo stretchy="false">{</mo><msub><mi>𝐳</mi><mi>k</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>K</mi></msubsup><mo>⊂</mo><msup><mi>ℝ</mi><mi>d</mi></msup></mrow><annotation encoding="application/x-tex">\mathcal{Z}=\{\mathbf{z}_{k}\}_{k=1}^{K}\subset\mathbb{R}^{d}</annotation></semantics></math> consists of <math id="S3.SS2.p2.6.m6" class="ltx_Math" alttext="K" display="inline" intent=":literal"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math> latent embedding vectors, each of dimension <math id="S3.SS2.p2.7.m7" class="ltx_Math" alttext="d" display="inline" intent=":literal"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>. The quantization operation <math id="S3.SS2.p2.8.m8" class="ltx_Math" alttext="Q(\cdot)" display="inline" intent=":literal"><semantics><mrow><mi>Q</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mo lspace="0em" rspace="0em">⋅</mo><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">Q(\cdot)</annotation></semantics></math> replaces each latent vector <math id="S3.SS2.p2.9.m9" class="ltx_Math" alttext="\hat{\mathbf{z}}_{i}" display="inline" intent=":literal"><semantics><msub><mover accent="true"><mi>𝐳</mi><mo>^</mo></mover><mi>i</mi></msub><annotation encoding="application/x-tex">\hat{\mathbf{z}}_{i}</annotation></semantics></math> with its nearest codebook entry <math id="S3.SS2.p2.10.m10" class="ltx_Math" alttext="\mathbf{z}_{k}" display="inline" intent=":literal"><semantics><msub><mi>𝐳</mi><mi>k</mi></msub><annotation encoding="application/x-tex">\mathbf{z}_{k}</annotation></semantics></math> in <math id="S3.SS2.p2.11.m11" class="ltx_Math" alttext="\mathcal{Z}" display="inline" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">𝒵</mi><annotation encoding="application/x-tex">\mathcal{Z}</annotation></semantics></math>, formalized as:</p>
+</div>
+<div id="S3.SS2.p3" class="ltx_para">
+<table id="S3.E1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(1)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E1.m1" class="ltx_Math" alttext="\mathbf{z}_{i}=Q(\hat{\mathbf{z}}_{i}):=\arg\min_{\mathbf{z}_{k}\in\mathcal{Z}}\|\hat{\mathbf{z}}_{i}-\mathbf{z}_{k}\|_{2}" display="block" intent=":literal"><semantics><mrow><msub><mi>𝐳</mi><mi>i</mi></msub><mo>=</mo><mrow><mi>Q</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msub><mover accent="true"><mi>𝐳</mi><mo>^</mo></mover><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>:=</mo><mrow><mi>arg</mi><mo lspace="0.167em">⁡</mo><mrow><munder><mi>min</mi><mrow><msub><mi>𝐳</mi><mi>k</mi></msub><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒵</mi></mrow></munder><mo>⁡</mo><msub><mrow><mo stretchy="false">‖</mo><mrow><msub><mover accent="true"><mi>𝐳</mi><mo>^</mo></mover><mi>i</mi></msub><mo>−</mo><msub><mi>𝐳</mi><mi>k</mi></msub></mrow><mo stretchy="false">‖</mo></mrow><mn>2</mn></msub></mrow></mrow></mrow><annotation encoding="application/x-tex">\mathbf{z}_{i}=Q(\hat{\mathbf{z}}_{i}):=\arg\min_{\mathbf{z}_{k}\in\mathcal{Z}}\|\hat{\mathbf{z}}_{i}-\mathbf{z}_{k}\|_{2}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S3.SS2.p4" class="ltx_para">
+<p id="S3.SS2.p4.4" class="ltx_p">After quantization, the motion decoder <math id="S3.SS2.p4.1.m1" class="ltx_Math" alttext="D" display="inline" intent=":literal"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math> projects the quantized sequence <math id="S3.SS2.p4.2.m2" class="ltx_Math" alttext="\mathbf{z}_{1:m}=\{\mathbf{z}_{i}\}_{i=1}^{m}" display="inline" intent=":literal"><semantics><mrow><msub><mi>𝐳</mi><mrow><mn>1</mn><mo lspace="0.278em" rspace="0.278em">:</mo><mi>m</mi></mrow></msub><mo>=</mo><msubsup><mrow><mo stretchy="false">{</mo><msub><mi>𝐳</mi><mi>i</mi></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></msubsup></mrow><annotation encoding="application/x-tex">\mathbf{z}_{1:m}=\{\mathbf{z}_{i}\}_{i=1}^{m}</annotation></semantics></math> back to the original motion space, reconstructing the motion sequence <math id="S3.SS2.p4.3.m3" class="ltx_Math" alttext="\hat{\mathbf{M}}_{1:L}" display="inline" intent=":literal"><semantics><msub><mover accent="true"><mi>𝐌</mi><mo>^</mo></mover><mrow><mn>1</mn><mo lspace="0.278em" rspace="0.278em">:</mo><mi>L</mi></mrow></msub><annotation encoding="application/x-tex">\hat{\mathbf{M}}_{1:L}</annotation></semantics></math> with <math id="S3.SS2.p4.4.m4" class="ltx_Math" alttext="L" display="inline" intent=":literal"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math> frames.</p>
+</div>
+<div id="S3.SS2.p5" class="ltx_para">
+<p id="S3.SS2.p5.1" class="ltx_p">To train this motion tokenizer, we follow <cite class="ltx_cite ltx_citemacro_citep">(Zhang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib15" title="Generating human motion from textual descriptions with discrete representations" class="ltx_ref">2023a</a>; Fan<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib55" title="Go to zero: towards zero-shot motion generation with million-scale data" class="ltx_ref">2025</a>)</cite> in employing four distinct loss functions:</p>
+</div>
+<div id="S3.SS2.p6" class="ltx_para">
+<table id="S3.E2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(2)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E2.m1" class="ltx_Math" alttext="\mathcal{L}_{V}=\mathcal{L}_{r}+\mathcal{L}_{e}+\mathcal{L}_{c}+\mathcal{L}_{v}" display="block" intent=":literal"><semantics><mrow><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>V</mi></msub><mo>=</mo><mrow><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>r</mi></msub><mo>+</mo><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>e</mi></msub><mo>+</mo><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>c</mi></msub><mo>+</mo><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>v</mi></msub></mrow></mrow><annotation encoding="application/x-tex">\mathcal{L}_{V}=\mathcal{L}_{r}+\mathcal{L}_{e}+\mathcal{L}_{c}+\mathcal{L}_{v}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S3.SS2.p7" class="ltx_para ltx_noindent">
+<p id="S3.SS2.p7.6" class="ltx_p">where <math id="S3.SS2.p7.1.m1" class="ltx_Math" alttext="\mathcal{L}_{r}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>r</mi></msub><annotation encoding="application/x-tex">\mathcal{L}_{r}</annotation></semantics></math> denotes the reconstruction loss, <math id="S3.SS2.p7.2.m2" class="ltx_Math" alttext="\mathcal{L}_{e}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>e</mi></msub><annotation encoding="application/x-tex">\mathcal{L}_{e}</annotation></semantics></math> the embedding loss, and <math id="S3.SS2.p7.3.m3" class="ltx_Math" alttext="\mathcal{L}_{c}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>c</mi></msub><annotation encoding="application/x-tex">\mathcal{L}_{c}</annotation></semantics></math> the commitment loss. To further enhance the quality of generated motion, we incorporate velocity regularization <math id="S3.SS2.p7.4.m4" class="ltx_Math" alttext="\mathcal{L}_{v}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>v</mi></msub><annotation encoding="application/x-tex">\mathcal{L}_{v}</annotation></semantics></math> into the reconstruction loss, as suggested by <cite class="ltx_cite ltx_citemacro_citep">(Zhang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib15" title="Generating human motion from textual descriptions with discrete representations" class="ltx_ref">2023a</a>)</cite>. Additionally, we adopt exponential moving average (EMA) and codebook reset techniques <cite class="ltx_cite ltx_citemacro_citep">(Razavi<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib34" title="Generating diverse high-fidelity images with vq-vae-2" class="ltx_ref">2019</a>)</cite> to improve codebook utilization during training. In particular, our human motion tokenizer <math id="S3.SS2.p7.5.m5" class="ltx_Math" alttext="V_{h}" display="inline" intent=":literal"><semantics><msub><mi>V</mi><mi>h</mi></msub><annotation encoding="application/x-tex">V_{h}</annotation></semantics></math> and object motion tokenizer <math id="S3.SS2.p7.6.m6" class="ltx_Math" alttext="V_{o}" display="inline" intent=":literal"><semantics><msub><mi>V</mi><mi>o</mi></msub><annotation encoding="application/x-tex">V_{o}</annotation></semantics></math> share the same VQ-VAE model architecture but differ in their input dimensions and the feature dimensions of their encoders.</p>
+</div>
+</section>
+<section id="S3.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3. </span>Uni-HOI: Unified framework for Text-Human-Object Modeling</h3>
+
+<div id="S3.SS3.p1" class="ltx_para">
+<p id="S3.SS3.p1.1" class="ltx_p"><span id="S3.SS3.p1.1.1" class="ltx_text ltx_font_bold">Joint modeling</span>. Our goal is to use a unified framework for the joint modeling of text, human motion, and object motion, thereby enabling flexible processing of multiple inputs and generating desired outputs according to the requirements of various downstream tasks for HOI.</p>
+</div>
+<div id="S3.SS3.p2" class="ltx_para">
+<table id="S3.E3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(3)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E3.m1" class="ltx_Math" alttext="\mathcal{T}=\left\{(\mathcal{X},\mathcal{Y})\;|\;\mathcal{X}\subset\mathcal{Q},\mathcal{Y}=\mathcal{Q}\setminus\mathcal{X},\mathcal{X}\notin\{\emptyset,\mathcal{Q}\}\right\}" display="block" intent=":literal"><semantics><mrow><mi class="ltx_font_mathcaligraphic">𝒯</mi><mo>=</mo><mrow><mo>{</mo><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">𝒳</mi><mo>,</mo><mi class="ltx_font_mathcaligraphic">𝒴</mi><mo stretchy="false">)</mo></mrow><mo>|</mo><mrow><mrow><mi class="ltx_font_mathcaligraphic">𝒳</mi><mo>⊂</mo><mi class="ltx_font_mathcaligraphic">𝒬</mi></mrow><mo>,</mo><mrow><mrow><mi class="ltx_font_mathcaligraphic">𝒴</mi><mo>=</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒬</mi><mo>∖</mo><mi class="ltx_font_mathcaligraphic">𝒳</mi></mrow></mrow><mo>,</mo><mrow><mi class="ltx_font_mathcaligraphic">𝒳</mi><mo>∉</mo><mrow><mo stretchy="false">{</mo><mi mathvariant="normal">∅</mi><mo>,</mo><mi class="ltx_font_mathcaligraphic">𝒬</mi><mo stretchy="false">}</mo></mrow></mrow></mrow></mrow><mo>}</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{T}=\left\{(\mathcal{X},\mathcal{Y})\;|\;\mathcal{X}\subset\mathcal{Q},\mathcal{Y}=\mathcal{Q}\setminus\mathcal{X},\mathcal{X}\notin\{\emptyset,\mathcal{Q}\}\right\}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S3.SS3.p3" class="ltx_para">
+<table id="S3.E4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(4)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E4.m1" class="ltx_Math" alttext="\theta^{*}=\arg\min_{\theta}\sum_{(\mathcal{X},\mathcal{Y})\in\mathcal{T}}\mathbb{E}_{(P,T,H,O)\sim\mathcal{D}}\left[\ell\left(\mathcal{Y},U_{\theta}(P,\mathcal{X})\right)\right]" display="block" intent=":literal"><semantics><mrow><msup><mi>θ</mi><mo>∗</mo></msup><mo>=</mo><mrow><mrow><mi>arg</mi><mo lspace="0.167em">⁡</mo><munder><mi>min</mi><mi>θ</mi></munder></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><munder><mo movablelimits="false">∑</mo><mrow><mrow><mo stretchy="false">(</mo><mi class="ltx_font_mathcaligraphic">𝒳</mi><mo>,</mo><mi class="ltx_font_mathcaligraphic">𝒴</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒯</mi></mrow></munder><mrow><msub><mi>𝔼</mi><mrow><mrow><mo stretchy="false">(</mo><mi>P</mi><mo>,</mo><mi>T</mi><mo>,</mo><mi>H</mi><mo>,</mo><mi>O</mi><mo stretchy="false">)</mo></mrow><mo>∼</mo><mi class="ltx_font_mathcaligraphic">𝒟</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo>[</mo><mrow><mi mathvariant="normal">ℓ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mi class="ltx_font_mathcaligraphic">𝒴</mi><mo>,</mo><mrow><msub><mi>U</mi><mi>θ</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>P</mi><mo>,</mo><mi class="ltx_font_mathcaligraphic">𝒳</mi><mo stretchy="false">)</mo></mrow></mrow><mo>)</mo></mrow></mrow><mo>]</mo></mrow></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">\theta^{*}=\arg\min_{\theta}\sum_{(\mathcal{X},\mathcal{Y})\in\mathcal{T}}\mathbb{E}_{(P,T,H,O)\sim\mathcal{D}}\left[\ell\left(\mathcal{Y},U_{\theta}(P,\mathcal{X})\right)\right]</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S3.SS3.p4" class="ltx_para ltx_noindent">
+<p id="S3.SS3.p4.9" class="ltx_p">where <math id="S3.SS3.p4.1.m1" class="ltx_Math" alttext="\mathcal{Q}=\{T,H,O\}" display="inline" intent=":literal"><semantics><mrow><mi class="ltx_font_mathcaligraphic">𝒬</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>T</mi><mo>,</mo><mi>H</mi><mo>,</mo><mi>O</mi><mo stretchy="false">}</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{Q}=\{T,H,O\}</annotation></semantics></math> and <math id="S3.SS3.p4.2.m2" class="ltx_Math" alttext="T" display="inline" intent=":literal"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math> represents the text condition,
+<math id="S3.SS3.p4.3.m3" class="ltx_Math" alttext="H" display="inline" intent=":literal"><semantics><mi>H</mi><annotation encoding="application/x-tex">H</annotation></semantics></math> is the human motion, <math id="S3.SS3.p4.4.m4" class="ltx_Math" alttext="O" display="inline" intent=":literal"><semantics><mi>O</mi><annotation encoding="application/x-tex">O</annotation></semantics></math> is the object motion. <math id="S3.SS3.p4.5.m5" class="ltx_Math" alttext="\mathcal{X}" display="inline" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">𝒳</mi><annotation encoding="application/x-tex">\mathcal{X}</annotation></semantics></math> denotes one or two modalities from <math id="S3.SS3.p4.6.m6" class="ltx_Math" alttext="\mathcal{Q}" display="inline" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">𝒬</mi><annotation encoding="application/x-tex">\mathcal{Q}</annotation></semantics></math> as conditions, and <math id="S3.SS3.p4.7.m7" class="ltx_Math" alttext="\mathcal{Y}" display="inline" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">𝒴</mi><annotation encoding="application/x-tex">\mathcal{Y}</annotation></semantics></math> denotes the remaining modalities. <math id="S3.SS3.p4.8.m8" class="ltx_Math" alttext="\ell" display="inline" intent=":literal"><semantics><mi mathvariant="normal">ℓ</mi><annotation encoding="application/x-tex">\ell</annotation></semantics></math> is the loss function and <math id="S3.SS3.p4.9.m9" class="ltx_Math" alttext="P" display="inline" intent=":literal"><semantics><mi>P</mi><annotation encoding="application/x-tex">P</annotation></semantics></math> represents the sampled object points.</p>
+</div>
+<div id="S3.SS3.p5" class="ltx_para">
+<p id="S3.SS3.p5.12" class="ltx_p">Employing the two motion tokenizers, a human motion sequence <math id="S3.SS3.p5.1.m1" class="ltx_Math" alttext="\mathbf{H}_{1:L}" display="inline" intent=":literal"><semantics><msub><mi>𝐇</mi><mrow><mn>1</mn><mo lspace="0.278em" rspace="0.278em">:</mo><mi>L</mi></mrow></msub><annotation encoding="application/x-tex">\mathbf{H}_{1:L}</annotation></semantics></math> and an object motion sequence <math id="S3.SS3.p5.2.m2" class="ltx_Math" alttext="\mathbf{O}_{1:L}" display="inline" intent=":literal"><semantics><msub><mi>𝐎</mi><mrow><mn>1</mn><mo lspace="0.278em" rspace="0.278em">:</mo><mi>L</mi></mrow></msub><annotation encoding="application/x-tex">\mathbf{O}_{1:L}</annotation></semantics></math> can be mapped to a sequence of human motion tokens <math id="S3.SS3.p5.3.m3" class="ltx_Math" alttext="\mathbf{z}_{1:m}^{h}" display="inline" intent=":literal"><semantics><msubsup><mi>𝐳</mi><mrow><mn>1</mn><mo lspace="0.278em" rspace="0.278em">:</mo><mi>m</mi></mrow><mi>h</mi></msubsup><annotation encoding="application/x-tex">\mathbf{z}_{1:m}^{h}</annotation></semantics></math> and object motion tokens <math id="S3.SS3.p5.4.m4" class="ltx_Math" alttext="\mathbf{z}_{1:m}^{o}" display="inline" intent=":literal"><semantics><msubsup><mi>𝐳</mi><mrow><mn>1</mn><mo lspace="0.278em" rspace="0.278em">:</mo><mi>m</mi></mrow><mi>o</mi></msubsup><annotation encoding="application/x-tex">\mathbf{z}_{1:m}^{o}</annotation></semantics></math>, allowing joint representation with vocabulary embeddings in language models <cite class="ltx_cite ltx_citemacro_citep">(Raffel<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib10" title="Exploring the limits of transfer learning with a unified text-to-text transformer" class="ltx_ref">2020</a>; Kudo and Richardson, <a href="#bib.bib9" title="SentencePiece: a simple and language independent subword tokenizer and detokenizer for neural text processing" class="ltx_ref">2018</a>; Ouyang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib11" title="Training language models to follow instructions with human feedback" class="ltx_ref">2022</a>)</cite>. By integrating them into a unified vocabulary, we learn motion and language jointly. We first represent human motion tokens <math id="S3.SS3.p5.5.m5" class="ltx_Math" alttext="\mathbf{z}_{1:m}^{h}" display="inline" intent=":literal"><semantics><msubsup><mi>𝐳</mi><mrow><mn>1</mn><mo lspace="0.278em" rspace="0.278em">:</mo><mi>m</mi></mrow><mi>h</mi></msubsup><annotation encoding="application/x-tex">\mathbf{z}_{1:m}^{h}</annotation></semantics></math> and object motion tokens <math id="S3.SS3.p5.6.m6" class="ltx_Math" alttext="\mathbf{z}_{1:m}^{o}" display="inline" intent=":literal"><semantics><msubsup><mi>𝐳</mi><mrow><mn>1</mn><mo lspace="0.278em" rspace="0.278em">:</mo><mi>m</mi></mrow><mi>o</mi></msubsup><annotation encoding="application/x-tex">\mathbf{z}_{1:m}^{o}</annotation></semantics></math> as a sequence of indices <math id="S3.SS3.p5.7.m7" class="ltx_Math" alttext="\mathbf{s}_{1:m}^{h}=\{s_{i}^{h}\}_{i=1}^{m}" display="inline" intent=":literal"><semantics><mrow><msubsup><mi>𝐬</mi><mrow><mn>1</mn><mo lspace="0.278em" rspace="0.278em">:</mo><mi>m</mi></mrow><mi>h</mi></msubsup><mo>=</mo><msubsup><mrow><mo stretchy="false">{</mo><msubsup><mi>s</mi><mi>i</mi><mi>h</mi></msubsup><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></msubsup></mrow><annotation encoding="application/x-tex">\mathbf{s}_{1:m}^{h}=\{s_{i}^{h}\}_{i=1}^{m}</annotation></semantics></math> and <math id="S3.SS3.p5.8.m8" class="ltx_Math" alttext="\mathbf{s}_{1:m}^{o}=\{s_{i}^{o}\}_{i=1}^{m}" display="inline" intent=":literal"><semantics><mrow><msubsup><mi>𝐬</mi><mrow><mn>1</mn><mo lspace="0.278em" rspace="0.278em">:</mo><mi>m</mi></mrow><mi>o</mi></msubsup><mo>=</mo><msubsup><mrow><mo stretchy="false">{</mo><msubsup><mi>s</mi><mi>i</mi><mi>o</mi></msubsup><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></msubsup></mrow><annotation encoding="application/x-tex">\mathbf{s}_{1:m}^{o}=\{s_{i}^{o}\}_{i=1}^{m}</annotation></semantics></math>, where <math id="S3.SS3.p5.9.m9" class="ltx_Math" alttext="s_{i}^{h}" display="inline" intent=":literal"><semantics><msubsup><mi>s</mi><mi>i</mi><mi>h</mi></msubsup><annotation encoding="application/x-tex">s_{i}^{h}</annotation></semantics></math> and <math id="S3.SS3.p5.10.m10" class="ltx_Math" alttext="s_{i}^{o}" display="inline" intent=":literal"><semantics><msubsup><mi>s</mi><mi>i</mi><mi>o</mi></msubsup><annotation encoding="application/x-tex">s_{i}^{o}</annotation></semantics></math> correspond to the indexes of human motion token <math id="S3.SS3.p5.11.m11" class="ltx_Math" alttext="\mathbf{z}_{i}^{h}" display="inline" intent=":literal"><semantics><msubsup><mi>𝐳</mi><mi>i</mi><mi>h</mi></msubsup><annotation encoding="application/x-tex">\mathbf{z}_{i}^{h}</annotation></semantics></math> and object motion <math id="S3.SS3.p5.12.m12" class="ltx_Math" alttext="\mathbf{z}_{i}^{o}" display="inline" intent=":literal"><semantics><msubsup><mi>𝐳</mi><mi>i</mi><mi>o</mi></msubsup><annotation encoding="application/x-tex">\mathbf{z}_{i}^{o}</annotation></semantics></math> in the codebook of motion tokenizers.</p>
+</div>
+<div id="S3.SS3.p6" class="ltx_para">
+<p id="S3.SS3.p6.12" class="ltx_p">Following MotionGpt <cite class="ltx_cite ltx_citemacro_citep">(Jiang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib7" title="Motiongpt: human motion as a foreign language" class="ltx_ref">2023a</a>)</cite>, we combine the original text vocabulary <math id="S3.SS3.p6.1.m1" class="ltx_Math" alttext="\mathcal{V}_{t}=\{v_{i}^{t}\}_{i=1}^{K_{t}}" display="inline" intent=":literal"><semantics><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒱</mi><mi>t</mi></msub><mo>=</mo><msubsup><mrow><mo stretchy="false">{</mo><msubsup><mi>v</mi><mi>i</mi><mi>t</mi></msubsup><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>K</mi><mi>t</mi></msub></msubsup></mrow><annotation encoding="application/x-tex">\mathcal{V}_{t}=\{v_{i}^{t}\}_{i=1}^{K_{t}}</annotation></semantics></math> with a human motion vocabulary <math id="S3.SS3.p6.2.m2" class="ltx_Math" alttext="\mathcal{V}_{h}=\{v_{i}^{h}\}_{i=1}^{K_{h}}" display="inline" intent=":literal"><semantics><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒱</mi><mi>h</mi></msub><mo>=</mo><msubsup><mrow><mo stretchy="false">{</mo><msubsup><mi>v</mi><mi>i</mi><mi>h</mi></msubsup><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>K</mi><mi>h</mi></msub></msubsup></mrow><annotation encoding="application/x-tex">\mathcal{V}_{h}=\{v_{i}^{h}\}_{i=1}^{K_{h}}</annotation></semantics></math> as well as an object motion vocabulary <math id="S3.SS3.p6.3.m3" class="ltx_Math" alttext="\mathcal{V}_{o}=\{v_{i}^{o}\}_{i=1}^{K_{o}}" display="inline" intent=":literal"><semantics><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒱</mi><mi>o</mi></msub><mo>=</mo><msubsup><mrow><mo stretchy="false">{</mo><msubsup><mi>v</mi><mi>i</mi><mi>o</mi></msubsup><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>K</mi><mi>o</mi></msub></msubsup></mrow><annotation encoding="application/x-tex">\mathcal{V}_{o}=\{v_{i}^{o}\}_{i=1}^{K_{o}}</annotation></semantics></math>, which preserves the order of our motion codebooks <math id="S3.SS3.p6.4.m4" class="ltx_Math" alttext="\mathcal{Z}_{h}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">𝒵</mi><mi>h</mi></msub><annotation encoding="application/x-tex">\mathcal{Z}_{h}</annotation></semantics></math> and <math id="S3.SS3.p6.5.m5" class="ltx_Math" alttext="\mathcal{Z}_{o}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">𝒵</mi><mi>o</mi></msub><annotation encoding="application/x-tex">\mathcal{Z}_{o}</annotation></semantics></math>. Moreover, <math id="S3.SS3.p6.6.m6" class="ltx_Math" alttext="\mathcal{V}_{h}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">𝒱</mi><mi>h</mi></msub><annotation encoding="application/x-tex">\mathcal{V}_{h}</annotation></semantics></math> includes special tokens such as boundary indicators <span id="S3.SS3.p6.12.1" class="ltx_text ltx_markedasmath ltx_font_typewriter">&lt;bohm&gt;</span>, <span id="S3.SS3.p6.12.2" class="ltx_text ltx_markedasmath ltx_font_typewriter">&lt;eohm&gt;</span>, <span id="S3.SS3.p6.12.3" class="ltx_text ltx_markedasmath ltx_font_typewriter">&lt;boom&gt;</span> and <span id="S3.SS3.p6.12.4" class="ltx_text ltx_markedasmath ltx_font_typewriter">&lt;eoom&gt;</span> denoting the beginning and end of motion sequence. Thus, we construct a unified text-hoi vocabulary <math id="S3.SS3.p6.11.m11" class="ltx_Math" alttext="\mathcal{V}=\{\mathcal{V}_{t},\mathcal{V}_{h},\mathcal{V}_{o}\}" display="inline" intent=":literal"><semantics><mrow><mi class="ltx_font_mathcaligraphic">𝒱</mi><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi class="ltx_font_mathcaligraphic">𝒱</mi><mi>t</mi></msub><mo>,</mo><msub><mi class="ltx_font_mathcaligraphic">𝒱</mi><mi>h</mi></msub><mo>,</mo><msub><mi class="ltx_font_mathcaligraphic">𝒱</mi><mi>o</mi></msub><mo stretchy="false">}</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{V}=\{\mathcal{V}_{t},\mathcal{V}_{h},\mathcal{V}_{o}\}</annotation></semantics></math>, enabling diverse motion-related tasks to be formulated in a general format where both input and output ”words” are drawn from the same <math id="S3.SS3.p6.12.m12" class="ltx_Math" alttext="\mathcal{V}" display="inline" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">𝒱</mi><annotation encoding="application/x-tex">\mathcal{V}</annotation></semantics></math>. These ”words” may represent natural language, human motion or object motion, depending on the task at hand. Consequently, our Uni-HOI supports flexible representation and generation of various text-HOI related outputs within a single framework.</p>
+</div>
+<div id="S3.SS3.p7" class="ltx_para">
+<p id="S3.SS3.p7.7" class="ltx_p">To address conditioned generation tasks, we adopt a transformer-based architecture following Qwen3 <cite class="ltx_cite ltx_citemacro_citep">(Yang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib17" title="Qwen3 technical report" class="ltx_ref">2025</a>)</cite>, which effectively maps input sequences to outputs. As illustrated in Figure <a href="#S1.F2" title="Figure 2 ‣ 1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>, our input source is a sequence of tokens <math id="S3.SS3.p7.1.m1" class="ltx_Math" alttext="\mathbf{X}_{s}=\{x_{p},\{x_{s_{i}}\}_{i=1}^{N}\}" display="inline" intent=":literal"><semantics><mrow><msub><mi>𝐗</mi><mi>s</mi></msub><mo>=</mo><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><mi>p</mi></msub><mo>,</mo><msubsup><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><msub><mi>s</mi><mi>i</mi></msub></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></msubsup><mo stretchy="false">}</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{X}_{s}=\{x_{p},\{x_{s_{i}}\}_{i=1}^{N}\}</annotation></semantics></math>, where <math id="S3.SS3.p7.2.m2" class="ltx_Math" alttext="x_{s}\in\mathcal{V}" display="inline" intent=":literal"><semantics><mrow><msub><mi>x</mi><mi>s</mi></msub><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒱</mi></mrow><annotation encoding="application/x-tex">x_{s}\in\mathcal{V}</annotation></semantics></math> and <math id="S3.SS3.p7.3.m3" class="ltx_Math" alttext="N" display="inline" intent=":literal"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math> denotes the input length. As for <math id="S3.SS3.p7.4.m4" class="ltx_Math" alttext="x_{p}" display="inline" intent=":literal"><semantics><msub><mi>x</mi><mi>p</mi></msub><annotation encoding="application/x-tex">x_{p}</annotation></semantics></math>, we design an MLP network to extract features from the input object point cloud, which is then inserted into the input sequence as a special <span id="S3.SS3.p7.7.1" class="ltx_text ltx_font_italic">¡object geometry token¿</span> to serve as the embedding of geometric information of interacted object. And the target output is <math id="S3.SS3.p7.5.m5" class="ltx_Math" alttext="\mathbf{X}_{t}=\{x_{t_{i}}\}_{i=1}^{L}" display="inline" intent=":literal"><semantics><mrow><msub><mi>𝐗</mi><mi>t</mi></msub><mo>=</mo><msubsup><mrow><mo stretchy="false">{</mo><msub><mi>x</mi><msub><mi>t</mi><mi>i</mi></msub></msub><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>L</mi></msubsup></mrow><annotation encoding="application/x-tex">\mathbf{X}_{t}=\{x_{t_{i}}\}_{i=1}^{L}</annotation></semantics></math>, with <math id="S3.SS3.p7.6.m6" class="ltx_Math" alttext="x_{t}\in\mathcal{V}" display="inline" intent=":literal"><semantics><mrow><msub><mi>x</mi><mi>t</mi></msub><mo>∈</mo><mi class="ltx_font_mathcaligraphic">𝒱</mi></mrow><annotation encoding="application/x-tex">x_{t}\in\mathcal{V}</annotation></semantics></math> and <math id="S3.SS3.p7.7.m7" class="ltx_Math" alttext="L" display="inline" intent=":literal"><semantics><mi>L</mi><annotation encoding="application/x-tex">L</annotation></semantics></math> the output length. Then the source tokens are fed into the transformer encoder, and the decoder subsequently predicts the probability distribution of the next token at each step in an autoregressive manner:</p>
+</div>
+<div id="S3.SS3.p8" class="ltx_para">
+<table id="S3.E5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(5)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E5.m1" class="ltx_Math" alttext="p_{\theta}(\mathbf{X}_{t}|\mathbf{X}_{s})=\prod_{i=0}^{L-1}p_{\theta}\left(x_{t_{i}}\mid x_{t}^{&lt;i},\mathbf{X}_{s}\right)," display="block" intent=":literal"><semantics><mrow><mrow><mrow><msub><mi>p</mi><mi>θ</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>𝐗</mi><mi>t</mi></msub><mo fence="false">|</mo><msub><mi>𝐗</mi><mi>s</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.111em">=</mo><mrow><munderover><mo movablelimits="false">∏</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>L</mi><mo>−</mo><mn>1</mn></mrow></munderover><mrow><msub><mi>p</mi><mi>θ</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><msub><mi>x</mi><msub><mi>t</mi><mi>i</mi></msub></msub><mo>∣</mo><mrow><msubsup><mi>x</mi><mi>t</mi><mrow><mi></mi><mo>&lt;</mo><mi>i</mi></mrow></msubsup><mo>,</mo><msub><mi>𝐗</mi><mi>s</mi></msub></mrow></mrow><mo>)</mo></mrow></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">p_{\theta}(\mathbf{X}_{t}|\mathbf{X}_{s})=\prod_{i=0}^{L-1}p_{\theta}\left(x_{t_{i}}\mid x_{t}^{&lt;i},\mathbf{X}_{s}\right),</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S3.SS3.p9" class="ltx_para">
+<p id="S3.SS3.p9.2" class="ltx_p">where <math id="S3.SS3.p9.1.m1" class="ltx_Math" alttext="x_{t}^{&lt;i}" display="inline" intent=":literal"><semantics><msubsup><mi>x</mi><mi>t</mi><mrow><mi></mi><mo>&lt;</mo><mi>i</mi></mrow></msubsup><annotation encoding="application/x-tex">x_{t}^{&lt;i}</annotation></semantics></math> denotes the tokens preceding position <math id="S3.SS3.p9.2.m2" class="ltx_Math" alttext="i" display="inline" intent=":literal"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>. During training, we maximize the log-likelihood of the data distribution:</p>
+</div>
+<div id="S3.SS3.p10" class="ltx_para">
+<table id="S3.E6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_left"><span class="ltx_tag ltx_tag_equation ltx_align_left">(6)</span></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E6.m1" class="ltx_Math" alttext="\mathcal{L}_{\mathrm{LM}}=-\sum_{i=0}^{L-1}\log p_{\theta}\left(x_{t_{i}}\mid x_{t}^{&lt;i},\mathbf{X}_{s}\right)." display="block" intent=":literal"><semantics><mrow><mrow><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>LM</mi></msub><mo>=</mo><mrow><mo>−</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>L</mi><mo>−</mo><mn>1</mn></mrow></munderover><mrow><mrow><mi>log</mi><mo lspace="0.167em">⁡</mo><msub><mi>p</mi><mi>θ</mi></msub></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><msub><mi>x</mi><msub><mi>t</mi><mi>i</mi></msub></msub><mo>∣</mo><mrow><msubsup><mi>x</mi><mi>t</mi><mrow><mi></mi><mo>&lt;</mo><mi>i</mi></mrow></msubsup><mo>,</mo><msub><mi>𝐗</mi><mi>s</mi></msub></mrow></mrow><mo>)</mo></mrow></mrow></mrow></mrow></mrow><mo lspace="0em">.</mo></mrow><annotation encoding="application/x-tex">\mathcal{L}_{\mathrm{LM}}=-\sum_{i=0}^{L-1}\log p_{\theta}\left(x_{t_{i}}\mid x_{t}^{&lt;i},\mathbf{X}_{s}\right).</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S3.SS3.p11" class="ltx_para">
+<p id="S3.SS3.p11.1" class="ltx_p">By optimizing this objective, Uni-HOI learns to capture underlying patterns and dependencies from the data distribution of three modalities, facilitating accurate and meaningful generation of target ”words”. During inference, target tokens are recursively sampled from the predicted distribution <math id="S3.SS3.p11.1.m1" class="ltx_Math" alttext="p_{\theta}(\hat{x}_{t_{i}}\mid\hat{x}_{t}^{&lt;i},\mathbf{X}_{s})" display="inline" intent=":literal"><semantics><mrow><msub><mi>p</mi><mi>θ</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mover accent="true"><mi>x</mi><mo>^</mo></mover><msub><mi>t</mi><mi>i</mi></msub></msub><mo>∣</mo><mrow><msubsup><mover accent="true"><mi>x</mi><mo>^</mo></mover><mi>t</mi><mrow><mi></mi><mo>&lt;</mo><mi>i</mi></mrow></msubsup><mo>,</mo><msub><mi>𝐗</mi><mi>s</mi></msub></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">p_{\theta}(\hat{x}_{t_{i}}\mid\hat{x}_{t}^{&lt;i},\mathbf{X}_{s})</annotation></semantics></math> until the end token is generated. This sampling strategy enables step-by-step generation, where each token is probabilistically determined based on previously generated tokens and the given source input.</p>
+</div>
+<div id="S3.SS3.p12" class="ltx_para ltx_noindent">
+<p id="S3.SS3.p12.1" class="ltx_p"><span id="S3.SS3.p12.1.1" class="ltx_text ltx_font_italic">Two-stage training strategy</span>. We first conduct a preliminary training stage for Uni-HOI on the largest collected HOI dataset. The objective is to model the joint distribution across text, human motion, and object motion by employing randomized combinations of the three modalities as input-output pairs. Specifically, given paired text-human motion-object motion data, any one or two of the modalities are designated as conditions, and the model is tasked with predicting the remaining modality based on the provided task instruction and conditions. For example, in the text-driven human-object interaction generation task, a task instruction could be: ”<span id="S3.SS3.p12.1.2" class="ltx_text ltx_font_italic">Please generate a human-object interaction sequence from the following text description</span>”. The model is then required to predict the corresponding indices of human motion and object motion within the two motion codebooks. Similarly, for object motion-guided human motion generation, an instruction prompt could be: ”<span id="S3.SS3.p12.1.3" class="ltx_text ltx_font_bold">Please generate a human motion sequence paired with the following object motion sequence:</span> <span id="S3.SS3.p12.1.4" class="ltx_text ltx_font_italic">¡object motion tokens¿</span>”.
+To further enhance the performance of Uni-HOI across various downstream tasks, we conduct adaptive second-stage training on each individual sub-task. Confined to a single HOI task, this second-stage training is more effective in improving its performance under fixed input-output conditions. We used the LoRA <cite class="ltx_cite ltx_citemacro_citep">(Hu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib35" title="Lora: low-rank adaptation of large language models." class="ltx_ref">2022a</a>)</cite> algorithm to fine-tune the backbone of the large language model in both training stages, and adopt a smaller rank and scaling coefficient during the second-stage training.</p>
+</div>
+<figure id="S3.T1" class="ltx_table">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 1. </span>Quantitative experimental results for the task of text-driven HOI generation on FullBodyManipulation and BEHAVE dataset. → means results closer to the real distribution are better.</figcaption>
+<table id="S3.T1.1" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr id="S3.T1.1.1.1" class="ltx_tr">
+<th id="S3.T1.1.1.1.1" class="ltx_td ltx_th ltx_th_row ltx_border_r ltx_border_t"></th>
+<td id="S3.T1.1.1.1.2" class="ltx_td ltx_align_center ltx_border_r ltx_border_t" colspan="5">FullBodyManipulation</td>
+<td id="S3.T1.1.1.1.3" class="ltx_td ltx_align_center ltx_border_t" colspan="5">BEHAVE</td>
+</tr>
+<tr id="S3.T1.1.2.2" class="ltx_tr">
+<th id="S3.T1.1.2.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" rowspan="2"><span id="S3.T1.1.2.2.1.1" class="ltx_text">Methods</span></th>
+<td id="S3.T1.1.2.2.2" class="ltx_td ltx_align_center ltx_border_t" rowspan="2"><span id="S3.T1.1.2.2.2.1" class="ltx_text">FID ↓</span></td>
+<td id="S3.T1.1.2.2.3" class="ltx_td ltx_align_center ltx_border_t" colspan="3">R-precision ↑</td>
+<td id="S3.T1.1.2.2.4" class="ltx_td ltx_align_center ltx_border_r ltx_border_t" rowspan="2"><span id="S3.T1.1.2.2.4.1" class="ltx_text">Diversity →</span></td>
+<td id="S3.T1.1.2.2.5" class="ltx_td ltx_align_center ltx_border_t" rowspan="2"><span id="S3.T1.1.2.2.5.1" class="ltx_text">FID ↓</span></td>
+<td id="S3.T1.1.2.2.6" class="ltx_td ltx_align_center ltx_border_t" colspan="3">R-precision ↑</td>
+<td id="S3.T1.1.2.2.7" class="ltx_td ltx_align_center ltx_border_t" rowspan="2"><span id="S3.T1.1.2.2.7.1" class="ltx_text">Diversity →</span></td>
+</tr>
+<tr id="S3.T1.1.3.3" class="ltx_tr">
+<td id="S3.T1.1.3.3.1" class="ltx_td ltx_align_center ltx_border_t">Top-1</td>
+<td id="S3.T1.1.3.3.2" class="ltx_td ltx_align_center ltx_border_t">Top-2</td>
+<td id="S3.T1.1.3.3.3" class="ltx_td ltx_align_center ltx_border_t">Top-3</td>
+<td id="S3.T1.1.3.3.4" class="ltx_td ltx_align_center ltx_border_t">Top-1</td>
+<td id="S3.T1.1.3.3.5" class="ltx_td ltx_align_center ltx_border_t">Top-2</td>
+<td id="S3.T1.1.3.3.6" class="ltx_td ltx_align_center ltx_border_t">Top-3</td>
+</tr>
+<tr id="S3.T1.1.4.4" class="ltx_tr">
+<th id="S3.T1.1.4.4.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t">GT</th>
+<td id="S3.T1.1.4.4.2" class="ltx_td ltx_align_center ltx_border_t">0.01</td>
+<td id="S3.T1.1.4.4.3" class="ltx_td ltx_align_center ltx_border_t">0.53</td>
+<td id="S3.T1.1.4.4.4" class="ltx_td ltx_align_center ltx_border_t">0.63</td>
+<td id="S3.T1.1.4.4.5" class="ltx_td ltx_align_center ltx_border_t">0.69</td>
+<td id="S3.T1.1.4.4.6" class="ltx_td ltx_align_center ltx_border_r ltx_border_t">7.82</td>
+<td id="S3.T1.1.4.4.7" class="ltx_td ltx_align_center ltx_border_t">0.09</td>
+<td id="S3.T1.1.4.4.8" class="ltx_td ltx_align_center ltx_border_t">0.75</td>
+<td id="S3.T1.1.4.4.9" class="ltx_td ltx_align_center ltx_border_t">0.82</td>
+<td id="S3.T1.1.4.4.10" class="ltx_td ltx_align_center ltx_border_t">0.89</td>
+<td id="S3.T1.1.4.4.11" class="ltx_td ltx_align_center ltx_border_t">7.76</td>
+</tr>
+<tr id="S3.T1.1.5.5" class="ltx_tr">
+<th id="S3.T1.1.5.5.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r">MDM* <cite class="ltx_cite ltx_citemacro_citep">(Tevet<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib44" title="Human motion diffusion model" class="ltx_ref">2022</a>)</cite>
+</th>
+<td id="S3.T1.1.5.5.2" class="ltx_td ltx_align_center">8.47</td>
+<td id="S3.T1.1.5.5.3" class="ltx_td ltx_align_center">0.25</td>
+<td id="S3.T1.1.5.5.4" class="ltx_td ltx_align_center">0.32</td>
+<td id="S3.T1.1.5.5.5" class="ltx_td ltx_align_center">0.41</td>
+<td id="S3.T1.1.5.5.6" class="ltx_td ltx_align_center ltx_border_r">8.82</td>
+<td id="S3.T1.1.5.5.7" class="ltx_td ltx_align_center">0.52</td>
+<td id="S3.T1.1.5.5.8" class="ltx_td ltx_align_center">0.17</td>
+<td id="S3.T1.1.5.5.9" class="ltx_td ltx_align_center">0.19</td>
+<td id="S3.T1.1.5.5.10" class="ltx_td ltx_align_center">0.22</td>
+<td id="S3.T1.1.5.5.11" class="ltx_td ltx_align_center">7.46</td>
+</tr>
+<tr id="S3.T1.1.6.6" class="ltx_tr">
+<th id="S3.T1.1.6.6.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r">HOI-Diff <cite class="ltx_cite ltx_citemacro_citep">(Peng<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib3" title="Hoi-diff: text-driven synthesis of 3d human-object interactions using diffusion models" class="ltx_ref">2025</a>)</cite>
+</th>
+<td id="S3.T1.1.6.6.2" class="ltx_td ltx_align_center">11.25</td>
+<td id="S3.T1.1.6.6.3" class="ltx_td ltx_align_center">0.21</td>
+<td id="S3.T1.1.6.6.4" class="ltx_td ltx_align_center">0.27</td>
+<td id="S3.T1.1.6.6.5" class="ltx_td ltx_align_center">0.31</td>
+<td id="S3.T1.1.6.6.6" class="ltx_td ltx_align_center ltx_border_r">10.23</td>
+<td id="S3.T1.1.6.6.7" class="ltx_td ltx_align_center">0.59</td>
+<td id="S3.T1.1.6.6.8" class="ltx_td ltx_align_center">0.16</td>
+<td id="S3.T1.1.6.6.9" class="ltx_td ltx_align_center">0.20</td>
+<td id="S3.T1.1.6.6.10" class="ltx_td ltx_align_center">0.23</td>
+<td id="S3.T1.1.6.6.11" class="ltx_td ltx_align_center">7.14</td>
+</tr>
+<tr id="S3.T1.1.7.7" class="ltx_tr">
+<th id="S3.T1.1.7.7.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r">ROG <cite class="ltx_cite ltx_citemacro_citep">(Xue<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib5" title="Guiding human-object interactions with rich geometry and relations" class="ltx_ref">2025</a>)</cite>
+</th>
+<td id="S3.T1.1.7.7.2" class="ltx_td ltx_align_center">5.35</td>
+<td id="S3.T1.1.7.7.3" class="ltx_td ltx_align_center">0.42</td>
+<td id="S3.T1.1.7.7.4" class="ltx_td ltx_align_center">0.48</td>
+<td id="S3.T1.1.7.7.5" class="ltx_td ltx_align_center">0.52</td>
+<td id="S3.T1.1.7.7.6" class="ltx_td ltx_align_center ltx_border_r">8.52</td>
+<td id="S3.T1.1.7.7.7" class="ltx_td ltx_align_center">0.42</td>
+<td id="S3.T1.1.7.7.8" class="ltx_td ltx_align_center">0.30</td>
+<td id="S3.T1.1.7.7.9" class="ltx_td ltx_align_center">0.37</td>
+<td id="S3.T1.1.7.7.10" class="ltx_td ltx_align_center">0.41</td>
+<td id="S3.T1.1.7.7.11" class="ltx_td ltx_align_center">7.55</td>
+</tr>
+<tr id="S3.T1.1.8.8" class="ltx_tr">
+<th id="S3.T1.1.8.8.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_r">Uni-HOI</th>
+<td id="S3.T1.1.8.8.2" class="ltx_td ltx_align_center ltx_border_b"><span id="S3.T1.1.8.8.2.1" class="ltx_text ltx_font_bold">5.13</span></td>
+<td id="S3.T1.1.8.8.3" class="ltx_td ltx_align_center ltx_border_b"><span id="S3.T1.1.8.8.3.1" class="ltx_text ltx_font_bold">0.45</span></td>
+<td id="S3.T1.1.8.8.4" class="ltx_td ltx_align_center ltx_border_b"><span id="S3.T1.1.8.8.4.1" class="ltx_text ltx_font_bold">0.51</span></td>
+<td id="S3.T1.1.8.8.5" class="ltx_td ltx_align_center ltx_border_b"><span id="S3.T1.1.8.8.5.1" class="ltx_text ltx_font_bold">0.55</span></td>
+<td id="S3.T1.1.8.8.6" class="ltx_td ltx_align_center ltx_border_b ltx_border_r"><span id="S3.T1.1.8.8.6.1" class="ltx_text ltx_font_bold">8.07</span></td>
+<td id="S3.T1.1.8.8.7" class="ltx_td ltx_align_center ltx_border_b"><span id="S3.T1.1.8.8.7.1" class="ltx_text ltx_font_bold">0.37</span></td>
+<td id="S3.T1.1.8.8.8" class="ltx_td ltx_align_center ltx_border_b"><span id="S3.T1.1.8.8.8.1" class="ltx_text ltx_font_bold">0.39</span></td>
+<td id="S3.T1.1.8.8.9" class="ltx_td ltx_align_center ltx_border_b"><span id="S3.T1.1.8.8.9.1" class="ltx_text ltx_font_bold">0.42</span></td>
+<td id="S3.T1.1.8.8.10" class="ltx_td ltx_align_center ltx_border_b"><span id="S3.T1.1.8.8.10.1" class="ltx_text ltx_font_bold">0.48</span></td>
+<td id="S3.T1.1.8.8.11" class="ltx_td ltx_align_center ltx_border_b"><span id="S3.T1.1.8.8.11.1" class="ltx_text ltx_font_bold">7.62</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure id="S3.F3" class="ltx_figure"><img src="2604.27491v1/x3.png" id="S3.F3.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="660" height="375" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 3. </span>Visualization of comparative results for the task of text-driven HOI generation on the FullBodyManipulation and BEHAVE datasets. Irrational interactions are circled in red.</figcaption>
+</figure>
+</section>
+</section>
+<section id="S4" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4. </span>Experiments</h2>
+
+<div id="S4.p1" class="ltx_para">
+<p id="S4.p1.1" class="ltx_p">Extensive experimental results demonstrate the superior performance of Uni-HOI over baseline methods across multiple HOI-related tasks and datasets. In the following, we first introduce the datasets used in the experiments, evaluation metrics, and implementation details. Subsequently, we report both qualitative and quantitative experimental results comparing Uni-HOI with baselines on four mainstream HOI tasks, thereby providing a comprehensive analysis of its performance.</p>
+</div>
+<section id="S4.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1. </span>Experimental Setup</h3>
+
+<div id="S4.SS1.p1" class="ltx_para ltx_noindent">
+<p id="S4.SS1.p1.1" class="ltx_p"><span id="S4.SS1.p1.1.1" class="ltx_text ltx_font_bold">Datasets</span>. Interact <cite class="ltx_cite ltx_citemacro_citep">(Xu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib19" title="Interact: advancing large-scale versatile 3d human-object interaction generation" class="ltx_ref">2025</a>)</cite> constructs a large-scale 4D human-object interaction dataset by integrating seven existing datasets (including BEHAVE <cite class="ltx_cite ltx_citemacro_citep">(Bhatnagar<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib20" title="Behave: dataset and method for tracking human object interactions" class="ltx_ref">2022</a>)</cite>, OMOMO <cite class="ltx_cite ltx_citemacro_citep">(Li<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib4" title="Object motion guided human motion synthesis" class="ltx_ref">2023</a>)</cite>, GRAB <cite class="ltx_cite ltx_citemacro_citep">(Taheri<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib21" title="GRAB: a dataset of whole-body human grasping of objects" class="ltx_ref">2020</a>)</cite>, etc.) and it comprises 21.81 hours and 16,201 sequences in total. Due to the task setup and the quality of text annotations, we excluded data from ARCTIC <cite class="ltx_cite ltx_citemacro_citep">(Fan<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib37" title="ARCTIC: a dataset for dexterous bimanual hand-object manipulation" class="ltx_ref">2023</a>)</cite> and Parahome <cite class="ltx_cite ltx_citemacro_citep">(Kim<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib39" title="Parahome: parameterizing everyday home activities towards 3d generative modeling of human-object interactions" class="ltx_ref">2025</a>)</cite>, and ultimately used a subset of InterAct that includes data from BEHAVE <cite class="ltx_cite ltx_citemacro_citep">(Bhatnagar<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib20" title="Behave: dataset and method for tracking human object interactions" class="ltx_ref">2022</a>)</cite>, Chairs <cite class="ltx_cite ltx_citemacro_citep">(Jiang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib38" title="Full-body articulated human-object interaction" class="ltx_ref">2023b</a>)</cite>, GRAB <cite class="ltx_cite ltx_citemacro_citep">(Taheri<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib21" title="GRAB: a dataset of whole-body human grasping of objects" class="ltx_ref">2020</a>)</cite>, OMOMO <cite class="ltx_cite ltx_citemacro_citep">(Li<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib4" title="Object motion guided human motion synthesis" class="ltx_ref">2023</a>)</cite>, InterCap <cite class="ltx_cite ltx_citemacro_citep">(Huang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib40" title="InterCap: joint markerless 3d tracking of humans and objects in interaction from multi-view rgb-d images" class="ltx_ref">2024</a>)</cite>, IMHD <cite class="ltx_cite ltx_citemacro_citep">(Zhao<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib41" title="I’m hoi: inertia-aware monocular capture of 3d human-object interactions" class="ltx_ref">2024</a>)</cite>, and NeuralDome <cite class="ltx_cite ltx_citemacro_citep">(Zhang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib42" title="Neuraldome: a neural modeling pipeline on multi-view human-object interactions" class="ltx_ref">2023b</a>)</cite>. By partitioning each sub-dataset into training and test sets, the data used to train Uni-HOI comprises a total of 10,485 sequences for training and 1,274 sequences for testing.</p>
+</div>
+<div id="S4.SS1.p2" class="ltx_para ltx_noindent">
+<p id="S4.SS1.p2.8" class="ltx_p"><span id="S4.SS1.p2.8.1" class="ltx_text ltx_font_bold">Evaluation Metrics.</span> (1) For the text-driven HOI generation, we evaluated using <span id="S4.SS1.p2.8.2" class="ltx_text ltx_font_bold">Fréchet Inception Distance</span> (FID), <span id="S4.SS1.p2.8.3" class="ltx_text ltx_font_bold">R-Precision</span> and <span id="S4.SS1.p2.8.4" class="ltx_text ltx_font_bold">Diversity</span> as evaluation metrics. <span id="S4.SS1.p2.8.5" class="ltx_text ltx_font_bold">FID</span> assesses the distribution difference between the generated HOI and the ground truth, while <span id="S4.SS1.p2.8.6" class="ltx_text ltx_font_bold">R-Precision</span> reports the degree of alignment between the generated HOI and the text. <span id="S4.SS1.p2.8.7" class="ltx_text ltx_font_bold">Diversity</span> captures the degree of variation present in the generated motions.
+(2) For the object motion-guided human motion generation, our evaluation primarily follows the metrics established in OMOMO <cite class="ltx_cite ltx_citemacro_citep">(Li<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib4" title="Object motion guided human motion synthesis" class="ltx_ref">2023</a>)</cite>. <span id="S4.SS1.p2.8.8" class="ltx_text ltx_font_bold">HandJPE</span> and <span id="S4.SS1.p2.8.9" class="ltx_text ltx_font_bold">MPJPE</span> denote the mean hand joint position error and the mean per‑joint position error, respectively, both computed as the Euclidean distance between the predicted and ground‑truth positions in centimeters (cm). To assess interaction quality, we adopt contact metrics—precision (<math id="S4.SS1.p2.1.m1" class="ltx_Math" alttext="C_{prec}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>c</mi></mrow></msub><annotation encoding="application/x-tex">C_{prec}</annotation></semantics></math>, recall (<math id="S4.SS1.p2.2.m2" class="ltx_Math" alttext="C_{rec}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>c</mi></mrow></msub><annotation encoding="application/x-tex">C_{rec}</annotation></semantics></math>) and accuracy (<math id="S4.SS1.p2.3.m3" class="ltx_Math" alttext="C_{acc}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>c</mi></mrow></msub><annotation encoding="application/x-tex">C_{acc}</annotation></semantics></math>) following <cite class="ltx_cite ltx_citemacro_citep">(Li<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib4" title="Object motion guided human motion synthesis" class="ltx_ref">2023</a>)</cite>. The contact percentage (<math id="S4.SS1.p2.4.m4" class="ltx_Math" alttext="c\%" display="inline" intent=":literal"><semantics><mrow><mi>c</mi><mo>%</mo></mrow><annotation encoding="application/x-tex">c\%</annotation></semantics></math>) represents the proportion of frames in which contact is detected.
+(3) For the human motion-guided object motion prediction, we follow <cite class="ltx_cite ltx_citemacro_citep">(Petrov<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib18" title="Object pop-up: can we infer 3d objects and their poses from human interactions alone?" class="ltx_ref">2023</a>)</cite> to report the
+<math id="S4.SS1.p2.5.m5" class="ltx_Math" alttext="\mathbf{E_{v2v}}" display="inline" intent=":literal"><semantics><msub><mi>𝐄</mi><mi>𝐯𝟐𝐯</mi></msub><annotation encoding="application/x-tex">\mathbf{E_{v2v}}</annotation></semantics></math> and <math id="S4.SS1.p2.6.m6" class="ltx_Math" alttext="\mathbf{E_{ch}}" display="inline" intent=":literal"><semantics><msub><mi>𝐄</mi><mi>𝐜𝐡</mi></msub><annotation encoding="application/x-tex">\mathbf{E_{ch}}</annotation></semantics></math> as evaluation metrics. <math id="S4.SS1.p2.7.m7" class="ltx_Math" alttext="\mathbf{E_{v2v}}" display="inline" intent=":literal"><semantics><msub><mi>𝐄</mi><mi>𝐯𝟐𝐯</mi></msub><annotation encoding="application/x-tex">\mathbf{E_{v2v}}</annotation></semantics></math> computes the error between predicted object points and the ground truth as a point-to-point error. <math id="S4.SS1.p2.8.m8" class="ltx_Math" alttext="\mathbf{E_{ch}}" display="inline" intent=":literal"><semantics><msub><mi>𝐄</mi><mi>𝐜𝐡</mi></msub><annotation encoding="application/x-tex">\mathbf{E_{ch}}</annotation></semantics></math> calculates the bi-directional Chamfer distance between the prediction and ground truth.</p>
+</div>
+<div id="S4.SS1.p3" class="ltx_para ltx_noindent">
+<p id="S4.SS1.p3.10" class="ltx_p"><span id="S4.SS1.p3.10.1" class="ltx_text ltx_font_bold">Implementation Details.</span> For human VQ-VAE and object VQ-VAE, the codebook is set to be <math id="S4.SS1.p3.1.m1" class="ltx_Math" alttext="K\in\mathbb{R}^{512\times 4096}" display="inline" intent=":literal"><semantics><mrow><mi>K</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mn>512</mn><mo lspace="0.222em" rspace="0.222em">×</mo><mn>4096</mn></mrow></msup></mrow><annotation encoding="application/x-tex">K\in\mathbb{R}^{512\times 4096}</annotation></semantics></math>. The motion encoder <math id="S4.SS1.p3.2.m2" class="ltx_Math" alttext="E" display="inline" intent=":literal"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math> incorporates a temporal downsampling rate l of 2. We utilize Qwen3-8B as the underlying architecture for our language model.
+The model consists of 36 transformer layers, with grouped query attention (GQA) where the number of query heads is 32 and the number of key/value heads is 8.
+The feed-forward networks have an output dimensionality of <math id="S4.SS1.p3.3.m3" class="ltx_Math" alttext="d_{ff}" display="inline" intent=":literal"><semantics><msub><mi>d</mi><mrow><mi>f</mi><mo lspace="0em" rspace="0em">​</mo><mi>f</mi></mrow></msub><annotation encoding="application/x-tex">d_{ff}</annotation></semantics></math> =25600, and the attention mechanisms employ an inner dimensionality of <math id="S4.SS1.p3.4.m4" class="ltx_Math" alttext="d_{kv}" display="inline" intent=":literal"><semantics><msub><mi>d</mi><mrow><mi>k</mi><mo lspace="0em" rspace="0em">​</mo><mi>v</mi></mrow></msub><annotation encoding="application/x-tex">d_{kv}</annotation></semantics></math> =64.
+The remaining sub-layers and embeddings have a dimensionality of <math id="S4.SS1.p3.5.m5" class="ltx_Math" alttext="d_{model}" display="inline" intent=":literal"><semantics><msub><mi>d</mi><mrow><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>d</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>l</mi></mrow></msub><annotation encoding="application/x-tex">d_{model}</annotation></semantics></math> =4096.
+Moreover, all our models employ the AdamW <cite class="ltx_cite ltx_citemacro_citep">(Loshchilov and Hutter, <a href="#bib.bib43" title="Decoupled weight decay regularization" class="ltx_ref">2017</a>)</cite> optimizer for training. The human motion tokenizer and object motion tokenizer are trained with a learning rate of <math id="S4.SS1.p3.6.m6" class="ltx_Math" alttext="2e^{-4}" display="inline" intent=":literal"><semantics><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><msup><mi>e</mi><mrow><mo>−</mo><mn>4</mn></mrow></msup></mrow><annotation encoding="application/x-tex">2e^{-4}</annotation></semantics></math> for 1.5 million and 1 million iterations. Both tokenizers are trained with a batch size of 128. The language model is trained with LoRA <cite class="ltx_cite ltx_citemacro_citep">(Hu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib35" title="Lora: low-rank adaptation of large language models." class="ltx_ref">2022a</a>)</cite>, of which the rank and <math id="S4.SS1.p3.7.m7" class="ltx_Math" alttext="\alpha" display="inline" intent=":literal"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> are set to be 1024 and 512 with a learning rate of <math id="S4.SS1.p3.8.m8" class="ltx_Math" alttext="2e^{-5}" display="inline" intent=":literal"><semantics><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><msup><mi>e</mi><mrow><mo>−</mo><mn>5</mn></mrow></msup></mrow><annotation encoding="application/x-tex">2e^{-5}</annotation></semantics></math> in the first stage. For the second-stage training, the rank and <math id="S4.SS1.p3.9.m9" class="ltx_Math" alttext="\alpha" display="inline" intent=":literal"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> are set to be 256 and 128 with a learning rate of <math id="S4.SS1.p3.10.m10" class="ltx_Math" alttext="1e^{-6}" display="inline" intent=":literal"><semantics><mrow><mn>1</mn><mo lspace="0em" rspace="0em">​</mo><msup><mi>e</mi><mrow><mo>−</mo><mn>6</mn></mrow></msup></mrow><annotation encoding="application/x-tex">1e^{-6}</annotation></semantics></math>. The first stage of training has a total iteration of 110K and the second stage has 50K iterations. All models are trained on 8 NVIDIA GeForce RTX 4090 GPUs.</p>
+</div>
+</section>
+<section id="S4.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2. </span>Comparisons on HOI-relevant Tasks</h3>
+
+<div id="S4.SS2.p1" class="ltx_para ltx_noindent">
+<p id="S4.SS2.p1.1" class="ltx_p"><span id="S4.SS2.p1.1.1" class="ltx_text ltx_font_bold">Comparisons on Text-to-HOI.</span> In the second stage of training, we performed fine-tuning on the text-to-HOI task using the FullBodyManipulation <cite class="ltx_cite ltx_citemacro_citep">(Li<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib4" title="Object motion guided human motion synthesis" class="ltx_ref">2023</a>)</cite> and BEHAVE <cite class="ltx_cite ltx_citemacro_citep">(Bhatnagar<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib20" title="Behave: dataset and method for tracking human object interactions" class="ltx_ref">2022</a>)</cite> datasets. We compared our method with several open-source baselines, including MDM* <cite class="ltx_cite ltx_citemacro_citep">(Tevet<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib44" title="Human motion diffusion model" class="ltx_ref">2022</a>)</cite>, HOI-Diff <cite class="ltx_cite ltx_citemacro_citep">(Peng<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib3" title="Hoi-diff: text-driven synthesis of 3d human-object interactions using diffusion models" class="ltx_ref">2025</a>)</cite>, and ROG <cite class="ltx_cite ltx_citemacro_citep">(Xue<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib5" title="Guiding human-object interactions with rich geometry and relations" class="ltx_ref">2025</a>)</cite>. HOI-Diff and ROG are consistent with our task setting. For MDM, we extended its output dimensions to obtain MDM*, enabling it to simultaneously predict human motion and object motion to meet the requirements of our task. Table <a href="#S3.T1" title="Table 1 ‣ 3.3. Uni-HOI: Unified framework for Text-Human-Object Modeling ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a> presents the quantitative comparison results on the two datasets. On the FullBodyManipulation dataset, our method outperforms the three baseline methods across all evaluation metrics. Compared to MDM* and HOI-Diff, our method achieves notable improvements, which can also be observed in the visualization results shown in Figure <a href="#S3.F3" title="Figure 3 ‣ 3.3. Uni-HOI: Unified framework for Text-Human-Object Modeling ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>. Compared with ROG, a state-of-the-art method specifically designed for this task, our method also achieves highly competitive performance. This strongly demonstrates the significant potential of our general framework when applied to a single task.</p>
+</div>
+<figure id="S4.T2" class="ltx_table">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 2. </span>Quantitative experimental results for the task of human motion generation guided by object motion(optionally with text) on the FullBodyManipulation dataset. </figcaption>
+<table id="S4.T2.4" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<tbody class="ltx_tbody">
+<tr id="S4.T2.4.4" class="ltx_tr">
+<th id="S4.T2.4.4.5" class="ltx_td ltx_th ltx_th_row ltx_border_r ltx_border_tt"></th>
+<th id="S4.T2.4.4.6" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_tt"><span id="S4.T2.4.4.6.1" class="ltx_text ltx_font_bold">Methods</span></th>
+<td id="S4.T2.4.4.7" class="ltx_td ltx_align_center ltx_border_tt"><span id="S4.T2.4.4.7.1" class="ltx_text ltx_font_bold">HandJPE ↓</span></td>
+<td id="S4.T2.4.4.8" class="ltx_td ltx_align_center ltx_border_tt"><span id="S4.T2.4.4.8.1" class="ltx_text ltx_font_bold">MPJPE ↓</span></td>
+<td id="S4.T2.1.1.1" class="ltx_td ltx_align_center ltx_border_tt">
+<math id="S4.T2.1.1.1.m1" class="ltx_Math" alttext="C_{prec}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>c</mi></mrow></msub><annotation encoding="application/x-tex">C_{prec}</annotation></semantics></math><span id="S4.T2.1.1.1.1" class="ltx_text ltx_font_bold"> ↑</span>
+</td>
+<td id="S4.T2.2.2.2" class="ltx_td ltx_align_center ltx_border_tt">
+<math id="S4.T2.2.2.2.m1" class="ltx_Math" alttext="C_{rec}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>c</mi></mrow></msub><annotation encoding="application/x-tex">C_{rec}</annotation></semantics></math><span id="S4.T2.2.2.2.1" class="ltx_text ltx_font_bold"> ↑</span>
+</td>
+<td id="S4.T2.3.3.3" class="ltx_td ltx_align_center ltx_border_tt">
+<math id="S4.T2.3.3.3.m1" class="ltx_Math" alttext="C_{acc}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>c</mi></mrow></msub><annotation encoding="application/x-tex">C_{acc}</annotation></semantics></math><span id="S4.T2.3.3.3.1" class="ltx_text ltx_font_bold"> ↑</span>
+</td>
+<td id="S4.T2.4.4.4" class="ltx_td ltx_align_center ltx_border_tt"><span id="S4.T2.4.4.4.1" class="ltx_text ltx_font_bold"><math id="S4.T2.4.4.4.1.m1" class="ltx_Math" alttext="c\%" display="inline" intent=":literal"><semantics><mrow><mi>c</mi><mo>%</mo></mrow><annotation encoding="application/x-tex">c\%</annotation></semantics></math> ↑</span></td>
+</tr>
+<tr id="S4.T2.4.5.1" class="ltx_tr">
+<th id="S4.T2.4.5.1.1" class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t" rowspan="3"><span id="S4.T2.4.5.1.1.1" class="ltx_text">w/o text</span></th>
+<th id="S4.T2.4.5.1.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">OMOMO <cite class="ltx_cite ltx_citemacro_citep">(Li<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib4" title="Object motion guided human motion synthesis" class="ltx_ref">2023</a>)</cite>
+</th>
+<td id="S4.T2.4.5.1.3" class="ltx_td ltx_align_center ltx_border_t">33.18</td>
+<td id="S4.T2.4.5.1.4" class="ltx_td ltx_align_center ltx_border_t">18.06</td>
+<td id="S4.T2.4.5.1.5" class="ltx_td ltx_align_center ltx_border_t">0.77</td>
+<td id="S4.T2.4.5.1.6" class="ltx_td ltx_align_center ltx_border_t">0.71</td>
+<td id="S4.T2.4.5.1.7" class="ltx_td ltx_align_center ltx_border_t">0.74</td>
+<td id="S4.T2.4.5.1.8" class="ltx_td ltx_align_center ltx_border_t">0.61</td>
+</tr>
+<tr id="S4.T2.4.6.2" class="ltx_tr">
+<th id="S4.T2.4.6.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">SemGeoMo <cite class="ltx_cite ltx_citemacro_citep">(Cong<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib8" title="Semgeomo: dynamic contextual human motion generation with semantic and geometric guidance" class="ltx_ref">2025</a>)</cite>
+</th>
+<td id="S4.T2.4.6.2.2" class="ltx_td ltx_align_center">30.35</td>
+<td id="S4.T2.4.6.2.3" class="ltx_td ltx_align_center">17.98</td>
+<td id="S4.T2.4.6.2.4" class="ltx_td ltx_align_center">0.82</td>
+<td id="S4.T2.4.6.2.5" class="ltx_td ltx_align_center">0.74</td>
+<td id="S4.T2.4.6.2.6" class="ltx_td ltx_align_center">0.82</td>
+<td id="S4.T2.4.6.2.7" class="ltx_td ltx_align_center">0.66</td>
+</tr>
+<tr id="S4.T2.4.7.3" class="ltx_tr">
+<th id="S4.T2.4.7.3.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">Uni-HOI</th>
+<td id="S4.T2.4.7.3.2" class="ltx_td ltx_align_center"><span id="S4.T2.4.7.3.2.1" class="ltx_text ltx_font_bold">29.87</span></td>
+<td id="S4.T2.4.7.3.3" class="ltx_td ltx_align_center"><span id="S4.T2.4.7.3.3.1" class="ltx_text ltx_font_bold">17.63</span></td>
+<td id="S4.T2.4.7.3.4" class="ltx_td ltx_align_center"><span id="S4.T2.4.7.3.4.1" class="ltx_text ltx_font_bold">0.85</span></td>
+<td id="S4.T2.4.7.3.5" class="ltx_td ltx_align_center"><span id="S4.T2.4.7.3.5.1" class="ltx_text ltx_font_bold">0.75</span></td>
+<td id="S4.T2.4.7.3.6" class="ltx_td ltx_align_center"><span id="S4.T2.4.7.3.6.1" class="ltx_text ltx_font_bold">0.84</span></td>
+<td id="S4.T2.4.7.3.7" class="ltx_td ltx_align_center"><span id="S4.T2.4.7.3.7.1" class="ltx_text ltx_font_bold">0.70</span></td>
+</tr>
+<tr id="S4.T2.4.8.4" class="ltx_tr">
+<th id="S4.T2.4.8.4.1" class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_bb ltx_border_r ltx_border_t" rowspan="2"><span id="S4.T2.4.8.4.1.1" class="ltx_text">w text</span></th>
+<th id="S4.T2.4.8.4.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">SemGeoMo-T <cite class="ltx_cite ltx_citemacro_citep">(Cong<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib8" title="Semgeomo: dynamic contextual human motion generation with semantic and geometric guidance" class="ltx_ref">2025</a>)</cite>
+</th>
+<td id="S4.T2.4.8.4.3" class="ltx_td ltx_align_center ltx_border_t">27.84</td>
+<td id="S4.T2.4.8.4.4" class="ltx_td ltx_align_center ltx_border_t">16.62</td>
+<td id="S4.T2.4.8.4.5" class="ltx_td ltx_align_center ltx_border_t">0.84</td>
+<td id="S4.T2.4.8.4.6" class="ltx_td ltx_align_center ltx_border_t">0.74</td>
+<td id="S4.T2.4.8.4.7" class="ltx_td ltx_align_center ltx_border_t"><span id="S4.T2.4.8.4.7.1" class="ltx_text ltx_font_bold">0.85</span></td>
+<td id="S4.T2.4.8.4.8" class="ltx_td ltx_align_center ltx_border_t">0.66</td>
+</tr>
+<tr id="S4.T2.4.9.5" class="ltx_tr">
+<th id="S4.T2.4.9.5.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">Uni-HOI</th>
+<td id="S4.T2.4.9.5.2" class="ltx_td ltx_align_center ltx_border_bb"><span id="S4.T2.4.9.5.2.1" class="ltx_text ltx_font_bold">27.56</span></td>
+<td id="S4.T2.4.9.5.3" class="ltx_td ltx_align_center ltx_border_bb"><span id="S4.T2.4.9.5.3.1" class="ltx_text ltx_font_bold">16.41</span></td>
+<td id="S4.T2.4.9.5.4" class="ltx_td ltx_align_center ltx_border_bb"><span id="S4.T2.4.9.5.4.1" class="ltx_text ltx_font_bold">0.86</span></td>
+<td id="S4.T2.4.9.5.5" class="ltx_td ltx_align_center ltx_border_bb"><span id="S4.T2.4.9.5.5.1" class="ltx_text ltx_font_bold">0.76</span></td>
+<td id="S4.T2.4.9.5.6" class="ltx_td ltx_align_center ltx_border_bb">0.84</td>
+<td id="S4.T2.4.9.5.7" class="ltx_td ltx_align_center ltx_border_bb"><span id="S4.T2.4.9.5.7.1" class="ltx_text ltx_font_bold">0.72</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure id="S4.F4" class="ltx_figure"><img src="2604.27491v1/x4.png" id="S4.F4.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="509" height="399" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 4. </span>Visualization of comparative results for the task of human motion generation guided by object motion(optionally with text) on the FullBodyManipulation dataset.</figcaption>
+</figure>
+<figure id="S4.T3" class="ltx_table">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 3. </span>Quantitative comparison for human motion-driven object motion prediction on GRAB and BEHAVE datasets.</figcaption>
+<table id="S4.T3.4" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S4.T3.4.5.1" class="ltx_tr">
+<th id="S4.T3.4.5.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" rowspan="2"><span id="S4.T3.4.5.1.1.1" class="ltx_text">Method</span></th>
+<th id="S4.T3.4.5.1.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="2">GRAB</th>
+<th id="S4.T3.4.5.1.3" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="2">BEHAVE</th>
+</tr>
+<tr id="S4.T3.4.4" class="ltx_tr">
+<th id="S4.T3.1.1.1" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t">Ec<math id="S4.T3.1.1.1.m1" class="ltx_Math" alttext="\downarrow" display="inline" intent=":literal"><semantics><mo stretchy="false">↓</mo><annotation encoding="application/x-tex">\downarrow</annotation></semantics></math>
+</th>
+<th id="S4.T3.2.2.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t">Ev2v<math id="S4.T3.2.2.2.m1" class="ltx_Math" alttext="\downarrow" display="inline" intent=":literal"><semantics><mo stretchy="false">↓</mo><annotation encoding="application/x-tex">\downarrow</annotation></semantics></math>
+</th>
+<th id="S4.T3.3.3.3" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t">Ec<math id="S4.T3.3.3.3.m1" class="ltx_Math" alttext="\downarrow" display="inline" intent=":literal"><semantics><mo stretchy="false">↓</mo><annotation encoding="application/x-tex">\downarrow</annotation></semantics></math>
+</th>
+<th id="S4.T3.4.4.4" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t">Ev2v<math id="S4.T3.4.4.4.m1" class="ltx_Math" alttext="\downarrow" display="inline" intent=":literal"><semantics><mo stretchy="false">↓</mo><annotation encoding="application/x-tex">\downarrow</annotation></semantics></math>
+</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S4.T3.4.6.1" class="ltx_tr">
+<th id="S4.T3.4.6.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">ObjPOP <cite class="ltx_cite ltx_citemacro_citep">(Petrov<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib18" title="Object pop-up: can we infer 3d objects and their poses from human interactions alone?" class="ltx_ref">2023</a>)</cite>
+</th>
+<td id="S4.T3.4.6.1.2" class="ltx_td ltx_align_center ltx_border_t">0.047</td>
+<td id="S4.T3.4.6.1.3" class="ltx_td ltx_align_center ltx_border_t">0.244</td>
+<td id="S4.T3.4.6.1.4" class="ltx_td ltx_align_center ltx_border_t">0.147</td>
+<td id="S4.T3.4.6.1.5" class="ltx_td ltx_align_center ltx_border_t">0.472</td>
+</tr>
+<tr id="S4.T3.4.7.2" class="ltx_tr">
+<th id="S4.T3.4.7.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">Uni-HOI</th>
+<td id="S4.T3.4.7.2.2" class="ltx_td ltx_align_center ltx_border_bb"><span id="S4.T3.4.7.2.2.1" class="ltx_text ltx_font_bold">0.024</span></td>
+<td id="S4.T3.4.7.2.3" class="ltx_td ltx_align_center ltx_border_bb"><span id="S4.T3.4.7.2.3.1" class="ltx_text ltx_font_bold">0.126</span></td>
+<td id="S4.T3.4.7.2.4" class="ltx_td ltx_align_center ltx_border_bb"><span id="S4.T3.4.7.2.4.1" class="ltx_text ltx_font_bold">0.092</span></td>
+<td id="S4.T3.4.7.2.5" class="ltx_td ltx_align_center ltx_border_bb"><span id="S4.T3.4.7.2.5.1" class="ltx_text ltx_font_bold">0.325</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<figure id="S4.F5" class="ltx_figure"><img src="2604.27491v1/x5.png" id="S4.F5.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="482" height="229" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 5. </span>Visualization of comparative results for human motion-driven object motion prediction on the BEHAVE and GRAB datasets.</figcaption>
+</figure>
+<div id="S4.SS2.p2" class="ltx_para ltx_noindent">
+<p id="S4.SS2.p2.1" class="ltx_p"><span id="S4.SS2.p2.1.1" class="ltx_text ltx_font_bold">Comparisons on Object-to-Human.</span> For the task of human motion generation guided by object motion, OMOMO <cite class="ltx_cite ltx_citemacro_citep">(Li<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib4" title="Object motion guided human motion synthesis" class="ltx_ref">2023</a>)</cite> was the first to explore this task and SemGeoMo <cite class="ltx_cite ltx_citemacro_citep">(Cong<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib8" title="Semgeomo: dynamic contextual human motion generation with semantic and geometric guidance" class="ltx_ref">2025</a>)</cite> built upon it by introducing textual descriptions of human-object interaction. We also fine-tuned our model on the FullBodyManipulation dataset for this task and compared it with these two methods. Table <a href="#S4.T2" title="Table 2 ‣ 4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a> presents the corresponding quantitative results. The experimental results show that our method achieves better performance than the two baseline methods across multiple evaluation metrics on this task. Furthermore, SemGeoMo can take ground-truth textual descriptions as input, using both object motion and text descriptions to predict human motion. Given this setting and the generality of our framework, we also conducted experiments on this task accordingly. As shown in the last two rows of Table <a href="#S4.T2" title="Table 2 ‣ 4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>, our method still achieves superior performance on most metrics compared to SemGeoMo-T which denotes the variant using ground-truth text as input. Figure <a href="#S4.F4" title="Figure 4 ‣ 4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a> presents the visual comparison results on both tasks, demonstrating that our method produces more natural and realistic results than SemGeoMo and OMOMO.</p>
+</div>
+<div id="S4.SS2.p3" class="ltx_para ltx_noindent">
+<p id="S4.SS2.p3.1" class="ltx_p"><span id="S4.SS2.p3.1.1" class="ltx_text ltx_font_bold">Comparisons on Human-to-Object.</span> The task of predicting object pose from human interaction poses was first introduced by ObjPOP <cite class="ltx_cite ltx_citemacro_citep">(Petrov<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib18" title="Object pop-up: can we infer 3d objects and their poses from human interactions alone?" class="ltx_ref">2023</a>)</cite>, aiming to synthesize plausible 3D HOIs by predicting reasonable object poses. We explore a more general setting: predicting object motion from sequential human interaction motion. Using human motion as condition and object motion as output, we fine-tune our model on both GRAB <cite class="ltx_cite ltx_citemacro_citep">(Taheri<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib21" title="GRAB: a dataset of whole-body human grasping of objects" class="ltx_ref">2020</a>)</cite> and BEHAVE <cite class="ltx_cite ltx_citemacro_citep">(Bhatnagar<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib20" title="Behave: dataset and method for tracking human object interactions" class="ltx_ref">2022</a>)</cite> datasets. As a baseline, we adapt ObjPOP <cite class="ltx_cite ltx_citemacro_citep">(Petrov<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib18" title="Object pop-up: can we infer 3d objects and their poses from human interactions alone?" class="ltx_ref">2023</a>)</cite> to predict the object pose corresponding to each frame of human pose. Table <a href="#S4.T3" title="Table 3 ‣ 4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a> presents the quantitative comparison results on this task. Our method significantly outperforms the baseline on both datasets. Figure <a href="#S4.F5" title="Figure 5 ‣ 4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a> shows the visualized comparison results between our model and baseline methods.</p>
+</div>
+</section>
+<section id="S4.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.3. </span>Ablation Studies</h3>
+
+<div id="S4.SS3.p1" class="ltx_para">
+<p id="S4.SS3.p1.1" class="ltx_p">We conduct ablation experiments to investigate the impact of model size and training strategy on the final performance (detailed quantitative results can be found in the supplementary material). The experimental results show that, compared to using Qwen3-1B and Qwen3-4B, employing Qwen3-8B as the large language model backbone in our framework achieves better results across multiple evaluation metrics. In addition, compared to performing only the first-stage training on multiple tasks, second-stage fine-tuning on a single task significantly improves the performance of our framework on that specific task.</p>
+</div>
+<figure id="S4.F6" class="ltx_figure"><img src="2604.27491v1/x6.png" id="S4.F6.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="830" height="210" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 6. </span>4D HOI synthesis. Uni-HOI can predict reasonable object motion for human in the reference videos.</figcaption>
+</figure>
+</section>
+</section>
+<section id="S5" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5. </span>Applications</h2>
+
+<div id="S5.p1" class="ltx_para">
+<p id="S5.p1.1" class="ltx_p">Our model can be employed to reconstruct 4D Human-Object Interactions (HOI) from videos. Given a reference video, we first reconstruct the human pose parameters for each frame using GVHMR <cite class="ltx_cite ltx_citemacro_citep">(Shen<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib56" title="World-grounded human motion recovery via gravity-view coordinates" class="ltx_ref">2024</a>)</cite> to obtain human motion. Our framework then predicts a sequence of interactive object poses conditioned on the human motion (U(O—H)), thereby indirectly reconstructing complete 4D HOI from the video.
+The reference video can be obtained either from existing resources or generated using existing text-to-video techniques. In the latter case, our model can serve some zero-shot HOI generation scenarios.</p>
+</div>
+</section>
+<section id="S6" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6. </span>Limitations</h2>
+
+<div id="S6.p1" class="ltx_para">
+<p id="S6.p1.1" class="ltx_p">We have not extensively explored the combinatorial capabilities of more modalities, such as jointly predicting object poses conditioned on both human motion and text, or generating corresponding interaction captions from input human motion and object motion. Investigating these settings more comprehensively is an important direction for future work. Moreover, although our method already outperforms state-of-the-art (SOTA) approaches on several tasks without explicit human-object contact embeddings, incorporating explicit contact modeling could further improve performance.</p>
+</div>
+</section>
+<section id="S7" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">7. </span>Conclusion</h2>
+
+<div id="S7.p1" class="ltx_para">
+<p id="S7.p1.1" class="ltx_p">In this work, we propose Uni-HOI, a unified framework that learns the joint distribution among text, human motion, and object motion in HOI. Unlike prior task-specific approaches, Uni-HOI leverages LLMs to establish a shared representation space across all three modalities. Two motion-specific VQ-VAEs convert heterogeneous motion data into token sequences compatible with LLM inputs, enabling a single model to handle arbitrary conditional inputs and outputs.
+We introduce a two-stage training strategy: multi-task learning on a large-scale HOI dataset followed by task-specific fine-tuning. Extensive experiments on multiple tasks show that Uni-HOI consistently outperforms or matches task-specialized baselines using a single unified framework, demonstrating its effectiveness and generalization capability.</p>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul id="bib.L1" class="ltx_biblist">
+<li id="bib.bib20" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">B. L. Bhatnagar, X. Xie, I. A. Petrov, C. Sminchisescu, C. Theobalt, and G. Pons-Moll (2022)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Behave: dataset and method for tracking human object interactions</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the IEEE/CVF conference on computer vision and pattern recognition</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 15935–15946</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.SS1.p1.1" title="4.1. Experimental Setup ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.1</span></a>,
+<a href="#S4.SS2.p1.1" title="4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.2</span></a>,
+<a href="#S4.SS2.p3.1" title="4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.2</span></a>.
+</span>
+</li>
+<li id="bib.bib48" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">X. Cai, M. Zheng, X. Jin, and Y. Liu (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">InteractMove: text-controlled human-object interaction generation in 3d scenes with movable objects</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 33rd ACM International Conference on Multimedia</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 9491–9499</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib25" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Y. Cao, X. Han, Y. Chen, L. Xu, Y. Wang, and Z. Liu (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">AvatarGO: zero-shot 4d human-object interaction generation and animation</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2410.07164</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib45" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">J. Cha, J. Kim, J. S. Yoon, and S. Baek (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Text2hoi: text-guided 3d motion generation for hand-object interaction</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 1577–1585</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib30" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">H. W. Chung, L. Hou, S. Longpre, B. Zoph, Y. Tay, W. Fedus, Y. Li, X. Wang, M. Dehghani, S. Brahma, <span class="ltx_text ltx_bib_etal">et al.</span> (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Scaling instruction-finetuned language models</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Journal of Machine Learning Research</span> <span class="ltx_text ltx_bib_volume">25</span> (<span class="ltx_text ltx_bib_number">70</span>), <span class="ltx_text ltx_bib_pages"> pp. 1–53</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p3.1" title="1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib8" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">P. Cong, Z. Wang, Y. Ma, and X. Yue (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Semgeomo: dynamic contextual human motion generation with semantic and geometric guidance</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the Computer Vision and Pattern Recognition Conference</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 17561–17570</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S2.p2.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#S4.SS2.p2.1" title="4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.2</span></a>,
+<a href="#S4.T2.4.6.2.1" title="In 4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">Table 2</span></a>,
+<a href="#S4.T2.4.8.4.2" title="In 4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">Table 2</span></a>.
+</span>
+</li>
+<li id="bib.bib46" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">S. Dai, W. Li, H. Sun, H. Huang, C. Ma, H. Huang, K. Xu, and R. Hu (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Interfusion: text-driven generation of 3d human-object interaction</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">European Conference on Computer Vision</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 18–35</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">C. Diller and A. Dai (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Cg-hoi: contact-guided 3d human-object interaction generation</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 19888–19901</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib55" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">K. Fan, S. Lu, M. Dai, R. Yu, L. Xiao, Z. Dou, J. Dong, L. Ma, and J. Wang (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Go to zero: towards zero-shot motion generation with million-scale data</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the IEEE/CVF International Conference on Computer Vision</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 13336–13348</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS2.p5.1" title="3.2. Motion Tokenizer ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.2</span></a>.
+</span>
+</li>
+<li id="bib.bib37" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Z. Fan, O. Taheri, D. Tzionas, M. Kocabas, M. Kaufmann, M. J. Black, and O. Hilliges (2023)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">ARCTIC: a dataset for dexterous bimanual hand-object manipulation</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the IEEE/CVF conference on computer vision and pattern recognition</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 12943–12954</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.SS1.p1.1" title="4.1. Experimental Setup ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.1</span></a>.
+</span>
+</li>
+<li id="bib.bib53" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Z. Geng, Z. Hayder, W. Liu, and A. S. Mian (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Auto-regressive diffusion for generating 3d human-object interactions</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the AAAI Conference on Artificial Intelligence</span>,
+</span>
+<span class="ltx_bibblock">Vol. <span class="ltx_text ltx_bib_volume">39</span>, <span class="ltx_text ltx_bib_pages"> pp. 3131–3139</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib14" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">C. Guo, X. Zuo, S. Wang, and L. Cheng (2022)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Tm2t: stochastic and tokenized modeling for the reciprocal generation of 3d human motions and texts</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">European Conference on Computer Vision</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 580–597</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS2.p1.5" title="3.2. Motion Tokenizer ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.2</span></a>.
+</span>
+</li>
+<li id="bib.bib35" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">E. J. Hu, Y. Shen, P. Wallis, Z. Allen-Zhu, Y. Li, S. Wang, L. Wang, W. Chen, <span class="ltx_text ltx_bib_etal">et al.</span> (2022a)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Lora: low-rank adaptation of large language models.</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Iclr</span> <span class="ltx_text ltx_bib_volume">1</span> (<span class="ltx_text ltx_bib_number">2</span>), <span class="ltx_text ltx_bib_pages"> pp. 3</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS3.p12.1" title="3.3. Uni-HOI: Unified framework for Text-Human-Object Modeling ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.3</span></a>,
+<a href="#S4.SS1.p3.10" title="4.1. Experimental Setup ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.1</span></a>.
+</span>
+</li>
+<li id="bib.bib28" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">H. Hu, W. Wang, W. Zhou, W. Zhao, H. Li, and G. Li (2022b)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Hand-object interaction image generation</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Advances in Neural Information Processing Systems (NeurIPS)</span>,
+</span>
+<span class="ltx_bibblock">Vol. <span class="ltx_text ltx_bib_volume">35</span>, <span class="ltx_text ltx_bib_pages"> pp. 23870–23883</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib40" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Y. Huang, O. Taheri, M. J. Black, and D. Tzionas (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">InterCap: joint markerless 3d tracking of humans and objects in interaction from multi-view rgb-d images</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">International Journal of Computer Vision</span> <span class="ltx_text ltx_bib_volume">132</span> (<span class="ltx_text ltx_bib_number">7</span>), <span class="ltx_text ltx_bib_pages"> pp. 2551–2566</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.SS1.p1.1" title="4.1. Experimental Setup ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.1</span></a>.
+</span>
+</li>
+<li id="bib.bib27" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">K. Jia, Y. Liu, Y. Yang, and H. Wang (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">PrimHOI: compositional human-object interaction via reusable primitives</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. to appear</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib7" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">B. Jiang, X. Chen, W. Liu, J. Yu, G. Yu, and T. Chen (2023a)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Motiongpt: human motion as a foreign language</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Advances in Neural Information Processing Systems</span> <span class="ltx_text ltx_bib_volume">36</span>, <span class="ltx_text ltx_bib_pages"> pp. 20067–20079</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p3.1" title="1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S3.SS2.p1.5" title="3.2. Motion Tokenizer ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.2</span></a>,
+<a href="#S3.SS3.p6.12" title="3.3. Uni-HOI: Unified framework for Text-Human-Object Modeling ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.3</span></a>.
+</span>
+</li>
+<li id="bib.bib38" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">N. Jiang, T. Liu, Z. Cao, J. Cui, Z. Zhang, Y. Chen, H. Wang, Y. Zhu, and S. Huang (2023b)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Full-body articulated human-object interaction</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the IEEE/CVF International Conference on Computer Vision</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 9365–9376</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.SS1.p1.1" title="4.1. Experimental Setup ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.1</span></a>.
+</span>
+</li>
+<li id="bib.bib26" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">H. Jung, S. Lee, S. Kim, and S. J. Hwang (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Decoupled generative modeling for human-object interaction synthesis</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2512.19049</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib39" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">J. Kim, J. Kim, J. Na, and H. Joo (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Parahome: parameterizing everyday home activities towards 3d generative modeling of human-object interactions</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the Computer Vision and Pattern Recognition Conference</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 1816–1828</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.SS1.p1.1" title="4.1. Experimental Setup ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.1</span></a>.
+</span>
+</li>
+<li id="bib.bib9" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">T. Kudo and J. Richardson (2018)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">SentencePiece: a simple and language independent subword tokenizer and detokenizer for neural text processing</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 2018 conference on empirical methods in natural language processing: System demonstrations</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 66–71</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS3.p5.12" title="3.3. Uni-HOI: Unified framework for Text-Human-Object Modeling ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.3</span></a>,
+<a href="#S3.p1.1" title="3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib24" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">D. Lee, T. Kim, J. Park, and S. Lee (2026)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">HOICraft: in-situ vlm-based authoring tool for part-level hand-object interaction design in vr</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the ACM CHI Conference on Human Factors in Computing Systems</span>,
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">arXiv preprint arXiv:2602.08219</span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib52" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">J. Li, A. Clegg, R. Mottaghi, J. Wu, X. Puig, and C. K. Liu (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Controllable human-object interaction synthesis</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">European Conference on Computer Vision</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 54–72</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">J. Li, J. Wu, and C. K. Liu (2023)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Object motion guided human motion synthesis</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">ACM Transactions on Graphics (TOG)</span> <span class="ltx_text ltx_bib_volume">42</span> (<span class="ltx_text ltx_bib_number">6</span>), <span class="ltx_text ltx_bib_pages"> pp. 1–11</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S2.p2.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#S4.SS1.p1.1" title="4.1. Experimental Setup ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.1</span></a>,
+<a href="#S4.SS1.p2.8" title="4.1. Experimental Setup ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.1</span></a>,
+<a href="#S4.SS2.p1.1" title="4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.2</span></a>,
+<a href="#S4.SS2.p2.1" title="4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.2</span></a>,
+<a href="#S4.T2.4.5.1.2" title="In 4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">Table 2</span></a>.
+</span>
+</li>
+<li id="bib.bib50" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">S. Li, H. Zhang, X. Chen, Y. Wang, and Y. Ban (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">GenHOI: generalizing text-driven 4d human-object interaction synthesis for unseen objects</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2506.15483</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib43" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">I. Loshchilov and F. Hutter (2017)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Decoupled weight decay regularization</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:1711.05101</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.SS1.p3.10" title="4.1. Experimental Setup ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.1</span></a>.
+</span>
+</li>
+<li id="bib.bib11" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">L. Ouyang, J. Wu, X. Jiang, D. Almeida, C. Wainwright, P. Mishkin, C. Zhang, S. Agarwal, K. Slama, A. Ray, <span class="ltx_text ltx_bib_etal">et al.</span> (2022)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Training language models to follow instructions with human feedback</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Advances in neural information processing systems</span> <span class="ltx_text ltx_bib_volume">35</span>, <span class="ltx_text ltx_bib_pages"> pp. 27730–27744</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS3.p5.12" title="3.3. Uni-HOI: Unified framework for Text-Human-Object Modeling ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.3</span></a>,
+<a href="#S3.p1.1" title="3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">X. Peng, Y. Xie, Z. Wu, V. Jampani, D. Sun, and H. Jiang (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Hoi-diff: text-driven synthesis of 3d human-object interactions using diffusion models</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the Computer Vision and Pattern Recognition Conference</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 2878–2888</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S2.p1.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#S3.T1.1.6.6.1" title="In 3.3. Uni-HOI: Unified framework for Text-Human-Object Modeling ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">Table 1</span></a>,
+<a href="#S4.SS2.p1.1" title="4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.2</span></a>.
+</span>
+</li>
+<li id="bib.bib18" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">I. A. Petrov, R. Marin, J. Chibane, and G. Pons-Moll (2023)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Object pop-up: can we infer 3d objects and their poses from human interactions alone?</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 4726–4736</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.SS1.p2.8" title="4.1. Experimental Setup ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.1</span></a>,
+<a href="#S4.SS2.p3.1" title="4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.2</span></a>,
+<a href="#S4.T3.4.6.1.1" title="In 4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">Table 3</span></a>.
+</span>
+</li>
+<li id="bib.bib6" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">I. A. Petrov, R. Marin, J. Chibane, and G. Pons-Moll (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Tridi: trilateral diffusion of 3d humans, objects, and interactions</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the IEEE/CVF International Conference on Computer Vision</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 5523–5535</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S2.p3.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib32" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">A. Radford, K. Narasimhan, T. Salimans, I. Sutskever, <span class="ltx_text ltx_bib_etal">et al.</span> (2018)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Improving language understanding by generative pre-training</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">OpenAI preprint</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p1.1" title="3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib10" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">C. Raffel, N. Shazeer, A. Roberts, K. Lee, S. Narang, M. Matena, Y. Zhou, W. Li, and P. J. Liu (2020)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Exploring the limits of transfer learning with a unified text-to-text transformer</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Journal of machine learning research</span> <span class="ltx_text ltx_bib_volume">21</span> (<span class="ltx_text ltx_bib_number">140</span>), <span class="ltx_text ltx_bib_pages"> pp. 1–67</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p3.1" title="1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S3.SS3.p5.12" title="3.3. Uni-HOI: Unified framework for Text-Human-Object Modeling ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.3</span></a>,
+<a href="#S3.p1.1" title="3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib34" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">A. Razavi, A. Van den Oord, and O. Vinyals (2019)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Generating diverse high-fidelity images with vq-vae-2</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Advances in neural information processing systems</span> <span class="ltx_text ltx_bib_volume">32</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS2.p7.6" title="3.2. Motion Tokenizer ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.2</span></a>.
+</span>
+</li>
+<li id="bib.bib23" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">J. Romero, D. Tzionas, and M. J. Black (2022)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Embodied hands: modeling and capturing hands and bodies together</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2201.02610</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS1.p1.9" title="3.1. Preliminary on Human-Object Interaction ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.1</span></a>.
+</span>
+</li>
+<li id="bib.bib56" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Z. Shen, H. Pi, Y. Xia, Z. Cen, S. Peng, Z. Hu, H. Bao, R. Hu, and X. Zhou (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">World-grounded human motion recovery via gravity-view coordinates</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">SIGGRAPH Asia 2024 Conference Papers</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 1–11</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.p1.1" title="5. Applications ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib16" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">L. Siyao, W. Yu, T. Gu, C. Lin, Q. Wang, C. Qian, C. C. Loy, and Z. Liu (2022)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Bailando: 3d dance generation by actor-critic gpt with choreographic memory</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 11050–11059</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS2.p1.5" title="3.2. Motion Tokenizer ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.2</span></a>.
+</span>
+</li>
+<li id="bib.bib21" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">O. Taheri, N. Ghorbani, M. J. Black, and D. Tzionas (2020)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">GRAB: a dataset of whole-body human grasping of objects</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">European conference on computer vision</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 581–600</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.SS1.p1.1" title="4.1. Experimental Setup ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.1</span></a>,
+<a href="#S4.SS2.p3.1" title="4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.2</span></a>.
+</span>
+</li>
+<li id="bib.bib44" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">G. Tevet, S. Raab, B. Gordon, Y. Shafir, D. Cohen-Or, and A. H. Bermano (2022)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Human motion diffusion model</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2209.14916</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.T1.1.5.5.1" title="In 3.3. Uni-HOI: Unified framework for Text-Human-Object Modeling ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">Table 1</span></a>,
+<a href="#S4.SS2.p1.1" title="4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.2</span></a>.
+</span>
+</li>
+<li id="bib.bib31" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">H. Touvron, T. Lavril, G. Izacard, X. Martinet, M. Lachaux, T. Lacroix, B. Rozière, N. Goyal, E. Hambro, F. Azhar, <span class="ltx_text ltx_bib_etal">et al.</span> (2023)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Llama: open and efficient foundation language models</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2302.13971</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p1.1" title="3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib33" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">A. Van Den Oord, O. Vinyals, <span class="ltx_text ltx_bib_etal">et al.</span> (2017a)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Neural discrete representation learning</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Advances in neural information processing systems</span> <span class="ltx_text ltx_bib_volume">30</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS2.p1.5" title="3.2. Motion Tokenizer ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.2</span></a>.
+</span>
+</li>
+<li id="bib.bib13" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">A. Van Den Oord, O. Vinyals, <span class="ltx_text ltx_bib_etal">et al.</span> (2017b)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Neural discrete representation learning</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Advances in neural information processing systems</span> <span class="ltx_text ltx_bib_volume">30</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p3.1" title="1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S3.SS2.p1.5" title="3.2. Motion Tokenizer ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.2</span></a>,
+<a href="#S3.p1.1" title="3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib47" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Q. Wu, Y. Shi, X. Huang, J. Yu, L. Xu, and J. Wang (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Thor: text to human-object interaction diffusion via relation intervention</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2403.11208</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib51" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Z. Wu, J. Li, P. Xu, and C. K. Liu (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Human-object interaction from human-level instructions</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the IEEE/CVF International Conference on Computer Vision</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 11176–11186</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib19" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">S. Xu, D. Li, Y. Zhang, X. Xu, Q. Long, Z. Wang, Y. Lu, S. Dong, H. Jiang, A. Gupta, <span class="ltx_text ltx_bib_etal">et al.</span> (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Interact: advancing large-scale versatile 3d human-object interaction generation</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the Computer Vision and Pattern Recognition Conference</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 7048–7060</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.SS1.p1.1" title="4.1. Experimental Setup ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.1</span></a>.
+</span>
+</li>
+<li id="bib.bib29" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">S. Xu, Z. Li, Y. Wang, and L. Gui (2023)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Interdiff: generating 3d human-object interactions with physics-informed diffusion</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the IEEE/CVF International Conference on Computer Vision</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 14928–14940</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib49" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">S. Xu, Z. Wang, Y. Wang, and L. Gui (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Interdreamer: zero-shot text to 3d dynamic human-object interaction</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Advances in Neural Information Processing Systems</span> <span class="ltx_text ltx_bib_volume">37</span>, <span class="ltx_text ltx_bib_pages"> pp. 52858–52890</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib5" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">M. Xue, Y. Liu, L. Guo, S. Huang, and C. Ding (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Guiding human-object interactions with rich geometry and relations</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the Computer Vision and Pattern Recognition Conference</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 22714–22723</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S2.p1.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#S3.T1.1.7.7.1" title="In 3.3. Uni-HOI: Unified framework for Text-Human-Object Modeling ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">Table 1</span></a>,
+<a href="#S4.SS2.p1.1" title="4.2. Comparisons on HOI-relevant Tasks ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.2</span></a>.
+</span>
+</li>
+<li id="bib.bib17" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">A. Yang, A. Li, B. Yang, B. Zhang, B. Hui, B. Zheng, B. Yu, C. Gao, C. Huang, C. Lv, <span class="ltx_text ltx_bib_etal">et al.</span> (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Qwen3 technical report</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2505.09388</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS3.p7.7" title="3.3. Uni-HOI: Unified framework for Text-Human-Object Modeling ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.3</span></a>,
+<a href="#S3.p1.1" title="3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib54" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">J. Yang, X. Niu, N. Jiang, R. Zhang, and S. Huang (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">F-hoi: toward fine-grained semantic-aligned 3d human-object interactions</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">European Conference on Computer Vision</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 91–110</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p3.1" title="1. Introduction ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib15" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">J. Zhang, Y. Zhang, X. Cun, Y. Zhang, H. Zhao, H. Lu, X. Shen, and Y. Shan (2023a)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Generating human motion from textual descriptions with discrete representations</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the IEEE/CVF conference on computer vision and pattern recognition</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 14730–14740</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS2.p1.5" title="3.2. Motion Tokenizer ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.2</span></a>,
+<a href="#S3.SS2.p5.1" title="3.2. Motion Tokenizer ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.2</span></a>,
+<a href="#S3.SS2.p7.6" title="3.2. Motion Tokenizer ‣ 3. Method ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.2</span></a>.
+</span>
+</li>
+<li id="bib.bib42" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">J. Zhang, H. Luo, H. Yang, X. Xu, Q. Wu, Y. Shi, J. Yu, L. Xu, and J. Wang (2023b)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Neuraldome: a neural modeling pipeline on multi-view human-object interactions</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 8834–8845</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.SS1.p1.1" title="4.1. Experimental Setup ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.1</span></a>.
+</span>
+</li>
+<li id="bib.bib12" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">W. Zhang, R. Dabral, V. Golyanik, V. Choutas, E. Alvarado, T. Beeler, M. Habermann, and C. Theobalt (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Bimart: a unified approach for the synthesis of 3d bimanual interaction with articulated objects</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the Computer Vision and Pattern Recognition Conference</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 27694–27705</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p2.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib1" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Y. Zhang, H. Yang, C. Luo, J. Peng, Y. Wang, and Z. Zhang (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">OOD-hoi: text-driven 3d whole-body human-object interactions generation beyond training domains</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2411.18660</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2. Related Work ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib41" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">C. Zhao, J. Zhang, J. Du, Z. Shan, J. Wang, J. Yu, J. Wang, and L. Xu (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">I’m hoi: inertia-aware monocular capture of 3d human-object interactions</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 729–741</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.SS1.p1.1" title="4.1. Experimental Setup ‣ 4. Experiments ‣ Uni-HOI: A Unified framework for Learning the Joint distribution of Text and Human-Object Interaction" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.1</span></a>.
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+</div>
+<footer class="arxiv-html-footer">
+  <div class="ltx_page_logo">
+    Experimental support, please
+    <a href="./2604.27491v1/__stdout.txt" class="ltx_ref"
+    target="_blank" rel="nofollow">view the build logs</a>
+    for errors. Generated by
+    <a href="https://math.nist.gov/~BMiller/LaTeXML/" target="_blank" class="ltx_ref ltx_LaTeXML_logo">
+      <span style="letter-spacing: -0.2em; margin-right: 0.1em;">
+        L
+        <span style="font-size: 70%; position: relative; bottom: 2.2pt;">A</span>
+        T
+        <span style="position: relative; bottom: -0.4ex;">E</span>
+      </span>
+      <span class="ltx_font_smallcaps">xml</span>
+      <img alt="[LOGO]"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==">
+    </a>.
+  </div>
+  <div class="keyboard-glossary">
+    <h2>Instructions for reporting errors</h2>
+    <p>We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below:</p>
+    <ul>
+      <li>Click the "Report Issue" <span class="mobile-only">(<svg role="presentation"
+            style="display: inline-block; vertical-align: middle; fill: var(--text-color);" aria-hidden="true"
+            height="1em" viewBox="0 0 640 640">
+            <path
+              d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+          </svg>)</span> button, located in the page header.</li>
+    </ul>
+    <p><strong>Tip:</strong> You can select the relevant text first, to include it in your report.</p>
+    <p>Our team has already identified <a class="ltx_ref" href="https://github.com/arXiv/html_feedback/issues"
+        target="_blank">the following issues</a>. We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all.</p>
+    <p>Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a <a
+        class="ltx_ref" href="https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML"
+        target="_blank">list of packages that need conversion</a>, and welcome <a class="ltx_ref"
+        href="https://github.com/brucemiller/LaTeXML/issues" target="_blank">developer contributions</a>.</p>
+  </div>
+</footer>
+<div id="fixed-buttons-container">
+  <div id="beta-badge" aria-hidden="true">BETA</div>
+  <a id="disable-reading-mode-btn" class="header-button" href="javascript:toggleReadingMode();"
+    title="Disable reading mode, show header and footer">
+    <svg role="presentation" height="1.25rem"
+      viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </a>
+</div></body>
+</html>

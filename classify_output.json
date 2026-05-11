@@ -1,57 +1,458 @@
 [
-  {"arxiv_id":"2605.04050","scene":"代码Agent","form":"结构化","mem_type":"分层管理型"},
-  {"arxiv_id":"2605.05191","scene":"Web Agent","form":"混合/其他","mem_type":"分层管理型"},
-  {"arxiv_id":"2605.04897","scene":"通用/其他","form":"混合/其他","mem_type":"检索型"},
-  {"arxiv_id":"2605.04939","scene":"多智能体模拟","form":"参数化","mem_type":"参数/潜变量型"},
-  {"arxiv_id":"2604.07595","scene":"通用/其他","form":"结构化","mem_type":"结构化图谱型"},
-  {"arxiv_id":"2602.04129","scene":"多智能体模拟","form":"结构化","mem_type":"结构化图谱型"},
-  {"arxiv_id":"2604.23088","scene":"代码Agent","form":"文本","mem_type":"上下文/摘要型"},
-  {"arxiv_id":"2605.03941","scene":"通用/其他","form":"混合/其他","mem_type":"其他"},
-  {"arxiv_id":"2605.05373","scene":"具身Agent","form":"潜变量","mem_type":"参数/潜变量型"},
-  {"arxiv_id":"2605.06472","scene":"通用/其他","form":"向量","mem_type":"其他"},
-  {"arxiv_id":"2605.03482","scene":"通用/其他","form":"向量","mem_type":"检索型"},
-  {"arxiv_id":"2605.06132","scene":"通用/其他","form":"向量","mem_type":"检索型"},
-  {"arxiv_id":"2605.06416","scene":"通用/其他","form":"混合/其他","mem_type":"上下文/摘要型"},
-  {"arxiv_id":"2605.06527","scene":"个人助手","form":"结构化","mem_type":"反思经验型"},
-  {"arxiv_id":"2605.05583","scene":"通用/其他","form":"结构化","mem_type":"检索型"},
-  {"arxiv_id":"2605.05716","scene":"通用/其他","form":"混合/其他","mem_type":"其他"},
-  {"arxiv_id":"2605.06614","scene":"通用/其他","form":"结构化","mem_type":"反思经验型"},
-  {"arxiv_id":"2603.07880","scene":"多智能体模拟","form":"文本","mem_type":"上下文/摘要型"},
-  {"arxiv_id":"2605.06365","scene":"通用/其他","form":"结构化","mem_type":"结构化图谱型"},
-  {"arxiv_id":"2605.06601","scene":"代码Agent","form":"文本","mem_type":"其他"},
-  {"arxiv_id":"2605.06534","scene":"通用/其他","form":"其他","mem_type":"其他"},
-  {"arxiv_id":"2605.06346","scene":"通用/其他","form":"潜变量","mem_type":"参数/潜变量型"},
-  {"arxiv_id":"2605.06064","scene":"具身Agent","form":"参数化","mem_type":"参数/潜变量型"},
-  {"arxiv_id":"2605.05991","scene":"多智能体模拟","form":"文本","mem_type":"反思经验型"},
-  {"arxiv_id":"2605.05765","scene":"个人助手","form":"混合/其他","mem_type":"分层管理型"},
-  {"arxiv_id":"2605.05704","scene":"通用/其他","form":"结构化","mem_type":"分层管理型"},
-  {"arxiv_id":"2605.05499","scene":"个人助手","form":"结构化","mem_type":"分层管理型"},
-  {"arxiv_id":"2605.05475","scene":"通用/其他","form":"其他","mem_type":"其他"},
-  {"arxiv_id":"2605.04811","scene":"多智能体模拟","form":"混合/其他","mem_type":"分层管理型"},
-  {"arxiv_id":"2605.04264","scene":"多智能体模拟","form":"结构化","mem_type":"反思经验型"},
-  {"arxiv_id":"2605.04000","scene":"代码Agent","form":"参数化","mem_type":"参数/潜变量型"},
-  {"arxiv_id":"2605.03989","scene":"通用/其他","form":"混合/其他","mem_type":"检索型"},
-  {"arxiv_id":"2605.03882","scene":"个人助手","form":"混合/其他","mem_type":"上下文/摘要型"},
-  {"arxiv_id":"2605.03804","scene":"个人助手","form":"混合/其他","mem_type":"分层管理型"},
-  {"arxiv_id":"2605.03675","scene":"通用/其他","form":"混合/其他","mem_type":"分层管理型"},
-  {"arxiv_id":"2605.03354","scene":"通用/其他","form":"其他","mem_type":"其他"},
-  {"arxiv_id":"2605.03312","scene":"通用/其他","form":"混合/其他","mem_type":"分层管理型"},
-  {"arxiv_id":"2605.03288","scene":"具身Agent","form":"参数化","mem_type":"参数/潜变量型"},
-  {"arxiv_id":"2605.03228","scene":"通用/其他","form":"结构化","mem_type":"分层管理型"},
-  {"arxiv_id":"2605.03213","scene":"通用/其他","form":"其他","mem_type":"其他"},
-  {"arxiv_id":"2605.03208","scene":"通用/其他","form":"其他","mem_type":"其他"},
-  {"arxiv_id":"2605.02868","scene":"代码Agent","form":"结构化","mem_type":"结构化图谱型"},
-  {"arxiv_id":"2605.02812","scene":"多智能体模拟","form":"文本","mem_type":"其他"},
-  {"arxiv_id":"2605.02681","scene":"通用/其他","form":"结构化","mem_type":"其他"},
-  {"arxiv_id":"2605.02431","scene":"代码Agent","form":"结构化","mem_type":"结构化图谱型"},
-  {"arxiv_id":"2605.02411","scene":"通用/其他","form":"文本","mem_type":"检索型"},
-  {"arxiv_id":"2605.02396","scene":"通用/其他","form":"参数化","mem_type":"参数/潜变量型"},
-  {"arxiv_id":"2605.02199","scene":"通用/其他","form":"向量","mem_type":"其他"},
-  {"arxiv_id":"2605.02168","scene":"多智能体模拟","form":"混合/其他","mem_type":"分层管理型"},
-  {"arxiv_id":"2605.02162","scene":"通用/其他","form":"向量","mem_type":"检索型"},
-  {"arxiv_id":"2605.02130","scene":"具身Agent","form":"其他","mem_type":"其他"},
-  {"arxiv_id":"2605.01970","scene":"通用/其他","form":"文本","mem_type":"检索型"},
-  {"arxiv_id":"2605.01708","scene":"通用/其他","form":"向量","mem_type":"其他"},
-  {"arxiv_id":"2605.01694","scene":"通用/其他","form":"潜变量","mem_type":"参数/潜变量型"},
-  {"arxiv_id":"2605.01688","scene":"个人助手","form":"结构化","mem_type":"结构化图谱型"}
+  {
+    "arxiv_id": "2605.06505",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2605.06366",
+    "scene": "通用/其他",
+    "form": "潜变量",
+    "mem_type": "其他"
+  },
+  {
+    "arxiv_id": "2605.06067",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2605.06052",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2605.05693",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2605.05639",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2605.05482",
+    "scene": "通用/其他",
+    "form": "检索型",
+    "mem_type": "检索型"
+  },
+  {
+    "arxiv_id": "2605.04738",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2605.02404",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2605.02105",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2605.01546",
+    "scene": "通用/其他",
+    "form": "结构化",
+    "mem_type": "分层管理型"
+  },
+  {
+    "arxiv_id": "2605.00539",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2605.00519",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2605.00422",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2605.00421",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2605.00320",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2605.00257",
+    "scene": "通用/其他",
+    "form": "检索型",
+    "mem_type": "检索型"
+  },
+  {
+    "arxiv_id": "2604.27491",
+    "scene": "通用/其他",
+    "form": "向量",
+    "mem_type": "其他"
+  },
+  {
+    "arxiv_id": "2605.02933",
+    "scene": "通用/其他",
+    "form": "结构化",
+    "mem_type": "反思经验型"
+  },
+  {
+    "arxiv_id": "2604.27396",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.26378",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.25421",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.25183",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.24820",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.24273",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.24008",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.23801",
+    "scene": "通用/其他",
+    "form": "检索型",
+    "mem_type": "检索型"
+  },
+  {
+    "arxiv_id": "2604.21649",
+    "scene": "通用/其他",
+    "form": "结构化",
+    "mem_type": "结构化图谱型"
+  },
+  {
+    "arxiv_id": "2605.04084",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.21035",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "其他"
+  },
+  {
+    "arxiv_id": "2604.20913",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.20079",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.19884",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.19342",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "其他"
+  },
+  {
+    "arxiv_id": "2604.19167",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.18566",
+    "scene": "通用/其他",
+    "form": "结构化",
+    "mem_type": "其他"
+  },
+  {
+    "arxiv_id": "2604.18137",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.18655",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.17816",
+    "scene": "通用/其他",
+    "form": "向量",
+    "mem_type": "检索型"
+  },
+  {
+    "arxiv_id": "2604.17384",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "其他"
+  },
+  {
+    "arxiv_id": "2604.17172",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "其他"
+  },
+  {
+    "arxiv_id": "2604.17041",
+    "scene": "通用/其他",
+    "form": "向量",
+    "mem_type": "其他"
+  },
+  {
+    "arxiv_id": "2604.16940",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.15794",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.15589",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "其他"
+  },
+  {
+    "arxiv_id": "2604.14922",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "反思经验型"
+  },
+  {
+    "arxiv_id": "2604.13806",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.13440",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.12782",
+    "scene": "通用/其他",
+    "form": "参数化",
+    "mem_type": "参数/潜变量型"
+  },
+  {
+    "arxiv_id": "2604.11655",
+    "scene": "多智能体模拟",
+    "form": "文本",
+    "mem_type": "上下文/摘要型"
+  },
+  {
+    "arxiv_id": "2501.11739",
+    "scene": "个人助手",
+    "form": "文本",
+    "mem_type": "反思经验型"
+  },
+  {
+    "arxiv_id": "2501.14119",
+    "scene": "通用/其他",
+    "form": "结构化",
+    "mem_type": "分层管理型"
+  },
+  {
+    "arxiv_id": "2502.16090",
+    "scene": "个人助手",
+    "form": "文本",
+    "mem_type": "反思经验型"
+  },
+  {
+    "arxiv_id": "2503.21760",
+    "scene": "个人助手",
+    "form": "结构化",
+    "mem_type": "检索型"
+  },
+  {
+    "arxiv_id": "2505.23422",
+    "scene": "代码Agent",
+    "form": "结构化",
+    "mem_type": "反思经验型"
+  },
+  {
+    "arxiv_id": "2506.04565",
+    "scene": "通用/其他",
+    "form": "混合/其他",
+    "mem_type": "分层管理型"
+  },
+  {
+    "arxiv_id": "2508.15294",
+    "scene": "个人助手",
+    "form": "结构化",
+    "mem_type": "分层管理型"
+  },
+  {
+    "arxiv_id": "2511.02805",
+    "scene": "通用/其他",
+    "form": "文本",
+    "mem_type": "检索型"
+  },
+  {
+    "arxiv_id": "2604.23938",
+    "scene": "通用/其他",
+    "form": "结构化",
+    "mem_type": "其他"
+  },
+  {
+    "arxiv_id": "2604.24372",
+    "scene": "通用/其他",
+    "form": "结构化",
+    "mem_type": "反思经验型"
+  },
+  {
+    "arxiv_id": "2605.06702",
+    "scene": "个人助手",
+    "form": "结构化",
+    "mem_type": "反思经验型"
+  },
+  {
+    "arxiv_id": "2605.06716",
+    "scene": "通用/其他",
+    "form": "混合/其他",
+    "mem_type": "分层管理型"
+  },
+  {
+    "arxiv_id": "2605.06731",
+    "scene": "个人助手",
+    "form": "文本",
+    "mem_type": "反思经验型"
+  },
+  {
+    "arxiv_id": "2605.06812",
+    "scene": "通用/其他",
+    "form": "结构化图谱型",
+    "mem_type": "结构化图谱型"
+  },
+  {
+    "arxiv_id": "2605.06924",
+    "scene": "通用/其他",
+    "form": "潜变量",
+    "mem_type": "其他"
+  },
+  {
+    "arxiv_id": "2605.07042",
+    "scene": "通用/其他",
+    "form": "结构化",
+    "mem_type": "检索型"
+  },
+  {
+    "arxiv_id": "2605.07103",
+    "scene": "通用/其他",
+    "form": "混合/其他",
+    "mem_type": "其他"
+  },
+  {
+    "arxiv_id": "2605.07110",
+    "scene": "Web Agent",
+    "form": "结构化",
+    "mem_type": "分层管理型"
+  },
+  {
+    "arxiv_id": "2605.07129",
+    "scene": "个人助手",
+    "form": "向量",
+    "mem_type": "检索型"
+  },
+  {
+    "arxiv_id": "2605.07180",
+    "scene": "通用/其他",
+    "form": "结构化",
+    "mem_type": "分层管理型"
+  },
+  {
+    "arxiv_id": "2605.07214",
+    "scene": "通用/其他",
+    "form": "结构化",
+    "mem_type": "反思经验型"
+  },
+  {
+    "arxiv_id": "2605.07242",
+    "scene": "通用/其他",
+    "form": "结构化",
+    "mem_type": "分层管理型"
+  },
+  {
+    "arxiv_id": "2605.07313",
+    "scene": "通用/其他",
+    "form": "结构化",
+    "mem_type": "检索型"
+  },
+  {
+    "arxiv_id": "2605.07692",
+    "scene": "多智能体模拟",
+    "form": "结构化",
+    "mem_type": "检索型"
+  },
+  {
+    "arxiv_id": "2605.07863",
+    "scene": "多智能体模拟",
+    "form": "参数化",
+    "mem_type": "其他"
+  },
+  {
+    "arxiv_id": "2605.08060",
+    "scene": "多智能体模拟",
+    "form": "文本",
+    "mem_type": "反思经验型"
+  }
 ]

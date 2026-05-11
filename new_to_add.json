@@ -1,0 +1,288 @@
+{
+  "2605.06702": {
+    "arxiv_id": "2605.06702",
+    "title": "CASCADE: Case-Based Continual Adaptation for Large Language Models During Deployment",
+    "abstract": "Large language models (LLMs) have become a central foundation of modern artificial intelligence, yet their lifecycle remains constrained by a rigid separation between training and deployment, after which learning effectively ceases. This limitation contrasts with natural intelligence, which continually adapts through interaction with its environment. In this paper, we formalise deployment-time learning (DTL) as the third stage in the LLM lifecycle that enables LLM agents to improve from experience during deployment without modifying model parameters. We present CASCADE (CASe-based Continual Adaptation during DEployment), a general and principled framework that equips LLM agents with an explicit, evolving episodic memory. CASCADE formulates experience reuse as a contextual bandit problem, enabling principled exploration-exploitation trade-offs and establishing no-regret guarantees over long-term interactions. This design allows agents to accumulate, select, and refine task-relevant cases, transforming past experience into actionable knowledge. Across 16 diverse tasks spanning medical diagnosis, legal analysis, code generation, web search, tool use, and embodied interaction, CASCADE improves macro-averaged success rate by 20.9% over zero-shot prompting while consistently outperforming gradient-based and memory-based baselines. By reframing deployment as an adaptive learning process, this work establishes a foundation for continually improving AI systems.",
+    "categories": [
+      "cs.AI",
+      "cs.CL",
+      "cs.LG"
+    ],
+    "authors_raw": "Siyuan Guo, Yali Du, Hechang Chen, Yi Chang, Jun Wang",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.06702",
+    "abs_url": "https://arxiv.org/abs/2605.06702"
+  },
+  "2605.06716": {
+    "arxiv_id": "2605.06716",
+    "title": "From Storage to Experience: A Survey on the Evolution of LLM Agent Memory Mechanisms",
+    "abstract": "Large Language Model (LLM)-based agents have fundamentally reshaped artificial intelligence by integrating external tools and planning capabilities. While memory mechanisms have emerged as the architectural cornerstone of these systems, current research remains fragmented, oscillating between operating system engineering and cognitive science. This theoretical divide prevents a unified view of technological synthesis and a coherent evolutionary perspective. To bridge this gap, this survey proposes a novel evolutionary framework for LLM agent memory mechanisms, formalizing the development process into three stages: Storage (trajectory preservation), Reflection (trajectory refinement), and Experience (trajectory abstraction). We first formally define these three stages before analyzing the three core drivers of this evolution: the necessity for long-range consistency, the challenges in dynamic environments, and the ultimate goal of continual learning. Furthermore, we specifically explore two transformative mechanisms in the frontier Experience stage: proactive exploration and cross-trajectory abstraction. By synthesizing these disparate views, this work offers robust design principles and a clear roadmap for the development of next-generation LLM agents.",
+    "categories": [
+      "cs.AI",
+      "cs.CL"
+    ],
+    "authors_raw": "Jinghao Luo, Yuchen Tian, Chuxue Cao, Ziyang Luo, Hongzhan Lin, Kaixin Li, Chuyi Kong, Ruichao Yang, Jing Ma",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.06716",
+    "abs_url": "https://arxiv.org/abs/2605.06716"
+  },
+  "2605.06812": {
+    "arxiv_id": "2605.06812",
+    "title": "Towards Security-Auditable LLM Agents: A Unified Graph Representation",
+    "abstract": "LLM-based agentic systems are rapidly evolving to perform complex autonomous tasks through dynamic tool invocation, stateful memory management, and multi-agent collaboration. However, this semantics-driven execution paradigm creates a severe semantic gap between low-level physical events and high-level execution intent, making post-hoc security auditing fundamentally difficult. Existing representation mechanisms, including static SBOMs and runtime logs, provide only fragmented evidence and fail to capture cognitive-state evolution, capability bindings, persistent memory contamination, and cascading risk propagation across interacting agents. To bridge this gap, we propose Agent-BOM, a unified structural representation for agent security auditing. Agent-BOM models an agentic system as a hierarchical attributed directed graph that separates static capability bases, such as models, tools, and long-term memory, from dynamic runtime semantic states, such as goals, reasoning trajectories, and actions. These layers are connected through semantic edges and security attributes, transforming fragmented execution traces into queryable audit paths. Building on Agent-BOM, we develop a graph-query-based paradigm for path-level risk assessment and instantiate it with the OWASP Agentic Top 10. We further implement an auditing plugin in the OpenClaw environment to construct Agent-BOM from live executions. Evaluation on representative real-world agentic attack scenarios shows that Agent-BOM can reconstruct stealthy attack chains, including cross-session memory poisoning and tool misuse, capability supply-chain hijacking and unexpected code execution, multi-agent ecosystem hijacking, and privilege and trust abuse. These results demonstrate that Agent-BOM provides a unified and auditable foundation for root-cause analysis and security adjudication in complex agentic ecosystems.",
+    "categories": [
+      "cs.AI"
+    ],
+    "authors_raw": "Chaofan Li, Lyuye Zhang, Jintao Zhai, Siyue Feng, Xichun Yang, Huahao Wang, Shihan Dou, Yu Ji, Yutao Hu, Yueming Wu, Yang Liu, Deqing Zou",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.06812",
+    "abs_url": "https://arxiv.org/abs/2605.06812"
+  },
+  "2605.07042": {
+    "arxiv_id": "2605.07042",
+    "title": "The Context Gathering Decision Process: A POMDP Framework for Agentic Search",
+    "abstract": "Large Language Model (LLM) agents are deployed in complex environments -- such as massive codebases, enterprise databases, and conversational histories -- where the relevant state far exceeds their context windows. To navigate these spaces, an agent must iteratively explore the environment to find relevant information. However, without explicit infrastructure, an agent's working memory can degrade into lossy representations of the search state, resulting in redundant work (e.g. repetitive looping) and premature stopping. In this work, we formalize this challenge as the Context Gathering Decision Process (CGDP), a specialized Partially Observable Markov Decision Process, where an agent's objective is to adaptively refine its belief state to isolate the necessary information for a task. We model an LLM's behavior as approximate Thompson Sampling within this CGDP, and introduce a predicate-based method that decomposes an LLM's implicit search into explicit and modular operations. We then derive two plug-and-play interventions for iterative LLM agents: a persistent, predicate-based belief state that bounds context while preserving multi-hop reasoning, and a programmatic exhaustion gate that halts unproductive search without premature stopping. Across four methods and three question-answering domains, we empirically validate that replacing an LLM's implicit state with our CGDP-motivated belief state improves multi-hop reasoning by up to $11.4\\%$; while the modular programmatic exhaustion detection saves up to $39\\%$ of tokens without any degradation in agent performance. Ultimately, we argue that framing the LLM agent loop as a CGDP can guide the design of modular, non-interfering improvements to agentic search harnesses.",
+    "categories": [
+      "cs.AI",
+      "cs.LG"
+    ],
+    "authors_raw": "Chinmaya Kausik, Adith Swaminathan, Nathan Kallus",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.07042",
+    "abs_url": "https://arxiv.org/abs/2605.07042"
+  },
+  "2605.07103": {
+    "arxiv_id": "2605.07103",
+    "title": "ARMOR: An Agentic Framework for Reaction Feasibility Prediction via Adaptive Utility-aware Multi-tool Reasoning",
+    "abstract": "Reaction feasibility prediction, as a fundamental problem in computational chemistry, has benefited from diverse tools enabled by recent advances in artificial intelligence, particularly large language models. However, the performance of individual tools varies substantially across reactions, making it difficult for any single tool to consistently perform well across all cases. This raises a critical challenge: how to effectively leverage multiple tools to obtain more accurate feasibility predictions. To address this, we propose ARMOR, an agentic framework that explicitly models tool-specific utilities, adaptively prioritizes tools, and further resolves the potential tool conflicts to produce the final prediction for each reaction. Unlike existing approaches that rely on simple aggregation or heuristic assignment over various tools, ARMOR organizes tools into a hierarchy that prioritizes top-performing tools and defers others when needed, characterizes their strengths through tool-specific patterns, and resolves conflicts via memoryaugmented reasoning. Extensive experiments on a public dataset demonstrate that ARMOR consistently outperforms strong baselines, including single-tool methods as well as various tool aggregation and tool selection approaches. Further analysis shows that the improvements are particularly significant on reactions with conflicting tool predictions, highlighting the effectiveness of ARMOR in leveraging the complementary strengths of multiple tools. The code is available via https://anonymous.4open.science/r/ARMOR-E13F.",
+    "categories": [
+      "cs.AI",
+      "cs.MA"
+    ],
+    "authors_raw": "Ye Liu, Botao Yu, Xinyi Ling, Daniel Adu-Ampratwum, Xia Ning",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.07103",
+    "abs_url": "https://arxiv.org/abs/2605.07103"
+  },
+  "2605.07214": {
+    "arxiv_id": "2605.07214",
+    "title": "HMACE: Heterogeneous Multi-Agent Collaborative Evolution for Combinatorial Optimization",
+    "abstract": "Large Language Models have recently emerged as a promising paradigm for automated heuristic design for NP-hard combinatorial optimization problems. Despite this progress, existing LLM-based methods typically rely on monolithic workflows constrained by rigid templates, thereby restricting memory-guided exploration and triggering premature convergence to local optima. To design an autonomous and collaborative architecture, we introduce HMACE, a Heterogeneous Multi-Agent Collaborative Evolution framework that reconceptualizes heuristic search as an organizational design problem. HMACE decomposes each evolutionary generation into an autonomous, role-specialized loop with four coordinated agents: a Proposer for strategy exploration, a Generator for executable heuristic synthesis, an Evaluator for empirical assessment, and a Reflector for archive-backed memory update. By coupling behavior-aware retrieval, lightweight candidate filtering, and fitness-grounded archive updates, HMACE guides the search toward diverse and promising heuristic behaviors while avoiding redundant evaluations. Extensive evaluations on representative COPs, including TSP, Online BPP, MKP, and PFSP, show that HMACE achieves a favorable quality-efficiency trade-off compared to state-of-the-art single-agent and multi-agent baselines. In the matched LLM-driven reference comparison, HMACE achieves the lowest average gaps on TSP and Online BPP (0.464\\% and 0.223\\%, respectively), while requiring only 0.13M and 0.42M tokens for the two tasks, substantially fewer than the compared baselines.",
+    "categories": [
+      "cs.AI"
+    ],
+    "authors_raw": "Yuping Yan, Jirui Han, Fei Ming, Yuanshuai Li, Yaochu Jin",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.07214",
+    "abs_url": "https://arxiv.org/abs/2605.07214"
+  },
+  "2605.07242": {
+    "arxiv_id": "2605.07242",
+    "title": "MEMOREPAIR: Barrier-First Cascade Repair in Agentic Memory",
+    "abstract": "Agentic memory evolves across tasks into durable derived artifacts: summaries, cached outputs, embeddings, learned skills, and executable tool procedures. When a source artifact is deleted, corrected, or invalidated by tool or API migration, descendants derived from that source can remain visible and steer future actions with stale support. We formalize this failure mode as the cascade update problem, where repair targets the visible derived state of the memory store. We present MemoRepair, a barrier-first cascade-repair contract for agentic memory. A repair event induces a controlled transition from invalidated descendant state to validated successor state: affected descendants are withdrawn before repair, successors are constructed from retained support and staged repaired predecessors under the current interface, and republication is restricted to validated predecessor-closed successors. This contract induces a scalarized repair-selection problem for a fixed repair-cost tradeoff. We show that the induced publication problem reduces to maximum-weight predecessor closure and can be solved exactly by a single s-t min-cut. Experiments on ToolBench and MemoryArena show that, with complete influence provenance, MemoRepair reduces invalidated-memory exposure from 69.8-94.3% under systems without cascade repair to 0%. Compared with exhaustive Repair all, it recovers 91.1-94.3% of validated successors while reducing normalized repair-operator cost from 1.00 to 0.57-0.76.",
+    "categories": [
+      "cs.AI",
+      "cs.CL"
+    ],
+    "authors_raw": "Yang Zhao, Chengxiao Dai, Mengying Kou, Yue Xiu",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.07242",
+    "abs_url": "https://arxiv.org/abs/2605.07242"
+  },
+  "2605.07313": {
+    "arxiv_id": "2605.07313",
+    "title": "When Stored Evidence Stops Being Usable: Scale-Conditioned Evaluation of Agent Memory",
+    "abstract": "Memory-agent evaluations report fixed-snapshot accuracy or retrieval quality, but these scores do not show whether evidence remains usable as irrelevant sessions (sessions not annotated as task-relevant evidence for the query) accumulate. We present a scale-conditioned evaluation protocol for agent memory under evidence-preserving growth: for each query, task evidence is held fixed while irrelevant sessions are added. The protocol logs agent--memory trajectories and reports four diagnostics: budget-compliant reliability, tail memory-call burden, failure-regime decomposition, and the usable-scale boundary where reliability falls below the target. Applied to LongMemEval and LoCoMo across flat, planar, and hierarchical memory interfaces, the protocol shows reliability loss is not a single phenomenon. On LongMemEval, HippoRAG stays within the two-call budget but loses 16--20 percentage points in budget-compliant reliability as irrelevant sessions are added; LiCoMemory's observed failures depend strongly on the agent, with Qwen3-8B exceeding the budget while Qwen3-32B and Qwen3-235B remain reliable in the tested range. The result supports a framework for making scalable-memory claims conditional on agent, interface, scale range, and interaction budget.",
+    "categories": [
+      "cs.AI"
+    ],
+    "authors_raw": "Jiaqi Shao, Yiyi Lu, Yunzhen Zhang, Bing Luo",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.07313",
+    "abs_url": "https://arxiv.org/abs/2605.07313"
+  },
+  "2605.07692": {
+    "arxiv_id": "2605.07692",
+    "title": "GASim: A Graph-Accelerated Hybrid Framework for Social Simulation",
+    "abstract": "Large-scale social simulators are essential for studying complex social patterns. Prior work explores hybrid methods to scale up simulations, combining large language models (LLM)-based agents with numerical agent-based models (ABM). However, this incurs high latency due to expensive memory retrieval and sequential ABM execution. To address this challenge, we propose GASim, a graph-accelerated hybrid multi-agent framework for large-scale social simulations. For core agents driven by LLM, GASim introduces Graph-Optimized Memory (GOM) to replace intensive LLM-based retrieval pipelines with lightweight propagation over a sparse memory graph. For the majority of ordinary agents, GASim employs Graph Message Passing (GMP), substituting sequential ABM execution with parallel updates by fine-grained feature aggregation and Graph Attention Network. We further introduce Entropy-Driven Grouping (EDG) that coordinates this hybrid partitioning, leveraging information entropy to dynamically identify emergent core agents situated in information-diverse neighborhoods. Extensive experiments show that GASim not only delivers a substantial 9.94-fold end-to-end speedup over the traditional hybrid framework but also consumes less than 20% of baseline tokens, significantly reducing costs while preserving strong alignment with real-world public opinion trends. Our code is available at https://github.com/Jasmine0201/GASim.",
+    "categories": [
+      "cs.AI"
+    ],
+    "authors_raw": "Xuan Zhou, Yanhui Sun, Hantao Yao, Allen He, Yongdong Zhang, Wu Liu",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.07692",
+    "abs_url": "https://arxiv.org/abs/2605.07692"
+  },
+  "2605.06924": {
+    "arxiv_id": "2605.06924",
+    "title": "A$^2$RD: Agentic Autoregressive Diffusion for Long Video Consistency",
+    "abstract": "Synthesizing consistent and coherent long video remains a fundamental challenge. Existing methods suffer from semantic drift and narrative collapse over long horizons. We present A$^2$RD, an Agentic Auto-Regressive Diffusion architecture that decouples creative synthesis from consistency enforcement. A$^2$RD formulates long video synthesis as a closed-loop process that synthesizes and self-improves video segment-by-segment through a Retrieve--Synthesize--Refine--Update cycle. It comprises three core components: (i) Multimodal Video Memory that tracks video progression across modalities; (ii) Adaptive Segment Generation that switches among generation modes for natural progression and visual consistency; and (iii) Hierarchical Test-Time Self-Improvement that self-improves each segment at frame and video levels to prevent error propagation. We further introduce LVBench-C, a challenging benchmark with non-linear entity and environment transitions to stress-test long-horizon consistency. Across public and LVBench-C benchmarks spanning one- to ten-minute videos, A$^2$RD outperforms state-of-the-art baselines by up to 30% in consistency and 20% in narrative coherence. Human evaluations corroborate these gains while also highlighting notable improvements in motion and transition smoothness.",
+    "categories": [
+      "cs.CV",
+      "cs.AI"
+    ],
+    "authors_raw": "Do Xuan Long, Yale Song, Min-Yen Kan, Tomas Pfister, Long T. Le",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.06924",
+    "abs_url": "https://arxiv.org/abs/2605.06924"
+  },
+  "2605.07129": {
+    "arxiv_id": "2605.07129",
+    "title": "RRCM: Ranking-Driven Retrieval over Collaborative and Meta Memories for LLM Recommendation",
+    "abstract": "Large Language Models (LLMs) have emerged as a promising paradigm for next-generation recommender systems, offering strong semantic understanding and natural-language reasoning abilities. Despite recent progress, current LLM-based recommenders still face key challenges in constructing decision-relevant contexts from heterogeneous evidence. First, existing methods often rely on fixed context construction strategies: collaborative behavioral evidence and item-side metadata are typically incorporated through predefined prompts, static retrieval pipelines, or handcrafted injection mechanisms, making it difficult to determine what information is truly beneficial for each instance. Second, heterogeneous evidence introduces a severe context-efficiency bottleneck. Rich metadata and collaborative interaction records can quickly overwhelm the context window, while aggressive compression or heuristic filtering may discard fine-grained evidence critical for accurate recommendation. To address these challenges, we propose RRCM, a ranking-driven retrieval-and-reasoning framework over collaborative and metadata memories for LLM-based agentic recommendation. RRCM starts from a lightweight user-history context and learns whether to recommend directly, retrieve collaborative evidence, retrieve item metadata, or interleave both through reasoning. Both memories are represented in natural language and accessed through a unified retrieval interface, enabling flexible evidence acquisition without handcrafted CF injection or fixed retrieval rules. We optimize this memory-reading policy with an outcome-only ranking reward, instantiated using group relative policy optimization, so that retrieval decisions are directly driven by final top-k recommendation quality. Extensive experiments show that RRCM significantly outperforms traditional baselines and diverse LLM-based recommendation approaches.",
+    "categories": [
+      "cs.IR",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "authors_raw": "Shijun Li, Wooseong Yang, Yu Wang, Tianxin Wei, Joydeep Ghosh",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.07129",
+    "abs_url": "https://arxiv.org/abs/2605.07129"
+  },
+  "2605.08060": {
+    "arxiv_id": "2605.08060",
+    "title": "The Memory Curse: How Expanded Recall Erodes Cooperative Intent in LLM Agents",
+    "abstract": "Context window expansion is often treated as a straightforward capability upgrade for LLMs, but we find it systematically fails in multi-agent social dilemmas. Across 7 LLMs and 4 games over 500 rounds, expanding accessible history degrades cooperation in 18 of 28 model--game settings, a pattern we term the memory curse. We isolate the underlying mechanism through three analyses. First, lexical analysis of 378,000 reasoning traces associates this breakdown with eroding forward-looking intent rather than rising paranoia. We validate this using targeted fine-tuning as a cognitive probe: a LoRA adapter trained exclusively on forward-looking traces mitigates the decay and transfers zero-shot to distinct games. Second, memory sanitization holds prompt length fixed while replacing visible history with synthetic cooperative records, which restores cooperation substantially, proving the trigger is memory content, not length alone. Finally, ablating explicit Chain-of-Thought reasoning often reduces the collapse, showing that deliberation paradoxically amplifies the memory curse. Together, these results recast memory as an active determinant of multi-agent behavior: longer recall can either destabilize or support cooperation depending on the reasoning patterns it elicits.",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.GT",
+      "cs.MA"
+    ],
+    "authors_raw": "Jiayuan Liu, Tianqin Li, Shiyi Du, Xin Luo, Haoxuan Zeng, Emanuel Tewolde, Tai Sing Lee, Tonghan Wang, Carl Kingsford, Vincent Conitzer",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.08060",
+    "abs_url": "https://arxiv.org/abs/2605.08060"
+  },
+  "2508.15294": {
+    "arxiv_id": "2508.15294",
+    "title": "A Multi-Memory Segment System for Generating High-Quality Long-Term Memory Content in Agents",
+    "abstract": "In the current field of agent memory, extensive explorations have been conducted in the area of memory retrieval, yet few studies have focused on exploring the memory content. Most research simply stores summarized versions of historical dialogues, as exemplified by methods like A-MEM and MemoryBank. However, when humans form long-term memories, the process involves multi-dimensional and multi-component generation, rather than merely creating simple summaries. The low-quality memory content generated by existing methods can adversely affect recall performance and response quality. In order to better construct high-quality long-term memory content, we have designed a multi-memory segment system (MMS) inspired by cognitive psychology theory. The system processes short-term memory into multiple long-term memory segments, and constructs retrieval memory units and contextual memory units based on these segments, with a one-to-one correspondence between the two. During the retrieval phase, MMS will match the most relevant retrieval memory units based on the user's query. Then, the corresponding contextual memory units is obtained as the context for the response stage to enhance knowledge, thereby effectively utilizing historical data. We conducted experiments on the LoCoMo dataset and further performed ablation experiments, experiments on the robustness regarding the number of input memories, and overhead experiments, which demonstrated the effectiveness and practical value of our method.",
+    "categories": [
+      "cs.AI",
+      "cs.CL",
+      "cs.MA"
+    ],
+    "authors_raw": "Gaoke Zhang, Bo Wang, Yunlong Ma, Dongming Zhao, Zifei Yu",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2508.15294",
+    "abs_url": "https://arxiv.org/abs/2508.15294"
+  },
+  "2605.05583": {
+    "arxiv_id": "2605.05583",
+    "title": "Belief Memory: Agent Memory Under Partial Observability",
+    "abstract": "LLM agents that operate over long context depend on external memory to accumulate knowledge over time. However, existing methods typically store each observation as a single deterministic conclusion (e.g., inferring \"API~X failed\" from temporary errors), even though such observations are inherently partial and potentially ambiguous. By committing to one conclusion and discarding uncertainty, these methods introduce self-reinforcing error: the agent acts on the stored conclusion, never revisits alternatives, and reinforces the conclusion over time. To address this issue, we propose BeliefMem, which shifts the memory paradigm from committing to a single conclusion per observation to retaining multiple candidate conclusions with their probabilities. Concretely, BeliefMem stores the candidate conclusions as separate memory entries, each carrying a probability that is updated via Noisy-OR rules as new observations arrive. At retrieval, all candidates surface together with their probabilities, keeping alternatives visible to the agent. Since each conclusion in memory retains its probability, BeliefMem preserves the uncertainty that the deterministic paradigm discards, enabling the agent to act with high confidence on well-evidenced knowledge while retaining the capacity to update its confidence when new evidence arrives. Empirical evaluations on LoCoMo and ALFWorld benchmarks show that, even with limited data, BeliefMem achieves the best average performance, remarkably outperforming well-known baselines. More broadly, such probabilistic memory produces substantial gains and explores a new direction for agent memory in partially observable environments.",
+    "categories": [
+      "cs.AI",
+      "cs.CL"
+    ],
+    "authors_raw": "Junfeng Liao, Qizhou Wang, Jianing Zhu, Bo Du, Rui Yan, Xiuying Chen",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.05583",
+    "abs_url": "https://arxiv.org/abs/2605.05583"
+  },
+  "2511.02805": {
+    "arxiv_id": "2511.02805",
+    "title": "MemSearcher: Training LLMs to Reason, Search and Manage Memory via End-to-End Reinforcement Learning",
+    "abstract": "LLM-based search agents often concatenate the full interaction history into the context, producing long and noisy inputs, and increasing compute cost and GPU memory overhead. To address this issue, we propose MemSearcher, an agent framework that maintains a compact memory during multi-turn interactions, retaining only question-relevant information and thereby keeping the context length stable across turns. Training MemSearcher is challenging because each trajectory spans multiple turns under different LLM contexts, making each turn an independent optimization target in reinforcement learning. We introduce multi-context GRPO, which propagates trajectory-level advantages to all turns for end-to-end optimization. Experiments demonstrate that MemSearcher outperforms strong history-concatenation (ReAct-style) baselines on a range of public datasets while maintaining nearly constant token counts across multi-turn interactions. The code and models will be publicly available at https://github.com/icip-cas/MemSearcher",
+    "categories": [
+      "cs.CL",
+      "cs.AI"
+    ],
+    "authors_raw": "Qianhao Yuan, Jie Lou, Zichao Li, Jiawei Chen, Yaojie Lu, Hongyu Lin, Le Sun, Debing Zhang, Xianpei Han",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2511.02805",
+    "abs_url": "https://arxiv.org/abs/2511.02805"
+  },
+  "2604.24372": {
+    "arxiv_id": "2604.24372",
+    "title": "SeaEvo: Advancing Algorithm Discovery with Strategy Space Evolution",
+    "abstract": "Large Language Model (LLM)-guided evolutionary search is increasingly used for automated algorithm discovery, yet most current methods track search progress primarily through executable programs and scalar fitness. Even when natural-language reasoning is used through heuristic descriptions or reflection, it typically remains transient mutation context or unstructured memory, rather than organized as persistent population-level state over strategic directions. As a result, evolutionary search can struggle to distinguish syntactically different implementations of the same idea, preserve lower-fitness but strategically promising directions, or detect when an entire family of strategies has saturated.\n  We introduce \\model, a modular strategy-space layer that turns language-level strategic reasoning into first-class population-level evolutionary state in LLM-driven program search. \\model represents each candidate program with an explicit natural-language strategy, clusters the archive by strategy semantics, retrieves behaviorally complementary inspirations, and periodically navigates the strategy landscape to avoid saturated directions. Without modifying the underlying evolutionary algorithms, \\model improves existing evolutionary backbones across algorithm discovery, systems optimization, and agent-scaffold design tasks in most settings. Across four systems benchmarks, \\model achieves a 20.6% average relative improvement, with the best single run on Prism scoring 3$\\times$ higher. These results suggest that persistent strategy representations provide a practical mechanism for improving the effectiveness and cost-efficiency of LLM-guided evolutionary search, pointing toward compound AI systems whose search capabilities benefit from the structured accumulation and reuse of algorithmic strategies.",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.NE"
+    ],
+    "authors_raw": "Sichun Luo, Yi Huang, Haochen Luo, Fengyuan Liu, Guanzhi Deng, Lei Li, Qinghua Yao, Zefa Hu, Junlan Feng, Qi Liu",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2604.24372",
+    "abs_url": "https://arxiv.org/abs/2604.24372"
+  },
+  "2605.07110": {
+    "arxiv_id": "2605.07110",
+    "title": "Securing Computer-Use Agents: A Unified Architecture-Lifecycle Framework for Deployment-Grounded Reliability",
+    "abstract": "Computer-use agents(CUAs)are moving frombounded benchmarks toward real software environments, wherethey operate browsers, desktops, mobile applications, flesystems,terminals, and tool backends. In such settings, reliability isno longer captured by task success alone: perception errors,planning drift, memory use, tool mediation, permission scope,and runtime oversight jointly determine whether agent actionsremain aligned with user intent, Existing surveys organize theCUA landscape by methods, platforms, benchmarks, or securitythreats, but less explicitly connect capability formation, author-ity exposure, failure manifestation, and control placement. Toaddress this gap, the article develops an architecture-lifecycleframework for deployment-grounded reliability in CUAs. Thearchitectural view analyzes Perception, Decision, and Executionas coupled layers that transform software observations intoauthority-bearing actions, The lifecycle view examines Creation.Deployment, Operation, and Maintenance as stages in which priorsare learned, tools and permissions are bound, runtime trajecto.ries are stressed, and assurance must be preserved under drift.Using this lens, the analysis synthesizes representative systems,benchmarks, and security/privacy studies; distinguishes wherefailures become visible from where their enabling conditions areintroduced, and maps recurring intervention surfaces for controloversight, and assurance. OpenClaw is used only as a public moti.vating example of an open deployment pattern, not as a verifedinternal case study. The conclusion highlights open challengesin controllable grounding, long-horizon constraint preservation,safe authority binding, mixed-trust runtime defense, privacy-preserving memory,and continual assurance.",
+    "categories": [
+      "cs.CL",
+      "cs.SE"
+    ],
+    "authors_raw": "Zejian Chen, Zhanyuan Liu, Chaozhuo Li, Mengxiang Han, Songyang Liu, Litian Zhang, Feng Gao, Yiming Hei, Xi Zhang",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.07110",
+    "abs_url": "https://arxiv.org/abs/2605.07110"
+  },
+  "2605.07180": {
+    "arxiv_id": "2605.07180",
+    "title": "Learning Agent Routing From Early Experience",
+    "abstract": "LLM agents achieve strong performance on complex reasoning tasks but incur high latency and compute cost. In practice, many queries fall within the capability boundary of cutting-edge LLMs and do not require full agent execution, making effective routing between LLMs and agents a key challenge. We study the problem of routing queries between lightweight LLM inference and full agent execution under realistic cold-start settings. To address this, we propose BoundaryRouter, a training-free routing framework that uses early behavioral experience and rubric-guided reasoning to decide whether to answer a query with direct LLM inference or escalate to an agent. BoundaryRouter builds a compact experience memory by executing both systems on a shared seed set and retrieves similar cases at inference time to guide routing decisions. To evaluate this method, we introduce RouteBench, a benchmark covering in-domain, paraphrased, and out-of-domain route settings. Experiments show that BoundaryRouter reduces inference time by 60.6% compared to the agent while improving performance by 28.6% over direct LLM inference, outperforming prompt-based and retrieval-only routing by an average of 37.9% and 8.2%, respectively.",
+    "categories": [
+      "cs.CL"
+    ],
+    "authors_raw": "Yimin Wang, Jiahao Qiu, Xuan Qi, Xinzhe Juan, Jingzhe Shi, Zelin Zhao, Hongru Wang, Shilong Liu, Mengdi Wang",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.07180",
+    "abs_url": "https://arxiv.org/abs/2605.07180"
+  },
+  "2605.06731": {
+    "arxiv_id": "2605.06731",
+    "title": "When Routine Chats Turn Toxic: Unintended Long-Term State Poisoning in Personalized Agents",
+    "abstract": "Personalized LLM agents maintain persistent cross-session state to support long-horizon collaboration. Yet, this persistence introduces a subtle but critical security vulnerability: routine user-agent interactions can gradually reshape an agent's long-term state, inadvertently weakening future confirmation boundaries, expanding tool-use defaults, and escalating autonomous behavior over time. We formalize this risk as \\textbf{unintended long-term state poisoning}. To systematically study it, we introduce the \\textbf{Unintended Long-Term State Poisoning Bench (ULSPB)}, a bilingual benchmark comprising $350$ settings spanning five assistance categories, seven interaction patterns, 24-turn routine interactions, and matched single-injection counterparts. Furthermore, we define the \\emph{Harm Score} (HS), a state-centric metric that quantifies \\emph{authorization drift}, \\emph{tool-use escalation}, and \\emph{unchecked autonomy}. Experiments on OpenClaw with four backbone LLMs demonstrate that, while single-injection is generally effective, routine conversations alone can substantially poison long-term state, primarily corrupting memory-centric artifacts. Evaluations seeded with real-world user interactions confirm that this risk is not a mere artifact of synthetic prompts. To mitigate this threat, we propose \\textbf{StateGuard}, a lightweight, post-execution defense that audits state diffs at the writeback boundary and selectively rolls back dangerous edits. Across all evaluated models, StateGuard reduces HS to near zero and lowers false-negative rates, with acceptable high false-positive rates under a safety-first writeback defense and minimal overhead.",
+    "categories": [
+      "cs.CR",
+      "cs.CL",
+      "cs.LG"
+    ],
+    "authors_raw": "Xiaoyu Xu, Minxin Du, Qipeng Xie, Haobin Ke, Qingqing Ye, Haibo Hu",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.06731",
+    "abs_url": "https://arxiv.org/abs/2605.06731"
+  },
+  "2604.23938": {
+    "arxiv_id": "2604.23938",
+    "title": "TSAssistant: A Human-in-the-Loop Agentic Framework for Automated Target Safety Assessment",
+    "abstract": "Target Safety Assessment (TSA) requires systematic integration of heterogeneous evidence, including genetic, transcriptomic, target homology, pharmacological, and clinical data, to evaluate potential safety liabilities of therapeutic targets. This process is inherently iterative and expert-driven, posing challenges in scalability and reproducibility. We present TSAssistant, a multi-agent framework designed to support TSA report drafting through a modular, section-based, and human-in-the-loop paradigm. The framework decomposes report generation into a coordinated pipeline of specialised subagents, each targeting a single TSA section. Specialised subagents retrieve structured and unstructured data as well as literature evidence from curated biomedical sources through standardised tool interfaces, producing individually citable, evidence-grounded sections. Agent behaviour is governed by a hierarchical instruction architecture comprising system prompts, domain-specific skill modules, and runtime user instructions. A key feature is an interactive refinement loop in which users may manually edit sections, append new information, upload additional sources, or re-invoke agents to revise specific sections, with the system maintaining conversational memory across iterations. TSAssistant is designed to reduce the mechanical burden of evidence synthesis and report drafting, supporting a hybrid model in which agentic AI augments evidence synthesis while toxicologists retain final decision authority.",
+    "categories": [
+      "cs.CL"
+    ],
+    "authors_raw": "Xiaochen Zheng, Zhiwen Jiang, Melanie Guerard, Klas Hatje, Tatyana Doktorova",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2604.23938",
+    "abs_url": "https://arxiv.org/abs/2604.23938"
+  },
+  "2506.04565": {
+    "arxiv_id": "2506.04565",
+    "title": "From Standalone LLMs to Integrated Intelligence: A Survey of Compound Al Systems",
+    "abstract": "Compound AI Systems (CAIS) are an emerging paradigm that integrates large language models (LLMs) with external components, including retrievers, agents, tools, and orchestrators, to overcome the limitations of standalone models in tasks requiring memory, reasoning, real-time grounding, and multimodal understanding. These systems enable more capable and context-aware behaviors by composing multiple specialized modules into cohesive workflows. Despite growing adoption in both academia and industry, the CAIS landscape remains fragmented and lacks a unified framework for analysis, taxonomy, and evaluation. In this survey, we define the concept of CAIS, propose a multi-dimensional taxonomy based on component roles and orchestration strategies, and analyze four foundational paradigms: Retrieval-Augmented Generation (RAG), LLM Agents, Multimodal LLMs (MLLMs), and Orchestration. We review representative systems, compare design trade-offs, and summarize evaluation methodologies across these paradigms. Finally, we identify key challenges - including scalability, interoperability, benchmarking, and coordination - and outline promising directions for future research. This survey aims to provide researchers and practitioners with a comprehensive foundation for understanding, developing, and advancing the next generation of system-level artificial intelligence.",
+    "categories": [
+      "cs.MA",
+      "cs.CL"
+    ],
+    "authors_raw": "Jiayi Chen, Junyi Ye, Guiling Wang",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2506.04565",
+    "abs_url": "https://arxiv.org/abs/2506.04565"
+  },
+  "2605.07863": {
+    "arxiv_id": "2605.07863",
+    "title": "ADKO: Agentic Decentralized Knowledge Optimization",
+    "abstract": "We present Agentic Decentralized Knowledge Optimization (ADKO), a framework for collaborative black-box optimization across autonomous agents that achieves sample efficiency, privacy preservation, heterogeneous-objective handling, and communication efficiency. Each agent maintains a private Gaussian Process (GP) surrogate trained on local data and communicates only through knowledge tokens-compact, lossy summaries containing directional signals, advantage scores, and optional language-model (LM) insights-without sharing raw data or model parameters. ADKO unifies GP-Upper Confidence Bound (GP-UCB), parallel Bayesian optimization, decentralized learning, and LM-guided discovery. We provide the first formal analysis of dual information loss: token compression, quantified via mutual-information-based fidelity, and LM approximation error, decomposed into bias and stochastic noise. Our main result shows cumulative regret decomposes into GP error, LM bias, LM noise, and compression loss, with necessary and sufficient conditions for sublinear regret. We also propose fidelity-aware token pruning to preserve high-information tokens under memory budget. Experiments on neural architecture search and scientific discovery validate the theory and show consistent improvements over strong baselines.",
+    "categories": [
+      "cs.LG"
+    ],
+    "authors_raw": "Lucas Nerone Rillo, Zhanhong Jiang, Nastaran Saadati, Aditya Balu, Baskar Ganapathysubramanian, Chinmay Hegde, Soumik Sarkar",
+    "pub_date": "Mon, 11 May 2026 00:00:00 -0400",
+    "pdf_url": "https://arxiv.org/pdf/2605.07863",
+    "abs_url": "https://arxiv.org/abs/2605.07863"
+  }
+}

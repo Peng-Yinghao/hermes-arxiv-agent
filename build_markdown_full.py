@@ -11,11 +11,15 @@ Usage:
 
 from __future__ import annotations
 
+import shutil
 import subprocess
 import sys
 import time
 from datetime import date
 from pathlib import Path
+
+# Resolve arxiv2md binary (may be in ~/.local/bin, not always on PATH)
+_ARXIV2MD = shutil.which("arxiv2md") or str(Path.home() / ".local/bin/arxiv2md")
 
 from openpyxl import load_workbook
 
@@ -68,7 +72,7 @@ def download_markdown(arxiv_id: str) -> bool:
 
     try:
         result = subprocess.run(
-            ["arxiv2md", arxiv_id, "--remove-refs", "--frontmatter", "-o", str(output_path)],
+            [_ARXIV2MD, arxiv_id, "--remove-refs", "--frontmatter", "-o", str(output_path)],
             capture_output=True, text=True, timeout=60,
         )
         if result.returncode != 0:

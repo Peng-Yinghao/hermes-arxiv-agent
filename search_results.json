@@ -1,0 +1,111 @@
+{
+  "2501.11739": {
+    "arxiv_id": "2501.11739",
+    "title": "Episodic memory in AI agents poses risks that should be studied and mitigated",
+    "authors": [
+      "Chad DeChant"
+    ],
+    "published": "2025-01-20",
+    "abstract": "Most current AI models have little ability to store and later retrieve a record or representation of what they do. In human cognition, episodic memories play an important role in both recall of the past as well as planning for the future. The ability to form and use episodic memories would similarly enable a broad range of improved capabilities in an AI agent that interacts with and takes actions in the world. Researchers have begun directing more attention to developing memory abilities in AI models. It is therefore likely that models with such capability will be become widespread in the near future. This could in some ways contribute to making such AI agents safer by enabling users to better monitor, understand, and control their actions. However, as a new capability with wide applications, we argue that it will also introduce significant new risks that researchers should begin to study and address. We outline these risks and benefits and propose four principles to guide the development of episodic memory capabilities so that these will enhance, rather than undermine, the effort to keep AI safe and trustworthy.",
+    "categories": [
+      "cs.AI",
+      "cs.CY"
+    ],
+    "primary_category": "cs.AI",
+    "pdf_url": "https://arxiv.org/pdf/2501.11739",
+    "abs_url": "https://arxiv.org/abs/2501.11739",
+    "citations": 12,
+    "arxiv_id_full": "2501.11739v2",
+    "pdf_path": "/opt/data/home/hermes-arxiv-agent/papers/2501.11739.pdf"
+  },
+  "2502.16090": {
+    "arxiv_id": "2502.16090",
+    "title": "Echo: A Large Language Model with Temporal Episodic Memory",
+    "authors": [
+      "Wentao Liu",
+      "Ruohua Zhang",
+      "Aimin Zhou",
+      "Feng Gao",
+      "Jiali Liu"
+    ],
+    "published": "2025-02-22",
+    "abstract": "Research on large language models (LLMs) has shown remarkable performance in domains such as mathematics, programming, and literary creation. However, most studies have focused on semantic memory-based question answering, neglecting LLMs' potential to handle episodic memory (EM)-related queries. This oversight has led to suboptimal performance in applications requiring EM, including emotional companionship, personal AI assistants, and AI teachers. To address this gap, we introduce Echo, a LLM enhanced with temporal episodic memory. We propose a Multi-Agent Data Generation Framework that guides the model in generating multi-turn, complex scenario episodic memory dialogue data (EM-Train). Temporal information is innovatively incorporated into the LLM training process, and Echo is trained using the EM-Train. Furthermore, We develop an EM-Test benchmark specifically designed to evaluate LLMs' episodic memory capabilities. The EM-Test assesses performance across various time spans and difficulty levels, providing a comprehensive evaluation of multi-turn episodic memory dialogues. Our experiments demonstrate that Echo significantly outperforms state-of-the-art LLMs on EM-Test. Additionally, a qualitative analysis reveals Echo's potential to exhibit human-like episodic memory capabilities. We will open-source all datasets, code, and model weights.",
+    "categories": [
+      "cs.CL",
+      "cs.AI",
+      "cs.LG"
+    ],
+    "primary_category": "cs.CL",
+    "pdf_url": "https://arxiv.org/pdf/2502.16090",
+    "abs_url": "https://arxiv.org/abs/2502.16090",
+    "citations": 7,
+    "arxiv_id_full": "2502.16090v1",
+    "pdf_path": "/opt/data/home/hermes-arxiv-agent/papers/2502.16090.pdf"
+  },
+  "2505.23422": {
+    "arxiv_id": "2505.23422",
+    "title": "From Knowledge to Noise: CTIM-Rover and the Pitfalls of Episodic Memory in Software Engineering Agents",
+    "authors": [
+      "Tobias Lindenbauer",
+      "Georg Groh",
+      "Hinrich Schütze"
+    ],
+    "published": "2025-05-29",
+    "abstract": "We introduce CTIM-Rover, an AI agent for Software Engineering (SE) built on top of AutoCodeRover (Zhang et al., 2024) that extends agentic reasoning frameworks with an episodic memory, more specifically, a general and repository-level Cross-Task-Instance Memory (CTIM). While existing open-source SE agents mostly rely on ReAct (Yao et al., 2023b), Reflexion (Shinn et al., 2023), or Code-Act (Wang et al., 2024), all of these reasoning and planning frameworks inefficiently discard their long-term memory after a single task instance. As repository-level understanding is pivotal for identifying all locations requiring a patch for fixing a bug, we hypothesize that SE is particularly well positioned to benefit from CTIM. For this, we build on the Experiential Learning (EL) approach ExpeL (Zhao et al., 2024), proposing a Mixture-Of-Experts (MoEs) inspired approach to create both a general-purpose and repository-level CTIM. We find that CTIM-Rover does not outperform AutoCodeRover in any configuration and thus conclude that neither ExpeL nor DoT-Bank (Lingam et al., 2024) scale to real-world SE problems. Our analysis indicates noise introduced by distracting CTIM items or exemplar trajectories as the likely source of the performance degradation.",
+    "categories": [
+      "cs.SE",
+      "cs.AI"
+    ],
+    "primary_category": "cs.SE",
+    "pdf_url": "https://arxiv.org/pdf/2505.23422",
+    "abs_url": "https://arxiv.org/abs/2505.23422",
+    "citations": 1,
+    "arxiv_id_full": "2505.23422v1",
+    "pdf_path": "/opt/data/home/hermes-arxiv-agent/papers/2505.23422.pdf"
+  },
+  "2503.21760": {
+    "arxiv_id": "2503.21760",
+    "title": "MemInsight: Autonomous Memory Augmentation for LLM Agents",
+    "authors": [
+      "R. Salama",
+      "Jason Cai",
+      "Michelle Yuan",
+      "Anna Currey",
+      "Monica Sunkara",
+      "Yi Zhang",
+      "Yassine Benajiba"
+    ],
+    "published": "2025-03-27",
+    "abstract": "Large language model (LLM) agents have evolved to intelligently process information, make decisions, and interact with users or tools. A key capability is the integration of long-term memory capabilities, enabling these agents to draw upon historical interactions and knowledge. However, the growing memory size and need for semantic structuring pose significant challenges. In this work, we propose an autonomous memory augmentation approach, MemInsight, to enhance semantic data representation and retrieval mechanisms. By leveraging autonomous augmentation to historical interactions, LLM agents are shown to deliver more accurate and contextualized responses. We empirically validate the efficacy of our proposed approach in three task scenarios; conversational recommendation, question answering and event summarization. On the LLM-REDIAL dataset, MemInsight boosts persuasiveness of recommendations by up to 14%. Moreover, it outperforms a RAG baseline by 34% in recall for LoCoMo retrieval. Our empirical results show the potential of MemInsight to enhance the contextual performance of LLM agents across multiple tasks.",
+    "categories": [
+      "cs.CL"
+    ],
+    "primary_category": "cs.CL",
+    "pdf_url": "https://arxiv.org/pdf/2503.21760",
+    "abs_url": "https://arxiv.org/abs/2503.21760",
+    "citations": 48,
+    "arxiv_id_full": "2503.21760v2",
+    "pdf_path": "/opt/data/home/hermes-arxiv-agent/papers/2503.21760.pdf"
+  },
+  "2501.14119": {
+    "arxiv_id": "2501.14119",
+    "title": "Autonomous Structural Memory Manipulation for Large Language Models Using Hierarchical Embedding Augmentation",
+    "authors": [
+      "Derek Yotheringhay",
+      "Alistair Kirkland",
+      "H. Kirkbride",
+      "Josiah Whitesteeple"
+    ],
+    "published": "2025-01-23",
+    "abstract": "Transformative innovations in model architectures have introduced hierarchical embedding augmentation as a means to redefine the representation of tokens through multi-level semantic structures, offering enhanced adaptability to complex linguistic inputs. Autonomous structural memory manipulation further advances this paradigm through dynamic memory reallocation mechanisms that prioritize critical contextual features while suppressing less relevant information, enabling scalable and efficient performance across diverse tasks. Experimental results reveal substantial improvements in computational efficiency, with marked reductions in processing overhead for longer input sequences, achieved through memory reorganization strategies that adapt to evolving contextual requirements. Hierarchical embeddings not only improved contextual alignment but also facilitated task generalization by capturing relationships at varying semantic granularities, ensuring coherence across layers without introducing significant computational redundancies. Comparative analysis against baseline models demonstrated unique advantages in accuracy, efficiency, and interpretability, particularly in tasks requiring complex contextual understanding or domain-specific adaptability. The ability to dynamically adjust token representations and memory configurations contributed to the model's robustness under varied and unpredictable input conditions. Applications benefiting from these advancements include multi-domain generalization, interactive systems, and scenarios involving real-time decision-making, where traditional static memory architectures often face limitations. The proposed methodology combines advanced embedding and memory management strategies into a cohesive framework that addresses scalability challenges while preserving task-specific relevance.",
+    "categories": [
+      "cs.CL",
+      "cs.AI"
+    ],
+    "primary_category": "cs.CL",
+    "pdf_url": "https://arxiv.org/pdf/2501.14119",
+    "abs_url": "https://arxiv.org/abs/2501.14119",
+    "citations": 0,
+    "arxiv_id_full": "2501.14119v2"
+  }
+}

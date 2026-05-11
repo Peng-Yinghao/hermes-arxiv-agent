@@ -1,0 +1,1360 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Retrieval-Augmented Reasoning for Chartered Accountancy</title>
+<!--Generated on Thu Apr 30 21:46:08 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="/static/browse/0.3.4/css/arxiv-html-papers-20260131.css" type="text/css">
+<script src="/static/browse/0.3.4/js/arxiv-html-papers-20260131.js"></script>
+<script>
+  // Restore the saved color scheme preference, or
+  // enact the browser preference if "automatic", 
+  // without expecting DOM load to have completed.
+  //
+  // Also restore any saved readingmode and ToC display preferences.
+  function initializeReadingPreferences() {
+    let saved_theme = localStorage.getItem("ar5iv_theme") || "automatic";
+    if (saved_theme === "automatic") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        saved_theme = "dark";
+      }
+    }
+    if (saved_theme == "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    const tocDisplay = localStorage.getItem('arxiv_html_paper_toc_display');
+    if (tocDisplay) {
+      document.documentElement.setAttribute("data-toc-display", tocDisplay);
+    }
+    const readingMode = localStorage.getItem('arxiv_html_paper_reading_mode');
+    if (readingMode) {
+      document.documentElement.setAttribute("data-reading-mode", readingMode);
+    }
+  }
+  // Run as soon as JS starts, to minimize repainting
+  initializeReadingPreferences();
+</script>
+<link rel="apple-touch-icon" sizes="180x180"
+  href="/static/browse/0.3.4/images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+  href="/static/browse/0.3.4/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+  href="/static/browse/0.3.4/images/icons/favicon-16x16.png">
+<link rel="manifest" href="/static/browse/0.3.4/images/icons/site.webmanifest">
+<link rel="mask-icon" href="/static/browse/0.3.4/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="stylesheet" type="text/css" media="screen" href="https://use.typekit.net/utz6mli.css">
+</head>
+<body>
+<dialog id="modal-form" aria-labelledby="modal-title" closedby="any">
+  <form id="modal-form-content" method="dialog" enctype="multipart/form-data">
+    <header class="modal-header">
+      <h5 id="modal-title" class="modal-title">Report GitHub Issue</h5>
+      <button type="submit" formnovalidate class="modal-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="modal-body">
+      <label for="form_title">Title:</label>
+      <input class="form-control" id="form_title" name="form_title" required placeholder="Enter title">
+
+      <p id="selectedTextModalDescription" hidden>Content selection saved. Describe the issue below:</p>
+
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description" required maxlength="500"
+        placeholder="500 characters maximum"></textarea>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="submit" value="internal-report" class="sr-only modal-submit">Submit without GitHub</button>
+      <button type="submit" value="github-report" class="modal-submit">Submit in GitHub</button>
+    </footer>
+  </form>
+</dialog>
+
+<header class="arxiv-html-header">
+  <div class="html-header-logo">
+    <a href="/">
+      <img alt="arXiv logo" class="logo desktop-only" width="100"
+        src="/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg">
+      <span class="sr-only">Back to arXiv</span>
+    </a>
+  </div>
+  <!--TOC, dark mode, links-->
+  <nav class="html-header-nav">
+    <a class="header-button hover-effect desktop-only" href="https://info.arxiv.org/about/accessible_HTML.html"
+      target="_blank">Why HTML?</a>
+    <a class="header-button" title="Report an Issue" href="#" title="Report an issue"
+      onclick="event.preventDefault(); showModalForm();">
+      <svg role="presentation" class="mobile-only toggle-icon" aria-hidden="true" height="1.25rem"
+        viewBox="0 0 640 640">
+        <path
+          d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+      </svg>
+      <span class="desktop-only">Report Issue</span></a>
+    <!--back to abstract-->
+    <a class="header-button" title="Back to abstract page" aria-label="Back to abstract page"
+      href="/abs/2605.00257v1">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 512 512" fill="#ffffff"
+        aria-hidden="true">
+        <path
+          d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z">
+        </path>
+      </svg>
+      <span class="desktop-only">Back to Abstract</span>
+    </a>
+    <!-- PDF download link -->
+    <a class="header-button" title="Download PDF" href="/pdf/2605.00257v1"
+      target="_blank">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 576 542">
+        <path
+          d="M208 48L96 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l80 0 0 48-80 0c-35.3 0-64-28.7-64-64L32 64C32 28.7 60.7 0 96 0L229.5 0c17 0 33.3 6.7 45.3 18.7L397.3 141.3c12 12 18.7 28.3 18.7 45.3l0 149.5-48 0 0-128-88 0c-39.8 0-72-32.2-72-72l0-88zM348.1 160L256 67.9 256 136c0 13.3 10.7 24 24 24l68.1 0zM240 380l32 0c33.1 0 60 26.9 60 60s-26.9 60-60 60l-12 0 0 28c0 11-9 20-20 20s-20-9-20-20l0-128c0-11 9-20 20-20zm32 80c11 0 20-9 20-20s-9-20-20-20l-12 0 0 40 12 0zm96-80l32 0c28.7 0 52 23.3 52 52l0 64c0 28.7-23.3 52-52 52l-32 0c-11 0-20-9-20-20l0-128c0-11 9-20 20-20zm32 128c6.6 0 12-5.4 12-12l0-64c0-6.6-5.4-12-12-12l-12 0 0 88 12 0zm76-108c0-11 9-20 20-20l48 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 24 28 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 44c0 11-9 20-20 20s-20-9-20-20l0-128z" />
+      </svg>
+      <span class="desktop-only">Download PDF</span></a>
+    <!-- navigational table of contents toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleNavTOC();" title="Toggle navigation"
+      aria-label="Toggle navigation">
+      <svg height="1.25rem" role="presentation" viewBox="0 0 512 512">
+        <path
+          d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z">
+        </path>
+      </svg>
+    </a>
+    <!--- collapsable header / reading mode toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleReadingMode();"
+      title="Disable reading mode, show header and footer">
+      <svg role="presentation" height="1.25rem"
+        viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+        <path
+          d="M32 32C14.3 32 0 46.3 0 64l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 32zM64 352c0-17.7-14.3-32-32-32S0 334.3 0 352l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96z" />
+      </svg>
+    </a>
+    <!--- colored theme toggle -->
+    <button type="button" class="header-button color-tog" onclick="toggleColorScheme();" title="Toggle dark/light mode" aria-label="Toggle color scheme">
+      <span class="toggle-icon automatic-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon light-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon dark-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+    </button>
+  </nav>
+</header><nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_abstract"><a href="#abstract1" title="In Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title">Abstract</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S1" title="In Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S2" title="In Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Related Works</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S3" title="In Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Methodology</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#S3.SS1" title="In 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Data Preparation</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a href="#S3.SS1.SSS1" title="In 3.1 Data Preparation ‣ 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1.1 </span>Text Chunking and Splitting</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a href="#S3.SS1.SSS2" title="In 3.1 Data Preparation ‣ 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1.2 </span>Embedding Generation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a href="#S3.SS1.SSS3" title="In 3.1 Data Preparation ‣ 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1.3 </span>Vector Indexing</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#S3.SS2" title="In 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>System Design</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a href="#S3.SS2.SSS1" title="In 3.2 System Design ‣ 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2.1 </span>Base Model Selection</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a href="#S3.SS2.SSS2" title="In 3.2 System Design ‣ 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2.2 </span>Prompt and Context Retrieval</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a href="#S3.SS2.SSS3" title="In 3.2 System Design ‣ 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2.3 </span>Context Integration and Reasoning</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS3" title="In 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Inference and Workflow Logic</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S4" title="In Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Experimental Setup</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S4.SS1" title="In 4 Experimental Setup ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Implementation Details</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S4.SS2" title="In 4 Experimental Setup ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Evaluation Pipeline and Answer Extraction</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S5" title="In Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Results and Analysis</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S5.SS1" title="In 5 Results and Analysis ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.1 </span>Exam Level-wise Breakdown</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S5.SS2" title="In 5 Results and Analysis ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.2 </span>Subject-wise Breakdown</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S5.SS3" title="In 5 Results and Analysis ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.3 </span>Model-Specific Comparative Analysis</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S5.SS4" title="In 5 Results and Analysis ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.4 </span>Scholastic Reliability Coefficient (SRC) Analysis</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S5.SS5" title="In 5 Results and Analysis ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.5 </span>Systemic Bottlenecks</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S6" title="In Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Conclusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S7" title="In Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">7 </span>Future Work</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_appendix"><a href="#A1" title="In Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A </span>Data Availability</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_bibliography"><a href="#bib" title="In Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_title">References</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div id="infobox" class="infobox">
+  <a id="license-tr" href="https://info.arxiv.org/help/license/index.html#licenses-available">
+    License: CC BY 4.0
+  </a>
+  <div id="watermark-tr">
+arXiv:2605.00257v1 [cs.CL] 30 Apr 2026</div>
+</div><div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Retrieval-Augmented Reasoning for Chartered Accountancy</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+Jatin Gupta <a href="https://orcid.org/0009-0002-9504-7487" title="ORCID 0009-0002-9504-7487" class="ltx_ref ltx_orcid"><svg class="ltx_orcidlogo" height="1.7em" overflow="visible" version="1.1" viewBox="0 0 72 72" width="1.7em"><g transform="translate(0,20)"><path style="--ltx-fill-color:#A6CE39;" d="M72,36 C72,55.884375 55.884375,72 36,72 C16.115625,72 0,55.884375 0,36 C0,16.115625 16.115625,0 36,0 C55.884375,0 72,16.115625 72,36 Z" fill="#A6CE39"></path><g style="--ltx-fill-color:#FFFFFF;" fill="#FFFFFF" transform="translate(18.868966, 12.910345)"><polygon points="5.03734929 39.1250878 0.695429861 39.1250878 0.695429861 9.14431787 5.03734929 9.14431787 5.03734929 22.6930505 5.03734929 39.1250878"></polygon><path d="M11.409257,9.14431787 L23.1380784,9.14431787 C34.303014,9.14431787 39.2088191,17.0664074 39.2088191,24.1486995 C39.2088191,31.846843 33.1470485,39.1530811 23.1944669,39.1530811 L11.409257,39.1530811 L11.409257,9.14431787 Z M15.7511765,35.2620194 L22.6587756,35.2620194 C32.49858,35.2620194 34.7541226,27.8438084 34.7541226,24.1486995 C34.7541226,18.1301509 30.8915059,13.0353795 22.4332213,13.0353795 L15.7511765,13.0353795 L15.7511765,35.2620194 Z"></path><path d="M5.71401206,2.90182329 C5.71401206,4.441452 4.44526937,5.72914146 2.86638958,5.72914146 C1.28750978,5.72914146 0.0187670918,4.441452 0.0187670918,2.90182329 C0.0187670918,1.33420133 1.28750978,0.0745051096 2.86638958,0.0745051096 C4.44526937,0.0745051096 5.71401206,1.36219458 5.71401206,2.90182329 Z"></path></g></g></svg></a> 
+<br class="ltx_break">Dept. of Computer Science and Engineering 
+<br class="ltx_break">Sharda University, Greater Noida, India 
+<br class="ltx_break"><span id="id1.1.id1" class="ltx_text ltx_font_typewriter">jatingupta261001@gmail.com</span>
+&amp;Akhil Sharma <a href="https://orcid.org/0009-0001-1490-4022" title="ORCID 0009-0001-1490-4022" class="ltx_ref ltx_orcid"><svg class="ltx_orcidlogo" height="1.7em" overflow="visible" version="1.1" viewBox="0 0 72 72" width="1.7em"><g transform="translate(0,20)"><path style="--ltx-fill-color:#A6CE39;" d="M72,36 C72,55.884375 55.884375,72 36,72 C16.115625,72 0,55.884375 0,36 C0,16.115625 16.115625,0 36,0 C55.884375,0 72,16.115625 72,36 Z" fill="#A6CE39"></path><g style="--ltx-fill-color:#FFFFFF;" fill="#FFFFFF" transform="translate(18.868966, 12.910345)"><polygon points="5.03734929 39.1250878 0.695429861 39.1250878 0.695429861 9.14431787 5.03734929 9.14431787 5.03734929 22.6930505 5.03734929 39.1250878"></polygon><path d="M11.409257,9.14431787 L23.1380784,9.14431787 C34.303014,9.14431787 39.2088191,17.0664074 39.2088191,24.1486995 C39.2088191,31.846843 33.1470485,39.1530811 23.1944669,39.1530811 L11.409257,39.1530811 L11.409257,9.14431787 Z M15.7511765,35.2620194 L22.6587756,35.2620194 C32.49858,35.2620194 34.7541226,27.8438084 34.7541226,24.1486995 C34.7541226,18.1301509 30.8915059,13.0353795 22.4332213,13.0353795 L15.7511765,13.0353795 L15.7511765,35.2620194 Z"></path><path d="M5.71401206,2.90182329 C5.71401206,4.441452 4.44526937,5.72914146 2.86638958,5.72914146 C1.28750978,5.72914146 0.0187670918,4.441452 0.0187670918,2.90182329 C0.0187670918,1.33420133 1.28750978,0.0745051096 2.86638958,0.0745051096 C4.44526937,0.0745051096 5.71401206,1.36219458 5.71401206,2.90182329 Z"></path></g></g></svg></a> 
+<br class="ltx_break">Dept. of Computer Science and Engineering 
+<br class="ltx_break">Sharda University, Greater Noida, India 
+<br class="ltx_break"><span id="id2.2.id2" class="ltx_text ltx_font_typewriter">sharmaakhil944@gmail.com</span>
+&amp;Saransh Singhania <a href="https://orcid.org/0009-0009-6925-001X" title="ORCID 0009-0009-6925-001X" class="ltx_ref ltx_orcid"><svg class="ltx_orcidlogo" height="1.7em" overflow="visible" version="1.1" viewBox="0 0 72 72" width="1.7em"><g transform="translate(0,20)"><path style="--ltx-fill-color:#A6CE39;" d="M72,36 C72,55.884375 55.884375,72 36,72 C16.115625,72 0,55.884375 0,36 C0,16.115625 16.115625,0 36,0 C55.884375,0 72,16.115625 72,36 Z" fill="#A6CE39"></path><g style="--ltx-fill-color:#FFFFFF;" fill="#FFFFFF" transform="translate(18.868966, 12.910345)"><polygon points="5.03734929 39.1250878 0.695429861 39.1250878 0.695429861 9.14431787 5.03734929 9.14431787 5.03734929 22.6930505 5.03734929 39.1250878"></polygon><path d="M11.409257,9.14431787 L23.1380784,9.14431787 C34.303014,9.14431787 39.2088191,17.0664074 39.2088191,24.1486995 C39.2088191,31.846843 33.1470485,39.1530811 23.1944669,39.1530811 L11.409257,39.1530811 L11.409257,9.14431787 Z M15.7511765,35.2620194 L22.6587756,35.2620194 C32.49858,35.2620194 34.7541226,27.8438084 34.7541226,24.1486995 C34.7541226,18.1301509 30.8915059,13.0353795 22.4332213,13.0353795 L15.7511765,13.0353795 L15.7511765,35.2620194 Z"></path><path d="M5.71401206,2.90182329 C5.71401206,4.441452 4.44526937,5.72914146 2.86638958,5.72914146 C1.28750978,5.72914146 0.0187670918,4.441452 0.0187670918,2.90182329 C0.0187670918,1.33420133 1.28750978,0.0745051096 2.86638958,0.0745051096 C4.44526937,0.0745051096 5.71401206,1.36219458 5.71401206,2.90182329 Z"></path></g></g></svg></a> 
+<br class="ltx_break">Dept. of Computer Science and Engineering 
+<br class="ltx_break">Sharda University, Greater Noida, India 
+<br class="ltx_break"><span id="id3.3.id3" class="ltx_text ltx_font_typewriter">saransh060123@gmail.com</span>
+&amp;Ali Imam Abidi <a href="https://orcid.org/0000-0002-7420-0027" title="ORCID 0000-0002-7420-0027" class="ltx_ref ltx_orcid"><svg class="ltx_orcidlogo" height="1.7em" overflow="visible" version="1.1" viewBox="0 0 72 72" width="1.7em"><g transform="translate(0,20)"><path style="--ltx-fill-color:#A6CE39;" d="M72,36 C72,55.884375 55.884375,72 36,72 C16.115625,72 0,55.884375 0,36 C0,16.115625 16.115625,0 36,0 C55.884375,0 72,16.115625 72,36 Z" fill="#A6CE39"></path><g style="--ltx-fill-color:#FFFFFF;" fill="#FFFFFF" transform="translate(18.868966, 12.910345)"><polygon points="5.03734929 39.1250878 0.695429861 39.1250878 0.695429861 9.14431787 5.03734929 9.14431787 5.03734929 22.6930505 5.03734929 39.1250878"></polygon><path d="M11.409257,9.14431787 L23.1380784,9.14431787 C34.303014,9.14431787 39.2088191,17.0664074 39.2088191,24.1486995 C39.2088191,31.846843 33.1470485,39.1530811 23.1944669,39.1530811 L11.409257,39.1530811 L11.409257,9.14431787 Z M15.7511765,35.2620194 L22.6587756,35.2620194 C32.49858,35.2620194 34.7541226,27.8438084 34.7541226,24.1486995 C34.7541226,18.1301509 30.8915059,13.0353795 22.4332213,13.0353795 L15.7511765,13.0353795 L15.7511765,35.2620194 Z"></path><path d="M5.71401206,2.90182329 C5.71401206,4.441452 4.44526937,5.72914146 2.86638958,5.72914146 C1.28750978,5.72914146 0.0187670918,4.441452 0.0187670918,2.90182329 C0.0187670918,1.33420133 1.28750978,0.0745051096 2.86638958,0.0745051096 C4.44526937,0.0745051096 5.71401206,1.36219458 5.71401206,2.90182329 Z"></path></g></g></svg></a> 
+<br class="ltx_break">Dept. of Computer Science and Engineering 
+<br class="ltx_break">Sharda University, Greater Noida, India 
+<br class="ltx_break"><span id="id4.4.id4" class="ltx_text ltx_font_typewriter">aliabidi4685@gmail.com</span>
+</span><span class="ltx_author_notes">Corresponding author: <span id="id5.5.id1" class="ltx_text ltx_font_typewriter">aliabidi4685@gmail.com</span></span></span>
+</div>
+
+<div id="abstract1" class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p">The inception of Large Language Models (LLMs) has catalyzed AI adoption in the finance sector, yet their reliability in complex, jurisdiction-specific tasks like Indian Chartered Accountancy (CA) remains limited. The models display difficulty in executing numerical tasks which require multiple steps while also needing advanced knowledge about legal regulations and the method of scaling their operations is not feasible in settings which have limited access to resources. We present CA-ThinkFlow as a parameter-efficient Retrieval-Augmented Generation (RAG) framework which operates with a 14B, 4-bit-quantized reasoning model, 14B-DeepSeek-R1, and a layout-aware Docling extraction system which maintains document structure during extraction. CA-ThinkFlow uses a basic RAG method which automatically adds retrieved information into the prompt, while it depends on the model’s built-in Chain-of-Thought (CoT) functions to create context and produce correct answers. The system we developed system operates at performance levels which match large proprietary models when we tested it on the multi-level CA-Ben benchmark, achieving Scholastic Reliability Coefficient (SRC) results which equal 68.75% of GPT-4o and Claude 3.5 Sonnet. The framework shows high efficiency and strength in handling parameters, but essential reasoning abilities fail to process complex regulatory texts which exist in fields such as Taxation.</p>
+</div>
+<div id="p1" class="ltx_para ltx_noindent">
+<p id="p1.4" class="ltx_p"><em id="p1.4.1" class="ltx_emph ltx_font_bold ltx_font_italic">K</em><span id="p1.4.2" class="ltx_text ltx_font_bold">eywords</span> Retrieval-Augmented Generation  <math id="p1.1.m1" class="ltx_Math" alttext="\cdot" display="inline" intent=":literal"><semantics><mo>⋅</mo><annotation encoding="application/x-tex">\cdot</annotation></semantics></math>
+Financial AI  <math id="p1.2.m2" class="ltx_Math" alttext="\cdot" display="inline" intent=":literal"><semantics><mo>⋅</mo><annotation encoding="application/x-tex">\cdot</annotation></semantics></math>
+Large Language Models  <math id="p1.3.m3" class="ltx_Math" alttext="\cdot" display="inline" intent=":literal"><semantics><mo>⋅</mo><annotation encoding="application/x-tex">\cdot</annotation></semantics></math>
+Parameter Efficiency  <math id="p1.4.m4" class="ltx_Math" alttext="\cdot" display="inline" intent=":literal"><semantics><mo>⋅</mo><annotation encoding="application/x-tex">\cdot</annotation></semantics></math>
+Chartered Accountancy.</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+
+<div id="S1.p1" class="ltx_para ltx_noindent">
+<p id="S1.p1.1" class="ltx_p">Large Language Models (LLMs) have witnessed significant adoption in financial services, with more than 70% of prominent organizations planning to use them for risk modeling by late 2024 <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib28" title="The impact of large language models in finance: towards trustworthy adoption" class="ltx_ref">10</a>, <a href="#bib.bib29" title="2024 iif-ey annual survey report on ai/ml use in financial services" class="ltx_ref">16</a>]</cite>. Despite advancements in efficiency of areas such as compliance automation, LLMs have dependability problems in regulated sectors, including hallucinations in complicated legal activities, particularly those involving Income Tax Act regulations, ICAI standards, and GST computations <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib30" title="Large language models and generative ai in finance" class="ltx_ref">4</a>, <a href="#bib.bib32" title="(Generative) ai in financial economics" class="ltx_ref">12</a>, <a href="#bib.bib33" title="Applying large language models in accounting: a comparative analysis of different methodologies and off-the-shelf examples" class="ltx_ref">11</a>]</cite>. Furthermore, their expensive inference, high resource requirements, privacy threats from cloud dependency, and environmental effect from huge training limit their usefulness for resource-constrained environments <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib36" title="Holistically evaluating the environmental impact of creating language models" class="ltx_ref">13</a>, <a href="#bib.bib37" title="LLMCarbon: modeling the end-to-end carbon footprint of large language models" class="ltx_ref">8</a>]</cite>. Generalist models, such as GPT-4o, obtain just 13-20% accuracy on CA benchmarks due to limited "tail" information and multi-step reasoning. Domain-specific Small Language Models (SLMs) address this by using compact, private, and cost-effective designs that are comparable to LLMs for financial tasks <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib16" title="Large language models acing chartered accountancy" class="ltx_ref">9</a>, <a href="#bib.bib34" title="A comprehensive survey of small language models in the era of large language models: techniques, enhancements, applications, collaboration with llms, and trustworthiness" class="ltx_ref">24</a>, <a href="#bib.bib35" title="Fine-tuning smaller language models for question answering over financial documents" class="ltx_ref">19</a>]</cite>. To achieve a better and comparable performance on the CA benchmark and lower computational overhead due to the high parameter count of such models, we present a RAG pipeline with a reasoning 14B-DeepSeek-R1 model.</p>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Related Works</h2>
+
+<div id="S2.p1" class="ltx_para ltx_noindent">
+<p id="S2.p1.1" class="ltx_p">The recent rise of "System 2" reasoning models has created a new paradigm that shifts reasoning away from pattern matching toward direct logical deduction. OpenAI’s o1 and o3 models introduced test-time compute scaling through their ability to generate internal chain-of-thought <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="O1 system card" class="ltx_ref">17</a>, <a href="#bib.bib2" title="OpenAI o3 and o4-mini system card" class="ltx_ref">18</a>]</cite>. DeepSeek-R1, an open-source development, appeared in January 2025, showcasing distilled reasoning abilities that rivaled those of more extensive systems <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib10" title="DeepSeek-r1: the open-source ai challenger rewriting the rules of enterprise ai" class="ltx_ref">25</a>, <a href="#bib.bib11" title="Fine-tuning deepseek r1 (reasoning model)" class="ltx_ref">5</a>]</cite>. Subsequently, financial adaptations led to the creation of Fin-R1, a model with 7 billion parameters, and Fino1, which focuses on financial reasoning, achieved through supervised fine-tuning on data tailored to the domain <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="Fin-r1: a large language model for financial reasoning" class="ltx_ref">20</a>, <a href="#bib.bib21" title="FinCoT: grounding chain-of-thought in expert financial blueprints" class="ltx_ref">28</a>, <a href="#bib.bib9" title="Fino1: a financial reasoning model" class="ltx_ref">23</a>]</cite>.</p>
+</div>
+<div id="S2.p2" class="ltx_para ltx_noindent">
+<p id="S2.p2.1" class="ltx_p">Financial and legal compliance now require all responses to be supported by original documents, since retrieval-augmented generation (RAG) has become essential in these areas <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib8" title="Fin-rag: a rag system for financial documents" class="ltx_ref">15</a>]</cite>. Fin-RAG uses domain-specific embeddings to analyze financial documents, while compliance designs focus on auditability and traceability <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib13" title="RAG-based system for document information retrieval in financial compliance" class="ltx_ref">14</a>, <a href="#bib.bib14" title="RAG architecture for financial compliance knowledge retrieval" class="ltx_ref">1</a>]</cite>.
+The primary obstacle for financial RAG systems arises from document parsing because standard OCR technology fails to maintain the intricate formats found in tax documents which contain multiple column tables and mathematical symbols. Docling developed into an exact document extractor that keeps document structure intact through its superior TableFormer and DocLayNet models which surpass Dolphin and PaddleOCR as alternative solutions that we have used in our scraping process <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib24" title="Docling: the document alchemist" class="ltx_ref">21</a>, <a href="#bib.bib3" title="Docling technical report" class="ltx_ref">2</a>, <a href="#bib.bib25" title="Docling-project/docling-models" class="ltx_ref">22</a>]</cite>.</p>
+</div>
+<div id="S2.p3" class="ltx_para ltx_noindent">
+<p id="S2.p3.1" class="ltx_p">The finance industry needs LLMs to achieve both high accuracy and high precision before they can become dependable tools for everyday usage. To solve this problem, researchers have developed multiple methods which aim to enhance system reliability <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib21" title="FinCoT: grounding chain-of-thought in expert financial blueprints" class="ltx_ref">28</a>]</cite>. The Indian government shows its commitment to developing financial intelligent systems through ICAI’s (Institute of Chartered Accountants of India’s) support of domestic AI research which makes this research timely. Our framework builds on these efforts by aligning with the Indian regulatory environment and integrating retrieval methods to ensure reasoning is grounded in credible sources.</p>
+</div>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Methodology</h2>
+
+<div id="S3.p1" class="ltx_para ltx_noindent">
+<p id="S3.p1.1" class="ltx_p">Our system combines the adaptable yet straightforward features of the Retrieval-Augmented Generation (RAG) method which extracts subtle details from embedded financial and legal data that has been collected together with the base model’s capacity to perform structured reasoning and mimic natural cognitive thinking.</p>
+</div>
+<section id="S3.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Data Preparation</h3>
+
+<div id="S3.SS1.p1" class="ltx_para ltx_noindent">
+<p id="S3.SS1.p1.1" class="ltx_p">We developed an extensive database of Indian financial sector knowledge. The database contained information from ICAI open-source materials tax regulations and financial textbooks and associated references. The Docling Document Converter was used to extract text from the selected financial documents which were then converted into a structured format.</p>
+</div>
+<section id="S3.SS1.SSS1" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.1.1 </span>Text Chunking and Splitting</h4>
+
+<div id="S3.SS1.SSS1.p1" class="ltx_para ltx_noindent">
+<p id="S3.SS1.SSS1.p1.1" class="ltx_p">The Markdown text was segmented into 1000-character chunks with 200-character overlap, matching established financial RAG benchmarks: Fin-RAG uses 1024 chars (15% overlap) <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib8" title="Fin-rag: a rag system for financial documents" class="ltx_ref">15</a>]</cite>, ConvFinQA uses 900 chars (200-char overlap) <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib5" title="ConvFinQA: exploring the chain of numerical reasoning in conversational finance question answering" class="ltx_ref">3</a>]</cite>, and DocMath uses 1100 chars (20% overlap) <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib6" title="DocMath-eval: evaluating math reasoning capabilities of LLMs in understanding long and specialized documents" class="ltx_ref">27</a>]</cite>. The Markdown text was divided into segments which measured 1000 characters and included an overlap of 200 characters. This division of text materials matched established financial RAG systems, such as Fin-RAG using 1024 chars with 15% overlap, ConvFinQA using 900 chars with 200-char overlap, and DocMath using 1100 chars with 20% overlap. The selected size achieves an optimal solution because it combines two factors, which include embedding model limits and data structure and retrieval precision requirements and contextual continuity needs which occur between chunk boundaries.</p>
+</div>
+</section>
+<section id="S3.SS1.SSS2" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.1.2 </span>Embedding Generation</h4>
+
+<div id="S3.SS1.SSS2.p1" class="ltx_para ltx_noindent">
+<p id="S3.SS1.SSS2.p1.6" class="ltx_p">Each text chunk <math id="S3.SS1.SSS2.p1.1.m1" class="ltx_Math" alttext="t_{i}" display="inline" intent=":literal"><semantics><msub><mi>t</mi><mi>i</mi></msub><annotation encoding="application/x-tex">t_{i}</annotation></semantics></math> was encoded using the Qwen-Embedding-0.6B model <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib26" title="Qwen3 embedding: advancing text embedding and reranking through foundation models" class="ltx_ref">26</a>]</cite>, selected for its multilingual support and high efficiency. Given an input text <math id="S3.SS1.SSS2.p1.2.m2" class="ltx_Math" alttext="t_{i}" display="inline" intent=":literal"><semantics><msub><mi>t</mi><mi>i</mi></msub><annotation encoding="application/x-tex">t_{i}</annotation></semantics></math>, the embedding vector <math id="S3.SS1.SSS2.p1.3.m3" class="ltx_Math" alttext="v_{i}" display="inline" intent=":literal"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_{i}</annotation></semantics></math> is computed as given in Equation <a href="#S3.E1" title="In 3.1.2 Embedding Generation ‣ 3.1 Data Preparation ‣ 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>, where the representation of the first hidden state (analogous to the [CLS] token) is extracted and normalized. Batch encoding was applied for efficient computation, producing a dense embedding matrix <math id="S3.SS1.SSS2.p1.4.m4" class="ltx_Math" alttext="\mathbf{V}\in\mathbb{R}^{n\times d}" display="inline" intent=":literal"><semantics><mrow><mi>𝐕</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>n</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi>d</mi></mrow></msup></mrow><annotation encoding="application/x-tex">\mathbf{V}\in\mathbb{R}^{n\times d}</annotation></semantics></math>, where <math id="S3.SS1.SSS2.p1.5.m5" class="ltx_Math" alttext="n" display="inline" intent=":literal"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> denotes the number of chunks and <math id="S3.SS1.SSS2.p1.6.m6" class="ltx_Math" alttext="d" display="inline" intent=":literal"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math> the embedding dimension.</p>
+</div>
+<div id="S3.SS1.SSS2.p2" class="ltx_para ltx_noindent">
+<table id="S3.E1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E1.m1" class="ltx_Math" alttext="v_{i}=\text{QwenEmb}\left(\text{Tokenizer}(t_{i})\right)_{[0]}" display="block" intent=":literal"><semantics><mrow><msub><mi>v</mi><mi>i</mi></msub><mo>=</mo><mrow><mtext>QwenEmb</mtext><mo lspace="0em" rspace="0em">​</mo><msub><mrow><mo>(</mo><mrow><mtext>Tokenizer</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>)</mo></mrow><mrow><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo></mrow></msub></mrow></mrow><annotation encoding="application/x-tex">v_{i}=\text{QwenEmb}\left(\text{Tokenizer}(t_{i})\right)_{[0]}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+</div>
+</section>
+<section id="S3.SS1.SSS3" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.1.3 </span>Vector Indexing</h4>
+
+<div id="S3.SS1.SSS3.p1" class="ltx_para ltx_noindent">
+<p id="S3.SS1.SSS3.p1.5" class="ltx_p">The embeddings were stored in a FAISS <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib18" title="THE faiss library" class="ltx_ref">7</a>]</cite> index for <math id="S3.SS1.SSS3.p1.1.m1" class="ltx_Math" alttext="L_{2}" display="inline" intent=":literal"><semantics><msub><mi>L</mi><mn>2</mn></msub><annotation encoding="application/x-tex">L_{2}</annotation></semantics></math>-based similarity search <math id="S3.SS1.SSS3.p1.2.m2" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>, where <math id="S3.SS1.SSS3.p1.3.m3" class="ltx_Math" alttext="S(Q,t_{i})" display="inline" intent=":literal"><semantics><mrow><mi>S</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>Q</mi><mo>,</mo><msub><mi>t</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">S(Q,t_{i})</annotation></semantics></math> denotes the similarity between a query embedding <math id="S3.SS1.SSS3.p1.4.m4" class="ltx_Math" alttext="v_{Q}" display="inline" intent=":literal"><semantics><msub><mi>v</mi><mi>Q</mi></msub><annotation encoding="application/x-tex">v_{Q}</annotation></semantics></math> and document chunk <math id="S3.SS1.SSS3.p1.5.m5" class="ltx_Math" alttext="v_{i}" display="inline" intent=":literal"><semantics><msub><mi>v</mi><mi>i</mi></msub><annotation encoding="application/x-tex">v_{i}</annotation></semantics></math>. The FAISS index and associated metadata (chunk mappings) were serialized as <span id="S3.SS1.SSS3.p1.5.1" class="ltx_text ltx_font_typewriter">index.faiss</span> and <span id="S3.SS1.SSS3.p1.5.2" class="ltx_text ltx_font_typewriter">index.pkl</span> respectively, forming the foundation of the vector retrieval layer.</p>
+</div>
+<div id="S3.SS1.SSS3.p2" class="ltx_para ltx_noindent">
+<table id="S3.E2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E2.m1" class="ltx_Math" alttext="S(Q,t_{i})=-\|v_{Q}-v_{i}\|_{2}" display="block" intent=":literal"><semantics><mrow><mrow><mi>S</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>Q</mi><mo>,</mo><msub><mi>t</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>−</mo><msub><mrow><mo stretchy="false">‖</mo><mrow><msub><mi>v</mi><mi>Q</mi></msub><mo>−</mo><msub><mi>v</mi><mi>i</mi></msub></mrow><mo stretchy="false">‖</mo></mrow><mn>2</mn></msub></mrow></mrow><annotation encoding="application/x-tex">S(Q,t_{i})=-\|v_{Q}-v_{i}\|_{2}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="S3.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>System Design</h3>
+
+<section id="S3.SS2.SSS1" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.2.1 </span>Base Model Selection</h4>
+
+<div id="S3.SS2.SSS1.p1" class="ltx_para ltx_noindent">
+<p id="S3.SS2.SSS1.p1.1" class="ltx_p">We use the ‘DeepSeek-R1-Distill-Qwen-14B’ model commonly known as ’14B-DeepSeek-R1’, in a 4-bit (Q4_K_M) quantized format <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib19" title="DeepSeek-r1: incentivizing reasoning capability in llms via reinforcement learning" class="ltx_ref">6</a>]</cite>. This choice balances reasoning strength and computational efficiency. The quantization enables deployment on resource-constrained environments while preserving reasoning quality through Chain-of-Thought (CoT) capabilities, crucial for the multi-step problem-solving found in Chartered Accountancy exams.</p>
+</div>
+</section>
+<section id="S3.SS2.SSS2" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.2.2 </span>Prompt and Context Retrieval</h4>
+
+<div id="S3.SS2.SSS2.p1" class="ltx_para ltx_noindent">
+<p id="S3.SS2.SSS2.p1.1" class="ltx_p">To preserve consistency and provide a fair evaluation, we used the exact standardized system prompt described in the original CA-Ben study <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib16" title="Large language models acing chartered accountancy" class="ltx_ref">9</a>]</cite>. The model processes the retrieved knowledge from the vector store which serves as contextual information to be used in the prompt.</p>
+</div>
+</section>
+<section id="S3.SS2.SSS3" class="ltx_subsubsection">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.2.3 </span>Context Integration and Reasoning</h4>
+
+<div id="S3.SS2.SSS3.p1" class="ltx_para ltx_noindent">
+<p id="S3.SS2.SSS3.p1.1" class="ltx_p">The system transfers the most relevant context that it found in the vector store to the base model. The system uses Chain-of-Thought reasoning through reinforcement learning that is built into the internal core of 14B-DeepSeek-R1 to create a response that combines both the user query and the retrieved text.</p>
+</div>
+</section>
+</section>
+<section id="S3.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3 </span>Inference and Workflow Logic</h3>
+
+<div id="S3.SS3.p1" class="ltx_para ltx_noindent">
+<p id="S3.SS3.p1.5" class="ltx_p">The complete inference workflow operates through a unified Retrieval-Augmented Generation system which functions as a RAG loop (Algorithm <a href="#alg1" title="Algorithm 1 ‣ 3.3 Inference and Workflow Logic ‣ 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>). The system starts its process by receiving a query (<math id="S3.SS3.p1.1.m1" class="ltx_Math" alttext="Q" display="inline" intent=":literal"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>) which it uses to create embeddings (<math id="S3.SS3.p1.2.m2" class="ltx_Math" alttext="E_{q}" display="inline" intent=":literal"><semantics><msub><mi>E</mi><mi>q</mi></msub><annotation encoding="application/x-tex">E_{q}</annotation></semantics></math>) and retrieve the top context (<math id="S3.SS3.p1.3.m3" class="ltx_Math" alttext="C" display="inline" intent=":literal"><semantics><mi>C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math>) from the vector store (<math id="S3.SS3.p1.4.m4" class="ltx_Math" alttext="V" display="inline" intent=":literal"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>). The system directly adds this retrieved context into the standard CA-Ben prompt template. For an apples-to-apples comparison, we set the temperature to 0.75, consistent with the CA-Ben study <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib16" title="Large language models acing chartered accountancy" class="ltx_ref">9</a>]</cite>, ensuring moderate randomness that supports learning in complex scenarios. The model evaluates the query together with the context to generate the final answer (<math id="S3.SS3.p1.5.m5" class="ltx_Math" alttext="A" display="inline" intent=":literal"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>) through controlled generation.</p>
+</div>
+<figure id="alg1" class="ltx_float ltx_float_algorithm ltx_framed ltx_framed_top">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_float"><span id="alg1.2.1.1" class="ltx_text ltx_font_bold">Algorithm 1</span> </span> Inference Workflow of the RAG Framework</figcaption>
+<div id="alg1.3" class="ltx_listing ltx_listing">
+<div id="alg1.l0" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline">0:</span> User query <math id="alg1.l0.m1" class="ltx_Math" alttext="Q" display="inline" intent=":literal"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>
+
+</div>
+<div id="alg1.l0a" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline">0:</span> Final answer <math id="alg1.l0a.m1" class="ltx_Math" alttext="A" display="inline" intent=":literal"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+
+</div>
+<div id="alg1.l1" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline">1:</span> <math id="alg1.l1.m1" class="ltx_Math" alttext="E_{q}\leftarrow\text{Embed}(Q)" display="inline" intent=":literal"><semantics><mrow><msub><mi>E</mi><mi>q</mi></msub><mo stretchy="false">←</mo><mrow><mtext>Embed</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>Q</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">E_{q}\leftarrow\text{Embed}(Q)</annotation></semantics></math>
+
+</div>
+<div id="alg1.l2" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline">2:</span> <math id="alg1.l2.m1" class="ltx_Math" alttext="C\leftarrow V.\text{search}(E_{q},k=1)" display="inline" intent=":literal"><semantics><mrow><mrow><mi>C</mi><mo stretchy="false">←</mo><mi>V</mi></mrow><mo lspace="0em" rspace="0.167em">.</mo><mrow><mtext>search</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><msub><mi>E</mi><mi>q</mi></msub><mo>,</mo><mi>k</mi></mrow><mo>=</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">C\leftarrow V.\text{search}(E_{q},k=1)</annotation></semantics></math>
+
+</div>
+<div id="alg1.l3" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline">3:</span> <math id="alg1.l3.m1" class="ltx_Math" alttext="\text{Prompt}\leftarrow\text{Template}(Q,C)" display="inline" intent=":literal"><semantics><mrow><mtext>Prompt</mtext><mo stretchy="false">←</mo><mrow><mtext>Template</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>Q</mi><mo>,</mo><mi>C</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\text{Prompt}\leftarrow\text{Template}(Q,C)</annotation></semantics></math>
+
+</div>
+<div id="alg1.l4" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline">4:</span> <math id="alg1.l4.m1" class="ltx_Math" alttext="A\leftarrow\text{LLM.generate}(\text{Prompt},\text{temperature}=0.75)" display="inline" intent=":literal"><semantics><mrow><mi>A</mi><mo stretchy="false">←</mo><mrow><mtext>LLM.generate</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mtext>Prompt</mtext><mo>,</mo><mtext>temperature</mtext></mrow><mo>=</mo><mn>0.75</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">A\leftarrow\text{LLM.generate}(\text{Prompt},\text{temperature}=0.75)</annotation></semantics></math>
+
+</div>
+<div id="alg1.l5" class="ltx_listingline">
+<span class="ltx_tag ltx_tag_listingline">5:</span> <span id="alg1.l5.1" class="ltx_text ltx_font_bold">return</span>  <math id="alg1.l5.m1" class="ltx_Math" alttext="A" display="inline" intent=":literal"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
+
+</div>
+</div>
+</figure>
+<div id="S3.SS3.p2" class="ltx_para ltx_noindent">
+<p id="S3.SS3.p2.1" class="ltx_p">The adoption of this streamlined workflow simplifies CA-ThinkFlow’s architecture by passing the retrieved text directly to the language model. By relying on a straightforward RAG approach, the system ensures that the model’s CoT reasoning is continuously focused on synthesizing the provided context to answer the query accurately.</p>
+</div>
+</section>
+</section>
+<section id="S4" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Experimental Setup</h2>
+
+<div id="S4.p1" class="ltx_para ltx_noindent">
+<p id="S4.p1.1" class="ltx_p">The evaluation used zero-shot testing on the CA-Ben <span id="footnote1" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note">1</span>Refer to the repository for benchmark: <a href="https://github.com/thejatingupta7/LLMCA" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://github.com/thejatingupta7/LLMCA</a></span></span></span> benchmark because the models received no training data. The system evaluates performance according to CA-Ben study standards because it simulates an actual cold-start situation <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib16" title="Large language models acing chartered accountancy" class="ltx_ref">9</a>]</cite>.</p>
+</div>
+<section id="S4.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Implementation Details</h3>
+
+<div id="S4.SS1.p1" class="ltx_para ltx_noindent">
+<p id="S4.SS1.p1.1" class="ltx_p">The implementation was completed on a workstation configuration which included two Intel Xeon CPUs and 65 GB RAM and two NVIDIA GeForce GTX 1080 Ti GPUs to meet its computational requirements. The software environment operated on Python version 3.11.9. PyTorch (CUDA 11.8) served as the deep learning and retrieval engine for the project. The data transformation was executed through the use of Transformers and FAISS-CPU dependencies. The complete process of retrieval and reasoning was conducted through the capabilities of LangChain and Ollama. The project used pandas and openpyxl for its data management tasks.</p>
+</div>
+</section>
+<section id="S4.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Evaluation Pipeline and Answer Extraction</h3>
+
+<div id="S4.SS2.p1" class="ltx_para ltx_noindent">
+<p id="S4.SS2.p1.1" class="ltx_p">To evaluate the models’ responses, we utilized the automated Python testing pipeline and regex extraction methodology established in the CA-Ben study <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib16" title="Large language models acing chartered accountancy" class="ltx_ref">9</a>]</cite>. However, because the DeepSeek-R1 reasoning model is highly verbose and produces very long Chain-of-Thought traces, a preprocessing step was required before we could apply the standard extraction procedure.</p>
+</div>
+<div id="S4.SS2.p2" class="ltx_para ltx_noindent">
+<p id="S4.SS2.p2.1" class="ltx_p">The evaluation process was streamlined as follows:</p>
+<ol id="S4.I1" class="ltx_enumerate">
+<li id="S4.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span> 
+<div id="S4.I1.i1.p1" class="ltx_para ltx_noindent">
+<p id="S4.I1.i1.p1.1" class="ltx_p"><span id="S4.I1.i1.p1.1.1" class="ltx_text ltx_font_bold">Reasoning Text Removal:</span>
+Reasoning models emit their intermediate thinking results within the <span id="S4.I1.i1.p1.1.2" class="ltx_text ltx_font_typewriter">&lt;think&gt;...&lt;/think&gt;</span> tokens which they use to deliver their ultimate response. The system used the regular expression patterns from Equation <a href="#S4.E3" title="In item 1 ‣ 4.2 Evaluation Pipeline and Answer Extraction ‣ 4 Experimental Setup ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a> to remove all text between the specified tags. The <span id="S4.I1.i1.p1.1.3" class="ltx_text ltx_font_typewriter">DOTALL</span> modifier acted as a wildcard, allowing the matching of text that spanned multiple lines.</p>
+</div>
+<div id="S4.I1.i1.p2" class="ltx_para ltx_noindent">
+<table id="S4.E3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.E3.m1" class="ltx_Math" alttext="\text{pattern}=\texttt{r'&lt;think&gt;.*?&lt;/think&gt;'}\;[\texttt{DOTALL}]" display="block" intent=":literal"><semantics><mrow><mtext>pattern</mtext><mo>=</mo><mrow><mtext class="ltx_mathvariant_monospace">r’&lt;think&gt;.*?&lt;/think&gt;’</mtext><mo lspace="0.280em" rspace="0em">​</mo><mrow><mo stretchy="false">[</mo><mtext class="ltx_mathvariant_monospace">DOTALL</mtext><mo stretchy="false">]</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\text{pattern}=\texttt{r'&lt;think&gt;.*?&lt;/think&gt;'}\;[\texttt{DOTALL}]</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+<li id="S4.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span> 
+<div id="S4.I1.i2.p1" class="ltx_para">
+<p id="S4.I1.i2.p1.1" class="ltx_p"><span id="S4.I1.i2.p1.1.1" class="ltx_text ltx_font_bold">Standardized Extraction and Validation:</span> After stripping the reasoning traces, we applied the standard CA-Ben regex pattern to reliably capture the final answer choice (A, B, C, or D). The extracted options were then compared against the ground-truth labels.</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="S4.SS2.p3" class="ltx_para ltx_noindent">
+<p id="S4.SS2.p3.1" class="ltx_p">Overall accuracy was then calculated using the exact mathematical formulation detailed in the original CA-Ben methodology.</p>
+</div>
+</section>
+</section>
+<section id="S5" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Results and Analysis</h2>
+
+<div id="S5.p1" class="ltx_para ltx_noindent">
+<p id="S5.p1.1" class="ltx_p">A detailed and thorough summary of the performance of each LLM over the 14 different domains of the CA-Ben benchmark is given in this section. The fine-grained accuracy scores in Table <a href="#S5.T1" title="Table 1 ‣ 5 Results and Analysis ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a> depict the capacity of various models and are the main data source for the level-wise and model-specific analysis that follows. A comprehensive visual and statistical discussion of these results is demonstrated in the next subsections:</p>
+</div>
+<figure id="S5.T1" class="ltx_table">
+
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 1: </span>Performance on Foundation, Intermediate, and Final-level Subjects</figcaption><div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1">
+<table id="S5.T1.1" class="ltx_tabular ltx_centering ltx_figure_panel ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S5.T1.1.1.1" class="ltx_tr">
+<th id="S5.T1.1.1.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_r ltx_border_tt" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.1.1.1.1" class="ltx_text ltx_font_bold">Models</span></th>
+<th id="S5.T1.1.1.1.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt" style="padding-left:3.0pt;padding-right:3.0pt;" colspan="2"><span id="S5.T1.1.1.1.2.1" class="ltx_text ltx_font_bold">Foundation</span></th>
+<th id="S5.T1.1.1.1.3" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_tt" style="padding-left:3.0pt;padding-right:3.0pt;" colspan="6"><span id="S5.T1.1.1.1.3.1" class="ltx_text ltx_font_bold">Intermediate</span></th>
+<th id="S5.T1.1.1.1.4" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" style="padding-left:3.0pt;padding-right:3.0pt;" colspan="6"><span id="S5.T1.1.1.1.4.1" class="ltx_text ltx_font_bold">Final</span></th>
+</tr>
+<tr id="S5.T1.1.2.2" class="ltx_tr">
+<th id="S5.T1.1.2.2.1" class="ltx_td ltx_th ltx_th_column ltx_th_row ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;"></th>
+<th id="S5.T1.1.2.2.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.2.2.2.1" class="ltx_text ltx_font_bold">F1</span></th>
+<th id="S5.T1.1.2.2.3" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.2.2.3.1" class="ltx_text ltx_font_bold">F2</span></th>
+<th id="S5.T1.1.2.2.4" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.2.2.4.1" class="ltx_text ltx_font_bold">I1</span></th>
+<th id="S5.T1.1.2.2.5" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.2.2.5.1" class="ltx_text ltx_font_bold">I2</span></th>
+<th id="S5.T1.1.2.2.6" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.2.2.6.1" class="ltx_text ltx_font_bold">I3</span></th>
+<th id="S5.T1.1.2.2.7" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.2.2.7.1" class="ltx_text ltx_font_bold">I4</span></th>
+<th id="S5.T1.1.2.2.8" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.2.2.8.1" class="ltx_text ltx_font_bold">I5</span></th>
+<th id="S5.T1.1.2.2.9" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.2.2.9.1" class="ltx_text ltx_font_bold">I6</span></th>
+<th id="S5.T1.1.2.2.10" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.2.2.10.1" class="ltx_text ltx_font_bold">FN1</span></th>
+<th id="S5.T1.1.2.2.11" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.2.2.11.1" class="ltx_text ltx_font_bold">FN2</span></th>
+<th id="S5.T1.1.2.2.12" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.2.2.12.1" class="ltx_text ltx_font_bold">FN3</span></th>
+<th id="S5.T1.1.2.2.13" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.2.2.13.1" class="ltx_text ltx_font_bold">FN4</span></th>
+<th id="S5.T1.1.2.2.14" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.2.2.14.1" class="ltx_text ltx_font_bold">FN5</span></th>
+<th id="S5.T1.1.2.2.15" class="ltx_td ltx_nopad_r ltx_align_center ltx_th ltx_th_column ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.2.2.15.1" class="ltx_text ltx_font_bold">FN6</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S5.T1.1.3.1" class="ltx_tr" style="--ltx-bg-color:#CCFFCC;">
+<th id="S5.T1.1.3.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.3.1.1.1" class="ltx_text ltx_font_bold" style="--ltx-bg-color:#CCFFCC;">CA-ThinkFlow</span></th>
+<td id="S5.T1.1.3.1.2" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.3.1.2.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">77.78</span></td>
+<td id="S5.T1.1.3.1.3" class="ltx_td ltx_align_center ltx_border_r ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.3.1.3.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">83.00</span></td>
+<td id="S5.T1.1.3.1.4" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.3.1.4.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">40.00</span></td>
+<td id="S5.T1.1.3.1.5" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.3.1.5.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">33.33</span></td>
+<td id="S5.T1.1.3.1.6" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.3.1.6.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">33.33</span></td>
+<td id="S5.T1.1.3.1.7" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.3.1.7.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">40.00</span></td>
+<td id="S5.T1.1.3.1.8" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.3.1.8.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">66.67</span></td>
+<td id="S5.T1.1.3.1.9" class="ltx_td ltx_align_center ltx_border_r ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.3.1.9.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">75.00</span></td>
+<td id="S5.T1.1.3.1.10" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.3.1.10.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">57.14</span></td>
+<td id="S5.T1.1.3.1.11" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.3.1.11.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">73.33</span></td>
+<td id="S5.T1.1.3.1.12" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.3.1.12.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">57.14</span></td>
+<td id="S5.T1.1.3.1.13" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.3.1.13.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">40.00</span></td>
+<td id="S5.T1.1.3.1.14" class="ltx_td ltx_align_center ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.3.1.14.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">26.67</span></td>
+<td id="S5.T1.1.3.1.15" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.3.1.15.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">37.50</span></td>
+</tr>
+<tr id="S5.T1.1.4.2" class="ltx_tr" style="--ltx-bg-color:#DFDFDF;">
+<th id="S5.T1.1.4.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.4.2.1.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">14B-Deepseek-R1</span></th>
+<td id="S5.T1.1.4.2.2" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.4.2.2.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">47.47</span></td>
+<td id="S5.T1.1.4.2.3" class="ltx_td ltx_align_center ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.4.2.3.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">70.00</span></td>
+<td id="S5.T1.1.4.2.4" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.4.2.4.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">33.33</span></td>
+<td id="S5.T1.1.4.2.5" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.4.2.5.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">33.33</span></td>
+<td id="S5.T1.1.4.2.6" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.4.2.6.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">20.00</span></td>
+<td id="S5.T1.1.4.2.7" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.4.2.7.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">20.00</span></td>
+<td id="S5.T1.1.4.2.8" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.4.2.8.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">46.67</span></td>
+<td id="S5.T1.1.4.2.9" class="ltx_td ltx_align_center ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.4.2.9.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">56.25</span></td>
+<td id="S5.T1.1.4.2.10" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.4.2.10.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">42.86</span></td>
+<td id="S5.T1.1.4.2.11" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.4.2.11.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">60.00</span></td>
+<td id="S5.T1.1.4.2.12" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.4.2.12.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">50.00</span></td>
+<td id="S5.T1.1.4.2.13" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.4.2.13.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">13.33</span></td>
+<td id="S5.T1.1.4.2.14" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.4.2.14.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">06.67</span></td>
+<td id="S5.T1.1.4.2.15" class="ltx_td ltx_nopad_r ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;"><span id="S5.T1.1.4.2.15.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">25.00</span></td>
+</tr>
+<tr id="S5.T1.1.5.3" class="ltx_tr">
+<th id="S5.T1.1.5.3.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">GPT-4o</th>
+<td id="S5.T1.1.5.3.2" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">50.00</td>
+<td id="S5.T1.1.5.3.3" class="ltx_td ltx_align_center ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">58.00</td>
+<td id="S5.T1.1.5.3.4" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">46.66</td>
+<td id="S5.T1.1.5.3.5" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">73.33</td>
+<td id="S5.T1.1.5.3.6" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">20.00</td>
+<td id="S5.T1.1.5.3.7" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">20.00</td>
+<td id="S5.T1.1.5.3.8" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">86.66</td>
+<td id="S5.T1.1.5.3.9" class="ltx_td ltx_align_center ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">75.00</td>
+<td id="S5.T1.1.5.3.10" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">71.43</td>
+<td id="S5.T1.1.5.3.11" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">53.33</td>
+<td id="S5.T1.1.5.3.12" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">78.57</td>
+<td id="S5.T1.1.5.3.13" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">53.33</td>
+<td id="S5.T1.1.5.3.14" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">33.33</td>
+<td id="S5.T1.1.5.3.15" class="ltx_td ltx_nopad_r ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">41.67</td>
+</tr>
+<tr id="S5.T1.1.6.4" class="ltx_tr">
+<th id="S5.T1.1.6.4.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">LLAMA 3.3 70B Inst.</th>
+<td id="S5.T1.1.6.4.2" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">59.00</td>
+<td id="S5.T1.1.6.4.3" class="ltx_td ltx_align_center ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">56.00</td>
+<td id="S5.T1.1.6.4.4" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">33.33</td>
+<td id="S5.T1.1.6.4.5" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">60.00</td>
+<td id="S5.T1.1.6.4.6" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">40.00</td>
+<td id="S5.T1.1.6.4.7" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">40.00</td>
+<td id="S5.T1.1.6.4.8" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">73.33</td>
+<td id="S5.T1.1.6.4.9" class="ltx_td ltx_align_center ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">75.00</td>
+<td id="S5.T1.1.6.4.10" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">64.29</td>
+<td id="S5.T1.1.6.4.11" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">33.33</td>
+<td id="S5.T1.1.6.4.12" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">71.43</td>
+<td id="S5.T1.1.6.4.13" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">53.33</td>
+<td id="S5.T1.1.6.4.14" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">06.67</td>
+<td id="S5.T1.1.6.4.15" class="ltx_td ltx_nopad_r ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">20.83</td>
+</tr>
+<tr id="S5.T1.1.7.5" class="ltx_tr">
+<th id="S5.T1.1.7.5.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">LLAMA 3.1 405B Inst.</th>
+<td id="S5.T1.1.7.5.2" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">53.00</td>
+<td id="S5.T1.1.7.5.3" class="ltx_td ltx_align_center ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">59.00</td>
+<td id="S5.T1.1.7.5.4" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">40.00</td>
+<td id="S5.T1.1.7.5.5" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">53.33</td>
+<td id="S5.T1.1.7.5.6" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">20.00</td>
+<td id="S5.T1.1.7.5.7" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">40.00</td>
+<td id="S5.T1.1.7.5.8" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">86.66</td>
+<td id="S5.T1.1.7.5.9" class="ltx_td ltx_align_center ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">56.25</td>
+<td id="S5.T1.1.7.5.10" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">64.29</td>
+<td id="S5.T1.1.7.5.11" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">46.67</td>
+<td id="S5.T1.1.7.5.12" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">71.43</td>
+<td id="S5.T1.1.7.5.13" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">13.33</td>
+<td id="S5.T1.1.7.5.14" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">26.67</td>
+<td id="S5.T1.1.7.5.15" class="ltx_td ltx_nopad_r ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">41.67</td>
+</tr>
+<tr id="S5.T1.1.8.6" class="ltx_tr">
+<th id="S5.T1.1.8.6.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">MISTRAL Large</th>
+<td id="S5.T1.1.8.6.2" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">41.00</td>
+<td id="S5.T1.1.8.6.3" class="ltx_td ltx_align_center ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">56.00</td>
+<td id="S5.T1.1.8.6.4" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">41.66</td>
+<td id="S5.T1.1.8.6.5" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">53.33</td>
+<td id="S5.T1.1.8.6.6" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">31.25</td>
+<td id="S5.T1.1.8.6.7" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">20.00</td>
+<td id="S5.T1.1.8.6.8" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">73.33</td>
+<td id="S5.T1.1.8.6.9" class="ltx_td ltx_align_center ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">60.00</td>
+<td id="S5.T1.1.8.6.10" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">42.86</td>
+<td id="S5.T1.1.8.6.11" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">41.67</td>
+<td id="S5.T1.1.8.6.12" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">57.14</td>
+<td id="S5.T1.1.8.6.13" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">46.67</td>
+<td id="S5.T1.1.8.6.14" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">13.33</td>
+<td id="S5.T1.1.8.6.15" class="ltx_td ltx_nopad_r ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">29.17</td>
+</tr>
+<tr id="S5.T1.1.9.7" class="ltx_tr">
+<th id="S5.T1.1.9.7.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">Claude 3.5 Sonnet</th>
+<td id="S5.T1.1.9.7.2" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">60.00</td>
+<td id="S5.T1.1.9.7.3" class="ltx_td ltx_align_center ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">60.00</td>
+<td id="S5.T1.1.9.7.4" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">33.33</td>
+<td id="S5.T1.1.9.7.5" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">60.00</td>
+<td id="S5.T1.1.9.7.6" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">20.00</td>
+<td id="S5.T1.1.9.7.7" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">46.66</td>
+<td id="S5.T1.1.9.7.8" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">93.33</td>
+<td id="S5.T1.1.9.7.9" class="ltx_td ltx_align_center ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">75.00</td>
+<td id="S5.T1.1.9.7.10" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">78.57</td>
+<td id="S5.T1.1.9.7.11" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">46.67</td>
+<td id="S5.T1.1.9.7.12" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">64.29</td>
+<td id="S5.T1.1.9.7.13" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">53.33</td>
+<td id="S5.T1.1.9.7.14" class="ltx_td ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">20.00</td>
+<td id="S5.T1.1.9.7.15" class="ltx_td ltx_nopad_r ltx_align_center" style="padding-left:3.0pt;padding-right:3.0pt;">62.50</td>
+</tr>
+<tr id="S5.T1.1.10.8" class="ltx_tr">
+<th id="S5.T1.1.10.8.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">Microsoft Phi 4</th>
+<td id="S5.T1.1.10.8.2" class="ltx_td ltx_align_center ltx_border_bb" style="padding-left:3.0pt;padding-right:3.0pt;">56.00</td>
+<td id="S5.T1.1.10.8.3" class="ltx_td ltx_align_center ltx_border_bb ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">62.00</td>
+<td id="S5.T1.1.10.8.4" class="ltx_td ltx_align_center ltx_border_bb" style="padding-left:3.0pt;padding-right:3.0pt;">46.66</td>
+<td id="S5.T1.1.10.8.5" class="ltx_td ltx_align_center ltx_border_bb" style="padding-left:3.0pt;padding-right:3.0pt;">46.66</td>
+<td id="S5.T1.1.10.8.6" class="ltx_td ltx_align_center ltx_border_bb" style="padding-left:3.0pt;padding-right:3.0pt;">33.33</td>
+<td id="S5.T1.1.10.8.7" class="ltx_td ltx_align_center ltx_border_bb" style="padding-left:3.0pt;padding-right:3.0pt;">33.33</td>
+<td id="S5.T1.1.10.8.8" class="ltx_td ltx_align_center ltx_border_bb" style="padding-left:3.0pt;padding-right:3.0pt;">66.66</td>
+<td id="S5.T1.1.10.8.9" class="ltx_td ltx_align_center ltx_border_bb ltx_border_r" style="padding-left:3.0pt;padding-right:3.0pt;">68.75</td>
+<td id="S5.T1.1.10.8.10" class="ltx_td ltx_align_center ltx_border_bb" style="padding-left:3.0pt;padding-right:3.0pt;">64.29</td>
+<td id="S5.T1.1.10.8.11" class="ltx_td ltx_align_center ltx_border_bb" style="padding-left:3.0pt;padding-right:3.0pt;">53.33</td>
+<td id="S5.T1.1.10.8.12" class="ltx_td ltx_align_center ltx_border_bb" style="padding-left:3.0pt;padding-right:3.0pt;">57.14</td>
+<td id="S5.T1.1.10.8.13" class="ltx_td ltx_align_center ltx_border_bb" style="padding-left:3.0pt;padding-right:3.0pt;">26.67</td>
+<td id="S5.T1.1.10.8.14" class="ltx_td ltx_align_center ltx_border_bb" style="padding-left:3.0pt;padding-right:3.0pt;">06.67</td>
+<td id="S5.T1.1.10.8.15" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_bb" style="padding-left:3.0pt;padding-right:3.0pt;">41.67</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="ltx_flex_break"></div>
+<div class="ltx_flex_cell ltx_flex_size_1">
+<p id="S5.T1.2" class="ltx_p ltx_figure_panel ltx_parbox ltx_align_center ltx_align_middle" style="width:433.6pt;"><span id="S5.T1.2.1" class="ltx_text ltx_font_bold">Legend:</span> <span id="S5.T1.2.2" class="ltx_text ltx_font_bold">F1</span>: Business Math &amp; Stats; <span id="S5.T1.2.3" class="ltx_text ltx_font_bold">F2</span>: Business Econ &amp; BCK; <span id="S5.T1.2.4" class="ltx_text ltx_font_bold">I1</span>: Adv. Accounting; <span id="S5.T1.2.5" class="ltx_text ltx_font_bold">I2</span>: Corp. Laws; <span id="S5.T1.2.6" class="ltx_text ltx_font_bold">I3</span>: Taxation; <span id="S5.T1.2.7" class="ltx_text ltx_font_bold">I4</span>: Cost &amp; Mgmt. Acct.; <span id="S5.T1.2.8" class="ltx_text ltx_font_bold">I5</span>: Auditing &amp; Ethics; <span id="S5.T1.2.9" class="ltx_text ltx_font_bold">I6</span>: Fin. &amp; Strat. Mgmt.; <span id="S5.T1.2.10" class="ltx_text ltx_font_bold">FN1</span>: Fin. Reporting; <span id="S5.T1.2.11" class="ltx_text ltx_font_bold">FN2</span>: Adv. Fin. Mgmt.; <span id="S5.T1.2.12" class="ltx_text ltx_font_bold">FN3</span>: Adv. Auditing; <span id="S5.T1.2.13" class="ltx_text ltx_font_bold">FN4</span>: Direct Tax Laws; <span id="S5.T1.2.14" class="ltx_text ltx_font_bold">FN5</span>: Indirect Tax Laws; <span id="S5.T1.2.15" class="ltx_text ltx_font_bold">FN6</span>: Integrated Business Sol.; <span id="S5.T1.2.16" class="ltx_text ltx_font_bold">Inst</span>: Instruct</p>
+</div>
+</div>
+</figure>
+<section id="S5.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.1 </span>Exam Level-wise Breakdown</h3>
+
+<div id="S5.SS1.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS1.p1.1" class="ltx_p">Table <a href="#S5.T2" title="Table 2 ‣ 5.1 Exam Level-wise Breakdown ‣ 5 Results and Analysis ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a> displays the accuracies of various models evaluated across the three CA-Ben levels. As per observations, CA-ThinkFlow acquires the highest accuracy score at the Foundation level (80.39%), and also outperforms almost all the given state-of-the-art models at the Final level (except GPT-4o and Claude-3.5-Sonnet). It also outperforms Mistral Large and the base 14B-Deepseek-R1 model, validating the impact of the RAG mechanism implemented. This validates the strong reasoning capability and robustness of CA-ThinkFlow across all difficulty levels in comparison to significantly larger and computationally inefficient models like Claude 3.5 Sonnet, GPT-4o, LLaMA-3.1-405B-Instruct, and others, especially at the Foundation and Final levels.</p>
+</div>
+<figure id="S5.T2" class="ltx_table">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 2: </span>Cumulative accuracy (%) of LLMs across CA-Ben levels.</figcaption>
+<table id="S5.T2.1" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S5.T2.1.1.1" class="ltx_tr">
+<th id="S5.T2.1.1.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt"><span id="S5.T2.1.1.1.1.1" class="ltx_text ltx_font_bold">Model</span></th>
+<th id="S5.T2.1.1.1.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S5.T2.1.1.1.2.1" class="ltx_text ltx_font_bold">Foundation</span></th>
+<th id="S5.T2.1.1.1.3" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S5.T2.1.1.1.3.1" class="ltx_text ltx_font_bold">Intermediate</span></th>
+<th id="S5.T2.1.1.1.4" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S5.T2.1.1.1.4.1" class="ltx_text ltx_font_bold">Final</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S5.T2.1.2.1" class="ltx_tr" style="--ltx-bg-color:#CCFFCC;">
+<th id="S5.T2.1.2.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t"><span id="S5.T2.1.2.1.1.1" class="ltx_text ltx_font_bold" style="--ltx-bg-color:#CCFFCC;">CA-ThinkFlow</span></th>
+<td id="S5.T2.1.2.1.2" class="ltx_td ltx_align_center ltx_border_t"><span id="S5.T2.1.2.1.2.1" class="ltx_text ltx_font_bold" style="--ltx-bg-color:#CCFFCC;">80.39</span></td>
+<td id="S5.T2.1.2.1.3" class="ltx_td ltx_align_center ltx_border_t"><span id="S5.T2.1.2.1.3.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">48.05</span></td>
+<td id="S5.T2.1.2.1.4" class="ltx_td ltx_align_center ltx_border_t"><span id="S5.T2.1.2.1.4.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">48.63</span></td>
+</tr>
+<tr id="S5.T2.1.3.2" class="ltx_tr" style="--ltx-bg-color:#DFDFDF;">
+<th id="S5.T2.1.3.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row"><span id="S5.T2.1.3.2.1.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">14B-Deepseek-R1</span></th>
+<td id="S5.T2.1.3.2.2" class="ltx_td ltx_align_center"><span id="S5.T2.1.3.2.2.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">58.73</span></td>
+<td id="S5.T2.1.3.2.3" class="ltx_td ltx_align_center"><span id="S5.T2.1.3.2.3.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">34.93</span></td>
+<td id="S5.T2.1.3.2.4" class="ltx_td ltx_align_center"><span id="S5.T2.1.3.2.4.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">32.97</span></td>
+</tr>
+<tr id="S5.T2.1.4.3" class="ltx_tr">
+<th id="S5.T2.1.4.3.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">GPT-4o</th>
+<td id="S5.T2.1.4.3.2" class="ltx_td ltx_align_center">54.00</td>
+<td id="S5.T2.1.4.3.3" class="ltx_td ltx_align_center">53.61</td>
+<td id="S5.T2.1.4.3.4" class="ltx_td ltx_align_center"><span id="S5.T2.1.4.3.4.1" class="ltx_text ltx_font_bold">55.28</span></td>
+</tr>
+<tr id="S5.T2.1.5.4" class="ltx_tr">
+<th id="S5.T2.1.5.4.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">LLaMA-3.3-70B-Instruct</th>
+<td id="S5.T2.1.5.4.2" class="ltx_td ltx_align_center">57.50</td>
+<td id="S5.T2.1.5.4.3" class="ltx_td ltx_align_center">53.61</td>
+<td id="S5.T2.1.5.4.4" class="ltx_td ltx_align_center">41.65</td>
+</tr>
+<tr id="S5.T2.1.6.5" class="ltx_tr">
+<th id="S5.T2.1.6.5.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">LLaMA-3.1-405B-Instruct</th>
+<td id="S5.T2.1.6.5.2" class="ltx_td ltx_align_center">56.00</td>
+<td id="S5.T2.1.6.5.3" class="ltx_td ltx_align_center">49.37</td>
+<td id="S5.T2.1.6.5.4" class="ltx_td ltx_align_center">44.01</td>
+</tr>
+<tr id="S5.T2.1.7.6" class="ltx_tr">
+<th id="S5.T2.1.7.6.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">Mistral-Large</th>
+<td id="S5.T2.1.7.6.2" class="ltx_td ltx_align_center">48.50</td>
+<td id="S5.T2.1.7.6.3" class="ltx_td ltx_align_center">46.59</td>
+<td id="S5.T2.1.7.6.4" class="ltx_td ltx_align_center">38.47</td>
+</tr>
+<tr id="S5.T2.1.8.7" class="ltx_tr">
+<th id="S5.T2.1.8.7.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">Claude-3.5-Sonnet</th>
+<td id="S5.T2.1.8.7.2" class="ltx_td ltx_align_center">60.00</td>
+<td id="S5.T2.1.8.7.3" class="ltx_td ltx_align_center"><span id="S5.T2.1.8.7.3.1" class="ltx_text ltx_font_bold">54.72</span></td>
+<td id="S5.T2.1.8.7.4" class="ltx_td ltx_align_center">54.23</td>
+</tr>
+<tr id="S5.T2.1.9.8" class="ltx_tr">
+<th id="S5.T2.1.9.8.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">Microsoft-Phi-4</th>
+<td id="S5.T2.1.9.8.2" class="ltx_td ltx_align_center ltx_border_bb">59.00</td>
+<td id="S5.T2.1.9.8.3" class="ltx_td ltx_align_center ltx_border_bb">49.23</td>
+<td id="S5.T2.1.9.8.4" class="ltx_td ltx_align_center ltx_border_bb">41.63</td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+<section id="S5.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.2 </span>Subject-wise Breakdown</h3>
+
+<div id="S5.SS2.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS2.p1.1" class="ltx_p">Figure <a href="#S5.F1" title="Figure 1 ‣ 5.2 Subject-wise Breakdown ‣ 5 Results and Analysis ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a> represents the accuracy of each model that was evaluated for each subject across the 14 domains of the CA-Ben benchmark. The bar chart with grouped bars directly and distinctly compares model performance in every subject area of Chartered Accountancy, thus throwing light on the different patterns, such as strengths and weaknesses across topics belonging to the foundational, intermediate, and final levels for all the models.</p>
+</div>
+<figure id="S5.F1" class="ltx_figure"><img src="2605.00257v1/x1.png" id="S5.F1.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="830" height="302" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>Subject-wise accuracy comparison of all evaluated models across 14 CA-Ben domains (F1–FN6). Each bar represents the model’s accuracy for a specific subject, color-coded by model.</figcaption>
+</figure>
+</section>
+<section id="S5.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.3 </span>Model-Specific Comparative Analysis</h3>
+
+<div id="S5.SS3.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS3.p1.1" class="ltx_p">CA-ThinkFlow demonstrated unique strengths across different domains in the CA benchmark, reflecting its varied capabilities in greater reasoning and numerical skills in the Foundation Level and comparable scores in Final Level. The radar chart in Figure <a href="#S5.F2" title="Figure 2 ‣ 5.3 Model-Specific Comparative Analysis ‣ 5 Results and Analysis ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a> clearly visualizes an overall comparison of models across each individual exam. While some models display balanced performance across most domains, CA-ThinkFlow reveals a sharper contrast, excelling in certain areas like Business Economics and Business &amp; Commercial Knowledge, Business Mathematics and Logical Reasoning &amp; Statistics, Advanced Financial Management, and others with comparable performance compared to other SOTA models.</p>
+</div>
+<figure id="S5.F2" class="ltx_figure"><img src="2605.00257v1/x2.png" id="S5.F2.g1" class="ltx_graphics ltx_centering ltx_img_square" width="830" height="830" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>An overall comparison of models across each individual exam.</figcaption>
+</figure>
+</section>
+<section id="S5.SS4" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.4 </span>Scholastic Reliability Coefficient (SRC) Analysis</h3>
+
+<div id="S5.SS4.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS4.p1.1" class="ltx_p">We evaluate the Scholastic Reliability Coefficient (SRC) to assess model consistency across increasing difficulty levels in CA-Ben. Table <a href="#S5.T3" title="Table 3 ‣ 5.4 Scholastic Reliability Coefficient (SRC) Analysis ‣ 5 Results and Analysis ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a> shows that CA-ThinkFlow scored an SRC of 68.75% which matches the performance of top state-of-the-art systems including Claude 3.5 Sonnet and GPT-4o while exceeding other systems. The results show that CA-ThinkFlow operates as a parameter-efficient quantized system which delivers high reliability and consistent performance throughout its foundation and final-level assessments because it possesses strong domain adaptability and reasoning capabilities.</p>
+</div>
+<figure id="S5.T3" class="ltx_table">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 3: </span>Model rankings by Scholastic Reliability Coefficient (SRC).</figcaption>
+<table id="S5.T3.1" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S5.T3.1.1.1" class="ltx_tr">
+<th id="S5.T3.1.1.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt"><span id="S5.T3.1.1.1.1.1" class="ltx_text ltx_font_bold">Model Name</span></th>
+<th id="S5.T3.1.1.1.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">
+<span id="S5.T3.1.1.1.2.1" class="ltx_inline-block">
+<span id="S5.T3.1.1.1.2.1.1" class="ltx_p">Foundation Passes</span>
+</span>
+</th>
+<th id="S5.T3.1.1.1.3" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">
+<span id="S5.T3.1.1.1.3.1" class="ltx_inline-block">
+<span id="S5.T3.1.1.1.3.1.1" class="ltx_p">Intermediate Passes</span>
+</span>
+</th>
+<th id="S5.T3.1.1.1.4" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">
+<span id="S5.T3.1.1.1.4.1" class="ltx_inline-block">
+<span id="S5.T3.1.1.1.4.1.1" class="ltx_p">Finals Passes</span>
+</span>
+</th>
+<th id="S5.T3.1.1.1.5" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">
+<span id="S5.T3.1.1.1.5.1" class="ltx_inline-block">
+<span id="S5.T3.1.1.1.5.1.1" class="ltx_p">Weighted Score</span>
+</span>
+</th>
+<th id="S5.T3.1.1.1.6" class="ltx_td ltx_nopad_r ltx_align_center ltx_th ltx_th_column ltx_border_tt">
+<span id="S5.T3.1.1.1.6.1" class="ltx_inline-block">
+<span id="S5.T3.1.1.1.6.1.1" class="ltx_p">SRC (%)</span>
+</span>
+</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S5.T3.1.2.1" class="ltx_tr" style="--ltx-bg-color:#CCFFCC;">
+<th id="S5.T3.1.2.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t"><span id="S5.T3.1.2.1.1.1" class="ltx_text ltx_font_bold" style="--ltx-bg-color:#CCFFCC;">CA-ThinkFlow</span></th>
+<td id="S5.T3.1.2.1.2" class="ltx_td ltx_align_center ltx_border_t"><span id="S5.T3.1.2.1.2.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">2/2</span></td>
+<td id="S5.T3.1.2.1.3" class="ltx_td ltx_align_center ltx_border_t"><span id="S5.T3.1.2.1.3.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">4/6</span></td>
+<td id="S5.T3.1.2.1.4" class="ltx_td ltx_align_center ltx_border_t"><span id="S5.T3.1.2.1.4.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">4/6</span></td>
+<td id="S5.T3.1.2.1.5" class="ltx_td ltx_align_center ltx_border_t"><span id="S5.T3.1.2.1.5.1" class="ltx_text" style="--ltx-bg-color:#CCFFCC;">22 / 32</span></td>
+<td id="S5.T3.1.2.1.6" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t"><span id="S5.T3.1.2.1.6.1" class="ltx_text ltx_font_bold" style="--ltx-bg-color:#CCFFCC;">68.75</span></td>
+</tr>
+<tr id="S5.T3.1.3.2" class="ltx_tr" style="--ltx-bg-color:#DFDFDF;">
+<th id="S5.T3.1.3.2.1" class="ltx_td ltx_align_left ltx_th ltx_th_row"><span id="S5.T3.1.3.2.1.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">14B-Deepseek-R1</span></th>
+<td id="S5.T3.1.3.2.2" class="ltx_td ltx_align_center"><span id="S5.T3.1.3.2.2.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">2/2</span></td>
+<td id="S5.T3.1.3.2.3" class="ltx_td ltx_align_center"><span id="S5.T3.1.3.2.3.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">2/6</span></td>
+<td id="S5.T3.1.3.2.4" class="ltx_td ltx_align_center"><span id="S5.T3.1.3.2.4.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">3/6</span></td>
+<td id="S5.T3.1.3.2.5" class="ltx_td ltx_align_center"><span id="S5.T3.1.3.2.5.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">15 / 32</span></td>
+<td id="S5.T3.1.3.2.6" class="ltx_td ltx_nopad_r ltx_align_center"><span id="S5.T3.1.3.2.6.1" class="ltx_text" style="--ltx-bg-color:#DFDFDF;">46.87</span></td>
+</tr>
+<tr id="S5.T3.1.4.3" class="ltx_tr">
+<th id="S5.T3.1.4.3.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">GPT-4o</th>
+<td id="S5.T3.1.4.3.2" class="ltx_td ltx_align_center">2/2</td>
+<td id="S5.T3.1.4.3.3" class="ltx_td ltx_align_center">4/6</td>
+<td id="S5.T3.1.4.3.4" class="ltx_td ltx_align_center">4/6</td>
+<td id="S5.T3.1.4.3.5" class="ltx_td ltx_align_center">22 / 32</td>
+<td id="S5.T3.1.4.3.6" class="ltx_td ltx_nopad_r ltx_align_center"><span id="S5.T3.1.4.3.6.1" class="ltx_text ltx_font_bold">68.75</span></td>
+</tr>
+<tr id="S5.T3.1.5.4" class="ltx_tr">
+<th id="S5.T3.1.5.4.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">LLaMA-3.3-70B-Instruct</th>
+<td id="S5.T3.1.5.4.2" class="ltx_td ltx_align_center">2/2</td>
+<td id="S5.T3.1.5.4.3" class="ltx_td ltx_align_center">4/6</td>
+<td id="S5.T3.1.5.4.4" class="ltx_td ltx_align_center">3/6</td>
+<td id="S5.T3.1.5.4.5" class="ltx_td ltx_align_center">19 / 32</td>
+<td id="S5.T3.1.5.4.6" class="ltx_td ltx_nopad_r ltx_align_center">59.38</td>
+</tr>
+<tr id="S5.T3.1.6.5" class="ltx_tr">
+<th id="S5.T3.1.6.5.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">LLaMA-3.1-405B-Instruct</th>
+<td id="S5.T3.1.6.5.2" class="ltx_td ltx_align_center">2/2</td>
+<td id="S5.T3.1.6.5.3" class="ltx_td ltx_align_center">4/6</td>
+<td id="S5.T3.1.6.5.4" class="ltx_td ltx_align_center">3/6</td>
+<td id="S5.T3.1.6.5.5" class="ltx_td ltx_align_center">19 / 32</td>
+<td id="S5.T3.1.6.5.6" class="ltx_td ltx_nopad_r ltx_align_center">59.38</td>
+</tr>
+<tr id="S5.T3.1.7.6" class="ltx_tr">
+<th id="S5.T3.1.7.6.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">Mistral-Large</th>
+<td id="S5.T3.1.7.6.2" class="ltx_td ltx_align_center">2/2</td>
+<td id="S5.T3.1.7.6.3" class="ltx_td ltx_align_center">3/6</td>
+<td id="S5.T3.1.7.6.4" class="ltx_td ltx_align_center">4/6</td>
+<td id="S5.T3.1.7.6.5" class="ltx_td ltx_align_center">20 / 32</td>
+<td id="S5.T3.1.7.6.6" class="ltx_td ltx_nopad_r ltx_align_center">62.50</td>
+</tr>
+<tr id="S5.T3.1.8.7" class="ltx_tr">
+<th id="S5.T3.1.8.7.1" class="ltx_td ltx_align_left ltx_th ltx_th_row">Claude 3.5 Sonnet</th>
+<td id="S5.T3.1.8.7.2" class="ltx_td ltx_align_center">2/2</td>
+<td id="S5.T3.1.8.7.3" class="ltx_td ltx_align_center">4/6</td>
+<td id="S5.T3.1.8.7.4" class="ltx_td ltx_align_center">4/6</td>
+<td id="S5.T3.1.8.7.5" class="ltx_td ltx_align_center">22 / 32</td>
+<td id="S5.T3.1.8.7.6" class="ltx_td ltx_nopad_r ltx_align_center"><span id="S5.T3.1.8.7.6.1" class="ltx_text ltx_font_bold">68.75</span></td>
+</tr>
+<tr id="S5.T3.1.9.8" class="ltx_tr">
+<th id="S5.T3.1.9.8.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">Microsoft-Phi-4</th>
+<td id="S5.T3.1.9.8.2" class="ltx_td ltx_align_center ltx_border_bb">2/2</td>
+<td id="S5.T3.1.9.8.3" class="ltx_td ltx_align_center ltx_border_bb">4/6</td>
+<td id="S5.T3.1.9.8.4" class="ltx_td ltx_align_center ltx_border_bb">3/6</td>
+<td id="S5.T3.1.9.8.5" class="ltx_td ltx_align_center ltx_border_bb">19 / 32</td>
+<td id="S5.T3.1.9.8.6" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_bb">59.38</td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+<section id="S5.SS5" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.5 </span>Systemic Bottlenecks</h3>
+
+<div id="S5.SS5.p1" class="ltx_para ltx_noindent">
+<p id="S5.SS5.p1.1" class="ltx_p">The original CA-Ben study reported a 100% failure rate, where no models were able to surpass a 40% score in a subject. The two subjects of Taxation (I3) and Indirect Tax Laws (FN5) showed these systemic bottlenecks.
+Our system did not clear the Systemic Bottlenecks because the core reasoning abilities of Large Language Models show fundamental knowledge gaps that exist across all domains.</p>
+</div>
+<div id="S5.SS5.p2" class="ltx_para ltx_noindent">
+<p id="S5.SS5.p2.1" class="ltx_p">The results demonstrate that CA-ThinkFlow delivers better parameter efficiency and balanced reasoning performance across foundation and final levels while exceeding the performance of full-precision systems that require more resources.</p>
+</div>
+</section>
+</section>
+<section id="S6" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6 </span>Conclusion</h2>
+
+<div id="S6.p1" class="ltx_para ltx_noindent">
+<p id="S6.p1.1" class="ltx_p">The research studies how contextual accuracy and deep understanding work together in the assessment process for chartered accountancy tests. We introduced CA-ThinkFlow as a simplified Retrieval-Augmented Generation (RAG) framework which uses the built-in Chain-of-Thought reasoning of the 4-bit quantized 14B-DeepSeek-R1 model. The system provides high-quality contextual information to the language model which enables it to use its internal reasoning methods for query assessment and synthesis. The multi-level CA-Ben benchmarking of the framework shows that CA-ThinkFlow delivers outstanding parameter efficiency results. The system delivers noteworthy results for all three exam levels while matching the performance of much larger commercial models which operate at full precision and no quantization.</p>
+</div>
+</section>
+<section id="S7" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">7 </span>Future Work</h2>
+
+<div id="S7.p1" class="ltx_para ltx_noindent">
+<p id="S7.p1.1" class="ltx_p">The general performance of CA-ThinkFlow proves to be strong, but its performance needs critical improvement because it cannot overcome essential obstacles which exist in complex fields like Taxation (I3) and Indirect Tax Laws (FN5). Future work should focus on creating a more advanced retrieval pipeline which will enable us to handle both multi-chunk synthesis and dynamic context scaling for our multi-faceted tax query system. It should also investigate domain-specific supervised fine-tuning methods which will enable the base reasoning model to develop deeper regulatory knowledge through examination of Indian financial statutes before the retrieval process. Finally, expanding the system to ingest real-time, evolving tax regulations and incorporating multilingual support will further bridge the gap toward deployable, expert-level financial AI.</p>
+</div>
+</section>
+<section id="A1" class="ltx_appendix">
+<h2 class="ltx_title ltx_title_appendix">
+<span class="ltx_tag ltx_tag_appendix">Appendix A </span>Data Availability</h2>
+
+<div id="A1.p1" class="ltx_para ltx_noindent">
+<p id="A1.p1.1" class="ltx_p">This study uses official ICAI Study Material as context documents, processed through our pipeline for reproducibility.</p>
+<ul id="A1.I1" class="ltx_itemize">
+<li id="A1.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="A1.I1.i1.p1" class="ltx_para">
+<p id="A1.I1.i1.p1.1" class="ltx_p">Foundation Course: <a href="https://www.icai.org/post/foundation-course" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://www.icai.org/post/foundation-course</a></p>
+</div>
+</li>
+<li id="A1.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="A1.I1.i2.p1" class="ltx_para">
+<p id="A1.I1.i2.p1.1" class="ltx_p">Intermediate Course: <a href="https://www.icai.org/post/intermediate-course" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://www.icai.org/post/intermediate-course</a></p>
+</div>
+</li>
+<li id="A1.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="A1.I1.i3.p1" class="ltx_para">
+<p id="A1.I1.i3.p1.1" class="ltx_p">Final Course: <a href="https://www.icai.org/post/final-course" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://www.icai.org/post/final-course</a></p>
+</div>
+</li>
+</ul>
+</div>
+<div id="A1.p2" class="ltx_para ltx_noindent">
+<p id="A1.p2.1" class="ltx_p">For testing data, we used the CA-Ben benchmark under a zero-shot setup, simulating a cold-start scenario <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib16" title="Large language models acing chartered accountancy" class="ltx_ref">9</a>]</cite>.</p>
+<ul id="A1.I2" class="ltx_itemize">
+<li id="A1.I2.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="A1.I2.i1.p1" class="ltx_para">
+<p id="A1.I2.i1.p1.1" class="ltx_p">Benchmark repository: <a href="https://github.com/thejatingupta7/LLMCA" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://github.com/thejatingupta7/LLMCA</a></p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul id="bib.L1" class="ltx_biblist">
+<li id="bib.bib14" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Auxilio Bits</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">RAG architecture for financial compliance knowledge retrieval</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note"><a href="https://www.auxiliobits.com/blog/rag-architecture-for-domain-specific-knowledge-retrieval-in-financial-compliance/" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://www.auxiliobits.com/blog/rag-architecture-for-domain-specific-knowledge-retrieval-in-financial-compliance/</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p2.1" title="2 Related Works ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem ltx_bib_report">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. Besso <span class="ltx_text ltx_bib_etal">et al.</span></span><span class="ltx_text ltx_bib_year"> (2024-08)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Docling technical report</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_type">Technical report</span>
+</span>
+<span class="ltx_bibblock"> <span class="ltx_text ltx_bib_publisher">IBM Research</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2408.09869</span>,
+<a href="https://arxiv.org/abs/2408.09869" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://dx.doi.org/10.48550/arXiv.2408.09869" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p2.1" title="2 Related Works ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib5" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Z. Chen, S. Li, C. Smiley, Z. Ma, S. Shah, and W. Y. Wang</span><span class="ltx_text ltx_bib_year"> (2022-12)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">ConvFinQA: exploring the chain of numerical reasoning in conversational finance question answering</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing</span>,  <span class="ltx_text ltx_bib_editor">Y. Goldberg, Z. Kozareva, and Y. Zhang (Eds.)</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_place">Abu Dhabi, United Arab Emirates</span>, <span class="ltx_text ltx_bib_pages"> pp. 6279–6292</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://aclanthology.org/2022.emnlp-main.421/" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://dx.doi.org/10.18653/v1/2022.emnlp-main.421" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS1.SSS1.p1.1" title="3.1.1 Text Chunking and Splitting ‣ 3.1 Data Preparation ‣ 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.1.1</span></a>.
+</span>
+</li>
+<li id="bib.bib30" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">H. B. Christensen, E. Floyd, and M. Maffett</span><span class="ltx_text ltx_bib_year"> (2023)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Large language models and generative ai in finance</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">SSRN Electronic Journal[web:49]</span>
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.2139/ssrn.4511540" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4511540" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1 Introduction ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib11" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">DataCamp</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Fine-tuning deepseek r1 (reasoning model)</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note"><a href="https://www.datacamp.com/tutorial/fine-tuning-deepseek-r1-reasoning-model" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://www.datacamp.com/tutorial/fine-tuning-deepseek-r1-reasoning-model</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2 Related Works ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib19" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">DeepSeek-AI</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">DeepSeek-r1: incentivizing reasoning capability in llms via reinforcement learning</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2501.12948</span>,
+<a href="https://arxiv.org/abs/2501.12948" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS2.SSS1.p1.1" title="3.2.1 Base Model Selection ‣ 3.2 System Design ‣ 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.2.1</span></a>.
+</span>
+</li>
+<li id="bib.bib18" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. Douze, A. Guzhva, C. Deng, J. Johnson, G. Szilvasy, P. Mazaré, M. Lomeli, L. Hosseini, and H. Jégou</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">THE faiss library</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">IEEE Transactions on Big Data</span> <span class="ltx_text ltx_bib_volume"></span> (<span class="ltx_text ltx_bib_number"></span>), <span class="ltx_text ltx_bib_pages"> pp. 1–17</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.1109/TBDATA.2025.3618474" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS1.SSS3.p1.5" title="3.1.3 Vector Indexing ‣ 3.1 Data Preparation ‣ 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.1.3</span></a>.
+</span>
+</li>
+<li id="bib.bib37" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Faiz, S. Kaneda, R. Wang, R. C. Osi, P. Sharma, F. Chen, and L. Jiang</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">LLMCarbon: modeling the end-to-end carbon footprint of large language models</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">The Twelfth International Conference on Learning Representations (ICLR)</span>,
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://openreview.net/forum?id=aIok3ZD9to" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1 Introduction ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib16" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Gupta, A. Sharma, S. Singhania, M. Adnan, S. Deo, A. I. Abidi, and K. Gupta</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Large language models acing chartered accountancy</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.p2.1" title="Appendix A Data Availability ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">Appendix A</span></a>,
+<a href="#S1.p1.1" title="1 Introduction ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S3.SS2.SSS2.p1.1" title="3.2.2 Prompt and Context Retrieval ‣ 3.2 System Design ‣ 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.2.2</span></a>,
+<a href="#S3.SS3.p1.5" title="3.3 Inference and Workflow Logic ‣ 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.3</span></a>,
+<a href="#S4.SS2.p1.1" title="4.2 Evaluation Pipeline and Answer Extraction ‣ 4 Experimental Setup ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.2</span></a>,
+<a href="#S4.p1.1" title="4 Experimental Setup ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4</span></a>.
+</span>
+</li>
+<li id="bib.bib28" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">T. Institute</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The impact of large language models in finance: towards trustworthy adoption</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Alan Turing Institute Report</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">[web:51]</span>
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://www.turing.ac.uk/sites/default/files/2024-06/the_impact_of_large_language_models_in_finance_-_towards_trustworthy_adoption.pdf" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1 Introduction ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib33" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">H. Li and M. A. Vasarhelyi</span><span class="ltx_text ltx_bib_year"> (2023-11-30)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Applying large language models in accounting: a comparative analysis of different methodologies and off-the-shelf examples</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.2139/ssrn.4650476" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://papers.ssrn.com/abstract=4650476" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1 Introduction ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib32" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">H. Mo and S. Ouyang</span><span class="ltx_text ltx_bib_year"> (2025-10-02)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">(Generative) ai in financial economics</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Journal of Chinese Economic and Business Studies</span> <span class="ltx_text ltx_bib_volume">23</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 509–587</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.1080/14765284.2025.2569006" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<span class="ltx_text issn ltx_bib_external">ISSN 1476-5292</span>,
+<a href="https://www.tandfonline.com/doi/pdf/10.1080/14765284.2025.2569006" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1 Introduction ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib36" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Morrison, C. Na, J. Fernandez, T. Dettmers, E. Strubell, and J. Dodge</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Holistically evaluating the environmental impact of creating language models</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">The Thirteenth International Conference on Learning Representations (ICLR)</span>,
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://openreview.net/forum?id=04qx93Viwj" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1 Introduction ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib13" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Muñiz Sánchez</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">RAG-based system for document information retrieval in financial compliance</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note"><a href="https://www.linkedin.com/pulse/rag-based-system-document-information-retrieval-muniz-sanchez-dk1bf" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://www.linkedin.com/pulse/rag-based-system-document-information-retrieval-muniz-sanchez-dk1bf</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p2.1" title="2 Related Works ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib8" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Nawal and S. Kumar</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Fin-rag: a rag system for financial documents</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2509.04469</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p2.1" title="2 Related Works ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#S3.SS1.SSS1.p1.1" title="3.1.1 Text Chunking and Splitting ‣ 3.1 Data Preparation ‣ 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.1.1</span></a>.
+</span>
+</li>
+<li id="bib.bib29" class="ltx_bibitem ltx_bib_report">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">I. of International Finance and E. &amp;. Young</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">2024 iif-ey annual survey report on ai/ml use in financial services</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_type">Technical report</span>
+</span>
+<span class="ltx_bibblock"> <span class="ltx_text ltx_bib_publisher">IIF</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">[web:60]</span>
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://www.iif.com/portals/0/Files/content/Innovation/2024%5C%20IIF-EY%5C%20Survey%5C%20Report%5C%20on%5C%20AI%5C_ML%5C%20Use%5C%20in%5C%20Financial%5C%20Ser..." title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1 Introduction ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib1" class="ltx_bibitem ltx_bib_report">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">OpenAI</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">O1 system card</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_type">Technical report</span>
+</span>
+<span class="ltx_bibblock"> <span class="ltx_text ltx_bib_publisher">OpenAI</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note">OpenAI Technical Report</span>
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2412.16720</span>,
+<a href="https://arxiv.org/abs/2412.16720" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://dx.doi.org/10.48550/arXiv.2412.16720" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2 Related Works ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem ltx_bib_report">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">OpenAI</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">OpenAI o3 and o4-mini system card</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_type">Technical report</span>
+</span>
+<span class="ltx_bibblock"> <span class="ltx_text ltx_bib_publisher">OpenAI</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://openai.com/index/o3-o4-mini-system-card/" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2 Related Works ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib35" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">K. S. Phogat, S. A. Puranam, S. Dasaratha, C. Harsha, and S. Ramakrishna</span><span class="ltx_text ltx_bib_year"> (2024-11)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Fine-tuning smaller language models for question answering over financial documents</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Findings of the Association for Computational Linguistics: EMNLP 2024</span>,  <span class="ltx_text ltx_bib_editor">Y. Al-Onaizan, M. Bansal, and Y. Chen (Eds.)</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_place">Miami, Florida, USA</span>, <span class="ltx_text ltx_bib_pages"> pp. 10528–10548</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://aclanthology.org/2024.findings-emnlp.617/" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://dx.doi.org/10.18653/v1/2024.findings-emnlp.617" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1 Introduction ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Shanghai AI Laboratory</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Fin-r1: a large language model for financial reasoning</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2503.16252</span>,
+<a href="https://arxiv.org/abs/2503.16252" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://dx.doi.org/10.48550/arXiv.2503.16252" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2 Related Works ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib24" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">D. Team</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Docling: the document alchemist</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://towardsdatascience.com/docling-the-document-alchemist/" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p2.1" title="2 Related Works ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib25" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">I. D. Team</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Docling-project/docling-models</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://huggingface.co/docling-project/docling-models" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p2.1" title="2 Related Works ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib9" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">The FinAI Team</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Fino1: a financial reasoning model</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note"><a href="https://github.com/The-FinAI/Fino1" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://github.com/The-FinAI/Fino1</a>GitHub Repository</span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2 Related Works ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib34" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">F. Wang, Z. Zhang, X. Zhang, Z. Wu, T. H. Mo, Q. Lu, W. Wang, R. Li, J. Xu, X. Tang, Q. He, Y. Ma, M. Huang, and S. Wang</span><span class="ltx_text ltx_bib_year"> (2025-11-24)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A comprehensive survey of small language models in the era of large language models: techniques, enhancements, applications, collaboration with llms, and trustworthiness</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">ACM Transactions on Intelligent Systems and Technology</span> <span class="ltx_text ltx_bib_volume">16</span> (<span class="ltx_text ltx_bib_number">6</span>).
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.1145/3768165" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<span class="ltx_text issn ltx_bib_external">ISSN 2157-6912</span>,
+<a href="https://dl.acm.org/doi/10.1145/3768165" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<span class="ltx_text ltx_bib_external">2411.03350</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1 Introduction ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib10" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Zartis Team</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">DeepSeek-r1: the open-source ai challenger rewriting the rules of enterprise ai</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note"><a href="https://www.zartis.com/deepseek-r1-the-open-source-ai-challenger-rewriting-the-rules-of-enterprise-ai/" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://www.zartis.com/deepseek-r1-the-open-source-ai-challenger-rewriting-the-rules-of-enterprise-ai/</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2 Related Works ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib26" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Y. Zhang, M. Li, D. Long, X. Zhang, H. Lin, B. Yang, P. Xie, A. Yang, D. Liu, J. Lin, F. Huang, and J. Zhou</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Qwen3 embedding: advancing text embedding and reranking through foundation models</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2506.05176</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS1.SSS2.p1.6" title="3.1.2 Embedding Generation ‣ 3.1 Data Preparation ‣ 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.1.2</span></a>.
+</span>
+</li>
+<li id="bib.bib6" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Y. Zhao, Y. Long, H. Liu, R. Kamoi, L. Nan, L. Chen, Y. Liu, X. Tang, R. Zhang, and A. Cohan</span><span class="ltx_text ltx_bib_year"> (2024-08)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">DocMath-eval: evaluating math reasoning capabilities of LLMs in understanding long and specialized documents</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)</span>,  <span class="ltx_text ltx_bib_editor">L. Ku, A. Martins, and V. Srikumar (Eds.)</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_place">Bangkok, Thailand</span>, <span class="ltx_text ltx_bib_pages"> pp. 16103–16120</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://aclanthology.org/2024.acl-long.852/" title="" class="ltx_ref ltx_bib_external">Link</a>,
+<a href="https://dx.doi.org/10.18653/v1/2024.acl-long.852" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS1.SSS1.p1.1" title="3.1.1 Text Chunking and Splitting ‣ 3.1 Data Preparation ‣ 3 Methodology ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.1.1</span></a>.
+</span>
+</li>
+<li id="bib.bib21" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Y. Zhou, P. Li, <span class="ltx_text ltx_bib_etal">et al.</span></span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">FinCoT: grounding chain-of-thought in expert financial blueprints</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 3rd Workshop on FinNLP</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.1" title="2 Related Works ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#S2.p3.1" title="2 Related Works ‣ Retrieval-Augmented Reasoning for Chartered Accountancy" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+</div>
+<footer class="arxiv-html-footer">
+  <div class="ltx_page_logo">
+    Experimental support, please
+    <a href="./2605.00257v1/__stdout.txt" class="ltx_ref"
+    target="_blank" rel="nofollow">view the build logs</a>
+    for errors. Generated by
+    <a href="https://math.nist.gov/~BMiller/LaTeXML/" target="_blank" class="ltx_ref ltx_LaTeXML_logo">
+      <span style="letter-spacing: -0.2em; margin-right: 0.1em;">
+        L
+        <span style="font-size: 70%; position: relative; bottom: 2.2pt;">A</span>
+        T
+        <span style="position: relative; bottom: -0.4ex;">E</span>
+      </span>
+      <span class="ltx_font_smallcaps">xml</span>
+      <img alt="[LOGO]"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==">
+    </a>.
+  </div>
+  <div class="keyboard-glossary">
+    <h2>Instructions for reporting errors</h2>
+    <p>We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below:</p>
+    <ul>
+      <li>Click the "Report Issue" <span class="mobile-only">(<svg role="presentation"
+            style="display: inline-block; vertical-align: middle; fill: var(--text-color);" aria-hidden="true"
+            height="1em" viewBox="0 0 640 640">
+            <path
+              d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+          </svg>)</span> button, located in the page header.</li>
+    </ul>
+    <p><strong>Tip:</strong> You can select the relevant text first, to include it in your report.</p>
+    <p>Our team has already identified <a class="ltx_ref" href="https://github.com/arXiv/html_feedback/issues"
+        target="_blank">the following issues</a>. We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all.</p>
+    <p>Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a <a
+        class="ltx_ref" href="https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML"
+        target="_blank">list of packages that need conversion</a>, and welcome <a class="ltx_ref"
+        href="https://github.com/brucemiller/LaTeXML/issues" target="_blank">developer contributions</a>.</p>
+  </div>
+</footer>
+<div id="fixed-buttons-container">
+  <div id="beta-badge" aria-hidden="true">BETA</div>
+  <a id="disable-reading-mode-btn" class="header-button" href="javascript:toggleReadingMode();"
+    title="Disable reading mode, show header and footer">
+    <svg role="presentation" height="1.25rem"
+      viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </a>
+</div></body>
+</html>

@@ -1,0 +1,1558 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Layer Collapse in Diffusion Language Models</title>
+<!--Generated on Thu May  7 14:35:59 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="/static/browse/0.3.4/css/arxiv-html-papers-20260131.css" type="text/css">
+<script src="/static/browse/0.3.4/js/arxiv-html-papers-20260131.js"></script>
+<script>
+  // Restore the saved color scheme preference, or
+  // enact the browser preference if "automatic", 
+  // without expecting DOM load to have completed.
+  //
+  // Also restore any saved readingmode and ToC display preferences.
+  function initializeReadingPreferences() {
+    let saved_theme = localStorage.getItem("ar5iv_theme") || "automatic";
+    if (saved_theme === "automatic") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        saved_theme = "dark";
+      }
+    }
+    if (saved_theme == "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    const tocDisplay = localStorage.getItem('arxiv_html_paper_toc_display');
+    if (tocDisplay) {
+      document.documentElement.setAttribute("data-toc-display", tocDisplay);
+    }
+    const readingMode = localStorage.getItem('arxiv_html_paper_reading_mode');
+    if (readingMode) {
+      document.documentElement.setAttribute("data-reading-mode", readingMode);
+    }
+  }
+  // Run as soon as JS starts, to minimize repainting
+  initializeReadingPreferences();
+</script>
+<link rel="apple-touch-icon" sizes="180x180"
+  href="/static/browse/0.3.4/images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+  href="/static/browse/0.3.4/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+  href="/static/browse/0.3.4/images/icons/favicon-16x16.png">
+<link rel="manifest" href="/static/browse/0.3.4/images/icons/site.webmanifest">
+<link rel="mask-icon" href="/static/browse/0.3.4/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="stylesheet" type="text/css" media="screen" href="https://use.typekit.net/utz6mli.css">
+</head>
+<body>
+<dialog id="modal-form" aria-labelledby="modal-title" closedby="any">
+  <form id="modal-form-content" method="dialog" enctype="multipart/form-data">
+    <header class="modal-header">
+      <h5 id="modal-title" class="modal-title">Report GitHub Issue</h5>
+      <button type="submit" formnovalidate class="modal-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="modal-body">
+      <label for="form_title">Title:</label>
+      <input class="form-control" id="form_title" name="form_title" required placeholder="Enter title">
+
+      <p id="selectedTextModalDescription" hidden>Content selection saved. Describe the issue below:</p>
+
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description" required maxlength="500"
+        placeholder="500 characters maximum"></textarea>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="submit" value="internal-report" class="sr-only modal-submit">Submit without GitHub</button>
+      <button type="submit" value="github-report" class="modal-submit">Submit in GitHub</button>
+    </footer>
+  </form>
+</dialog>
+
+<header class="arxiv-html-header">
+  <div class="html-header-logo">
+    <a href="/">
+      <img alt="arXiv logo" class="logo desktop-only" width="100"
+        src="/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg">
+      <span class="sr-only">Back to arXiv</span>
+    </a>
+  </div>
+  <!--TOC, dark mode, links-->
+  <nav class="html-header-nav">
+    <a class="header-button hover-effect desktop-only" href="https://info.arxiv.org/about/accessible_HTML.html"
+      target="_blank">Why HTML?</a>
+    <a class="header-button" title="Report an Issue" href="#" title="Report an issue"
+      onclick="event.preventDefault(); showModalForm();">
+      <svg role="presentation" class="mobile-only toggle-icon" aria-hidden="true" height="1.25rem"
+        viewBox="0 0 640 640">
+        <path
+          d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+      </svg>
+      <span class="desktop-only">Report Issue</span></a>
+    <!--back to abstract-->
+    <a class="header-button" title="Back to abstract page" aria-label="Back to abstract page"
+      href="/abs/2605.06366v1">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 512 512" fill="#ffffff"
+        aria-hidden="true">
+        <path
+          d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z">
+        </path>
+      </svg>
+      <span class="desktop-only">Back to Abstract</span>
+    </a>
+    <!-- PDF download link -->
+    <a class="header-button" title="Download PDF" href="/pdf/2605.06366v1"
+      target="_blank">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 576 542">
+        <path
+          d="M208 48L96 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l80 0 0 48-80 0c-35.3 0-64-28.7-64-64L32 64C32 28.7 60.7 0 96 0L229.5 0c17 0 33.3 6.7 45.3 18.7L397.3 141.3c12 12 18.7 28.3 18.7 45.3l0 149.5-48 0 0-128-88 0c-39.8 0-72-32.2-72-72l0-88zM348.1 160L256 67.9 256 136c0 13.3 10.7 24 24 24l68.1 0zM240 380l32 0c33.1 0 60 26.9 60 60s-26.9 60-60 60l-12 0 0 28c0 11-9 20-20 20s-20-9-20-20l0-128c0-11 9-20 20-20zm32 80c11 0 20-9 20-20s-9-20-20-20l-12 0 0 40 12 0zm96-80l32 0c28.7 0 52 23.3 52 52l0 64c0 28.7-23.3 52-52 52l-32 0c-11 0-20-9-20-20l0-128c0-11 9-20 20-20zm32 128c6.6 0 12-5.4 12-12l0-64c0-6.6-5.4-12-12-12l-12 0 0 88 12 0zm76-108c0-11 9-20 20-20l48 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 24 28 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 44c0 11-9 20-20 20s-20-9-20-20l0-128z" />
+      </svg>
+      <span class="desktop-only">Download PDF</span></a>
+    <!-- navigational table of contents toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleNavTOC();" title="Toggle navigation"
+      aria-label="Toggle navigation">
+      <svg height="1.25rem" role="presentation" viewBox="0 0 512 512">
+        <path
+          d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z">
+        </path>
+      </svg>
+    </a>
+    <!--- collapsable header / reading mode toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleReadingMode();"
+      title="Disable reading mode, show header and footer">
+      <svg role="presentation" height="1.25rem"
+        viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+        <path
+          d="M32 32C14.3 32 0 46.3 0 64l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 32zM64 352c0-17.7-14.3-32-32-32S0 334.3 0 352l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96z" />
+      </svg>
+    </a>
+    <!--- colored theme toggle -->
+    <button type="button" class="header-button color-tog" onclick="toggleColorScheme();" title="Toggle dark/light mode" aria-label="Toggle color scheme">
+      <span class="toggle-icon automatic-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon light-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon dark-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+    </button>
+  </nav>
+</header><nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_abstract"><a href="#abstract1" title="In Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title">Abstract</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S1" title="In Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S2" title="In Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Layer Dynamics in Diffusion Language Models</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S2.SS1" title="In 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>Metrics</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S2.SS2" title="In 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2 </span>Super-Outlier in LLaDA-8B</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S2.SS3" title="In 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.3 </span>Early-Layer Redundancies in LLaDA-8B</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S2.SS4" title="In 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.4 </span>Heavy-Tailed Evidence of Overtraining</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S3" title="In Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>DLMs Are More Robust to Compression Despite Super-Outliers</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#S3.SS1" title="In 3 DLMs Are More Robust to Compression Despite Super-Outliers ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Experiment Setup</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S3.SS1.SSS0.Px1" title="In 3.1 Experiment Setup ‣ 3 DLMs Are More Robust to Compression Despite Super-Outliers ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title">Evaluation.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S3.SS1.SSS0.Px2" title="In 3.1 Experiment Setup ‣ 3 DLMs Are More Robust to Compression Despite Super-Outliers ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title">Compression.</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#S3.SS2" title="In 3 DLMs Are More Robust to Compression Despite Super-Outliers ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Compression</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S3.SS2.SSS0.Px1" title="In 3.2 Compression ‣ 3 DLMs Are More Robust to Compression Despite Super-Outliers ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title">Pruning.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S3.SS2.SSS0.Px2" title="In 3.2 Compression ‣ 3 DLMs Are More Robust to Compression Despite Super-Outliers ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title">Quantization.</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S4" title="In Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Supporting Evidence: A Controlled 160M Pair</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#S4.SS1" title="In 4 Supporting Evidence: A Controlled 160M Pair ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Results</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S4.SS1.SSS0.Px1" title="In 4.1 Results ‣ 4 Supporting Evidence: A Controlled 160M Pair ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title">Layer Similarities.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S4.SS1.SSS0.Px2" title="In 4.1 Results ‣ 4 Supporting Evidence: A Controlled 160M Pair ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title">Heavy-tailed Signature.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S4.SS1.SSS0.Px3" title="In 4.1 Results ‣ 4 Supporting Evidence: A Controlled 160M Pair ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title">Compression Results.</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S5" title="In Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Related Work</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S5.SS0.SSS0.Px1" title="In 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title">Outliers, Sinks, and Super-weights.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S5.SS0.SSS0.Px2" title="In 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title">Curse of Depth.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S5.SS0.SSS0.Px3" title="In 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title">Weight and Activation Dynamics in DLMs.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S5.SS0.SSS0.Px4" title="In 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title">Compression of Diffusion Language Models.</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S6" title="In Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Discussion</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S6.SS0.SSS0.Px1" title="In 6 Discussion ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title">Limitations.</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_bibliography"><a href="#bib" title="In Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title">References</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_appendix">
+<a href="#A1" title="In Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A </span>Experimental details</span></a>
+<ol class="ltx_toclist ltx_toclist_appendix">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#A1.SS1" title="In Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.1 </span>Evaluation of Language Models</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a href="#A1.SS2" title="In Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.2 </span>Small-scale pre-training</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#A1.SS2.SSS0.Px1" title="In A.2 Small-scale pre-training ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title">Autoregressive Model.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#A1.SS2.SSS0.Px2" title="In A.2 Small-scale pre-training ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title">Diffusion Language Model.</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_appendix">
+<a href="#A2" title="In Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">B </span>Further experiment plots</span></a>
+<ol class="ltx_toclist ltx_toclist_appendix">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#A2.SS1" title="In Appendix B Further experiment plots ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">B.1 </span>Activations and similarities without masking</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#A2.SS2" title="In Appendix B Further experiment plots ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">B.2 </span>Extended activation plots</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#A2.SS3" title="In Appendix B Further experiment plots ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">B.3 </span>Channel activation over Diffusion Steps</span></a></li>
+</ol>
+</li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div id="infobox" class="infobox">
+  <a id="license-tr" href="https://info.arxiv.org/help/license/index.html#licenses-available">
+    License: CC BY 4.0
+  </a>
+  <div id="watermark-tr">
+arXiv:2605.06366v1 [cs.LG] 07 May 2026</div>
+</div><div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Layer Collapse in Diffusion Language Models</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Alexander Conzelmann<sup id="id7.7.id1" class="ltx_sup"><span id="id7.7.id1.1" class="ltx_text ltx_font_italic">1,2</span></sup>  Albert Catalan-Tatjer<sup id="id8.8.id2" class="ltx_sup"><span id="id8.8.id2.1" class="ltx_text ltx_font_italic">1,2,3</span></sup>  Shiwei Liu<sup id="id9.9.id3" class="ltx_sup"><span id="id9.9.id3.1" class="ltx_text ltx_font_italic">1,2,3</span></sup> 
+<br class="ltx_break"><sup id="id10.10.id4" class="ltx_sup">1</sup>Tübingen AI Center 
+<br class="ltx_break"><sup id="id11.11.id5" class="ltx_sup">2</sup>Max Planck Institute for Intelligent Systems 
+<br class="ltx_break"><sup id="id12.12.id6" class="ltx_sup">3</sup>ELLIS Institute Tübingen 
+<br class="ltx_break">Correspondence to: <span id="id13.13.id7" class="ltx_text ltx_font_typewriter">a.conzelmann@uni-tuebingen.de</span>
+</span></span>
+</div>
+
+<div id="abstract1" class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p">Diffusion language models (DLMs) have recently emerged as competitive alternatives to autoregressive (AR) language models, yet the differences in their activation dynamics remain poorly understood.
+We characterize these dynamics in LLaDA-8B and identify a striking layer-collapse property: a few early layers exhibit highly similar, collapsed activation patterns dominated by a single large super-outlier that persists over a long token range.
+Despite its apparent redundancy, we have found that this outlier is critical: pruning it causes the model’s outputs to degrade into repetitive random token loops.
+Paradoxically, besides this outlier, layers in LLaDA contain more redundant representations, where redundancy is particularly pronounced in earlier layers. This pattern is the reverse of what is commonly observed in AR language models, where deeper layers tend to become more redundant due to undertraining, as measured by representation similarity. Our analysis further indicates that layer collapse in DLMs is not driven by undertraining. Rather, it appears to arise from overtraining: a dominant outlier becomes an indispensable carrier of information, while the remaining representations collapse into redundant structure. These observations have strong practical implications, as we verify through controlled pre-training experiments.
+First, DLMs are surprisingly robust to compression: performance of LLaDA under 3-bit GPTQ quantization drops only by -1.8%
+on GSM8K, whereas Llama-3.1-8B under the same settings drops by -64.7%. Second, optimal non-uniform sparsity allocation reverses between the two model families:
+under an average budget of 50% sparsity, allocating more sparsity to early layers in LLaDA yields +8.4% over the reverse strategy, while for Llama the same early-layer-sparse allocation incurs -8.4%. Our findings reveal that the DLM training objective fundamentally reshapes layer dynamics relative to AR models, with direct consequences for how such models should be compressed and deployed. Our code is available at <a href="https://github.com/Conzel/super-outlier-dlm" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://github.com/Conzel/super-outlier-dlm</a>.</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p id="S1.p1.1" class="ltx_p">Diffusion language models (DLMs) have recently emerged as a competitive alternative to
+autoregressive (AR) large language models. Open models such as LLaDA-8B <cite class="ltx_cite ltx_citemacro_citep">(Nie<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib30" title="Large language diffusion models" class="ltx_ref">2026</a>)</cite>
+and DREAM-7B <cite class="ltx_cite ltx_citemacro_citep">(Ye<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib45" title="Dream 7B: Diffusion Large Language Models" class="ltx_ref">2025</a>)</cite> match the quality of AR counterparts at comparable scale
+on standard reasoning and language understanding benchmarks. Rather than producing one token at a
+time from left to right, DLMs denoise a masked sequence over multiple refinement steps, which
+enables parallel token generation
+<cite class="ltx_cite ltx_citemacro_citep">(Wu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib40" title="Fast-dLLM: Training-free acceleration of diffusion LLM by enabling KV cache and parallel decoding" class="ltx_ref">2026</a>; Chen<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib6" title="dParallel: Learnable parallel decoding for dLLMs" class="ltx_ref">2026</a>; Ma<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib26" title="dInfer: An Efficient Inference Framework for Diffusion Language Models" class="ltx_ref">2025</a>)</cite>
+and avoids the reversal curse <cite class="ltx_cite ltx_citemacro_citep">(Berglund<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib2" title="The Reversal Curse: LLMs trained on “A is B” fail to learn “B is A”" class="ltx_ref">2024</a>)</cite>.
+As DLMs become more widespread, questions on the structure of their internal representations
+and how they propagate through layers arise. Of particular interest is whether the findings
+from AR models transfer one-to-one to DLMs or if there are particular behaviours that necessitate
+extra care during tasks such as training, fine-tuning or compression.</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p id="S1.p2.1" class="ltx_p">In this paper, we find that DLMs show distinct and partly opposite behaviour from AR models.
+We find that LLaDA-8B’s internal representations are qualitatively unlike those
+of any AR model previously studied.
+Most strikingly, a <em id="S1.p2.1.1" class="ltx_emph ltx_font_italic">single</em> activation channel (see <a href="#S1.F1" title="Figure 1 ‣ 1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Figure 1</span></a>) remains persistently and highly activated across all tokens throughout the first half of the model’s layers — an extreme outlier that drives layer collapse, causing multiple layers to produce nearly identical, redundant hidden representations.
+This channel dominates the model to such a degree that ablating it alone causes a near-total collapse in capability. While outlier channels are prominent in AR models (see <cite class="ltx_cite ltx_citemacro_citet">Dettmers<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib10" title="Gpt3.int8(): 8-bit matrix multiplication for transformers at scale" class="ltx_ref">2022</a>); Yu<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib47" title="The super weight in large language models" class="ltx_ref">2025</a>)</cite>), they only cause extreme activations for specific tokens or token positions, and pruning a single one of them causes only a noticeable accuracy drop (-4% in our experiment, see <a href="#S2.T1" title="Table 1 ‣ 2.2 Super-Outlier in LLaDA-8B ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Table 1</span></a>), but not complete model collapse.
+The layer-wise similarity structure is also inverted (see <a href="#S2.F3" title="Figure 3 ‣ 2.3 Early-Layer Redundancies in LLaDA-8B ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Figure 3</span></a>). In standard AR models, early layers usually learn more distinct transformations, while deeper layers become increasingly redundant as a consequence of undertraining <cite class="ltx_cite ltx_citemacro_citep">(Sun<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib37" title="The curse of depth in large language models" class="ltx_ref">2026</a>)</cite>.
+By contrast, LLaDA-8B exhibits highly redundant early layers. We find that this redundancy is driven by the dominating super-outlier, which suppresses the representation expressivity of other channels across the first few layers.</p>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p id="S1.p3.1" class="ltx_p">At first glance, this observation conflicts with the curse-of-depth hypothesis <cite class="ltx_cite ltx_citemacro_citep">(Sun<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib37" title="The curse of depth in large language models" class="ltx_ref">2026</a>)</cite>, which attributes high representation similarity in Pre-LN Transformers to the undertraining of deeper layers. However, our weight spectral density analysis shows that DLMs exhibit a compatible layerwise trainability pattern, but with a different source of redundancy. In LLaDA-8B, the unusually high similarity among early layers is not caused by undertraining; instead, it arises from the relative overtraining of these layers, resulting in dominant super-outliers concentrated in the earliest layers.</p>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p id="S1.p4.1" class="ltx_p"><span id="S1.p4.1.1" class="ltx_text ltx_font_bold">Why activation structure matters.</span> A long line of work has shown that algorithms
+which explicitly account for activation structure
+<cite class="ltx_cite ltx_citemacro_citep">(Lin<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib22" title="AWQ: Activation-aware weight quantization for LLM compression and acceleration" class="ltx_ref">2024</a>; Lee<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib20" title="OWQ: Outlier-aware weight quantization for efficient fine-tuning and inference of large language models" class="ltx_ref">2024</a>; Ashkboos<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib32" title="QuaRot: Outlier-free 4-bit inference in rotated llms" class="ltx_ref">2024</a>)</cite> substantially outperform
+naive counterparts on quantization and pruning. The structure itself has been mapped in detail
+for AR models: <em id="S1.p4.1.2" class="ltx_emph ltx_font_italic">outlier features</em>, extreme activations found in essentially all sufficiently
+large language models <cite class="ltx_cite ltx_citemacro_citep">(Dettmers<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib10" title="Gpt3.int8(): 8-bit matrix multiplication for transformers at scale" class="ltx_ref">2022</a>; An<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib1" title="Systematic outliers in large language models" class="ltx_ref">2025</a>)</cite>, are tied to
+core information-processing functions. <em id="S1.p4.1.3" class="ltx_emph ltx_font_italic">Super-weights</em> suppress stop-tokens
+<cite class="ltx_cite ltx_citemacro_citep">(Yu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib47" title="The super weight in large language models" class="ltx_ref">2025</a>)</cite>, and attention outliers at sequence boundaries serve as
+sinks for excess attention mass <cite class="ltx_cite ltx_citemacro_citep">(Gu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib15" title="When attention sink emerges in language models: An empirical view" class="ltx_ref">2025</a>; Xiao<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib41" title="Efficient streaming language models with attention sinks" class="ltx_ref">2024</a>)</cite>.
+Early DLM work hints that the picture is different: <cite class="ltx_cite ltx_citemacro_citet">Rulli<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib33" title="Attention sinks in diffusion language models" class="ltx_ref">2025</a>)</cite>
+report that attention sinks are present in DLMs but far less sensitive to removal, an observation
+that <cite class="ltx_cite ltx_citemacro_citet">Myrzakhan<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib29" title="Sink-aware pruning for diffusion language models" class="ltx_ref">2026</a>)</cite> have already exploited for more
+efficient pruning. Our results push this line considerably further, and identify the diffusion training objective itself as the source of the divergence.</p>
+</div>
+<figure id="S1.F1" class="ltx_figure"><img src="2605.06366v1/x1.png" id="S1.F1.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="660" height="429" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span id="S1.F1.2.1.1" class="ltx_text" style="font-size:90%;">Figure 1</span>: </span><span id="S1.F1.3.2" class="ltx_text" style="font-size:90%;">LLaDA activations contain a single consistent, very large super-outlier channel which persists well into the middle layers. The marked dot shows the channel with the highest activation magnitude maximum (averaged over tokens and sequence positions).
+For Llama, the dominant channel changes on almost every layer.</span></figcaption>
+</figure>
+<div id="S1.p5" class="ltx_para">
+<p id="S1.p5.1" class="ltx_p"><span id="S1.p5.1.1" class="ltx_text ltx_font_bold">Contributions.</span> We close part of the knowledge gap between AR and diffusion language
+models through a systematic study of activation histograms and layer similarities in LLaDA-8B.
+To separate effects arising from the diffusion objective from architectural quirks, we compare
+LLaDA-8B to Llama-3.1-8B, which share a near-identical architecture, and complement this with the first
+controlled pre-training comparison in which an AR and a DL model are trained under identical
+conditions.</p>
+<ul id="S1.I1" class="ltx_itemize">
+<li id="S1.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S1.I1.i1.p1" class="ltx_para">
+<p id="S1.I1.i1.p1.1" class="ltx_p">We identify a <em id="S1.I1.i1.p1.1.1" class="ltx_emph ltx_font_italic">super-outlier</em> in LLaDA-8B: a single dominant activation channel qualitatively distinct from the weight and activation outliers previously reported in AR LLMs, and whose removal collapses the model.</p>
+</div>
+</li>
+<li id="S1.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S1.I1.i2.p1" class="ltx_para">
+<p id="S1.I1.i2.p1.1" class="ltx_p">We characterize the layer-similarity structure of LLaDA-8B and show that it differs markedly from that of comparable AR models, with early layers being highly redundant rather than distinct, corroborated by weight spectral analysis indicative of
+significant overfitting.</p>
+</div>
+</li>
+<li id="S1.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S1.I1.i3.p1" class="ltx_para">
+<p id="S1.I1.i3.p1.1" class="ltx_p">We translate these observations into practical guidance for DLM compression and show that AR-derived sparsity heuristics are not merely suboptimal but actively inverted relative to what LLaDA-8B calls for.</p>
+</div>
+</li>
+<li id="S1.I1.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S1.I1.i4.p1" class="ltx_para">
+<p id="S1.I1.i4.p1.1" class="ltx_p">To isolate the role of the training objective, we pre-train an AR and a DL model under an identical setup and show that the diffusion objective is responsible for the observed layer and compression behaviours. To our knowledge, this is the first such controlled comparison.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Layer Dynamics in Diffusion Language Models</h2>
+
+<section id="S2.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>Metrics</h3>
+
+<div id="S2.SS1.p1" class="ltx_para">
+<p id="S2.SS1.p1.4" class="ltx_p"><span id="S2.SS1.p1.4.1" class="ltx_text ltx_font_bold">Layer Similarity.</span> Our main method of analysis is the per-token cosine similarity between the hidden activations of different layers of a model.
+Let <math id="S2.SS1.p1.1.m1" class="ltx_Math" alttext="h_{i}(x,t)\in\mathbb{R}^{d}" display="inline" intent=":literal"><semantics><mrow><mrow><msub><mi>h</mi><mi>i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo>∈</mo><msup><mi>ℝ</mi><mi>d</mi></msup></mrow><annotation encoding="application/x-tex">h_{i}(x,t)\in\mathbb{R}^{d}</annotation></semantics></math> denote the hidden state at layer <math id="S2.SS1.p1.2.m2" class="ltx_Math" alttext="i" display="inline" intent=":literal"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math> for input sequence <math id="S2.SS1.p1.3.m3" class="ltx_Math" alttext="x\sim p_{x}" display="inline" intent=":literal"><semantics><mrow><mi>x</mi><mo>∼</mo><msub><mi>p</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">x\sim p_{x}</annotation></semantics></math> at token position <math id="S2.SS1.p1.4.m4" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>. We define the layer-wise similarity as</p>
+<table id="S2.E1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E1.m1" class="ltx_Math" alttext="\mathrm{sim}(i,j)\;=\;\mathbb{E}_{x\sim p_{x}}\,\mathbb{E}_{t}\left[\frac{\langle h_{i}(x,t),\,h_{j}(x,t)\rangle}{\|h_{i}(x,t)\|_{2}\,\|h_{j}(x,t)\|_{2}}\right]," display="block" intent=":literal"><semantics><mrow><mrow><mrow><mi>sim</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo rspace="0.280em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.558em">=</mo><mrow><msub><mi>𝔼</mi><mrow><mi>x</mi><mo>∼</mo><msub><mi>p</mi><mi>x</mi></msub></mrow></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>𝔼</mi><mi>t</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo>[</mo><mfrac><mrow><mo stretchy="false">⟨</mo><mrow><msub><mi>h</mi><mi>i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.337em">,</mo><mrow><msub><mi>h</mi><mi>j</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">⟩</mo></mrow><mrow><msub><mrow><mo stretchy="false">‖</mo><mrow><msub><mi>h</mi><mi>i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">‖</mo></mrow><mn>2</mn></msub><mo lspace="0.170em" rspace="0em">​</mo><msub><mrow><mo stretchy="false">‖</mo><mrow><msub><mi>h</mi><mi>j</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">‖</mo></mrow><mn>2</mn></msub></mrow></mfrac><mo>]</mo></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\mathrm{sim}(i,j)\;=\;\mathbb{E}_{x\sim p_{x}}\,\mathbb{E}_{t}\left[\frac{\langle h_{i}(x,t),\,h_{j}(x,t)\rangle}{\|h_{i}(x,t)\|_{2}\,\|h_{j}(x,t)\|_{2}}\right],</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.SS1.p1.9" class="ltx_p">where the inner expectation is taken over all (non-padding) token positions <math id="S2.SS1.p1.5.m1" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math> in the sequence.
+A value of <math id="S2.SS1.p1.6.m2" class="ltx_Math" alttext="\mathrm{sim}(i,j)" display="inline" intent=":literal"><semantics><mrow><mi>sim</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathrm{sim}(i,j)</annotation></semantics></math> close to <math id="S2.SS1.p1.7.m3" class="ltx_Math" alttext="1" display="inline" intent=":literal"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math> indicates that layers <math id="S2.SS1.p1.8.m4" class="ltx_Math" alttext="i" display="inline" intent=":literal"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math> and <math id="S2.SS1.p1.9.m5" class="ltx_Math" alttext="j" display="inline" intent=":literal"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math> produce nearly collinear representations, which we use as a proxy for layer redundancy: if the representation barely changes between two layers, the intermediate computation contributes little and is a natural candidate for pruning.</p>
+</div>
+<div id="S2.SS1.p2" class="ltx_para">
+<p id="S2.SS1.p2.1" class="ltx_p"><span id="S2.SS1.p2.1.1" class="ltx_text ltx_font_bold">Estimating Activations.</span>
+In practice, we estimate all hidden layer activations using a fixed calibration set of 128 sequences of
+length 2048 drawn from the C4 corpus. For DLMs we duplicate each sample 4 times and mask a <math id="S2.SS1.p2.1.m1" class="ltx_Math" alttext="t\sim\text{Unif}[0,1]" display="inline" intent=":literal"><semantics><mrow><mi>t</mi><mo>∼</mo><mrow><mtext>Unif</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">t\sim\text{Unif}[0,1]</annotation></semantics></math> fraction of tokens to imitate the activation statistics of a partly decoded sample sequence. We note however that this has very little effect on the resulting figures (see <a href="#A2.SS1" title="B.1 Activations and similarities without masking ‣ Appendix B Further experiment plots ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">subsection B.1</span></a>, repeating similarity and activation plots without masking), indicating that our findings are not sensitive to the exact decoding process that the DLM implements.</p>
+</div>
+<div id="S2.SS1.p3" class="ltx_para">
+<p id="S2.SS1.p3.1" class="ltx_p"><span id="S2.SS1.p3.1.1" class="ltx_text ltx_font_bold">Heavy-tailedness of the Weight Spectrum as a Layer Trainability Measure.</span>
+Representation similarity is a useful diagnostic for identifying redundant layers, but it is not by itself a reliable measure of layer trainability. High similarity can arise from qualitatively different mechanisms: in AR Transformers, similar representations in deeper layers are often associated with under-trained, near-identity residual mappings <cite class="ltx_cite ltx_citemacro_citep">(Sun<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib37" title="The curse of depth in large language models" class="ltx_ref">2026</a>)</cite>, whereas in DLMs, highly similar layers may instead reflect strong training of a few dominant directions, manifested as distinguished spectral or activation outliers. Thus, similarity-based importance metrics can be misleading, since they conflate under-utilized layers with layers whose representations are highly structured but dominated by a small number of directions.</p>
+</div>
+<div id="S2.SS1.p4" class="ltx_para">
+<p id="S2.SS1.p4.1" class="ltx_p">Motivated by Heavy-Tailed Self-Regularization (HT-SR) theory <cite class="ltx_cite ltx_citemacro_citep">(Martin and Mahoney, <a href="#bib.bib27" title="Traditional and Heavy-Tailed Self Regularization in Neural Network Models" class="ltx_ref">2019</a>; Lu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib25" title="AlphaPruning: Using heavy-tailed self regularization theory for improved layer-wise pruning of large language models" class="ltx_ref">2024</a>; He<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib53" title="One LR doesn’t fit all: heavy-tail guided layerwise learning rates for LLMs" class="ltx_ref">2026</a>)</cite>, we argue that the heavy-tailedness of the weight spectrum provides a more reliable, training-data-free measure of layer quality than representation similarity. HT-SR theory suggests that the empirical spectral density of neural-network weight matrices encodes information about the degree of learned structure: heavier-tailed spectra are typically associated with stronger feature learning and better-trained layers. In our setting, this spectral perspective is particularly useful because it helps distinguish two cases that representation similarity alone cannot separate: near-identity redundancy caused by insufficient training, and apparent redundancy caused by strong low-dimensional structure or outlier-dominated spectra.</p>
+</div>
+<div id="S2.SS1.p5" class="ltx_para">
+<p id="S2.SS1.p5.5" class="ltx_p">To quantify the heavy-tailedness of a layer, we use the Hill estimator <math id="S2.SS1.p5.1.m1" class="ltx_Math" alttext="\alpha_{\text{Hill}}" display="inline" intent=":literal"><semantics><msub><mi>α</mi><mtext>Hill</mtext></msub><annotation encoding="application/x-tex">\alpha_{\text{Hill}}</annotation></semantics></math> <cite class="ltx_cite ltx_citemacro_citep">(Lu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib25" title="AlphaPruning: Using heavy-tailed self regularization theory for improved layer-wise pruning of large language models" class="ltx_ref">2024</a>)</cite>. For weight <math id="S2.SS1.p5.2.m2" class="ltx_Math" alttext="W" display="inline" intent=":literal"><semantics><mi>W</mi><annotation encoding="application/x-tex">W</annotation></semantics></math>, let <math id="S2.SS1.p5.3.m3" class="ltx_Math" alttext="\lambda_{1}\geq\lambda_{2}\geq\dots\geq\lambda_{N}" display="inline" intent=":literal"><semantics><mrow><msub><mi>λ</mi><mn>1</mn></msub><mo>≥</mo><msub><mi>λ</mi><mn>2</mn></msub><mo>≥</mo><mi mathvariant="normal">⋯</mi><mo>≥</mo><msub><mi>λ</mi><mi>N</mi></msub></mrow><annotation encoding="application/x-tex">\lambda_{1}\geq\lambda_{2}\geq\dots\geq\lambda_{N}</annotation></semantics></math> denote the eigenvalues of <math id="S2.SS1.p5.4.m4" class="ltx_Math" alttext="W^{\top}W" display="inline" intent=":literal"><semantics><mrow><msup><mi>W</mi><mo>⊤</mo></msup><mo lspace="0em" rspace="0em">​</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">W^{\top}W</annotation></semantics></math> sorted in decreasing order. The Hill estimator of the power-law tail exponent, computed from the top <math id="S2.SS1.p5.5.m5" class="ltx_Math" alttext="k" display="inline" intent=":literal"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math> eigenvalues, is</p>
+<table id="S2.E2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E2.m1" class="ltx_Math" alttext="\alpha_{\text{Hill}}(k)\;=\;1+\frac{k}{\sum_{i=1}^{k}\log\frac{\lambda_{n-i+1}}{\lambda_{n-k}}}," display="block" intent=":literal"><semantics><mrow><mrow><mrow><msub><mi>α</mi><mtext>Hill</mtext></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>k</mi><mo rspace="0.280em" stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mn> 1</mn><mo>+</mo><mfrac><mi>k</mi><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></msubsup><mrow><mi>log</mi><mo lspace="0.167em">⁡</mo><mfrac><msub><mi>λ</mi><mrow><mrow><mi>n</mi><mo>−</mo><mi>i</mi></mrow><mo>+</mo><mn>1</mn></mrow></msub><msub><mi>λ</mi><mrow><mi>n</mi><mo>−</mo><mi>k</mi></mrow></msub></mfrac></mrow></mrow></mfrac></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\alpha_{\text{Hill}}(k)\;=\;1+\frac{k}{\sum_{i=1}^{k}\log\frac{\lambda_{n-i+1}}{\lambda_{n-k}}},</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.SS1.p5.7" class="ltx_p">where smaller values of <math id="S2.SS1.p5.6.m1" class="ltx_Math" alttext="\alpha_{\text{Hill}}" display="inline" intent=":literal"><semantics><msub><mi>α</mi><mtext>Hill</mtext></msub><annotation encoding="application/x-tex">\alpha_{\text{Hill}}</annotation></semantics></math> indicate heavier-tailed spectra. We set <math id="S2.SS1.p5.7.m2" class="ltx_Math" alttext="k" display="inline" intent=":literal"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math> using the fix-finger method <cite class="ltx_cite ltx_citemacro_citep">(Yang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib43" title="Test accuracy vs. generalization gap: Model selection in NLP without accessing training or testing data" class="ltx_ref">2023</a>)</cite>. Under HT-SR theory, a heavier tail is typically interpreted as evidence of stronger feature learning.</p>
+</div>
+</section>
+<section id="S2.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>Super-Outlier in LLaDA-8B</h3>
+
+<div id="S2.SS2.p1" class="ltx_para">
+<p id="S2.SS2.p1.1" class="ltx_p">Activation outliers are a well observed phenomenon in LLMs, but those spikes usually only occur briefly for specific tokens
+or for specific token positions <cite class="ltx_cite ltx_citemacro_citep">(An<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib1" title="Systematic outliers in large language models" class="ltx_ref">2025</a>)</cite>.
+In the case of LLaDA-8B, we present a unique finding: when analyzing the activation heatmaps over sequence positions in LLaDA, we find
+that there exists one single dominant outlier channel, which has a persistently high activation (up to 5 times as large as the next largest outlier)
+over all sequence positions (see <a href="#S2.F2" title="Figure 2 ‣ 2.2 Super-Outlier in LLaDA-8B ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Figure 2</span></a>).</p>
+</div>
+<div id="S2.SS2.p2" class="ltx_para">
+<p id="S2.SS2.p2.1" class="ltx_p">In contrast to outliers in AR models, which are reported to have well behaved mechanisms such as stop-word suppression <cite class="ltx_cite ltx_citemacro_citep">(Yu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib47" title="The super weight in large language models" class="ltx_ref">2025</a>)</cite>,
+the super-outlier in LLaDA seems more akin to a constant bias that is learned by the network.
+The qualitative effect of pruning the super-outlier is striking: LLaDA-8B degenerates into repetitive token loops, regardless of the prompt. As an illustrative example (taken from GSM8K):</p>
+<blockquote id="S2.SS2.p2.2" class="ltx_quote">
+<p id="S2.SS2.p2.2.1" class="ltx_p"><span id="S2.SS2.p2.2.1.1" class="ltx_text ltx_font_bold">Question.</span> Kylar went to the store to buy glasses for his new apartment. One glass costs $5, but every second glass costs only 60% of the price. Kylar wants to buy 16 glasses. How much does he need to pay for them?</p>
+<p id="S2.SS2.p2.2.2" class="ltx_p"><span id="S2.SS2.p2.2.2.1" class="ltx_text ltx_font_bold">LLaDA-8B answer (super-outlier pruned).</span> <span id="S2.SS2.p2.2.2.2" class="ltx_text ltx_font_italic">buy buy buy buy1yl buy buy buy</span></p>
+</blockquote>
+<p id="S2.SS2.p2.3" class="ltx_p">This is in stark contrast to Llama-3.1-8B, where removing the highest magnitude channel only slightly reduces the accuracy, see <a href="#S2.T1" title="Table 1 ‣ 2.2 Super-Outlier in LLaDA-8B ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Table 1</span></a>.</p>
+</div>
+<figure id="S2.T1" class="ltx_table">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table"><span id="S2.T1.5.1.1" class="ltx_text" style="font-size:90%;">Table 1</span>: </span><span id="S2.T1.6.2" class="ltx_text" style="font-size:90%;">
+Effect of pruning the single highest-magnitude channel on GSM8K (small subset). Removing channel 3848 in LLaDA-8B (the super-outlier) collapses the model entirely, while pruning the corresponding top-magnitude channel in Llama-3.1-8B causes only a minor accuracy drop.</span></figcaption>
+<table id="S2.T1.3" class="ltx_tabular ltx_centering ltx_align_middle">
+<tr id="S2.T1.1.1" class="ltx_tr">
+<td id="S2.T1.1.1.2" class="ltx_td ltx_align_left ltx_border_tt">Model</td>
+<td id="S2.T1.1.1.3" class="ltx_td ltx_align_center ltx_border_tt">Channel pruned</td>
+<td id="S2.T1.1.1.4" class="ltx_td ltx_align_center ltx_border_tt">Accuracy</td>
+<td id="S2.T1.1.1.1" class="ltx_td ltx_align_center ltx_border_tt">
+<math id="S2.T1.1.1.1.m1" class="ltx_Math" alttext="\Delta" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Δ</mi><annotation encoding="application/x-tex">\Delta</annotation></semantics></math> baseline</td>
+</tr>
+<tr id="S2.T1.2.2" class="ltx_tr">
+<td id="S2.T1.2.2.2" class="ltx_td ltx_align_left ltx_border_t">Llama-3.1-8B</td>
+<td id="S2.T1.2.2.3" class="ltx_td ltx_align_center ltx_border_t">291</td>
+<td id="S2.T1.2.2.4" class="ltx_td ltx_align_center ltx_border_t">79%</td>
+<td id="S2.T1.2.2.1" class="ltx_td ltx_align_center ltx_border_t"><math id="S2.T1.2.2.1.m1" class="ltx_Math" alttext="-4\%" display="inline" intent=":literal"><semantics><mrow><mo>−</mo><mrow><mn>4</mn><mo>%</mo></mrow></mrow><annotation encoding="application/x-tex">-4\%</annotation></semantics></math></td>
+</tr>
+<tr id="S2.T1.3.3" class="ltx_tr">
+<td id="S2.T1.3.3.2" class="ltx_td ltx_align_left ltx_border_bb">LLaDA-8B</td>
+<td id="S2.T1.3.3.3" class="ltx_td ltx_align_center ltx_border_bb">3848</td>
+<td id="S2.T1.3.3.4" class="ltx_td ltx_align_center ltx_border_bb">0%</td>
+<td id="S2.T1.3.3.1" class="ltx_td ltx_align_center ltx_border_bb"><math id="S2.T1.3.3.1.m1" class="ltx_Math" alttext="-83\%" display="inline" intent=":literal"><semantics><mrow><mo>−</mo><mrow><mn>83</mn><mo>%</mo></mrow></mrow><annotation encoding="application/x-tex">-83\%</annotation></semantics></math></td>
+</tr>
+</table>
+</figure>
+<figure id="S2.F2" class="ltx_figure">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_2">
+<figure id="S2.F2.sf1" class="ltx_figure ltx_figure_panel ltx_align_center"><img src="2605.06366v1/x2.png" id="S2.F2.sf1.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="660" height="317" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span id="S2.F2.sf1.2.1.1" class="ltx_text" style="font-size:90%;">(a)</span> </span><span id="S2.F2.sf1.3.2" class="ltx_text" style="font-size:90%;">LLaDA-8B: the super-outlier channel dominates the top-5 magnitudes consistently across early-middle layers.</span></figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_2">
+<figure id="S2.F2.sf2" class="ltx_figure ltx_figure_panel ltx_align_center"><img src="2605.06366v1/x3.png" id="S2.F2.sf2.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="660" height="320" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span id="S2.F2.sf2.2.1.1" class="ltx_text" style="font-size:90%;">(b)</span> </span><span id="S2.F2.sf2.3.2" class="ltx_text" style="font-size:90%;">Llama-3.1-8B: top-5 channels are of comparable magnitude; dominant channel changes across layers.</span></figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span id="S2.F2.2.1.1" class="ltx_text" style="font-size:90%;">Figure 2</span>: </span><span id="S2.F2.3.2" class="ltx_text" style="font-size:90%;">Magnitudes of the top-5 QKV input channels across layers. In LLaDA-8B, one channel persistently dominates by a wide margin, whereas in Llama-3.1-8B no single channel is dominant.</span></figcaption>
+</figure>
+</section>
+<section id="S2.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.3 </span>Early-Layer Redundancies in LLaDA-8B</h3>
+
+<div id="S2.SS3.p1" class="ltx_para">
+<p id="S2.SS3.p1.1" class="ltx_p">Next, we analyze the pairwise similarities of the hidden representations in LLaDA and Llama in <a href="#S2.F3" title="Figure 3 ‣ 2.3 Early-Layer Redundancies in LLaDA-8B ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Figure 3</span></a>.
+Surprisingly, we find that almost all layers in LLaDA (top left) exhibit an extremely high similarity to each other,
+especially early layers which are almost identical to each other even over ranges of 15+ layers.
+This is partially mitigated if the similarities are calculated with the channel corresponding to the super-outlier set to zero (Ch. 3848, see <a href="#S2.SS2" title="2.2 Super-Outlier in LLaDA-8B ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">subsection 2.2</span></a>),
+but the learned representations for LLaDA are still more redundant than the ones from Llama-3.1-8B (which will result in a stronger robustness of
+DLMs compared to ARs, see <a href="#S3" title="3 DLMs Are More Robust to Compression Despite Super-Outliers ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">section 3</span></a>).
+On the other hand, for Llama-3.1-8B (bottom left), the early layers show very distinct activation patterns, and the later layers contain more redundancy,
+in line with previous work on AR models.</p>
+</div>
+<div id="S2.SS3.p2" class="ltx_para">
+<p id="S2.SS3.p2.1" class="ltx_p">This behaviour from LLaDA-8B is not shared with DREAM-7B, since DREAM has been initialized from the weights of Qwen-2.5-7B (an AR model) and only fine-tuned
+on masked sequences. Therefore, the final weights of DREAM do not differ much from the ones of Qwen, and their similarity patterns look almost identical. This outlier profile can be harmful in handling DLMs. Common wisdom is that strong outliers make for layers or networks
+that are hard to compress; thus the compression community has devised various ways of dealing with them
+<cite class="ltx_cite ltx_citemacro_citep">(Lin<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib22" title="AWQ: Activation-aware weight quantization for LLM compression and acceleration" class="ltx_ref">2024</a>; Dettmers<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib10" title="Gpt3.int8(): 8-bit matrix multiplication for transformers at scale" class="ltx_ref">2022</a>; Ashkboos<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib32" title="QuaRot: Outlier-free 4-bit inference in rotated llms" class="ltx_ref">2024</a>)</cite>.
+Based on this, metrics such as OWL <cite class="ltx_cite ltx_citemacro_citep">(Yin<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib46" title="Outlier Weighed Layerwise Sparsity (OWL): A Missing Secret Sauce for Pruning LLMs to High Sparsity" class="ltx_ref">2025</a>)</cite> allocate a lower sparsity level to layers with strong outliers
+(which are presumably difficult to compress). In LLaDA-8B, this would mean that early layers should be pruned less aggressively. Due to the redundancy that is exhibited in the early layers, we have a different finding:
+early layers can actually be pruned more strongly; we quantify this in <a href="#S3" title="3 DLMs Are More Robust to Compression Despite Super-Outliers ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">section 3</span></a>.</p>
+</div>
+<figure id="S2.F3" class="ltx_figure"><img src="2605.06366v1/x4.png" id="S2.F3.1.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="627" height="402" alt="Refer to caption">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span id="S2.F3.3.1.1" class="ltx_text" style="font-size:90%;">Figure 3</span>: </span><span id="S2.F3.4.2" class="ltx_text" style="font-size:90%;">Per-token cosine similarity for different models. The top row shows DLMs, the bottom shows ARs. The left column shows a comparison of LLaDA-8B and Llama-3.1-8B, where LLaDA-8B exhibits highly redundant (collapsed) layer similarities.
+For the middle column, we have removed the largest outlier from the similarity calculations, showing
+that much of the layer similarity of LLaDA is due to a single outlier, unlike Llama, where removing one outlier barely changes the resulting similarities.
+The right column shows a comparison between Qwen-2.5-7B and DREAM-7B.
+As DREAM was finetuned from Qwen-initialized weights, their layer similarity patterns are very similar. </span></figcaption>
+</figure>
+</section>
+<section id="S2.SS4" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.4 </span>Heavy-Tailed Evidence of Overtraining</h3>
+
+<div id="S2.SS4.p1" class="ltx_para">
+<p id="S2.SS4.p1.1" class="ltx_p">Leveraging the analysis performed by <cite class="ltx_cite ltx_citemacro_citet">Martin and Mahoney (<a href="#bib.bib27" title="Traditional and Heavy-Tailed Self Regularization in Neural Network Models" class="ltx_ref">2019</a>); Lu<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib25" title="AlphaPruning: Using heavy-tailed self regularization theory for improved layer-wise pruning of large language models" class="ltx_ref">2024</a>)</cite>,
+we can also measure how well trained the layers in a neural network are via the <math id="S2.SS4.p1.1.m1" class="ltx_Math" alttext="\alpha_{\text{Hill}}" display="inline" intent=":literal"><semantics><msub><mi>α</mi><mtext>Hill</mtext></msub><annotation encoding="application/x-tex">\alpha_{\text{Hill}}</annotation></semantics></math> estimator.</p>
+</div>
+<div id="S2.SS4.p2" class="ltx_para">
+<p id="S2.SS4.p2.3" class="ltx_p">According to the works of <cite class="ltx_cite ltx_citemacro_citep">(Zhou<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib51" title="Temperature balancing, layer-wise weight analysis, and neural network training" class="ltx_ref">2023</a>; Liu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib24" title="Model balancing helps low-data training and fine-tuning" class="ltx_ref">2024</a>; He<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib16" title="AlphaDecay: Module-wise weight decay for heavy-tailed balancing in llms" class="ltx_ref">2025</a>)</cite>, a balanced distribution of <math id="S2.SS4.p2.1.m1" class="ltx_Math" alttext="\alpha_{\text{Hill}}" display="inline" intent=":literal"><semantics><msub><mi>α</mi><mtext>Hill</mtext></msub><annotation encoding="application/x-tex">\alpha_{\text{Hill}}</annotation></semantics></math> indicates, that the layers in a network a better trained.
+A relatively low value of <math id="S2.SS4.p2.2.m2" class="ltx_Math" alttext="\alpha_{\text{Hill}}" display="inline" intent=":literal"><semantics><msub><mi>α</mi><mtext>Hill</mtext></msub><annotation encoding="application/x-tex">\alpha_{\text{Hill}}</annotation></semantics></math> (with respect to the other layers) indicates a relatively ”overtrained” layer, while a very high value of <math id="S2.SS4.p2.3.m3" class="ltx_Math" alttext="\alpha_{\text{Hill}}" display="inline" intent=":literal"><semantics><msub><mi>α</mi><mtext>Hill</mtext></msub><annotation encoding="application/x-tex">\alpha_{\text{Hill}}</annotation></semantics></math> indicates an ”undertrained” layer.</p>
+</div>
+<div id="S2.SS4.p3" class="ltx_para">
+<p id="S2.SS4.p3.1" class="ltx_p">This behaviour can be seen in <a href="#S2.F4" title="Figure 4 ‣ 2.4 Heavy-Tailed Evidence of Overtraining ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Figure 4</span></a>: early layers in LLaDA-8B have a strikingly
+low <math id="S2.SS4.p3.1.m1" class="ltx_Math" alttext="\alpha_{\text{Hill}}" display="inline" intent=":literal"><semantics><msub><mi>α</mi><mtext>Hill</mtext></msub><annotation encoding="application/x-tex">\alpha_{\text{Hill}}</annotation></semantics></math> (relative) value, while the distribution of the twin-model Llama-3.1-8B is much more flat. This ties in with the early-layer occurrence of the super-outlier, a form of
+over-training where the layer representations collapse to a single
+dominant channel.</p>
+</div>
+<figure id="S2.F4" class="ltx_figure"><img src="2605.06366v1/x5.png" id="S2.F4.1.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="528" height="150" alt="Refer to caption">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span id="S2.F4.7.3.1" class="ltx_text" style="font-size:90%;">Figure 4</span>: </span><span id="S2.F4.5.2" class="ltx_text" style="font-size:90%;">The <math id="S2.F4.4.1.m1" class="ltx_Math" alttext="\alpha_{\text{Hill}}" display="inline" intent=":literal"><semantics><msub><mi>α</mi><mtext>Hill</mtext></msub><annotation encoding="application/x-tex">\alpha_{\text{Hill}}</annotation></semantics></math> value is very low in the early layers of LLaDA-8B which shows that these layers
+are actually overtrained. <math id="S2.F4.5.2.m2" class="ltx_Math" alttext="\alpha_{\text{Hill}}" display="inline" intent=":literal"><semantics><msub><mi>α</mi><mtext>Hill</mtext></msub><annotation encoding="application/x-tex">\alpha_{\text{Hill}}</annotation></semantics></math> is averaged over modules in layer.</span></figcaption>
+</figure>
+</section>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>DLMs Are More Robust to Compression Despite Super-Outliers</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p id="S3.p1.1" class="ltx_p">In this section, we demonstrate that our observations have practically relevant consequences when dealing with DLMs. For this, we have chosen
+the task of model compression. We prune and quantize LLaDA and Llama-3.1-8B using GPTQ and WANDA and measure their performance on math and question-answering under different overall and layer-wise compression strength allocations.
+We show that (a) AR-optimal schemes for layer-wise compression strength are inverted when dealing with DLMs and (b) DLMs have more compression robustness.
+Observation (a) is a direct consequence of our layer-wise similarity analysis, but observation (b) is particularly surprising, as LLaDA-8B contains a super-outlier that is very sensitive to change. However,
+we have seen in <a href="#S1.F1" title="Figure 1 ‣ 1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Figure 1</span></a> that LLaDA contains fewer outliers apart from the super-outlier, and we have seen in
+<a href="#S2.F3" title="Figure 3 ‣ 2.3 Early-Layer Redundancies in LLaDA-8B ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Figure 3</span></a> that LLaDA layer activations are more redundant, even when the outlier is removed. This translates to an overall
+stronger compression robustness, particularly as modern compression methods (like WANDA) are designed to be robust to a certain amount of outliers.</p>
+</div>
+<section id="S3.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Experiment Setup</h3>
+
+<section id="S3.SS1.SSS0.Px1" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Evaluation.</h4>
+
+<div id="S3.SS1.SSS0.Px1.p1" class="ltx_para">
+<p id="S3.SS1.SSS0.Px1.p1.1" class="ltx_p">Models are evaluated both on
+an average of 6 common question-answering (QnA) tasks (ARC-C, HellaSwag, PIQA, Winogrande, BoolQ, OBQA) as well as on reasoning via GSM8K.
+DLMs are evaluated using FastDLLM <cite class="ltx_cite ltx_citemacro_citep">(Wu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib40" title="Fast-dLLM: Training-free acceleration of diffusion LLM by enabling KV cache and parallel decoding" class="ltx_ref">2026</a>)</cite> with
+a generation length of 1024 and one token decoded per diffusion step. Further details can be found in <a href="#A1.SS1" title="A.1 Evaluation of Language Models ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">subsection A.1</span></a>.</p>
+</div>
+</section>
+<section id="S3.SS1.SSS0.Px2" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Compression.</h4>
+
+<div id="S3.SS1.SSS0.Px2.p1" class="ltx_para">
+<p id="S3.SS1.SSS0.Px2.p1.5" class="ltx_p">Pruning experiments were performed using WANDA <cite class="ltx_cite ltx_citemacro_citep">(Sun<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib36" title="A simple and effective pruning approach for large language models" class="ltx_ref">2024b</a>)</cite> and quantization experiments using GPTQ <cite class="ltx_cite ltx_citemacro_citep">(Frantar<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib64" title="GPTQ: accurate post-training quantization for generative pre-trained transformers" class="ltx_ref">2023</a>)</cite>.
+Both methods used calibration samples drawn from the C4 dataset (128 for WANDA, 256 for GPTQ). Adding samples with
+masked tokens did not change the performance of the compression at all, so we opted not to mask samples for the DLM compression.
+The described sparsity schedules <span id="S3.SS1.SSS0.Px2.p1.5.1" class="ltx_text ltx_font_italic">earlier-is-sparser</span> (EIS) and <span id="S3.SS1.SSS0.Px2.p1.5.2" class="ltx_text ltx_font_italic">deeper-is-sparser</span> (DIS) follow a simple linear allocation, using an <math id="S3.SS1.SSS0.Px2.p1.1.m1" class="ltx_Math" alttext="\epsilon" display="inline" intent=":literal"><semantics><mi>ϵ</mi><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math> of 0.08.
+This means for EIS applied to a <math id="S3.SS1.SSS0.Px2.p1.2.m2" class="ltx_Math" alttext="T" display="inline" intent=":literal"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math> layer network at sparsity <math id="S3.SS1.SSS0.Px2.p1.3.m3" class="ltx_Math" alttext="s" display="inline" intent=":literal"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>, we assign sparsity <math id="S3.SS1.SSS0.Px2.p1.4.m4" class="ltx_Math" alttext="s+0.08\left(1-\frac{2(t-1)}{T-1}\right)" display="inline" intent=":literal"><semantics><mrow><mi>s</mi><mo>+</mo><mrow><mn>0.08</mn><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><mn>1</mn><mo>−</mo><mfrac><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>T</mi><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><mo>)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">s+0.08\left(1-\frac{2(t-1)}{T-1}\right)</annotation></semantics></math> to layer <math id="S3.SS1.SSS0.Px2.p1.5.m5" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>.
+Correspondingly, for DIS, the addition turns into a subtraction.</p>
+</div>
+</section>
+</section>
+<section id="S3.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Compression</h3>
+
+<section id="S3.SS2.SSS0.Px1" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Pruning.</h4>
+
+<div id="S3.SS2.SSS0.Px1.p1" class="ltx_para">
+<p id="S3.SS2.SSS0.Px1.p1.1" class="ltx_p">Our experiments in <a href="#S3.F5" title="Figure 5 ‣ Quantization. ‣ 3.2 Compression ‣ 3 DLMs Are More Robust to Compression Despite Super-Outliers ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Figure 5</span></a> (top row) show the average accuracy on QnA tasks (left) respectively GSM8K reasoning (right)
+of LLaDA-8B and Llama-3.1-8B at three sparsity levels (0.3, 0.5, 0.7) and under three sparsity allocation strategies that result
+in the same total sparsity (uniform, earlier-is-sparser, deeper-is-sparser).</p>
+</div>
+<div id="S3.SS2.SSS0.Px1.p2" class="ltx_para">
+<p id="S3.SS2.SSS0.Px1.p2.1" class="ltx_p">These results reinforce the practicality of our observations made in <a href="#S2" title="2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">section 2</span></a>. We have two key observations to make in the results:
+<span id="S3.SS2.SSS0.Px1.p2.1.1" class="ltx_text ltx_font_bold">First</span>, LLaDA starts out with a generally lower accuracy than Llama, but is much more robust when compressed
+achieving almost double the accuracy of Llama for GSM8K at 50% sparsity. This ties into our observation
+that Llama-3.1-8B contains many more similarities, introducing redundancy into the network and making the accuracy of
+each single layer less important (as long as the super-outlier is protected, which is exactly the case under WANDA pruning).
+<span id="S3.SS2.SSS0.Px1.p2.1.2" class="ltx_text ltx_font_bold">Second,</span> the optimal sparsity allocation differs between LLaDA and Llama. For Llama, pruning early layers more
+strongly (EIS) is always suboptimal and either uniform sparsity allocation or pruning deeper layers more strongly (DIS) are the optimal choice
+(depending on task). For LLaDA, this flips, and DIS is usually the suboptimal choice, with either EIS or uniform performing the best.
+Only for sparsity 0.7 on QnA, DIS significantly outperforms EIS for LLaDA, which we suspect might be due to the fact that the very high
+sparsity level starts to necessitate pruning of the weights connected to the super-outlier.</p>
+</div>
+</section>
+<section id="S3.SS2.SSS0.Px2" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Quantization.</h4>
+
+<div id="S3.SS2.SSS0.Px2.p1" class="ltx_para">
+<p id="S3.SS2.SSS0.Px2.p1.1" class="ltx_p">As quantization is usually the more practical method of compressing a neural network, we have included
+experiments on quantization as well in <a href="#S3.F5" title="Figure 5 ‣ Quantization. ‣ 3.2 Compression ‣ 3 DLMs Are More Robust to Compression Despite Super-Outliers ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Figure 5</span></a> (bottom row). However, as quantization has to be done to discrete
+bit widths, we have not included an experiment on a layerwise bit-width allocation, which cannot be made with such a fine-grained
+allocation as is done in the experiments on pruning.</p>
+</div>
+<div id="S3.SS2.SSS0.Px2.p2" class="ltx_para">
+<p id="S3.SS2.SSS0.Px2.p2.1" class="ltx_p">Other than that, these experiments reinforce the same observation we have made for pruning above, namely that LLaDA is inherently
+more robust to compression than Llama-3.1-8B, starting out with a worse base performance and surpassing the performance of Llama at
+3 bit for QnA (left figure) and already at 4 bit for GSM8K (right figure).</p>
+</div>
+<figure id="S3.F5" class="ltx_figure"><img src="2605.06366v1/x6.png" id="S3.F5.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="660" height="302" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span id="S3.F5.4.2.1" class="ltx_text" style="font-size:90%;">Figure 5</span>: </span><span id="S3.F5.2.1" class="ltx_text" style="font-size:90%;">Compression performance for LLaDA-8B and Llama-3.1-8B: pruning across sparsity allocation strategies (top row, at <math id="S3.F5.2.1.m1" class="ltx_Math" alttext="\epsilon=0.08" display="inline" intent=":literal"><semantics><mrow><mi>ϵ</mi><mo>=</mo><mn>0.08</mn></mrow><annotation encoding="application/x-tex">\epsilon=0.08</annotation></semantics></math>) and GPTQ quantization across bit-widths (bottom row), evaluated on the base-model commonsense QnA tasks (left column) and the instruct-model GSM8K task (right column).</span></figcaption>
+</figure>
+</section>
+</section>
+</section>
+<section id="S4" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Supporting Evidence: A Controlled 160M Pair</h2>
+
+<div id="S4.p1" class="ltx_para">
+<p id="S4.p1.1" class="ltx_p">The experiments in this section reinforce that our findings are not just a spurious quirk of LLaDA-8B, but are inherent to the
+pre-training objective that is used in DLMs. To establish this, we perform pre-training experiments with a Pythia-160M <cite class="ltx_cite ltx_citemacro_citep">(Vaswani<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib54" title="Attention is all you need" class="ltx_ref">2017</a>; Biderman<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib55" title="Pythia: a suite for analyzing large language models across training and scaling" class="ltx_ref">2023</a>)</cite> architecture pre-trained on 100B tokens from FineWebEdu <cite class="ltx_cite ltx_citemacro_citep">(Penedo<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib56" title="The FineWeb datasets: decanting the web for the finest text data at scale" class="ltx_ref">2024</a>)</cite>. The resulting models AR-160M, DLM-160M are trained identically,
+solely varying in the training objective (cross-entropy either with or without masking). Further details are in <a href="#A1.SS2" title="A.2 Small-scale pre-training ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">subsection A.2</span></a>. We perform the same evaluation as we did for <a href="#S3" title="3 DLMs Are More Robust to Compression Despite Super-Outliers ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">section 3</span></a>, minus GSM8K due to the small model scale.</p>
+</div>
+<section id="S4.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Results</h3>
+
+<div id="S4.SS1.p1" class="ltx_para">
+<p id="S4.SS1.p1.1" class="ltx_p">Our analysis of the small-scale models supports the following two observations from the base model:
+(a) early layer representations in DLM-160M are more similar to each other than in AR-160M, and more similar to each other than
+the deeper layer representations, and (b) DLM-160M shows more robustness to compression than AR-160M. Due to our controlled setting, we could thus ensure that these observations
+are due to the DLM training objective and not due to architectural or pre-training hyperparameter choices.
+We note that DLM-160M is lacking the super-outlier: to observe weight and activation outliers, one has to train models to much larger scale (&gt;6.7B indicated by <cite class="ltx_cite ltx_citemacro_citet">Dettmers<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib10" title="Gpt3.int8(): 8-bit matrix multiplication for transformers at scale" class="ltx_ref">2022</a>)</cite>), which was out of the scope of this work.</p>
+</div>
+<section id="S4.SS1.SSS0.Px1" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Layer Similarities.</h4>
+
+<div id="S4.SS1.SSS0.Px1.p1" class="ltx_para">
+<p id="S4.SS1.SSS0.Px1.p1.1" class="ltx_p">To more easily quantify how similar the layer representations in our two models are, we have averaged the per-layer similarities
+in a blockwise fashion: we have grouped the first 4 layers of the model together, as well as the last 4 layers and have averaged
+over the resulting 16 inner-block layer-wise similarities.
+<a href="#S4.T2" title="Table 2 ‣ Layer Similarities. ‣ 4.1 Results ‣ 4 Supporting Evidence: A Controlled 160M Pair ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Table 2</span></a> shows that the same early-layer redundancy pattern of the large models starts to emerge
+in our pre-trained models: the early layer similarity is higher in DLM-160M compared to AR-160M, while it flips for the late-layer similarities.</p>
+</div>
+<figure id="S4.T2" class="ltx_table">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table"><span id="S4.T2.2.1.1" class="ltx_text" style="font-size:90%;">Table 2</span>: </span><span id="S4.T2.3.2" class="ltx_text" style="font-size:90%;">Average cosine-similarities between early layers are higher for DLM-160M. To better assess the similarity, we have grouped the first 4 layers and the last 4 layers together
+and have averaged over their pairwise cosine similarities. </span></figcaption>
+<table id="S4.T2.4" class="ltx_tabular ltx_centering ltx_align_middle">
+<tr id="S4.T2.4.1" class="ltx_tr">
+<td id="S4.T2.4.1.1" class="ltx_td ltx_align_left ltx_border_tt">Model</td>
+<td id="S4.T2.4.1.2" class="ltx_td ltx_align_center ltx_border_tt">Early-layer similarity</td>
+<td id="S4.T2.4.1.3" class="ltx_td ltx_align_center ltx_border_tt">Deeper-layer similarity</td>
+</tr>
+<tr id="S4.T2.4.2" class="ltx_tr">
+<td id="S4.T2.4.2.1" class="ltx_td ltx_align_left ltx_border_t">DLM-160M</td>
+<td id="S4.T2.4.2.2" class="ltx_td ltx_align_center ltx_border_t">0.877</td>
+<td id="S4.T2.4.2.3" class="ltx_td ltx_align_center ltx_border_t">0.787</td>
+</tr>
+<tr id="S4.T2.4.3" class="ltx_tr">
+<td id="S4.T2.4.3.1" class="ltx_td ltx_align_left ltx_border_bb">AR-160M</td>
+<td id="S4.T2.4.3.2" class="ltx_td ltx_align_center ltx_border_bb">0.818</td>
+<td id="S4.T2.4.3.3" class="ltx_td ltx_align_center ltx_border_bb">0.829</td>
+</tr>
+</table>
+</figure>
+</section>
+<section id="S4.SS1.SSS0.Px2" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Heavy-tailed Signature.</h4>
+
+<div id="S4.SS1.SSS0.Px2.p1" class="ltx_para">
+<p id="S4.SS1.SSS0.Px2.p1.2" class="ltx_p">The same heavy-tailed signature appears in the 160M pair (<a href="#S4.F6" title="Figure 6 ‣ Heavy-tailed Signature. ‣ 4.1 Results ‣ 4 Supporting Evidence: A Controlled 160M Pair ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Figure 6</span></a>): the controlled DLM shows a markedly lower <math id="S4.SS1.SSS0.Px2.p1.1.m1" class="ltx_Math" alttext="\alpha_{\text{Hill}}" display="inline" intent=":literal"><semantics><msub><mi>α</mi><mtext>Hill</mtext></msub><annotation encoding="application/x-tex">\alpha_{\text{Hill}}</annotation></semantics></math>
+in early layers, while its AR twin does not. This behaviour normalizes in later layers, where both models show similar <math id="S4.SS1.SSS0.Px2.p1.2.m2" class="ltx_Math" alttext="\alpha_{\text{Hill}}" display="inline" intent=":literal"><semantics><msub><mi>α</mi><mtext>Hill</mtext></msub><annotation encoding="application/x-tex">\alpha_{\text{Hill}}</annotation></semantics></math> values.</p>
+</div>
+<figure id="S4.F6" class="ltx_figure"><img src="2605.06366v1/x7.png" id="S4.F6.1.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="528" height="145" alt="Refer to caption">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span id="S4.F6.5.2.1" class="ltx_text" style="font-size:90%;">Figure 6</span>: </span><span id="S4.F6.3.1" class="ltx_text" style="font-size:90%;">Similar to the larger models, <math id="S4.F6.3.1.m1" class="ltx_Math" alttext="\alpha_{\text{Hill}}" display="inline" intent=":literal"><semantics><msub><mi>α</mi><mtext>Hill</mtext></msub><annotation encoding="application/x-tex">\alpha_{\text{Hill}}</annotation></semantics></math> is smaller for DLM-160M compared to AR-160M.</span></figcaption>
+</figure>
+</section>
+<section id="S4.SS1.SSS0.Px3" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Compression Results.</h4>
+
+<div id="S4.SS1.SSS0.Px3.p1" class="ltx_para">
+<p id="S4.SS1.SSS0.Px3.p1.1" class="ltx_p">In <a href="#S4.F7" title="Figure 7 ‣ Compression Results. ‣ 4.1 Results ‣ 4 Supporting Evidence: A Controlled 160M Pair ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Figure 7</span></a>, we present results for pruning (left) and quantization (right) of our 160M models.
+We have performed pruning and evaluation for all pre-training learning rates and selected the best performing model per
+sparsity level. Similar to the behaviour of LLaDA-8B, DLM-160M starts out with less performance than AR-160M, but is more robust to compression.
+Here, the DLM model only supersedes its AR counterpart for the quantization experiment, while for pruning, they roughly
+match at the highest sparsity level (which could be due to initially subpar performance of DLM-160M). Also replicating the behaviour of LLaDA versus Llama, the best sparsity allocation strategy for DLM-160M is consistently earlier-is-sparser,
+while AR-160M achieves higher accuracy using deeper-is-sparser (aside from low sparsity regimes up to 40%, where all strategies perform similarly).
+This matches the expectations from our similarity analysis in <a href="#S4.T2" title="Table 2 ‣ Layer Similarities. ‣ 4.1 Results ‣ 4 Supporting Evidence: A Controlled 160M Pair ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Table 2</span></a>.</p>
+</div>
+<figure id="S4.F7" class="ltx_figure"><img src="2605.06366v1/x8.png" id="S4.F7.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="660" height="160" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span id="S4.F7.2.1.1" class="ltx_text" style="font-size:90%;">Figure 7</span>: </span><span id="S4.F7.3.2" class="ltx_text" style="font-size:90%;">Robustness replication on the controlled 160M pair: pruning (left) and quantization (right). DLM-160M loses less performance than AR-160M under pruning, with the best sparsity allocation strategy inverted (EIS for the DLM, DIS for the AR). Under quantization, DLM-160M starts below AR-160M at full precision but surpasses it from 2 bits onward. Both results are in line with the behaviour of LLaDA-8B versus Llama-3.1-8B.</span></figcaption>
+</figure>
+</section>
+</section>
+</section>
+<section id="S5" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Related Work</h2>
+
+<section id="S5.SS0.SSS0.Px1" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Outliers, Sinks, and Super-weights.</h4>
+
+<div id="S5.SS0.SSS0.Px1.p1" class="ltx_para">
+<p id="S5.SS0.SSS0.Px1.p1.1" class="ltx_p">A growing body of work shows that a small number of coordinates disproportionately
+shape large language model behaviour. Attention sinks concentrate probability mass on
+a handful of tokens <cite class="ltx_cite ltx_citemacro_citep">(Xiao<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib41" title="Efficient streaming language models with attention sinks" class="ltx_ref">2024</a>; Gu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib15" title="When attention sink emerges in language models: An empirical view" class="ltx_ref">2025</a>)</cite>;
+massive activations identify a few token positions whose hidden states grow orders of
+magnitude larger than the rest <cite class="ltx_cite ltx_citemacro_citep">(Sun<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib38" title="Massive activations in large language models" class="ltx_ref">2024a</a>)</cite>; super weights
+<cite class="ltx_cite ltx_citemacro_citep">(Yu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib47" title="The super weight in large language models" class="ltx_ref">2025</a>)</cite> and systematic outliers
+<cite class="ltx_cite ltx_citemacro_citep">(An<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib1" title="Systematic outliers in large language models" class="ltx_ref">2025</a>)</cite> extend the picture to individual
+parameters and feature dimensions whose removal disproportionately damages the model.
+These phenomena are predominantly described along the <em id="S5.SS0.SSS0.Px1.p1.1.1" class="ltx_emph ltx_font_italic">token</em> axis: a small set
+of positions dominates attention or activation norm. Collapsed layers describe the
+<em id="S5.SS0.SSS0.Px1.p1.1.2" class="ltx_emph ltx_font_italic">channel-axis</em> counterpart: a single hidden dimension that dominates the
+representation across all positions. In contrast to attention sinks, this phenomenon is absent in autoregressive models of comparable scale.</p>
+</div>
+</section>
+<section id="S5.SS0.SSS0.Px2" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Curse of Depth.</h4>
+
+<div id="S5.SS0.SSS0.Px2.p1" class="ltx_para">
+<p id="S5.SS0.SSS0.Px2.p1.1" class="ltx_p">Multiple works analyze the tendency of AR models to have less well-trained
+deeper layers <cite class="ltx_cite ltx_citemacro_citep">(Sun<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib37" title="The curse of depth in large language models" class="ltx_ref">2026</a>; Gromov<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib14" title="The unreasonable ineffectiveness of the deeper layers" class="ltx_ref">2025</a>; Siji<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib35" title="From words to amino acids: Does the curse of depth persist?" class="ltx_ref">2026</a>)</cite>, a phenomenon also termed the <em id="S5.SS0.SSS0.Px2.p1.1.1" class="ltx_emph ltx_font_italic">Curse of Depth</em>. Existing approaches
+to mitigate this issue include depth-growing during training <cite class="ltx_cite ltx_citemacro_citep">(Kapl<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib18" title="Do depth-grown models overcome the curse of depth? An in-depth analysis" class="ltx_ref">2025</a>)</cite>, adding sparsity to the model <cite class="ltx_cite ltx_citemacro_citep">(Muhtar<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib28" title="When does sparsity mitigate the curse of depth in llms" class="ltx_ref">2026</a>)</cite> or mixing Pre- and Post-LN <cite class="ltx_cite ltx_citemacro_citep">(Li<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib21" title="Mix-LN: Unleashing the power of deeper layers by combining pre-LN and post-LN" class="ltx_ref">2024</a>)</cite>. While our work reveals
+that early layers in DLMs are more redundant and can be compressed more strongly than in ARs, this does
+not mean that the curse is broken: if an improved training paradigm would make early-layers more informative and
+distinct, DLMs still exhibit strong redundancies in later layers and could thus face similar issues.</p>
+</div>
+</section>
+<section id="S5.SS0.SSS0.Px3" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Weight and Activation Dynamics in DLMs.</h4>
+
+<div id="S5.SS0.SSS0.Px3.p1" class="ltx_para">
+<p id="S5.SS0.SSS0.Px3.p1.1" class="ltx_p">A concurrent work by <cite class="ltx_cite ltx_citemacro_cite">Goel<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib12" title="A comparative analysis of layer-wise representational capacity in AR and diffusion llms" class="ltx_ref">2026</a>)</cite> also uses the cosine-similarity of hidden-states to characterize layer-dynamics, but analyzes similarities between
+immediately neighbored layers instead of long-range interactions, also revealing early-layer redundancies. The authors use this to propose a layer-skip method for inference,
+which is different from our sparsity allocation.
+In agreement with our work, the authors find that
+AR-finetuned DLMs retain most of the layer dynamics from
+initialization. Apart from that, our work uses cosine similarities in a markedly different way, which allows us to detect the super-outlier in LLaDA-8B. Additionally, we provide
+controlled AR-DLM twins and perform extensive compression experiments.
+<cite class="ltx_cite ltx_citemacro_citet">Rulli<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib33" title="Attention sinks in diffusion language models" class="ltx_ref">2025</a>)</cite> characterise attention sinks in DLMs, which are token-level attention outliers. Our work is complementary, as we analyze channel-wide <em id="S5.SS0.SSS0.Px3.p1.1.1" class="ltx_emph ltx_font_italic">activation</em> outliers.</p>
+</div>
+</section>
+<section id="S5.SS0.SSS0.Px4" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Compression of Diffusion Language Models.</h4>
+
+<div id="S5.SS0.SSS0.Px4.p1" class="ltx_para">
+<p id="S5.SS0.SSS0.Px4.p1.1" class="ltx_p">Several recent works compress masked diffusion language models. On the quantization
+side, DLM-Quant <cite class="ltx_cite ltx_citemacro_citep">(Xu and Yang, <a href="#bib.bib42" title="DLLMQuant: Quantizing Diffusion-based Large Language Models" class="ltx_ref">2025</a>)</cite>,
+Quant-dLLM <cite class="ltx_cite ltx_citemacro_citep">(Zhang<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib50" title="Quant-dLLM: Post-training extreme low-bit quantization for diffusion large language models" class="ltx_ref">2026</a>)</cite>, and
+<cite class="ltx_cite ltx_citemacro_citet">Lin<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib23" title="Quantization Meets dLLMs: A Systematic Study of Post-training Quantization for Diffusion LLMs" class="ltx_ref">2025</a>)</cite> adapt post-training quantization pipelines
+to the bidirectional, multi-step inference of DLMs.
+<cite class="ltx_cite ltx_citemacro_citet">Myrzakhan<span class="ltx_text ltx_bib_etal"> et al.</span> (<a href="#bib.bib29" title="Sink-aware pruning for diffusion language models" class="ltx_ref">2026</a>)</cite> use insights on attention sinks in DLMs to improve pruning.
+These works treat compression as a methodological problem, where they adapt a known technique to a new architecture.
+Our work is decidedly not a compression paper, but an analysis of activation dynamics whose findings carry practical implications that may
+be used in further compression research.</p>
+</div>
+</section>
+</section>
+<section id="S6" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6 </span>Discussion</h2>
+
+<div id="S6.p1" class="ltx_para">
+<p id="S6.p1.1" class="ltx_p">We have shown that DLMs exhibit activation dynamics that are qualitatively distinct from their AR counterparts. LLaDA-8B contains a single dominant activation channel that persists across all token positions and early layers; removing it causes total model collapse, a fragility with no parallel in AR models of comparable scale. This super-outlier drives early-layer redundancy through a mechanism we attribute to overtraining rather than undertraining, as evidenced by heavy-tailed weight spectra in early layers. A controlled 160M pre-training comparison supports that both the redundancy pattern and the compression robustness are products of the diffusion training objective and
+not architectural or pre-training artifacts. These findings carry direct practical consequences:
+Allocating more sparsity to deeper layers, exactly what is useful for AR models, instead performs suboptimally on DLMs.</p>
+</div>
+<div id="S6.p2" class="ltx_para">
+<p id="S6.p2.1" class="ltx_p">We envision that our findings inspire further research into DLM activation dynamics.
+The super-outlier in particular leaves many open questions, for example, which mechanisms of the DLM pre-training process produce it, and whether it is a harmful artifact or provides a useful role in information processing of DLMs.
+Additionally, the redundancy of DLM layer representations might indicate that the pre-training process is not yet optimized, similar to how redundant later layers in pre-LN AR models indicate suboptimal gradient flow. Ensuring that all layers are trained to produce distinct and informative
+representations would produce models that are more capable at similar sizes.</p>
+</div>
+<section id="S6.SS0.SSS0.Px1" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Limitations.</h4>
+
+<div id="S6.SS0.SSS0.Px1.p1" class="ltx_para">
+<p id="S6.SS0.SSS0.Px1.p1.1" class="ltx_p">Our findings are mostly focussed on a single DLM-AR pair, namely LLaDA-8B and Llama-3.1-8B. While the behaviour of Llama-3.1-8B is consistent with what is reported in the AR model literature, our findings for LLaDA-8B are novel.
+To our knowledge, LLaDA-8B is the only large-scale DLM that is completely pre-trained from scratch, as
+the current literature is mostly focussed on creating DLMs by fine-tuning them from AR model weights
+<cite class="ltx_cite ltx_citemacro_citep">(Bie<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib3" title="LLaDA2.0: Scaling up diffusion language models to 100B" class="ltx_ref">2025</a>, <a href="#bib.bib4" title="LLaDA2.1: Speeding up text diffusion via token editing" class="ltx_ref">2026</a>; Yu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib48" title="Introspective diffusion language models" class="ltx_ref">2026</a>)</cite>.
+During fine-tuning, these models’ weights stay close to their original, therefore models
+such as DREAM-7B show activation dynamics that are very close
+to their AR counterpart, see <a href="#S2.F3" title="Figure 3 ‣ 2.3 Early-Layer Redundancies in LLaDA-8B ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Figure 3</span></a>. While supporting our other findings, the 160M pre-training models did not show the super-outlier as LLaDA-8B, which was expected given the small scale of the model. To make our results more widely applicable,
+a large-scale DLM pre-training study could be implemented, pre-training DLMs on multiple parameter scales (e.g. 350M, 1B, 3B, 8B, 16B). This task unfortunately requires large amounts of GPU resources to run.</p>
+</div>
+</section>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul id="bib.L1" class="ltx_biblist">
+<li id="bib.bib52" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">N. Ajroldi (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">PlainLM: language model pretraining in PyTorch</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note"><a href="https://github.com/Niccolo-Ajroldi/plainLM" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://github.com/Niccolo-Ajroldi/plainLM</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS2.SSS0.Px1.p1.5" title="Autoregressive Model. ‣ A.2 Small-scale pre-training ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.2</span></a>.
+</span>
+</li>
+<li id="bib.bib1" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Y. An, X. Zhao, T. Yu, M. Tang, and J. Wang (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Systematic outliers in large language models</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">The Thirteenth International Conference on Learning Representations</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p4.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S2.SS2.p1.1" title="2.2 Super-Outlier in LLaDA-8B ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.2</span></a>,
+<a href="#S5.SS0.SSS0.Px1.p1.1" title="Outliers, Sinks, and Super-weights. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib32" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">S. Ashkboos, A. Mohtashami, M. L. Croci, B. Li, P. Cameron, M. Jaggi, D. Alistarh, T. Hoefler, and J. Hensman (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">QuaRot: Outlier-free 4-bit inference in rotated llms</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Advances in Neural Information Processing Systems</span>,  <span class="ltx_text ltx_bib_editor">A. Globerson, L. Mackey, D. Belgrave, A. Fan, U. Paquet, J. Tomczak, and C. Zhang (Eds.)</span>,
+</span>
+<span class="ltx_bibblock">Vol. <span class="ltx_text ltx_bib_volume">37</span>, <span class="ltx_text ltx_bib_pages"> pp. 100213–100240</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.52202/079017-3180" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p4.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S2.SS3.p2.1" title="2.3 Early-Layer Redundancies in LLaDA-8B ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.3</span></a>.
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">L. Berglund, M. Tong, M. Kaufmann, M. Balesni, A. C. Stickland, T. Korbak, and O. Evans (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The Reversal Curse: LLMs trained on “A is B” fail to learn “B is A”</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">The Twelfth International Conference on Learning Representations</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib62" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">S. Bergsma, N. Dey, G. Gosal, G. Gray, D. Soboleva, and J. Hestness (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Straight to zero: why linearly decaying the learning rate to zero works best for llms</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2502.15938</span>,
+<a href="https://arxiv.org/abs/2502.15938" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS2.SSS0.Px1.p1.5" title="Autoregressive Model. ‣ A.2 Small-scale pre-training ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.2</span></a>.
+</span>
+</li>
+<li id="bib.bib55" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">S. Biderman, H. Schoelkopf, Q. G. Anthony, H. Bradley, K. O’Brien, E. Hallahan, M. A. Khan, S. Purohit, U. S. Prashanth, E. Raff, A. Skowron, L. Sutawika, and O. Van Der Wal (2023)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Pythia: a suite for analyzing large language models across training and scaling</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 40th International Conference on Machine Learning (ICML)</span>,
+</span>
+<span class="ltx_bibblock">Vol. <span class="ltx_text ltx_bib_volume">202</span>, <span class="ltx_text ltx_bib_pages"> pp. 2397–2430</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.48550/arXiv.2304.01373" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS2.SSS0.Px1.p1.5" title="Autoregressive Model. ‣ A.2 Small-scale pre-training ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.2</span></a>,
+<a href="#S4.p1.1" title="4 Supporting Evidence: A Controlled 160M Pair ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4</span></a>.
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">T. Bie, M. Cao, X. Cao, B. Chen, F. Chen, K. Chen, L. Du, D. Feng, H. Feng, M. Gong, Z. Gong, Y. Gu, J. Guan, K. Guan, H. He, Z. Huang, J. Jiang, Z. Jiang, Z. Lan, C. Li, J. Li, Z. Li, H. Liu, L. Liu, G. Lu, Y. Lu, Y. Ma, X. Mou, Z. Pan, K. Qiu, Y. Ren, J. Tan, Y. Tian, Z. Wang, L. Wei, T. Wu, Y. Xing, W. Ye, L. Zha, T. Zhang, X. Zhang, J. Zhao, D. Zheng, H. Zhong, W. Zhong, J. Zhou, J. Zhou, L. Zhu, M. Zhu, and Y. Zhuang (2026)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">LLaDA2.1: Speeding up text diffusion via token editing</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2602.08676</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S6.SS0.SSS0.Px1.p1.1" title="Limitations. ‣ 6 Discussion ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§6</span></a>.
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">T. Bie, M. Cao, K. Chen, L. Du, M. Gong, Z. Gong, Y. Gu, J. Hu, Z. Huang, Z. Lan, C. Li, C. Li, J. Li, Z. Li, H. Liu, L. Liu, G. Lu, X. Lu, Y. Ma, J. Tan, L. Wei, J. Wen, Y. Xing, X. Zhang, J. Zhao, D. Zheng, J. Zhou, J. Zhou, Z. Zhou, L. Zhu, and Y. Zhuang (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">LLaDA2.0: Scaling up diffusion language models to 100B</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2512.15745</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S6.SS0.SSS0.Px1.p1.1" title="Limitations. ‣ 6 Discussion ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§6</span></a>.
+</span>
+</li>
+<li id="bib.bib5" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Y. Bisk, R. Zellers, R. L. Bras, J. Gao, and Y. Choi (2019)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">PIQA: Reasoning about physical commonsense in natural language</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">1911.11641</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS1.p1.1" title="A.1 Evaluation of Language Models ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.1</span></a>.
+</span>
+</li>
+<li id="bib.bib6" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Z. Chen, G. Fang, X. Ma, R. Yu, and X. Wang (2026)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">dParallel: Learnable parallel decoding for dLLMs</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">The Fourteenth International Conference on Learning Representations</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib8" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">C. Clark, K. Lee, M. Chang, T. Kwiatkowski, M. Collins, and K. Toutanova (2019)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">BoolQ: Exploring the surprising difficulty of natural yes/no questions</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)</span>,  <span class="ltx_text ltx_bib_editor">J. Burstein, C. Doran, and T. Solorio (Eds.)</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_place">Minneapolis, Minnesota</span>, <span class="ltx_text ltx_bib_pages"> pp. 2924–2936</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.18653/v1/N19-1300" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS1.p1.1" title="A.1 Evaluation of Language Models ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.1</span></a>.
+</span>
+</li>
+<li id="bib.bib7" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">P. Clark, I. Cowhey, O. Etzioni, T. Khot, A. Sabharwal, C. Schoenick, and O. Tafjord (2018)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Think you have solved question answering? Try ARC, the AI2 reasoning challenge</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">1803.05457</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS1.p1.1" title="A.1 Evaluation of Language Models ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.1</span></a>.
+</span>
+</li>
+<li id="bib.bib9" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">K. Cobbe, V. Kosaraju, M. Bavarian, M. Chen, H. Jun, L. Kaiser, M. Plappert, J. Tworek, J. Hilton, R. Nakano, C. Hesse, and J. Schulman (2021)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Training verifiers to solve math word problems</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2110.14168</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2110.14168</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS1.p1.1" title="A.1 Evaluation of Language Models ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.1</span></a>.
+</span>
+</li>
+<li id="bib.bib10" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">T. Dettmers, M. Lewis, Y. Belkada, and L. Zettlemoyer (2022)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Gpt3.int8(): 8-bit matrix multiplication for transformers at scale</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Advances in Neural Information Processing Systems</span>,  <span class="ltx_text ltx_bib_editor">S. Koyejo, S. Mohamed, A. Agarwal, D. Belgrave, K. Cho, and A. Oh (Eds.)</span>,
+</span>
+<span class="ltx_bibblock">Vol. <span class="ltx_text ltx_bib_volume">35</span>, <span class="ltx_text ltx_bib_pages"> pp. 30318–30332</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S1.p4.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S2.SS3.p2.1" title="2.3 Early-Layer Redundancies in LLaDA-8B ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.3</span></a>,
+<a href="#S4.SS1.p1.1" title="4.1 Results ‣ 4 Supporting Evidence: A Controlled 160M Pair ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4.1</span></a>.
+</span>
+</li>
+<li id="bib.bib64" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">E. Frantar, S. Ashkboos, T. Hoefler, and D. Alistarh (2023)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">GPTQ: accurate post-training quantization for generative pre-trained transformers</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2210.17323</span>,
+<a href="https://arxiv.org/abs/2210.17323" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS1.SSS0.Px2.p1.5" title="Compression. ‣ 3.1 Experiment Setup ‣ 3 DLMs Are More Robust to Compression Despite Super-Outliers ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.1</span></a>.
+</span>
+</li>
+<li id="bib.bib11" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">L. Gao, J. Tow, B. Abbasi, S. Biderman, S. Black, A. DiPofi, C. Foster, L. Golding, J. Hsu, A. Le Noac’h, H. Li, K. McDonell, N. Muennighoff, C. Ociepa, J. Phang, L. Reynolds, H. Schoelkopf, A. Skowron, L. Sutawika, E. Tang, A. Thite, B. Wang, K. Wang, and A. Zou (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The language model evaluation harness</span>.
+</span>
+<span class="ltx_bibblock"> <span class="ltx_text ltx_bib_publisher">Zenodo</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.5281/zenodo.12608602" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS1.p2.1" title="A.1 Evaluation of Language Models ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.1</span></a>.
+</span>
+</li>
+<li id="bib.bib12" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">R. Goel, R. Garrepalli, S. Agrawal, C. Lott, M. Lee, and F. Porikli (2026)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A comparative analysis of layer-wise representational capacity in AR and diffusion llms</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2603.07475</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS0.SSS0.Px3.p1.1" title="Weight and Activation Dynamics in DLMs. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib14" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">A. Gromov, K. Tirumala, H. Shapourian, P. Glorioso, and D. Roberts (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The unreasonable ineffectiveness of the deeper layers</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">The Thirteenth International Conference on Learning Representations</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS0.SSS0.Px2.p1.1" title="Curse of Depth. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib15" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">X. Gu, T. Pang, C. Du, Q. Liu, F. Zhang, C. Du, Y. Wang, and M. Lin (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">When attention sink emerges in language models: An empirical view</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">The Thirteenth International Conference on Learning Representations</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p4.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S5.SS0.SSS0.Px1.p1.1" title="Outliers, Sinks, and Super-weights. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib16" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">D. He, S. Tu, A. Jaiswal, L. Shen, G. Yuan, S. Liu, and L. Yin (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">AlphaDecay: Module-wise weight decay for heavy-tailed balancing in llms</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2506.14562</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.SS4.p2.3" title="2.4 Heavy-Tailed Evidence of Overtraining ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.4</span></a>.
+</span>
+</li>
+<li id="bib.bib53" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">D. He, S. Tu, K. Wang, L. Yin, and S. Liu (2026)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">One LR doesn’t fit all: heavy-tail guided layerwise learning rates for LLMs</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the International Conference on Machine Learning (ICML)</span>,
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://openreview.net/forum?id=Aj3ZWgxYwt" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.SS1.p4.1" title="2.1 Metrics ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.1</span></a>.
+</span>
+</li>
+<li id="bib.bib18" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">F. Kapl, E. Angelis, T. Hoppe, K. Maile, J. von Oswald, N. Scherrer, and S. Bauer (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Do depth-grown models overcome the curse of depth? An in-depth analysis</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">ArXiv</span> <span class="ltx_text ltx_bib_volume">abs/2512.08819</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS0.SSS0.Px2.p1.1" title="Curse of Depth. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib57" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">D. P. Kingma and J. Ba (2015)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Adam: a method for stochastic optimization</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">International Conference on Learning Representations (ICLR)</span>,
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://arxiv.org/abs/1412.6980" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS2.SSS0.Px1.p1.5" title="Autoregressive Model. ‣ A.2 Small-scale pre-training ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.2</span></a>.
+</span>
+</li>
+<li id="bib.bib19" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">W. Kwon, Z. Li, S. Zhuang, Y. Sheng, L. Zheng, C. H. Yu, J. E. Gonzalez, H. Zhang, and I. Stoica (2023)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Efficient memory management for large language model serving with PagedAttention</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the ACM SIGOPS 29th Symposium on Operating Systems Principles</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS1.p2.1" title="A.1 Evaluation of Language Models ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.1</span></a>.
+</span>
+</li>
+<li id="bib.bib20" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">C. Lee, J. Jin, T. Kim, H. Kim, and E. Park (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">OWQ: Outlier-aware weight quantization for efficient fine-tuning and inference of large language models</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2306.02272</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p4.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib21" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">P. Li, L. Yin, and S. Liu (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Mix-LN: Unleashing the power of deeper layers by combining pre-LN and post-LN</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">ArXiv</span> <span class="ltx_text ltx_bib_volume">abs/2412.13795</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS0.SSS0.Px2.p1.1" title="Curse of Depth. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib23" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">H. Lin, H. Xu, Y. Wu, Z. Guo, R. Zhang, Z. Lu, Y. Wei, Q. Zhang, and Z. Sun (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Quantization Meets dLLMs: A Systematic Study of Post-training Quantization for Diffusion LLMs</span>.
+</span>
+<span class="ltx_bibblock"> <span class="ltx_text ltx_bib_publisher">arXiv</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2508.14896</span>,
+<a href="https://dx.doi.org/10.48550/arXiv.2508.14896" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS0.SSS0.Px4.p1.1" title="Compression of Diffusion Language Models. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib22" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">J. Lin, J. Tang, H. Tang, S. Yang, W. Chen, W. Wang, G. Xiao, X. Dang, C. Gan, and S. Han (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">AWQ: Activation-aware weight quantization for LLM compression and acceleration</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">MLSys</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p4.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S2.SS3.p2.1" title="2.3 Early-Layer Redundancies in LLaDA-8B ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.3</span></a>.
+</span>
+</li>
+<li id="bib.bib24" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Z. Liu, Y. Hu, T. Pang, Y. Zhou, P. Ren, and Y. Yang (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Model balancing helps low-data training and fine-tuning</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing</span>,  <span class="ltx_text ltx_bib_editor">Y. Al-Onaizan, M. Bansal, and Y. Chen (Eds.)</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_place">Miami, Florida, USA</span>, <span class="ltx_text ltx_bib_pages"> pp. 1311–1331</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.18653/v1/2024.emnlp-main.78" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.SS4.p2.3" title="2.4 Heavy-Tailed Evidence of Overtraining ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.4</span></a>.
+</span>
+</li>
+<li id="bib.bib58" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">I. Loshchilov and F. Hutter (2019)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Decoupled weight decay regularization</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">International Conference on Learning Representations (ICLR)</span>,
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://arxiv.org/abs/1711.05101" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS2.SSS0.Px1.p1.5" title="Autoregressive Model. ‣ A.2 Small-scale pre-training ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.2</span></a>.
+</span>
+</li>
+<li id="bib.bib60" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">A. Lou, C. Feng, S. Ermon, and J. Zhao (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Discrete diffusion modeling by estimating the ratios of the transition kernel</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 41st International Conference on Machine Learning (ICML)</span>,
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://arxiv.org/abs/2310.16834" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS2.SSS0.Px2.p1.1" title="Diffusion Language Model. ‣ A.2 Small-scale pre-training ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.2</span></a>.
+</span>
+</li>
+<li id="bib.bib25" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">H. Lu, Y. Zhou, S. Liu, Z. Wang, M. W. Mahoney, and Y. Yang (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">AlphaPruning: Using heavy-tailed self regularization theory for improved layer-wise pruning of large language models</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">The Thirty-Eighth Annual Conference on Neural Information Processing Systems</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.SS1.p4.1" title="2.1 Metrics ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.1</span></a>,
+<a href="#S2.SS1.p5.5" title="2.1 Metrics ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.1</span></a>,
+<a href="#S2.SS4.p1.1" title="2.4 Heavy-Tailed Evidence of Overtraining ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.4</span></a>.
+</span>
+</li>
+<li id="bib.bib26" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Y. Ma, L. Du, L. Wei, K. Chen, Q. Xu, K. Wang, G. Feng, G. Lu, L. Liu, X. Qi, X. Zhang, Z. Tao, H. Feng, Z. Jiang, Y. Xu, Z. Huang, Y. Zhuang, H. Xu, J. Hu, Z. Lan, J. Zhao, J. Li, and D. Zheng (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">dInfer: An Efficient Inference Framework for Diffusion Language Models</span>.
+</span>
+<span class="ltx_bibblock"> <span class="ltx_text ltx_bib_publisher">arXiv</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2510.08666</span>,
+<a href="https://dx.doi.org/10.48550/arXiv.2510.08666" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib27" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">C. H. Martin and M. W. Mahoney (2019)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Traditional and Heavy-Tailed Self Regularization in Neural Network Models</span>.
+</span>
+<span class="ltx_bibblock"> <span class="ltx_text ltx_bib_publisher">arXiv</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">1901.08276</span>,
+<a href="https://dx.doi.org/10.48550/arXiv.1901.08276" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.SS1.p4.1" title="2.1 Metrics ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.1</span></a>,
+<a href="#S2.SS4.p1.1" title="2.4 Heavy-Tailed Evidence of Overtraining ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.4</span></a>.
+</span>
+</li>
+<li id="bib.bib31" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">T. Mihaylov, P. Clark, T. Khot, and A. Sabharwal (2018)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Can a suit of armor conduct electricity? A new dataset for open book question answering</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">EMNLP</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS1.p1.1" title="A.1 Evaluation of Language Models ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.1</span></a>.
+</span>
+</li>
+<li id="bib.bib28" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">D. Muhtar, X. Song, S. Pokutta, M. Zimmer, N. Pelleriti, T. Hofmann, and S. Liu (2026)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">When does sparsity mitigate the curse of depth in llms</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2603.15389</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS0.SSS0.Px2.p1.1" title="Curse of Depth. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib29" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">A. Myrzakhan, T. Li, B. Guo, S. Tang, and Z. Shen (2026)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Sink-aware pruning for diffusion language models</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2602.17664</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p4.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S5.SS0.SSS0.Px4.p1.1" title="Compression of Diffusion Language Models. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib30" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">S. Nie, F. Zhu, Z. You, X. Zhang, J. Ou, J. Hu, J. ZHOU, Y. Lin, J. Wen, and C. Li (2026)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Large language diffusion models</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">The Thirty-Ninth Annual Conference on Neural Information Processing Systems</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib56" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">G. Penedo, H. Kydlíček, L. Cappelli, M. Žilinec, C. Chapman, C. Guest, L. Guntupalli, A. Bakouch, I. Malartic, H. Touvron, <span class="ltx_text ltx_bib_etal">et al.</span> (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The FineWeb datasets: decanting the web for the finest text data at scale</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2406.17557</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://arxiv.org/abs/2406.17557" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS2.SSS0.Px1.p1.5" title="Autoregressive Model. ‣ A.2 Small-scale pre-training ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.2</span></a>,
+<a href="#S4.p1.1" title="4 Supporting Evidence: A Controlled 160M Pair ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4</span></a>.
+</span>
+</li>
+<li id="bib.bib33" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">M. E. Rulli, S. Petruzzi, E. Michielon, F. Silvestri, S. Scardapane, and A. Devoto (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Attention sinks in diffusion language models</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2510.15731</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p4.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S5.SS0.SSS0.Px3.p1.1" title="Weight and Activation Dynamics in DLMs. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib59" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">S. Sahoo, A. Lou, R. Chen, and V. Kuleshov (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Simple and effective masked diffusion language models</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Advances in Neural Information Processing Systems (NeurIPS)</span>,
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://arxiv.org/abs/2406.07524" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS2.SSS0.Px2.p1.1" title="Diffusion Language Model. ‣ A.2 Small-scale pre-training ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.2</span></a>.
+</span>
+</li>
+<li id="bib.bib34" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">K. Sakaguchi, R. L. Bras, C. Bhagavatula, and Y. Choi (2019)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">WinoGrande: An adversarial winograd schema challenge at scale</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">1907.10641</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS1.p1.1" title="A.1 Evaluation of Language Models ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.1</span></a>.
+</span>
+</li>
+<li id="bib.bib35" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">A. Siji, A. M. Karimi-Mamaghan, F. Kapl, T. Höppe, E. Angelis, A. Dittadi, M. Brenner, M. Heinzinger, K. H. Johansson, K. Maile, J. von Oswald, and S. Bauer (2026)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">From words to amino acids: Does the curse of depth persist?</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">ArXiv</span> <span class="ltx_text ltx_bib_volume">abs/2602.21750</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS0.SSS0.Px2.p1.1" title="Curse of Depth. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib38" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">M. Sun, X. Chen, J. Z. Kolter, and Z. Liu (2024a)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Massive activations in large language models</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">First Conference on Language Modeling</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS0.SSS0.Px1.p1.1" title="Outliers, Sinks, and Super-weights. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib36" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">M. Sun, Z. Liu, A. Bair, and J. Z. Kolter (2024b)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A simple and effective pruning approach for large language models</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">The Twelfth International Conference on Learning Representations</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.SS1.SSS0.Px2.p1.5" title="Compression. ‣ 3.1 Experiment Setup ‣ 3 DLMs Are More Robust to Compression Despite Super-Outliers ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.1</span></a>.
+</span>
+</li>
+<li id="bib.bib37" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">W. Sun, X. Song, P. Li, L. Yin, Y. Zheng, and S. Liu (2026)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The curse of depth in large language models</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">The Thirty-Ninth Annual Conference on Neural Information Processing Systems</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S1.p3.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S2.SS1.p3.1" title="2.1 Metrics ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.1</span></a>,
+<a href="#S5.SS0.SSS0.Px2.p1.1" title="Curse of Depth. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib54" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. N. Gomez, Ł. Kaiser, and I. Polosukhin (2017)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Attention is all you need</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Advances in Neural Information Processing Systems (NeurIPS)</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 5998–6008</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://papers.nips.cc/paper/7181-attention-is-all-you-need" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS2.SSS0.Px1.p1.5" title="Autoregressive Model. ‣ A.2 Small-scale pre-training ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.2</span></a>,
+<a href="#S4.p1.1" title="4 Supporting Evidence: A Controlled 160M Pair ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4</span></a>.
+</span>
+</li>
+<li id="bib.bib63" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">K. Wen, Z. Li, J. Wang, D. Hall, P. Liang, and T. Ma (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Understanding warmup-stable-decay learning rates: a river valley loss landscape perspective</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2410.05192</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS2.SSS0.Px1.p1.5" title="Autoregressive Model. ‣ A.2 Small-scale pre-training ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.2</span></a>.
+</span>
+</li>
+<li id="bib.bib40" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">C. Wu, H. Zhang, S. Xue, Z. Liu, S. Diao, L. Zhu, P. Luo, S. Han, and E. Xie (2026)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Fast-dLLM: Training-free acceleration of diffusion LLM by enabling KV cache and parallel decoding</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">The Fourteenth International Conference on Learning Representations</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS1.p2.1" title="A.1 Evaluation of Language Models ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.1</span></a>,
+<a href="#S1.p1.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S3.SS1.SSS0.Px1.p1.1" title="Evaluation. ‣ 3.1 Experiment Setup ‣ 3 DLMs Are More Robust to Compression Despite Super-Outliers ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3.1</span></a>.
+</span>
+</li>
+<li id="bib.bib41" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">G. Xiao, Y. Tian, B. Chen, S. Han, and M. Lewis (2024)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Efficient streaming language models with attention sinks</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">The Twelfth International Conference on Learning Representations</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p4.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S5.SS0.SSS0.Px1.p1.1" title="Outliers, Sinks, and Super-weights. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib42" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">C. Xu and D. Yang (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">DLLMQuant: Quantizing Diffusion-based Large Language Models</span>.
+</span>
+<span class="ltx_bibblock"> <span class="ltx_text ltx_bib_publisher">arXiv</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2508.14090</span>,
+<a href="https://dx.doi.org/10.48550/arXiv.2508.14090" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS0.SSS0.Px4.p1.1" title="Compression of Diffusion Language Models. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib43" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Y. Yang, R. Theisen, L. Hodgkinson, J. E. Gonzalez, K. Ramchandran, C. H. Martin, and M. W. Mahoney (2023)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Test accuracy vs. generalization gap: Model selection in NLP without accessing training or testing data</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 29th ACM SIGKDD Conference on Knowledge Discovery and Data Mining</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_series">Kdd ’23</span>, <span class="ltx_text ltx_bib_place">New York, NY, USA</span>, <span class="ltx_text ltx_bib_pages"> pp. 3011–3021</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.1145/3580305.3599518" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<span class="ltx_text isbn ltx_bib_external">ISBN 979-8-4007-0103-0</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.SS1.p5.7" title="2.1 Metrics ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.1</span></a>.
+</span>
+</li>
+<li id="bib.bib45" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">J. Ye, Z. Xie, L. Zheng, J. Gao, Z. Wu, X. Jiang, Z. Li, and L. Kong (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Dream 7B: Diffusion Large Language Models</span>.
+</span>
+<span class="ltx_bibblock"> <span class="ltx_text ltx_bib_publisher">arXiv</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2508.15487</span>,
+<a href="https://dx.doi.org/10.48550/arXiv.2508.15487" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib46" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">L. Yin, Y. Wu, Z. Zhang, C. Hsieh, Y. Wang, Y. Jia, G. Li, A. Jaiswal, M. Pechenizkiy, Y. Liang, M. Bendersky, Z. Wang, and S. Liu (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Outlier Weighed Layerwise Sparsity (OWL): A Missing Secret Sauce for Pruning LLMs to High Sparsity</span>.
+</span>
+<span class="ltx_bibblock"> <span class="ltx_text ltx_bib_publisher">arXiv</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2310.05175</span>,
+<a href="https://dx.doi.org/10.48550/arXiv.2310.05175" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.SS3.p2.1" title="2.3 Early-Layer Redundancies in LLaDA-8B ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.3</span></a>.
+</span>
+</li>
+<li id="bib.bib47" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">M. Yu, D. Wang, Q. Shan, C. J. Reed, and A. Wan (2025)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The super weight in large language models</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2411.07191</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S1.p4.1" title="1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S2.SS2.p2.1" title="2.2 Super-Outlier in LLaDA-8B ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.2</span></a>,
+<a href="#S5.SS0.SSS0.Px1.p1.1" title="Outliers, Sinks, and Super-weights. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib48" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Y. Yu, Y. Jian, J. Wang, Z. Zhou, D. Zhuang, X. Fang, S. Yanamandra, X. Wu, Q. Wu, S. L. Song, T. Dao, B. Athiwaratkun, J. Zou, F. Lai, and C. Xu (2026)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Introspective diffusion language models</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2604.11035</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S6.SS0.SSS0.Px1.p1.1" title="Limitations. ‣ 6 Discussion ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§6</span></a>.
+</span>
+</li>
+<li id="bib.bib49" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">R. Zellers, A. Holtzman, Y. Bisk, A. Farhadi, and Y. Choi (2019)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">HellaSwag: Can a machine really finish your sentence?</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">1905.07830</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#A1.SS1.p1.1" title="A.1 Evaluation of Language Models ‣ Appendix A Experimental details ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§A.1</span></a>.
+</span>
+</li>
+<li id="bib.bib50" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">T. Zhang, Z. Li, X. Yan, H. Qin, Y. Guo, and Y. Zhang (2026)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Quant-dLLM: Post-training extreme low-bit quantization for diffusion large language models</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">The Fourteenth International Conference on Learning Representations</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.SS0.SSS0.Px4.p1.1" title="Compression of Diffusion Language Models. ‣ 5 Related Work ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib51" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_author-year ltx_role_refnum ltx_tag_bibitem">Y. Zhou, T. Pang, K. Liu, c. h martin, M. W. Mahoney, and Y. Yang (2023)</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Temperature balancing, layer-wise weight analysis, and neural network training</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Thirty-Seventh Conference on Neural Information Processing Systems</span>,
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.SS4.p2.3" title="2.4 Heavy-Tailed Evidence of Overtraining ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2.4</span></a>.
+</span>
+</li>
+</ul>
+</section>
+<section id="A1" class="ltx_appendix">
+<h2 class="ltx_title ltx_title_appendix">
+<span class="ltx_tag ltx_tag_appendix">Appendix A </span>Experimental details</h2>
+
+<section id="A1.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">A.1 </span>Evaluation of Language Models</h3>
+
+<div id="A1.SS1.p1" class="ltx_para">
+<p id="A1.SS1.p1.1" class="ltx_p">Models are evaluated on the following question-answering tasks:
+ARC-Challenge <cite class="ltx_cite ltx_citemacro_citet">Clark<span class="ltx_text ltx_bib_etal"> et al.</span> [<a href="#bib.bib7" title="Think you have solved question answering? Try ARC, the AI2 reasoning challenge" class="ltx_ref">2018</a>]</cite>,
+HellaSwag <cite class="ltx_cite ltx_citemacro_citet">Zellers<span class="ltx_text ltx_bib_etal"> et al.</span> [<a href="#bib.bib49" title="HellaSwag: Can a machine really finish your sentence?" class="ltx_ref">2019</a>]</cite>,
+PIQA <cite class="ltx_cite ltx_citemacro_citet">Bisk<span class="ltx_text ltx_bib_etal"> et al.</span> [<a href="#bib.bib5" title="PIQA: Reasoning about physical commonsense in natural language" class="ltx_ref">2019</a>]</cite>
+WinoGrande  <cite class="ltx_cite ltx_citemacro_citet">Sakaguchi<span class="ltx_text ltx_bib_etal"> et al.</span> [<a href="#bib.bib34" title="WinoGrande: An adversarial winograd schema challenge at scale" class="ltx_ref">2019</a>]</cite>,
+BoolQ <cite class="ltx_cite ltx_citemacro_citet">Clark<span class="ltx_text ltx_bib_etal"> et al.</span> [<a href="#bib.bib8" title="BoolQ: Exploring the surprising difficulty of natural yes/no questions" class="ltx_ref">2019</a>]</cite>,
+OpenbookQA <cite class="ltx_cite ltx_citemacro_citet">Mihaylov<span class="ltx_text ltx_bib_etal"> et al.</span> [<a href="#bib.bib31" title="Can a suit of armor conduct electricity? A new dataset for open book question answering" class="ltx_ref">2018</a>]</cite>. Additionally, we evaluate on reasoning via GSM8K <cite class="ltx_cite ltx_citemacro_citep">[Cobbe<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib9" title="Training verifiers to solve math word problems" class="ltx_ref">2021</a>]</cite>.
+We use 25-shot for ARC-Challenge, 10-shot for HellaSwag, 5-shot for WinoGrande and GSM8K, and 0-shot for BoolQ, OpenBookQA, and PIQA.
+We used base models for QnA, and corresponding instruction-finetuned variants for GSM8K.</p>
+</div>
+<div id="A1.SS1.p2" class="ltx_para">
+<p id="A1.SS1.p2.1" class="ltx_p">For the DLMs, we used an adapted version FastDLLM <cite class="ltx_cite ltx_citemacro_citep">[Wu<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib40" title="Fast-dLLM: Training-free acceleration of diffusion LLM by enabling KV cache and parallel decoding" class="ltx_ref">2026</a>]</cite> with single KV-cache, but not parallel decoding. The block-length was set to 32 and the generation length to 1024, with 1024 decoding steps (so 1 token per decoding step) and low confidence remasking.
+For the AR models, we use vLLM <cite class="ltx_cite ltx_citemacro_citep">[Kwon<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib19" title="Efficient memory management for large language model serving with PagedAttention" class="ltx_ref">2023</a>]</cite> for inference acceleration together with LM-Eval <cite class="ltx_cite ltx_citemacro_citep">[Gao<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib11" title="The language model evaluation harness" class="ltx_ref">2024</a>]</cite>.</p>
+</div>
+<div id="A1.SS1.p3" class="ltx_para">
+<p id="A1.SS1.p3.1" class="ltx_p">All evaluations are done on a single H100 GPU. Evaluations take around 6 hours for DLMs and 20 minutes for AR models for both task sets.</p>
+</div>
+</section>
+<section id="A1.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">A.2 </span>Small-scale pre-training</h3>
+
+<section id="A1.SS2.SSS0.Px1" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Autoregressive Model.</h4>
+
+<div id="A1.SS2.SSS0.Px1.p1" class="ltx_para">
+<p id="A1.SS2.SSS0.Px1.p1.5" class="ltx_p">We used <cite class="ltx_cite ltx_citemacro_citet">Ajroldi [<a href="#bib.bib52" title="PlainLM: language model pretraining in PyTorch" class="ltx_ref">2024</a>]</cite> to pretrain Pythia-160M parameter transformer models <cite class="ltx_cite ltx_citemacro_citep">[Vaswani<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib54" title="Attention is all you need" class="ltx_ref">2017</a>, Biderman<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib55" title="Pythia: a suite for analyzing large language models across training and scaling" class="ltx_ref">2023</a>]</cite> on causal language modeling, with 100B tokens of FineWebEdu <cite class="ltx_cite ltx_citemacro_citep">[Penedo<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib56" title="The FineWeb datasets: decanting the web for the finest text data at scale" class="ltx_ref">2024</a>]</cite> on 8<math id="A1.SS2.SSS0.Px1.p1.1.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>A100-80GB GPUs. We use sequence length 2048 and a batch size of 0.5M tokens, cross-entropy loss, Adam <cite class="ltx_cite ltx_citemacro_citep">[Kingma and Ba, <a href="#bib.bib57" title="Adam: a method for stochastic optimization" class="ltx_ref">2015</a>]</cite> with decoupled weight decay <cite class="ltx_cite ltx_citemacro_citep">[Loshchilov and Hutter, <a href="#bib.bib58" title="Decoupled weight decay regularization" class="ltx_ref">2019</a>]</cite> of 0.1, gradient clipping of 1, and <math id="A1.SS2.SSS0.Px1.p1.2.m2" class="ltx_Math" alttext="(\beta_{1},\beta_{2})=(0.9,0.95)" display="inline" intent=":literal"><semantics><mrow><mrow><mo stretchy="false">(</mo><msub><mi>β</mi><mn>1</mn></msub><mo>,</mo><msub><mi>β</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow><mo>=</mo><mrow><mo stretchy="false">(</mo><mn>0.9</mn><mo>,</mo><mn>0.95</mn><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">(\beta_{1},\beta_{2})=(0.9,0.95)</annotation></semantics></math>. We use Warm up-Stable-Decay <cite class="ltx_cite ltx_citemacro_citep">[Wen<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib63" title="Understanding warmup-stable-decay learning rates: a river valley loss landscape perspective" class="ltx_ref">2024</a>]</cite> to schedule the learning rates, warm up of 1900 steps (<math id="A1.SS2.SSS0.Px1.p1.3.m3" class="ltx_Math" alttext="1\%" display="inline" intent=":literal"><semantics><mrow><mn>1</mn><mo>%</mo></mrow><annotation encoding="application/x-tex">1\%</annotation></semantics></math>) and decay to 0 <cite class="ltx_cite ltx_citemacro_citep">[Bergsma<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib62" title="Straight to zero: why linearly decaying the learning rate to zero works best for llms" class="ltx_ref">2025</a>]</cite> of <math id="A1.SS2.SSS0.Px1.p1.4.m4" class="ltx_Math" alttext="10\%" display="inline" intent=":literal"><semantics><mrow><mn>10</mn><mo>%</mo></mrow><annotation encoding="application/x-tex">10\%</annotation></semantics></math> of token budget.
+We perform three independent runs for learning rates <math id="A1.SS2.SSS0.Px1.p1.5.m5" class="ltx_Math" alttext="\{3\!\times\!10^{-3},1\!\times\!10^{-3},3\!\times\!10^{-4}\}" display="inline" intent=":literal"><semantics><mrow><mo stretchy="false">{</mo><mrow><mn>3</mn><mo lspace="0.052em" rspace="0.052em">×</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>3</mn></mrow></msup></mrow><mo>,</mo><mrow><mn>1</mn><mo lspace="0.052em" rspace="0.052em">×</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>3</mn></mrow></msup></mrow><mo>,</mo><mrow><mn>3</mn><mo lspace="0.052em" rspace="0.052em">×</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>4</mn></mrow></msup></mrow><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{3\!\times\!10^{-3},1\!\times\!10^{-3},3\!\times\!10^{-4}\}</annotation></semantics></math>.</p>
+</div>
+</section>
+<section id="A1.SS2.SSS0.Px2" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Diffusion Language Model.</h4>
+
+<div id="A1.SS2.SSS0.Px2.p1" class="ltx_para">
+<p id="A1.SS2.SSS0.Px2.p1.1" class="ltx_p">We adapt this pipeline into a Masked Discrete Diffusion Language Model
+<cite class="ltx_cite ltx_citemacro_citep">[MDLM; Sahoo<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib59" title="Simple and effective masked diffusion language models" class="ltx_ref">2024</a>, Lou<span class="ltx_text ltx_bib_etal"> et al.</span>, <a href="#bib.bib60" title="Discrete diffusion modeling by estimating the ratios of the transition kernel" class="ltx_ref">2024</a>]</cite> trainer with four modifications:
+(i) a bidirectional attention patch on the GPTNeoX backbone,
+(ii) a forward absorbing-state corruption step,
+(iii) an importance-weighted cross-entropy loss applied only at corrupted positions,
+and (iv) the reuse of an unused vocabulary slot as the <math id="A1.SS2.SSS0.Px2.p1.1.m1" class="ltx_Math" alttext="[\text{MASK}]" display="inline" intent=":literal"><semantics><mrow><mo stretchy="false">[</mo><mtext>MASK</mtext><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[\text{MASK}]</annotation></semantics></math> token.
+All other hyperparameters, including data order, are identical to the AR trainer.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="A2" class="ltx_appendix">
+<h2 class="ltx_title ltx_title_appendix">
+<span class="ltx_tag ltx_tag_appendix">Appendix B </span>Further experiment plots</h2>
+
+<section id="A2.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">B.1 </span>Activations and similarities without masking</h3>
+
+<div id="A2.SS1.p1" class="ltx_para">
+<p id="A2.SS1.p1.1" class="ltx_p">We replicate a subset of our experiments while calculating activations in DLMs without
+masking tokens to showcase that our findings are robust over diffusion steps.</p>
+</div>
+<figure id="A2.F8" class="ltx_figure"><img src="2605.06366v1/x9.png" id="A2.F8.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="463" height="326" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span id="A2.F8.2.1.1" class="ltx_text" style="font-size:90%;">Figure 8</span>: </span><span id="A2.F8.3.2" class="ltx_text" style="font-size:90%;">Similar to <a href="#S2.F2.sf1" title="Figure 2(a) ‣ Figure 2 ‣ 2.2 Super-Outlier in LLaDA-8B ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">2(a)</span></a>, but without including masked sequences.</span></figcaption>
+</figure>
+<figure id="A2.F9" class="ltx_figure"><img src="2605.06366v1/x10.png" id="A2.F9.1.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="627" height="402" alt="Refer to caption">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure"><span id="A2.F9.3.1.1" class="ltx_text" style="font-size:90%;">Figure 9</span>: </span><span id="A2.F9.4.2" class="ltx_text" style="font-size:90%;">Similar to <a href="#S2.F3" title="Figure 3 ‣ 2.3 Early-Layer Redundancies in LLaDA-8B ‣ 2 Layer Dynamics in Diffusion Language Models ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Figure 3</span></a>, but without including masked sequences.</span></figcaption>
+</figure>
+</section>
+<section id="A2.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">B.2 </span>Extended activation plots</h3>
+
+<figure id="A2.F10" class="ltx_figure"><img src="2605.06366v1/x11.png" id="A2.F10.g1" class="ltx_graphics ltx_centering ltx_img_portrait" width="462" height="630" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span id="A2.F10.2.1.1" class="ltx_text" style="font-size:90%;">Figure 10</span>: </span><span id="A2.F10.3.2" class="ltx_text" style="font-size:90%;">Extended version of <a href="#S1.F1" title="Figure 1 ‣ 1 Introduction ‣ Layer Collapse in Diffusion Language Models" class="ltx_ref ltx_refmacro_autoref"><span class="ltx_text ltx_ref_tag">Figure 1</span></a>.</span></figcaption>
+</figure>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</section>
+<section id="A2.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">B.3 </span>Channel activation over Diffusion Steps</h3>
+
+<figure id="A2.F11" class="ltx_figure"><img src="2605.06366v1/x12.png" id="A2.F11.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="595" height="293" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span id="A2.F11.2.1.1" class="ltx_text" style="font-size:90%;">Figure 11</span>: </span><span id="A2.F11.3.2" class="ltx_text" style="font-size:90%;">Channel magnitude mean of the top-5 largest (by mean) channels in LLaDA-8B, over different diffusion steps. The channel
+magnitudes for early-mid layers barely change over the diffusion step. </span></figcaption>
+</figure>
+</section>
+</section>
+</article>
+</div>
+</div>
+<footer class="arxiv-html-footer">
+  <div class="ltx_page_logo">
+    Experimental support, please
+    <a href="./2605.06366v1/__stdout.txt" class="ltx_ref"
+    target="_blank" rel="nofollow">view the build logs</a>
+    for errors. Generated by
+    <a href="https://math.nist.gov/~BMiller/LaTeXML/" target="_blank" class="ltx_ref ltx_LaTeXML_logo">
+      <span style="letter-spacing: -0.2em; margin-right: 0.1em;">
+        L
+        <span style="font-size: 70%; position: relative; bottom: 2.2pt;">A</span>
+        T
+        <span style="position: relative; bottom: -0.4ex;">E</span>
+      </span>
+      <span class="ltx_font_smallcaps">xml</span>
+      <img alt="[LOGO]"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==">
+    </a>.
+  </div>
+  <div class="keyboard-glossary">
+    <h2>Instructions for reporting errors</h2>
+    <p>We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below:</p>
+    <ul>
+      <li>Click the "Report Issue" <span class="mobile-only">(<svg role="presentation"
+            style="display: inline-block; vertical-align: middle; fill: var(--text-color);" aria-hidden="true"
+            height="1em" viewBox="0 0 640 640">
+            <path
+              d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+          </svg>)</span> button, located in the page header.</li>
+    </ul>
+    <p><strong>Tip:</strong> You can select the relevant text first, to include it in your report.</p>
+    <p>Our team has already identified <a class="ltx_ref" href="https://github.com/arXiv/html_feedback/issues"
+        target="_blank">the following issues</a>. We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all.</p>
+    <p>Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a <a
+        class="ltx_ref" href="https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML"
+        target="_blank">list of packages that need conversion</a>, and welcome <a class="ltx_ref"
+        href="https://github.com/brucemiller/LaTeXML/issues" target="_blank">developer contributions</a>.</p>
+  </div>
+</footer>
+<div id="fixed-buttons-container">
+  <div id="beta-badge" aria-hidden="true">BETA</div>
+  <a id="disable-reading-mode-btn" class="header-button" href="javascript:toggleReadingMode();"
+    title="Disable reading mode, show header and footer">
+    <svg role="presentation" height="1.25rem"
+      viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </a>
+</div></body>
+</html>

@@ -1,0 +1,1473 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Are Large Language Models Economically Viable for Industry Deployment?</title>
+<!--Generated on Tue Apr 21 11:20:12 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="/static/browse/0.3.4/css/arxiv-html-papers-20260131.css" type="text/css">
+<script src="/static/browse/0.3.4/js/arxiv-html-papers-20260131.js"></script>
+<script>
+  // Restore the saved color scheme preference, or
+  // enact the browser preference if "automatic", 
+  // without expecting DOM load to have completed.
+  //
+  // Also restore any saved readingmode and ToC display preferences.
+  function initializeReadingPreferences() {
+    let saved_theme = localStorage.getItem("ar5iv_theme") || "automatic";
+    if (saved_theme === "automatic") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        saved_theme = "dark";
+      }
+    }
+    if (saved_theme == "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    const tocDisplay = localStorage.getItem('arxiv_html_paper_toc_display');
+    if (tocDisplay) {
+      document.documentElement.setAttribute("data-toc-display", tocDisplay);
+    }
+    const readingMode = localStorage.getItem('arxiv_html_paper_reading_mode');
+    if (readingMode) {
+      document.documentElement.setAttribute("data-reading-mode", readingMode);
+    }
+  }
+  // Run as soon as JS starts, to minimize repainting
+  initializeReadingPreferences();
+</script>
+<link rel="apple-touch-icon" sizes="180x180"
+  href="/static/browse/0.3.4/images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+  href="/static/browse/0.3.4/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+  href="/static/browse/0.3.4/images/icons/favicon-16x16.png">
+<link rel="manifest" href="/static/browse/0.3.4/images/icons/site.webmanifest">
+<link rel="mask-icon" href="/static/browse/0.3.4/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="stylesheet" type="text/css" media="screen" href="https://use.typekit.net/utz6mli.css">
+</head>
+<body>
+<dialog id="modal-form" aria-labelledby="modal-title" closedby="any">
+  <form id="modal-form-content" method="dialog" enctype="multipart/form-data">
+    <header class="modal-header">
+      <h5 id="modal-title" class="modal-title">Report GitHub Issue</h5>
+      <button type="submit" formnovalidate class="modal-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="modal-body">
+      <label for="form_title">Title:</label>
+      <input class="form-control" id="form_title" name="form_title" required placeholder="Enter title">
+
+      <p id="selectedTextModalDescription" hidden>Content selection saved. Describe the issue below:</p>
+
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description" required maxlength="500"
+        placeholder="500 characters maximum"></textarea>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="submit" value="internal-report" class="sr-only modal-submit">Submit without GitHub</button>
+      <button type="submit" value="github-report" class="modal-submit">Submit in GitHub</button>
+    </footer>
+  </form>
+</dialog>
+
+<header class="arxiv-html-header">
+  <div class="html-header-logo">
+    <a href="/">
+      <img alt="arXiv logo" class="logo desktop-only" width="100"
+        src="/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg">
+      <span class="sr-only">Back to arXiv</span>
+    </a>
+  </div>
+  <!--TOC, dark mode, links-->
+  <nav class="html-header-nav">
+    <a class="header-button hover-effect desktop-only" href="https://info.arxiv.org/about/accessible_HTML.html"
+      target="_blank">Why HTML?</a>
+    <a class="header-button" title="Report an Issue" href="#" title="Report an issue"
+      onclick="event.preventDefault(); showModalForm();">
+      <svg role="presentation" class="mobile-only toggle-icon" aria-hidden="true" height="1.25rem"
+        viewBox="0 0 640 640">
+        <path
+          d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+      </svg>
+      <span class="desktop-only">Report Issue</span></a>
+    <!--back to abstract-->
+    <a class="header-button" title="Back to abstract page" aria-label="Back to abstract page"
+      href="/abs/2604.19342v1">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 512 512" fill="#ffffff"
+        aria-hidden="true">
+        <path
+          d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z">
+        </path>
+      </svg>
+      <span class="desktop-only">Back to Abstract</span>
+    </a>
+    <!-- PDF download link -->
+    <a class="header-button" title="Download PDF" href="/pdf/2604.19342v1"
+      target="_blank">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 576 542">
+        <path
+          d="M208 48L96 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l80 0 0 48-80 0c-35.3 0-64-28.7-64-64L32 64C32 28.7 60.7 0 96 0L229.5 0c17 0 33.3 6.7 45.3 18.7L397.3 141.3c12 12 18.7 28.3 18.7 45.3l0 149.5-48 0 0-128-88 0c-39.8 0-72-32.2-72-72l0-88zM348.1 160L256 67.9 256 136c0 13.3 10.7 24 24 24l68.1 0zM240 380l32 0c33.1 0 60 26.9 60 60s-26.9 60-60 60l-12 0 0 28c0 11-9 20-20 20s-20-9-20-20l0-128c0-11 9-20 20-20zm32 80c11 0 20-9 20-20s-9-20-20-20l-12 0 0 40 12 0zm96-80l32 0c28.7 0 52 23.3 52 52l0 64c0 28.7-23.3 52-52 52l-32 0c-11 0-20-9-20-20l0-128c0-11 9-20 20-20zm32 128c6.6 0 12-5.4 12-12l0-64c0-6.6-5.4-12-12-12l-12 0 0 88 12 0zm76-108c0-11 9-20 20-20l48 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 24 28 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 44c0 11-9 20-20 20s-20-9-20-20l0-128z" />
+      </svg>
+      <span class="desktop-only">Download PDF</span></a>
+    <!-- navigational table of contents toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleNavTOC();" title="Toggle navigation"
+      aria-label="Toggle navigation">
+      <svg height="1.25rem" role="presentation" viewBox="0 0 512 512">
+        <path
+          d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z">
+        </path>
+      </svg>
+    </a>
+    <!--- collapsable header / reading mode toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleReadingMode();"
+      title="Disable reading mode, show header and footer">
+      <svg role="presentation" height="1.25rem"
+        viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+        <path
+          d="M32 32C14.3 32 0 46.3 0 64l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 32zM64 352c0-17.7-14.3-32-32-32S0 334.3 0 352l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96z" />
+      </svg>
+    </a>
+    <!--- colored theme toggle -->
+    <button type="button" class="header-button color-tog" onclick="toggleColorScheme();" title="Toggle dark/light mode" aria-label="Toggle color scheme">
+      <span class="toggle-icon automatic-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon light-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon dark-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+    </button>
+  </nav>
+</header><nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_abstract"><a href="#abstract1" title="In Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_title">Abstract</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S1" title="In Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S2" title="In Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Related Work</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S2.SS0.SSS0.Px1" title="In 2 Related Work ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_title">Model Compression.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a href="#S2.SS0.SSS0.Px2" title="In 2 Related Work ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_title">Model Evaluation.</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S3" title="In Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Methodology</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S4" title="In Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Experimental Setup</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S4.SS1" title="In 4 Experimental Setup ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Dataset Analysis</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S4.SS2" title="In 4 Experimental Setup ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Evaluation Metrics</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S5" title="In Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Result Analysis</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S5.SS1" title="In 5 Result Analysis ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.1 </span>Benchmark Analysis</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S5.SS2" title="In 5 Result Analysis ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.2 </span>Multidimensional Efficiency Dynamics</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S5.SS3" title="In 5 Result Analysis ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.3 </span>Inference and Quality Trade-offs</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S5.SS4" title="In 5 Result Analysis ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.4 </span>Systems-Level Deployment Dynamics</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S6" title="In Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Conclusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_bibliography"><a href="#bib" title="In Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_title">References</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div id="infobox" class="infobox">
+  <a id="license-tr" href="https://info.arxiv.org/help/license/index.html#licenses-available">
+    License: CC BY 4.0
+  </a>
+  <div id="watermark-tr">
+arXiv:2604.19342v1 [cs.CL] 21 Apr 2026</div>
+</div><div class="ltx_page_content">
+<article class="ltx_document">
+<h1 class="ltx_title ltx_title_document">Are Large Language Models Economically Viable for Industry Deployment?</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+<span id="id1.1.id1" class="ltx_text ltx_font_bold">Abdullah Mohammad<sup id="id1.1.id1.1" class="ltx_sup"><span id="id1.1.id1.1.1" class="ltx_text ltx_font_medium">1</span></sup></span>,
+<span id="id2.2.id2" class="ltx_text ltx_font_bold">Sushant Kumar Ray<sup id="id2.2.id2.1" class="ltx_sup"><span id="id2.2.id2.1.1" class="ltx_text ltx_font_medium">2</span></sup></span>,
+<span id="id3.3.id3" class="ltx_text ltx_font_bold">Pushkar Arora<sup id="id3.3.id3.1" class="ltx_sup"><span id="id3.3.id3.1.1" class="ltx_text ltx_font_medium">3</span></sup></span>,
+<span id="id4.4.id4" class="ltx_text ltx_font_bold">Rafiq Ali<sup id="id4.4.id4.1" class="ltx_sup"><span id="id4.4.id4.1.1" class="ltx_text ltx_font_medium">4</span></sup>
+<br class="ltx_break">Ebad Shabbir<sup id="id4.4.id4.2" class="ltx_sup"><span id="id4.4.id4.2.1" class="ltx_text ltx_font_medium">5</span></sup></span>,
+<span id="id5.5.id5" class="ltx_text ltx_font_bold">Gautam Siddharth Kashyap<sup id="id5.5.id5.1" class="ltx_sup"><span id="id5.5.id5.1.1" class="ltx_text ltx_font_medium">6</span></sup></span>,
+<span id="id6.6.id6" class="ltx_text ltx_font_bold">Jiechao Gao<sup id="id6.6.id6.1" class="ltx_sup"><span id="id6.6.id6.1.1" class="ltx_text ltx_font_medium">7</span></sup></span>,
+<span id="id7.7.id7" class="ltx_text ltx_font_bold">Usman Naseem<sup id="id7.7.id7.1" class="ltx_sup"><span id="id7.7.id7.1.1" class="ltx_text ltx_font_medium">8</span></sup><span id="footnotex2" class="ltx_note ltx_role_footnotemark"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_note_type">footnotemark: </span><span class="ltx_tag ltx_tag_note"><span id="footnotex2.1.1.1" class="ltx_text ltx_font_medium">1</span></span></span></span></span></span> 
+<br class="ltx_break"><sup id="id8.8.id8" class="ltx_sup">1, 3, 4, 5</sup>DSEU-Okhla, New Delhi, India 
+<br class="ltx_break">
+<sup id="id9.9.id9" class="ltx_sup">2</sup>University of Delhi, New Delhi, India 
+<br class="ltx_break">
+<sup id="id10.10.id10" class="ltx_sup">6, 8</sup>Macquarie University, Sydney, Australia 
+<br class="ltx_break">
+<sup id="id11.11.id11" class="ltx_sup">7</sup>Center for SDGC, Stanford University, California, USA 
+<br class="ltx_break">
+</span><span class="ltx_author_notes">Corresponding Author: jiechao@stanford.edu, usman.naseem@mq.edu.au</span></span>
+</div>
+
+<div id="abstract1" class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p">Generative AI—powered by Large Language Models (LLMs)—is increasingly deployed in industry across healthcare decision support, financial analytics, enterprise retrieval, and conversational automation, where reliability, efficiency, and cost control are critical. In such settings, models must satisfy strict constraints on energy, latency, and hardware utilization—not accuracy alone. Yet prevailing evaluation pipelines remain accuracy-centric, creating a <em class="ltx_emph ltx_font_italic">Deployment–Evaluation Gap</em>—the absence of operational and economic criteria in model assessment. To address this gap, we present <span class="ltx_text ltx_font_smallcaps">Edge-Eval<span class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note"><span class="ltx_text ltx_font_upright">1</span></span><a href="https://github.com/Abdullah4152/EDGE-EVAL" title="" class="ltx_ref ltx_url ltx_font_typewriter ltx_font_upright">https://github.com/Abdullah4152/EDGE-EVAL</a></span></span></span></span>—a industry-oriented benchmarking framework that evaluates LLMs across their full lifecycle on legacy NVIDIA Tesla T4 GPUs. Benchmarking LLaMA and Qwen variants across three industrial tasks, we introduce five deployment metrics—<em class="ltx_emph ltx_font_italic">Economic Break-Even</em> (<math class="ltx_Math" alttext="N_{break}" display="inline" intent=":literal"><semantics><msub><mi>N</mi><mrow><mi>b</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>k</mi></mrow></msub><annotation encoding="application/x-tex">N_{break}</annotation></semantics></math>), <em class="ltx_emph ltx_font_italic">Intelligence-Per-Watt</em> (<math class="ltx_Math" alttext="IPW" display="inline" intent=":literal"><semantics><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi><mo lspace="0em" rspace="0em">​</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">IPW</annotation></semantics></math>), <em class="ltx_emph ltx_font_italic">System Density</em> (<math class="ltx_Math" alttext="\rho_{sys}" display="inline" intent=":literal"><semantics><msub><mi>ρ</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi><mo lspace="0em" rspace="0em">​</mo><mi>s</mi></mrow></msub><annotation encoding="application/x-tex">\rho_{sys}</annotation></semantics></math>), <em class="ltx_emph ltx_font_italic">Cold-Start Tax</em> (<math class="ltx_Math" alttext="C_{tax}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>x</mi></mrow></msub><annotation encoding="application/x-tex">C_{tax}</annotation></semantics></math>), and <em class="ltx_emph ltx_font_italic">Quantization Fidelity</em> (<math class="ltx_Math" alttext="Q_{ret}" display="inline" intent=":literal"><semantics><msub><mi>Q</mi><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">Q_{ret}</annotation></semantics></math>)—capturing profitability, energy efficiency, hardware scaling, serverless feasibility, and compression safety. Our results reveal a clear efficiency frontier—models in the <em class="ltx_emph ltx_font_italic"><math class="ltx_Math" alttext="&lt;2" display="inline" intent=":literal"><semantics><mrow><mi></mi><mo>&lt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">&lt;2</annotation></semantics></math>B parameter class</em> dominate larger baselines across economic and ecological dimensions. <em class="ltx_emph ltx_font_italic">LLaMA-3.2-1B (INT4)</em> achieves ROI break-even in <math class="ltx_Math" alttext="14" display="inline" intent=":literal"><semantics><mn>14</mn><annotation encoding="application/x-tex">14</annotation></semantics></math> requests (median), delivers <math class="ltx_math_unparsed" alttext="3\times" display="inline" intent=":literal"><semantics><mrow><mn>3</mn><mo lspace="0.222em">×</mo></mrow><annotation encoding="application/x-tex">3\times</annotation></semantics></math> higher energy-normalized intelligence than <math class="ltx_Math" alttext="7" display="inline" intent=":literal"><semantics><mn>7</mn><annotation encoding="application/x-tex">7</annotation></semantics></math>B models, and exceeds <math class="ltx_Math" alttext="6{,}900" display="inline" intent=":literal"><semantics><mrow><mn>6</mn><mo>,</mo><mn>900</mn></mrow><annotation encoding="application/x-tex">6{,}900</annotation></semantics></math> tokens/s/GB under 4-bit quantization. We further uncover an efficiency anomaly—while QLoRA reduces memory footprint, it increases adaptation energy by up to <math class="ltx_math_unparsed" alttext="7\times" display="inline" intent=":literal"><semantics><mrow><mn>7</mn><mo lspace="0.222em">×</mo></mrow><annotation encoding="application/x-tex">7\times</annotation></semantics></math> for small models—challenging prevailing assumptions about quantization-aware training in edge deployment.</p>
+</div>
+<div id="p1" class="ltx_para ltx_noindent">
+<div id="p1.1" class="ltx_block ltx_align_bottom">
+<p id="p1.1.1" class="ltx_p ltx_align_center"><span id="p1.1.1.1" class="ltx_text ltx_font_bold">Are Large Language Models Economically Viable for Industry Deployment?</span></p>
+<p id="p1.1.2" class="ltx_p ltx_align_center" style="width:345.0pt;"><span id="p1.1.2.1" class="ltx_text ltx_inline-block" style="width:0.0pt;">
+<span id="p1.1.2.1.1" class="ltx_tabular ltx_guessed_headers ltx_align_top">
+<span class="ltx_thead">
+<span id="p1.1.2.1.1.1.1" class="ltx_tr">
+<span id="p1.1.2.1.1.1.1.1" class="ltx_td ltx_align_center ltx_th ltx_th_column"><span id="p1.1.2.1.1.1.1.1.1" class="ltx_text ltx_font_bold">
+Abdullah Mohammad<sup id="p1.1.2.1.1.1.1.1.1.1" class="ltx_sup">1</sup>,
+Sushant Kumar Ray<sup id="p1.1.2.1.1.1.1.1.1.2" class="ltx_sup">2</sup>,
+Pushkar Arora<sup id="p1.1.2.1.1.1.1.1.1.3" class="ltx_sup">3</sup>,
+Rafiq Ali<sup id="p1.1.2.1.1.1.1.1.1.4" class="ltx_sup">4</sup></span></span></span>
+<span id="p1.1.2.1.1.2.2" class="ltx_tr">
+<span id="p1.1.2.1.1.2.2.1" class="ltx_td ltx_align_center ltx_th ltx_th_column"><span id="p1.1.2.1.1.2.2.1.1" class="ltx_text ltx_font_bold">Ebad Shabbir<sup id="p1.1.2.1.1.2.2.1.1.1" class="ltx_sup"><span id="p1.1.2.1.1.2.2.1.1.1.1" class="ltx_text ltx_font_medium">5</span></sup></span>,
+<span id="p1.1.2.1.1.2.2.1.2" class="ltx_text ltx_font_bold">Gautam Siddharth Kashyap<sup id="p1.1.2.1.1.2.2.1.2.1" class="ltx_sup"><span id="p1.1.2.1.1.2.2.1.2.1.1" class="ltx_text ltx_font_medium">6</span></sup></span>,
+<span id="p1.1.2.1.1.2.2.1.3" class="ltx_text ltx_font_bold">Jiechao Gao<sup id="p1.1.2.1.1.2.2.1.3.1" class="ltx_sup"><span id="p1.1.2.1.1.2.2.1.3.1.1" class="ltx_text ltx_font_medium">7</span></sup><span id="p1.1.2.1.1.2.2.1.3.2" class="ltx_note ltx_role_thanks"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">thanks: </span><span id="p1.1.2.1.1.2.2.1.3.2.1" class="ltx_text ltx_font_medium">Corresponding Author: jiechao@stanford.edu, usman.naseem@mq.edu.au</span></span></span></span></span>,
+<span id="p1.1.2.1.1.2.2.1.4" class="ltx_text ltx_font_bold">Usman Naseem<sup id="p1.1.2.1.1.2.2.1.4.1" class="ltx_sup"><span id="p1.1.2.1.1.2.2.1.4.1.1" class="ltx_text ltx_font_medium">8</span></sup><span id="footnotex1" class="ltx_note ltx_role_footnotemark"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_note_type">footnotemark: </span><span class="ltx_tag ltx_tag_note"><span id="footnotex1.1.1.1" class="ltx_text ltx_font_medium">1</span></span></span></span></span></span></span></span>
+</span>
+<span class="ltx_tbody">
+<span id="p1.1.2.1.1.3.1" class="ltx_tr">
+<span id="p1.1.2.1.1.3.1.1" class="ltx_td ltx_align_center" style="padding-bottom:-1.72218pt;"><sup id="p1.1.2.1.1.3.1.1.1" class="ltx_sup">1, 3, 4, 5</sup>DSEU-Okhla, New Delhi, India</span></span>
+<span id="p1.1.2.1.1.4.2" class="ltx_tr">
+<span id="p1.1.2.1.1.4.2.1" class="ltx_td ltx_align_center" style="padding-bottom:-1.72218pt;"><sup id="p1.1.2.1.1.4.2.1.1" class="ltx_sup">2</sup>University of Delhi, New Delhi, India</span></span>
+<span id="p1.1.2.1.1.5.3" class="ltx_tr">
+<span id="p1.1.2.1.1.5.3.1" class="ltx_td ltx_align_center" style="padding-bottom:-1.72218pt;"><sup id="p1.1.2.1.1.5.3.1.1" class="ltx_sup">6, 8</sup>Macquarie University, Sydney, Australia</span></span>
+<span id="p1.1.2.1.1.6.4" class="ltx_tr">
+<span id="p1.1.2.1.1.6.4.1" class="ltx_td ltx_align_center"><sup id="p1.1.2.1.1.6.4.1.1" class="ltx_sup">7</sup>Center for SDGC, Stanford University, California, USA</span></span>
+</span>
+</span></span></p>
+</div>
+</div>
+<figure id="S0.F1" class="ltx_figure"><img src="2604.19342v1/x1.png" id="S0.F1.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="830" height="593" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>Illustration of the <em id="S0.F1.6.1" class="ltx_emph ltx_font_italic">Deployment–Evaluation Gap</em>–QLoRA reduces memory by <math id="S0.F1.3.m1" class="ltx_Math" alttext="\sim 60\%" display="inline" intent=":literal"><semantics><mrow><mi></mi><mo>∼</mo><mrow><mn>60</mn><mo>%</mo></mrow></mrow><annotation encoding="application/x-tex">\sim 60\%</annotation></semantics></math> yet increases fine-tuning energy up to <math id="S0.F1.4.m2" class="ltx_math_unparsed" alttext="7.2\times" display="inline" intent=":literal"><semantics><mrow><mn>7.2</mn><mo lspace="0.222em">×</mo></mrow><annotation encoding="application/x-tex">7.2\times</annotation></semantics></math> for small models, showing that memory efficiency does not equal energy efficiency.</figcaption>
+</figure>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p id="S1.p1.2" class="ltx_p">Generative AI—powered by Large Language Models (LLMs) <cite class="ltx_cite ltx_citemacro_cite">Ciubotaru (<a href="#bib.bib5" title="" class="ltx_ref">2025</a>)</cite>—is rapidly transitioning from research prototypes to real-world industry deployment. Across healthcare decision support <cite class="ltx_cite ltx_citemacro_cite">Almadani et al. (<a href="#bib.bib2" title="" class="ltx_ref">2025</a>)</cite>, financial analytics <cite class="ltx_cite ltx_citemacro_cite">Al-Jumaili et al. (<a href="#bib.bib1" title="" class="ltx_ref">2023</a>)</cite>, enterprise retrieval <cite class="ltx_cite ltx_citemacro_cite">Hasan and Akter (<a href="#bib.bib10" title="" class="ltx_ref">2022</a>)</cite>, and conversational automation <cite class="ltx_cite ltx_citemacro_cite">Manolescu et al. (<a href="#bib.bib21" title="" class="ltx_ref">2025</a>)</cite>, these models must operate under strict constraints on energy, latency, cost, and hardware availability. In such environments, practical viability depends not only on predictive accuracy, but also on economic sustainability. Despite this, prevailing evaluation pipelines remain dominated by accuracy-centric benchmarks <cite class="ltx_cite ltx_citemacro_cite">Siddiqui et al. (<a href="#bib.bib28" title="" class="ltx_ref">2025</a>); Joshi et al. (<a href="#bib.bib15" title="" class="ltx_ref">2025</a>); Hendrycks et al. (<a href="#bib.bib11" title="" class="ltx_ref">2020</a>)</cite>. These benchmarks provide limited insight into operational trade-offs, creating what we term the <em id="S1.p1.2.1" class="ltx_emph ltx_font_italic">Deployment–Evaluation Gap</em>—the absence of operational and economic criteria in model assessment. Figure <a href="#S0.F1" title="Figure 1 ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a> illustrates a motivating example of this gap. While Quantized Low-Rank Adaptation (QLoRA) <cite class="ltx_cite ltx_citemacro_cite">Dettmers et al. (<a href="#bib.bib6" title="" class="ltx_ref">2023</a>)</cite> reduces memory usage by approximately <math id="S1.p1.1.m1" class="ltx_Math" alttext="60\%" display="inline" intent=":literal"><semantics><mrow><mn>60</mn><mo>%</mo></mrow><annotation encoding="application/x-tex">60\%</annotation></semantics></math>, it increases fine-tuning energy consumption by up to <math id="S1.p1.2.m2" class="ltx_math_unparsed" alttext="7.2\times" display="inline" intent=":literal"><semantics><mrow><mn>7.2</mn><mo lspace="0.222em">×</mo></mrow><annotation encoding="application/x-tex">7.2\times</annotation></semantics></math> for small models compared to standard LoRA <cite class="ltx_cite ltx_citemacro_cite">Hu et al. (<a href="#bib.bib13" title="" class="ltx_ref">2022</a>)</cite>. Memory efficiency, therefore, does not necessarily translate to energy efficiency. Such trade-offs remain invisible under accuracy-centric benchmarks, yet they critically impact real-world deployment decisions.</p>
+</div>
+<figure id="S1.F2" class="ltx_figure"><img src="2604.19342v1/arch.png" id="S1.F2.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="509" height="278" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>Lifecycle benchmarking pipeline of <span id="S1.F2.7.1" class="ltx_text ltx_font_smallcaps">Edge-Eval</span>. For each configuration <math id="S1.F2.2.m1" class="ltx_Math" alttext="(f,p,t,a)" display="inline" intent=":literal"><semantics><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>p</mi><mo>,</mo><mi>t</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(f,p,t,a)</annotation></semantics></math>, models pass through three stages—<em id="S1.F2.8.2" class="ltx_emph ltx_font_italic">adaptation</em>, <em id="S1.F2.9.3" class="ltx_emph ltx_font_italic">compression</em>, and <em id="S1.F2.10.4" class="ltx_emph ltx_font_italic">inference</em>—under uniform hardware constraints. The recorded lifecycle variables are subsequently aggregated into the five deployment metrics defined in Section <a href="#S4.SS2" title="4.2 Evaluation Metrics ‣ 4 Experimental Setup ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4.2</span></a>.</figcaption>
+</figure>
+<div id="S1.p2" class="ltx_para">
+<p id="S1.p2.5" class="ltx_p">To address this gap, we introduce <span id="S1.p2.5.6" class="ltx_text ltx_font_smallcaps">Edge-Eval</span>—an industry-oriented benchmarking framework that evaluates language models across their full operational lifecycle. We conduct a empirical study of LLaMA <cite class="ltx_cite ltx_citemacro_cite">Grattafiori et al. (<a href="#bib.bib9" title="" class="ltx_ref">2024</a>)</cite> and Qwen <cite class="ltx_cite ltx_citemacro_cite">Qwen et al. (<a href="#bib.bib25" title="" class="ltx_ref">2025</a>)</cite> variants across three industrial tasks—Summarization (long-context document compression under constrained inference budgets), Retrieval-Augmented Generation (RAG) <cite class="ltx_cite ltx_citemacro_cite">Lewis et al. (<a href="#bib.bib17" title="" class="ltx_ref">2020</a>)</cite> (retrieval-grounded reasoning with external knowledge integration), and Conversational Agents (latency-sensitive, multi-turn instruction-following dialogue)—on widely deployed NVIDIA Tesla T4 hardware. Our methodology integrates LoRA, QLoRA, and vLLM-based inference <cite class="ltx_cite ltx_citemacro_cite">Kwon et al. (<a href="#bib.bib16" title="" class="ltx_ref">2023</a>)</cite>. Furthermore, <span id="S1.p2.5.7" class="ltx_text ltx_font_smallcaps">Edge-Eval</span> extends conventional benchmarking through five deployment metrics–(1) <em id="S1.p2.1.1" class="ltx_emph ltx_font_italic">Economic Break-Even (<math id="S1.p2.1.1.m1" class="ltx_Math" alttext="N_{break}" display="inline" intent=":literal"><semantics><msub><mi>N</mi><mrow><mi>b</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>k</mi></mrow></msub><annotation encoding="application/x-tex">N_{break}</annotation></semantics></math>)</em>—the traffic volume required for local adaptation to undercut API costs; (2) <em id="S1.p2.2.2" class="ltx_emph ltx_font_italic">Intelligence-Per-Watt (<math id="S1.p2.2.2.m1" class="ltx_Math" alttext="IPW" display="inline" intent=":literal"><semantics><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi><mo lspace="0em" rspace="0em">​</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">IPW</annotation></semantics></math>)</em>—performance normalized by energy consumption <cite class="ltx_cite ltx_citemacro_cite">Schizas et al. (<a href="#bib.bib27" title="" class="ltx_ref">2022</a>); Patterson et al. (<a href="#bib.bib24" title="" class="ltx_ref">2022</a>)</cite>; (3) <em id="S1.p2.3.3" class="ltx_emph ltx_font_italic">System Density (<math id="S1.p2.3.3.m1" class="ltx_Math" alttext="\rho_{sys}" display="inline" intent=":literal"><semantics><msub><mi>ρ</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi><mo lspace="0em" rspace="0em">​</mo><mi>s</mi></mrow></msub><annotation encoding="application/x-tex">\rho_{sys}</annotation></semantics></math>)</em>—throughput per gigabyte of VRAM; (4) <em id="S1.p2.4.4" class="ltx_emph ltx_font_italic">Cold-Start Tax (<math id="S1.p2.4.4.m1" class="ltx_Math" alttext="C_{tax}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>x</mi></mrow></msub><annotation encoding="application/x-tex">C_{tax}</annotation></semantics></math>)</em>—the energy penalty of model loading; and (5) <em id="S1.p2.5.5" class="ltx_emph ltx_font_italic">Quantization Fidelity (<math id="S1.p2.5.5.m1" class="ltx_Math" alttext="Q_{ret}" display="inline" intent=":literal"><semantics><msub><mi>Q</mi><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">Q_{ret}</annotation></semantics></math>)</em>—reasoning retention under 4-bit compression. In summary, our work makes two primary contributions:</p>
+<ul id="S1.I1" class="ltx_itemize">
+<li id="S1.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S1.I1.i1.p1" class="ltx_para">
+<p id="S1.I1.i1.p1.5" class="ltx_p">We introduce <span id="S1.I1.i1.p1.5.1" class="ltx_text ltx_font_smallcaps">Edge-Eval</span>, a benchmarking framework that augments accuracy-centric evaluation with five deployment metrics (<math id="S1.I1.i1.p1.1.m1" class="ltx_Math" alttext="N_{break}" display="inline" intent=":literal"><semantics><msub><mi>N</mi><mrow><mi>b</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>k</mi></mrow></msub><annotation encoding="application/x-tex">N_{break}</annotation></semantics></math>, <math id="S1.I1.i1.p1.2.m2" class="ltx_Math" alttext="IPW" display="inline" intent=":literal"><semantics><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi><mo lspace="0em" rspace="0em">​</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">IPW</annotation></semantics></math>, <math id="S1.I1.i1.p1.3.m3" class="ltx_Math" alttext="\rho_{sys}" display="inline" intent=":literal"><semantics><msub><mi>ρ</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi><mo lspace="0em" rspace="0em">​</mo><mi>s</mi></mrow></msub><annotation encoding="application/x-tex">\rho_{sys}</annotation></semantics></math>, <math id="S1.I1.i1.p1.4.m4" class="ltx_Math" alttext="C_{tax}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>x</mi></mrow></msub><annotation encoding="application/x-tex">C_{tax}</annotation></semantics></math>, <math id="S1.I1.i1.p1.5.m5" class="ltx_Math" alttext="Q_{ret}" display="inline" intent=":literal"><semantics><msub><mi>Q</mi><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">Q_{ret}</annotation></semantics></math>) for lifecycle assessment of LLMs on legacy hardware.</p>
+</div>
+</li>
+<li id="S1.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S1.I1.i2.p1" class="ltx_para">
+<p id="S1.I1.i2.p1.2" class="ltx_p">Empirically, <span id="S1.I1.i2.p1.2.1" class="ltx_text ltx_font_smallcaps">Edge-Eval</span> on LLaMA and Qwen variants on Tesla T4 GPUs, we identify an efficiency frontier where <math id="S1.I1.i2.p1.1.m1" class="ltx_Math" alttext="&lt;2" display="inline" intent=":literal"><semantics><mrow><mi></mi><mo>&lt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">&lt;2</annotation></semantics></math>B models outperform larger baselines, and reveal an energy anomaly—QLoRA increases adaptation energy by up to <math id="S1.I1.i2.p1.2.m2" class="ltx_math_unparsed" alttext="7\times" display="inline" intent=":literal"><semantics><mrow><mn>7</mn><mo lspace="0.222em">×</mo></mrow><annotation encoding="application/x-tex">7\times</annotation></semantics></math> despite reducing memory footprint.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Related Work</h2>
+
+<section id="S2.SS0.SSS0.Px1" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Model Compression.</h4>
+
+<div id="S2.SS0.SSS0.Px1.p1" class="ltx_para">
+<p id="S2.SS0.SSS0.Px1.p1.1" class="ltx_p">Recent advances in model compression and Parameter-Efficient Fine-Tuning (PEFT) have enabled LLMs to operate on resource-constrained hardware. Post-Training Quantization (PTQ) models such as Generalized Post-Training Quantization (GPTQ) <cite class="ltx_cite ltx_citemacro_cite">Frantar et al. (<a href="#bib.bib8" title="" class="ltx_ref">2022</a>)</cite> and Activation Aware Quantization (AWQ) <cite class="ltx_cite ltx_citemacro_cite">Lin et al. (<a href="#bib.bib20" title="" class="ltx_ref">2024</a>)</cite> reduce numerical precision while preserving accuracy, and Quantization-Aware Training (QAT) models such as QLoRA <cite class="ltx_cite ltx_citemacro_cite">Dettmers et al. (<a href="#bib.bib6" title="" class="ltx_ref">2023</a>)</cite> integrate low-bit quantization into adaptation. Similarly, LoRA <cite class="ltx_cite ltx_citemacro_cite">Hu et al. (<a href="#bib.bib13" title="" class="ltx_ref">2022</a>)</cite> and related PEFT models freeze base weights and introduce low-rank adapters to reduce memory overhead <cite class="ltx_cite ltx_citemacro_cite">Lialin et al. (<a href="#bib.bib18" title="" class="ltx_ref">2023</a>)</cite>. While these models demonstrate strong accuracy-centric. Yet, systematic analysis of lifecycle energy consumption, economic trade-offs, and infrastructure-level efficiency remains limited. In particular, memory reduction is often implicitly treated as a proxy for deployment efficiency—an assumption our empirical results challenge.</p>
+</div>
+</section>
+<section id="S2.SS0.SSS0.Px2" class="ltx_paragraph">
+<h4 class="ltx_title ltx_title_paragraph">Model Evaluation.</h4>
+
+<div id="S2.SS0.SSS0.Px2.p1" class="ltx_para">
+<p id="S2.SS0.SSS0.Px2.p1.5" class="ltx_p">Green AI initiatives advocate reporting energy consumption alongside accuracy <cite class="ltx_cite ltx_citemacro_cite">Schizas et al. (<a href="#bib.bib27" title="" class="ltx_ref">2022</a>); Patterson et al. (<a href="#bib.bib24" title="" class="ltx_ref">2022</a>)</cite>, such as MLPerf Tiny <cite class="ltx_cite ltx_citemacro_cite">Banbury et al. (<a href="#bib.bib3" title="" class="ltx_ref">2021</a>)</cite> evaluate inference on ultra-low-power devices. Other studies profile latency or throughput for quantized inference <cite class="ltx_cite ltx_citemacro_cite">Yao et al. (<a href="#bib.bib29" title="" class="ltx_ref">2022</a>)</cite>, yet typically omit economic viability, cold-start overhead, and hardware density considerations. Existing benchmarks therefore lack a unified framework that connects adaptation cost, inference energy, quantization fidelity, and return on investment. In contrast, <span id="S2.SS0.SSS0.Px2.p1.5.1" class="ltx_text ltx_font_smallcaps">Edge-Eval</span> introduces a lifecycle-oriented evaluation paradigm through five deployment metrics (<math id="S2.SS0.SSS0.Px2.p1.1.m1" class="ltx_Math" alttext="N_{break}" display="inline" intent=":literal"><semantics><msub><mi>N</mi><mrow><mi>b</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>k</mi></mrow></msub><annotation encoding="application/x-tex">N_{break}</annotation></semantics></math>, <math id="S2.SS0.SSS0.Px2.p1.2.m2" class="ltx_Math" alttext="IPW" display="inline" intent=":literal"><semantics><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi><mo lspace="0em" rspace="0em">​</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">IPW</annotation></semantics></math>, <math id="S2.SS0.SSS0.Px2.p1.3.m3" class="ltx_Math" alttext="\rho_{sys}" display="inline" intent=":literal"><semantics><msub><mi>ρ</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi><mo lspace="0em" rspace="0em">​</mo><mi>s</mi></mrow></msub><annotation encoding="application/x-tex">\rho_{sys}</annotation></semantics></math>, <math id="S2.SS0.SSS0.Px2.p1.4.m4" class="ltx_Math" alttext="C_{tax}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>x</mi></mrow></msub><annotation encoding="application/x-tex">C_{tax}</annotation></semantics></math>, <math id="S2.SS0.SSS0.Px2.p1.5.m5" class="ltx_Math" alttext="Q_{ret}" display="inline" intent=":literal"><semantics><msub><mi>Q</mi><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">Q_{ret}</annotation></semantics></math>), providing a systematic assessment of operational and economic criteria in model assessment.</p>
+</div>
+</section>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Methodology</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p id="S3.p1.18" class="ltx_p"><span id="S3.p1.18.1" class="ltx_text ltx_font_smallcaps">Edge-Eval</span> (see Figure <a href="#S1.F2" title="Figure 2 ‣ 1 Introduction ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>) benchmarks language models through a structured lifecycle pipeline that mirrors real-world deployment. Let <math id="S3.p1.1.m1" class="ltx_Math" alttext="\mathcal{F}" display="inline" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">ℱ</mi><annotation encoding="application/x-tex">\mathcal{F}</annotation></semantics></math> denote the set of model families (LLaMA, Qwen) described in Section <a href="#S4" title="4 Experimental Setup ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>, <math id="S3.p1.2.m2" class="ltx_Math" alttext="\mathcal{P}" display="inline" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">𝒫</mi><annotation encoding="application/x-tex">\mathcal{P}</annotation></semantics></math> the set of parameter tiers (Micro <math id="S3.p1.3.m3" class="ltx_Math" alttext="&lt;2" display="inline" intent=":literal"><semantics><mrow><mi></mi><mo>&lt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">&lt;2</annotation></semantics></math>B, Compact 3B, Standard 7B–8B), <math id="S3.p1.4.m4" class="ltx_Math" alttext="\mathcal{T}" display="inline" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">𝒯</mi><annotation encoding="application/x-tex">\mathcal{T}</annotation></semantics></math> the set of industrial tasks defined in Section <a href="#S4.SS1" title="4.1 Dataset Analysis ‣ 4 Experimental Setup ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4.1</span></a> (Summarization, RAG, Conversational Agents), and <math id="S3.p1.5.m5" class="ltx_Math" alttext="\mathcal{A}" display="inline" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">𝒜</mi><annotation encoding="application/x-tex">\mathcal{A}</annotation></semantics></math> the set of adaptation strategies (LoRA-FP16, LoRA-INT8, LoRA-INT4, QLoRA-INT4). For each configuration <math id="S3.p1.6.m6" class="ltx_Math" alttext="(f,p,t,a)\in\mathcal{F}\times\mathcal{P}\times\mathcal{T}\times\mathcal{A}" display="inline" intent=":literal"><semantics><mrow><mrow><mo stretchy="false">(</mo><mi>f</mi><mo>,</mo><mi>p</mi><mo>,</mo><mi>t</mi><mo>,</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mo>∈</mo><mrow><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi class="ltx_font_mathcaligraphic">𝒯</mi><mo lspace="0.222em" rspace="0.222em">×</mo><mi class="ltx_font_mathcaligraphic">𝒜</mi></mrow></mrow><annotation encoding="application/x-tex">(f,p,t,a)\in\mathcal{F}\times\mathcal{P}\times\mathcal{T}\times\mathcal{A}</annotation></semantics></math>, we execute a full deployment pipeline consisting of adaptation, compression (when applicable), and serving. This factorial design yields <math id="S3.p1.7.m7" class="ltx_Math" alttext="|\mathcal{F}|\times|\mathcal{P}|\times|\mathcal{T}|\times|\mathcal{A}|=72" display="inline" intent=":literal"><semantics><mrow><mrow><mrow><mo stretchy="false">|</mo><mi class="ltx_font_mathcaligraphic">ℱ</mi><mo rspace="0.055em" stretchy="false">|</mo></mrow><mo rspace="0.222em">×</mo><mrow><mo stretchy="false">|</mo><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo rspace="0.055em" stretchy="false">|</mo></mrow><mo rspace="0.222em">×</mo><mrow><mo stretchy="false">|</mo><mi class="ltx_font_mathcaligraphic">𝒯</mi><mo rspace="0.055em" stretchy="false">|</mo></mrow><mo rspace="0.222em">×</mo><mrow><mo stretchy="false">|</mo><mi class="ltx_font_mathcaligraphic">𝒜</mi><mo stretchy="false">|</mo></mrow></mrow><mo>=</mo><mn>72</mn></mrow><annotation encoding="application/x-tex">|\mathcal{F}|\times|\mathcal{P}|\times|\mathcal{T}|\times|\mathcal{A}|=72</annotation></semantics></math> benchmarked variants. During the <em id="S3.p1.18.2" class="ltx_emph ltx_font_italic">adaptation stage</em>, models are specialized on task-specific data using PEFT. In the <em id="S3.p1.18.3" class="ltx_emph ltx_font_italic">compression stage</em>, weights are optionally quantized under controlled precision regimes. In the <em id="S3.p1.18.4" class="ltx_emph ltx_font_italic">inference stage</em>, adapted models are deployed in a serving environment representative of low-batch industry conditions. For each stage, we record lifecycle variables including training energy <math id="S3.p1.8.m8" class="ltx_Math" alttext="E_{\text{train}}" display="inline" intent=":literal"><semantics><msub><mi>E</mi><mtext>train</mtext></msub><annotation encoding="application/x-tex">E_{\text{train}}</annotation></semantics></math>, inference energy per request <math id="S3.p1.9.m9" class="ltx_Math" alttext="E_{\text{infer}}" display="inline" intent=":literal"><semantics><msub><mi>E</mi><mtext>infer</mtext></msub><annotation encoding="application/x-tex">E_{\text{infer}}</annotation></semantics></math>, model loading overhead <math id="S3.p1.10.m10" class="ltx_Math" alttext="E_{\text{load}}" display="inline" intent=":literal"><semantics><msub><mi>E</mi><mtext>load</mtext></msub><annotation encoding="application/x-tex">E_{\text{load}}</annotation></semantics></math>, sustained throughput <math id="S3.p1.11.m11" class="ltx_Math" alttext="T_{\text{put}}" display="inline" intent=":literal"><semantics><msub><mi>T</mi><mtext>put</mtext></msub><annotation encoding="application/x-tex">T_{\text{put}}</annotation></semantics></math>, latency characteristics <math id="S3.p1.12.m12" class="ltx_Math" alttext="(T_{\text{TTFT}},T_{\text{ITL}})" display="inline" intent=":literal"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>T</mi><mtext>TTFT</mtext></msub><mo>,</mo><msub><mi>T</mi><mtext>ITL</mtext></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(T_{\text{TTFT}},T_{\text{ITL}})</annotation></semantics></math>, and GPU memory footprint <math id="S3.p1.13.m13" class="ltx_Math" alttext="M_{\text{vram}}" display="inline" intent=":literal"><semantics><msub><mi>M</mi><mtext>vram</mtext></msub><annotation encoding="application/x-tex">M_{\text{vram}}</annotation></semantics></math>. These measured quantities collectively characterize both one-time specialization cost and recurring operational behavior under uniform hardware constraints. The recorded variables are subsequently aggregated into five deployment metrics—<math id="S3.p1.14.m14" class="ltx_Math" alttext="N_{break}" display="inline" intent=":literal"><semantics><msub><mi>N</mi><mrow><mi>b</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>k</mi></mrow></msub><annotation encoding="application/x-tex">N_{break}</annotation></semantics></math>, <math id="S3.p1.15.m15" class="ltx_Math" alttext="IPW" display="inline" intent=":literal"><semantics><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi><mo lspace="0em" rspace="0em">​</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">IPW</annotation></semantics></math>, <math id="S3.p1.16.m16" class="ltx_Math" alttext="\rho_{sys}" display="inline" intent=":literal"><semantics><msub><mi>ρ</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi><mo lspace="0em" rspace="0em">​</mo><mi>s</mi></mrow></msub><annotation encoding="application/x-tex">\rho_{sys}</annotation></semantics></math>, <math id="S3.p1.17.m17" class="ltx_Math" alttext="C_{tax}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>x</mi></mrow></msub><annotation encoding="application/x-tex">C_{tax}</annotation></semantics></math>, and <math id="S3.p1.18.m18" class="ltx_Math" alttext="Q_{ret}" display="inline" intent=":literal"><semantics><msub><mi>Q</mi><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">Q_{ret}</annotation></semantics></math>—whose formal definitions and mathematical formulations are provided in Section <a href="#S4.SS2" title="4.2 Evaluation Metrics ‣ 4 Experimental Setup ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4.2</span></a>.</p>
+</div>
+</section>
+<section id="S4" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Experimental Setup</h2>
+
+<div id="S4.p1" class="ltx_para">
+<p id="S4.p1.2" class="ltx_p">All experiments are conducted on a dual-GPU node equipped with NVIDIA Tesla T4 accelerators (16GB VRAM each) <cite class="ltx_cite ltx_citemacro_cite">Nvidia (<a href="#bib.bib23" title="" class="ltx_ref">2018</a>); Jia et al. (<a href="#bib.bib14" title="" class="ltx_ref">2019</a>)</cite>, reflecting widely deployed legacy industry hardware. We evaluate two open-weight model families—LLaMA <cite class="ltx_cite ltx_citemacro_cite">Grattafiori et al. (<a href="#bib.bib9" title="" class="ltx_ref">2024</a>)</cite> (1B<span id="footnote2" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_tag ltx_tag_note">2</span><a href="https://huggingface.co/meta-LLaMa/LLaMa-3.2-1B-Instruct" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://huggingface.co/meta-LLaMa/LLaMa-3.2-1B-Instruct</a></span></span></span>, 3B<span id="footnote3" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">3</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">3</sup><span class="ltx_tag ltx_tag_note">3</span><a href="https://huggingface.co/meta-LLaMa/LLaMa-3.2-3B-Instruct" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://huggingface.co/meta-LLaMa/LLaMa-3.2-3B-Instruct</a></span></span></span>, 8B<span id="footnote4" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">4</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">4</sup><span class="ltx_tag ltx_tag_note">4</span><a href="https://huggingface.co/meta-LLaMa/LLaMa-3.1-8B-Instruct" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://huggingface.co/meta-LLaMa/LLaMa-3.1-8B-Instruct</a></span></span></span>; employing Grouped-Query Attention) and Qwen-2.5 <cite class="ltx_cite ltx_citemacro_cite">Qwen et al. (<a href="#bib.bib25" title="" class="ltx_ref">2025</a>)</cite> (1.5B<span id="footnote5" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">5</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">5</sup><span class="ltx_tag ltx_tag_note">5</span><a href="https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct</a></span></span></span>, 3B<span id="footnote6" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">6</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">6</sup><span class="ltx_tag ltx_tag_note">6</span><a href="https://huggingface.co/Qwen/Qwen2.5-3B-Instruct" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://huggingface.co/Qwen/Qwen2.5-3B-Instruct</a></span></span></span>, 7B<span id="footnote7" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">7</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">7</sup><span class="ltx_tag ltx_tag_note">7</span><a href="https://huggingface.co/Qwen/Qwen2.5-7B-Instruct" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://huggingface.co/Qwen/Qwen2.5-7B-Instruct</a></span></span></span>; dense transformer variants)—across three parameter tiers. Models are adapted using PEFT with rank <math id="S4.p1.1.m1" class="ltx_Math" alttext="r=16" display="inline" intent=":literal"><semantics><mrow><mi>r</mi><mo>=</mo><mn>16</mn></mrow><annotation encoding="application/x-tex">r=16</annotation></semantics></math> and scaling factor <math id="S4.p1.2.m2" class="ltx_Math" alttext="\alpha=32" display="inline" intent=":literal"><semantics><mrow><mi>α</mi><mo>=</mo><mn>32</mn></mrow><annotation encoding="application/x-tex">\alpha=32</annotation></semantics></math>, under four precision configurations–LoRA-FP16, LoRA-INT8, LoRA-INT4 (PTQ), and QLoRA-INT4 <cite class="ltx_cite ltx_citemacro_cite">Hu et al. (<a href="#bib.bib13" title="" class="ltx_ref">2022</a>); Dettmers et al. (<a href="#bib.bib6" title="" class="ltx_ref">2023</a>)</cite>. Inference is served via vLLM (v0.6.3) <cite class="ltx_cite ltx_citemacro_cite">Kwon et al. (<a href="#bib.bib16" title="" class="ltx_ref">2023</a>)</cite> with paged attention enabled, and evaluated under batch size 1 to simulate low-batch deployment conditions. Throughput (tokens/s), Time-To-First-Token (TTFT), and Inter-Token Latency (ITL) are measured over 100 independent requests per configuration, while GPU power draw is recorded using <span id="S4.p1.2.1" class="ltx_text ltx_font_typewriter">pynvml</span> <cite class="ltx_cite ltx_citemacro_cite">Bauer et al. (<a href="#bib.bib4" title="" class="ltx_ref">2024</a>)</cite> at 100 ms intervals to enable fine-grained lifecycle energy profiling.</p>
+</div>
+<figure id="S4.T1" class="ltx_table">
+<div id="S4.T1.5" class="ltx_inline-block ltx_align_center ltx_transformed_outer" style="width:345.0pt;height:55.2pt;vertical-align:-26.2pt;"><span class="ltx_transformed_inner" style="transform:translate(-132.8pt,21.2pt) scale(0.565001306304635,0.565001306304635) ;">
+<table id="S4.T1.5.5" class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S4.T1.5.5.5" class="ltx_tr">
+<th id="S4.T1.5.5.5.6" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt"><span id="S4.T1.5.5.5.6.1" class="ltx_text ltx_font_bold">Family</span></th>
+<th id="S4.T1.5.5.5.7" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt"><span id="S4.T1.5.5.5.7.1" class="ltx_text ltx_font_bold">Model Size</span></th>
+<th id="S4.T1.1.1.1.1" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">
+<table id="S4.T1.1.1.1.1.1" class="ltx_tabular ltx_align_middle">
+<tr id="S4.T1.1.1.1.1.1.2" class="ltx_tr">
+<td id="S4.T1.1.1.1.1.1.2.1" class="ltx_td ltx_nopad_r ltx_align_center"><span id="S4.T1.1.1.1.1.1.2.1.1" class="ltx_text ltx_font_bold">ROI Velocity</span></td>
+</tr>
+<tr id="S4.T1.1.1.1.1.1.1" class="ltx_tr">
+<td id="S4.T1.1.1.1.1.1.1.1" class="ltx_td ltx_nopad_r ltx_align_center">
+<span id="S4.T1.1.1.1.1.1.1.1.1" class="ltx_text ltx_font_bold">(</span><math id="S4.T1.1.1.1.1.1.1.1.m1" class="ltx_Math" alttext="N_{break}" display="inline" intent=":literal"><semantics><msub><mi>N</mi><mrow><mi>b</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>k</mi></mrow></msub><annotation encoding="application/x-tex">N_{break}</annotation></semantics></math><span id="S4.T1.1.1.1.1.1.1.1.2" class="ltx_text ltx_font_bold">)</span>
+</td>
+</tr>
+</table>
+</th>
+<th id="S4.T1.2.2.2.2" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">
+<table id="S4.T1.2.2.2.2.1" class="ltx_tabular ltx_align_middle">
+<tr id="S4.T1.2.2.2.2.1.2" class="ltx_tr">
+<td id="S4.T1.2.2.2.2.1.2.1" class="ltx_td ltx_nopad_r ltx_align_center"><span id="S4.T1.2.2.2.2.1.2.1.1" class="ltx_text ltx_font_bold">Green Efficiency</span></td>
+</tr>
+<tr id="S4.T1.2.2.2.2.1.1" class="ltx_tr">
+<td id="S4.T1.2.2.2.2.1.1.1" class="ltx_td ltx_nopad_r ltx_align_center">
+<span id="S4.T1.2.2.2.2.1.1.1.1" class="ltx_text ltx_font_bold">(</span><math id="S4.T1.2.2.2.2.1.1.1.m1" class="ltx_Math" alttext="IPW" display="inline" intent=":literal"><semantics><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi><mo lspace="0em" rspace="0em">​</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">IPW</annotation></semantics></math><span id="S4.T1.2.2.2.2.1.1.1.2" class="ltx_text ltx_font_bold">)</span>
+</td>
+</tr>
+</table>
+</th>
+<th id="S4.T1.3.3.3.3" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">
+<table id="S4.T1.3.3.3.3.1" class="ltx_tabular ltx_align_middle">
+<tr id="S4.T1.3.3.3.3.1.2" class="ltx_tr">
+<td id="S4.T1.3.3.3.3.1.2.1" class="ltx_td ltx_nopad_r ltx_align_center"><span id="S4.T1.3.3.3.3.1.2.1.1" class="ltx_text ltx_font_bold">System Density</span></td>
+</tr>
+<tr id="S4.T1.3.3.3.3.1.1" class="ltx_tr">
+<td id="S4.T1.3.3.3.3.1.1.1" class="ltx_td ltx_nopad_r ltx_align_center">
+<span id="S4.T1.3.3.3.3.1.1.1.1" class="ltx_text ltx_font_bold">(</span><math id="S4.T1.3.3.3.3.1.1.1.m1" class="ltx_Math" alttext="\rho_{sys}" display="inline" intent=":literal"><semantics><msub><mi>ρ</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi><mo lspace="0em" rspace="0em">​</mo><mi>s</mi></mrow></msub><annotation encoding="application/x-tex">\rho_{sys}</annotation></semantics></math><span id="S4.T1.3.3.3.3.1.1.1.2" class="ltx_text ltx_font_bold">)</span>
+</td>
+</tr>
+</table>
+</th>
+<th id="S4.T1.4.4.4.4" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt">
+<table id="S4.T1.4.4.4.4.1" class="ltx_tabular ltx_align_middle">
+<tr id="S4.T1.4.4.4.4.1.2" class="ltx_tr">
+<td id="S4.T1.4.4.4.4.1.2.1" class="ltx_td ltx_nopad_r ltx_align_center"><span id="S4.T1.4.4.4.4.1.2.1.1" class="ltx_text ltx_font_bold">Quantization Fidelity</span></td>
+</tr>
+<tr id="S4.T1.4.4.4.4.1.1" class="ltx_tr">
+<td id="S4.T1.4.4.4.4.1.1.1" class="ltx_td ltx_nopad_r ltx_align_center">
+<span id="S4.T1.4.4.4.4.1.1.1.1" class="ltx_text ltx_font_bold">(</span><math id="S4.T1.4.4.4.4.1.1.1.m1" class="ltx_Math" alttext="Q_{ret}" display="inline" intent=":literal"><semantics><msub><mi>Q</mi><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">Q_{ret}</annotation></semantics></math><span id="S4.T1.4.4.4.4.1.1.1.2" class="ltx_text ltx_font_bold">)</span>
+</td>
+</tr>
+</table>
+</th>
+<th id="S4.T1.5.5.5.5" class="ltx_td ltx_nopad_r ltx_align_center ltx_th ltx_th_column ltx_border_tt">
+<table id="S4.T1.5.5.5.5.1" class="ltx_tabular ltx_align_middle">
+<tr id="S4.T1.5.5.5.5.1.2" class="ltx_tr">
+<td id="S4.T1.5.5.5.5.1.2.1" class="ltx_td ltx_nopad_r ltx_align_center"><span id="S4.T1.5.5.5.5.1.2.1.1" class="ltx_text ltx_font_bold">Cold-Start Tax</span></td>
+</tr>
+<tr id="S4.T1.5.5.5.5.1.1" class="ltx_tr">
+<td id="S4.T1.5.5.5.5.1.1.1" class="ltx_td ltx_nopad_r ltx_align_center">
+<span id="S4.T1.5.5.5.5.1.1.1.1" class="ltx_text ltx_font_bold">(</span><math id="S4.T1.5.5.5.5.1.1.1.m1" class="ltx_Math" alttext="C_{tax}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>x</mi></mrow></msub><annotation encoding="application/x-tex">C_{tax}</annotation></semantics></math><span id="S4.T1.5.5.5.5.1.1.1.2" class="ltx_text ltx_font_bold">)</span>
+</td>
+</tr>
+</table>
+</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S4.T1.5.5.6.1" class="ltx_tr">
+<th id="S4.T1.5.5.6.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t"><span id="S4.T1.5.5.6.1.1.1" class="ltx_text ltx_font_bold">LLaMa</span></th>
+<th id="S4.T1.5.5.6.1.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t"><span id="S4.T1.5.5.6.1.2.1" class="ltx_text ltx_font_bold">1B</span></th>
+<td id="S4.T1.5.5.6.1.3" class="ltx_td ltx_align_center ltx_border_t"><span id="S4.T1.5.5.6.1.3.1" class="ltx_text ltx_font_bold">14 Reqs</span></td>
+<td id="S4.T1.5.5.6.1.4" class="ltx_td ltx_align_center ltx_border_t">0.45</td>
+<td id="S4.T1.5.5.6.1.5" class="ltx_td ltx_align_center ltx_border_t"><span id="S4.T1.5.5.6.1.5.1" class="ltx_text ltx_font_bold">6,930 Tok/s/GB</span></td>
+<td id="S4.T1.5.5.6.1.6" class="ltx_td ltx_align_center ltx_border_t"><span id="S4.T1.5.5.6.1.6.1" class="ltx_text ltx_font_bold">100.6%</span></td>
+<td id="S4.T1.5.5.6.1.7" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t"><span id="S4.T1.5.5.6.1.7.1" class="ltx_text ltx_font_bold">183x</span></td>
+</tr>
+<tr id="S4.T1.5.5.7.2" class="ltx_tr">
+<th id="S4.T1.5.5.7.2.1" class="ltx_td ltx_th ltx_th_row"></th>
+<th id="S4.T1.5.5.7.2.2" class="ltx_td ltx_align_left ltx_th ltx_th_row">3B</th>
+<td id="S4.T1.5.5.7.2.3" class="ltx_td ltx_align_center">33 Reqs</td>
+<td id="S4.T1.5.5.7.2.4" class="ltx_td ltx_align_center">0.27</td>
+<td id="S4.T1.5.5.7.2.5" class="ltx_td ltx_align_center">1,336 Tok/s/GB</td>
+<td id="S4.T1.5.5.7.2.6" class="ltx_td ltx_align_center">99.8%</td>
+<td id="S4.T1.5.5.7.2.7" class="ltx_td ltx_nopad_r ltx_align_center">184x</td>
+</tr>
+<tr id="S4.T1.5.5.8.3" class="ltx_tr">
+<th id="S4.T1.5.5.8.3.1" class="ltx_td ltx_th ltx_th_row"></th>
+<th id="S4.T1.5.5.8.3.2" class="ltx_td ltx_align_left ltx_th ltx_th_row">7B</th>
+<td id="S4.T1.5.5.8.3.3" class="ltx_td ltx_align_center">43 Reqs</td>
+<td id="S4.T1.5.5.8.3.4" class="ltx_td ltx_align_center">0.15</td>
+<td id="S4.T1.5.5.8.3.5" class="ltx_td ltx_align_center">387 Tok/s/GB</td>
+<td id="S4.T1.5.5.8.3.6" class="ltx_td ltx_align_center">100.3%</td>
+<td id="S4.T1.5.5.8.3.7" class="ltx_td ltx_nopad_r ltx_align_center">230x</td>
+</tr>
+<tr id="S4.T1.5.5.9.4" class="ltx_tr">
+<th id="S4.T1.5.5.9.4.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t"><span id="S4.T1.5.5.9.4.1.1" class="ltx_text ltx_font_bold">Qwen</span></th>
+<th id="S4.T1.5.5.9.4.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">1B</th>
+<td id="S4.T1.5.5.9.4.3" class="ltx_td ltx_align_center ltx_border_t">21 Reqs</td>
+<td id="S4.T1.5.5.9.4.4" class="ltx_td ltx_align_center ltx_border_t"><span id="S4.T1.5.5.9.4.4.1" class="ltx_text ltx_font_bold">0.48</span></td>
+<td id="S4.T1.5.5.9.4.5" class="ltx_td ltx_align_center ltx_border_t">6,942 Tok/s/GB</td>
+<td id="S4.T1.5.5.9.4.6" class="ltx_td ltx_align_center ltx_border_t">99.6%</td>
+<td id="S4.T1.5.5.9.4.7" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">179x</td>
+</tr>
+<tr id="S4.T1.5.5.10.5" class="ltx_tr">
+<th id="S4.T1.5.5.10.5.1" class="ltx_td ltx_th ltx_th_row"></th>
+<th id="S4.T1.5.5.10.5.2" class="ltx_td ltx_align_left ltx_th ltx_th_row">3B</th>
+<td id="S4.T1.5.5.10.5.3" class="ltx_td ltx_align_center">28 Reqs</td>
+<td id="S4.T1.5.5.10.5.4" class="ltx_td ltx_align_center">0.23</td>
+<td id="S4.T1.5.5.10.5.5" class="ltx_td ltx_align_center">1,419 Tok/s/GB</td>
+<td id="S4.T1.5.5.10.5.6" class="ltx_td ltx_align_center">97.3%</td>
+<td id="S4.T1.5.5.10.5.7" class="ltx_td ltx_nopad_r ltx_align_center">188x</td>
+</tr>
+<tr id="S4.T1.5.5.11.6" class="ltx_tr">
+<th id="S4.T1.5.5.11.6.1" class="ltx_td ltx_th ltx_th_row ltx_border_bb"></th>
+<th id="S4.T1.5.5.11.6.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb">7B</th>
+<td id="S4.T1.5.5.11.6.3" class="ltx_td ltx_align_center ltx_border_bb">39 Reqs</td>
+<td id="S4.T1.5.5.11.6.4" class="ltx_td ltx_align_center ltx_border_bb">0.14</td>
+<td id="S4.T1.5.5.11.6.5" class="ltx_td ltx_align_center ltx_border_bb">394 Tok/s/GB</td>
+<td id="S4.T1.5.5.11.6.6" class="ltx_td ltx_align_center ltx_border_bb">99.5%</td>
+<td id="S4.T1.5.5.11.6.7" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_bb">237x</td>
+</tr>
+</tbody>
+</table>
+</span></div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 1: </span>Lifecycle efficiency frontier on legacy T4 hardware. Median INT4 results (20 runs, three tasks) across <math id="S4.T1.12.m1" class="ltx_Math" alttext="N_{break}" display="inline" intent=":literal"><semantics><msub><mi>N</mi><mrow><mi>b</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>k</mi></mrow></msub><annotation encoding="application/x-tex">N_{break}</annotation></semantics></math>, <math id="S4.T1.13.m2" class="ltx_Math" alttext="IPW" display="inline" intent=":literal"><semantics><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi><mo lspace="0em" rspace="0em">​</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">IPW</annotation></semantics></math>, <math id="S4.T1.14.m3" class="ltx_Math" alttext="\rho_{sys}" display="inline" intent=":literal"><semantics><msub><mi>ρ</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi><mo lspace="0em" rspace="0em">​</mo><mi>s</mi></mrow></msub><annotation encoding="application/x-tex">\rho_{sys}</annotation></semantics></math>, <math id="S4.T1.15.m4" class="ltx_Math" alttext="Q_{ret}" display="inline" intent=":literal"><semantics><msub><mi>Q</mi><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">Q_{ret}</annotation></semantics></math>, and <math id="S4.T1.16.m5" class="ltx_Math" alttext="C_{tax}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>x</mi></mrow></msub><annotation encoding="application/x-tex">C_{tax}</annotation></semantics></math> show that compact (<math id="S4.T1.17.m6" class="ltx_Math" alttext="&lt;2" display="inline" intent=":literal"><semantics><mrow><mi></mi><mo>&lt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">&lt;2</annotation></semantics></math>B) models consistently outperform larger tiers in ROI velocity, system density, and energy-normalized intelligence.</figcaption>
+</figure>
+<section id="S4.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>Dataset Analysis</h3>
+
+<div id="S4.SS1.p1" class="ltx_para">
+<p id="S4.SS1.p1.3" class="ltx_p">To evaluate <span id="S4.SS1.p1.3.1" class="ltx_text ltx_font_smallcaps">Edge-Eval</span>, we use three representative datasets—<span id="S4.SS1.p1.3.2" class="ltx_text ltx_font_typewriter">Summarization (XSum)</span> <cite class="ltx_cite ltx_citemacro_cite">Narayan et al. (<a href="#bib.bib22" title="" class="ltx_ref">2018</a>)</cite>, <span id="S4.SS1.p1.3.3" class="ltx_text ltx_font_typewriter">RAG (SQuAD)</span> <cite class="ltx_cite ltx_citemacro_cite">Rajpurkar et al. (<a href="#bib.bib26" title="" class="ltx_ref">2016</a>)</cite>, and <span id="S4.SS1.p1.3.4" class="ltx_text ltx_font_typewriter">Conversational Agent (UltraChat)</span> <cite class="ltx_cite ltx_citemacro_cite">Ding et al. (<a href="#bib.bib7" title="" class="ltx_ref">2023</a>)</cite>. <span id="S4.SS1.p1.3.5" class="ltx_text ltx_font_typewriter">XSum</span> contains <math id="S4.SS1.p1.1.m1" class="ltx_Math" alttext="\sim" display="inline" intent=":literal"><semantics><mo>∼</mo><annotation encoding="application/x-tex">\sim</annotation></semantics></math>227K news articles (204K/11K/11K train/val/test) paired with single-sentence summaries—modeling long-context document compression under constrained inference budgets. <span id="S4.SS1.p1.3.6" class="ltx_text ltx_font_typewriter">SQuAD</span> v1.1 provides <math id="S4.SS1.p1.2.m2" class="ltx_Math" alttext="\sim" display="inline" intent=":literal"><semantics><mo>∼</mo><annotation encoding="application/x-tex">\sim</annotation></semantics></math>100K QA pairs (87K/10K train/val), adapted into a retrieval-grounded generation setup to simulate knowledge-intensive enterprise reasoning. <span id="S4.SS1.p1.3.7" class="ltx_text ltx_font_typewriter">UltraChat</span> comprises <math id="S4.SS1.p1.3.m3" class="ltx_Math" alttext="\sim" display="inline" intent=":literal"><semantics><mo>∼</mo><annotation encoding="application/x-tex">\sim</annotation></semantics></math>1.5M multi-turn dialogues—reflecting latency-sensitive conversational deployment. We follow an 70/15/15 train/validation/test split, limiting fine-tuning to 5K–10K training samples per task while reserving the full validation and test sets for evaluation.</p>
+</div>
+</section>
+<section id="S4.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Evaluation Metrics</h3>
+
+<div id="S4.SS2.p1" class="ltx_para">
+<p id="S4.SS2.p1.19" class="ltx_p">To evaluate <span id="S4.SS2.p1.19.1" class="ltx_text ltx_font_smallcaps">Edge-Eval</span>, we implement a three-pass evaluation loop and report mean, median, and standard deviation across task-specific metrics: for <span id="S4.SS2.p1.19.2" class="ltx_text ltx_font_typewriter">RAG</span>, NLI Entailment (Context <math id="S4.SS2.p1.1.m1" class="ltx_Math" alttext="\rightarrow" display="inline" intent=":literal"><semantics><mo stretchy="false">→</mo><annotation encoding="application/x-tex">\rightarrow</annotation></semantics></math> Generation) <cite class="ltx_cite ltx_citemacro_cite">Honovich et al. (<a href="#bib.bib12" title="" class="ltx_ref">2022</a>)</cite> and ROUGE-L <cite class="ltx_cite ltx_citemacro_cite">Lin (<a href="#bib.bib19" title="" class="ltx_ref">2004</a>)</cite>; for <span id="S4.SS2.p1.19.3" class="ltx_text ltx_font_typewriter">Summarization</span>, NLI Non-Contradiction and ROUGE-L; and for <span id="S4.SS2.p1.19.4" class="ltx_text ltx_font_typewriter">Conversational Agents</span>, LLM-as-a-Judge (GPT-4o) ratings <cite class="ltx_cite ltx_citemacro_cite">Zheng et al. (<a href="#bib.bib30" title="" class="ltx_ref">2023</a>)</cite> on Helpfulness and Safety (1–10 Likert scale). Based on the lifecycle variables defined in Section <a href="#S3" title="3 Methodology ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>, we formalize five deployment metrics. <em id="S4.SS2.p1.19.5" class="ltx_emph ltx_font_italic">Economic Break-Even</em> computes the traffic volume required for local adaptation to undercut API costs,
+<math id="S4.SS2.p1.2.m2" class="ltx_Math" alttext="N_{break}=\frac{C_{train}+C_{setup}}{C_{api}-C_{infer}}" display="inline" intent=":literal"><semantics><mrow><msub><mi>N</mi><mrow><mi>b</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>k</mi></mrow></msub><mo>=</mo><mfrac><mrow><msub><mi>C</mi><mrow><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>i</mi><mo lspace="0em" rspace="0em">​</mo><mi>n</mi></mrow></msub><mo>+</mo><msub><mi>C</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>u</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi></mrow></msub></mrow><mrow><msub><mi>C</mi><mrow><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mi>i</mi></mrow></msub><mo>−</mo><msub><mi>C</mi><mrow><mi>i</mi><mo lspace="0em" rspace="0em">​</mo><mi>n</mi><mo lspace="0em" rspace="0em">​</mo><mi>f</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi></mrow></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">N_{break}=\frac{C_{train}+C_{setup}}{C_{api}-C_{infer}}</annotation></semantics></math>,
+where <math id="S4.SS2.p1.3.m3" class="ltx_Math" alttext="C_{train}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>i</mi><mo lspace="0em" rspace="0em">​</mo><mi>n</mi></mrow></msub><annotation encoding="application/x-tex">C_{train}</annotation></semantics></math> denotes adaptation cost, <math id="S4.SS2.p1.4.m4" class="ltx_Math" alttext="C_{setup}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>u</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi></mrow></msub><annotation encoding="application/x-tex">C_{setup}</annotation></semantics></math> infrastructure overhead, <math id="S4.SS2.p1.5.m5" class="ltx_Math" alttext="C_{api}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mi>i</mi></mrow></msub><annotation encoding="application/x-tex">C_{api}</annotation></semantics></math> per-request API cost, and <math id="S4.SS2.p1.6.m6" class="ltx_Math" alttext="C_{infer}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mrow><mi>i</mi><mo lspace="0em" rspace="0em">​</mo><mi>n</mi><mo lspace="0em" rspace="0em">​</mo><mi>f</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi></mrow></msub><annotation encoding="application/x-tex">C_{infer}</annotation></semantics></math> local inference cost per request.
+<em id="S4.SS2.p1.19.6" class="ltx_emph ltx_font_italic">Intelligence-Per-Watt</em> measures task-normalized reasoning efficiency,
+<math id="S4.SS2.p1.7.m7" class="ltx_Math" alttext="IPW=\frac{\mathcal{S}_{task}\cdot\alpha}{E_{req}}" display="inline" intent=":literal"><semantics><mrow><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi><mo lspace="0em" rspace="0em">​</mo><mi>W</mi></mrow><mo>=</mo><mfrac><mrow><msub><mi class="ltx_font_mathcaligraphic">𝒮</mi><mrow><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>k</mi></mrow></msub><mo lspace="0.222em" rspace="0.222em">⋅</mo><mi>α</mi></mrow><msub><mi>E</mi><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>q</mi></mrow></msub></mfrac></mrow><annotation encoding="application/x-tex">IPW=\frac{\mathcal{S}_{task}\cdot\alpha}{E_{req}}</annotation></semantics></math>,
+where <math id="S4.SS2.p1.8.m8" class="ltx_Math" alttext="\mathcal{S}_{task}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">𝒮</mi><mrow><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>k</mi></mrow></msub><annotation encoding="application/x-tex">\mathcal{S}_{task}</annotation></semantics></math> is normalized task performance, <math id="S4.SS2.p1.9.m9" class="ltx_Math" alttext="\alpha" display="inline" intent=":literal"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> a task-complexity scaling factor, and <math id="S4.SS2.p1.10.m10" class="ltx_Math" alttext="E_{req}" display="inline" intent=":literal"><semantics><msub><mi>E</mi><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>q</mi></mrow></msub><annotation encoding="application/x-tex">E_{req}</annotation></semantics></math> energy consumed per request.
+<em id="S4.SS2.p1.19.7" class="ltx_emph ltx_font_italic">System Density</em> quantifies hardware utilization efficiency,
+<math id="S4.SS2.p1.11.m11" class="ltx_Math" alttext="\rho_{sys}=\frac{\mathcal{T}_{put}}{M_{vram}}" display="inline" intent=":literal"><semantics><mrow><msub><mi>ρ</mi><mrow><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>y</mi><mo lspace="0em" rspace="0em">​</mo><mi>s</mi></mrow></msub><mo>=</mo><mfrac><msub><mi class="ltx_font_mathcaligraphic">𝒯</mi><mrow><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mi>u</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><msub><mi>M</mi><mrow><mi>v</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi></mrow></msub></mfrac></mrow><annotation encoding="application/x-tex">\rho_{sys}=\frac{\mathcal{T}_{put}}{M_{vram}}</annotation></semantics></math>,
+where <math id="S4.SS2.p1.12.m12" class="ltx_Math" alttext="\mathcal{T}_{put}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">𝒯</mi><mrow><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mi>u</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><annotation encoding="application/x-tex">\mathcal{T}_{put}</annotation></semantics></math> denotes sustained token throughput and <math id="S4.SS2.p1.13.m13" class="ltx_Math" alttext="M_{vram}" display="inline" intent=":literal"><semantics><msub><mi>M</mi><mrow><mi>v</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi></mrow></msub><annotation encoding="application/x-tex">M_{vram}</annotation></semantics></math> allocated GPU memory in GB.
+<em id="S4.SS2.p1.19.8" class="ltx_emph ltx_font_italic">Cold-Start Tax</em> captures the relative energy overhead of model loading,
+<math id="S4.SS2.p1.14.m14" class="ltx_Math" alttext="C_{tax}=\frac{E_{load}}{E_{infer}}" display="inline" intent=":literal"><semantics><mrow><msub><mi>C</mi><mrow><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>x</mi></mrow></msub><mo>=</mo><mfrac><msub><mi>E</mi><mrow><mi>l</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>d</mi></mrow></msub><msub><mi>E</mi><mrow><mi>i</mi><mo lspace="0em" rspace="0em">​</mo><mi>n</mi><mo lspace="0em" rspace="0em">​</mo><mi>f</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi></mrow></msub></mfrac></mrow><annotation encoding="application/x-tex">C_{tax}=\frac{E_{load}}{E_{infer}}</annotation></semantics></math>,
+with <math id="S4.SS2.p1.15.m15" class="ltx_Math" alttext="E_{load}" display="inline" intent=":literal"><semantics><msub><mi>E</mi><mrow><mi>l</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>d</mi></mrow></msub><annotation encoding="application/x-tex">E_{load}</annotation></semantics></math> representing model loading energy and <math id="S4.SS2.p1.16.m16" class="ltx_Math" alttext="E_{infer}" display="inline" intent=":literal"><semantics><msub><mi>E</mi><mrow><mi>i</mi><mo lspace="0em" rspace="0em">​</mo><mi>n</mi><mo lspace="0em" rspace="0em">​</mo><mi>f</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>r</mi></mrow></msub><annotation encoding="application/x-tex">E_{infer}</annotation></semantics></math> steady-state inference energy.
+Finally, <em id="S4.SS2.p1.19.9" class="ltx_emph ltx_font_italic">Quantization Fidelity</em> measures reasoning retention under 4-bit compression,
+<math id="S4.SS2.p1.17.m17" class="ltx_Math" alttext="Q_{ret}=\left(\frac{\mathcal{S}_{INT4}}{\mathcal{S}_{FP16}}\right)\times 100\%" display="inline" intent=":literal"><semantics><mrow><msub><mi>Q</mi><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow></msub><mo>=</mo><mrow><mrow><mo>(</mo><mfrac><msub><mi class="ltx_font_mathcaligraphic">𝒮</mi><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>N</mi><mo lspace="0em" rspace="0em">​</mo><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mn>4</mn></mrow></msub><msub><mi class="ltx_font_mathcaligraphic">𝒮</mi><mrow><mi>F</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi><mo lspace="0em" rspace="0em">​</mo><mn>16</mn></mrow></msub></mfrac><mo rspace="0.055em">)</mo></mrow><mo rspace="0.222em">×</mo><mrow><mn>100</mn><mo>%</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">Q_{ret}=\left(\frac{\mathcal{S}_{INT4}}{\mathcal{S}_{FP16}}\right)\times 100\%</annotation></semantics></math>,
+where <math id="S4.SS2.p1.18.m18" class="ltx_Math" alttext="\mathcal{S}_{INT4}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">𝒮</mi><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>N</mi><mo lspace="0em" rspace="0em">​</mo><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mn>4</mn></mrow></msub><annotation encoding="application/x-tex">\mathcal{S}_{INT4}</annotation></semantics></math> and <math id="S4.SS2.p1.19.m19" class="ltx_Math" alttext="\mathcal{S}_{FP16}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">𝒮</mi><mrow><mi>F</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi><mo lspace="0em" rspace="0em">​</mo><mn>16</mn></mrow></msub><annotation encoding="application/x-tex">\mathcal{S}_{FP16}</annotation></semantics></math> denote task scores under INT4 and FP16 precision, respectively.</p>
+</div>
+<figure id="S4.T2" class="ltx_table">
+<div id="S4.T2.12" class="ltx_inline-block ltx_align_center ltx_transformed_outer" style="width:433.6pt;height:212.8pt;vertical-align:-103.1pt;"><span class="ltx_transformed_inner" style="transform:translate(54.6pt,-26.8pt) scale(1.33664570868202,1.33664570868202) ;">
+<table id="S4.T2.12.12" class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S4.T2.12.12.13.1" class="ltx_tr">
+<th id="S4.T2.12.12.13.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt"><span id="S4.T2.12.12.13.1.1.1" class="ltx_text ltx_font_bold">Family</span></th>
+<th id="S4.T2.12.12.13.1.2" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt"><span id="S4.T2.12.12.13.1.2.1" class="ltx_text ltx_font_bold">Size</span></th>
+<th id="S4.T2.12.12.13.1.3" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt"><span id="S4.T2.12.12.13.1.3.1" class="ltx_text ltx_font_bold">Method</span></th>
+<th id="S4.T2.12.12.13.1.4" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S4.T2.12.12.13.1.4.1" class="ltx_text ltx_font_bold">Median Energy (kWh)</span></th>
+<th id="S4.T2.12.12.13.1.5" class="ltx_td ltx_nopad_r ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S4.T2.12.12.13.1.5.1" class="ltx_text ltx_font_bold">Ratio</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S4.T2.1.1.1" class="ltx_tr">
+<td id="S4.T2.1.1.1.2" class="ltx_td ltx_align_left ltx_border_t">LLaMa 3.2</td>
+<td id="S4.T2.1.1.1.3" class="ltx_td ltx_align_left ltx_border_t">1B</td>
+<td id="S4.T2.1.1.1.4" class="ltx_td ltx_align_left ltx_border_t">LoRA-FP16</td>
+<td id="S4.T2.1.1.1.5" class="ltx_td ltx_align_center ltx_border_t">0.039 [0.025-0.045]</td>
+<td id="S4.T2.1.1.1.1" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">1.0<math id="S4.T2.1.1.1.1.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>
+</td>
+</tr>
+<tr id="S4.T2.2.2.2" class="ltx_tr">
+<td id="S4.T2.2.2.2.2" class="ltx_td"></td>
+<td id="S4.T2.2.2.2.3" class="ltx_td"></td>
+<td id="S4.T2.2.2.2.4" class="ltx_td ltx_align_left">QLoRA-INT4</td>
+<td id="S4.T2.2.2.2.5" class="ltx_td ltx_align_center">0.251 [0.231-0.355]</td>
+<td id="S4.T2.2.2.2.1" class="ltx_td ltx_nopad_r ltx_align_center">6.4<math id="S4.T2.2.2.2.1.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>
+</td>
+</tr>
+<tr id="S4.T2.3.3.3" class="ltx_tr">
+<td id="S4.T2.3.3.3.2" class="ltx_td ltx_align_left ltx_border_t">LLaMa 3.2</td>
+<td id="S4.T2.3.3.3.3" class="ltx_td ltx_align_left ltx_border_t">3B</td>
+<td id="S4.T2.3.3.3.4" class="ltx_td ltx_align_left ltx_border_t">LoRA-FP16</td>
+<td id="S4.T2.3.3.3.5" class="ltx_td ltx_align_center ltx_border_t">0.171 [0.119-0.244]</td>
+<td id="S4.T2.3.3.3.1" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">1.0<math id="S4.T2.3.3.3.1.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>
+</td>
+</tr>
+<tr id="S4.T2.4.4.4" class="ltx_tr">
+<td id="S4.T2.4.4.4.2" class="ltx_td"></td>
+<td id="S4.T2.4.4.4.3" class="ltx_td"></td>
+<td id="S4.T2.4.4.4.4" class="ltx_td ltx_align_left">QLoRA-INT4</td>
+<td id="S4.T2.4.4.4.5" class="ltx_td ltx_align_center">0.511 [0.156-0.612]</td>
+<td id="S4.T2.4.4.4.1" class="ltx_td ltx_nopad_r ltx_align_center">3.0<math id="S4.T2.4.4.4.1.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>
+</td>
+</tr>
+<tr id="S4.T2.5.5.5" class="ltx_tr">
+<td id="S4.T2.5.5.5.2" class="ltx_td ltx_align_left ltx_border_t">LLaMa 3.1</td>
+<td id="S4.T2.5.5.5.3" class="ltx_td ltx_align_left ltx_border_t">7B</td>
+<td id="S4.T2.5.5.5.4" class="ltx_td ltx_align_left ltx_border_t">LoRA-FP16</td>
+<td id="S4.T2.5.5.5.5" class="ltx_td ltx_align_center ltx_border_t">0.244 [0.235-0.251]</td>
+<td id="S4.T2.5.5.5.1" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">1.0<math id="S4.T2.5.5.5.1.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>
+</td>
+</tr>
+<tr id="S4.T2.6.6.6" class="ltx_tr">
+<td id="S4.T2.6.6.6.2" class="ltx_td"></td>
+<td id="S4.T2.6.6.6.3" class="ltx_td"></td>
+<td id="S4.T2.6.6.6.4" class="ltx_td ltx_align_left">QLoRA-INT4</td>
+<td id="S4.T2.6.6.6.5" class="ltx_td ltx_align_center">0.552 [0.463-0.691]</td>
+<td id="S4.T2.6.6.6.1" class="ltx_td ltx_nopad_r ltx_align_center">2.3<math id="S4.T2.6.6.6.1.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>
+</td>
+</tr>
+<tr id="S4.T2.7.7.7" class="ltx_tr">
+<td id="S4.T2.7.7.7.2" class="ltx_td ltx_align_left ltx_border_t">Qwen 2.5</td>
+<td id="S4.T2.7.7.7.3" class="ltx_td ltx_align_left ltx_border_t">1.5B</td>
+<td id="S4.T2.7.7.7.4" class="ltx_td ltx_align_left ltx_border_t">LoRA-FP16</td>
+<td id="S4.T2.7.7.7.5" class="ltx_td ltx_align_center ltx_border_t">0.129 [0.096-0.185]</td>
+<td id="S4.T2.7.7.7.1" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">1.0<math id="S4.T2.7.7.7.1.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>
+</td>
+</tr>
+<tr id="S4.T2.8.8.8" class="ltx_tr">
+<td id="S4.T2.8.8.8.2" class="ltx_td"></td>
+<td id="S4.T2.8.8.8.3" class="ltx_td"></td>
+<td id="S4.T2.8.8.8.4" class="ltx_td ltx_align_left">QLoRA-INT4</td>
+<td id="S4.T2.8.8.8.5" class="ltx_td ltx_align_center">0.301 [0.295-0.433]</td>
+<td id="S4.T2.8.8.8.1" class="ltx_td ltx_nopad_r ltx_align_center">2.3<math id="S4.T2.8.8.8.1.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>
+</td>
+</tr>
+<tr id="S4.T2.9.9.9" class="ltx_tr">
+<td id="S4.T2.9.9.9.2" class="ltx_td ltx_align_left ltx_border_tt">Qwen 2.5</td>
+<td id="S4.T2.9.9.9.3" class="ltx_td ltx_align_left ltx_border_tt">3B</td>
+<td id="S4.T2.9.9.9.4" class="ltx_td ltx_align_left ltx_border_tt">LoRA-FP16</td>
+<td id="S4.T2.9.9.9.5" class="ltx_td ltx_align_center ltx_border_tt">0.153 [0.120-0.177]</td>
+<td id="S4.T2.9.9.9.1" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_tt">1.0<math id="S4.T2.9.9.9.1.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>
+</td>
+</tr>
+<tr id="S4.T2.10.10.10" class="ltx_tr">
+<td id="S4.T2.10.10.10.2" class="ltx_td"></td>
+<td id="S4.T2.10.10.10.3" class="ltx_td"></td>
+<td id="S4.T2.10.10.10.4" class="ltx_td ltx_align_left">QLoRA-INT4</td>
+<td id="S4.T2.10.10.10.5" class="ltx_td ltx_align_center">0.359 [0.326-0.408]</td>
+<td id="S4.T2.10.10.10.1" class="ltx_td ltx_nopad_r ltx_align_center">2.3<math id="S4.T2.10.10.10.1.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>
+</td>
+</tr>
+<tr id="S4.T2.11.11.11" class="ltx_tr">
+<td id="S4.T2.11.11.11.2" class="ltx_td ltx_align_left ltx_border_tt">Qwen 2.5</td>
+<td id="S4.T2.11.11.11.3" class="ltx_td ltx_align_left ltx_border_tt">7B</td>
+<td id="S4.T2.11.11.11.4" class="ltx_td ltx_align_left ltx_border_tt">LoRA-FP16</td>
+<td id="S4.T2.11.11.11.5" class="ltx_td ltx_align_center ltx_border_tt">0.243 [0.082-0.386]</td>
+<td id="S4.T2.11.11.11.1" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_tt">1.0<math id="S4.T2.11.11.11.1.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>
+</td>
+</tr>
+<tr id="S4.T2.12.12.12" class="ltx_tr">
+<td id="S4.T2.12.12.12.2" class="ltx_td ltx_border_bb"></td>
+<td id="S4.T2.12.12.12.3" class="ltx_td ltx_border_bb"></td>
+<td id="S4.T2.12.12.12.4" class="ltx_td ltx_align_left ltx_border_bb">QLoRA-INT4</td>
+<td id="S4.T2.12.12.12.5" class="ltx_td ltx_align_center ltx_border_bb">0.563 [0.492-0.633]</td>
+<td id="S4.T2.12.12.12.1" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_bb">2.3<math id="S4.T2.12.12.12.1.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>
+</td>
+</tr>
+</tbody>
+</table>
+</span></div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 2: </span>Adaptation energy asymmetry across precision regimes. Median training energy and carbon cost (20 runs, IQR shown) reveal that QLoRA—despite reducing VRAM—incurs up to <math id="S4.T2.14.m1" class="ltx_math_unparsed" alttext="6.4\times" display="inline" intent=":literal"><semantics><mrow><mn>6.4</mn><mo lspace="0.222em">×</mo></mrow><annotation encoding="application/x-tex">6.4\times</annotation></semantics></math> higher energy for 1B models, exposing a divergence between memory and carbon efficiency on legacy hardware.</figcaption>
+</figure>
+<figure id="S4.F3" class="ltx_figure">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure id="S4.F3.sf1" class="ltx_figure ltx_figure_panel ltx_align_center"><img src="2604.19342v1/x2.png" id="S4.F3.sf1.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="830" height="593" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">(a) </span>ROI–Efficiency Quadrant</figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure id="S4.F3.sf2" class="ltx_figure ltx_figure_panel ltx_align_center"><img src="2604.19342v1/x3.png" id="S4.F3.sf2.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="830" height="598" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">(b) </span>System Density</figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure id="S4.F3.sf3" class="ltx_figure ltx_figure_panel ltx_align_center"><img src="2604.19342v1/x4.png" id="S4.F3.sf3.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="830" height="592" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">(c) </span>Quality–Stability Trade-off</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>Multidimensional efficiency under legacy deployment–compact (<math id="S4.F3.2.m1" class="ltx_Math" alttext="&lt;2" display="inline" intent=":literal"><semantics><mrow><mi></mi><mo>&lt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">&lt;2</annotation></semantics></math>B) models form the ROI–IPW efficiency frontier, INT4 enables a strong throughput-per-GB hardware multiplier, and quantization fidelity remains stable with controlled variance.</figcaption>
+</figure>
+</section>
+</section>
+<section id="S5" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Result Analysis</h2>
+
+<section id="S5.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.1 </span>Benchmark Analysis</h3>
+
+<div id="S5.SS1.p1" class="ltx_para">
+<p id="S5.SS1.p1.10" class="ltx_p">The results in Table <a href="#S4.T1" title="Table 1 ‣ 4 Experimental Setup ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a> reveal a clear efficiency frontier favoring the <math id="S5.SS1.p1.1.m1" class="ltx_Math" alttext="&lt;2" display="inline" intent=":literal"><semantics><mrow><mi></mi><mo>&lt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">&lt;2</annotation></semantics></math>B <em id="S5.SS1.p1.10.1" class="ltx_emph ltx_font_italic">parameter class</em> across economic, ecological, and infrastructure dimensions. The LLaMa-3.2-1B configuration achieves the fastest ROI velocity (<math id="S5.SS1.p1.2.m2" class="ltx_Math" alttext="14" display="inline" intent=":literal"><semantics><mn>14</mn><annotation encoding="application/x-tex">14</annotation></semantics></math> requests), the highest system density (<math id="S5.SS1.p1.3.m3" class="ltx_Math" alttext="6{,}930" display="inline" intent=":literal"><semantics><mrow><mn>6</mn><mo>,</mo><mn>930</mn></mrow><annotation encoding="application/x-tex">6{,}930</annotation></semantics></math> tokens/s/GB), and near-perfect quantization fidelity (<math id="S5.SS1.p1.4.m4" class="ltx_Math" alttext="100.6\%" display="inline" intent=":literal"><semantics><mrow><mn>100.6</mn><mo>%</mo></mrow><annotation encoding="application/x-tex">100.6\%</annotation></semantics></math>), while maintaining competitive green efficiency. Similarly, Qwen-1.5B attains the highest <math id="S5.SS1.p1.5.m5" class="ltx_Math" alttext="IPW" display="inline" intent=":literal"><semantics><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>P</mi><mo lspace="0em" rspace="0em">​</mo><mi>W</mi></mrow><annotation encoding="application/x-tex">IPW</annotation></semantics></math> (0.48), confirming that compact models maximize reasoning-per-watt under constrained hardware. In contrast, 7B models exhibit 3–5<math id="S5.SS1.p1.6.m6" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math> lower density and slower economic recovery despite marginal quality gains, indicating diminishing deployment returns at scale. Table <a href="#S4.T2" title="Table 2 ‣ 4.2 Evaluation Metrics ‣ 4 Experimental Setup ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a> further exposes a critical lifecycle asymmetry–although QLoRA reduces memory footprint, it increases adaptation energy by up to <math id="S5.SS1.p1.7.m7" class="ltx_math_unparsed" alttext="6.4\times" display="inline" intent=":literal"><semantics><mrow><mn>6.4</mn><mo lspace="0.222em">×</mo></mrow><annotation encoding="application/x-tex">6.4\times</annotation></semantics></math> for 1B models and <math id="S5.SS1.p1.8.m8" class="ltx_Math" alttext="\sim 2" display="inline" intent=":literal"><semantics><mrow><mi></mi><mo>∼</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">\sim 2</annotation></semantics></math>–<math id="S5.SS1.p1.9.m9" class="ltx_math_unparsed" alttext="3\times" display="inline" intent=":literal"><semantics><mrow><mn>3</mn><mo lspace="0.222em">×</mo></mrow><annotation encoding="application/x-tex">3\times</annotation></semantics></math> for larger tiers, demonstrating that memory efficiency does not guarantee carbon efficiency. Notably, post-training quantization incurs negligible overhead (<math id="S5.SS1.p1.10.m10" class="ltx_Math" alttext="&lt;0.2\%" display="inline" intent=":literal"><semantics><mrow><mi></mi><mo>&lt;</mo><mrow><mn>0.2</mn><mo>%</mo></mrow></mrow><annotation encoding="application/x-tex">&lt;0.2\%</annotation></semantics></math> of training energy), reinforcing its practicality for inference optimization.</p>
+</div>
+</section>
+<section id="S5.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.2 </span>Multidimensional Efficiency Dynamics</h3>
+
+<div id="S5.SS2.p1" class="ltx_para">
+<p id="S5.SS2.p1.3" class="ltx_p">Figure <a href="#S4.F3" title="Figure 3 ‣ 4.2 Evaluation Metrics ‣ 4 Experimental Setup ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a> synthesizes economic, infrastructure, and quality dimensions of deployment viability. The ROI–Efficiency quadrant (see Fig. <a href="#S4.F3.sf1" title="In Figure 3 ‣ 4.2 Evaluation Metrics ‣ 4 Experimental Setup ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3(a)</span></a>) reveals a pronounced efficiency frontier, where LLaMa-3.2-1B occupies the top-left region—achieving rapid break-even (median: 14 requests) while sustaining up to <math id="S5.SS2.p1.1.m1" class="ltx_math_unparsed" alttext="3\times" display="inline" intent=":literal"><semantics><mrow><mn>3</mn><mo lspace="0.222em">×</mo></mrow><annotation encoding="application/x-tex">3\times</annotation></semantics></math> higher intelligence-per-watt than 7B baselines—indicating that compact models maximize both capital recovery speed and energy-normalized reasoning. The infrastructure density analysis (see Fig. <a href="#S4.F3.sf2" title="In Figure 3 ‣ 4.2 Evaluation Metrics ‣ 4 Experimental Setup ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3(b)</span></a>) further demonstrates a hardware multiplier effect: INT4-quantized 1B models exceed <math id="S5.SS2.p1.2.m2" class="ltx_Math" alttext="6{,}900" display="inline" intent=":literal"><semantics><mrow><mn>6</mn><mo>,</mo><mn>900</mn></mrow><annotation encoding="application/x-tex">6{,}900</annotation></semantics></math> tokens/s/GB, representing up to <math id="S5.SS2.p1.3.m3" class="ltx_math_unparsed" alttext="17\times" display="inline" intent=":literal"><semantics><mrow><mn>17</mn><mo lspace="0.222em">×</mo></mrow><annotation encoding="application/x-tex">17\times</annotation></semantics></math> higher service capacity relative to 7B variants, thereby transforming legacy Tesla T4 accelerators into high-throughput inference nodes. Finally, the quality–stability trade-off (see Fig. <a href="#S4.F3.sf3" title="In Figure 3 ‣ 4.2 Evaluation Metrics ‣ 4 Experimental Setup ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3(c)</span></a>) shows that LLaMa models maintain near-perfect quantization fidelity (99%–101%) with controlled variance shifts, whereas larger and denser configurations exhibit increased output instability, particularly in conversational settings.</p>
+</div>
+<figure id="S5.T3" class="ltx_table">
+<div id="S5.T3.3" class="ltx_inline-block ltx_align_center ltx_transformed_outer" style="width:433.6pt;height:95.5pt;vertical-align:-45.0pt;"><span class="ltx_transformed_inner" style="transform:translate(21.6pt,-4.8pt) scale(1.11059593528356,1.11059593528356) ;">
+<table id="S5.T3.3.1" class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S5.T3.3.1.1.1" class="ltx_tr">
+<th id="S5.T3.3.1.1.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt"><span id="S5.T3.3.1.1.1.1.1" class="ltx_text ltx_font_bold">Family</span></th>
+<th id="S5.T3.3.1.1.1.2" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt"><span id="S5.T3.3.1.1.1.2.1" class="ltx_text ltx_font_bold">Size</span></th>
+<th id="S5.T3.3.1.1.1.3" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S5.T3.3.1.1.1.3.1" class="ltx_text ltx_font_bold">Precision</span></th>
+<th id="S5.T3.3.1.1.1.4" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S5.T3.3.1.1.1.4.1" class="ltx_text ltx_font_bold">Throughput</span></th>
+<th id="S5.T3.3.1.1.1.5" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S5.T3.3.1.1.1.5.1" class="ltx_text ltx_font_bold">Speedup</span></th>
+<th id="S5.T3.3.1.1.1.6" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S5.T3.3.1.1.1.6.1" class="ltx_text ltx_font_bold">Energy/req</span></th>
+<th id="S5.T3.3.1.1.1.7" class="ltx_td ltx_nopad_r ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S5.T3.3.1.1.1.7.1" class="ltx_text ltx_font_bold">Savings</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S5.T3.3.1.2.1" class="ltx_tr">
+<th id="S5.T3.3.1.2.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">LLaMa 3.2</th>
+<th id="S5.T3.3.1.2.1.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">1B</th>
+<td id="S5.T3.3.1.2.1.3" class="ltx_td ltx_align_center ltx_border_t">FP16</td>
+<td id="S5.T3.3.1.2.1.4" class="ltx_td ltx_align_center ltx_border_t">2,235</td>
+<td id="S5.T3.3.1.2.1.5" class="ltx_td ltx_align_center ltx_border_t">1.0x</td>
+<td id="S5.T3.3.1.2.1.6" class="ltx_td ltx_align_center ltx_border_t">6.45 J</td>
+<td id="S5.T3.3.1.2.1.7" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">-</td>
+</tr>
+<tr id="S5.T3.3.1.3.2" class="ltx_tr">
+<th id="S5.T3.3.1.3.2.1" class="ltx_td ltx_th ltx_th_row"></th>
+<th id="S5.T3.3.1.3.2.2" class="ltx_td ltx_th ltx_th_row"></th>
+<td id="S5.T3.3.1.3.2.3" class="ltx_td ltx_align_center"><span id="S5.T3.3.1.3.2.3.1" class="ltx_text ltx_font_bold">INT4</span></td>
+<td id="S5.T3.3.1.3.2.4" class="ltx_td ltx_align_center"><span id="S5.T3.3.1.3.2.4.1" class="ltx_text ltx_font_bold">4,331</span></td>
+<td id="S5.T3.3.1.3.2.5" class="ltx_td ltx_align_center"><span id="S5.T3.3.1.3.2.5.1" class="ltx_text ltx_font_bold">1.94x</span></td>
+<td id="S5.T3.3.1.3.2.6" class="ltx_td ltx_align_center"><span id="S5.T3.3.1.3.2.6.1" class="ltx_text ltx_font_bold">2.50 J</span></td>
+<td id="S5.T3.3.1.3.2.7" class="ltx_td ltx_nopad_r ltx_align_center"><span id="S5.T3.3.1.3.2.7.1" class="ltx_text ltx_font_bold">61%</span></td>
+</tr>
+<tr id="S5.T3.3.1.4.3" class="ltx_tr">
+<th id="S5.T3.3.1.4.3.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">LLaMa 3.2</th>
+<th id="S5.T3.3.1.4.3.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">3B</th>
+<td id="S5.T3.3.1.4.3.3" class="ltx_td ltx_align_center ltx_border_t">FP16</td>
+<td id="S5.T3.3.1.4.3.4" class="ltx_td ltx_align_center ltx_border_t">1,374</td>
+<td id="S5.T3.3.1.4.3.5" class="ltx_td ltx_align_center ltx_border_t">1.0x</td>
+<td id="S5.T3.3.1.4.3.6" class="ltx_td ltx_align_center ltx_border_t">12.67 J</td>
+<td id="S5.T3.3.1.4.3.7" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">-</td>
+</tr>
+<tr id="S5.T3.3.1.5.4" class="ltx_tr">
+<th id="S5.T3.3.1.5.4.1" class="ltx_td ltx_th ltx_th_row"></th>
+<th id="S5.T3.3.1.5.4.2" class="ltx_td ltx_th ltx_th_row"></th>
+<td id="S5.T3.3.1.5.4.3" class="ltx_td ltx_align_center"><span id="S5.T3.3.1.5.4.3.1" class="ltx_text ltx_font_bold">INT4</span></td>
+<td id="S5.T3.3.1.5.4.4" class="ltx_td ltx_align_center"><span id="S5.T3.3.1.5.4.4.1" class="ltx_text ltx_font_bold">2,506</span></td>
+<td id="S5.T3.3.1.5.4.5" class="ltx_td ltx_align_center"><span id="S5.T3.3.1.5.4.5.1" class="ltx_text ltx_font_bold">1.82x</span></td>
+<td id="S5.T3.3.1.5.4.6" class="ltx_td ltx_align_center"><span id="S5.T3.3.1.5.4.6.1" class="ltx_text ltx_font_bold">5.39 J</span></td>
+<td id="S5.T3.3.1.5.4.7" class="ltx_td ltx_nopad_r ltx_align_center"><span id="S5.T3.3.1.5.4.7.1" class="ltx_text ltx_font_bold">57%</span></td>
+</tr>
+<tr id="S5.T3.3.1.6.5" class="ltx_tr">
+<th id="S5.T3.3.1.6.5.1" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">Qwen 2.5</th>
+<th id="S5.T3.3.1.6.5.2" class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t">7B</th>
+<td id="S5.T3.3.1.6.5.3" class="ltx_td ltx_align_center ltx_border_t">FP16</td>
+<td id="S5.T3.3.1.6.5.4" class="ltx_td ltx_align_center ltx_border_t">948</td>
+<td id="S5.T3.3.1.6.5.5" class="ltx_td ltx_align_center ltx_border_t">1.0x</td>
+<td id="S5.T3.3.1.6.5.6" class="ltx_td ltx_align_center ltx_border_t">20.68 J</td>
+<td id="S5.T3.3.1.6.5.7" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">-</td>
+</tr>
+<tr id="S5.T3.3.1.7.6" class="ltx_tr">
+<th id="S5.T3.3.1.7.6.1" class="ltx_td ltx_th ltx_th_row ltx_border_bb"></th>
+<th id="S5.T3.3.1.7.6.2" class="ltx_td ltx_th ltx_th_row ltx_border_bb"></th>
+<td id="S5.T3.3.1.7.6.3" class="ltx_td ltx_align_center ltx_border_bb"><span id="S5.T3.3.1.7.6.3.1" class="ltx_text ltx_font_bold">INT4</span></td>
+<td id="S5.T3.3.1.7.6.4" class="ltx_td ltx_align_center ltx_border_bb"><span id="S5.T3.3.1.7.6.4.1" class="ltx_text ltx_font_bold">1,723</span></td>
+<td id="S5.T3.3.1.7.6.5" class="ltx_td ltx_align_center ltx_border_bb"><span id="S5.T3.3.1.7.6.5.1" class="ltx_text ltx_font_bold">1.82x</span></td>
+<td id="S5.T3.3.1.7.6.6" class="ltx_td ltx_align_center ltx_border_bb"><span id="S5.T3.3.1.7.6.6.1" class="ltx_text ltx_font_bold">8.90 J</span></td>
+<td id="S5.T3.3.1.7.6.7" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_bb"><span id="S5.T3.3.1.7.6.7.1" class="ltx_text ltx_font_bold">57%</span></td>
+</tr>
+</tbody>
+</table>
+</span></div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 3: </span>Inference efficiency under INT4 on Tesla T4–1.8–1.9<math id="S5.T3.2.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math> throughput gains and 57%–61% energy reduction versus FP16 (median over 20 runs, three tasks), confirming low-bit inference as a hardware multiplier under constrained infrastructure.</figcaption>
+</figure>
+<figure id="S5.T4" class="ltx_table">
+<div id="S5.T4.19" class="ltx_inline-block ltx_align_center ltx_transformed_outer" style="width:433.6pt;height:111.5pt;vertical-align:-52.5pt;"><span class="ltx_transformed_inner" style="transform:translate(50.4pt,-13.0pt) scale(1.30260061563589,1.30260061563589) ;">
+<table id="S5.T4.19.19" class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S5.T4.1.1.1" class="ltx_tr">
+<th id="S5.T4.1.1.1.2" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt"><span id="S5.T4.1.1.1.2.1" class="ltx_text ltx_font_bold">Family</span></th>
+<th id="S5.T4.1.1.1.3" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt"><span id="S5.T4.1.1.1.3.1" class="ltx_text ltx_font_bold">Task</span></th>
+<th id="S5.T4.1.1.1.4" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S5.T4.1.1.1.4.1" class="ltx_text ltx_font_bold">FP16 Score</span></th>
+<th id="S5.T4.1.1.1.5" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S5.T4.1.1.1.5.1" class="ltx_text ltx_font_bold">INT4 Score</span></th>
+<th id="S5.T4.1.1.1.6" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S5.T4.1.1.1.6.1" class="ltx_text ltx_font_bold">Retention</span></th>
+<th id="S5.T4.1.1.1.1" class="ltx_td ltx_nopad_r ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S5.T4.1.1.1.1.1" class="ltx_text ltx_font_bold">STD <math id="S5.T4.1.1.1.1.1.m1" class="ltx_Math" alttext="\Delta" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Δ</mi><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S5.T4.4.4.4" class="ltx_tr">
+<td id="S5.T4.4.4.4.4" class="ltx_td ltx_align_left ltx_border_t"><span id="S5.T4.4.4.4.4.1" class="ltx_text ltx_font_bold">LLaMa</span></td>
+<td id="S5.T4.4.4.4.5" class="ltx_td ltx_align_left ltx_border_t">Chat</td>
+<td id="S5.T4.2.2.2.1" class="ltx_td ltx_align_center ltx_border_t"><math id="S5.T4.2.2.2.1.m1" class="ltx_Math" alttext="7.31\pm 0.04" display="inline" intent=":literal"><semantics><mrow><mn>7.31</mn><mo>±</mo><mn>0.04</mn></mrow><annotation encoding="application/x-tex">7.31\pm 0.04</annotation></semantics></math></td>
+<td id="S5.T4.3.3.3.2" class="ltx_td ltx_align_center ltx_border_t"><math id="S5.T4.3.3.3.2.m1" class="ltx_Math" alttext="7.32\pm 0.04" display="inline" intent=":literal"><semantics><mrow><mn>7.32</mn><mo>±</mo><mn>0.04</mn></mrow><annotation encoding="application/x-tex">7.32\pm 0.04</annotation></semantics></math></td>
+<td id="S5.T4.4.4.4.6" class="ltx_td ltx_align_center ltx_border_t"><span id="S5.T4.4.4.4.6.1" class="ltx_text ltx_font_bold">100.1%</span></td>
+<td id="S5.T4.4.4.4.3" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t"><math id="S5.T4.4.4.4.3.m1" class="ltx_Math" alttext="-6.1\%" display="inline" intent=":literal"><semantics><mrow><mo>−</mo><mrow><mn>6.1</mn><mo>%</mo></mrow></mrow><annotation encoding="application/x-tex">-6.1\%</annotation></semantics></math></td>
+</tr>
+<tr id="S5.T4.7.7.7" class="ltx_tr">
+<td id="S5.T4.7.7.7.4" class="ltx_td"></td>
+<td id="S5.T4.7.7.7.5" class="ltx_td ltx_align_left">RAG</td>
+<td id="S5.T4.5.5.5.1" class="ltx_td ltx_align_center"><math id="S5.T4.5.5.5.1.m1" class="ltx_Math" alttext="0.75\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.75</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.75\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T4.6.6.6.2" class="ltx_td ltx_align_center"><math id="S5.T4.6.6.6.2.m1" class="ltx_Math" alttext="0.75\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.75</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.75\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T4.7.7.7.6" class="ltx_td ltx_align_center"><span id="S5.T4.7.7.7.6.1" class="ltx_text ltx_font_bold">100.4%</span></td>
+<td id="S5.T4.7.7.7.3" class="ltx_td ltx_nopad_r ltx_align_center"><math id="S5.T4.7.7.7.3.m1" class="ltx_Math" alttext="+65.9\%" display="inline" intent=":literal"><semantics><mrow><mo style="--ltx-fg-color:#FF0000;" mathcolor="#FF0000">+</mo><mrow><mn style="--ltx-fg-color:#FF0000;" mathcolor="#FF0000">65.9</mn><mo style="--ltx-fg-color:#FF0000;" mathcolor="#FF0000">%</mo></mrow></mrow><annotation encoding="application/x-tex">+65.9\%</annotation></semantics></math></td>
+</tr>
+<tr id="S5.T4.10.10.10" class="ltx_tr">
+<td id="S5.T4.10.10.10.4" class="ltx_td"></td>
+<td id="S5.T4.10.10.10.5" class="ltx_td ltx_align_left">Summ</td>
+<td id="S5.T4.8.8.8.1" class="ltx_td ltx_align_center"><math id="S5.T4.8.8.8.1.m1" class="ltx_Math" alttext="0.86\pm 0.02" display="inline" intent=":literal"><semantics><mrow><mn>0.86</mn><mo>±</mo><mn>0.02</mn></mrow><annotation encoding="application/x-tex">0.86\pm 0.02</annotation></semantics></math></td>
+<td id="S5.T4.9.9.9.2" class="ltx_td ltx_align_center"><math id="S5.T4.9.9.9.2.m1" class="ltx_Math" alttext="0.85\pm 0.02" display="inline" intent=":literal"><semantics><mrow><mn>0.85</mn><mo>±</mo><mn>0.02</mn></mrow><annotation encoding="application/x-tex">0.85\pm 0.02</annotation></semantics></math></td>
+<td id="S5.T4.10.10.10.6" class="ltx_td ltx_align_center">98.6%</td>
+<td id="S5.T4.10.10.10.3" class="ltx_td ltx_nopad_r ltx_align_center"><math id="S5.T4.10.10.10.3.m1" class="ltx_Math" alttext="-9.7\%" display="inline" intent=":literal"><semantics><mrow><mo>−</mo><mrow><mn>9.7</mn><mo>%</mo></mrow></mrow><annotation encoding="application/x-tex">-9.7\%</annotation></semantics></math></td>
+</tr>
+<tr id="S5.T4.13.13.13" class="ltx_tr">
+<td id="S5.T4.13.13.13.4" class="ltx_td ltx_align_left ltx_border_t"><span id="S5.T4.13.13.13.4.1" class="ltx_text ltx_font_bold">Qwen</span></td>
+<td id="S5.T4.13.13.13.5" class="ltx_td ltx_align_left ltx_border_t">Chat</td>
+<td id="S5.T4.11.11.11.1" class="ltx_td ltx_align_center ltx_border_t"><math id="S5.T4.11.11.11.1.m1" class="ltx_Math" alttext="7.42\pm 0.10" display="inline" intent=":literal"><semantics><mrow><mn>7.42</mn><mo>±</mo><mn>0.10</mn></mrow><annotation encoding="application/x-tex">7.42\pm 0.10</annotation></semantics></math></td>
+<td id="S5.T4.12.12.12.2" class="ltx_td ltx_align_center ltx_border_t"><math id="S5.T4.12.12.12.2.m1" class="ltx_Math" alttext="7.25\pm 0.14" display="inline" intent=":literal"><semantics><mrow><mn>7.25</mn><mo>±</mo><mn>0.14</mn></mrow><annotation encoding="application/x-tex">7.25\pm 0.14</annotation></semantics></math></td>
+<td id="S5.T4.13.13.13.6" class="ltx_td ltx_align_center ltx_border_t">97.7%</td>
+<td id="S5.T4.13.13.13.3" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t"><math id="S5.T4.13.13.13.3.m1" class="ltx_Math" alttext="+45.6\%" display="inline" intent=":literal"><semantics><mrow><mo>+</mo><mrow><mn>45.6</mn><mo>%</mo></mrow></mrow><annotation encoding="application/x-tex">+45.6\%</annotation></semantics></math></td>
+</tr>
+<tr id="S5.T4.16.16.16" class="ltx_tr">
+<td id="S5.T4.16.16.16.4" class="ltx_td"></td>
+<td id="S5.T4.16.16.16.5" class="ltx_td ltx_align_left">RAG</td>
+<td id="S5.T4.14.14.14.1" class="ltx_td ltx_align_center"><math id="S5.T4.14.14.14.1.m1" class="ltx_Math" alttext="0.77\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.77</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.77\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T4.15.15.15.2" class="ltx_td ltx_align_center"><math id="S5.T4.15.15.15.2.m1" class="ltx_Math" alttext="0.76\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.76</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.76\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T4.16.16.16.6" class="ltx_td ltx_align_center">98.7%</td>
+<td id="S5.T4.16.16.16.3" class="ltx_td ltx_nopad_r ltx_align_center"><math id="S5.T4.16.16.16.3.m1" class="ltx_Math" alttext="+20.5\%" display="inline" intent=":literal"><semantics><mrow><mo>+</mo><mrow><mn>20.5</mn><mo>%</mo></mrow></mrow><annotation encoding="application/x-tex">+20.5\%</annotation></semantics></math></td>
+</tr>
+<tr id="S5.T4.19.19.19" class="ltx_tr">
+<td id="S5.T4.19.19.19.4" class="ltx_td ltx_border_bb"></td>
+<td id="S5.T4.19.19.19.5" class="ltx_td ltx_align_left ltx_border_bb">Summ</td>
+<td id="S5.T4.17.17.17.1" class="ltx_td ltx_align_center ltx_border_bb"><math id="S5.T4.17.17.17.1.m1" class="ltx_Math" alttext="0.84\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.84</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.84\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T4.18.18.18.2" class="ltx_td ltx_align_center ltx_border_bb"><math id="S5.T4.18.18.18.2.m1" class="ltx_Math" alttext="0.85\pm 0.02" display="inline" intent=":literal"><semantics><mrow><mn>0.85</mn><mo>±</mo><mn>0.02</mn></mrow><annotation encoding="application/x-tex">0.85\pm 0.02</annotation></semantics></math></td>
+<td id="S5.T4.19.19.19.6" class="ltx_td ltx_align_center ltx_border_bb"><span id="S5.T4.19.19.19.6.1" class="ltx_text ltx_font_bold">100.2%</span></td>
+<td id="S5.T4.19.19.19.3" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_bb"><math id="S5.T4.19.19.19.3.m1" class="ltx_Math" alttext="+25.3\%" display="inline" intent=":literal"><semantics><mrow><mo>+</mo><mrow><mn>25.3</mn><mo>%</mo></mrow></mrow><annotation encoding="application/x-tex">+25.3\%</annotation></semantics></math></td>
+</tr>
+</tbody>
+</table>
+</span></div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 4: </span>Quantization fidelity under INT4 across 400 evaluation runs per task (20<math id="S5.T4.23.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>20). Retention = (INT4/FP16)<math id="S5.T4.24.m2" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math>100% and STD <math id="S5.T4.25.m3" class="ltx_Math" alttext="\Delta" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Δ</mi><annotation encoding="application/x-tex">\Delta</annotation></semantics></math> captures variance shift, showing near-lossless retention for compact models with architecture-dependent stability sensitivity.</figcaption>
+</figure>
+<figure id="S5.T5" class="ltx_table">
+<div id="S5.T5.39" class="ltx_inline-block ltx_align_center ltx_transformed_outer" style="width:433.6pt;height:272.2pt;vertical-align:-133.2pt;"><span class="ltx_transformed_inner" style="transform:translate(32.3pt,-20.3pt) scale(1.17523419929651,1.17523419929651) ;">
+<table id="S5.T5.39.39" class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S5.T5.39.39.40.1" class="ltx_tr">
+<th id="S5.T5.39.39.40.1.1" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt"><span id="S5.T5.39.39.40.1.1.1" class="ltx_text ltx_font_bold">Task</span></th>
+<th id="S5.T5.39.39.40.1.2" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt"><span id="S5.T5.39.39.40.1.2.1" class="ltx_text ltx_font_bold">Metric</span></th>
+<th id="S5.T5.39.39.40.1.3" class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_border_tt"><span id="S5.T5.39.39.40.1.3.1" class="ltx_text ltx_font_bold">Family</span></th>
+<th id="S5.T5.39.39.40.1.4" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S5.T5.39.39.40.1.4.1" class="ltx_text ltx_font_bold">Size</span></th>
+<th id="S5.T5.39.39.40.1.5" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S5.T5.39.39.40.1.5.1" class="ltx_text ltx_font_bold">FP16</span></th>
+<th id="S5.T5.39.39.40.1.6" class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S5.T5.39.39.40.1.6.1" class="ltx_text ltx_font_bold">INT4</span></th>
+<th id="S5.T5.39.39.40.1.7" class="ltx_td ltx_nopad_r ltx_align_center ltx_th ltx_th_column ltx_border_tt"><span id="S5.T5.39.39.40.1.7.1" class="ltx_text ltx_font_bold">Retention</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S5.T5.2.2.2" class="ltx_tr">
+<td id="S5.T5.2.2.2.3" class="ltx_td ltx_align_left ltx_border_t" rowspan="6"><span id="S5.T5.2.2.2.3.1" class="ltx_text">Chat</span></td>
+<td id="S5.T5.2.2.2.4" class="ltx_td ltx_align_left ltx_border_t" rowspan="6"><span id="S5.T5.2.2.2.4.1" class="ltx_text">
+<span id="S5.T5.2.2.2.4.1.1" class="ltx_tabular ltx_align_middle">
+<span id="S5.T5.2.2.2.4.1.1.1" class="ltx_tr">
+<span id="S5.T5.2.2.2.4.1.1.1.1" class="ltx_td ltx_nopad_r ltx_align_left">Helpfulness</span></span>
+<span id="S5.T5.2.2.2.4.1.1.2" class="ltx_tr">
+<span id="S5.T5.2.2.2.4.1.1.2.1" class="ltx_td ltx_nopad_r ltx_align_left">(1-10)</span></span>
+</span></span></td>
+<td id="S5.T5.2.2.2.5" class="ltx_td ltx_border_t"></td>
+<td id="S5.T5.2.2.2.6" class="ltx_td ltx_align_center ltx_border_t"><span id="S5.T5.2.2.2.6.1" class="ltx_text ltx_font_bold">1B</span></td>
+<td id="S5.T5.1.1.1.1" class="ltx_td ltx_align_center ltx_border_t"><math id="S5.T5.1.1.1.1.m1" class="ltx_Math" alttext="6.67\pm 0.08" display="inline" intent=":literal"><semantics><mrow><mn>6.67</mn><mo>±</mo><mn>0.08</mn></mrow><annotation encoding="application/x-tex">6.67\pm 0.08</annotation></semantics></math></td>
+<td id="S5.T5.2.2.2.2" class="ltx_td ltx_align_center ltx_border_t"><math id="S5.T5.2.2.2.2.m1" class="ltx_Math" alttext="6.72\pm 0.05" display="inline" intent=":literal"><semantics><mrow><mn>6.72</mn><mo>±</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">6.72\pm 0.05</annotation></semantics></math></td>
+<td id="S5.T5.2.2.2.7" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t"><span id="S5.T5.2.2.2.7.1" class="ltx_text" style="--ltx-fg-color:#009900;">+0.8%</span></td>
+</tr>
+<tr id="S5.T5.4.4.4" class="ltx_tr">
+<td id="S5.T5.4.4.4.3" class="ltx_td ltx_align_left"><span id="S5.T5.4.4.4.3.1" class="ltx_text ltx_font_bold">LLaMa</span></td>
+<td id="S5.T5.4.4.4.4" class="ltx_td ltx_align_center">3B</td>
+<td id="S5.T5.3.3.3.1" class="ltx_td ltx_align_center"><math id="S5.T5.3.3.3.1.m1" class="ltx_Math" alttext="7.58\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>7.58</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">7.58\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.4.4.4.2" class="ltx_td ltx_align_center"><math id="S5.T5.4.4.4.2.m1" class="ltx_Math" alttext="7.57\pm 0.04" display="inline" intent=":literal"><semantics><mrow><mn>7.57</mn><mo>±</mo><mn>0.04</mn></mrow><annotation encoding="application/x-tex">7.57\pm 0.04</annotation></semantics></math></td>
+<td id="S5.T5.4.4.4.5" class="ltx_td ltx_nopad_r ltx_align_center">-0.2%</td>
+</tr>
+<tr id="S5.T5.6.6.6" class="ltx_tr">
+<td id="S5.T5.6.6.6.3" class="ltx_td"></td>
+<td id="S5.T5.6.6.6.4" class="ltx_td ltx_align_center">7B</td>
+<td id="S5.T5.5.5.5.1" class="ltx_td ltx_align_center"><math id="S5.T5.5.5.5.1.m1" class="ltx_Math" alttext="7.68\pm 0.02" display="inline" intent=":literal"><semantics><mrow><mn>7.68</mn><mo>±</mo><mn>0.02</mn></mrow><annotation encoding="application/x-tex">7.68\pm 0.02</annotation></semantics></math></td>
+<td id="S5.T5.6.6.6.2" class="ltx_td ltx_align_center"><math id="S5.T5.6.6.6.2.m1" class="ltx_Math" alttext="7.67\pm 0.03" display="inline" intent=":literal"><semantics><mrow><mn>7.67</mn><mo>±</mo><mn>0.03</mn></mrow><annotation encoding="application/x-tex">7.67\pm 0.03</annotation></semantics></math></td>
+<td id="S5.T5.6.6.6.5" class="ltx_td ltx_nopad_r ltx_align_center">-0.1%</td>
+</tr>
+<tr id="S5.T5.8.8.8" class="ltx_tr">
+<td id="S5.T5.8.8.8.3" class="ltx_td ltx_border_t"></td>
+<td id="S5.T5.8.8.8.4" class="ltx_td ltx_align_center ltx_border_t">1B</td>
+<td id="S5.T5.7.7.7.1" class="ltx_td ltx_align_center ltx_border_t"><math id="S5.T5.7.7.7.1.m1" class="ltx_Math" alttext="7.19\pm 0.16" display="inline" intent=":literal"><semantics><mrow><mn>7.19</mn><mo>±</mo><mn>0.16</mn></mrow><annotation encoding="application/x-tex">7.19\pm 0.16</annotation></semantics></math></td>
+<td id="S5.T5.8.8.8.2" class="ltx_td ltx_align_center ltx_border_t"><math id="S5.T5.8.8.8.2.m1" class="ltx_Math" alttext="7.34\pm 0.17" display="inline" intent=":literal"><semantics><mrow><mn>7.34</mn><mo>±</mo><mn>0.17</mn></mrow><annotation encoding="application/x-tex">7.34\pm 0.17</annotation></semantics></math></td>
+<td id="S5.T5.8.8.8.5" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">+2.0%</td>
+</tr>
+<tr id="S5.T5.10.10.10" class="ltx_tr">
+<td id="S5.T5.10.10.10.3" class="ltx_td ltx_align_left">Qwen</td>
+<td id="S5.T5.10.10.10.4" class="ltx_td ltx_align_center">3B</td>
+<td id="S5.T5.9.9.9.1" class="ltx_td ltx_align_center"><math id="S5.T5.9.9.9.1.m1" class="ltx_Math" alttext="7.46\pm 0.07" display="inline" intent=":literal"><semantics><mrow><mn>7.46</mn><mo>±</mo><mn>0.07</mn></mrow><annotation encoding="application/x-tex">7.46\pm 0.07</annotation></semantics></math></td>
+<td id="S5.T5.10.10.10.2" class="ltx_td ltx_align_center"><math id="S5.T5.10.10.10.2.m1" class="ltx_Math" alttext="6.75\pm 0.23" display="inline" intent=":literal"><semantics><mrow><mn>6.75</mn><mo>±</mo><mn>0.23</mn></mrow><annotation encoding="application/x-tex">6.75\pm 0.23</annotation></semantics></math></td>
+<td id="S5.T5.10.10.10.5" class="ltx_td ltx_nopad_r ltx_align_center"><span id="S5.T5.10.10.10.5.1" class="ltx_text ltx_font_bold" style="--ltx-fg-color:#FF0000;">-9.5%</span></td>
+</tr>
+<tr id="S5.T5.12.12.12" class="ltx_tr">
+<td id="S5.T5.12.12.12.3" class="ltx_td"></td>
+<td id="S5.T5.12.12.12.4" class="ltx_td ltx_align_center">7B</td>
+<td id="S5.T5.11.11.11.1" class="ltx_td ltx_align_center"><math id="S5.T5.11.11.11.1.m1" class="ltx_Math" alttext="7.62\pm 0.06" display="inline" intent=":literal"><semantics><mrow><mn>7.62</mn><mo>±</mo><mn>0.06</mn></mrow><annotation encoding="application/x-tex">7.62\pm 0.06</annotation></semantics></math></td>
+<td id="S5.T5.12.12.12.2" class="ltx_td ltx_align_center"><math id="S5.T5.12.12.12.2.m1" class="ltx_Math" alttext="7.66\pm 0.02" display="inline" intent=":literal"><semantics><mrow><mn>7.66</mn><mo>±</mo><mn>0.02</mn></mrow><annotation encoding="application/x-tex">7.66\pm 0.02</annotation></semantics></math></td>
+<td id="S5.T5.12.12.12.5" class="ltx_td ltx_nopad_r ltx_align_center">+0.6%</td>
+</tr>
+<tr id="S5.T5.14.14.14" class="ltx_tr">
+<td id="S5.T5.14.14.14.3" class="ltx_td ltx_align_left ltx_border_t" rowspan="6"><span id="S5.T5.14.14.14.3.1" class="ltx_text">RAG</span></td>
+<td id="S5.T5.14.14.14.4" class="ltx_td ltx_align_left ltx_border_t" rowspan="6"><span id="S5.T5.14.14.14.4.1" class="ltx_text">
+<span id="S5.T5.14.14.14.4.1.1" class="ltx_tabular ltx_align_middle">
+<span id="S5.T5.14.14.14.4.1.1.1" class="ltx_tr">
+<span id="S5.T5.14.14.14.4.1.1.1.1" class="ltx_td ltx_nopad_r ltx_align_left">Entailment</span></span>
+<span id="S5.T5.14.14.14.4.1.1.2" class="ltx_tr">
+<span id="S5.T5.14.14.14.4.1.1.2.1" class="ltx_td ltx_nopad_r ltx_align_left">(0-1)</span></span>
+</span></span></td>
+<td id="S5.T5.14.14.14.5" class="ltx_td ltx_border_t"></td>
+<td id="S5.T5.14.14.14.6" class="ltx_td ltx_align_center ltx_border_t"><span id="S5.T5.14.14.14.6.1" class="ltx_text ltx_font_bold">1B</span></td>
+<td id="S5.T5.13.13.13.1" class="ltx_td ltx_align_center ltx_border_t"><math id="S5.T5.13.13.13.1.m1" class="ltx_Math" alttext="0.74\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.74</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.74\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.14.14.14.2" class="ltx_td ltx_align_center ltx_border_t"><math id="S5.T5.14.14.14.2.m1" class="ltx_Math" alttext="0.76\pm 0.02" display="inline" intent=":literal"><semantics><mrow><mn>0.76</mn><mo>±</mo><mn>0.02</mn></mrow><annotation encoding="application/x-tex">0.76\pm 0.02</annotation></semantics></math></td>
+<td id="S5.T5.14.14.14.7" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">+2.7%</td>
+</tr>
+<tr id="S5.T5.17.17.17" class="ltx_tr">
+<td id="S5.T5.17.17.17.4" class="ltx_td ltx_align_left"><span id="S5.T5.17.17.17.4.1" class="ltx_text ltx_font_bold">LLaMa</span></td>
+<td id="S5.T5.17.17.17.5" class="ltx_td ltx_align_center">3B</td>
+<td id="S5.T5.15.15.15.1" class="ltx_td ltx_align_center"><math id="S5.T5.15.15.15.1.m1" class="ltx_Math" alttext="0.77\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.77</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.77\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.16.16.16.2" class="ltx_td ltx_align_center"><math id="S5.T5.16.16.16.2.m1" class="ltx_Math" alttext="0.77\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.77</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.77\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.17.17.17.3" class="ltx_td ltx_nopad_r ltx_align_center"><math id="S5.T5.17.17.17.3.m1" class="ltx_Math" alttext="\pm 0.0\%" display="inline" intent=":literal"><semantics><mrow><mo>±</mo><mrow><mn>0.0</mn><mo>%</mo></mrow></mrow><annotation encoding="application/x-tex">\pm 0.0\%</annotation></semantics></math></td>
+</tr>
+<tr id="S5.T5.19.19.19" class="ltx_tr">
+<td id="S5.T5.19.19.19.3" class="ltx_td"></td>
+<td id="S5.T5.19.19.19.4" class="ltx_td ltx_align_center">7B</td>
+<td id="S5.T5.18.18.18.1" class="ltx_td ltx_align_center"><math id="S5.T5.18.18.18.1.m1" class="ltx_Math" alttext="0.74\pm 0.00" display="inline" intent=":literal"><semantics><mrow><mn>0.74</mn><mo>±</mo><mn>0.00</mn></mrow><annotation encoding="application/x-tex">0.74\pm 0.00</annotation></semantics></math></td>
+<td id="S5.T5.19.19.19.2" class="ltx_td ltx_align_center"><math id="S5.T5.19.19.19.2.m1" class="ltx_Math" alttext="0.73\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.73</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.73\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.19.19.19.5" class="ltx_td ltx_nopad_r ltx_align_center">-1.4%</td>
+</tr>
+<tr id="S5.T5.21.21.21" class="ltx_tr">
+<td id="S5.T5.21.21.21.3" class="ltx_td ltx_border_t"></td>
+<td id="S5.T5.21.21.21.4" class="ltx_td ltx_align_center ltx_border_t">1B</td>
+<td id="S5.T5.20.20.20.1" class="ltx_td ltx_align_center ltx_border_t"><math id="S5.T5.20.20.20.1.m1" class="ltx_Math" alttext="0.76\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.76</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.76\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.21.21.21.2" class="ltx_td ltx_align_center ltx_border_t"><math id="S5.T5.21.21.21.2.m1" class="ltx_Math" alttext="0.75\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.75</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.75\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.21.21.21.5" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">-2.0%</td>
+</tr>
+<tr id="S5.T5.23.23.23" class="ltx_tr">
+<td id="S5.T5.23.23.23.3" class="ltx_td ltx_align_left">Qwen</td>
+<td id="S5.T5.23.23.23.4" class="ltx_td ltx_align_center">3B</td>
+<td id="S5.T5.22.22.22.1" class="ltx_td ltx_align_center"><math id="S5.T5.22.22.22.1.m1" class="ltx_Math" alttext="0.77\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.77</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.77\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.23.23.23.2" class="ltx_td ltx_align_center"><math id="S5.T5.23.23.23.2.m1" class="ltx_Math" alttext="0.77\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.77</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.77\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.23.23.23.5" class="ltx_td ltx_nopad_r ltx_align_center">+0.7%</td>
+</tr>
+<tr id="S5.T5.25.25.25" class="ltx_tr">
+<td id="S5.T5.25.25.25.3" class="ltx_td"></td>
+<td id="S5.T5.25.25.25.4" class="ltx_td ltx_align_center">7B</td>
+<td id="S5.T5.24.24.24.1" class="ltx_td ltx_align_center"><math id="S5.T5.24.24.24.1.m1" class="ltx_Math" alttext="0.79\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.79</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.79\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.25.25.25.2" class="ltx_td ltx_align_center"><math id="S5.T5.25.25.25.2.m1" class="ltx_Math" alttext="0.77\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.77</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.77\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.25.25.25.5" class="ltx_td ltx_nopad_r ltx_align_center">-2.5%</td>
+</tr>
+<tr id="S5.T5.27.27.27" class="ltx_tr">
+<td id="S5.T5.27.27.27.3" class="ltx_td ltx_align_left ltx_border_bb ltx_border_t" rowspan="6"><span id="S5.T5.27.27.27.3.1" class="ltx_text">Summ</span></td>
+<td id="S5.T5.27.27.27.4" class="ltx_td ltx_align_left ltx_border_bb ltx_border_t" rowspan="6"><span id="S5.T5.27.27.27.4.1" class="ltx_text">
+<span id="S5.T5.27.27.27.4.1.1" class="ltx_tabular ltx_align_middle">
+<span id="S5.T5.27.27.27.4.1.1.1" class="ltx_tr">
+<span id="S5.T5.27.27.27.4.1.1.1.1" class="ltx_td ltx_nopad_r ltx_align_left">ROUGE-L</span></span>
+<span id="S5.T5.27.27.27.4.1.1.2" class="ltx_tr">
+<span id="S5.T5.27.27.27.4.1.1.2.1" class="ltx_td ltx_nopad_r ltx_align_left">(0-1)</span></span>
+</span></span></td>
+<td id="S5.T5.27.27.27.5" class="ltx_td ltx_border_t"></td>
+<td id="S5.T5.27.27.27.6" class="ltx_td ltx_align_center ltx_border_t"><span id="S5.T5.27.27.27.6.1" class="ltx_text ltx_font_bold">1B</span></td>
+<td id="S5.T5.26.26.26.1" class="ltx_td ltx_align_center ltx_border_t"><math id="S5.T5.26.26.26.1.m1" class="ltx_Math" alttext="0.77\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.77</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.77\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.27.27.27.2" class="ltx_td ltx_align_center ltx_border_t"><math id="S5.T5.27.27.27.2.m1" class="ltx_Math" alttext="0.76\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.76</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.76\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.27.27.27.7" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t">-0.7%</td>
+</tr>
+<tr id="S5.T5.29.29.29" class="ltx_tr">
+<td id="S5.T5.29.29.29.3" class="ltx_td ltx_align_left"><span id="S5.T5.29.29.29.3.1" class="ltx_text ltx_font_bold">LLaMa</span></td>
+<td id="S5.T5.29.29.29.4" class="ltx_td ltx_align_center">3B</td>
+<td id="S5.T5.28.28.28.1" class="ltx_td ltx_align_center"><math id="S5.T5.28.28.28.1.m1" class="ltx_Math" alttext="0.90\pm 0.03" display="inline" intent=":literal"><semantics><mrow><mn>0.90</mn><mo>±</mo><mn>0.03</mn></mrow><annotation encoding="application/x-tex">0.90\pm 0.03</annotation></semantics></math></td>
+<td id="S5.T5.29.29.29.2" class="ltx_td ltx_align_center"><math id="S5.T5.29.29.29.2.m1" class="ltx_Math" alttext="0.86\pm 0.02" display="inline" intent=":literal"><semantics><mrow><mn>0.86</mn><mo>±</mo><mn>0.02</mn></mrow><annotation encoding="application/x-tex">0.86\pm 0.02</annotation></semantics></math></td>
+<td id="S5.T5.29.29.29.5" class="ltx_td ltx_nopad_r ltx_align_center">-4.4%</td>
+</tr>
+<tr id="S5.T5.31.31.31" class="ltx_tr">
+<td id="S5.T5.31.31.31.3" class="ltx_td"></td>
+<td id="S5.T5.31.31.31.4" class="ltx_td ltx_align_center">7B</td>
+<td id="S5.T5.30.30.30.1" class="ltx_td ltx_align_center"><math id="S5.T5.30.30.30.1.m1" class="ltx_Math" alttext="0.92\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.92</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.92\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.31.31.31.2" class="ltx_td ltx_align_center"><math id="S5.T5.31.31.31.2.m1" class="ltx_Math" alttext="0.93\pm 0.02" display="inline" intent=":literal"><semantics><mrow><mn>0.93</mn><mo>±</mo><mn>0.02</mn></mrow><annotation encoding="application/x-tex">0.93\pm 0.02</annotation></semantics></math></td>
+<td id="S5.T5.31.31.31.5" class="ltx_td ltx_nopad_r ltx_align_center">+1.1%</td>
+</tr>
+<tr id="S5.T5.34.34.34" class="ltx_tr">
+<td id="S5.T5.34.34.34.4" class="ltx_td ltx_border_t"></td>
+<td id="S5.T5.34.34.34.5" class="ltx_td ltx_align_center ltx_border_t">1B</td>
+<td id="S5.T5.32.32.32.1" class="ltx_td ltx_align_center ltx_border_t"><math id="S5.T5.32.32.32.1.m1" class="ltx_Math" alttext="0.79\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.79</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.79\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.33.33.33.2" class="ltx_td ltx_align_center ltx_border_t"><math id="S5.T5.33.33.33.2.m1" class="ltx_Math" alttext="0.79\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.79</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.79\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.34.34.34.3" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t"><math id="S5.T5.34.34.34.3.m1" class="ltx_Math" alttext="\pm 0.0\%" display="inline" intent=":literal"><semantics><mrow><mo>±</mo><mrow><mn>0.0</mn><mo>%</mo></mrow></mrow><annotation encoding="application/x-tex">\pm 0.0\%</annotation></semantics></math></td>
+</tr>
+<tr id="S5.T5.37.37.37" class="ltx_tr">
+<td id="S5.T5.37.37.37.4" class="ltx_td ltx_align_left">Qwen</td>
+<td id="S5.T5.37.37.37.5" class="ltx_td ltx_align_center">3B</td>
+<td id="S5.T5.35.35.35.1" class="ltx_td ltx_align_center"><math id="S5.T5.35.35.35.1.m1" class="ltx_Math" alttext="0.86\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.86</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.86\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.36.36.36.2" class="ltx_td ltx_align_center"><math id="S5.T5.36.36.36.2.m1" class="ltx_Math" alttext="0.86\pm 0.02" display="inline" intent=":literal"><semantics><mrow><mn>0.86</mn><mo>±</mo><mn>0.02</mn></mrow><annotation encoding="application/x-tex">0.86\pm 0.02</annotation></semantics></math></td>
+<td id="S5.T5.37.37.37.3" class="ltx_td ltx_nopad_r ltx_align_center"><math id="S5.T5.37.37.37.3.m1" class="ltx_Math" alttext="\pm 0.0\%" display="inline" intent=":literal"><semantics><mrow><mo>±</mo><mrow><mn>0.0</mn><mo>%</mo></mrow></mrow><annotation encoding="application/x-tex">\pm 0.0\%</annotation></semantics></math></td>
+</tr>
+<tr id="S5.T5.39.39.39" class="ltx_tr">
+<td id="S5.T5.39.39.39.3" class="ltx_td ltx_border_bb"></td>
+<td id="S5.T5.39.39.39.4" class="ltx_td ltx_align_center ltx_border_bb">7B</td>
+<td id="S5.T5.38.38.38.1" class="ltx_td ltx_align_center ltx_border_bb"><math id="S5.T5.38.38.38.1.m1" class="ltx_Math" alttext="0.89\pm 0.01" display="inline" intent=":literal"><semantics><mrow><mn>0.89</mn><mo>±</mo><mn>0.01</mn></mrow><annotation encoding="application/x-tex">0.89\pm 0.01</annotation></semantics></math></td>
+<td id="S5.T5.39.39.39.2" class="ltx_td ltx_align_center ltx_border_bb"><math id="S5.T5.39.39.39.2.m1" class="ltx_Math" alttext="0.89\pm 0.02" display="inline" intent=":literal"><semantics><mrow><mn>0.89</mn><mo>±</mo><mn>0.02</mn></mrow><annotation encoding="application/x-tex">0.89\pm 0.02</annotation></semantics></math></td>
+<td id="S5.T5.39.39.39.5" class="ltx_td ltx_nopad_r ltx_align_center ltx_border_bb">+0.6%</td>
+</tr>
+</tbody>
+</table>
+</span></div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 5: </span>Task-level quality under INT4 vs FP16 across Chat, RAG, and Summarization (400 runs per task). Median <math id="S5.T5.41.m1" class="ltx_Math" alttext="\pm" display="inline" intent=":literal"><semantics><mo>±</mo><annotation encoding="application/x-tex">\pm</annotation></semantics></math> StdDev shows near-baseline retention for compact models, with deviations highlighting task-and architecture-specific sensitivity.</figcaption>
+</figure>
+<figure id="S5.F4" class="ltx_figure">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure id="S5.F4.sf1" class="ltx_figure ltx_figure_panel ltx_align_center"><img src="2604.19342v1/x5.png" id="S5.F4.sf1.g1" class="ltx_graphics ltx_centering ltx_img_square" width="831" height="818" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">(a) </span>Multi-Task Profile</figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure id="S5.F4.sf2" class="ltx_figure ltx_figure_panel ltx_align_center"><img src="2604.19342v1/x6.png" id="S5.F4.sf2.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="830" height="593" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">(b) </span>Pareto Frontier</figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure id="S5.F4.sf3" class="ltx_figure ltx_figure_panel ltx_align_center"><img src="2604.19342v1/x7.png" id="S5.F4.sf3.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="830" height="594" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">(c) </span>Latency Heatmap</figcaption>
+</figure>
+</div>
+<div class="ltx_flex_break"></div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure id="S5.F4.sf4" class="ltx_figure ltx_figure_panel ltx_align_center"><img src="2604.19342v1/x8.png" id="S5.F4.sf4.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="830" height="592" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">(d) </span>Cold-Start Tax</figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure id="S5.F4.sf5" class="ltx_figure ltx_figure_panel ltx_align_center"><img src="2604.19342v1/x9.png" id="S5.F4.sf5.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="830" height="592" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">(e) </span>Quantization Fidelity</figcaption>
+</figure>
+</div>
+<div class="ltx_flex_cell ltx_flex_size_3">
+<figure id="S5.F4.sf6" class="ltx_figure ltx_figure_panel ltx_align_center"><img src="2604.19342v1/x10.png" id="S5.F4.sf6.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="830" height="592" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">(f) </span>Power Stability</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 4: </span>Systems-level deployment landscape on legacy T4 hardware. Compact (<math id="S5.F4.4.m1" class="ltx_Math" alttext="&lt;2" display="inline" intent=":literal"><semantics><mrow><mi></mi><mo>&lt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">&lt;2</annotation></semantics></math>B) INT4 models consistently dominate the efficiency frontier—balancing multi-task performance, Pareto-optimal throughput–energy trade-offs, low latency, <math id="S5.F4.5.m2" class="ltx_Math" alttext="&gt;99\%" display="inline" intent=":literal"><semantics><mrow><mi></mi><mo>&gt;</mo><mrow><mn>99</mn><mo>%</mo></mrow></mrow><annotation encoding="application/x-tex">&gt;99\%</annotation></semantics></math> quantization retention, and stable <math id="S5.F4.6.m3" class="ltx_Math" alttext="\sim" display="inline" intent=":literal"><semantics><mo>∼</mo><annotation encoding="application/x-tex">\sim</annotation></semantics></math>35W power—while larger models remain lifecycle-dominated.</figcaption>
+</figure>
+</section>
+<section id="S5.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.3 </span>Inference and Quality Trade-offs</h3>
+
+<div id="S5.SS3.p1" class="ltx_para">
+<p id="S5.SS3.p1.1" class="ltx_p">Tables <a href="#S5.T3" title="Table 3 ‣ 5.2 Multidimensional Efficiency Dynamics ‣ 5 Result Analysis ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>–<a href="#S5.T5" title="Table 5 ‣ 5.2 Multidimensional Efficiency Dynamics ‣ 5 Result Analysis ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a> jointly characterize the inference–quality balance under INT4 deployment. The Inference Performance Matrix (see Table <a href="#S5.T3" title="Table 3 ‣ 5.2 Multidimensional Efficiency Dynamics ‣ 5 Result Analysis ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>) demonstrates a consistent hardware multiplier effect–INT4 nearly doubles throughput (1.82-1.94<math id="S5.SS3.p1.1.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math> speedup) while reducing per-request energy by 57%–61%, confirming that low-bit inference materially improves energy-normalized service capacity on Tesla T4 hardware. Therefore, these efficiency gains do not systematically degrade task quality. As shown in Table <a href="#S5.T4" title="Table 4 ‣ 5.2 Multidimensional Efficiency Dynamics ‣ 5 Result Analysis ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>, LLaMa models retain 99%–101% performance across tasks with tightly controlled variance, whereas Qwen exhibits greater instability in conversational settings (+45.6% standard deviation shift), indicating model-dependent quantization sensitivity. The comprehensive benchmark in Table <a href="#S5.T5" title="Table 5 ‣ 5.2 Multidimensional Efficiency Dynamics ‣ 5 Result Analysis ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a> further reveals that compact (1B-3B) models preserve or even slightly improve task scores under INT4, while occasional degradations (e.g., Qwen-3B Chat, 9.5%) remain localized rather than systemic.</p>
+</div>
+</section>
+<section id="S5.SS4" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.4 </span>Systems-Level Deployment Dynamics</h3>
+
+<div id="S5.SS4.p1" class="ltx_para">
+<p id="S5.SS4.p1.2" class="ltx_p">Figures <a href="#S5.F4" title="Figure 4 ‣ 5.2 Multidimensional Efficiency Dynamics ‣ 5 Result Analysis ‣ Are Large Language Models Economically Viable for Industry Deployment?" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a> shows the systems-level behavior underlying the efficiency frontier. The multi-task radar profile confirms that LLaMa-3.2-1B (INT4) maintains balanced performance across Chat, RAG, and Summarization, forming a near-circular capability shape indicative of stable generalization at low cost. The Pareto frontier further demonstrates structural dominance–1B configurations occupy the optimal lower-right region (high throughput, low energy), while 7B models remain Pareto-inferior regardless of quantization strategy. Latency analysis reveals a non-linear deployment advantage—INT4 reduces inter-token latency disproportionately for compact models, enabling sub-10ms ITL and TTFT below 50ms, thereby satisfying real-time interaction thresholds. Operational constraints reinforce this asymmetry–cold-start taxes of 179–237<math id="S5.SS4.p1.1.m1" class="ltx_Math" alttext="\times" display="inline" intent=":literal"><semantics><mo>×</mo><annotation encoding="application/x-tex">\times</annotation></semantics></math> render scale-to-zero economically infeasible for low-traffic workloads, and although 4-bit quantization safely preserves reasoning fidelity (most configurations exceeding the 99% threshold), larger models still incur higher steady-state power draw. The power profile highlights an additional edge advantage–LLaMa-3.2-1B sustains a stable <math id="S5.SS4.p1.2.m2" class="ltx_Math" alttext="\sim" display="inline" intent=":literal"><semantics><mo>∼</mo><annotation encoding="application/x-tex">\sim</annotation></semantics></math>35W envelope under inference, supporting fanless deployment and improved reliability in constrained environments.</p>
+</div>
+</section>
+</section>
+<section id="S6" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6 </span>Conclusion</h2>
+
+<div id="S6.p1" class="ltx_para">
+<p id="S6.p1.1" class="ltx_p">This work introduced <span id="S6.p1.1.1" class="ltx_text ltx_font_smallcaps">Edge-Eval</span>, a lifecycle-oriented benchmarking framework designed to close the <em id="S6.p1.1.2" class="ltx_emph ltx_font_italic">Deployment–Evaluation Gap</em> in industry LLM assessment. Through LLaMA and Qwen variants across adaptation, quantization, and inference on legacy Tesla T4 hardware, we demonstrated that compact (<math id="S6.p1.1.m1" class="ltx_Math" alttext="&lt;2" display="inline" intent=":literal"><semantics><mrow><mi></mi><mo>&lt;</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">&lt;2</annotation></semantics></math>B) models consistently dominate larger baselines in ROI velocity, energy-normalized intelligence, system density, and latency stability under INT4 deployment. Our findings reveal two key insights–(i) small models form a clear efficiency frontier under constrained infrastructure, and (ii) memory-efficient training (e.g., QLoRA) does not necessarily imply energy or carbon efficiency.</p>
+</div>
+</section>
+<section id="Sx1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">Limitations</h2>
+
+<div id="Sx1.p1" class="ltx_para">
+<p id="Sx1.p1.1" class="ltx_p">Our work focuses on legacy NVIDIA Tesla T4 accelerators and low-batch deployment settings; results may differ on modern architectures (e.g., Hopper-class GPUs) or high-throughput cloud serving environments. We evaluate two model families and three industry-representative tasks, which, while diverse, do not exhaust the space of domain-specific workflows. Energy measurements rely on GPU-level power telemetry and may not capture full system-level overheads (e.g., CPU, networking). At last, economic assumptions (e.g., API pricing and carbon intensity factors) reflect current estimates and may evolve over time, affecting absolute break-even thresholds.</p>
+</div>
+</section>
+<section id="Sx2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">Ethics Statement</h2>
+
+<div id="Sx2.p1" class="ltx_para">
+<p id="Sx2.p1.1" class="ltx_p">This work evaluates operational efficiency rather than proposing new model capabilities. All experiments are conducted on publicly available open-weight models and widely used benchmark datasets. Through emphasizing energy consumption, carbon footprint, and infrastructure efficiency, <span id="Sx2.p1.1.1" class="ltx_text ltx_font_smallcaps">Edge-Eval</span> aligns with responsible and sustainable AI principles. However, improved deployment efficiency may lower the barrier to large-scale model use; practitioners must ensure compliance with data governance, privacy, and responsible deployment standards in real-world industry applications.</p>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Al-Jumaili et al. (2023)</span>
+<span class="ltx_bibblock">
+Ahmed Hadi Ali Al-Jumaili, Ravie Chandren Muniyandi, Mohammad Kamrul Hasan, Johnny Koh Siaw Paw, and Mandeep Jit Singh. 2023.
+
+</span>
+<span class="ltx_bibblock">Big data analytics using cloud computing based frameworks for power management systems: Status, constraints, and future recommendations.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib1.1.1" class="ltx_emph ltx_font_italic">Sensors</em>, 23(6):2952.
+
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Almadani et al. (2025)</span>
+<span class="ltx_bibblock">
+Basem Almadani, Hunain Kaisar, Irfan Rashid Thoker, and Farouq Aliyu. 2025.
+
+</span>
+<span class="ltx_bibblock">A systematic survey of distributed decision support systems in healthcare.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib2.1.1" class="ltx_emph ltx_font_italic">Systems</em>, 13(3):157.
+
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Banbury et al. (2021)</span>
+<span class="ltx_bibblock">
+Colby Banbury, Vijay Janapa Reddi, Peter Torelli, Jeremy Holleman, Nat Jeffries, Csaba Kiraly, Pietro Montino, David Kanter, Sebastian Ahmed, Danilo Pau, and 1 others. 2021.
+
+</span>
+<span class="ltx_bibblock">Mlperf tiny benchmark.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib3.1.1" class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2106.07597</em>.
+
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Bauer et al. (2024)</span>
+<span class="ltx_bibblock">
+Christian Bauer, Samira Afzal, Sandro Linder, Radu Prodan, and Christian Timmerer. 2024.
+
+</span>
+<span class="ltx_bibblock">Greem: An open-source energy measurement tool for video processing.
+
+</span>
+<span class="ltx_bibblock">In <em id="bib.bib4.1.1" class="ltx_emph ltx_font_italic">Proceedings of the 15th ACM Multimedia Systems Conference</em>, pages 264–270.
+
+</span>
+</li>
+<li id="bib.bib5" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ciubotaru (2025)</span>
+<span class="ltx_bibblock">
+Bogdan-Iulian Ciubotaru. 2025.
+
+</span>
+<span class="ltx_bibblock">Generative ai and large language models: A comprehensive scientific review.
+
+</span>
+</li>
+<li id="bib.bib6" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Dettmers et al. (2023)</span>
+<span class="ltx_bibblock">
+Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, and Luke Zettlemoyer. 2023.
+
+</span>
+<span class="ltx_bibblock">Qlora: Efficient finetuning of quantized llms.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib6.1.1" class="ltx_emph ltx_font_italic">Advances in neural information processing systems</em>, 36:10088–10115.
+
+</span>
+</li>
+<li id="bib.bib7" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ding et al. (2023)</span>
+<span class="ltx_bibblock">
+Ning Ding, Yulin Chen, Bokai Xu, Yujia Qin, Shengding Hu, Zhiyuan Liu, Maosong Sun, and Bowen Zhou. 2023.
+
+</span>
+<span class="ltx_bibblock">Enhancing chat language models by scaling high-quality instructional conversations.
+
+</span>
+<span class="ltx_bibblock">In <em id="bib.bib7.1.1" class="ltx_emph ltx_font_italic">Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing</em>, pages 3029–3051.
+
+</span>
+</li>
+<li id="bib.bib8" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Frantar et al. (2022)</span>
+<span class="ltx_bibblock">
+Elias Frantar, Saleh Ashkboos, Torsten Hoefler, and Dan Alistarh. 2022.
+
+</span>
+<span class="ltx_bibblock">Gptq: Accurate post-training quantization for generative pre-trained transformers.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib8.1.1" class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2210.17323</em>.
+
+</span>
+</li>
+<li id="bib.bib9" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Grattafiori et al. (2024)</span>
+<span class="ltx_bibblock">
+Aaron Grattafiori, Abhimanyu Dubey, Abhinav Jauhri, Abhinav Pandey, Abhishek Kadian, Ahmad Al-Dahle, Aiesha Letman, Akhil Mathur, Alan Schelten, Alex Vaughan, Amy Yang, Angela Fan, Anirudh Goyal, Anthony Hartshorn, Aobo Yang, Archi Mitra, Archie Sravankumar, Artem Korenev, Arthur Hinsvark, and 542 others. 2024.
+
+</span>
+<span class="ltx_bibblock"><a href="https://arxiv.org/abs/2407.21783" title="" class="ltx_ref ltx_href">The llama 3 herd of models</a>.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib9.1.1" class="ltx_emph ltx_font_italic">Preprint</em>, arXiv:2407.21783.
+
+</span>
+</li>
+<li id="bib.bib10" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Hasan and Akter (2022)</span>
+<span class="ltx_bibblock">
+Rakibul Hasan and Samia Akter. 2022.
+
+</span>
+<span class="ltx_bibblock">Information system-based decision support tools: A systematic review of strategic applications in service-oriented enterprises.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib10.1.1" class="ltx_emph ltx_font_italic">Review of Applied Science and Technology</em>, 1(04):26–65.
+
+</span>
+</li>
+<li id="bib.bib11" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Hendrycks et al. (2020)</span>
+<span class="ltx_bibblock">
+Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn Song, and Jacob Steinhardt. 2020.
+
+</span>
+<span class="ltx_bibblock">Measuring massive multitask language understanding.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib11.1.1" class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2009.03300</em>.
+
+</span>
+</li>
+<li id="bib.bib12" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Honovich et al. (2022)</span>
+<span class="ltx_bibblock">
+Or Honovich, Roee Aharoni, Jonathan Herzig, Hagai Taitelbaum, Doron Kukliansy, Vered Cohen, Thomas Scialom, Idan Szpektor, Avinatan Hassidim, and Yossi Matias. 2022.
+
+</span>
+<span class="ltx_bibblock">True: Re-evaluating factual consistency evaluation.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib12.1.1" class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2204.04991</em>.
+
+</span>
+</li>
+<li id="bib.bib13" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Hu et al. (2022)</span>
+<span class="ltx_bibblock">
+Edward J Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, Weizhu Chen, and 1 others. 2022.
+
+</span>
+<span class="ltx_bibblock">Lora: Low-rank adaptation of large language models.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib13.1.1" class="ltx_emph ltx_font_italic">ICLR</em>, 1(2):3.
+
+</span>
+</li>
+<li id="bib.bib14" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Jia et al. (2019)</span>
+<span class="ltx_bibblock">
+Zhe Jia, Marco Maggioni, Jeffrey Smith, and Daniele Paolo Scarpazza. 2019.
+
+</span>
+<span class="ltx_bibblock"><a href="https://arxiv.org/abs/1903.07486" title="" class="ltx_ref ltx_href">Dissecting the nvidia turing t4 gpu via microbenchmarking</a>.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib14.1.1" class="ltx_emph ltx_font_italic">Preprint</em>, arXiv:1903.07486.
+
+</span>
+</li>
+<li id="bib.bib15" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Joshi et al. (2025)</span>
+<span class="ltx_bibblock">
+Harsh Joshi, Gautam Siddharth Kashyap, Rafiq Ali, Ebad Shabbir, Niharika Jain, Sarthak Jain, Jiechao Gao, and Usman Naseem. 2025.
+
+</span>
+<span class="ltx_bibblock">Can argus judge them all? comparing vlms across domains.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib15.1.1" class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2507.01042</em>.
+
+</span>
+</li>
+<li id="bib.bib16" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kwon et al. (2023)</span>
+<span class="ltx_bibblock">
+Woosuk Kwon, Zhuohan Li, Siyuan Zhuang, Ying Sheng, Lianmin Zheng, Cody Hao Yu, Joseph Gonzalez, Hao Zhang, and Ion Stoica. 2023.
+
+</span>
+<span class="ltx_bibblock">Efficient memory management for large language model serving with pagedattention.
+
+</span>
+<span class="ltx_bibblock">In <em id="bib.bib16.1.1" class="ltx_emph ltx_font_italic">Proceedings of the 29th symposium on operating systems principles</em>, pages 611–626.
+
+</span>
+</li>
+<li id="bib.bib17" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Lewis et al. (2020)</span>
+<span class="ltx_bibblock">
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel, and 1 others. 2020.
+
+</span>
+<span class="ltx_bibblock">Retrieval-augmented generation for knowledge-intensive nlp tasks.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib17.1.1" class="ltx_emph ltx_font_italic">Advances in neural information processing systems</em>, 33:9459–9474.
+
+</span>
+</li>
+<li id="bib.bib18" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Lialin et al. (2023)</span>
+<span class="ltx_bibblock">
+Vladislav Lialin, Vijeta Deshpande, and Anna Rumshisky. 2023.
+
+</span>
+<span class="ltx_bibblock">Scaling down to scale up: A guide to parameter-efficient fine-tuning.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib18.1.1" class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2303.15647</em>.
+
+</span>
+</li>
+<li id="bib.bib19" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Lin (2004)</span>
+<span class="ltx_bibblock">
+Chin-Yew Lin. 2004.
+
+</span>
+<span class="ltx_bibblock">Rouge: A package for automatic evaluation of summaries.
+
+</span>
+<span class="ltx_bibblock">In <em id="bib.bib19.1.1" class="ltx_emph ltx_font_italic">Text summarization branches out</em>, pages 74–81.
+
+</span>
+</li>
+<li id="bib.bib20" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Lin et al. (2024)</span>
+<span class="ltx_bibblock">
+Ji Lin, Jiaming Tang, Haotian Tang, Shang Yang, Wei-Ming Chen, Wei-Chen Wang, Guangxuan Xiao, Xingyu Dang, Chuang Gan, and Song Han. 2024.
+
+</span>
+<span class="ltx_bibblock">Awq: Activation-aware weight quantization for on-device llm compression and acceleration.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib20.1.1" class="ltx_emph ltx_font_italic">Proceedings of machine learning and systems</em>, 6:87–100.
+
+</span>
+</li>
+<li id="bib.bib21" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Manolescu et al. (2025)</span>
+<span class="ltx_bibblock">
+Vasile Denis Manolescu, Hamzah AlZu’bi, and Emanuele Lindo Secco. 2025.
+
+</span>
+<span class="ltx_bibblock">Interactive conversational ai with iot devices for enhanced human-robot interaction.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib21.1.1" class="ltx_emph ltx_font_italic">Journal of Intelligent Communication</em>.
+
+</span>
+</li>
+<li id="bib.bib22" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Narayan et al. (2018)</span>
+<span class="ltx_bibblock">
+Shashi Narayan, Shay B Cohen, and Mirella Lapata. 2018.
+
+</span>
+<span class="ltx_bibblock">Don’t give me the details, just the summary! topic-aware convolutional neural networks for extreme summarization.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib22.1.1" class="ltx_emph ltx_font_italic">arXiv preprint arXiv:1808.08745</em>.
+
+</span>
+</li>
+<li id="bib.bib23" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Nvidia (2018)</span>
+<span class="ltx_bibblock">
+C Nvidia. 2018.
+
+</span>
+<span class="ltx_bibblock">Nvidia turing gpu architecture.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib23.1.1" class="ltx_emph ltx_font_italic">NVIDIA Whitepaper</em>, 1.
+
+</span>
+</li>
+<li id="bib.bib24" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Patterson et al. (2022)</span>
+<span class="ltx_bibblock">
+David Patterson, Joseph Gonzalez, Urs Hölzle, Quoc Le, Chen Liang, Lluis-Miquel Munguia, Daniel Rothchild, David R So, Maud Texier, and Jeff Dean. 2022.
+
+</span>
+<span class="ltx_bibblock">The carbon footprint of machine learning training will plateau, then shrink.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib24.1.1" class="ltx_emph ltx_font_italic">Computer</em>, 55(7):18–28.
+
+</span>
+</li>
+<li id="bib.bib25" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Qwen et al. (2025)</span>
+<span class="ltx_bibblock">
+Qwen, :, An Yang, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo Zheng, Bowen Yu, Chengyuan Li, Dayiheng Liu, Fei Huang, Haoran Wei, Huan Lin, Jian Yang, Jianhong Tu, Jianwei Zhang, Jianxin Yang, Jiaxi Yang, Jingren Zhou, and 25 others. 2025.
+
+</span>
+<span class="ltx_bibblock"><a href="https://arxiv.org/abs/2412.15115" title="" class="ltx_ref ltx_href">Qwen2.5 technical report</a>.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib25.1.1" class="ltx_emph ltx_font_italic">Preprint</em>, arXiv:2412.15115.
+
+</span>
+</li>
+<li id="bib.bib26" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Rajpurkar et al. (2016)</span>
+<span class="ltx_bibblock">
+Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, and Percy Liang. 2016.
+
+</span>
+<span class="ltx_bibblock">Squad: 100,000+ questions for machine comprehension of text.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib26.1.1" class="ltx_emph ltx_font_italic">arXiv preprint arXiv:1606.05250</em>.
+
+</span>
+</li>
+<li id="bib.bib27" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Schizas et al. (2022)</span>
+<span class="ltx_bibblock">
+Nikolaos Schizas, Aristeidis Karras, Christos Karras, and Spyros Sioutas. 2022.
+
+</span>
+<span class="ltx_bibblock">Tinyml for ultra-low power ai and large scale iot deployments: A systematic review.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib27.1.1" class="ltx_emph ltx_font_italic">Future Internet</em>, 14(12):363.
+
+</span>
+</li>
+<li id="bib.bib28" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Siddiqui et al. (2025)</span>
+<span class="ltx_bibblock">
+Zohaib Hasan Siddiqui, Jiechao Gao, Ebad Shabbir, Mohammad Anas Azeez, Rafiq Ali, Gautam Siddharth Kashyap, and Usman Naseem. 2025.
+
+</span>
+<span class="ltx_bibblock">Llms on a budget? say hola.
+
+</span>
+<span class="ltx_bibblock">In <em id="bib.bib28.1.1" class="ltx_emph ltx_font_italic">Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing: Industry Track</em>, pages 1035–1043.
+
+</span>
+</li>
+<li id="bib.bib29" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Yao et al. (2022)</span>
+<span class="ltx_bibblock">
+Zhewei Yao, Reza Yazdani Aminabadi, Minjia Zhang, Xiaoxia Wu, Conglong Li, and Yuxiong He. 2022.
+
+</span>
+<span class="ltx_bibblock">Zeroquant: Efficient and affordable post-training quantization for large-scale transformers.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib29.1.1" class="ltx_emph ltx_font_italic">Advances in neural information processing systems</em>, 35:27168–27183.
+
+</span>
+</li>
+<li id="bib.bib30" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zheng et al. (2023)</span>
+<span class="ltx_bibblock">
+Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin, Zhuohan Li, Dacheng Li, Eric Xing, and 1 others. 2023.
+
+</span>
+<span class="ltx_bibblock">Judging llm-as-a-judge with mt-bench and chatbot arena.
+
+</span>
+<span class="ltx_bibblock"><em id="bib.bib30.1.1" class="ltx_emph ltx_font_italic">Advances in neural information processing systems</em>, 36:46595–46623.
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+</div>
+<footer class="arxiv-html-footer">
+  <div class="ltx_page_logo">
+    Experimental support, please
+    <a href="./2604.19342v1/__stdout.txt" class="ltx_ref"
+    target="_blank" rel="nofollow">view the build logs</a>
+    for errors. Generated by
+    <a href="https://math.nist.gov/~BMiller/LaTeXML/" target="_blank" class="ltx_ref ltx_LaTeXML_logo">
+      <span style="letter-spacing: -0.2em; margin-right: 0.1em;">
+        L
+        <span style="font-size: 70%; position: relative; bottom: 2.2pt;">A</span>
+        T
+        <span style="position: relative; bottom: -0.4ex;">E</span>
+      </span>
+      <span class="ltx_font_smallcaps">xml</span>
+      <img alt="[LOGO]"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==">
+    </a>.
+  </div>
+  <div class="keyboard-glossary">
+    <h2>Instructions for reporting errors</h2>
+    <p>We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below:</p>
+    <ul>
+      <li>Click the "Report Issue" <span class="mobile-only">(<svg role="presentation"
+            style="display: inline-block; vertical-align: middle; fill: var(--text-color);" aria-hidden="true"
+            height="1em" viewBox="0 0 640 640">
+            <path
+              d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+          </svg>)</span> button, located in the page header.</li>
+    </ul>
+    <p><strong>Tip:</strong> You can select the relevant text first, to include it in your report.</p>
+    <p>Our team has already identified <a class="ltx_ref" href="https://github.com/arXiv/html_feedback/issues"
+        target="_blank">the following issues</a>. We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all.</p>
+    <p>Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a <a
+        class="ltx_ref" href="https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML"
+        target="_blank">list of packages that need conversion</a>, and welcome <a class="ltx_ref"
+        href="https://github.com/brucemiller/LaTeXML/issues" target="_blank">developer contributions</a>.</p>
+  </div>
+</footer>
+<div id="fixed-buttons-container">
+  <div id="beta-badge" aria-hidden="true">BETA</div>
+  <a id="disable-reading-mode-btn" class="header-button" href="javascript:toggleReadingMode();"
+    title="Disable reading mode, show header and footer">
+    <svg role="presentation" height="1.25rem"
+      viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </a>
+</div></body>
+</html>
