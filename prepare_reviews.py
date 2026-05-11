@@ -17,7 +17,7 @@ ARXIV_ID_RE = re.compile(r"^\d{4}\.\d{4,}$")
 
 BASE_DIR = Path(__file__).resolve().parent
 MD_DIR = BASE_DIR / "markdown_full"
-REVIEW_DIR = BASE_DIR / "review_md"
+REVIEW_DIR = BASE_DIR / "viewer" / "review_md"
 BATCH_FILE = BASE_DIR / "review_batch.json"
 REVIEW_DIR.mkdir(exist_ok=True)
 
