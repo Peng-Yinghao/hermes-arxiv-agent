@@ -146,7 +146,7 @@ input[type="date"] {
 }
 
 .search-field {
-  grid-column: 1 / span 8;
+  grid-column: 1 / span 12;
 }
 
 .quick-range-field {
@@ -178,8 +178,20 @@ input[type="date"] {
 }
 
 .favorite-only-field {
-  grid-column: 9 / span 2;
+  grid-column: 1 / span 3;
   justify-content: end;
+}
+
+.show-deleted-field {
+  grid-column: 4 / span 3;
+}
+
+.peer-review-field {
+  grid-column: 7 / span 3;
+}
+
+.review-only-field {
+  grid-column: 10 / span 3;
 }
 
 .switch-label {
@@ -255,8 +267,13 @@ input[type="date"] {
   gap: 8px;
 }
 
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .favorite-btn {
-  margin-left: auto;
   border: 1px solid #d8cfbe;
   background: #fff;
   color: #6b7280;
@@ -274,7 +291,7 @@ input[type="date"] {
 }
 
 .delete-btn {
-  margin-left: 6px;
+  margin-left: auto;
   border: 1px solid #d8cfbe;
   background: #fff;
   color: #9ca3af;
@@ -397,17 +414,16 @@ summary {
   .end-date-field,
   .quick-range-field,
   .search-field,
+  .scene-field,
+  .form-field,
+  .memtype-field,
   .favorite-only-field,
+  .show-deleted-field,
+  .peer-review-field,
+  .review-only-field,
   .actions {
     grid-column: span 2;
     grid-row: auto;
-  }
-
-  .search-field,
-  .quick-range-field,
-  .favorite-only-field,
-  .actions {
-    grid-column: span 2;
   }
 
   .actions {
@@ -448,7 +464,13 @@ summary {
   .end-date-field,
   .search-field,
   .quick-range-field,
+  .scene-field,
+  .form-field,
+  .memtype-field,
   .favorite-only-field,
+  .show-deleted-field,
+  .peer-review-field,
+  .review-only-field,
   .actions {
     grid-column: span 1;
   }
@@ -494,8 +516,9 @@ summary {
     order: 3;
   }
 
-  .favorite-btn {
-    margin-left: 0;
+  .card-actions {
+    width: 100%;
+    justify-content: flex-start;
   }
 }
 
@@ -610,14 +633,15 @@ summary {
 .cls-peer  { background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; }
 
 /* ── Classification select fields (compact) ── */
+.scene-field { grid-column: 1 / span 4; }
+.form-field { grid-column: 5 / span 4; }
+.memtype-field { grid-column: 9 / span 4; }
 .scene-field select, .form-field select, .memtype-field select {
   min-width: 100px;
-  max-width: 130px;
 }
 
 /* ── MD button ── */
 .md-btn {
-  margin-left: 4px;
   border: 1px solid #d8cfbe;
   background: #fff;
   color: #6b7280;
@@ -634,7 +658,6 @@ summary {
 
 /* Review button */
 .review-btn {
-  margin-left: 4px;
   border: 1px solid #c7d2fe;
   background: linear-gradient(135deg, #ede9fe, #f0fdf4);
   color: #4b5563;

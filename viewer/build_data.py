@@ -17,6 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 EXCEL_PATH = BASE_DIR / "papers_record.xlsx"
 OUTPUT_PATH = Path(__file__).resolve().parent / "papers_data.json"
 DELETED_IDS_PATH = BASE_DIR / "deleted_ids.txt"
+REVIEW_DIR = Path(__file__).resolve().parent / "review_md"
 
 
 def load_deleted_ids() -> set[str]:
@@ -85,6 +86,7 @@ def load_rows() -> list[dict]:
         if not paper["arxiv_id"]:
             continue
         paper["pdf_url"] = f"https://arxiv.org/pdf/{paper['arxiv_id']}"
+        paper["has_review"] = (REVIEW_DIR / f"{paper['arxiv_id']}.md").exists()
         arxiv_id = paper["arxiv_id"]
         old = rows_by_id.get(arxiv_id)
         if old is None or quality_key(paper) > quality_key(old):

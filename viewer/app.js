@@ -228,25 +228,30 @@ function renderCards(papers) {
     });
 
     // Review button — AI deep analysis from different LLM
+    // Only show if review exists
     const reviewBtn = node.querySelector(".review-btn");
     if (reviewBtn) {
-      reviewBtn.addEventListener("click", async () => {
-        reviewBtn.disabled = true;
-        reviewBtn.textContent = "⏳";
-        try {
-          await showReviewModal(p);
-        } catch (err) {
-          console.error("Review load error:", err);
-          if (err.message === "NOT_FOUND") {
-            alert("该论文的 AI 精读尚未生成，请稍后再试。");
-          } else {
-            alert("加载失败: " + (err.message || err));
+      if (!p.has_review) {
+        reviewBtn.style.display = "none";
+      } else {
+        reviewBtn.addEventListener("click", async () => {
+          reviewBtn.disabled = true;
+          reviewBtn.textContent = "⏳";
+          try {
+            await showReviewModal(p);
+          } catch (err) {
+            console.error("Review load error:", err);
+            if (err.message === "NOT_FOUND") {
+              alert("该论文的 AI 精读尚未生成，请稍后再试。");
+            } else {
+              alert("加载失败: " + (err.message || err));
+            }
+          } finally {
+            reviewBtn.disabled = false;
+            reviewBtn.textContent = "🤖 精读";
           }
-        } finally {
-          reviewBtn.disabled = false;
-          reviewBtn.textContent = "🤖 精读";
-        }
-      });
+        });
+      }
     }
 
     node.querySelector(".meta").textContent =
@@ -305,6 +310,7 @@ function applyFilter() {
   const favoriteOnly = document.getElementById("favoriteOnly").checked;
   const showDeleted = document.getElementById("showDeleted").checked;
   const peerReviewOnly = document.getElementById("peerReviewOnly").checked;
+  const reviewOnly = document.getElementById("reviewOnly").checked;
   const scene = document.getElementById("sceneFilter").value;
   const form = document.getElementById("formFilter").value;
   const memType = document.getElementById("memTypeFilter").value;
@@ -315,6 +321,7 @@ function applyFilter() {
     (!favoriteOnly || isFavorite(p.arxiv_id)) &&
     (showDeleted || !isDeleted(p.arxiv_id)) &&
     (!peerReviewOnly || (p.peer_reviewed || "").startsWith("✓")) &&
+    (!reviewOnly || p.has_review) &&
     (!scene || (p.scene || "").includes(scene)) &&
     (!form || (p.form || "").includes(form)) &&
     (!memType || (p.mem_type || "").includes(memType))
@@ -333,6 +340,7 @@ function resetFilter(dmin, dmax) {
   document.getElementById("favoriteOnly").checked = false;
   document.getElementById("showDeleted").checked = false;
   document.getElementById("peerReviewOnly").checked = false;
+  document.getElementById("reviewOnly").checked = false;
   document.getElementById("sceneFilter").value = "";
   document.getElementById("formFilter").value = "";
   document.getElementById("memTypeFilter").value = "";
@@ -374,6 +382,7 @@ async function init() {
   document.getElementById("favoriteOnly").addEventListener("change", applyFilter);
   document.getElementById("showDeleted").addEventListener("change", applyFilter);
   document.getElementById("peerReviewOnly").addEventListener("change", applyFilter);
+  document.getElementById("reviewOnly").addEventListener("change", applyFilter);
   document.getElementById("sceneFilter").addEventListener("change", applyFilter);
   document.getElementById("formFilter").addEventListener("change", applyFilter);
   document.getElementById("memTypeFilter").addEventListener("change", applyFilter);
