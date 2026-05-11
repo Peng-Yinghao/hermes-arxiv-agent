@@ -1,35 +1,32 @@
-# Papers matching these keywords in TITLE will be excluded from search results.
-# One keyword per line. Case-insensitive match.
+# Papers matching these keywords in TITLE will be excluded.
+# Only hardware/quantization terms — NOT general words like "scale", "latency", "compress".
+# One keyword per line. Case-insensitive. Title match only.
+
 quantization
 quantized
-quantize
-bit-width
 low-bit
 4-bit
 8-bit
+2-bit
 1-bit
-ternary
-binary neural
-GPU accelerator
-FPGA
-hardware accelerator
-PIM
+bit-width
+bitnet
+bit binarization
+kv cache
+kv-cache
+key-value cache
+gpu memory
+vram
+fpga
 processing-in-memory
-HBM
-compression
-lossless compression
-pruning
-sparsity
-fine-tuning
-pretraining
-fine-tune
-pretrain
-KV-cache
-KV cache
-token compression
-mixed-precision
-weight-only
+weight-only quantization
+llm serving
+vllm
+token pruning
+token merging
+integer-only
+integer quantization
+gemm optimization
+matrix multiplication optimization
 activation quantization
-calibration
-post-training
-knowledge distillation
+kernel extraction

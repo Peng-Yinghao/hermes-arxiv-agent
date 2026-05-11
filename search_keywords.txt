@@ -1,1 +1,1 @@
-all:quantization+AND+all:large+AND+all:language+AND+all:model
+all:agent+AND+all:memory+ANDNOT+(all:quantization+OR+all:GPU+OR+all:hardware+OR+all:FPGA+OR+all:binarization)
