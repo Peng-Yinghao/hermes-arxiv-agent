@@ -1,5 +1,5 @@
 {
-  "count": 74,
+  "count": 73,
   "crawled_date_min": "2026-05-08",
   "crawled_date_max": "2026-05-10",
   "published_date_min": "2025-01-20",
@@ -61,25 +61,6 @@
       "peer_reviewed": "",
       "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.01546"
-    },
-    {
-      "arxiv_id": "2605.00519",
-      "title": "Silicon Showdown: Performance, Efficiency, and Ecosystem Barriers in Consumer-Grade LLM Inference",
-      "authors": "Abdurrahman Javat, Allan Kazakov",
-      "affiliations": "",
-      "published_date": "2026-05-01",
-      "categories": "cs.PF, cs.AI, cs.AR",
-      "abstract": "The operational landscape of local Large Language Model (LLM) inference has shifted from lightweight models to datacenter-class weights exceeding 70B parameters, creating profound systems challenges for consumer hardware. This paper presents a systematic empirical analysis of the Nvidia and Apple Silicon ecosystems, specifically characterizing the distinct intra-architecture trade-offs required to deploy these massive models. On the Nvidia Blackwell architecture, we identify a critical \"Backend Dichotomy\" within the TensorRT-LLM stack: while the new NVFP4 quantization format delivers a 1.6x throughput advantage over optimized BF16 baselines (151 tokens/s vs. 92 tokens/s), realizing this performance requires navigating complex runtime constraints that trade startup latency for generation speed. Furthermore, we characterize the \"VRAM Wall\" for 70B+ models: on discrete GPUs, users face a destructive choice between aggressive quantization (e.g., Q2) that degrades model intelligence to fit in VRAM, or PCIe-bottlenecked CPU offloading, which reduces throughput by over 90% compared to full-GPU execution. Conversely, Apple's Unified Memory Architecture (UMA) circumvents these bottlenecks, enabling linear scaling for 80B parameter models at practical 4-bit precisions. This architectural divergence extends to operational sustainability, where Apple's SoC design demonstrates up to a 23x advantage in energy efficiency (tokens/joule). We conclude that for consumer-grade inference, the optimal hardware is defined by a complex interplay between compute density (Nvidia) and memory capacity (Apple), moderated by the significant \"ecosystem friction\" of proprietary quantization workflows.",
-      "summary_cn": "系统对比Nvidia与Apple Silicon在消费级LLM推理中的表现：NVFP4吞吐量达BF16的1.6倍，但70B+模型激进量化会降低智能；Apple统一内存架构4比特80B模型能效优势达23倍。",
-      "pdf_filename": "2605.00519.pdf",
-      "crawled_date": "2026-05-10",
-      "notes": "",
-      "scene": "",
-      "form": "",
-      "mem_type": "",
-      "peer_reviewed": "",
-      "peer_venue": "",
-      "pdf_url": "https://arxiv.org/pdf/2605.00519"
     },
     {
       "arxiv_id": "2605.02933",
