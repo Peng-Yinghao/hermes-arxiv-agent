@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory</title>
+<!--Generated on Fri Feb  6 08:53:01 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/browse/0.3.4/css/arxiv-html-papers-20250916.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2601.18642v2/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1" title="In FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S2" title="In FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Methodology</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S2.SS1" title="In 2 Methodology ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>Dual-Layer Memory Architecture with Differential Forgetting</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S2.SS2" title="In 2 Methodology ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2 </span>Biologically-Inspired Forgetting Curves</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S2.SS3" title="In 2 Methodology ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.3 </span>Memory Conflict Resolution</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S2.SS4" title="In 2 Methodology ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.4 </span>Adaptive Memory Fusion</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3" title="In FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Experiments</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.SS1" title="In 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Experimental Setup</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.SS2" title="In 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Memory Retention and Forgetting Dynamics</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.SS3" title="In 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Conflict Resolution Performance</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.SS4" title="In 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.4 </span>Cross-Dataset Evaluation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.SS5" title="In 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.5 </span>Ablation Study</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S4" title="In FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Conclusion</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document" style="font-size:90%;">FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory</h1>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id1.id1"><span class="ltx_text" id="id1.id1.1" style="font-size:90%;">Large language models deployed as autonomous agents face critical memory limitations, lacking selective forgetting mechanisms that lead to either catastrophic forgetting at context boundaries or information overload within them. While human memory naturally balances retention and forgetting through adaptive decay processes, current AI systems employ binary retention strategies that preserve everything or lose it entirely. We propose FadeMem, a biologically-inspired agent memory architecture that incorporates active forgetting mechanisms mirroring human cognitive efficiency. FadeMem implements differential decay rates across a dual-layer memory hierarchy, where retention is governed by adaptive exponential decay functions modulated by semantic relevance, access frequency, and temporal patterns. Through LLM-guided conflict resolution and intelligent memory fusion, our system consolidates related information while allowing irrelevant details to fade. Experiments on Multi-Session Chat, LoCoMo, and LTI-Bench demonstrate superior multi-hop reasoning and retrieval with 45% storage reduction, validating the effectiveness of biologically-inspired forgetting in agent memory systems.</span></p>
+</div>
+<span class="ltx_note ltx_role_footnotetext" id="footnotex1"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">footnotetext: </span><span class="ltx_text" id="footnotex1.1" style="font-size:90%;">🖂 Corresponding author.</span></span></span></span><span class="ltx_note ltx_role_footnotetext" id="footnotex2"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">footnotetext: </span><span class="ltx_text" id="footnotex2.1" style="font-size:90%;">* These authors contributed equally to this research.</span></span></span></span>
+<div class="ltx_para" id="p1">
+<p class="ltx_p" id="p1.1"><span class="ltx_text ltx_font_bold ltx_font_italic" id="p1.1.1" style="font-size:90%;">Index Terms<span class="ltx_text ltx_font_upright" id="p1.1.1.1">— <span class="ltx_text ltx_font_medium" id="p1.1.1.1.1">
+Large Language Models, Agent Memory, Long-Term Context, Adaptive Memory Management</span></span></span></p>
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1"><span class="ltx_text" id="S1.p1.1.1" style="font-size:90%;">The advent of large language models (LLMs) has revolutionized AI systems’ ability to process and generate human-like text, yet their practical deployment as autonomous agents remains constrained by fundamental memory limitations </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S1.p1.1.2.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib6" title="Dense passage retrieval for open-domain question answering.">10</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib14" title="Lost in the middle: how language models use long contexts">16</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib39" title="Multimodal multi-agent empowered legal judgment prediction">9</a><span class="ltx_text" id="S1.p1.1.3.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S1.p1.1.4" style="font-size:90%;">. Recent advances in agent memory architectures have explored various approaches to extend context windows and maintain conversation history, from retrieval-augmented generation (RAG) systems that leverage external knowledge bases </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S1.p1.1.5.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib9" title="Retrieval-augmented generation for knowledge-intensive nlp tasks">13</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib10" title="Retrieval-augmented generation for large language models: a survey">7</a><span class="ltx_text" id="S1.p1.1.6.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S1.p1.1.7" style="font-size:90%;"> to memory-augmented neural networks that incorporate differentiable memory modules </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S1.p1.1.8.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib28" title="RAG-driven memory architectures in conversational llms-a literature review with insights into emerging agriculture data sharing">2</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib11" title="One-shot learning with memory-augmented neural networks using a 64-kbit, 118 gops/w rram-based non-volatile associative memory">14</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib19" title="Large language model agents: a comprehensive survey on architectures, capabilities, and applications">12</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib30" title="Bio-inspired cognitive architecture of episodic memory">19</a><span class="ltx_text" id="S1.p1.1.9.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S1.p1.1.10" style="font-size:90%;">. These developments have enabled agents to handle increasingly complex tasks requiring long-term context retention, multi-turn interactions, and knowledge accumulation across sessions </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S1.p1.1.11.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib15" title="Transformer-xl: attentive language models beyond a fixed-length context">5</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib18" title="Mem0: building production-ready ai agents with scalable long-term memory">4</a><span class="ltx_text" id="S1.p1.1.12.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S1.p1.1.13" style="font-size:90%;">.</span></p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1"><span class="ltx_text" id="S1.p2.1.1" style="font-size:90%;">However, existing agent memory architectures suffer from a critical flaw: they lack selective forgetting mechanisms, causing either catastrophic forgetting at context boundaries or information overload within them </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S1.p2.1.2.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib13" title="Overcoming catastrophic forgetting in neural networks">11</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib16" title="Catastrophic forgetting in deep learning: a comprehensive taxonomy">3</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib31" title="A biologically inspired architecture with switching units can learn to generalize across backgrounds">23</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib35" title="A survey on the memory mechanism of large language model-based agents">26</a><span class="ltx_text" id="S1.p2.1.3.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S1.p2.1.4" style="font-size:90%;">. Current agent memory systems predominantly operate on simplistic storage-and-retrieval paradigms that treat all information with equal importance, leading to context windows cluttered with irrelevant details and degraded performance as memory scales. While human memory elegantly balances retention and forgetting through natural decay processes, where unimportant information gradually fades while significant memories are reinforced, current AI systems employ binary retention strategies that either preserve everything within their capacity or lose it entirely </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S1.p2.1.5.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib17" title="Biologically inspired sleep algorithm for reducing catastrophic forgetting in neural networks">22</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib33" title="Neuroplasticity meets artificial intelligence: a hippocampus-inspired approach to the stability–plasticity dilemma">21</a><span class="ltx_text" id="S1.p2.1.6.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S1.p2.1.7" style="font-size:90%;">. This limitation becomes increasingly problematic as agents handle longer interactions and accumulate vast amounts of potentially redundant or outdated information. The biological inspiration from Ebbinghaus’s forgetting curve reveals that human memory strength follows predictable exponential decay patterns modulated by factors such as repetition, emotional significance, and relevance </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S1.p2.1.8.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib7" title="Memory: a contribution to experimental psychology: teachers college">6</a><span class="ltx_text" id="S1.p2.1.9.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S1.p2.1.10" style="font-size:90%;">. This natural forgetting is not a weakness but an adaptive feature that prevents cognitive overload, maintains information relevance, and enables efficient generalization by removing specific details while preserving important patterns </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S1.p2.1.11.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib8" title="The psychology and neuroscience of forgetting">24</a><span class="ltx_text" id="S1.p2.1.12.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S1.p2.1.13" style="font-size:90%;">.</span></p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1"><span class="ltx_text" id="S1.p3.1.1" style="font-size:90%;">To address these fundamental limitations, we propose FadeMem, a biologically-inspired agent memory architecture that incorporates active forgetting mechanisms to mirror human cognitive efficiency </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S1.p3.1.2.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib32" title="Neural brain: a neuroscience-inspired framework for embodied agents">15</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib37" title="Machine memory intelligence: inspired by human memory mechanisms">27</a><span class="ltx_text" id="S1.p3.1.3.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S1.p3.1.4" style="font-size:90%;">. Our system implements differential decay rates across a dual-layer memory hierarchy, where each memory’s retention is governed by adaptive exponential decay functions modulated by semantic relevance, access frequency, and temporal patterns </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S1.p3.1.5.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib36" title="Memory os of ai agent">8</a><span class="ltx_text" id="S1.p3.1.6.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S1.p3.1.7" style="font-size:90%;">. Through LLM-guided conflict resolution and intelligent memory fusion, our architecture naturally consolidates related information while allowing irrelevant details to fade, achieving a dynamic balance between memory capacity and retrieval precision. Our contributions can be summarized as follows: (1) We present the first dual-layer biologically inspired agent memory with adaptive forgetting.
+(2) We devise a unified framework with LLM-guided conflict resolution and memory fusion that enforces temporal consistency and aggressively compresses redundancy, yielding compact, coherent memory states.
+(3) Extensive experiments on Multi-Session Chat, LoCoMo, and LTI-Bench show superior multi-hop reasoning and retrieval with large storage savings, and thorough ablations validate each component’s impact.</span></p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_section">2 </span>Methodology</h2>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>Dual-Layer Memory Architecture with Differential Forgetting</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.2"><span class="ltx_text" id="S2.SS1.p1.2.1" style="font-size:90%;">Inspired by human memory systems, we design a dual-layer architecture that mimics the differential forgetting rates observed in biological memory, as shown in Fig. </span><span class="ltx_ref ltx_missing_label ltx_ref_self" style="font-size:90%;">LABEL:fig:Learning_to_forget</span><span class="ltx_text" id="S2.SS1.p1.2.2" style="font-size:90%;">. Each memory </span><math alttext="m_{i}" class="ltx_Math" display="inline" id="S2.SS1.p1.1.m1" intent=":literal"><semantics><msub><mi mathsize="0.900em">m</mi><mi mathsize="0.900em">i</mi></msub><annotation encoding="application/x-tex">m_{i}</annotation></semantics></math><span class="ltx_text" id="S2.SS1.p1.2.3" style="font-size:90%;"> at time </span><math alttext="t" class="ltx_Math" display="inline" id="S2.SS1.p1.2.m2" intent=":literal"><semantics><mi mathsize="0.900em">t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math><span class="ltx_text" id="S2.SS1.p1.2.4" style="font-size:90%;"> is represented as:</span></p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E1">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="m_{i}(t)=(c_{i},s_{i},v_{i}(t),\tau_{i},f_{i})" class="ltx_Math" display="block" id="S2.E1.m1" intent=":literal"><semantics><mrow><mrow><msub><mi mathsize="0.900em">m</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">=</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><msub><mi mathsize="0.900em">c</mi><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em">,</mo><msub><mi mathsize="0.900em">s</mi><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em">,</mo><mrow><msub><mi mathsize="0.900em">v</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">,</mo><msub><mi mathsize="0.900em">τ</mi><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em">,</mo><msub><mi mathsize="0.900em">f</mi><mi mathsize="0.900em">i</mi></msub><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><annotation encoding="application/x-tex">m_{i}(t)=(c_{i},s_{i},v_{i}(t),\tau_{i},f_{i})</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS1.p1.7"><span class="ltx_text" id="S2.SS1.p1.7.1" style="font-size:90%;">where </span><math alttext="c_{i}" class="ltx_Math" display="inline" id="S2.SS1.p1.3.m1" intent=":literal"><semantics><msub><mi mathsize="0.900em">c</mi><mi mathsize="0.900em">i</mi></msub><annotation encoding="application/x-tex">c_{i}</annotation></semantics></math><span class="ltx_text" id="S2.SS1.p1.7.2" style="font-size:90%;"> is the content embedding, </span><math alttext="s_{i}" class="ltx_Math" display="inline" id="S2.SS1.p1.4.m2" intent=":literal"><semantics><msub><mi mathsize="0.900em">s</mi><mi mathsize="0.900em">i</mi></msub><annotation encoding="application/x-tex">s_{i}</annotation></semantics></math><span class="ltx_text" id="S2.SS1.p1.7.3" style="font-size:90%;"> is the original text, </span><math alttext="v_{i}(t)\in[0,1]" class="ltx_Math" display="inline" id="S2.SS1.p1.5.m3" intent=":literal"><semantics><mrow><mrow><msub><mi mathsize="0.900em">v</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">∈</mo><mrow><mo maxsize="0.900em" minsize="0.900em">[</mo><mn mathsize="0.900em">0</mn><mo mathsize="0.900em">,</mo><mn mathsize="0.900em">1</mn><mo maxsize="0.900em" minsize="0.900em">]</mo></mrow></mrow><annotation encoding="application/x-tex">v_{i}(t)\in[0,1]</annotation></semantics></math><span class="ltx_text" id="S2.SS1.p1.7.4" style="font-size:90%;"> is the memory strength, </span><math alttext="\tau_{i}" class="ltx_Math" display="inline" id="S2.SS1.p1.6.m4" intent=":literal"><semantics><msub><mi mathsize="0.900em">τ</mi><mi mathsize="0.900em">i</mi></msub><annotation encoding="application/x-tex">\tau_{i}</annotation></semantics></math><span class="ltx_text" id="S2.SS1.p1.7.5" style="font-size:90%;"> is the creation timestamp, and </span><math alttext="f_{i}" class="ltx_Math" display="inline" id="S2.SS1.p1.7.m5" intent=":literal"><semantics><msub><mi mathsize="0.900em">f</mi><mi mathsize="0.900em">i</mi></msub><annotation encoding="application/x-tex">f_{i}</annotation></semantics></math><span class="ltx_text" id="S2.SS1.p1.7.6" style="font-size:90%;"> is the access frequency. The memory importance score determines layer assignment:</span></p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E2">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="I_{i}(t)=\alpha\cdot\text{rel}(c_{i},Q_{t})+\beta\cdot\frac{f_{i}}{1+f_{i}}+\gamma\cdot\text{recency}(\tau_{i},t)" class="ltx_Math" display="block" id="S2.E2.m1" intent=":literal"><semantics><mrow><mrow><msub><mi mathsize="0.900em">I</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">=</mo><mrow><mrow><mrow><mi mathsize="0.900em">α</mi><mo lspace="0.222em" mathsize="0.900em" rspace="0.222em">⋅</mo><mtext mathsize="0.900em">rel</mtext></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><msub><mi mathsize="0.900em">c</mi><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em">,</mo><msub><mi mathsize="0.900em">Q</mi><mi mathsize="0.900em">t</mi></msub><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">+</mo><mrow><mi mathsize="0.900em">β</mi><mo lspace="0.222em" mathsize="0.900em" rspace="0.222em">⋅</mo><mfrac><msub><mi mathsize="0.900em">f</mi><mi mathsize="0.900em">i</mi></msub><mrow><mn mathsize="0.900em">1</mn><mo mathsize="0.900em">+</mo><msub><mi mathsize="0.900em">f</mi><mi mathsize="0.900em">i</mi></msub></mrow></mfrac></mrow><mo mathsize="0.900em">+</mo><mrow><mrow><mi mathsize="0.900em">γ</mi><mo lspace="0.222em" mathsize="0.900em" rspace="0.222em">⋅</mo><mtext mathsize="0.900em">recency</mtext></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><msub><mi mathsize="0.900em">τ</mi><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em">,</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">I_{i}(t)=\alpha\cdot\text{rel}(c_{i},Q_{t})+\beta\cdot\frac{f_{i}}{1+f_{i}}+\gamma\cdot\text{recency}(\tau_{i},t)</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS1.p1.11"><span class="ltx_text" id="S2.SS1.p1.11.1" style="font-size:90%;">where </span><math alttext="Q_{t}" class="ltx_Math" display="inline" id="S2.SS1.p1.8.m1" intent=":literal"><semantics><msub><mi mathsize="0.900em">Q</mi><mi mathsize="0.900em">t</mi></msub><annotation encoding="application/x-tex">Q_{t}</annotation></semantics></math><span class="ltx_text" id="S2.SS1.p1.11.2" style="font-size:90%;"> represents recent context, the frequency term follows a saturating function to prevent over-weighting, and recency is defined as </span><math alttext="\text{recency}(\tau_{i},t)=\exp(-\delta(t-\tau_{i}))" class="ltx_Math" display="inline" id="S2.SS1.p1.9.m2" intent=":literal"><semantics><mrow><mrow><mtext mathsize="0.900em">recency</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><msub><mi mathsize="0.900em">τ</mi><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em">,</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">=</mo><mrow><mi mathsize="0.900em">exp</mi><mo>⁡</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mo mathsize="0.900em">−</mo><mrow><mi mathsize="0.900em">δ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mi mathsize="0.900em">t</mi><mo mathsize="0.900em">−</mo><msub><mi mathsize="0.900em">τ</mi><mi mathsize="0.900em">i</mi></msub></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\text{recency}(\tau_{i},t)=\exp(-\delta(t-\tau_{i}))</annotation></semantics></math><span class="ltx_text" id="S2.SS1.p1.11.3" style="font-size:90%;">. In practice, we replace the raw count </span><math alttext="f_{i}" class="ltx_Math" display="inline" id="S2.SS1.p1.10.m3" intent=":literal"><semantics><msub><mi mathsize="0.900em">f</mi><mi mathsize="0.900em">i</mi></msub><annotation encoding="application/x-tex">f_{i}</annotation></semantics></math><span class="ltx_text" id="S2.SS1.p1.11.4" style="font-size:90%;"> with an exponentially time-decayed access rate </span><math alttext="\tilde{f}_{i}=\sum_{j}\exp(-\kappa(t-t_{j}))" class="ltx_Math" display="inline" id="S2.SS1.p1.11.m4" intent=":literal"><semantics><mrow><msub><mover accent="true"><mi mathsize="0.900em">f</mi><mo mathsize="0.900em">~</mo></mover><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em" rspace="0.111em">=</mo><mrow><msub><mo maxsize="0.900em" minsize="0.900em" stretchy="true">∑</mo><mi mathsize="0.900em">j</mi></msub><mrow><mi mathsize="0.900em">exp</mi><mo>⁡</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mo mathsize="0.900em">−</mo><mrow><mi mathsize="0.900em">κ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mi mathsize="0.900em">t</mi><mo mathsize="0.900em">−</mo><msub><mi mathsize="0.900em">t</mi><mi mathsize="0.900em">j</mi></msub></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">\tilde{f}_{i}=\sum_{j}\exp(-\kappa(t-t_{j}))</annotation></semantics></math><span class="ltx_text" id="S2.SS1.p1.11.5" style="font-size:90%;"> to emphasize recent accesses. Memories are dynamically assigned to layers based on importance:</span></p>
+<ul class="ltx_itemize" id="S2.I1">
+<li class="ltx_item" id="S2.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i1.p1">
+<p class="ltx_p" id="S2.I1.i1.p1.1"><span class="ltx_text" id="S2.I1.i1.p1.1.1" style="font-size:90%;">Long-term Memory Layer (LML): High-importance memories with slow decay</span></p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i2.p1">
+<p class="ltx_p" id="S2.I1.i2.p1.1"><span class="ltx_text" id="S2.I1.i2.p1.1.1" style="font-size:90%;">Short-term Memory Layer (SML): Low-importance memories with rapid decay</span></p>
+</div>
+</li>
+</ul>
+<p class="ltx_p" id="S2.SS1.p1.15"><span class="ltx_text" id="S2.SS1.p1.15.1" style="font-size:90%;">Layer transitions occur when:</span></p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E3">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\text{Layer}(m_{i})=\begin{cases}\text{LML}&amp;\text{if }I_{i}(t)\geq\theta_{\text{promote}}\\
+\text{SML}&amp;\text{if }I_{i}(t)&lt;\theta_{\text{demote}}\end{cases}" class="ltx_Math" display="block" id="S2.E3.m1" intent=":literal"><semantics><mrow><mrow><mtext mathsize="0.900em">Layer</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><msub><mi mathsize="0.900em">m</mi><mi mathsize="0.900em">i</mi></msub><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mtext mathsize="0.900em">LML</mtext></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mrow><mtext mathsize="0.900em">if </mtext><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">I</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">≥</mo><msub><mi mathsize="0.900em">θ</mi><mtext mathsize="0.900em">promote</mtext></msub></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mtext mathsize="0.900em">SML</mtext></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mrow><mtext mathsize="0.900em">if </mtext><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">I</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">&lt;</mo><msub><mi mathsize="0.900em">θ</mi><mtext mathsize="0.900em">demote</mtext></msub></mrow></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\text{Layer}(m_{i})=\begin{cases}\text{LML}&amp;\text{if }I_{i}(t)\geq\theta_{\text{promote}}\\
+\text{SML}&amp;\text{if }I_{i}(t)&lt;\theta_{\text{demote}}\end{cases}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS1.p1.14"><span class="ltx_text" id="S2.SS1.p1.14.1" style="font-size:90%;">This allows memories to migrate between layers as their importance evolves over time. The thresholds </span><math alttext="\theta_{\text{promote}}" class="ltx_Math" display="inline" id="S2.SS1.p1.12.m1" intent=":literal"><semantics><msub><mi mathsize="0.900em">θ</mi><mtext mathsize="0.900em">promote</mtext></msub><annotation encoding="application/x-tex">\theta_{\text{promote}}</annotation></semantics></math><span class="ltx_text" id="S2.SS1.p1.14.2" style="font-size:90%;"> and </span><math alttext="\theta_{\text{demote}}" class="ltx_Math" display="inline" id="S2.SS1.p1.13.m2" intent=":literal"><semantics><msub><mi mathsize="0.900em">θ</mi><mtext mathsize="0.900em">demote</mtext></msub><annotation encoding="application/x-tex">\theta_{\text{demote}}</annotation></semantics></math><span class="ltx_text" id="S2.SS1.p1.14.3" style="font-size:90%;"> are determined through grid search on validation data. Using </span><math alttext="\theta_{\text{promote}}&gt;\theta_{\text{demote}}" class="ltx_Math" display="inline" id="S2.SS1.p1.14.m3" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">θ</mi><mtext mathsize="0.900em">promote</mtext></msub><mo mathsize="0.900em">&gt;</mo><msub><mi mathsize="0.900em">θ</mi><mtext mathsize="0.900em">demote</mtext></msub></mrow><annotation encoding="application/x-tex">\theta_{\text{promote}}&gt;\theta_{\text{demote}}</annotation></semantics></math><span class="ltx_text" id="S2.SS1.p1.14.4" style="font-size:90%;"> introduces hysteresis that prevents oscillation.</span></p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>Biologically-Inspired Forgetting Curves</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.10"><span class="ltx_text" id="S2.SS2.p1.10.1" style="font-size:90%;">We measure time in days, consistent with our 30-day evaluation setup. We model memory decay using differential exponential functions that simulate human forgetting patterns, consistent with Ebbinghaus’s forgetting curve:</span></p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E4">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="v_{i}(t)=v_{i}(0)\cdot\exp\left(-\lambda_{i}\cdot(t-\tau_{i})^{\beta_{i}}\right)" class="ltx_Math" display="block" id="S2.E4.m1" intent=":literal"><semantics><mrow><mrow><msub><mi mathsize="0.900em">v</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">=</mo><mrow><mrow><msub><mi mathsize="0.900em">v</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mn mathsize="0.900em">0</mn><mo maxsize="0.900em" minsize="0.900em" rspace="0.055em">)</mo></mrow></mrow><mo mathsize="0.900em" rspace="0.222em">⋅</mo><mrow><mi mathsize="0.900em">exp</mi><mo>⁡</mo><mrow><mo>(</mo><mrow><mo mathsize="0.900em">−</mo><mrow><msub><mi mathsize="0.900em">λ</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0.222em" mathsize="0.900em" rspace="0.222em">⋅</mo><msup><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mi mathsize="0.900em">t</mi><mo mathsize="0.900em">−</mo><msub><mi mathsize="0.900em">τ</mi><mi mathsize="0.900em">i</mi></msub></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow><msub><mi mathsize="0.900em">β</mi><mi mathsize="0.900em">i</mi></msub></msup></mrow></mrow><mo>)</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">v_{i}(t)=v_{i}(0)\cdot\exp\left(-\lambda_{i}\cdot(t-\tau_{i})^{\beta_{i}}\right)</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(4)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS2.p1.11"><span class="ltx_text" id="S2.SS2.p1.11.1" style="font-size:90%;">The decay rate adapts to memory importance:</span></p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E5">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\lambda_{i}=\lambda_{\text{base}}\cdot\exp(-\mu\cdot I_{i}(t))" class="ltx_Math" display="block" id="S2.E5.m1" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">λ</mi><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em">=</mo><mrow><msub><mi mathsize="0.900em">λ</mi><mtext mathsize="0.900em">base</mtext></msub><mo lspace="0.222em" mathsize="0.900em" rspace="0.222em">⋅</mo><mrow><mi mathsize="0.900em">exp</mi><mo>⁡</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mo mathsize="0.900em">−</mo><mrow><mrow><mi mathsize="0.900em">μ</mi><mo lspace="0.222em" mathsize="0.900em" rspace="0.222em">⋅</mo><msub><mi mathsize="0.900em">I</mi><mi mathsize="0.900em">i</mi></msub></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">\lambda_{i}=\lambda_{\text{base}}\cdot\exp(-\mu\cdot I_{i}(t))</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(5)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS2.p1.3"><span class="ltx_text" id="S2.SS2.p1.3.1" style="font-size:90%;">where </span><math alttext="\lambda_{\text{base}}" class="ltx_Math" display="inline" id="S2.SS2.p1.1.m1" intent=":literal"><semantics><msub><mi mathsize="0.900em">λ</mi><mtext mathsize="0.900em">base</mtext></msub><annotation encoding="application/x-tex">\lambda_{\text{base}}</annotation></semantics></math><span class="ltx_text" id="S2.SS2.p1.3.2" style="font-size:90%;"> approximates human short-term memory decay rates and </span><math alttext="\mu" class="ltx_Math" display="inline" id="S2.SS2.p1.2.m2" intent=":literal"><semantics><mi mathsize="0.900em">μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math><span class="ltx_text" id="S2.SS2.p1.3.3" style="font-size:90%;"> modulates the importance effect. The shape parameter </span><math alttext="\beta_{i}" class="ltx_Math" display="inline" id="S2.SS2.p1.3.m3" intent=":literal"><semantics><msub><mi mathsize="0.900em">β</mi><mi mathsize="0.900em">i</mi></msub><annotation encoding="application/x-tex">\beta_{i}</annotation></semantics></math><span class="ltx_text" id="S2.SS2.p1.3.4" style="font-size:90%;"> depends on the memory layer:</span></p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E6">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\beta_{i}=\begin{cases}0.8&amp;\text{if }m_{i}\in\text{LML}\qquad\text{(sub-linear decay)}\\
+1.2&amp;\text{if }m_{i}\in\text{SML}\qquad\text{(super-linear decay)}\end{cases}" class="ltx_Math" display="block" id="S2.E6.m1" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">β</mi><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em">=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mn mathsize="0.900em">0.8</mn></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mrow><mtext mathsize="0.900em">if </mtext><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">m</mi><mi mathsize="0.900em">i</mi></msub></mrow><mo mathsize="0.900em">∈</mo><mrow><mtext mathsize="0.900em">LML</mtext><mo lspace="0.920em" rspace="0em">​</mo><mtext mathsize="0.900em">(sub-linear decay)</mtext></mrow></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mn mathsize="0.900em">1.2</mn></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mrow><mtext mathsize="0.900em">if </mtext><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">m</mi><mi mathsize="0.900em">i</mi></msub></mrow><mo mathsize="0.900em">∈</mo><mrow><mtext mathsize="0.900em">SML</mtext><mo lspace="0.920em" rspace="0em">​</mo><mtext mathsize="0.900em">(super-linear decay)</mtext></mrow></mrow></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">\beta_{i}=\begin{cases}0.8&amp;\text{if }m_{i}\in\text{LML}\qquad\text{(sub-linear decay)}\\
+1.2&amp;\text{if }m_{i}\in\text{SML}\qquad\text{(super-linear decay)}\end{cases}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(6)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS2.p1.12"><span class="ltx_text" id="S2.SS2.p1.12.1" style="font-size:90%;">These values mirror biological memory consolidation where long-term memories exhibit slower, more gradual decay. Memory consolidation occurs during access, simulating the strengthening effect observed in human memory:</span></p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E7">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="v_{i}(t^{+})=v_{i}(t)+\Delta v\cdot(1-v_{i}(t))\cdot\exp(-n_{i}/N)" class="ltx_Math" display="block" id="S2.E7.m1" intent=":literal"><semantics><mrow><mrow><msub><mi mathsize="0.900em">v</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><msup><mi mathsize="0.900em">t</mi><mo mathsize="0.900em">+</mo></msup><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">=</mo><mrow><mrow><msub><mi mathsize="0.900em">v</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">+</mo><mrow><mrow><mi mathsize="0.900em" mathvariant="normal">Δ</mi><mo lspace="0em" rspace="0em">​</mo><mi mathsize="0.900em">v</mi></mrow><mo lspace="0.222em" mathsize="0.900em" rspace="0.222em">⋅</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mn mathsize="0.900em">1</mn><mo mathsize="0.900em">−</mo><mrow><msub><mi mathsize="0.900em">v</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow><mo maxsize="0.900em" minsize="0.900em" rspace="0.055em">)</mo></mrow><mo mathsize="0.900em" rspace="0.222em">⋅</mo><mrow><mi mathsize="0.900em">exp</mi><mo>⁡</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mo mathsize="0.900em">−</mo><mrow><msub><mi mathsize="0.900em">n</mi><mi mathsize="0.900em">i</mi></msub><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><mi mathsize="0.900em">N</mi></mrow></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">v_{i}(t^{+})=v_{i}(t)+\Delta v\cdot(1-v_{i}(t))\cdot\exp(-n_{i}/N)</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(7)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS2.p1.9"><span class="ltx_text" id="S2.SS2.p1.9.1" style="font-size:90%;">where </span><math alttext="\Delta v" class="ltx_Math" display="inline" id="S2.SS2.p1.4.m1" intent=":literal"><semantics><mrow><mi mathsize="0.900em" mathvariant="normal">Δ</mi><mo lspace="0em" rspace="0em">​</mo><mi mathsize="0.900em">v</mi></mrow><annotation encoding="application/x-tex">\Delta v</annotation></semantics></math><span class="ltx_text" id="S2.SS2.p1.9.2" style="font-size:90%;"> is the base reinforcement strength, </span><math alttext="n_{i}" class="ltx_Math" display="inline" id="S2.SS2.p1.5.m2" intent=":literal"><semantics><msub><mi mathsize="0.900em">n</mi><mi mathsize="0.900em">i</mi></msub><annotation encoding="application/x-tex">n_{i}</annotation></semantics></math><span class="ltx_text" id="S2.SS2.p1.9.3" style="font-size:90%;"> counts accesses within a sliding window of </span><math alttext="W" class="ltx_Math" display="inline" id="S2.SS2.p1.6.m3" intent=":literal"><semantics><mi mathsize="0.900em">W</mi><annotation encoding="application/x-tex">W</annotation></semantics></math><span class="ltx_text" id="S2.SS2.p1.9.4" style="font-size:90%;"> days, and </span><math alttext="N" class="ltx_Math" display="inline" id="S2.SS2.p1.7.m4" intent=":literal"><semantics><mi mathsize="0.900em">N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math><span class="ltx_text" id="S2.SS2.p1.9.5" style="font-size:90%;"> implements diminishing returns consistent with spacing effects in human learning. Memories undergo automatic pruning when their strength falls below </span><math alttext="\epsilon_{\text{prune}}" class="ltx_Math" display="inline" id="S2.SS2.p1.8.m5" intent=":literal"><semantics><msub><mi mathsize="0.900em">ϵ</mi><mtext mathsize="0.900em">prune</mtext></msub><annotation encoding="application/x-tex">\epsilon_{\text{prune}}</annotation></semantics></math><span class="ltx_text" id="S2.SS2.p1.9.6" style="font-size:90%;"> or they remain dormant beyond </span><math alttext="T_{\text{max}}" class="ltx_Math" display="inline" id="S2.SS2.p1.9.m6" intent=":literal"><semantics><msub><mi mathsize="0.900em">T</mi><mtext mathsize="0.900em">max</mtext></msub><annotation encoding="application/x-tex">T_{\text{max}}</annotation></semantics></math><span class="ltx_text" id="S2.SS2.p1.9.7" style="font-size:90%;"> days.</span></p>
+</div>
+<div class="ltx_para ltx_noindent" id="S2.SS2.p2">
+<p class="ltx_p" id="S2.SS2.p2.1"><span class="ltx_text ltx_font_bold" id="S2.SS2.p2.1.1" style="font-size:90%;">Half-life</span><span class="ltx_text" id="S2.SS2.p2.1.2" style="font-size:90%;">  With time measured in days, the half-life of memory </span><math alttext="m_{i}" class="ltx_Math" display="inline" id="S2.SS2.p2.1.m1" intent=":literal"><semantics><msub><mi mathsize="0.900em">m</mi><mi mathsize="0.900em">i</mi></msub><annotation encoding="application/x-tex">m_{i}</annotation></semantics></math><span class="ltx_text" id="S2.SS2.p2.1.3" style="font-size:90%;"> under our model is</span></p>
+<table class="ltx_equation ltx_eqn_table" id="S2.Ex1">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="t_{1/2}(i)=\Big(\tfrac{\ln 2}{\lambda_{i}}\Big)^{\!1/\beta_{i}},\quad\lambda_{i}=\lambda_{\text{base}}\exp(-\mu I_{i}(t))." class="ltx_Math" display="block" id="S2.Ex1.m1" intent=":literal"><semantics><mrow><mrow><mrow><mrow><msub><mi mathsize="0.900em">t</mi><mrow><mn mathsize="0.900em">1</mn><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><mn mathsize="0.900em">2</mn></mrow></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">i</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">=</mo><msup><mrow><mo maxsize="1.600em" minsize="1.600em">(</mo><mstyle displaystyle="false"><mfrac><mrow><mi mathsize="0.900em">ln</mi><mo lspace="0.167em">⁡</mo><mn mathsize="0.900em">2</mn></mrow><msub><mi mathsize="0.900em">λ</mi><mi mathsize="0.900em">i</mi></msub></mfrac></mstyle><mo maxsize="1.600em" minsize="1.600em">)</mo></mrow><mrow><mn mathsize="0.900em">1</mn><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><msub><mi mathsize="0.900em">β</mi><mi mathsize="0.900em">i</mi></msub></mrow></msup></mrow><mo mathsize="0.900em" rspace="1.087em">,</mo><mrow><msub><mi mathsize="0.900em">λ</mi><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em">=</mo><mrow><msub><mi mathsize="0.900em">λ</mi><mtext mathsize="0.900em">base</mtext></msub><mo lspace="0.167em" rspace="0em">​</mo><mrow><mi mathsize="0.900em">exp</mi><mo>⁡</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mo mathsize="0.900em">−</mo><mrow><mi mathsize="0.900em">μ</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">I</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow></mrow></mrow><mo lspace="0em" mathsize="0.900em">.</mo></mrow><annotation encoding="application/x-tex">t_{1/2}(i)=\Big(\tfrac{\ln 2}{\lambda_{i}}\Big)^{\!1/\beta_{i}},\quad\lambda_{i}=\lambda_{\text{base}}\exp(-\mu I_{i}(t)).</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS2.p2.7"><span class="ltx_text" id="S2.SS2.p2.7.1" style="font-size:90%;">At </span><math alttext="I_{i}(t)=0" class="ltx_Math" display="inline" id="S2.SS2.p2.2.m1" intent=":literal"><semantics><mrow><mrow><msub><mi mathsize="0.900em">I</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">=</mo><mn mathsize="0.900em">0</mn></mrow><annotation encoding="application/x-tex">I_{i}(t)=0</annotation></semantics></math><span class="ltx_text" id="S2.SS2.p2.7.2" style="font-size:90%;">, this gives </span><math alttext="t_{1/2}\approx 11.25" class="ltx_Math" display="inline" id="S2.SS2.p2.3.m2" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">t</mi><mrow><mn mathsize="0.900em">1</mn><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><mn mathsize="0.900em">2</mn></mrow></msub><mo mathsize="0.900em">≈</mo><mn mathsize="0.900em">11.25</mn></mrow><annotation encoding="application/x-tex">t_{1/2}\approx 11.25</annotation></semantics></math><span class="ltx_text" id="S2.SS2.p2.7.3" style="font-size:90%;"> days for LML (</span><math alttext="\beta_{i}=0.8" class="ltx_Math" display="inline" id="S2.SS2.p2.4.m3" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">β</mi><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em">=</mo><mn mathsize="0.900em">0.8</mn></mrow><annotation encoding="application/x-tex">\beta_{i}=0.8</annotation></semantics></math><span class="ltx_text" id="S2.SS2.p2.7.4" style="font-size:90%;">) and </span><math alttext="t_{1/2}\approx 5.02" class="ltx_Math" display="inline" id="S2.SS2.p2.5.m4" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">t</mi><mrow><mn mathsize="0.900em">1</mn><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><mn mathsize="0.900em">2</mn></mrow></msub><mo mathsize="0.900em">≈</mo><mn mathsize="0.900em">5.02</mn></mrow><annotation encoding="application/x-tex">t_{1/2}\approx 5.02</annotation></semantics></math><span class="ltx_text" id="S2.SS2.p2.7.5" style="font-size:90%;"> days for SML (</span><math alttext="\beta_{i}=1.2" class="ltx_Math" display="inline" id="S2.SS2.p2.6.m5" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">β</mi><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em">=</mo><mn mathsize="0.900em">1.2</mn></mrow><annotation encoding="application/x-tex">\beta_{i}=1.2</annotation></semantics></math><span class="ltx_text" id="S2.SS2.p2.7.6" style="font-size:90%;">) when </span><math alttext="\lambda_{\text{base}}=0.1" class="ltx_Math" display="inline" id="S2.SS2.p2.7.m6" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">λ</mi><mtext mathsize="0.900em">base</mtext></msub><mo mathsize="0.900em">=</mo><mn mathsize="0.900em">0.1</mn></mrow><annotation encoding="application/x-tex">\lambda_{\text{base}}=0.1</annotation></semantics></math><span class="ltx_text" id="S2.SS2.p2.7.7" style="font-size:90%;">.</span></p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS3">
+<h3 class="ltx_title ltx_title_subsection" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_subsection">2.3 </span>Memory Conflict Resolution</h3>
+<div class="ltx_para" id="S2.SS3.p1">
+<p class="ltx_p" id="S2.SS3.p1.1"><span class="ltx_text" id="S2.SS3.p1.1.1" style="font-size:90%;">When new information arrives, we detect and resolve conflicts through semantic analysis and LLM-based reasoning. For each new memory </span><math alttext="m_{\text{new}}" class="ltx_Math" display="inline" id="S2.SS3.p1.1.m1" intent=":literal"><semantics><msub><mi mathsize="0.900em">m</mi><mtext mathsize="0.900em">new</mtext></msub><annotation encoding="application/x-tex">m_{\text{new}}</annotation></semantics></math><span class="ltx_text" id="S2.SS3.p1.1.2" style="font-size:90%;">, we retrieve semantically similar memories:</span></p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E8">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\mathcal{S}=\{m_{i}:\text{sim}(c_{\text{new}},c_{i})&gt;\theta_{\text{sim}}\}" class="ltx_Math" display="block" id="S2.E8.m1" intent=":literal"><semantics><mrow><mi class="ltx_font_mathcaligraphic" mathsize="0.900em">𝒮</mi><mo mathsize="0.900em">=</mo><mrow><mo maxsize="0.900em" minsize="0.900em">{</mo><msub><mi mathsize="0.900em">m</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0.278em" mathsize="0.900em" rspace="0.278em">:</mo><mrow><mrow><mtext mathsize="0.900em">sim</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><msub><mi mathsize="0.900em">c</mi><mtext mathsize="0.900em">new</mtext></msub><mo mathsize="0.900em">,</mo><msub><mi mathsize="0.900em">c</mi><mi mathsize="0.900em">i</mi></msub><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">&gt;</mo><msub><mi mathsize="0.900em">θ</mi><mtext mathsize="0.900em">sim</mtext></msub></mrow><mo maxsize="0.900em" minsize="0.900em">}</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{S}=\{m_{i}:\text{sim}(c_{\text{new}},c_{i})&gt;\theta_{\text{sim}}\}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(8)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS3.p1.5"><span class="ltx_text" id="S2.SS3.p1.5.1" style="font-size:90%;">where </span><math alttext="\text{sim}(\cdot)" class="ltx_Math" display="inline" id="S2.SS3.p1.2.m1" intent=":literal"><semantics><mrow><mtext mathsize="0.900em">sim</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mo lspace="0em" mathsize="0.900em" rspace="0em">⋅</mo><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{sim}(\cdot)</annotation></semantics></math><span class="ltx_text" id="S2.SS3.p1.5.2" style="font-size:90%;"> is cosine similarity on </span><math alttext="\ell_{2}" class="ltx_Math" display="inline" id="S2.SS3.p1.3.m2" intent=":literal"><semantics><msub><mi mathsize="0.900em" mathvariant="normal">ℓ</mi><mn mathsize="0.900em">2</mn></msub><annotation encoding="application/x-tex">\ell_{2}</annotation></semantics></math><span class="ltx_text" id="S2.SS3.p1.5.3" style="font-size:90%;">-normalized embeddings. For each </span><math alttext="m_{i}\in\mathcal{S}" class="ltx_Math" display="inline" id="S2.SS3.p1.4.m3" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">m</mi><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em">∈</mo><mi class="ltx_font_mathcaligraphic" mathsize="0.900em">𝒮</mi></mrow><annotation encoding="application/x-tex">m_{i}\in\mathcal{S}</annotation></semantics></math><span class="ltx_text" id="S2.SS3.p1.5.4" style="font-size:90%;">, an LLM examines </span><math alttext="(s_{\text{new}},s_{i})" class="ltx_Math" display="inline" id="S2.SS3.p1.5.m4" intent=":literal"><semantics><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><msub><mi mathsize="0.900em">s</mi><mtext mathsize="0.900em">new</mtext></msub><mo mathsize="0.900em">,</mo><msub><mi mathsize="0.900em">s</mi><mi mathsize="0.900em">i</mi></msub><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow><annotation encoding="application/x-tex">(s_{\text{new}},s_{i})</annotation></semantics></math><span class="ltx_text" id="S2.SS3.p1.5.5" style="font-size:90%;"> and classifies their relationship into one of four categories in text: </span><em class="ltx_emph ltx_font_italic" id="S2.SS3.p1.5.6" style="font-size:90%;">compatible</em><span class="ltx_text" id="S2.SS3.p1.5.7" style="font-size:90%;">, </span><em class="ltx_emph ltx_font_italic" id="S2.SS3.p1.5.8" style="font-size:90%;">contradictory</em><span class="ltx_text" id="S2.SS3.p1.5.9" style="font-size:90%;">, </span><em class="ltx_emph ltx_font_italic" id="S2.SS3.p1.5.10" style="font-size:90%;">subsumes</em><span class="ltx_text" id="S2.SS3.p1.5.11" style="font-size:90%;">, or </span><em class="ltx_emph ltx_font_italic" id="S2.SS3.p1.5.12" style="font-size:90%;">subsumed</em><span class="ltx_text" id="S2.SS3.p1.5.13" style="font-size:90%;">. We then apply the corresponding resolution strategy:</span></p>
+</div>
+<div class="ltx_para" id="S2.SS3.p2">
+<p class="ltx_p" id="S2.SS3.p2.1"><span class="ltx_text ltx_font_bold" id="S2.SS3.p2.1.1" style="font-size:90%;">Compatible</span><span class="ltx_text" id="S2.SS3.p2.1.2" style="font-size:90%;">: Both memories coexist, while the existing memory’s importance is reduced by redundancy:</span></p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E9">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="I_{i}=I_{i}\cdot\bigl(1-\omega\cdot\text{sim}(c_{\text{new}},c_{i})\bigr)." class="ltx_Math" display="block" id="S2.E9.m1" intent=":literal"><semantics><mrow><mrow><msub><mi mathsize="0.900em">I</mi><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em">=</mo><mrow><msub><mi mathsize="0.900em">I</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0.222em" mathsize="0.900em" rspace="0.222em">⋅</mo><mrow><mo maxsize="1.200em" minsize="1.200em">(</mo><mrow><mn mathsize="0.900em">1</mn><mo mathsize="0.900em">−</mo><mrow><mrow><mi mathsize="0.900em">ω</mi><mo lspace="0.222em" mathsize="0.900em" rspace="0.222em">⋅</mo><mtext mathsize="0.900em">sim</mtext></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><msub><mi mathsize="0.900em">c</mi><mtext mathsize="0.900em">new</mtext></msub><mo mathsize="0.900em">,</mo><msub><mi mathsize="0.900em">c</mi><mi mathsize="0.900em">i</mi></msub><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow><mo maxsize="1.200em" minsize="1.200em">)</mo></mrow></mrow></mrow><mo lspace="0em" mathsize="0.900em">.</mo></mrow><annotation encoding="application/x-tex">I_{i}=I_{i}\cdot\bigl(1-\omega\cdot\text{sim}(c_{\text{new}},c_{i})\bigr).</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(9)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div class="ltx_para" id="S2.SS3.p3">
+<p class="ltx_p" id="S2.SS3.p3.1"><span class="ltx_text ltx_font_bold" id="S2.SS3.p3.1.1" style="font-size:90%;">Contradictory</span><span class="ltx_text" id="S2.SS3.p3.1.2" style="font-size:90%;">: Apply competitive dynamics where newer information suppresses older. We use a window-normalized age difference with </span><math alttext="W_{\text{age}}" class="ltx_Math" display="inline" id="S2.SS3.p3.1.m1" intent=":literal"><semantics><msub><mi mathsize="0.900em">W</mi><mtext mathsize="0.900em">age</mtext></msub><annotation encoding="application/x-tex">W_{\text{age}}</annotation></semantics></math><span class="ltx_text" id="S2.SS3.p3.1.3" style="font-size:90%;"> days:</span></p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E10">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="v_{i}(t)=v_{i}(t)\cdot\exp\!\Bigl(-\rho\cdot\mathrm{clip}\!\bigl((\tau_{\text{new}}-\tau_{i})/W_{\text{age}},\,0,\,1\bigr)\Bigr)." class="ltx_Math" display="block" id="S2.E10.m1" intent=":literal"><semantics><mrow><mrow><mrow><msub><mi mathsize="0.900em">v</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">=</mo><mrow><mrow><msub><mi mathsize="0.900em">v</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em" rspace="0.055em">)</mo></mrow></mrow><mo mathsize="0.900em" rspace="0.222em">⋅</mo><mrow><mpadded style="width:1.370em;" width="1.370em"><mi mathsize="0.900em">exp</mi></mpadded><mo>⁡</mo><mrow><mo maxsize="1.600em" minsize="1.600em">(</mo><mrow><mo mathsize="0.900em">−</mo><mrow><mrow><mi mathsize="0.900em">ρ</mi><mo lspace="0.222em" mathsize="0.900em" rspace="0.222em">⋅</mo><mpadded style="width:1.428em;" width="1.428em"><mi mathsize="0.900em">clip</mi></mpadded></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="1.200em" minsize="1.200em">(</mo><mrow><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><msub><mi mathsize="0.900em">τ</mi><mtext mathsize="0.900em">new</mtext></msub><mo mathsize="0.900em">−</mo><msub><mi mathsize="0.900em">τ</mi><mi mathsize="0.900em">i</mi></msub></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><msub><mi mathsize="0.900em">W</mi><mtext mathsize="0.900em">age</mtext></msub></mrow><mo mathsize="0.900em">,</mo><mn mathsize="0.900em"> 0</mn><mo mathsize="0.900em">,</mo><mn mathsize="0.900em"> 1</mn><mo maxsize="1.200em" minsize="1.200em">)</mo></mrow></mrow></mrow><mo maxsize="1.600em" minsize="1.600em">)</mo></mrow></mrow></mrow></mrow><mo lspace="0em" mathsize="0.900em">.</mo></mrow><annotation encoding="application/x-tex">v_{i}(t)=v_{i}(t)\cdot\exp\!\Bigl(-\rho\cdot\mathrm{clip}\!\bigl((\tau_{\text{new}}-\tau_{i})/W_{\text{age}},\,0,\,1\bigr)\Bigr).</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(10)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div class="ltx_para" id="S2.SS3.p4">
+<p class="ltx_p" id="S2.SS3.p4.2"><span class="ltx_text ltx_font_bold" id="S2.SS3.p4.2.1" style="font-size:90%;">Subsumes/Subsumed</span><span class="ltx_text" id="S2.SS3.p4.2.2" style="font-size:90%;">: The more general memory absorbs the specific one via LLM-guided merging (content is consolidated; redundant details are compressed). The parameters </span><math alttext="\omega" class="ltx_Math" display="inline" id="S2.SS3.p4.1.m1" intent=":literal"><semantics><mi mathsize="0.900em">ω</mi><annotation encoding="application/x-tex">\omega</annotation></semantics></math><span class="ltx_text" id="S2.SS3.p4.2.3" style="font-size:90%;"> and </span><math alttext="\rho" class="ltx_Math" display="inline" id="S2.SS3.p4.2.m2" intent=":literal"><semantics><mi mathsize="0.900em">ρ</mi><annotation encoding="application/x-tex">\rho</annotation></semantics></math><span class="ltx_text" id="S2.SS3.p4.2.4" style="font-size:90%;"> control redundancy penalty and suppression strength respectively, calibrated through ablation studies.</span></p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS4">
+<h3 class="ltx_title ltx_title_subsection" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_subsection">2.4 </span>Adaptive Memory Fusion</h3>
+<div class="ltx_para" id="S2.SS4.p1">
+<p class="ltx_p" id="S2.SS4.p1.8"><span class="ltx_text" id="S2.SS4.p1.8.1" style="font-size:90%;">To maintain efficiency while preserving information integrity, we implement LLM-guided fusion for related memories. Fusion candidates are identified through temporal-semantic clustering:</span></p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E11">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\mathcal{C}_{k}=\{m_{i}:\text{sim}(c_{i},c_{k})&gt;\theta_{\text{fusion}}\land|\tau_{i}-\tau_{k}|&lt;T_{\text{window}}\}" class="ltx_Math" display="block" id="S2.E11.m1" intent=":literal"><semantics><mrow><msub><mi class="ltx_font_mathcaligraphic" mathsize="0.900em">𝒞</mi><mi mathsize="0.900em">k</mi></msub><mo mathsize="0.900em">=</mo><mrow><mo maxsize="0.900em" minsize="0.900em">{</mo><msub><mi mathsize="0.900em">m</mi><mi mathsize="0.900em">i</mi></msub><mo lspace="0.278em" mathsize="0.900em" rspace="0.278em">:</mo><mrow><mrow><mtext mathsize="0.900em">sim</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><msub><mi mathsize="0.900em">c</mi><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em">,</mo><msub><mi mathsize="0.900em">c</mi><mi mathsize="0.900em">k</mi></msub><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">&gt;</mo><mrow><msub><mi mathsize="0.900em">θ</mi><mtext mathsize="0.900em">fusion</mtext></msub><mo mathsize="0.900em">∧</mo><mrow><mo maxsize="0.900em" minsize="0.900em" stretchy="true">|</mo><mrow><msub><mi mathsize="0.900em">τ</mi><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em">−</mo><msub><mi mathsize="0.900em">τ</mi><mi mathsize="0.900em">k</mi></msub></mrow><mo maxsize="0.900em" minsize="0.900em" stretchy="true">|</mo></mrow></mrow><mo mathsize="0.900em">&lt;</mo><msub><mi mathsize="0.900em">T</mi><mtext mathsize="0.900em">window</mtext></msub></mrow><mo maxsize="0.900em" minsize="0.900em">}</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{C}_{k}=\{m_{i}:\text{sim}(c_{i},c_{k})&gt;\theta_{\text{fusion}}\land|\tau_{i}-\tau_{k}|&lt;T_{\text{window}}\}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(11)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS4.p1.2"><span class="ltx_text" id="S2.SS4.p1.2.1" style="font-size:90%;">where </span><math alttext="\theta_{\text{fusion}}" class="ltx_Math" display="inline" id="S2.SS4.p1.1.m1" intent=":literal"><semantics><msub><mi mathsize="0.900em">θ</mi><mtext mathsize="0.900em">fusion</mtext></msub><annotation encoding="application/x-tex">\theta_{\text{fusion}}</annotation></semantics></math><span class="ltx_text" id="S2.SS4.p1.2.2" style="font-size:90%;"> ensures semantic coherence and </span><math alttext="T_{\text{window}}" class="ltx_Math" display="inline" id="S2.SS4.p1.2.m2" intent=":literal"><semantics><msub><mi mathsize="0.900em">T</mi><mtext mathsize="0.900em">window</mtext></msub><annotation encoding="application/x-tex">T_{\text{window}}</annotation></semantics></math><span class="ltx_text" id="S2.SS4.p1.2.3" style="font-size:90%;"> maintains temporal locality. For clusters exceeding a size threshold, we perform intelligent fusion via LLM that preserves unique information, temporal progression, and causal relationships. The fused memory inherits aggregated properties:</span></p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E12">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="v_{\text{fused}}(0)=\max_{i\in\mathcal{C}_{k}}v_{i}(t)+\epsilon\cdot\text{var}(\{v_{i}\})" class="ltx_Math" display="block" id="S2.E12.m1" intent=":literal"><semantics><mrow><mrow><msub><mi mathsize="0.900em">v</mi><mtext mathsize="0.900em">fused</mtext></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mn mathsize="0.900em">0</mn><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">=</mo><mrow><mrow><mrow><munder><mi mathsize="0.900em">max</mi><mrow><mi mathsize="0.900em">i</mi><mo mathsize="0.900em">∈</mo><msub><mi class="ltx_font_mathcaligraphic" mathsize="0.900em">𝒞</mi><mi mathsize="0.900em">k</mi></msub></mrow></munder><mo lspace="0.167em">⁡</mo><msub><mi mathsize="0.900em">v</mi><mi mathsize="0.900em">i</mi></msub></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">t</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">+</mo><mrow><mrow><mi mathsize="0.900em">ϵ</mi><mo lspace="0.222em" mathsize="0.900em" rspace="0.222em">⋅</mo><mtext mathsize="0.900em">var</mtext></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mo maxsize="0.900em" minsize="0.900em">{</mo><msub><mi mathsize="0.900em">v</mi><mi mathsize="0.900em">i</mi></msub><mo maxsize="0.900em" minsize="0.900em">}</mo></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">v_{\text{fused}}(0)=\max_{i\in\mathcal{C}_{k}}v_{i}(t)+\epsilon\cdot\text{var}(\{v_{i}\})</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(12)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS4.p1.4"><span class="ltx_text" id="S2.SS4.p1.4.1" style="font-size:90%;">where the strength combines the maximum individual strength with a variance-based bonus, reflecting that diverse supporting memories create stronger consolidation. We clip </span><math alttext="v_{\text{fused}}" class="ltx_Math" display="inline" id="S2.SS4.p1.3.m1" intent=":literal"><semantics><msub><mi mathsize="0.900em">v</mi><mtext mathsize="0.900em">fused</mtext></msub><annotation encoding="application/x-tex">v_{\text{fused}}</annotation></semantics></math><span class="ltx_text" id="S2.SS4.p1.4.2" style="font-size:90%;"> to </span><math alttext="[0,1]" class="ltx_Math" display="inline" id="S2.SS4.p1.4.m2" intent=":literal"><semantics><mrow><mo maxsize="0.900em" minsize="0.900em">[</mo><mn mathsize="0.900em">0</mn><mo mathsize="0.900em">,</mo><mn mathsize="0.900em">1</mn><mo maxsize="0.900em" minsize="0.900em">]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math><span class="ltx_text" id="S2.SS4.p1.4.3" style="font-size:90%;">.</span></p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E13">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\lambda_{\text{fused}}=\frac{\lambda_{\text{base}}}{1+\log(|\mathcal{C}_{k}|)}" class="ltx_Math" display="block" id="S2.E13.m1" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">λ</mi><mtext mathsize="0.900em">fused</mtext></msub><mo mathsize="0.900em">=</mo><mfrac><msub><mi mathsize="0.900em">λ</mi><mtext mathsize="0.900em">base</mtext></msub><mrow><mn mathsize="0.900em">1</mn><mo mathsize="0.900em">+</mo><mrow><mi mathsize="0.900em">log</mi><mo>⁡</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mo maxsize="0.900em" minsize="0.900em" stretchy="true">|</mo><msub><mi class="ltx_font_mathcaligraphic" mathsize="0.900em">𝒞</mi><mi mathsize="0.900em">k</mi></msub><mo maxsize="0.900em" minsize="0.900em" stretchy="true">|</mo></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\lambda_{\text{fused}}=\frac{\lambda_{\text{base}}}{1+\log(|\mathcal{C}_{k}|)}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(13)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS4.p1.7"><span class="ltx_text" id="S2.SS4.p1.7.1" style="font-size:90%;">During fusion we set </span><math alttext="\lambda_{i}\leftarrow\lambda_{\text{base}}\cdot\xi_{\text{fused}}\cdot\exp(-\mu I_{i})" class="ltx_Math" display="inline" id="S2.SS4.p1.5.m1" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">λ</mi><mi mathsize="0.900em">i</mi></msub><mo mathsize="0.900em" stretchy="false">←</mo><mrow><msub><mi mathsize="0.900em">λ</mi><mtext mathsize="0.900em">base</mtext></msub><mo lspace="0.222em" mathsize="0.900em" rspace="0.222em">⋅</mo><msub><mi mathsize="0.900em">ξ</mi><mtext mathsize="0.900em">fused</mtext></msub><mo lspace="0.222em" mathsize="0.900em" rspace="0.222em">⋅</mo><mrow><mi mathsize="0.900em">exp</mi><mo>⁡</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mo mathsize="0.900em">−</mo><mrow><mi mathsize="0.900em">μ</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">I</mi><mi mathsize="0.900em">i</mi></msub></mrow></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">\lambda_{i}\leftarrow\lambda_{\text{base}}\cdot\xi_{\text{fused}}\cdot\exp(-\mu I_{i})</annotation></semantics></math><span class="ltx_text" id="S2.SS4.p1.7.2" style="font-size:90%;"> with </span><math alttext="\xi_{\text{fused}}=1/(1+\log|\mathcal{C}_{k}|)" class="ltx_Math" display="inline" id="S2.SS4.p1.6.m2" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">ξ</mi><mtext mathsize="0.900em">fused</mtext></msub><mo mathsize="0.900em">=</mo><mrow><mn mathsize="0.900em">1</mn><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mn mathsize="0.900em">1</mn><mo mathsize="0.900em">+</mo><mrow><mi mathsize="0.900em">log</mi><mo>⁡</mo><mrow><mo maxsize="0.900em" minsize="0.900em" stretchy="true">|</mo><msub><mi class="ltx_font_mathcaligraphic" mathsize="0.900em">𝒞</mi><mi mathsize="0.900em">k</mi></msub><mo maxsize="0.900em" minsize="0.900em" stretchy="true">|</mo></mrow></mrow></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\xi_{\text{fused}}=1/(1+\log|\mathcal{C}_{k}|)</annotation></semantics></math><span class="ltx_text" id="S2.SS4.p1.7.3" style="font-size:90%;">. The reduced decay rate for fused memories reflects their consolidated importance. Information preservation is validated through LLM verification with threshold </span><math alttext="\theta_{\text{preserve}}" class="ltx_Math" display="inline" id="S2.SS4.p1.7.m3" intent=":literal"><semantics><msub><mi mathsize="0.900em">θ</mi><mtext mathsize="0.900em">preserve</mtext></msub><annotation encoding="application/x-tex">\theta_{\text{preserve}}</annotation></semantics></math><span class="ltx_text" id="S2.SS4.p1.7.4" style="font-size:90%;">. If preservation falls below threshold, fusion is rejected. The complete memory evolution follows:</span></p>
+<table class="ltx_equation ltx_eqn_table" id="S2.E14">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\mathcal{M}_{t+\Delta t}=\text{Fusion}(\text{Resolution}(\text{Decay}(\mathcal{M}_{t},\Delta t)\cup\{m_{\text{new}}\}))" class="ltx_Math" display="block" id="S2.E14.m1" intent=":literal"><semantics><mrow><msub><mi class="ltx_font_mathcaligraphic" mathsize="0.900em">ℳ</mi><mrow><mi mathsize="0.900em">t</mi><mo mathsize="0.900em">+</mo><mrow><mi mathsize="0.900em" mathvariant="normal">Δ</mi><mo lspace="0em" rspace="0em">​</mo><mi mathsize="0.900em">t</mi></mrow></mrow></msub><mo mathsize="0.900em">=</mo><mrow><mtext mathsize="0.900em">Fusion</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mtext mathsize="0.900em">Resolution</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mrow><mtext mathsize="0.900em">Decay</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><msub><mi class="ltx_font_mathcaligraphic" mathsize="0.900em">ℳ</mi><mi mathsize="0.900em">t</mi></msub><mo mathsize="0.900em">,</mo><mrow><mi mathsize="0.900em" mathvariant="normal">Δ</mi><mo lspace="0em" rspace="0em">​</mo><mi mathsize="0.900em">t</mi></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">∪</mo><mrow><mo maxsize="0.900em" minsize="0.900em">{</mo><msub><mi mathsize="0.900em">m</mi><mtext mathsize="0.900em">new</mtext></msub><mo maxsize="0.900em" minsize="0.900em">}</mo></mrow></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\mathcal{M}_{t+\Delta t}=\text{Fusion}(\text{Resolution}(\text{Decay}(\mathcal{M}_{t},\Delta t)\cup\{m_{\text{new}}\}))</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(14)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S2.SS4.p1.9"><span class="ltx_text" id="S2.SS4.p1.9.1" style="font-size:90%;">This creates an adaptive system that naturally forgets unimportant information while strengthening and consolidating important memories, mirroring human cognitive processes. All hyperparameters were determined through systematic ablation studies, balancing retention quality against computational efficiency.</span></p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_section">3 </span>Experiments</h2>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Experimental Setup</h3>
+<div class="ltx_para ltx_noindent" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1"><span class="ltx_text ltx_font_bold" id="S3.SS1.p1.1.1" style="font-size:90%;">Datasets</span><span class="ltx_text" id="S3.SS1.p1.1.2" style="font-size:90%;">  We evaluate our approach on three diverse datasets that capture different aspects of long-term agent memory requirements. We use Multi-Session Chat (MSC) </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S3.SS1.p1.1.3.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib20" title="Beyond goldfish memory: long-term open-domain conversation">25</a><span class="ltx_text" id="S3.SS1.p1.1.4.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S3.SS1.p1.1.5" style="font-size:90%;"> containing 5,000 multi-session dialogues spanning up to 5 sessions per user, with an average context length of 1,614 tokens per session. For long-context evaluation, we employ LoCoMo </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S3.SS1.p1.1.6.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib38" title="Evaluating very long-term conversational memory of llm agents">17</a><span class="ltx_text" id="S3.SS1.p1.1.7.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S3.SS1.p1.1.8" style="font-size:90%;">, focusing on multi-hop reasoning across extended contexts. Additionally, we construct a synthetic long-term interaction dataset (LTI-Bench) simulating 30-day agent-user interactions with controlled information evolution patterns, containing 10,780 interaction sequences with explicit temporal dependencies and contradiction scenarios.</span></p>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.SS1.p2">
+<p class="ltx_p" id="S3.SS1.p2.1"><span class="ltx_text ltx_font_bold" id="S3.SS1.p2.1.1" style="font-size:90%;">Baselines</span><span class="ltx_text" id="S3.SS1.p2.1.2" style="font-size:90%;">  We compare against three categories of memory management approaches: (1) </span><span class="ltx_text ltx_font_italic" id="S3.SS1.p2.1.3" style="font-size:90%;">Fixed-window methods</span><span class="ltx_text" id="S3.SS1.p2.1.4" style="font-size:90%;">: including context windows of 4K, 8K, and 16K tokens with FIFO eviction </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S3.SS1.p2.1.5.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib15" title="Transformer-xl: attentive language models beyond a fixed-length context">5</a>, <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib14" title="Lost in the middle: how language models use long contexts">16</a><span class="ltx_text" id="S3.SS1.p2.1.6.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S3.SS1.p2.1.7" style="font-size:90%;">; (2) </span><span class="ltx_text ltx_font_italic" id="S3.SS1.p2.1.8" style="font-size:90%;">RAG-based systems</span><span class="ltx_text" id="S3.SS1.p2.1.9" style="font-size:90%;">: LangChain Memory with default configurations; (3) </span><span class="ltx_text ltx_font_italic" id="S3.SS1.p2.1.10" style="font-size:90%;">Specialized agent memory</span><span class="ltx_text" id="S3.SS1.p2.1.11" style="font-size:90%;">: Mem0 </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S3.SS1.p2.1.12.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib18" title="Mem0: building production-ready ai agents with scalable long-term memory">4</a><span class="ltx_text" id="S3.SS1.p2.1.13.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S3.SS1.p2.1.14" style="font-size:90%;"> as our primary baseline, representing state-of-the-art unified memory layers, and MemGPT </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S3.SS1.p2.1.15.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib23" title="MemGPT: towards llms as operating systems.">20</a><span class="ltx_text" id="S3.SS1.p2.1.16.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S3.SS1.p2.1.17" style="font-size:90%;"> with hierarchical memory management.</span></p>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.SS1.p3">
+<p class="ltx_p" id="S3.SS1.p3.1"><span class="ltx_text ltx_font_bold" id="S3.SS1.p3.1.1" style="font-size:90%;">Evaluation Metrics.</span><span class="ltx_text" id="S3.SS1.p3.1.2" style="font-size:90%;">  We assess performance across multiple dimensions. For memory efficiency, we measure Storage Reduction Rate (SRR) as </span><math alttext="\text{SRR}=1-|\mathcal{M}_{\text{retained}}|/|\mathcal{M}_{\text{total}}|" class="ltx_Math" display="inline" id="S3.SS1.p3.1.m1" intent=":literal"><semantics><mrow><mtext mathsize="0.900em">SRR</mtext><mo mathsize="0.900em">=</mo><mrow><mn mathsize="0.900em">1</mn><mo mathsize="0.900em">−</mo><mrow><mrow><mo maxsize="0.900em" minsize="0.900em" stretchy="true">|</mo><msub><mi class="ltx_font_mathcaligraphic" mathsize="0.900em">ℳ</mi><mtext mathsize="0.900em">retained</mtext></msub><mo maxsize="0.900em" minsize="0.900em" stretchy="true">|</mo></mrow><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><mrow><mo maxsize="0.900em" minsize="0.900em" stretchy="true">|</mo><msub><mi class="ltx_font_mathcaligraphic" mathsize="0.900em">ℳ</mi><mtext mathsize="0.900em">total</mtext></msub><mo maxsize="0.900em" minsize="0.900em" stretchy="true">|</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">\text{SRR}=1-|\mathcal{M}_{\text{retained}}|/|\mathcal{M}_{\text{total}}|</annotation></semantics></math><span class="ltx_text" id="S3.SS1.p3.1.3" style="font-size:90%;">, quantifying the proportion of memory saved through intelligent forgetting. Retrieval quality is evaluated through Relevance Precision@K (RP@K), measuring the precision of top-K retrieved memories. We also compute Temporal Consistency Score (TCS) to assess chronological coherence in memory retrieval, ranging from 0 to 1 where higher values indicate better temporal ordering. For task performance, we report F1 scores on downstream tasks, particularly focusing on multi-hop reasoning capabilities. Additionally, we measure Factual Consistency Rate (FCR) via LLM-based fact checking </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S3.SS1.p3.1.4.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib29" title="Selfcheckgpt: zero-resource black-box hallucination detection for generative large language models">18</a><span class="ltx_text" id="S3.SS1.p3.1.5.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S3.SS1.p3.1.6" style="font-size:90%;"> to ensure memory coherence after updates and conflict resolution. For conflict resolution evaluation, we report accuracy (Acc.) as the rate of correct strategy selection and consistency (Cons.) as the factual coherence maintained post-resolution.</span></p>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.SS1.p4">
+<p class="ltx_p" id="S3.SS1.p4.5"><span class="ltx_text ltx_font_bold" id="S3.SS1.p4.5.1" style="font-size:90%;">Implementation Details</span><span class="ltx_text" id="S3.SS1.p4.5.2" style="font-size:90%;">  Our system employs GPT-4o-mini </span><cite class="ltx_cite ltx_citemacro_cite"><span class="ltx_text" id="S3.SS1.p4.5.3.1" style="font-size:90%;">[</span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#bib.bib26" title="Gpt-4 technical report">1</a><span class="ltx_text" id="S3.SS1.p4.5.4.2" style="font-size:90%;">]</span></cite><span class="ltx_text" id="S3.SS1.p4.5.5" style="font-size:90%;"> for conflict resolution and memory fusion operations, with embeddings generated using text-embedding-3-small. Key hyperparameters determined through grid search on validation sets include: </span><math alttext="\lambda_{\text{base}}=0.1" class="ltx_Math" display="inline" id="S3.SS1.p4.1.m1" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">λ</mi><mtext mathsize="0.900em">base</mtext></msub><mo mathsize="0.900em">=</mo><mn mathsize="0.900em">0.1</mn></mrow><annotation encoding="application/x-tex">\lambda_{\text{base}}=0.1</annotation></semantics></math><span class="ltx_text" id="S3.SS1.p4.5.6" style="font-size:90%;">, </span><math alttext="\theta_{\text{promote}}=0.7" class="ltx_Math" display="inline" id="S3.SS1.p4.2.m2" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">θ</mi><mtext mathsize="0.900em">promote</mtext></msub><mo mathsize="0.900em">=</mo><mn mathsize="0.900em">0.7</mn></mrow><annotation encoding="application/x-tex">\theta_{\text{promote}}=0.7</annotation></semantics></math><span class="ltx_text" id="S3.SS1.p4.5.7" style="font-size:90%;">, </span><math alttext="\theta_{\text{demote}}=0.3" class="ltx_Math" display="inline" id="S3.SS1.p4.3.m3" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">θ</mi><mtext mathsize="0.900em">demote</mtext></msub><mo mathsize="0.900em">=</mo><mn mathsize="0.900em">0.3</mn></mrow><annotation encoding="application/x-tex">\theta_{\text{demote}}=0.3</annotation></semantics></math><span class="ltx_text" id="S3.SS1.p4.5.8" style="font-size:90%;">, and </span><math alttext="\theta_{\text{fusion}}=0.75" class="ltx_Math" display="inline" id="S3.SS1.p4.4.m4" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">θ</mi><mtext mathsize="0.900em">fusion</mtext></msub><mo mathsize="0.900em">=</mo><mn mathsize="0.900em">0.75</mn></mrow><annotation encoding="application/x-tex">\theta_{\text{fusion}}=0.75</annotation></semantics></math><span class="ltx_text" id="S3.SS1.p4.5.9" style="font-size:90%;">. All experiments use a dual-layer architecture with maximum capacities of 1,000 memories in LML and 500 in SML. Statistical significance is assessed using paired t-tests with </span><math alttext="p&lt;0.05" class="ltx_Math" display="inline" id="S3.SS1.p4.5.m5" intent=":literal"><semantics><mrow><mi mathsize="0.900em">p</mi><mo mathsize="0.900em">&lt;</mo><mn mathsize="0.900em">0.05</mn></mrow><annotation encoding="application/x-tex">p&lt;0.05</annotation></semantics></math><span class="ltx_text" id="S3.SS1.p4.5.10" style="font-size:90%;">.</span></p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Memory Retention and Forgetting Dynamics</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1"><span class="ltx_text" id="S3.SS2.p1.1.1" style="font-size:90%;">We evaluate whether our biologically-inspired forgetting effectively balances retention with efficiency using 30-day simulated interactions on LTI-Bench. Table </span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.T1" style="font-size:90%;" title="Table 1 ‣ 3.2 Memory Retention and Forgetting Dynamics ‣ 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">1</span></a><span class="ltx_text" id="S3.SS2.p1.1.2" style="font-size:90%;"> shows retention rates for different information categories.</span></p>
+</div>
+<figure class="ltx_table" id="S3.T1">
+<figcaption class="ltx_caption ltx_centering" style="font-size:90%;"><span class="ltx_tag ltx_tag_table"><span class="ltx_text ltx_font_bold" id="S3.T1.6.1.1">Table 1</span>: </span>Memory retention analysis on <span class="ltx_text ltx_font_bold" id="S3.T1.7.2">LTI-Bench</span> after 30 days of continuous interaction. Critical facts include user preferences/constraints; contextual info includes topics/states.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S3.T1.8">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S3.T1.8.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="S3.T1.8.1.1.1"><span class="ltx_text" id="S3.T1.8.1.1.1.1" style="font-size:90%;">Method</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S3.T1.8.1.1.2"><span class="ltx_text" id="S3.T1.8.1.1.2.1" style="font-size:90%;">Critical Facts</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S3.T1.8.1.1.3"><span class="ltx_text" id="S3.T1.8.1.1.3.1" style="font-size:90%;">Contextual Info</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" id="S3.T1.8.1.1.4"><span class="ltx_text" id="S3.T1.8.1.1.4.1" style="font-size:90%;">Storage Used</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.T1.8.2.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S3.T1.8.2.1.1"><span class="ltx_text" id="S3.T1.8.2.1.1.1" style="font-size:90%;">Fixed-16K</span></th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.8.2.1.2"><span class="ltx_text" id="S3.T1.8.2.1.2.1" style="font-size:90%;">50.2%</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.8.2.1.3"><span class="ltx_text" id="S3.T1.8.2.1.3.1" style="font-size:90%;">44.8%</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T1.8.2.1.4"><span class="ltx_text" id="S3.T1.8.2.1.4.1" style="font-size:90%;">100%</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.8.3.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S3.T1.8.3.2.1"><span class="ltx_text" id="S3.T1.8.3.2.1.1" style="font-size:90%;">LangChain</span></th>
+<td class="ltx_td ltx_align_center" id="S3.T1.8.3.2.2"><span class="ltx_text" id="S3.T1.8.3.2.2.1" style="font-size:90%;">71.2%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.8.3.2.3"><span class="ltx_text" id="S3.T1.8.3.2.3.1" style="font-size:90%;">65.3%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.8.3.2.4"><span class="ltx_text" id="S3.T1.8.3.2.4.1" style="font-size:90%;">100%</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.8.4.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S3.T1.8.4.3.1"><span class="ltx_text" id="S3.T1.8.4.3.1.1" style="font-size:90%;">Mem0</span></th>
+<td class="ltx_td ltx_align_center" id="S3.T1.8.4.3.2"><span class="ltx_text" id="S3.T1.8.4.3.2.1" style="font-size:90%;">78.4%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.8.4.3.3"><span class="ltx_text" id="S3.T1.8.4.3.3.1" style="font-size:90%;">69.1%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.8.4.3.4"><span class="ltx_text" id="S3.T1.8.4.3.4.1" style="font-size:90%;">100%</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.8.5.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S3.T1.8.5.4.1"><span class="ltx_text" id="S3.T1.8.5.4.1.1" style="font-size:90%;">MemGPT</span></th>
+<td class="ltx_td ltx_align_center" id="S3.T1.8.5.4.2"><span class="ltx_text" id="S3.T1.8.5.4.2.1" style="font-size:90%;">75.6%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.8.5.4.3"><span class="ltx_text" id="S3.T1.8.5.4.3.1" style="font-size:90%;">62.8%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T1.8.5.4.4"><span class="ltx_text" id="S3.T1.8.5.4.4.1" style="font-size:90%;">85.3%</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.8.6.5">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb" id="S3.T1.8.6.5.1"><span class="ltx_text ltx_font_bold" id="S3.T1.8.6.5.1.1" style="font-size:90%;">FadeMem</span></th>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.8.6.5.2"><span class="ltx_text ltx_font_bold" id="S3.T1.8.6.5.2.1" style="font-size:90%;">82.1%</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.8.6.5.3"><span class="ltx_text ltx_font_bold" id="S3.T1.8.6.5.3.1" style="font-size:90%;">71.0%</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T1.8.6.5.4"><span class="ltx_text ltx_font_bold" id="S3.T1.8.6.5.4.1" style="font-size:90%;">55.0%</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<div class="ltx_para" id="S3.SS2.p2">
+<p class="ltx_p" id="S3.SS2.p2.2"><span class="ltx_text" id="S3.SS2.p2.2.1" style="font-size:90%;">Our approach achieves 82.1% retention of critical facts using only 55.0% storage. Important memories exhibit </span><math alttext="3" class="ltx_Math" display="inline" id="S3.SS2.p2.1.m1" intent=":literal"><semantics><mn mathsize="0.900em">3</mn><annotation encoding="application/x-tex">3</annotation></semantics></math><span class="ltx_text" id="S3.SS2.p2.2.2" style="font-size:90%;">–</span><math alttext="5\times" class="ltx_math_unparsed" display="inline" id="S3.SS2.p2.2.m2" intent=":literal"><semantics><mrow><mn mathsize="0.900em">5</mn><mo lspace="0.222em" mathsize="0.900em">×</mo></mrow><annotation encoding="application/x-tex">5\times</annotation></semantics></math><span class="ltx_text" id="S3.SS2.p2.2.3" style="font-size:90%;"> slower decay than baseline, with 23% of low-importance memories promoted to LML based on access patterns.</span></p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_subsection">3.3 </span>Conflict Resolution Performance</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.1"><span class="ltx_text" id="S3.SS3.p1.1.1" style="font-size:90%;">We inject 4075 controlled conflicts on LTI-Bench across three types to evaluate LLM-guided resolution. Table </span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.T2" style="font-size:90%;" title="Table 2 ‣ 3.3 Conflict Resolution Performance ‣ 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">2</span></a><span class="ltx_text" id="S3.SS3.p1.1.2" style="font-size:90%;"> reports accuracy and post-resolution consistency.</span></p>
+</div>
+<figure class="ltx_table" id="S3.T2">
+<figcaption class="ltx_caption ltx_centering" style="font-size:90%;"><span class="ltx_tag ltx_tag_table"><span class="ltx_text ltx_font_bold" id="S3.T2.6.1.1">Table 2</span>: </span>Conflict resolution on <span class="ltx_text ltx_font_bold" id="S3.T2.7.2">LTI-Bench</span> across types. Acc.: correct strategy selection; Cons.: factual coherence after resolution.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S3.T2.8">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S3.T2.8.1.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="S3.T2.8.1.1.1" rowspan="2" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.1.1.1.1" style="font-size:90%;">Method</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="2" id="S3.T2.8.1.1.2" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.1.1.2.1" style="font-size:90%;">Contradiction</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="2" id="S3.T2.8.1.1.3" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.1.1.3.1" style="font-size:90%;">Update</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="2" id="S3.T2.8.1.1.4" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.1.1.4.1" style="font-size:90%;">Overlap</span></th>
+</tr>
+<tr class="ltx_tr" id="S3.T2.8.2.2">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T2.8.2.2.1" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.2.2.1.1" style="font-size:90%;">Acc.</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T2.8.2.2.2" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.2.2.2.1" style="font-size:90%;">Cons.</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T2.8.2.2.3" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.2.2.3.1" style="font-size:90%;">Acc.</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T2.8.2.2.4" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.2.2.4.1" style="font-size:90%;">Cons.</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T2.8.2.2.5" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.2.2.5.1" style="font-size:90%;">Acc.</span></th>
+<th class="ltx_td ltx_nopad_r ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T2.8.2.2.6" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.2.2.6.1" style="font-size:90%;">Cons.</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.T2.8.3.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S3.T2.8.3.1.1" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.3.1.1.1" style="font-size:90%;">FIFO</span></th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T2.8.3.1.2" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.3.1.2.1" style="font-size:90%;">-</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T2.8.3.1.3" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.3.1.3.1" style="font-size:90%;">45.2%</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T2.8.3.1.4" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.3.1.4.1" style="font-size:90%;">-</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T2.8.3.1.5" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.3.1.5.1" style="font-size:90%;">73.1%</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T2.8.3.1.6" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.3.1.6.1" style="font-size:90%;">-</span></td>
+<td class="ltx_td ltx_nopad_r ltx_align_center ltx_border_t" id="S3.T2.8.3.1.7" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.3.1.7.1" style="font-size:90%;">61.3%</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T2.8.4.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S3.T2.8.4.2.1" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.4.2.1.1" style="font-size:90%;">Mem0</span></th>
+<td class="ltx_td ltx_align_center" id="S3.T2.8.4.2.2" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.4.2.2.1" style="font-size:90%;">62.3%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T2.8.4.2.3" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.4.2.3.1" style="font-size:90%;">71.4%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T2.8.4.2.4" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.4.2.4.1" style="font-size:90%;">84.7%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T2.8.4.2.5" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.4.2.5.1" style="font-size:90%;">82.3%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T2.8.4.2.6" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.4.2.6.1" style="font-size:90%;">45.6%</span></td>
+<td class="ltx_td ltx_nopad_r ltx_align_center" id="S3.T2.8.4.2.7" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.4.2.7.1" style="font-size:90%;">73.8%</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T2.8.5.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S3.T2.8.5.3.1" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.5.3.1.1" style="font-size:90%;">MemGPT</span></th>
+<td class="ltx_td ltx_align_center" id="S3.T2.8.5.3.2" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.5.3.2.1" style="font-size:90%;">58.7%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T2.8.5.3.3" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.5.3.3.1" style="font-size:90%;">68.9%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T2.8.5.3.4" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.5.3.4.1" style="font-size:90%;">81.2%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T2.8.5.3.5" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.5.3.5.1" style="font-size:90%;">79.6%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T2.8.5.3.6" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.5.3.6.1" style="font-size:90%;">51.3%</span></td>
+<td class="ltx_td ltx_nopad_r ltx_align_center" id="S3.T2.8.5.3.7" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text" id="S3.T2.8.5.3.7.1" style="font-size:90%;">75.4%</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T2.8.6.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb" id="S3.T2.8.6.4.1" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text ltx_font_bold" id="S3.T2.8.6.4.1.1" style="font-size:90%;">FadeMem</span></th>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T2.8.6.4.2" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text ltx_font_bold" id="S3.T2.8.6.4.2.1" style="font-size:90%;">66.2%</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T2.8.6.4.3" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text ltx_font_bold" id="S3.T2.8.6.4.3.1" style="font-size:90%;">78.0%</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T2.8.6.4.4" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text ltx_font_bold" id="S3.T2.8.6.4.4.1" style="font-size:90%;">87.1%</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T2.8.6.4.5" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text ltx_font_bold" id="S3.T2.8.6.4.5.1" style="font-size:90%;">86.5%</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T2.8.6.4.6" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text ltx_font_bold" id="S3.T2.8.6.4.6.1" style="font-size:90%;">53.4%</span></td>
+<td class="ltx_td ltx_nopad_r ltx_align_center ltx_border_bb" id="S3.T2.8.6.4.7" style="padding-left:3.8pt;padding-right:3.8pt;"><span class="ltx_text ltx_font_bold" id="S3.T2.8.6.4.7.1" style="font-size:90%;">76.8%</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<div class="ltx_para" id="S3.SS3.p2">
+<p class="ltx_p" id="S3.SS3.p2.1"><span class="ltx_text" id="S3.SS3.p2.1.1" style="font-size:90%;">Our LLM-guided mechanism achieves 68.9% macro-averaged accuracy and 80.4% macro-averaged consistency across the three conflict types. The temporal suppression effectively favors recent information while maintaining historical context.</span></p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS4">
+<h3 class="ltx_title ltx_title_subsection" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_subsection">3.4 </span>Cross-Dataset Evaluation</h3>
+<div class="ltx_para" id="S3.SS4.p1">
+<p class="ltx_p" id="S3.SS4.p1.1"><span class="ltx_text" id="S3.SS4.p1.1.1" style="font-size:90%;">To demonstrate generalizability, we evaluate on MSC for conversational memory and LoCoMo for long-context reasoning. Table </span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.T3" style="font-size:90%;" title="Table 3 ‣ 3.4 Cross-Dataset Evaluation ‣ 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">3</span></a><span class="ltx_text" id="S3.SS4.p1.1.2" style="font-size:90%;"> shows performance across different evaluation metrics.</span></p>
+</div>
+<figure class="ltx_table" id="S3.T3">
+<figcaption class="ltx_caption ltx_centering" style="font-size:90%;"><span class="ltx_tag ltx_tag_table"><span class="ltx_text ltx_font_bold" id="S3.T3.13.1.1">Table 3</span>: </span>Results on <span class="ltx_text ltx_font_bold" id="S3.T3.14.2">MSC</span> and <span class="ltx_text ltx_font_bold" id="S3.T3.15.3">LoCoMo</span>. MSC reports RP@10 and TCS; LoCoMo reports multi-hop F1, Factual Consistency Rate (FCR), and Storage Reduction Rate (SRR).</figcaption>
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle" id="S3.T3.5">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S3.T3.5.6.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_tt" id="S3.T3.5.6.1.1" rowspan="2"><span class="ltx_text" id="S3.T3.5.6.1.1.1" style="font-size:90%;">Method</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="2" id="S3.T3.5.6.1.2"><span class="ltx_text" id="S3.T3.5.6.1.2.1" style="font-size:90%;">MSC</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_tt" colspan="3" id="S3.T3.5.6.1.3"><span class="ltx_text" id="S3.T3.5.6.1.3.1" style="font-size:90%;">LoCoMo</span></th>
+</tr>
+<tr class="ltx_tr" id="S3.T3.5.5">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T3.1.1.1">
+<span class="ltx_text" id="S3.T3.1.1.1.1" style="font-size:90%;">RP@10</span><math alttext="\uparrow" class="ltx_Math" display="inline" id="S3.T3.1.1.1.m1" intent=":literal"><semantics><mo mathsize="0.900em" stretchy="false">↑</mo><annotation encoding="application/x-tex">\uparrow</annotation></semantics></math>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T3.2.2.2">
+<span class="ltx_text" id="S3.T3.2.2.2.1" style="font-size:90%;">TCS</span><math alttext="\uparrow" class="ltx_Math" display="inline" id="S3.T3.2.2.2.m1" intent=":literal"><semantics><mo mathsize="0.900em" stretchy="false">↑</mo><annotation encoding="application/x-tex">\uparrow</annotation></semantics></math>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T3.3.3.3">
+<span class="ltx_text" id="S3.T3.3.3.3.1" style="font-size:90%;">F1</span><math alttext="\uparrow" class="ltx_Math" display="inline" id="S3.T3.3.3.3.m1" intent=":literal"><semantics><mo mathsize="0.900em" stretchy="false">↑</mo><annotation encoding="application/x-tex">\uparrow</annotation></semantics></math>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T3.4.4.4">
+<span class="ltx_text" id="S3.T3.4.4.4.1" style="font-size:90%;">FCR</span><math alttext="\uparrow" class="ltx_Math" display="inline" id="S3.T3.4.4.4.m1" intent=":literal"><semantics><mo mathsize="0.900em" stretchy="false">↑</mo><annotation encoding="application/x-tex">\uparrow</annotation></semantics></math>
+</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_t" id="S3.T3.5.5.5">
+<span class="ltx_text" id="S3.T3.5.5.5.1" style="font-size:90%;">SRR</span><math alttext="\uparrow" class="ltx_Math" display="inline" id="S3.T3.5.5.5.m1" intent=":literal"><semantics><mo mathsize="0.900em" stretchy="false">↑</mo><annotation encoding="application/x-tex">\uparrow</annotation></semantics></math>
+</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S3.T3.5.7.1">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_t" id="S3.T3.5.7.1.1"><span class="ltx_text" id="S3.T3.5.7.1.1.1" style="font-size:90%;">Fixed-16K</span></th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T3.5.7.1.2"><span class="ltx_text" id="S3.T3.5.7.1.2.1" style="font-size:90%;">58.7%</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T3.5.7.1.3"><span class="ltx_text" id="S3.T3.5.7.1.3.1" style="font-size:90%;">0.71</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T3.5.7.1.4"><span class="ltx_text" id="S3.T3.5.7.1.4.1" style="font-size:90%;">5.17</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T3.5.7.1.5"><span class="ltx_text" id="S3.T3.5.7.1.5.1" style="font-size:90%;">78.9%</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S3.T3.5.7.1.6"><span class="ltx_text" id="S3.T3.5.7.1.6.1" style="font-size:90%;">0.00</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T3.5.8.2">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S3.T3.5.8.2.1"><span class="ltx_text" id="S3.T3.5.8.2.1.1" style="font-size:90%;">LangChain</span></th>
+<td class="ltx_td ltx_align_center" id="S3.T3.5.8.2.2"><span class="ltx_text" id="S3.T3.5.8.2.2.1" style="font-size:90%;">71.5%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T3.5.8.2.3"><span class="ltx_text" id="S3.T3.5.8.2.3.1" style="font-size:90%;">0.77</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T3.5.8.2.4"><span class="ltx_text" id="S3.T3.5.8.2.4.1" style="font-size:90%;">25.75</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T3.5.8.2.5"><span class="ltx_text" id="S3.T3.5.8.2.5.1" style="font-size:90%;">81.2%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T3.5.8.2.6"><span class="ltx_text" id="S3.T3.5.8.2.6.1" style="font-size:90%;">0.00</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T3.5.9.3">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S3.T3.5.9.3.1"><span class="ltx_text" id="S3.T3.5.9.3.1.1" style="font-size:90%;">Mem0</span></th>
+<td class="ltx_td ltx_align_center" id="S3.T3.5.9.3.2"><span class="ltx_text" id="S3.T3.5.9.3.2.1" style="font-size:90%;">74.8%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T3.5.9.3.3"><span class="ltx_text" id="S3.T3.5.9.3.3.1" style="font-size:90%;">0.79</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T3.5.9.3.4"><span class="ltx_text" id="S3.T3.5.9.3.4.1" style="font-size:90%;">28.37</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T3.5.9.3.5"><span class="ltx_text" id="S3.T3.5.9.3.5.1" style="font-size:90%;">83.6%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T3.5.9.3.6"><span class="ltx_text" id="S3.T3.5.9.3.6.1" style="font-size:90%;">0.00</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T3.5.10.4">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row" id="S3.T3.5.10.4.1"><span class="ltx_text" id="S3.T3.5.10.4.1.1" style="font-size:90%;">MemGPT</span></th>
+<td class="ltx_td ltx_align_center" id="S3.T3.5.10.4.2"><span class="ltx_text" id="S3.T3.5.10.4.2.1" style="font-size:90%;">73.1%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T3.5.10.4.3"><span class="ltx_text" id="S3.T3.5.10.4.3.1" style="font-size:90%;">0.78</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T3.5.10.4.4"><span class="ltx_text" id="S3.T3.5.10.4.4.1" style="font-size:90%;">9.46</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T3.5.10.4.5"><span class="ltx_text" id="S3.T3.5.10.4.5.1" style="font-size:90%;">82.9%</span></td>
+<td class="ltx_td ltx_align_center" id="S3.T3.5.10.4.6"><span class="ltx_text" id="S3.T3.5.10.4.6.1" style="font-size:90%;">0.15</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T3.5.11.5">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_bb" id="S3.T3.5.11.5.1"><span class="ltx_text ltx_font_bold" id="S3.T3.5.11.5.1.1" style="font-size:90%;">FadeMem</span></th>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T3.5.11.5.2"><span class="ltx_text ltx_font_bold" id="S3.T3.5.11.5.2.1" style="font-size:90%;">77.2%</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T3.5.11.5.3"><span class="ltx_text ltx_font_bold" id="S3.T3.5.11.5.3.1" style="font-size:90%;">0.82</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T3.5.11.5.4"><span class="ltx_text ltx_font_bold" id="S3.T3.5.11.5.4.1" style="font-size:90%;">29.43</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T3.5.11.5.5"><span class="ltx_text ltx_font_bold" id="S3.T3.5.11.5.5.1" style="font-size:90%;">85.9%</span></td>
+<td class="ltx_td ltx_align_center ltx_border_bb" id="S3.T3.5.11.5.6"><span class="ltx_text ltx_font_bold" id="S3.T3.5.11.5.6.1" style="font-size:90%;">0.45</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+<div class="ltx_para" id="S3.SS4.p2">
+<p class="ltx_p" id="S3.SS4.p2.1"><span class="ltx_text" id="S3.SS4.p2.1.1" style="font-size:90%;">Our approach consistently outperforms baselines on both datasets. On MSC, we achieve 77.2% RP@10, demonstrating superior retrieval of relevant conversational history. The TCS of 0.82 indicates better temporal coherence across multi-session interactions. On LoCoMo, our multi-hop F1 score of 29.43 shows effective long-context reasoning capabilities, surpassing Mem0 (28.37) and significantly outperforming MemGPT (9.46). Notably, we achieve 85.9% factual consistency rate while maintaining 45% storage reduction (SRR=0.45) through intelligent forgetting.</span></p>
+</div>
+<figure class="ltx_figure" id="S3.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="182" id="S3.F1.g1" src="f1score.png" width="336"/>
+<figcaption class="ltx_caption ltx_centering" style="font-size:90%;"><span class="ltx_tag ltx_tag_figure"><span class="ltx_text ltx_font_bold" id="S3.F1.6.1.1">Fig. 1</span>: </span>Ablation study results on <span class="ltx_text ltx_font_bold" id="S3.F1.7.2">LoCoMo</span> across different task types. Each bar shows F1 scores when removing specific components compared to the full model.</figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S3.SS5">
+<h3 class="ltx_title ltx_title_subsection" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_subsection">3.5 </span>Ablation Study</h3>
+<div class="ltx_para" id="S3.SS5.p1">
+<p class="ltx_p" id="S3.SS5.p1.1"><span class="ltx_text" id="S3.SS5.p1.1.1" style="font-size:90%;">We conduct ablation studies on LoCoMo to analyze the contribution of each component in our memory management framework, as illustrated in Fig. </span><a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.F1" style="font-size:90%;" title="Figure 1 ‣ 3.4 Cross-Dataset Evaluation ‣ 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">1</span></a><span class="ltx_text" id="S3.SS5.p1.1.2" style="font-size:90%;">.</span></p>
+</div>
+<div class="ltx_para" id="S3.SS5.p2">
+<p class="ltx_p" id="S3.SS5.p2.1"><span class="ltx_text" id="S3.SS5.p2.1.1" style="font-size:90%;">The ablation results demonstrate the critical importance of each component. Removing the dual-layer architecture (w/o LML-SML) causes significant performance degradation across all tasks, with multi-hop F1 dropping from 29.43 to 19.45 (33.9% decrease), highlighting its role in effectively separating long-term and short-term memories. The memory fusion component proves essential for maintaining performance, as its removal (w/o Fusion) results in the most severe degradation, with multi-hop F1 plummeting to 13.63 (53.7% decrease). Conflict resolution (w/o Conflict) also plays a vital role, particularly for maintaining factual consistency—its absence reduces multi-hop F1 to 22.88 (22.4% decrease). The full model achieves the best performance across all task types, with particularly strong results on temporal tasks (F1=46.52) and open-domain tasks (F1=44.35), demonstrating the synergistic effect of combining all components.</span></p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_section">4 </span>Conclusion</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1"><span class="ltx_text" id="S4.p1.1.1" style="font-size:90%;">We presented FadeMem, a biologically-inspired agent memory architecture that introduces adaptive forgetting to LLM-based systems. By implementing differential decay rates modulated by semantic relevance, access frequency, and temporal patterns, combined with LLM-guided conflict resolution and intelligent memory fusion, our approach achieves superior retention of critical information while reducing storage by 45%. The dual-layer memory hierarchy naturally consolidates related information while allowing irrelevant details to fade, achieving a dynamic balance between memory capacity and retrieval precision. Experiments on Multi-Session Chat, LoCoMo, and LTI-Bench demonstrate consistent improvements in multi-hop reasoning and retrieval performance compared to existing baselines, validating the effectiveness of incorporating human-like forgetting patterns inspired by Ebbinghaus’s forgetting curve. This work establishes that selective forgetting, rather than being a limitation, is essential for preventing information overload and maintaining relevance in agent memory systems. Future work will explore meta-learning approaches to further enhance adaptive decay parameters and extend the framework to multi-agent collaborative memory systems.</span></p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography" style="font-size:90%;">References</h2>
+<ul class="ltx_biblist" id="bib.L1">
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib26">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Achiam, S. Adler, S. Agarwal, L. Ahmad, I. Akkaya, F. L. Aleman, D. Almeida, J. Altenschmidt, S. Altman, S. Anadkat, <span class="ltx_text ltx_bib_etal">et al.</span></span><span class="ltx_text ltx_bib_year"> (2023)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Gpt-4 technical report</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2303.08774</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.SS1.p4.5" title="3.1 Experimental Setup ‣ 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§3.1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib28">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">N. A. Akbar, R. Dembani, B. Lenzitti, and D. Tegolo</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">RAG-driven memory architectures in conversational llms-a literature review with insights into emerging agriculture data sharing</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">IEEE Access</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p1.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib16">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">E. L. Aleixo, J. G. Colonna, M. Cristo, and E. Fernandes</span><span class="ltx_text ltx_bib_year"> (2023)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Catastrophic forgetting in deep learning: a comprehensive taxonomy</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2312.10549</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p2.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib18">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">P. Chhikara, D. Khant, S. Aryan, T. Singh, and D. Yadav</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Mem0: building production-ready ai agents with scalable long-term memory</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2504.19413</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p1.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.SS1.p2.1" title="3.1 Experimental Setup ‣ 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§3.1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_inproceedings" id="bib.bib15">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Z. Dai, Z. Yang, Y. Yang, J. G. Carbonell, Q. Le, and R. Salakhutdinov</span><span class="ltx_text ltx_bib_year"> (2019)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Transformer-xl: attentive language models beyond a fixed-length context</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 57th annual meeting of the association for computational linguistics</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 2978–2988</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p1.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.SS1.p2.1" title="3.1 Experimental Setup ‣ 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§3.1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib7">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">H. Ebbinghaus, H. Ruger, and C. Bussenius</span><span class="ltx_text ltx_bib_year"> (1913)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Memory: a contribution to experimental psychology: teachers college</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Columbia university</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p2.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_misc" id="bib.bib10">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Y. Gao, Y. Xiong, X. Gao, K. Jia, J. Pan, Y. Bi, Y. Dai, J. Sun, M. Wang, and H. Wang</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Retrieval-augmented generation for large language models: a survey</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2312.10997</span>,
+<a class="ltx_ref ltx_bib_external" href="https://arxiv.org/abs/2312.10997" title="">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p1.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib36">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Kang, M. Ji, Z. Zhao, and T. Bai</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Memory os of ai agent</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2506.06326</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p3.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_misc" id="bib.bib39">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Z. Kang, J. Gong, Q. Chen, H. Zhang, J. Liu, R. Fu, Z. Feng, Y. Wang, S. Fong, and K. Zhou</span><span class="ltx_text ltx_bib_year"> (2026)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Multimodal multi-agent empowered legal judgment prediction</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2601.12815</span>,
+<a class="ltx_ref ltx_bib_external" href="https://arxiv.org/abs/2601.12815" title="">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p1.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_inproceedings" id="bib.bib6">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">V. Karpukhin, B. Oguz, S. Min, P. S. Lewis, L. Wu, S. Edunov, D. Chen, and W. Yih</span><span class="ltx_text ltx_bib_year"> (2020)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Dense passage retrieval for open-domain question answering.</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">EMNLP (1)</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 6769–6781</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p1.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib13">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Kirkpatrick, R. Pascanu, N. Rabinowitz, J. Veness, G. Desjardins, A. A. Rusu, K. Milan, J. Quan, T. Ramalho, A. Grabska-Barwinska, <span class="ltx_text ltx_bib_etal">et al.</span></span><span class="ltx_text ltx_bib_year"> (2017)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Overcoming catastrophic forgetting in neural networks</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proceedings of the national academy of sciences</span> <span class="ltx_text ltx_bib_volume">114</span> (<span class="ltx_text ltx_bib_number">13</span>), <span class="ltx_text ltx_bib_pages"> pp. 3521–3526</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p2.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib19">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Y. Lei, J. Xu, C. X. Liang, Z. Bi, X. Li, D. Zhang, J. Song, and Z. Yu</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Large language model agents: a comprehensive survey on architectures, capabilities, and applications</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p1.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib9">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">P. Lewis, E. Perez, A. Piktus, F. Petroni, V. Karpukhin, N. Goyal, H. Küttler, M. Lewis, W. Yih, T. Rocktäschel, <span class="ltx_text ltx_bib_etal">et al.</span></span><span class="ltx_text ltx_bib_year"> (2020)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Retrieval-augmented generation for knowledge-intensive nlp tasks</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Advances in neural information processing systems</span> <span class="ltx_text ltx_bib_volume">33</span>, <span class="ltx_text ltx_bib_pages"> pp. 9459–9474</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p1.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_inproceedings" id="bib.bib11">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">H. Li, W. Chen, A. Levy, C. Wang, H. Wang, P. Chen, W. Wan, H. P. Wong, and P. Raina</span><span class="ltx_text ltx_bib_year"> (2021)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">One-shot learning with memory-augmented neural networks using a 64-kbit, 118 gops/w rram-based non-volatile associative memory</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">2021 Symposium on VLSI Technology</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 1–2</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p1.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib32">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Liu, X. Shi, T. D. Nguyen, H. Zhang, T. Zhang, W. Sun, Y. Li, A. V. Vasilakos, G. Iacca, A. A. Khan, <span class="ltx_text ltx_bib_etal">et al.</span></span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Neural brain: a neuroscience-inspired framework for embodied agents</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2505.07634</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p3.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib14">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">N. F. Liu, K. Lin, J. Hewitt, A. Paranjape, M. Bevilacqua, F. Petroni, and P. Liang</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Lost in the middle: how language models use long contexts</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Transactions of the association for computational linguistics</span> <span class="ltx_text ltx_bib_volume">12</span>, <span class="ltx_text ltx_bib_pages"> pp. 157–173</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p1.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.SS1.p2.1" title="3.1 Experimental Setup ‣ 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§3.1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib38">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Maharana, D. Lee, S. Tulyakov, M. Bansal, F. Barbieri, and Y. Fang</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Evaluating very long-term conversational memory of llm agents</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2402.17753</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.SS1.p1.1" title="3.1 Experimental Setup ‣ 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§3.1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_inproceedings" id="bib.bib29">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">P. Manakul, A. Liusie, and M. Gales</span><span class="ltx_text ltx_bib_year"> (2023)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Selfcheckgpt: zero-resource black-box hallucination detection for generative large language models</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 2023 conference on empirical methods in natural language processing</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 9004–9017</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.SS1.p3.1" title="3.1 Experimental Setup ‣ 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§3.1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib30">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">L. Martin, K. Jaime, F. Ramos, and F. Robles</span><span class="ltx_text ltx_bib_year"> (2022)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Bio-inspired cognitive architecture of episodic memory</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Cognitive Systems Research</span> <span class="ltx_text ltx_bib_volume">76</span>, <span class="ltx_text ltx_bib_pages"> pp. 26–45</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p1.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib23">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">C. Packer, V. Fang, S. Patil, K. Lin, S. Wooders, and J. Gonzalez</span><span class="ltx_text ltx_bib_year"> (2023)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">MemGPT: towards llms as operating systems.</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.SS1.p2.1" title="3.1 Experimental Setup ‣ 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§3.1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib33">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">T. Rudroff, O. Rainio, and R. Klen</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Neuroplasticity meets artificial intelligence: a hippocampus-inspired approach to the stability–plasticity dilemma</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Brain Sciences</span> <span class="ltx_text ltx_bib_volume">14</span> (<span class="ltx_text ltx_bib_number">11</span>), <span class="ltx_text ltx_bib_pages"> pp. 1111</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p2.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_inproceedings" id="bib.bib17">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">T. Tadros, G. Krishnan, R. Ramyaa, and M. Bazhenov</span><span class="ltx_text ltx_bib_year"> (2020)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Biologically inspired sleep algorithm for reducing catastrophic forgetting in neural networks</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the AAAI Conference on Artificial Intelligence</span>,
+</span>
+<span class="ltx_bibblock">Vol. <span class="ltx_text ltx_bib_volume">34</span>, <span class="ltx_text ltx_bib_pages"> pp. 13933–13934</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p2.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib31">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">D. Voina, E. Shea-Brown, and S. Mihalas</span><span class="ltx_text ltx_bib_year"> (2023)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A biologically inspired architecture with switching units can learn to generalize across backgrounds</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Neural Networks</span> <span class="ltx_text ltx_bib_volume">168</span>, <span class="ltx_text ltx_bib_pages"> pp. 615–630</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p2.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib8">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. T. Wixted</span><span class="ltx_text ltx_bib_year"> (2004)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The psychology and neuroscience of forgetting</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Annu. Rev. Psychol.</span> <span class="ltx_text ltx_bib_volume">55</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 235–269</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p2.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_inproceedings" id="bib.bib20">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Xu, A. Szlam, and J. Weston</span><span class="ltx_text ltx_bib_year"> (2022)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Beyond goldfish memory: long-term open-domain conversation</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Proceedings of the 60th annual meeting of the association for computational linguistics (volume 1: long papers)</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_pages"> pp. 5180–5197</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S3.SS1.p1.1" title="3.1 Experimental Setup ‣ 3 Experiments ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§3.1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib35">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Z. Zhang, Q. Dai, X. Bo, C. Ma, R. Li, X. Chen, J. Zhu, Z. Dong, and J. Wen</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A survey on the memory mechanism of large language model-based agents</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">ACM Transactions on Information Systems</span> <span class="ltx_text ltx_bib_volume">43</span> (<span class="ltx_text ltx_bib_number">6</span>), <span class="ltx_text ltx_bib_pages"> pp. 1–47</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p2.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li class="ltx_bibitem ltx_bib_article" id="bib.bib37">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Q. Zheng, H. Liu, X. Zhang, C. Yan, X. Cao, T. Gong, Y. Liu, B. Shi, Z. Peng, X. Fan, <span class="ltx_text ltx_bib_etal">et al.</span></span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Machine memory intelligence: inspired by human memory mechanisms</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Engineering</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a class="ltx_ref" href="https://arxiv.org/html/2601.18642v2#S1.p3.1" title="1 Introduction ‣ FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Fri Feb  6 08:53:01 2026 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

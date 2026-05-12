@@ -82,7 +82,14 @@ def load_rows() -> list[dict]:
         # Add optional classification columns
         for col in optional:
             if col in index:
-                paper[col] = normalize_text(row[index[col]])
+                val = normalize_text(row[index[col]])
+                # Normalize peer_reviewed: convert 'Yes' → '✓ 同行评议', keep '✓ ...' as-is
+                if col == 'peer_reviewed':
+                    if val.lower() == 'yes' or val == '是':
+                        val = '✓ 同行评议'
+                    elif val and not val.startswith('✓') and val != '否':
+                        val = f'✓ {val}'
+                paper[col] = val
         if not paper["arxiv_id"]:
             continue
         paper["pdf_url"] = f"https://arxiv.org/pdf/{paper['arxiv_id']}"

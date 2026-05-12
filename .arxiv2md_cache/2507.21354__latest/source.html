@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems</title>
+<!--Generated on Mon Jul 28 21:25:06 2025 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.8.2.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.8.2.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.0.8.2.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2507.21354v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx1" title="In Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx2" title="In Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Related Work</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx3" title="In Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Trans-ACT: Transactional Analysis Cognitive Toolkit</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx3.SSx1" title="In Trans-ACT: Transactional Analysis Cognitive Toolkit ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Ego State Modeling</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx3.SSx2" title="In Trans-ACT: Transactional Analysis Cognitive Toolkit ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Memory Retrieval</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx3.SSx3" title="In Trans-ACT: Transactional Analysis Cognitive Toolkit ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Decision-Making</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx4" title="In Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Experimental Design</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx4.SSx1" title="In Experimental Design ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Experimental Setup</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx4.SSx2" title="In Experimental Design ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Results and Analysis</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx5" title="In Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Discussion and Future Work</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx5.SSx1" title="In Discussion and Future Work ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Architecture Improvements</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx5.SSx1.SSSx1" title="In Architecture Improvements ‣ Discussion and Future Work ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Reinforcement Learning</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx5.SSx1.SSSx2" title="In Architecture Improvements ‣ Discussion and Future Work ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Integration with Cognitive Architectures</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx5.SSx1.SSSx3" title="In Architecture Improvements ‣ Discussion and Future Work ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">More Advanced TA Connection</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx5.SSx2" title="In Discussion and Future Work ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Potential Real-World Applications</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx5.SSx2.SSSx1" title="In Potential Real-World Applications ‣ Discussion and Future Work ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Conflict Resolution and Mediation Tools</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx5.SSx2.SSSx2" title="In Potential Real-World Applications ‣ Discussion and Future Work ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Advancing Psychological Research</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx5.SSx2.SSSx3" title="In Potential Real-World Applications ‣ Discussion and Future Work ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Supporting Scientific Research in Social Systems</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx6" title="In Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Conclusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx7" title="In Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_title">Acknowledgments</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Games Agents Play: Towards Transactional Analysis in LLM-based
+<br class="ltx_break"/>Multi-Agent Systems</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname"><span class="ltx_text ltx_font_bold">Monika Zamojska (monika.zamojska.stud@pw.edu.pl)</span>
+<br class="ltx_break"/>Faculty of Electronics and Information Technology, ul. Nowowiejska 15/19 
+<br class="ltx_break"/>Warsaw, 00-665 Poland
+<span class="ltx_ERROR undefined">\AND</span><span class="ltx_text ltx_font_bold">Jarosław A. Chudziak (jaroslaw.chudziak@pw.edu.pl)</span>
+<br class="ltx_break"/>Faculty of Electronics and Information Technology, ul. Nowowiejska 15/19 
+<br class="ltx_break"/>Warsaw, 00-665 Poland
+</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p">Multi-Agent Systems (MAS) are increasingly used to simulate social interactions, but most of the frameworks miss the underlying cognitive complexity of human behavior. In this paper, we introduce Trans-ACT (Transactional Analysis Cognitive Toolkit), an approach embedding Transactional Analysis (TA) principles into MAS to generate agents with realistic psychological dynamics. Trans-ACT integrates the Parent, Adult, and Child ego states into an agent’s cognitive architecture. Each ego state retrieves context-specific memories and uses them to shape response to new situations. The final answer is chosen according to the underlying life script of the agent. Our experimental simulation, which reproduces the Stupid game scenario, demonstrates that agents grounded in cognitive and TA principles produce deeper and context-aware interactions. Looking ahead, our research opens a new way for a variety of applications, including conflict resolution, educational support, and advanced social psychology studies.</p>
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Keywords:</span>
+Artificial Intelligence; Cognitive architectures; Social cognition; Agent-based Modeling; Case studies; Transactional Analysis.</p>
+</div>
+<section class="ltx_section" id="Sx1">
+<h2 class="ltx_title ltx_title_section">Introduction</h2>
+<div class="ltx_para" id="Sx1.p1">
+<p class="ltx_p">In the late 1950s, Eric ? (?, ?) introduced Transactional Analysis (TA), which quickly gained attention in psychotherapy. TA’s framework, based on ego states (Parent, Adult, Child) and <em class="ltx_emph ltx_font_italic">life scripts</em>, offered a new way to understand human behavior and social interaction. The bestseller <em class="ltx_emph ltx_font_italic">Games People Play</em> (?, ?) further popularized TA by introducing the concept of psychological <em class="ltx_emph ltx_font_italic">games</em>. Over the years, TA has evolved and found applications in therapy (?, ?, ?), education (?, ?), and counseling (?, ?), making it a valuable tool for analyzing interpersonal dynamics.</p>
+</div>
+<div class="ltx_para" id="Sx1.p2">
+<p class="ltx_p">Large Language Models (LLMs) are advanced AI systems that excel in understanding and generating human language. Generative AI agents built on LLMs have been used in many fields, from customer service to creative arts. In Multi-Agent Systems (MAS), multiple AI agents work together to achieve common goals. However, traditional MAS frameworks often focus on rule-based or algorithmic methods that lack the emotional depth and psychological nuance of real human interactions (?, ?, ?). These systems may work well for tasks like stock market analysis (?, ?) or software engineering (?, ?), but they fail to capture authentic social dynamics and the underlying psychological drivers explored in theories like TA.</p>
+</div>
+<div class="ltx_para" id="Sx1.p3">
+<p class="ltx_p">This study addresses the gap by incorporating TA principles into agent-based modeling. We present Trans-ACT (Transactional Analysis Cognitive Toolkit), a novel framework that implements TA’s core components - ego states, life scripts, and personality adaptations (?, ?) - to create agents that simulate human-like social interactions. Each agent is composed of separate sub-agents representing the Parent, Adult, and Child ego states. Ego states have different memory sets and cognitive focus (?, ?). They generate responses that reflect different aspects of human personality.</p>
+</div>
+<div class="ltx_para" id="Sx1.p4">
+<p class="ltx_p">To validate Trans-ACT’s effectiveness, we constructed a scenario trying to reproduce the game between agents. The experimental setup configured agents with distinct memory structures and assigned them specific life scripts. After that, we examined the resulting transactions between agents, focusing on identifying game patterns. In TA, a game refers to repetitive unconscious sequences of transactions driven by hidden motivations and predictable outcomes (?, ?). Our analysis checked if these game patterns corresponded to the personality structures constructed of the agents. The experimental results demonstrate the potential of the framework to replicate and verify the complex behavioral dynamics predicted by TA.</p>
+</div>
+<div class="ltx_para" id="Sx1.p5">
+<p class="ltx_p">To allow further development of the initial findings, future research could apply reinforcement learning to regulate the response of ego states to environmental feedback. Another idea is to introduce more elements related to TA - such as <em class="ltx_emph ltx_font_italic">drivers</em>, <em class="ltx_emph ltx_font_italic">racket feelings</em>, <em class="ltx_emph ltx_font_italic">strokes</em>, and <em class="ltx_emph ltx_font_italic">talons</em> - to capture hidden emotional dynamics. We believe that combining Trans-ACT with established cognitive architectures can further deepen the social reasoning of agents and support practical applications such as conflict resolution and psychological research.</p>
+</div>
+<div class="ltx_para" id="Sx1.p6">
+<p class="ltx_p">Trans-ACT contributes a novel approach to modeling human social dynamics by embedding Transactional Analysis principles directly into agent design. Unlike models focused solely on general reasoning or task execution, its use of TA’s psychodynamic concepts (ego states, scripts) aims for more realistic AI interactions. This framework supports cognitive science research (?, ?, ?, ?, ?) and, we hope, will inspire further studies across AI and psychology.</p>
+</div>
+</section>
+<section class="ltx_section" id="Sx2">
+<h2 class="ltx_title ltx_title_section">Related Work</h2>
+<div class="ltx_para" id="Sx2.p1">
+<p class="ltx_p">Multi-Agent Systems (MAS) focus on designing and coordinating intelligent agents that interact within a shared environment (?, ?). Recent MAS architectures integrate Large Language Models (LLMs) as agent reasoning engines, combining external tools and planning strategies to enhance complex problem solving (?, ?). These agents operate autonomously, with capabilities such as learning, planning, reasoning, and decision making (?, ?, ?). MAS are widely used in domains such as robotics, logistic (?, ?), economics, and software development (?, ?), where the collaboration of agents can help achieve common goals.</p>
+</div>
+<div class="ltx_para" id="Sx2.p2">
+<p class="ltx_p">Despite these advancements, MAS frameworks often struggle to capture emotional and psychological depth in interactions (?, ?). While they can simulate human-like behaviors (?, ?), they frequently fail to represent social complexity, personality dynamics, and cognitive biases that influence real-world decision-making (?, ?). Bridging this gap requires integrating psychological models to enhance the realism of MAS-driven simulations (?, ?).</p>
+</div>
+<div class="ltx_para" id="Sx2.p3">
+<p class="ltx_p">Agent-based modeling (ABM) focuses on representing complex systems by simulating individual agents and their interactions within an environment (?, ?). Recent advances integrate LLM, improving adaptability and social reasoning (?, ?). Agents can have specific behaviors, attributes, and decision-making rules. They can act on their own without needing direct instructions and respond like real humans with adaptive planning. To improve decision-making and interaction capabilities, some frameworks incorporate ReAct (Reason + Act) (?, ?). As illustrated in Figure <a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx2.F1" title="Figure 1 ‣ Related Work ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_tag">1</span></a>, it enables LLM-based agents to carry out reasoning alongside the execution of task-specific actions. ReAct enhances agent adaptability, allowing for more efficient task completion and solving the problem with more accuracy.</p>
+</div>
+<figure class="ltx_figure" id="Sx2.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_square" height="409" id="Sx2.F1.g1" src="figure1.png" width="479"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>An example of ReAct and the different steps involved in performing question answering (?, ?).</figcaption>
+</figure>
+<div class="ltx_para" id="Sx2.p4">
+<p class="ltx_p">ABM is increasingly used to study how agents influence and adapt to social structures (?, ?, ?). Researchers use these models to explore trust, cooperation, norm formation, and opinion dynamics in various contexts (?, ?). LLM-enhanced agents improve context-aware communication and adaptive decision-making. These models help to analyze how social behaviors emerge and evolve (?, ?, ?, ?), but it remains difficult to capture long-term adaptation, cultural nuances, and deep cognitive processes essential for realistic social cognition (?, ?, ?).</p>
+</div>
+<div class="ltx_para" id="Sx2.p5">
+<p class="ltx_p">Cognitive architectures provide a structured foundation for modeling human-like cognition. SOAR (State, Operator, and Result) uses knowledge-based reasoning for completing complex problem-solving (?, ?). ACT-R (Adaptive Control of Thought-Rational) tries to better capture human behavior and decision-making (?, ?, ?). Sigma employs graphical models and message passing in its cognitive cycle (?, ?).</p>
+</div>
+<div class="ltx_para" id="Sx2.p6">
+<p class="ltx_p">Recent research explores how Large Language Models (LLMs) can be added to existing cognitive architectures to improve agent-based modeling. One study (?, ?) suggests adding LLM-based memory to SOAR and Sigma, creating a cognitive cycle that works with both symbolic and sub-symbolic information. While parts of this idea already exist in Sigma and Soar, some changes to Sigma are still needed. Another study (?, ?) combines ACT-R’s goal module with SOAR’s impasse mechanism, using LLMs to help agents learn with little human input. This method allows agents to create and adapt plans, showing how LLMs can be useful for learning tasks and making personalized agents in the future.</p>
+</div>
+<figure class="ltx_figure" id="Sx2.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="335" id="Sx2.F2.g1" src="figure2.png" width="663"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>Overview of the Trans-ACT architecture, highlighting memory retrieval, ego states, and information flow.</figcaption>
+</figure>
+<div class="ltx_para" id="Sx2.p7">
+<p class="ltx_p">At the same time, researchers are designing new architectures that mix ideas from traditional cognitive models with LLMs. CoALA (Cognitive Architectures for Language Agents) organizes agents using three main parts: memory, action space, and decision-making (?, ?). It includes a reasoning function powered by LLMs to generate new knowledge. CoPS (Cognitive Personalized Search) focuses on using cognitive memory and LLMs to improve user modeling and search results, helping with data gaps and complex user behavior (?, ?). Casevo is a multi-agent simulation framework that integrates LLMs to model social interactions and decision-making (?, ?). These new models show how LLMs can be used to build smarter and more flexible AI agents.</p>
+</div>
+</section>
+<section class="ltx_section" id="Sx3">
+<h2 class="ltx_title ltx_title_section">Trans-ACT: Transactional Analysis Cognitive Toolkit</h2>
+<div class="ltx_para" id="Sx3.p1">
+<p class="ltx_p">Following the work of other researchers in integrating cognitive architectures with Large Language Models (LLM), we decided to create Trans-ACT with the main focus on social cognition. Trans-ACT is a system designed to model the social dynamics of agent interactions using principles of Transactional Analysis (TA). An overview of the architecture is presented in Figure <a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx2.F2" title="Figure 2 ‣ Related Work ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_tag">2</span></a>.</p>
+</div>
+<section class="ltx_subsection" id="Sx3.SSx1">
+<h3 class="ltx_title ltx_title_subsection">Ego State Modeling</h3>
+<div class="ltx_para" id="Sx3.SSx1.p1">
+<p class="ltx_p">Trans-ACT defines personality through the TA model of ego states, integrating findings from social-cognitive research. Eric ? (?) described these ego states as <em class="ltx_emph ltx_font_italic">”system of feelings accompanied by a related set of behavior patterns”</em> (visualized with their characteristics in Figure <a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx3.F3" title="Figure 3 ‣ Decision-Making ‣ Trans-ACT: Transactional Analysis Cognitive Toolkit ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_tag">3</span></a>). Futher on, Jacqui Schiff and Vann S. ? (?) debated that ego states are neural networks of associated responses, where conscious and unconscious elements shape distinct states and contribute to survival scripts.</p>
+</div>
+<div class="ltx_para" id="Sx3.SSx1.p2">
+<p class="ltx_p">The Parent state embodies internalized attitudes, beliefs, and rules absorbed from authority figures. The Adult represents a rational, objective mindset focused on processing information and making logical decisions. Finally, the Child reflects emotional responses and behavioral patterns rooted in early life experiences, often shaped by the needs and feelings of childhood. In our Trans-ACT architecture, each ego state is modeled as a ReAct (?, ?) agent within a LangGraph framework. These agents actively search for relevant memories and then reason about how to use them to create an appropriate response.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="Sx3.SSx2">
+<h3 class="ltx_title ltx_title_subsection">Memory Retrieval</h3>
+<div class="ltx_para" id="Sx3.SSx2.p1">
+<p class="ltx_p">The agents adapt to different social contexts through schema-based processing. This approach aligns with cognitive and attachment theories, which suggest that ego states emerge from early relationships and continue evolving throughout life. In our architecture, each ego state has unique access to memory and cognitive focus:</p>
+<ul class="ltx_itemize" id="Sx3.I1">
+<li class="ltx_item" id="Sx3.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="Sx3.I1.i1.p1">
+<p class="ltx_p">Parent retrieves memories of rules and behaviors derived from early authority figures, reinforcing social norms;</p>
+</div>
+</li>
+<li class="ltx_item" id="Sx3.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="Sx3.I1.i2.p1">
+<p class="ltx_p">Adult retains factual knowledge and logical reasoning patterns, supporting objective analysis;</p>
+</div>
+</li>
+<li class="ltx_item" id="Sx3.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="Sx3.I1.i3.p1">
+<p class="ltx_p">Child has memory of responses and behavioral patterns rooted in early life experiences, often shaped by the needs and feelings of childhood (?, ?).</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ltx_para" id="Sx3.SSx2.p2">
+<p class="ltx_p">The memory retrieval tool operates through a similarity-based search mechanism. For each ego state, memories are stored as JSON objects containing fields for context, reaction, emotions, and tone. The textual context of these memories is embedded using OpenAI’s text embedding models and indexed into a dedicated FAISS (Facebook AI Similarity Search) (?, ?) vector store. When a query representing the current situation is received, the tool performs a cosine similarity search within the relevant ego state’s FAISS store to retrieve the top- k most similar memories. These retrieved memories are then used by the respective ego state to shape and generate its response to the situation.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="Sx3.SSx3">
+<h3 class="ltx_title ltx_title_subsection">Decision-Making</h3>
+<div class="ltx_para" id="Sx3.SSx3.p1">
+<p class="ltx_p">Following the generation of responses by the ego state agents, a final decision-making step evaluates the options and selects the most suitable reaction. In this step, a dedicated agent reflects on the outputs from the Parent, Adult, and Child agents, weighing each option according to its relevance, the current social context, and the agent’s own <em class="ltx_emph ltx_font_italic">life script</em>. The concept of the <em class="ltx_emph ltx_font_italic">life script</em> in Transactional Analysis refers to an unconscious plan developed in childhood through a complex interplay of factors (?, ?). Life script guides decisions, shapes relationships, and often manifests as repetitive patterns that reinforce core beliefs about oneself and the world. By synthesizing these elements, the final decision-making module selects a response that is both consistent with the agent’s internal psychological framework and adaptive to its immediate environment.</p>
+</div>
+<figure class="ltx_figure" id="Sx3.F3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_square" height="345" id="Sx3.F3.g1" src="figure3.png" width="419"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>Visualization of the three ego states in Transactional Analysis (Parent, Adult, and Child) with descriptions of their characteristics, based on (?, ?).</figcaption>
+</figure>
+</section>
+</section>
+<section class="ltx_section" id="Sx4">
+<h2 class="ltx_title ltx_title_section">Experimental Design</h2>
+<div class="ltx_para" id="Sx4.p1">
+<p class="ltx_p">In this study, we simulate the psychological dynamics of the Transactional Analysis (TA) game <em class="ltx_emph ltx_font_italic">Stupid</em>. This game is typically played when individuals pretend to be helpless or incompetence to gain attention and support. The setup comes from the TA theory (?, ?) and the cognitive science, drawing on schema theory and social-cognitive models for memory retrieval, emotional processing, and decision-making.</p>
+</div>
+<section class="ltx_subsection" id="Sx4.SSx1">
+<h3 class="ltx_title ltx_title_subsection">Experimental Setup</h3>
+<div class="ltx_para" id="Sx4.SSx1.p1">
+<p class="ltx_p">Simulation scenario creates a work situation between Jordan and Alex. It’s starts with system prompt: <span class="ltx_text ltx_font_bold">Alex points out the financial report’s crucial mistake</span>. Jordan is made to act helpless and avoid responsibility. He believes he needs others to solve his problems and relying on external help. He uses three states: a strict Parent ego, a logical Adult ego, and a panicked Child ego. Jordan has 5 problem-related memories and 5 unrelated memories to test the searching system. Alex is programmed to fix others’ mistakes to prove his worth and reacts in three ways: a stern Parent ego, an analytical Adult ego, and an anxious Child ego. Alex also has 5 resolving-problem memories and 5 unrelated memories.</p>
+</div>
+<div class="ltx_para" id="Sx4.SSx1.p2">
+<p class="ltx_p">The simulation uses a LangGraph architecture (Figure <a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx4.F4" title="Figure 4 ‣ Experimental Setup ‣ Experimental Design ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_tag">4</span></a>) where each conversation step connects in a graph. Memory search system helps find similar past situations from stored memories by searching through a ’context’ field. Additional instructions in the ego states agent prompts require them to reason about retrieved memories. They must compare the situation with past experiences and use the information from them - example statements, emotion, and tone - to shape a human-like conversational response. Agents decide on their own whether the memory is relevant or if they should search with another query. They can perform maximum five memory searches so that they do not rely solely on memory retrieval, as they may not have the right memories. If memories are irrelevant, agents create an original response. The decision-making agent choose one of three ego-state options (Parent/Adult/Child) based on four criteria: relevance to the situation, progress toward resolution, social appropriateness, and alignment with their life script. The underlying language model used for all agent reasoning and generation was GPT-4o (?, ?).</p>
+</div>
+<figure class="ltx_figure" id="Sx4.F4"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_portrait" height="774" id="Sx4.F4.g1" src="figure4.png" width="479"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 4: </span>LangGraph-based agent architecture with the message flow within Alex’s and Jordan’s subgraphs.</figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="Sx4.SSx2">
+<h3 class="ltx_title ltx_title_subsection">Results and Analysis</h3>
+<div class="ltx_para" id="Sx4.SSx2.p1">
+<p class="ltx_p">Overall, the simulation supports the hypothesis that cognitive agents modeled using TA principles can produce nuanced, context-aware responses. The integration of memory, retrieval, and psychological adaptation mechanisms results in behavior that mirrors deepened interactions. Distinct patterns emerging in line with each agent’s life script are visible. For instance, Jordan’s repeated expressions of helplessness (’My head is spinning! I wish I was smart like you!’) followed by Alex assuming control (’I will handle this…’) (see Figure <a class="ltx_ref" href="https://arxiv.org/html/2507.21354v1#Sx4.F5" title="Figure 5 ‣ Results and Analysis ‣ Experimental Design ‣ Games Agents Play: Towards Transactional Analysis in LLM-based Multi-Agent Systems"><span class="ltx_text ltx_ref_tag">5</span></a>).</p>
+</div>
+<figure class="ltx_figure" id="Sx4.F5"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_portrait" height="777" id="Sx4.F5.g1" src="figure5.png" width="598"/>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 5: </span>A Transactional Analysis-based simulation where Alex takes control of the situation while Jordan expresses anxiety and seeks reassurance.</figcaption>
+</figure>
+<div class="ltx_para" id="Sx4.SSx2.p2">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Contextual Relevance:</span> The agents’ final responses align with the scenario context. Alex points out specific errors (e.g., incorrect data entries) rather than issuing generic commands.
+
+<br class="ltx_break"/><span class="ltx_text ltx_font_bold">Emotional Processing:</span> Emotional alignment varied by ego state. The simulation captures variations in emotional tone, with Alex using a mix of authority and empathy to manage the crisis, while Jordan responds mostly with Child, reflecting defensiveness and dependency.
+
+<br class="ltx_break"/><span class="ltx_text ltx_font_bold">Cognitive Consistency:</span> Both agents exhibit behavior consistent with the principles of cognitive science. Memory retrieval is shown to shape real-time decision-making through schema activation, and adaptation mechanisms allow for flexible switching between ego states. However, loops emerged: Jordan’s repeated helplessness and Alex’s predictable rescuer in the cycle. Introducing self-reliant memories for Jordan’s Adult state and frustration-triggered Child responses for Alex could break this pattern. In addition, adjusting the prompts could significantly influence more nuanced state selection.
+
+<br class="ltx_break"/><span class="ltx_text ltx_font_bold">Tool Utilization</span>: The implementation of a tool call limit effectively prevents infinite loops in memory retrieval. Agents adapt the memory to the context, rather than searching endlessly for the ideal memory fragment.
+
+<br class="ltx_break"/>Future work will focus on incorporating reinforcement learning and further validating the model against additional real-world scenarios.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="Sx5">
+<h2 class="ltx_title ltx_title_section">Discussion and Future Work</h2>
+<div class="ltx_para" id="Sx5.p1">
+<p class="ltx_p">The use of Transactional Analysis (TA) in Multi-Agent Systems (MAS) brings many new opportunities for creating agents with more psychological depth. This helps agents to interact more realistically by understanding individual needs and complex social signals. However, making these agents work in diverse and ever-changing environments is a challenge (?, ?). The key issue is making sure the agents’ behaviors remain true to established psychological principles. This requires careful validation of the consistency and accuracy of agents’ actions (?, ?, ?). Keeping this psychological relevance is important to ensure that agents are reliable and can be used in practical applications (?, ?).</p>
+</div>
+<section class="ltx_subsection" id="Sx5.SSx1">
+<h3 class="ltx_title ltx_title_subsection">Architecture Improvements</h3>
+<div class="ltx_para" id="Sx5.SSx1.p1">
+<p class="ltx_p">Future improvements to Trans-ACT’s architecture could include new features that will help agents learn, remember, and find better decisions in social situations. These improvements aim to make agents more psychologically advanced and better able to handle different social contexts.
+<br class="ltx_break"/></p>
+</div>
+<section class="ltx_subsubsection" id="Sx5.SSx1.SSSx1">
+<h4 class="ltx_title ltx_title_subsubsection">Reinforcement Learning</h4>
+<div class="ltx_para" id="Sx5.SSx1.SSSx1.p1">
+<p class="ltx_p">Reinforcement learning (RL) might be incorporated into Trans-ACT so that agents can learn from their experiences and adapt their behaviors over time. This could help them be more flexible in how they respond to social situations. Understanding how new experiences could influence the ego states (?, ?), especially the Parent and Child states, which are shaped by early life experiences (?, ?), is important. Adding RL could also allow the agents to change their life scripts over time, breaking free from old repetitive patterns and forming new ones based on what they learn from their environment. This would make agents more adaptable and closer to how human personalities evolve.
+<br class="ltx_break"/></p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="Sx5.SSx1.SSSx2">
+<h4 class="ltx_title ltx_title_subsubsection">Integration with Cognitive Architectures</h4>
+<div class="ltx_para" id="Sx5.SSx1.SSSx2.p1">
+<p class="ltx_p">Although Trans-ACT already has a memory system, we can improve it by connecting it with existing cognitive architectures such as ACT-R or Soar (?, ?). These cognitive systems have well-developed methods for reasoning, problem-solving, and learning. By combining Trans-ACT with these architectures, agents can simulate more complex social interactions and reason about situations more like humans do. However, this integration would need careful planning to ensure that the two systems work well together.
+<br class="ltx_break"/></p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="Sx5.SSx1.SSSx3">
+<h4 class="ltx_title ltx_title_subsubsection">More Advanced TA Connection</h4>
+<div class="ltx_para" id="Sx5.SSx1.SSSx3.p1">
+<p class="ltx_p">A useful next step would be adding more advanced Transactional Analysis concepts to Trans-ACT. Elements like <em class="ltx_emph ltx_font_italic">drivers</em> (mini-script behaviors), <em class="ltx_emph ltx_font_italic">racket feelings</em> (substitute emotions), <em class="ltx_emph ltx_font_italic">strokes</em> (units of recognition or attention), and <em class="ltx_emph ltx_font_italic">trading stamps</em> (accumulated unexpressed, negative feelings) can make the agents’ behaviors more complex and closer to real human interactions. These elements represent deeper emotional patterns and unconscious motivations. For example, including stamp collecting could allow agents to simulate the build-up of frustration, which in turn could trigger disproportionately large emotional reactions.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="Sx5.SSx2">
+<h3 class="ltx_title ltx_title_subsection">Potential Real-World Applications</h3>
+<div class="ltx_para" id="Sx5.SSx2.p1">
+<p class="ltx_p">The integration between Transactional Analysis and MAS offers numerous practical applications, particularly in areas where social cognition and psychological processes are crucial.
+<br class="ltx_break"/></p>
+</div>
+<section class="ltx_subsubsection" id="Sx5.SSx2.SSSx1">
+<h4 class="ltx_title ltx_title_subsubsection">Conflict Resolution and Mediation Tools</h4>
+<div class="ltx_para" id="Sx5.SSx2.SSSx1.p1">
+<p class="ltx_p">TA-based agents may assist in conflict resolution by understanding the psychological dynamics underlying disputes. TA-based agents could identify psychological patterns such as transactional games. Recognizing these patterns would allow agents to propose strategies to break the cycle and facilitate more constructive interactions. Agents could simulate ways to prevent or resolve conflicts in specific situations. This could lead to more effective mediation strategies in personal, organizational, and even diplomatic settings (?, ?, ?, ?).
+<br class="ltx_break"/></p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="Sx5.SSx2.SSSx2">
+<h4 class="ltx_title ltx_title_subsubsection">Advancing Psychological Research</h4>
+<div class="ltx_para" id="Sx5.SSx2.SSSx2.p1">
+<p class="ltx_p">TA-based Multi-Agent Systems have the potential to advance psychological theory, particularly in understanding interpersonal dynamics and complex human behaviors. Social cognition theories on memory, emotion, and decision-making could be explored more deeply through these agent-based models. These systems can serve as valuable tools for developing and refining psychological knowledge (?, ?, ?). This could lead to a more comprehensive understanding of how early experiences shape behavior throughout life.
+<br class="ltx_break"/></p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="Sx5.SSx2.SSSx3">
+<h4 class="ltx_title ltx_title_subsubsection">Supporting Scientific Research in Social Systems</h4>
+<div class="ltx_para" id="Sx5.SSx2.SSSx3.p1">
+<p class="ltx_p">Another important application is using Trans-Act to enhance scientific research on social systems (?, ?, ?). By modeling the interactions of cognitive agents, researchers could gain insight into how people form relationships, resolve conflicts, and navigate social hierarchies (?, ?, ?). These systems could simulate how groups with different psychological adaptations respond to social changes or policies. For example, simulations could predict how different populations might react to a new policy or social trend, helping to better understand the social impact of different decisions (?, ?, ?). By incorporating psychological theories into agent-based models, we can simulate the cognitive and emotional responses that shape collective behavior, providing valuable data for social scientists and politics alike.</p>
+</div>
+</section>
+</section>
+</section>
+<section class="ltx_section" id="Sx6">
+<h2 class="ltx_title ltx_title_section">Conclusion</h2>
+<div class="ltx_para" id="Sx6.p1">
+<p class="ltx_p">This study contributes to the growing field of cognitive agent modeling by demonstrating the potential of integrating Transactional Analysis with advanced cognitive mechanisms. The Trans-ACT framework structures agent behavior around distinct ego states (Parent, Adult and Child). By encoding long-term memories for each state and employing similarity-based retrieval, agents dynamically activate internal schemas that guide their responses in a way consistent with human cognition. This process not only reinforces behavioral consistency, but also prevents agents from ”going in circles” by promoting progressive and adaptive interactions.</p>
+</div>
+<div class="ltx_para" id="Sx6.p2">
+<p class="ltx_p">Experimental simulation, based on the <em class="ltx_emph ltx_font_italic">Stupid</em> game, illustrates that agents with TA-inspired architectures can display rich psychological dynamics. Jordan’s responses reveal a strong dependence on external validation and a tendency to avoid responsibility, while Alex consistently assumes control and attempts to help. The results confirm that the interplay between automatic emotional responses and deliberate analytical thinking plays a key role in shaping agent behavior. Moreover, the simulation highlights the importance of well-structured memories in triggering appropriate responses and ensuring that agents remain aligned with their internal life scripts.</p>
+</div>
+<div class="ltx_para" id="Sx6.p3">
+<p class="ltx_p">We highlighted the broader applications of Trans-ACT across various domains. For example, in conflict resolution, the framework could model emotionally charged interactions to simulate strategies for deescalation (?, ?). In education, agents might recreate realistic classroom dynamics to improve teacher training. In sociological research, Trans-ACT could help study collective behaviors or group decision-making processes (?, ?). By enabling MAS to model complex psychological dynamics, this work offers new tools to address real-world challenges while promotes collaboration between cognitive science and LLMs.</p>
+</div>
+</section>
+<section class="ltx_section" id="Sx7">
+<h2 class="ltx_title ltx_title_section">Acknowledgments</h2>
+<div class="ltx_para" id="Sx7.p1">
+<p class="ltx_p">The work reported in this paper was partly supported by the Polish National Science Centre under grant 2020/39/I/HS1/02861.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bibx1">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Argyle et al.Argyle et al.</span>
+<span class="ltx_bibblock">
+Argyle, L., Busby, E., Fulda, N., Gubler, J., Rytting, C.,  Wingate, D. 
+</span>
+<span class="ltx_bibblock">(2023, 02).
+
+</span>
+<span class="ltx_bibblock">Out of one, many: Using language models to simulate human samples.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Political Analysis</em>, <em class="ltx_emph ltx_font_italic">31</em>, 1-15.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx2">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">BerneBerne</span>
+<span class="ltx_bibblock">
+Berne, E. 
+</span>
+<span class="ltx_bibblock">(1958).
+
+</span>
+<span class="ltx_bibblock">Transactional analysis: A new and effective method of group therapy.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">American Journal of Psychotherapy</em>, <em class="ltx_emph ltx_font_italic">12</em>(4), 735–-743.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx3">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">BerneBerne</span>
+<span class="ltx_bibblock">
+Berne, E. 
+</span>
+<span class="ltx_bibblock">(1961).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Transactional analysis in psychotherapy: A systematic individual and social psychiatry</em>.
+
+</span>
+<span class="ltx_bibblock">New York: Grove Press.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx4">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">BerneBerne</span>
+<span class="ltx_bibblock">
+Berne, E. 
+</span>
+<span class="ltx_bibblock">(1964).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Games people play</em>.
+
+</span>
+<span class="ltx_bibblock">New York: Grove Press.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx5">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">BerneBerne</span>
+<span class="ltx_bibblock">
+Berne, E. 
+</span>
+<span class="ltx_bibblock">(1972).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">What do you say after you say hello?: The psychology of human destiny</em>.
+
+</span>
+<span class="ltx_bibblock">Grove Press.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx6">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ceridono  VialeCeridono  Viale</span>
+<span class="ltx_bibblock">
+Ceridono, D.,  Viale, D. 
+</span>
+<span class="ltx_bibblock">(2013, Jan.).
+
+</span>
+<span class="ltx_bibblock">Ego states in the therapeutic relationship and pre- to post-treatment change in self ego states.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">International Journal of Transactional Analysis Research &amp; Practice</em>, <em class="ltx_emph ltx_font_italic">4</em>(1), 49–58.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx7">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Chopra, Kumar, Giray-Kuru, Raskar,  Quera-BofarullChopra et al.</span>
+<span class="ltx_bibblock">
+Chopra, A., Kumar, S., Giray-Kuru, N., Raskar, R.,  Quera-Bofarull, A. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">On the limits of agency in agent-based models.</em>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx8">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Chudziak  WawerChudziak  Wawer</span>
+<span class="ltx_bibblock">
+Chudziak, J. A.,  Wawer, M. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock">ElliottAgents: A natural language-driven multi-agent system for stock market analysis and prediction.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the 38th pacific asia conference on language, information and computation.</em>
+</span>
+<span class="ltx_bibblock">Tokyo, Japan, (in press).
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx9">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Cinkusz  ChudziakCinkusz  Chudziak</span>
+<span class="ltx_bibblock">
+Cinkusz, K.,  Chudziak, J. A. 
+</span>
+<span class="ltx_bibblock">(2024, October).
+
+</span>
+<span class="ltx_bibblock">Towards LLM-augmented multiagent systems for agile software engineering.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the 39th IEEE/ACM International Conference on Automated Software Engineering</em> (pp. 2476–2477).
+
+</span>
+<span class="ltx_bibblock">Sacramento CA USA: ACM.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx10">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">de Graaf  Rosseaude Graaf  Rosseau</span>
+<span class="ltx_bibblock">
+de Graaf, A.,  Rosseau, M. 
+</span>
+<span class="ltx_bibblock">(2015).
+
+</span>
+<span class="ltx_bibblock">Transactional analysis and conflict management.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Transactional Analysis Journal</em>, <em class="ltx_emph ltx_font_italic">45</em>(4), 250 - 259.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx11">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ding et al.Ding et al.</span>
+<span class="ltx_bibblock">
+Ding, L., Tang, Y., Wang, T., Xie, T., Huang, P.,  Yang, B. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock">A cooperative decision-making approach based on a soar cognitive architecture for multi-unmanned vehicles.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Drones</em>, <em class="ltx_emph ltx_font_italic">8</em>(4).
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx12">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Du, Rajivan,  GonzalezDu et al.</span>
+<span class="ltx_bibblock">
+Du, Y., Rajivan, P.,  Gonzalez, C. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock">Large language models for collective problem-solving: Insights into group consensus decision-making.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Proceedings of the Annual Meeting of the Cognitive Science Society</em>, <em class="ltx_emph ltx_font_italic">46</em>.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx13">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">ElstonElston</span>
+<span class="ltx_bibblock">
+Elston, R. 
+</span>
+<span class="ltx_bibblock">(2023).
+
+</span>
+<span class="ltx_bibblock">Making new meaning with Eco-TA: Using the aggregate script helix to explore the contribution of place to script development.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Transactional Analysis Journal</em>, <em class="ltx_emph ltx_font_italic">53</em>(1), 80–92.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx14">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Flache, Maes,  KeijzerFlache et al.</span>
+<span class="ltx_bibblock">
+Flache, A., Maes, M.,  Keijzer, M. 
+</span>
+<span class="ltx_bibblock">(2022).
+
+</span>
+<span class="ltx_bibblock">Computational approaches in rigorous sociology: agent-based computational sociology and computational social science.
+
+</span>
+<span class="ltx_bibblock">In K. Gërxhani, N. de Graaf,  W. Raub (Eds.), <em class="ltx_emph ltx_font_italic">Handbook of sociological science</em> (pp. 57–72).
+
+</span>
+<span class="ltx_bibblock">Edward Elgar Publishing; Cheltenham.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx15">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Gao et al.Gao et al.</span>
+<span class="ltx_bibblock">
+Gao, C., Lan, X., Li, N., Yuan, Y., Ding, J., Zhou, Z., … Li, Y. 
+</span>
+<span class="ltx_bibblock">(2024, 09).
+
+</span>
+<span class="ltx_bibblock">Large language models empowered agent-based modeling and simulation: a survey and perspectives.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Humanities and Social Sciences Communications</em>, <em class="ltx_emph ltx_font_italic">11</em>.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx16">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">He, Treude,  LoHe et al.</span>
+<span class="ltx_bibblock">
+He, J., Treude, C.,  Lo, D. 
+</span>
+<span class="ltx_bibblock">(2025, January).
+
+</span>
+<span class="ltx_bibblock">Llm-based multi-agent systems for software engineering: Literature review, vision and the road ahead.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">ACM Trans. Softw. Eng. Methodol.</em>.
+
+</span>
+<span class="ltx_bibblock">(Just Accepted)
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx17">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Hollins MartinHollins Martin</span>
+<span class="ltx_bibblock">
+Hollins Martin, C. 
+</span>
+<span class="ltx_bibblock">(2011, 09).
+
+</span>
+<span class="ltx_bibblock">Transactional analysis: A method of analysing communication.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">British Journal of Midwifery</em>, <em class="ltx_emph ltx_font_italic">19</em>, 587-593.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx18">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Huang et al.Huang et al.</span>
+<span class="ltx_bibblock">
+Huang, Y., Wang, X., Liu, H., Kong, F., Qin, A., Tang, M., … Feng, X. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">AdaSociety: An adaptive environment with social structures for multi-agent decision-making.</em>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx19">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ito, Hadfi,  SuzukiIto et al.</span>
+<span class="ltx_bibblock">
+Ito, T., Hadfi, R.,  Suzuki, S. 
+</span>
+<span class="ltx_bibblock">(2022, 06).
+
+</span>
+<span class="ltx_bibblock">An agent that facilitates crowd discussion: A crowd discussion support system based on an automated facilitation agent.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Group Decision and Negotiation</em>, <em class="ltx_emph ltx_font_italic">31</em>.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx20">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Jiang et al.Jiang et al.</span>
+<span class="ltx_bibblock">
+Jiang, Z., Shi, Y., Li, M., Xiao, H., Qin, Y., Wei, Q., … Zhang, Y. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Casevo: A cognitive agents and social evolution simulator.</em>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx21">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Johnson, Douze,  JégouJohnson et al.</span>
+<span class="ltx_bibblock">
+Johnson, J., Douze, M.,  Jégou, H. 
+</span>
+<span class="ltx_bibblock">(2021).
+
+</span>
+<span class="ltx_bibblock">Billion-scale similarity search with gpus.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">IEEE Transactions on Big Data</em>, <em class="ltx_emph ltx_font_italic">7</em>(3), 535-547.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx22">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">JoinesJoines</span>
+<span class="ltx_bibblock">
+Joines, V. S. 
+</span>
+<span class="ltx_bibblock">(2016).
+
+</span>
+<span class="ltx_bibblock">Understanding second-order structure and functioning.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Transactional Analysis Journal</em>, <em class="ltx_emph ltx_font_italic">46</em>(1), 39 - 49.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx23">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Joshi  UstunJoshi  Ustun</span>
+<span class="ltx_bibblock">
+Joshi, H.,  Ustun, V. 
+</span>
+<span class="ltx_bibblock">(2024, Jan.).
+
+</span>
+<span class="ltx_bibblock">Augmenting cognitive architectures with large language models.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Proceedings of the AAAI Symposium Series</em>, <em class="ltx_emph ltx_font_italic">2</em>(1), 281-285.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx24">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kostka  ChudziakKostka  Chudziak</span>
+<span class="ltx_bibblock">
+Kostka, A.,  Chudziak, J. A. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock">Synergizing logical reasoning, long-term memory, and collaborative intelligence in multi-agent llm systems.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Pacific asia conference on language, information and computation (paclic 38).</em>
+</span>
+<span class="ltx_bibblock">Tokyo, Japan.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx25">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">LairdLaird</span>
+<span class="ltx_bibblock">
+Laird, J. E. 
+</span>
+<span class="ltx_bibblock">(2022).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">An analysis and comparison of act-r and soar.</em>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx26">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">LinLin</span>
+<span class="ltx_bibblock">
+Lin, Z. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Large language models as linguistic simulators and cognitive models in human research.</em>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx27">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Nguyen, Jamale,  GonzalezNguyen et al.</span>
+<span class="ltx_bibblock">
+Nguyen, T. N., Jamale, K.,  Gonzalez, C. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Predicting and understanding human action decisions: Insights from large language models and cognitive instance-based learning.</em>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx28">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Niu et al.Niu et al.</span>
+<span class="ltx_bibblock">
+Niu, Q., Liu, J., Bi, Z., Feng, P., Peng, B., Chen, K., … Liu, M. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Large language models and cognitive science: A comprehensive review of similarities, differences, and challenges.</em>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx29">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">OpenAIOpenAI</span>
+<span class="ltx_bibblock">
+OpenAI. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Introducing gpt-4.1 in the api.</em>
+</span>
+<span class="ltx_bibblock">Retrieved from <span class="ltx_text ltx_font_typewriter">https://openai.com/index/gpt-4-1/</span>
+</span>
+<span class="ltx_bibblock">(Accessed: 2025-07-15)
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx30">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Park et al.Park et al.</span>
+<span class="ltx_bibblock">
+Park, J. S., O’Brien, J. C., Cai, C. J., Morris, M. R., Liang, P.,  Bernstein, M. S. 
+</span>
+<span class="ltx_bibblock">(2023).
+
+</span>
+<span class="ltx_bibblock">Generative Agents: Interactive simulacra of human behavior.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the 36th annual acm symposium on user interface software and technology.</em>
+</span>
+<span class="ltx_bibblock">Association for Computing Machinery.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx31">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Qu et al.Qu et al.</span>
+<span class="ltx_bibblock">
+Qu, Y., Du, P., Che, W., Wei, C., Zhang, C., Ouyang, W., … Liu, Q. 
+</span>
+<span class="ltx_bibblock">(2024, 03).
+
+</span>
+<span class="ltx_bibblock">Promoting interactions between cognitive science and large language models.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">The Innovation</em>, <em class="ltx_emph ltx_font_italic">5</em>, 100579.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx32">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Sarangi, Elgarf,  SalamSarangi et al.</span>
+<span class="ltx_bibblock">
+Sarangi, S., Elgarf, M.,  Salam, H. 
+</span>
+<span class="ltx_bibblock">(2025, January).
+
+</span>
+<span class="ltx_bibblock">Decompose-ToM: Enhancing theory of mind reasoning in large language models through simulation and task decomposition.
+
+</span>
+<span class="ltx_bibblock">In O. Rambow, L. Wanner, M. Apidianaki, H. Al-Khalifa, B. D. Eugenio,  S. Schockaert (Eds.), <em class="ltx_emph ltx_font_italic">Proceedings of the 31st international conference on computational linguistics</em> (pp. 10228–10241).
+
+</span>
+<span class="ltx_bibblock">Abu Dhabi, UAE: Association for Computational Linguistics.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx33">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Shapiro  TalmonShapiro  Talmon</span>
+<span class="ltx_bibblock">
+Shapiro, E.,  Talmon, N. 
+</span>
+<span class="ltx_bibblock">(2018).
+
+</span>
+<span class="ltx_bibblock">Incorporating reality into social choice.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the 17th international conference on autonomous agents and multiagent systems</em> (pp. 1188–1192).
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx34">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Song, Tan, Zhu, Feng,  LeeSong et al.</span>
+<span class="ltx_bibblock">
+Song, T., Tan, Y., Zhu, Z., Feng, Y.,  Lee, Y.-C. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Multi-agents are social groups: Investigating social influence of multiple agents in human-agent interactions.</em>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx35">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Stewart  JoinesStewart  Joines</span>
+<span class="ltx_bibblock">
+Stewart, I.,  Joines, V. 
+</span>
+<span class="ltx_bibblock">(2002).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Personality adaptations</em>.
+
+</span>
+<span class="ltx_bibblock">Kegworth and North Carolina: Lifespace Publishing and Chapel Hill.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx36">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Stewart  JoinesStewart  Joines</span>
+<span class="ltx_bibblock">
+Stewart, I.,  Joines, V. 
+</span>
+<span class="ltx_bibblock">(2012).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">TA today: A new introduction to transactional analysis</em> (2nd ed.).
+
+</span>
+<span class="ltx_bibblock">Nottingham: Lifespace Publishing.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx37">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Stuart  AlgarStuart  Algar</span>
+<span class="ltx_bibblock">
+Stuart, K.,  Algar, A. 
+</span>
+<span class="ltx_bibblock">(2011).
+
+</span>
+<span class="ltx_bibblock">The use of transactional analysis in secondary education: A case study.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Teacher Education Advancement Network Journal</em>, <em class="ltx_emph ltx_font_italic">3</em>.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx38">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Sumers, Yao, Narasimhan,  GriffithsSumers et al.</span>
+<span class="ltx_bibblock">
+Sumers, T. R., Yao, S., Narasimhan, K.,  Griffiths, T. L. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Cognitive architectures for language agents.</em>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx39">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Taverner, Cordova García, Del Val Noguera, Valero,  ArgenteTaverner et al.</span>
+<span class="ltx_bibblock">
+Taverner, J., Cordova García, C., Del Val Noguera, E., Valero, S.,  Argente, E. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock">Exploring the relationship between emotions and norms in decision-making processes of intelligent agents.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the 16th international conference on agents and artificial intelligence - volume 1: Eaa</em> (p. 471-479).
+
+</span>
+<span class="ltx_bibblock">SciTePress.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx40">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Thomson, Lebiere, Anderson,  StaszewskiThomson et al.</span>
+<span class="ltx_bibblock">
+Thomson, R., Lebiere, C., Anderson, J. R.,  Staszewski, J. 
+</span>
+<span class="ltx_bibblock">(2015).
+
+</span>
+<span class="ltx_bibblock">A general instance-based learning framework for studying intuitive decision-making in a cognitive architecture.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Journal of Applied Research in Memory and Cognition</em>, <em class="ltx_emph ltx_font_italic">4</em>(3), 180-190.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx41">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Torkaman, Farokhzadian, Miri,  PouraboliTorkaman et al.</span>
+<span class="ltx_bibblock">
+Torkaman, M., Farokhzadian, J., Miri, S.,  Pouraboli, B. 
+</span>
+<span class="ltx_bibblock">(2020, 01).
+
+</span>
+<span class="ltx_bibblock">The effect of transactional analysis on the self-esteem of imprisoned women: a clinical trial.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">BMC Psychology</em>, <em class="ltx_emph ltx_font_italic">8</em>.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx42">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Tosi  BianchiniTosi  Bianchini</span>
+<span class="ltx_bibblock">
+Tosi, M. T.,  Bianchini, S. 
+</span>
+<span class="ltx_bibblock">(2013, Jan.).
+
+</span>
+<span class="ltx_bibblock">A social-cognitive definition of ego states to implement ta research.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">International Journal of Transactional Analysis Research &amp; Practice</em>, <em class="ltx_emph ltx_font_italic">4</em>(1), 107–112.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx43">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Tran et al.Tran et al.</span>
+<span class="ltx_bibblock">
+Tran, K.-T., Dao, D., Nguyen, M.-D., Pham, Q.-V., O’Sullivan, B.,  Nguyen, H. D. 
+</span>
+<span class="ltx_bibblock">(2025).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Multi-agent collaboration mechanisms: A survey of llms.</em>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx44">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wang  LiuWang  Liu</span>
+<span class="ltx_bibblock">
+Wang, L.,  Liu, G. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock">Research on multi-robot collaborative operation in logistics and warehousing using A3C optimized YOLOv5-PPO model.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Frontiers in Neurorobotics</em>, <em class="ltx_emph ltx_font_italic">17</em>.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx45">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wang et al.Wang et al.</span>
+<span class="ltx_bibblock">
+Wang, L., Ma, C., Feng, X., Zhang, Z., Yang, H., Zhang, J., … Wen, J. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock">A survey on large language model based autonomous agents.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Frontiers of Computer Science</em>, <em class="ltx_emph ltx_font_italic">18</em>(6).
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx46">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">WooldridgeWooldridge</span>
+<span class="ltx_bibblock">
+Wooldridge, M. 
+</span>
+<span class="ltx_bibblock">(2009).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">An introduction to multiagent systems</em> (2nd ed.).
+
+</span>
+<span class="ltx_bibblock">Wiley Publishing.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx47">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Yao et al.Yao et al.</span>
+<span class="ltx_bibblock">
+Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K.,  Cao, Y. 
+</span>
+<span class="ltx_bibblock">(2023).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">React: Synergizing reasoning and acting in language models.</em>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx48">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang, Yin, Jiang,  SuZhang et al.</span>
+<span class="ltx_bibblock">
+Zhang, H., Yin, J., Jiang, M.,  Su, C. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Can agents spontaneously form a society? introducing a novel architecture for generative multi-agents to elicit social emergence.</em>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx49">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhou, Zhu, Jin,  DouZhou et al.</span>
+<span class="ltx_bibblock">
+Zhou, Y., Zhu, Q., Jin, J.,  Dou, Z. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock">Cognitive personalized search integrating large language models with an efficient memory mechanism.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the acm web conference 2024</em> (p. 1464–1473).
+
+</span>
+<span class="ltx_bibblock">New York, NY, USA: Association for Computing Machinery.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx50">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhu  SimmonsZhu  Simmons</span>
+<span class="ltx_bibblock">
+Zhu, F.,  Simmons, R. 
+</span>
+<span class="ltx_bibblock">(2024, 03).
+
+</span>
+<span class="ltx_bibblock">Bootstrapping cognitive agents with a large language model.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Proceedings of the AAAI Conference on Artificial Intelligence</em>, <em class="ltx_emph ltx_font_italic">38</em>, 655-663.
+
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx51">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Önder GürcanÖnder Gürcan</span>
+<span class="ltx_bibblock">
+Önder Gürcan. 
+</span>
+<span class="ltx_bibblock">(2024).
+
+</span>
+<span class="ltx_bibblock">Llm-augmented agent-based modelling for social simulations: Challenges and opportunities.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Hybrid human ai systems for the social good</em> (p. 134-144).
+
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Mon Jul 28 21:25:06 2025 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation</title>
+<!--Generated on Mon Jun 23 15:30:26 2025 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2506.18783v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S1" title="In TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>INTRODUCTION</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S2" title="In TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>BACKGROUND</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S2.SS1" title="In 2 BACKGROUND ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>Related Work</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S2.SS2" title="In 2 BACKGROUND ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2 </span>TRIZ Methodology</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S2.SS2.SSS1" title="In 2.2 TRIZ Methodology ‣ 2 BACKGROUND ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2.1 </span>TRIZ Core Principles</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S2.SS2.SSS2" title="In 2.2 TRIZ Methodology ‣ 2 BACKGROUND ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2.2 </span>TRIZ Complexity and Knowledge Demands</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S2.SS3" title="In 2 BACKGROUND ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.3 </span>Multi-agent Systems and Language Agents</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S2.SS3.SSS1" title="In 2.3 Multi-agent Systems and Language Agents ‣ 2 BACKGROUND ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.3.1 </span>Agent Orchestration</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S2.SS3.SSS2" title="In 2.3 Multi-agent Systems and Language Agents ‣ 2 BACKGROUND ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.3.2 </span>Agent Tools</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S2.SS4" title="In 2 BACKGROUND ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.4 </span>Role of LLMs in Problem-Solving and Innovation</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S3" title="In TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>TRIZ AGENTS</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S3.SS1" title="In 3 TRIZ AGENTS ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Workflow</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S3.SS1.SSS1" title="In 3.1 Workflow ‣ 3 TRIZ AGENTS ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1.1 </span>Implementation</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S3.SS2" title="In 3 TRIZ AGENTS ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Agent Orchestration Architecture</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S3.SS2.SSS1" title="In 3.2 Agent Orchestration Architecture ‣ 3 TRIZ AGENTS ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2.1 </span>Team Composition</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S3.SS2.SSS2" title="In 3.2 Agent Orchestration Architecture ‣ 3 TRIZ AGENTS ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2.2 </span>Agent Profiling Prompts</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S3.SS2.SSS3" title="In 3.2 Agent Orchestration Architecture ‣ 3 TRIZ AGENTS ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2.3 </span>Tools of TRIZ Agents</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S4" title="In TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>CASE STUDY</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5" title="In TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>RESULTS AND DISCUSSION</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.SS1" title="In 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.1 </span>Analysis of System’s Actions</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.SS1.SSS0.Px1" title="In 5.1 Analysis of System’s Actions ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title">Step 1: Defining Engineering System</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.SS1.SSS0.Px2" title="In 5.1 Analysis of System’s Actions ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title">Step 2: Function Analysis</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.SS1.SSS0.Px3" title="In 5.1 Analysis of System’s Actions ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title">Step 3: Cause and Effect Chain Analysis (CECA)</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.SS1.SSS0.Px4" title="In 5.1 Analysis of System’s Actions ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title">Step 4: Engineering Contradiction (EC) and Contradiction Matrix.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.SS1.SSS0.Px5" title="In 5.1 Analysis of System’s Actions ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title">Step 5: Physical Contradiction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.SS1.SSS0.Px6" title="In 5.1 Analysis of System’s Actions ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title">Step 6: Solutions</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.SS2" title="In 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.2 </span>Assessment and Discussion</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.SS2.SSS1" title="In 5.2 Assessment and Discussion ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.2.1 </span>TRIZ Agents Actions</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.SS2.SSS2" title="In 5.2 Assessment and Discussion ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.2.2 </span>Case Study Comparison</span></a>
+<ol class="ltx_toclist ltx_toclist_subsubsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.SS2.SSS2.Px1" title="In 5.2.2 Case Study Comparison ‣ 5.2 Assessment and Discussion ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title">Step 1: Defining Engineering System</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.SS2.SSS2.Px2" title="In 5.2.2 Case Study Comparison ‣ 5.2 Assessment and Discussion ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title">Step 2: Function Analysis</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.SS2.SSS2.Px3" title="In 5.2.2 Case Study Comparison ‣ 5.2 Assessment and Discussion ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title">Step 3: Cause and Effect Chain Analysis (CECA)</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.SS2.SSS2.Px4" title="In 5.2.2 Case Study Comparison ‣ 5.2 Assessment and Discussion ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title">Step 4: Engineering Contradiction (EC) and Contradiction Matrix.</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.SS2.SSS2.Px5" title="In 5.2.2 Case Study Comparison ‣ 5.2 Assessment and Discussion ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title">Step 5: Physical Contradiction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.SS2.SSS2.Px6" title="In 5.2.2 Case Study Comparison ‣ 5.2 Assessment and Discussion ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title">Step 6: Solutions</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S6" title="In TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>CONCLUSIONS</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S6.SS1" title="In 6 CONCLUSIONS ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6.1 </span>Main insights</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S6.SS2" title="In 6 CONCLUSIONS ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6.2 </span>Limitations</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S6.SS3" title="In 6 CONCLUSIONS ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6.3 </span>Future Work</span></a></li>
+</ol>
+</li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">TRIZ Agents: A Multi-Agent LLM Approach for 
+<br class="ltx_break"/>TRIZ-Based Innovation</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Kamil Szczepanik<sup class="ltx_sup" id="id8.8.id1"><span class="ltx_text ltx_font_italic" id="id8.8.id1.1">1</span></sup>
+<img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="12" id="id2.2.g1" src="extracted/6563590/orcid.png" width="12"/>
+, Jarosław A. Chudziak<sup class="ltx_sup" id="id9.9.id2"><span class="ltx_text ltx_font_italic" id="id9.9.id2.1">1</span></sup>
+<img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="12" id="id5.5.g2" src="extracted/6563590/orcid.png" width="12"/>
+<br class="ltx_break"/>
+<span class="ltx_inline-block ltx_minipage ltx_align_top" id="id7.7.1" style="width:448.1pt;">
+<span class="ltx_p" id="id7.7.1.1"><sup class="ltx_sup" id="id7.7.1.1.1"><span class="ltx_text ltx_font_italic" id="id7.7.1.1.1.1">1</span></sup><span class="ltx_text ltx_font_italic" id="id7.7.1.1.2">The Institute of Computer Science, Warsaw University of Technology</span></span>
+</span>
+<br class="ltx_break"/>{<span class="ltx_text ltx_font_italic" id="id10.10.id3">kamil.szczepanik.stud, jaroslaw.chudziak</span>}<span class="ltx_text ltx_font_italic" id="id11.11.id4">@pw.edu.pl</span>
+<br class="ltx_break"/>
+</span><span class="ltx_author_notes"><img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="12" id="id3.3.g1" src="extracted/6563590/orcid.png" width="12"/> https://orcid.org/0009-0009-6807-2426<img alt="[Uncaptioned image]" class="ltx_graphics ltx_img_square" height="12" id="id6.6.g1" src="extracted/6563590/orcid.png" width="12"/> https://orcid.org/0000-0003-4534-8652</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id12.id1">TRIZ, the Theory of Inventive Problem Solving, is a structured, knowledge-based framework for innovation and abstracting problems to find inventive solutions. However, its application is often limited by the complexity and deep interdisciplinary knowledge required. Advancements in Large Language Models (LLMs) have revealed new possibilities for automating parts of this process. While previous studies have explored single LLMs in TRIZ applications, this paper introduces a multi-agent approach. We propose an LLM-based multi-agent system, called TRIZ agents, each with specialized capabilities and tool access, collaboratively solving inventive problems based on the TRIZ methodology. This multi-agent system leverages agents with various domain expertise to efficiently navigate TRIZ steps. The aim is to model and simulate an inventive process with language agents. We assess the effectiveness of this team of agents in addressing complex innovation challenges based on a selected case study in engineering. We demonstrate the potential of agent collaboration to produce diverse, inventive solutions. This research contributes to the future of AI-driven innovation, showcasing the advantages of decentralized problem-solving in complex ideation tasks.</p>
+</div>
+<span class="ltx_note ltx_role_footnotetext" id="footnotex1"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">footnotetext: </span><span class="ltx_rule" style="width:433.6pt;height:0.4pt;background:black;display:inline-block;"> </span>This is the accepted version of the paper presented at the
+<span class="ltx_text ltx_font_bold" id="footnotex1.1">17th International Conference on Agents and Artificial Intelligence</span>
+(ICAART 2025), Porto, Portugal.
+Available at: <a class="ltx_ref ltx_url" href="https://doi.org/10.5220/0013321900003890" title="">https://doi.org/10.5220/0013321900003890</a></span></span></span>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>INTRODUCTION</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Problem-solving is a fundamental subject of every innovation process. It is much more than finding quick fixes or solutions to occurring obstacles. Innovation problem-solving requires substantial knowledge and unconventional thinking. However, it is strongly advised to follow methodologies designed to succeed in this process. Structured methodologies for problem-solving in innovation, like TRIZ (Theory of Inventive Problem Solving) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx33" title="">Orloff, 2006</a>]</cite>, Design Thinking <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx5" title="">Brown et al., 2008</a>]</cite>, Lean Innovation <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx37" title="">Sehested and Sonnenberg, 2010</a>]</cite>, and more, were created.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">Researchers have preferred or disliked methods; some work only for specific problems or become hard to implement. The innovation process is a challenging task, and every tool that tries to harness it is merely a rough guide for innovators during the process. Nevertheless, these methodologies are the best-known way to cope with it.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">TRIZ has been around for decades, proving its efficiency and usefulness as a problem-solving methodology. It was developed after analyzing around 200,000 patents <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx26" title="">Loh et al., 2006</a>]</cite> to create a structured framework for engineers and innovators to solve innovation problems. Over the years, many improvements have been proposed; however, the general idea has stayed the same. In addition, complementary tools and group work techniques have been developed to assist teams during the TRIZ process, such as brainstorming <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx28" title="">Mahto, 2013</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">Although the TRIZ methodology has been successfully helping innovators solve problems, it has limitations that still need to be addressed. The biggest one is perhaps the need for experts. The only way to solve complex innovation challenges is for innovators to have extensive knowledge and experience in the relevant field <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx15" title="">Czinki and Hentschel, 2016</a>]</cite> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx21" title="">Ilevbare et al., 2013</a>]</cite>. It takes many years to become an expert in one domain, and sometimes, expertise in multiple domains is required to solve complex innovation problems. People working in an innovation team must think creatively and possess broad knowledge. There is a need for interdisciplinary knowledge when creating a TRIZ team. There have been proposed concepts supporting knowledge discovery <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx12" title="">Choinski and Chudziak, 2009</a>]</cite>; however, with the advent of LLMs, new possibilities have arisen.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">This study simulates a realistic team tasked with solving innovation problems using the TRIZ methodology. It aims to model agents’ subtasks, goals, and abilities for collaboratively achieving a theoretical solution proposal. Choosing the TRIZ methodology narrows the scope of actions while guiding the team in a structured and systematic way.</p>
+</div>
+<div class="ltx_para" id="S1.p6">
+<p class="ltx_p" id="S1.p6.1">The primary purpose is to showcase the abilities of language agents in collaborative teamwork. This study proposes a multi-agent system in which LLM agents simulate a team’s workflow to solve innovation problems using the TRIZ methodology. First, we review previous works on this topic and introduce the reader to the TRIZ methodology. Next, we describe the workflow design, defining key assumptions and the system’s scope. The architecture and implementation details are discussed, outlining agent orchestration, agents’ abilities, and tools. The subject of the system’s work is a case study of the TRIZ application for the improvement design of a gantry crane <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx27" title="">Luing et al., 2024</a>]</cite>, which precisely documents each step of the researchers’ workflow. Lastly, the system results are assessed and discussed.</p>
+</div>
+<div class="ltx_para" id="S1.p7">
+<p class="ltx_p" id="S1.p7.1">The experiments follow the ideation process of agents solving the case study problem, with each step’s outcome assessed against the original study. The focus is not on comparing agent orchestration architectures or prompt strategies.</p>
+</div>
+<div class="ltx_para" id="S1.p8">
+<p class="ltx_p" id="S1.p8.1">Exploring LLM-based multi-agent systems may significantly enhance problem-solving tasks requiring creative thinking, external resources, and broad knowledge. Agent collaboration methods are likely to become more investigated because of their potential to automate processes and optimize business operations.</p>
+</div>
+<div class="ltx_para" id="S1.p9">
+<p class="ltx_p" id="S1.p9.1">The paper is structured as follows. Section 2 describes the background and related work. Section 3 presents our TRIZ Agents framework. Section 4 describes our case study. Section 5 discusses the system results and Section 6 summarizes our conclusions.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>BACKGROUND</h2>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1 </span>Related Work</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.1">Previous research has explored using LLMs to enhance the innovation process with TRIZ methodology. However, the focus was more on creating workflows for such models <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx9" title="">Chen et al., 2024a</a>]</cite>, comparing prompting strategies and LLM models <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx22" title="">Jiang and Luo, 2024</a>]</cite>. Previous works include building workflows that strictly follow TRIZ steps and solve those steps with refined, prompt engineering strategies. Results showed a promising area of LLM usage - innovative problem-solving.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p2">
+<p class="ltx_p" id="S2.SS1.p2.1">Studies have also suggested that agentic systems based on LLMs are significantly effective <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx44" title="">Wu et al., 2023</a>]</cite>. With agentic GPT-3.5, it was possible to achieve results better than the foundation GPT-4 model, a next-generation model <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx20" title="">Hu et al., 2024</a>]</cite>. This sparks a need to explore this approach.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p3">
+<p class="ltx_p" id="S2.SS1.p3.1">Over the past few years, researchers and providers have developed numerous models. OpenAI’s GPT model is the most widely used, with many integrations, which is why we decided to utilize it for our experiments. Using other available LLMs, such as Gemini, Llama, or Claude, would be equally justified. This research does not focus on comparing LLMs.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p4">
+<p class="ltx_p" id="S2.SS1.p4.1">Recent advancements in artificial intelligence, especially natural language processing, have significantly increased possible AI applications. The emergence of Large Language Models and intensive research in this area has shown that many new domains can be supported with AI. Models, like OpenAI’s GPT-3, have extensive knowledge about the world <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx3" title="">Atox and Clark, 2024</a>]</cite>. They have shown impressive performance in passing tests concerning intelligence and problem-solving abilities <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx34" title="">Orrù et al., 2023</a>]</cite>. Surprisingly, LLMs have also demonstrated remarkable capabilities in creative tasks, such as image generation <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx32" title="">Oppenlaender, 2022</a>]</cite>, writing <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx8" title="">Chakrabarty et al., 2024</a>]</cite>, and even music generation <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx47" title="">Yuan et al., 2024</a>]</cite>. These results suggest using LLMs to solve problems that require creative thinking, such as designing innovations. Since current research suggests that it is best to guide LLMs and carefully structure their tasks <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx29" title="">Minaee et al., 2024</a>]</cite>, the TRIZ methodology seems perfect, with clear, progressive steps and guidelines.</p>
+</div>
+<figure class="ltx_figure" id="S2.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="194" id="S2.F1.g1" src="extracted/6563590/images/triz_method_diagram.png" width="299"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>TRIZ Problem Solving Methodology.</figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2 </span>TRIZ Methodology</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.1">TRIZ is a well-known and broadly used method of solving innovation problems. It was proposed by Genrich Altshuller in the 1960s <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx2" title="">Arciszewski, 2016</a>]</cite>. It introduced a systematic approach to innovative problem-solving. A critical insight from TRIZ creators is that problems and solutions reoccur across domains of industries and sciences. The core idea behind it is an assumption that there must be something in common, some pattern, in solving problems described in thousands of patents. Four stages of TRIZ are shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S2.F1" title="Figure 1 ‣ 2.1 Related Work ‣ 2 BACKGROUND ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_tag">1</span></a>. This analysis allowed researchers to define a step-by-step method for overcoming innovation obstacles by abstracting them into generalized patterns of invention. This allowed many innovators to overcome seemingly impossible challenges without the need for unfavorable compromise. Although TRIZ has primarily involved mechanical problems, it was effectively transferred to other domains, making it a universal method for innovative problem-solving.</p>
+</div>
+<figure class="ltx_figure" id="S2.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="232" id="S2.F2.g1" src="extracted/6563590/images/autogen.png" width="479"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>Agents collaboration methods <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx44" title="">Wu et al., 2023</a>]</cite>.</figcaption>
+</figure>
+<figure class="ltx_figure" id="S2.F3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="121" id="S2.F3.g1" src="extracted/6563590/images/triz_team_graph.png" width="558"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>TRIZ Agents diagram, showing connections between key agents.</figcaption>
+</figure>
+<section class="ltx_subsubsection" id="S2.SS2.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">2.2.1 </span>TRIZ Core Principles</h4>
+<div class="ltx_para" id="S2.SS2.SSS1.p1">
+<p class="ltx_p" id="S2.SS2.SSS1.p1.1">The core principle of TRIZ is resolving contradictions identified in the problem matter, where often, improving one feature implies worsening another. The TRIZ methodology provides tools to support the resolution of these contradictions. Two primary tools are the 40 Inventive Principles and the Contradiction Matrix.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.SSS1.p2">
+<p class="ltx_p" id="S2.SS2.SSS1.p2.1">The TRIZ process starts with a problem analysis, resulting in the identification of TRIZ parameters. According to TRIZ methodology, 39 parameters - such as Speed, Force, Temperature, etc. - represent system characteristics. By identifying the parameters relevant to the specific problem and their interdependencies, the problem can be generalized and structured within TRIZ.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.SSS1.p3">
+<p class="ltx_p" id="S2.SS2.SSS1.p3.1">The Contradiction Matrix is a tool for finding Innovation Principles by providing two TRIZ parameters: the improving feature and the worsening feature. The matrix contains information on which contradictions can be solved by which principles. The study of thousands of patterns enabled the structuring of parameters and the creation of this tool. It is worth noting that the contradiction matrix consists of empty cells, meaning there are no inventive principles for some contradictions.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.SSS1.p4">
+<p class="ltx_p" id="S2.SS2.SSS1.p4.1">The 40 Inventive Principles define ideas and approaches for resolving contradictions. They serve as instructions or guidelines for overcoming given conditions. They provide solutions to abstract problems, which can be transformed into practical solutions in the real world.</p>
+</div>
+<figure class="ltx_figure" id="S2.F4"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="298" id="S2.F4.g1" src="extracted/6563590/images/multi-agent-system.png" width="538"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 4: </span>Architecture of LLM-based multi-agent system enhanced with tools and data sources <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx18" title="">Händler, 2023</a>]</cite>.</figcaption>
+</figure>
+</section>
+<section class="ltx_subsubsection" id="S2.SS2.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">2.2.2 </span>TRIZ Complexity and Knowledge Demands</h4>
+<div class="ltx_para" id="S2.SS2.SSS2.p1">
+<p class="ltx_p" id="S2.SS2.SSS2.p1.1">TRIZ application follows clear guidelines; however, to abstract problems effectively, identify contradictions, and use TRIZ tools, it still requires deep interdisciplinary knowledge of innovators <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx30" title="">Moehrle, 2005</a>]</cite>. This makes it challenging to apply for non-experts, and the final result is highly dependent on innovators’ expertise due to the high complexity of the problems.
+In addition, following TRIZ steps like analyzing system parameters, identifying contradictions, or scrutiny of inventive principles is very labor-intensive and time-consuming <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx31" title="">Nassar and AbouRizk, 2016</a>]</cite> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx7" title="">Cascini and Rissone, 2004</a>]</cite>.
+For this reason, resulting in limited accessibility, TRIZ has been adopted only in specialized innovation environments like R&amp;D centers or academic sites. Given its effectiveness, it would be desirable to implement it in a broader range of environments, especially those without resources or access to experts.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S2.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.3 </span>Multi-agent Systems and Language Agents</h3>
+<div class="ltx_para" id="S2.SS3.p1">
+<p class="ltx_p" id="S2.SS3.p1.1">Multi-Agent Systems (MAS), a subdomain of Distributed Artificial Intelligence (DAI), is a system that consists of multiple autonomous entities known as agents <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx16" title="">Dorri et al., 2018</a>]</cite>. Each agent, put together in a shared environment, can operate independently but communicate and collaborate with others or interact with the system to solve more complex tasks <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx41" title="">Van Harmelen et al., 2008</a>]</cite>. Agents alone cannot perform complex tasks; however, after decomposing them into smaller subproblems, specialized agents can solve them and, therefore, solve the primary task together. MAS are valued for flexibility and adaptability, especially in distributed intelligence and decision-making <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx38" title="">Serugendo et al., 2005</a>]</cite>. Figure <a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S2.F4" title="Figure 4 ‣ 2.2.1 TRIZ Core Principles ‣ 2.2 TRIZ Methodology ‣ 2 BACKGROUND ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_tag">4</span></a> presents an exemplary architecture of an LLM-based system, where tasks are distributed to multiple agents equipped with context sources like tools or databases. Those systems seem to have a significant amount of use cases because they, in a way, simulate the work of human workers.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p2">
+<p class="ltx_p" id="S2.SS3.p2.1">As opposed to traditional MAS that use formal agent communication language protocols such as FIPA ACL <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx23" title="">Kone et al., 2000</a>]</cite>, our proposed approach utilizes natural language prompts. Moreover, agents communicate with one another by natural language. While FIPA ACL provides a good, standardized, and rigorous way for agent interactions, LLM-based communication offers flexibility and adaptability for complex collaborative tasks.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p3">
+<p class="ltx_p" id="S2.SS3.p3.1">Multi-agent systems based on LLMs are currently being researched extensively. Their core idea is to handle complex problems through collaboration and language abilities <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx49" title="">Zhao et al., 2023</a>]</cite>.
+A notable example of a multi-agent system is presented in the study <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx36" title="">Park et al., 2023</a>]</cite>, where agents demonstrate human-like behavior within a shared interactive environment. This research underscores the potential of LLM-based multi-agent systems for simulating complex human communities.
+Studies have explored various implementations of teams, such as a software engineering team <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx13" title="">Chudziak and Cinkusz, 2024</a>]</cite> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx14" title="">Cinkusz et al., 2025</a>]</cite> and a multi-agent system designed for big data analysis in financial markets <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx42" title="">Wawer et al., 2024</a>]</cite>. Other research focuses on enhancing agents’ logical reasoning capabilities and memory functions within LLM-based multi-agent systems <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx24" title="">Kostka and Chudziak, 2024</a>]</cite>.</p>
+</div>
+<section class="ltx_subsubsection" id="S2.SS3.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">2.3.1 </span>Agent Orchestration</h4>
+<div class="ltx_para" id="S2.SS3.SSS1.p1">
+<p class="ltx_p" id="S2.SS3.SSS1.p1.1">Along with research about the application of LLMs in multi-agent systems, a new subdomain of those studies has emerged called Agent Orchestration. It explores how different agent architectures work and produce results. In the past, there was no need for that because most multi-agent systems were deterministic microservices, and in general, the result of given input could be known before running the system. LLM agents introduced new areas of research because of their stochasticity, flexibility, and ability to adapt or remember abstract information <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx11" title="">Cheng et al., 2024</a>]</cite>. This promising field of study involves designing and evaluating agent orchestration architectures. It includes investigating various ways agents interact, such as supervised groups, equal collaboration, and nested collaborating teams, as shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S2.F2" title="Figure 2 ‣ 2.2 TRIZ Methodology ‣ 2 BACKGROUND ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_tag">2</span></a>. Agent orchestration techniques optimize the abilities of each agent and, therefore, synergetically obtain the best results.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.SSS1.p2">
+<p class="ltx_p" id="S2.SS3.SSS1.p2.1">Another related research field is prompt engineering. This domain focuses on optimizing prompts to achieve the best LLM outputs. Other studies demonstrate that employing specific prompting strategies — such as reasoning and acting (ReAct) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx46" title="">Yao et al., 2023</a>]</cite> or Chain-of-Thought Prompting <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx43" title="">Wei et al., 2023</a>]</cite> — can significantly enhance the quality of generated outcomes.
+The way in which roles and tasks are described to an LLM agent is essential, and the outcome strongly depends on it <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx48" title="">Zamfirescu-Pereira et al., 2023</a>]</cite>. It has to be clear what the structure of the agent’s output should be. This study focuses on basic prompt strategy, which consists of tasks, roles, and contexts for the agent.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S2.SS3.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">2.3.2 </span>Agent Tools</h4>
+<div class="ltx_para" id="S2.SS3.SSS2.p1">
+<p class="ltx_p" id="S2.SS3.SSS2.p1.1">What we know about agentic systems is that you can never fully predict the outcome of an LLM’s actions. While LLMs are pretty proficient at planning and decision-making, a default LLM model cannot perform actions or directly interact with the real world. Tools enable these interactions by allowing LLMs to generate function call outputs with specified arguments. This mechanism can equip models with tools such as web search, database queries, file reading and writing, and more. Our goal is to provide agents with tools to take action, apply grounding, and interact with the system.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.SSS2.p2">
+<p class="ltx_p" id="S2.SS3.SSS2.p2.1">A known characteristic of LLMs is their tendency to hallucinate, which comes from the fundamental mathematical and logical structure of these models <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx4" title="">Banerjee et al., 2024</a>]</cite>.
+Although LLM knowledge is broad and often accurate, it is not advisable to assume that every generated text is truthful. This is especially important in our case, as we want agents to reason based on fact-checked information. One way to minimize the generation of incorrect knowledge is by using a Retrieval-Augmented Generation (RAG) mechanism
+<cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx6" title="">Béchard and Ayala, 2024</a>]</cite>.
+By incorporating RAG into a tool, agents can check necessary knowledge by retrieving it from predefined and reliable sources.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.SSS2.p3">
+<p class="ltx_p" id="S2.SS3.SSS2.p3.1">A simple web search is another helpful tool that helps ground the models. It allows browsing the internet with queries about the topic. Eventually, the agent gets valuable information, and based on it, it generates a response.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S2.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.4 </span>Role of LLMs in Problem-Solving and Innovation</h3>
+<div class="ltx_para" id="S2.SS4.p1">
+<p class="ltx_p" id="S2.SS4.p1.1">Artificial intelligence has been applied to various and numerous tasks, and TRIZ is one of them. Those improvements include estimation of ideality and level of invention <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx1" title="">Adams and Tate, 2009</a>]</cite>, or classification and analyzing engineering patents <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx17" title="">Hall et al., 2022</a>]</cite>. Recently, LLMs have opened a new set of possible TRIZ enhancements. In recent works, researchers have been exploring ways of using LLMs’ extensive broad knowledge and substantial reasoning abilities to create systems supporting innovators in the ideation process or entirely replace them <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx10" title="">Chen et al., 2024b</a>]</cite><cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx22" title="">Jiang and Luo, 2024</a>]</cite>. Those researchers have uncovered the potential of LLMs in applications requiring creative thinking.
+The limitations of these methods become apparent with larger and more complex tasks. Given that LLMs perform more effectively on smaller subtasks <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx9" title="">Chen et al., 2024a</a>]</cite>, exploring Multi-Agent Systems has emerged as a natural solution for handling such complexity.
+Such systems could be flexible and adaptable to the given problem, enabling interdisciplinary problem-solving capabilities.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>TRIZ AGENTS</h2>
+<figure class="ltx_figure" id="S3.F5"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_portrait" height="323" id="S3.F5.g1" src="extracted/6563590/images/workflow_steps.png" width="216"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 5: </span>TRIZ Agents workflow steps and products.</figcaption>
+</figure>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Workflow</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">As said before, the general idea simulates an innovation team’s ideation process. The team is provided with a problem description and, in return, must propose one or more solutions. The team works based on the steps indicated in the case study paper. Each step is done one by one, and a special agent documents each step. Documentation of the previous step is provided to the team. One way to think about it is that each step is a separate meeting where team members solve a problem. At the next meeting, team members don’t remember what they said last time, but they have documentation and the main findings of the previous step. Based on that, they continue with the following step. The process repeats until the last step is achieved. After that, another documentation agent compiles all documentation into one concise report (Figure <a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S3.F7" title="Figure 7 ‣ 3.2 Agent Orchestration Architecture ‣ 3 TRIZ AGENTS ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_tag">7</span></a>).</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p2">
+<p class="ltx_p" id="S3.SS1.p2.1">The ideal result would be that the team produces the exact solutions with the same intermediate steps, and the final report’s content is the same as the case study’s content. Each step will be compared and evaluated with the original case study. All steps are presented in Figure <a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S3.F5" title="Figure 5 ‣ 3 TRIZ AGENTS ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_tag">5</span></a> for better workflow clarity. Documenting the team’s progress at each step helps to track the progress, but it also allows us to compare results to the original case study’s corresponding parts.</p>
+</div>
+<section class="ltx_subsubsection" id="S3.SS1.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.1.1 </span>Implementation</h4>
+<div class="ltx_para" id="S3.SS1.SSS1.p1">
+<p class="ltx_p" id="S3.SS1.SSS1.p1.1">System implementation is based on LangGraph <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx25" title="">LangGraph, 2023</a>]</cite>, a framework designed to build applications that integrate LLMs. They provide precise agent orchestration and control over the graph of agents. Each agent was implemented as a node in a graph, where edges are connections between them - conditional or not. The agents’ tools are separate nodes as well. This framework allows for more structured LLM text generation by using prompt templates while calling LLM models. Messages of each step are the primary context for LLM chat models to generate answers. It is worth mentioning that in LangChain, messages have classes, including Human or AI. In the system, messages generated by models are converted to human type so that the next model generates outputs as if it were conversing with a human.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.SSS1.p2">
+<p class="ltx_p" id="S3.SS1.SSS1.p2.1">For the LLM model, GPT-4o was selected due to its high performance and relatively fast response time. It supports function calls, which is necessary for tool integration. Outputs of LLMs rely on the model temperature parameter. In this study, this parameter was arbitrarily set to 0.5 since it is a good compromise between reasonable and creative answers.</p>
+</div>
+<figure class="ltx_figure" id="S3.F6"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="211" id="S3.F6.g1" src="extracted/6563590/images/agent_node.png" width="329"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 6: </span>Agent node with tool nodes.</figcaption>
+</figure>
+</section>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Agent Orchestration Architecture</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">For agent orchestration, a supervised team was chosen. In the experiment, we call this agent a <span class="ltx_text ltx_font_typewriter" id="S3.SS2.p1.1.1">Project Manager</span>. This agent is responsible for following the workflow, distributing tasks, and telling who should act next. This agent, an orchestrator, manages the team and makes sure it goes in the right direction. The simple way to think about it is an actual group leader in a real-life scenario, but its capabilities and responsibilities are a bit narrow for the LLM efficacy. Provided with workflow wrought on the case study paper, <span class="ltx_text ltx_font_typewriter" id="S3.SS2.p1.1.2">Project Manager</span> keeps track of the project and steers the conversation so that the team solves tasks one by one. Agents engage in the conversation once they are asked to by <span class="ltx_text ltx_font_typewriter" id="S3.SS2.p1.1.3">Project Manager</span>. They perform necessary actions, like tool usage, and provide an appropriate answer. After that, attention is brought back to <span class="ltx_text ltx_font_typewriter" id="S3.SS2.p1.1.4">Project Manager</span>, who receives the message and continues with management.</p>
+</div>
+<figure class="ltx_figure" id="S3.F7"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="336" id="S3.F7.g1" src="extracted/6563590/images/products.png" width="479"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 7: </span>TRIZ Agents products.</figcaption>
+</figure>
+<section class="ltx_subsubsection" id="S3.SS2.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.2.1 </span>Team Composition</h4>
+<div class="ltx_para" id="S3.SS2.SSS1.p1">
+<p class="ltx_p" id="S3.SS2.SSS1.p1.1">There are the following agents in the team: <span class="ltx_text ltx_font_typewriter" id="S3.SS2.SSS1.p1.1.1">Mechanical Engineer</span>, <span class="ltx_text ltx_font_typewriter" id="S3.SS2.SSS1.p1.1.2">Electrical Engineer</span>, <span class="ltx_text ltx_font_typewriter" id="S3.SS2.SSS1.p1.1.3">Control Systems Engineer</span>, <span class="ltx_text ltx_font_typewriter" id="S3.SS2.SSS1.p1.1.4">Safety Engineer</span>, <span class="ltx_text ltx_font_typewriter" id="S3.SS2.SSS1.p1.1.5">TRIZ Specialist</span>, <span class="ltx_text ltx_font_typewriter" id="S3.SS2.SSS1.p1.1.6">Operations Specialist</span>, <span class="ltx_text ltx_font_typewriter" id="S3.SS2.SSS1.p1.1.7">Documentation Specialist</span> and supervisor <span class="ltx_text ltx_font_typewriter" id="S3.SS2.SSS1.p1.1.8">Project Manager</span>. Each agent’s role was defined based on case study analysis, which allowed to specify what members the team would consist of.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS2.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.2.2 </span>Agent Profiling Prompts</h4>
+<div class="ltx_para" id="S3.SS2.SSS2.p1">
+<p class="ltx_p" id="S3.SS2.SSS2.p1.1">Each agent has its own prompt specifying their persona. It gives information about their field of expertise, tools, and what their output should look like. Each agent needs a profiling prompt, which will define the persona behind it. Key elements that need such prompts are:</p>
+<ul class="ltx_itemize" id="S3.I1">
+<li class="ltx_item" id="S3.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I1.i1.p1">
+<p class="ltx_p" id="S3.I1.i1.p1.1"><span class="ltx_text ltx_font_bold" id="S3.I1.i1.p1.1.1">Name</span>: Name of the agent. Necessary for finding oneself in conversation.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I1.i2.p1">
+<p class="ltx_p" id="S3.I1.i2.p1.1"><span class="ltx_text ltx_font_bold" id="S3.I1.i2.p1.1.1">Role</span>: Basic description of the agent’s place in the team and its background for character development.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I1.i3.p1">
+<p class="ltx_p" id="S3.I1.i3.p1.1"><span class="ltx_text ltx_font_bold" id="S3.I1.i3.p1.1.1">Tasks and Reponsibilities</span>: Clearly states their tasks and responsibilities so that LLM’s focus is primarily on them.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I1.i4.p1">
+<p class="ltx_p" id="S3.I1.i4.p1.1"><span class="ltx_text ltx_font_bold" id="S3.I1.i4.p1.1.1">Context</span>: Gives the agent an idea of what is the current stage of the process. It can be messages of the conversation or a summary of previous messages.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS2.p2">
+<p class="ltx_p" id="S3.SS2.SSS2.p2.1">In addition, it is advisable to add some specific instructions in the prompt that are critical for correct system operation or just essential in the agent’s role. The prompt template of <span class="ltx_text ltx_font_typewriter" id="S3.SS2.SSS2.p2.1.1">Project Manager</span> agent is presented in Figure <a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S3.F8" title="Figure 8 ‣ 3.2.2 Agent Profiling Prompts ‣ 3.2 Agent Orchestration Architecture ‣ 3 TRIZ AGENTS ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_tag">8</span></a>.</p>
+</div>
+<figure class="ltx_figure" id="S3.F8">
+<div class="ltx_block ltx_minipage ltx_align_center ltx_align_middle" id="S3.F8.1" style="width:433.6pt;">
+<div class="ltx_para ltx_noindent" id="S3.F8.1.p1">
+<svg class="ltx_picture" height="298.09" id="S3.F8.1.p1.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,298.09) matrix(1 0 0 -1 0 0)"><g fill="#262626" fill-opacity="1.0"><path d="M 0 0 L 0 298.09 L 600 298.09 L 600 0 Z" style="stroke:none"></path></g><g fill="#E6E6E6" fill-opacity="1.0"><path d="M 1.97 1.97 L 1.97 296.12 L 598.03 296.12 L 598.03 1.97 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 5.91 5.91)"><foreignobject color="#000000" height="286.28" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="588.19"><span class="ltx_inline-logical-block ltx_minipage ltx_align_bottom" id="S3.F8.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6" style="width:425.1pt;">
+<span class="ltx_para ltx_noindent" id="S3.F8.1.p1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.p1">
+<span class="ltx_p" id="S3.F8.1.p1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.p1.1"><span class="ltx_text ltx_font_bold" id="S3.F8.1.p1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.p1.1.1">Project Manager Prompt:</span>
+</span>
+</span>
+<span class="ltx_para ltx_noindent" id="S3.F8.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2"><svg class="ltx_picture" height="83.35" id="S3.F8.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,83.35) matrix(1 0 0 -1 0 0)"><g fill="#000000" fill-opacity="1.0"><path d="M 0 4.63 L 0 78.72 C 0 81.28 2.07 83.35 4.63 83.35 L 595.37 83.35 C 597.93 83.35 600 81.28 600 78.72 L 600 4.63 C 600 2.07 597.93 0 595.37 0 L 4.63 0 C 2.07 0 0 2.07 0 4.63 Z" style="stroke:none"></path></g><g fill="#FFFFFF" fill-opacity="1.0"><path d="M 0.69 4.63 L 0.69 61.95 L 599.31 61.95 L 599.31 4.63 C 599.31 2.45 597.55 0.69 595.37 0.69 L 4.63 0.69 C 2.45 0.69 0.69 2.45 0.69 4.63 Z" style="stroke:none"></path></g><g fill="#F2F2F2" fill-opacity="1.0"><path d="M 0.69 62.64 L 0.69 78.72 C 0.69 80.9 2.45 82.66 4.63 82.66 L 595.37 82.66 C 597.55 82.66 599.31 80.9 599.31 78.72 L 599.31 62.64 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 66.58)"><foreignobject height="12.15" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F8.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1.1.1.1.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S3.F8.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S3.F8.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1.1.1.1.1.1.1.1">System Message</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 8.57)"><foreignobject height="45.51" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F8.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1.2.2.2.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S3.F8.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1.2.2.2.1.1.1"><span class="ltx_text ltx_font_typewriter" id="S3.F8.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1.2.2.2.1.1.1.1">You are the Project Manager of a team made up of different experts who are working together to solve a complicated engineering problem using the TRIZ method.</span></span>
+<span class="ltx_p" id="S3.F8.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1.2.2.2.1.1.2"><span class="ltx_text ltx_font_typewriter" id="S3.F8.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1.2.2.2.1.1.2.1">...</span></span>
+<span class="ltx_p" id="S3.F8.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1.2.2.2.1.1.3"><span class="ltx_text ltx_font_typewriter" id="S3.F8.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1.2.2.2.1.1.3.1">Each step is solved and documented separately. You are provided messages of conversation of the current solving step.</span></span>
+</span></foreignobject></g></g></svg>
+</span>
+<span class="ltx_para ltx_noindent" id="S3.F8.1.p1.pic1.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.p3"><svg class="ltx_picture" height="30.97" id="S3.F8.1.p1.pic1.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.p3.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,30.97) matrix(1 0 0 -1 0 0)"><g fill="#000000" fill-opacity="1.0"><path d="M 0 4.63 L 0 26.34 C 0 28.9 2.07 30.97 4.63 30.97 L 595.37 30.97 C 597.93 30.97 600 28.9 600 26.34 L 600 4.63 C 600 2.07 597.93 0 595.37 0 L 4.63 0 C 2.07 0 0 2.07 0 4.63 Z" style="stroke:none"></path></g><g fill="#FFFFFF" fill-opacity="1.0"><path d="M 0.69 4.63 L 0.69 26.34 C 0.69 28.51 2.45 30.28 4.63 30.28 L 595.37 30.28 C 597.55 30.28 599.31 28.51 599.31 26.34 L 599.31 4.63 C 599.31 2.45 597.55 0.69 595.37 0.69 L 4.63 0.69 C 2.45 0.69 0.69 2.45 0.69 4.63 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 8.57)"><foreignobject height="13.84" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F8.1.p1.pic1.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.p3.pic1.1.1.1.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S3.F8.1.p1.pic1.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.p3.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_typewriter" id="S3.F8.1.p1.pic1.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.p3.pic1.1.1.1.1.1.1.1">{messages}</span></span>
+</span></foreignobject></g></g></svg>
+</span>
+<span class="ltx_para ltx_noindent" id="S3.F8.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4"><svg class="ltx_picture" height="63.1" id="S3.F8.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,63.1) matrix(1 0 0 -1 0 0)"><g fill="#000000" fill-opacity="1.0"><path d="M 0 4.63 L 0 58.47 C 0 61.02 2.07 63.1 4.63 63.1 L 595.37 63.1 C 597.93 63.1 600 61.02 600 58.47 L 600 4.63 C 600 2.07 597.93 0 595.37 0 L 4.63 0 C 2.07 0 0 2.07 0 4.63 Z" style="stroke:none"></path></g><g fill="#FFFFFF" fill-opacity="1.0"><path d="M 0.69 4.63 L 0.69 41.69 L 599.31 41.69 L 599.31 4.63 C 599.31 2.45 597.55 0.69 595.37 0.69 L 4.63 0.69 C 2.45 0.69 0.69 2.45 0.69 4.63 Z" style="stroke:none"></path></g><g fill="#F2F2F2" fill-opacity="1.0"><path d="M 0.69 42.38 L 0.69 58.47 C 0.69 60.64 2.45 62.4 4.63 62.4 L 595.37 62.4 C 597.55 62.4 599.31 60.64 599.31 58.47 L 599.31 42.38 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 46.32)"><foreignobject height="12.15" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F8.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1.1.1.1.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S3.F8.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S3.F8.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1.1.1.1.1.1.1.1">System Message</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 8.57)"><foreignobject height="25.25" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F8.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1.2.2.2.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S3.F8.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1.2.2.2.1.1.1"><span class="ltx_text ltx_font_typewriter" id="S3.F8.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1.2.2.2.1.1.1.1">You are also provided documentation of previously performed steps, which tells you about the progress:</span></span>
+</span></foreignobject></g></g></svg>
+</span>
+<span class="ltx_para ltx_noindent" id="S3.F8.1.p1.pic1.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.p5"><svg class="ltx_picture" height="30.97" id="S3.F8.1.p1.pic1.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.p5.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,30.97) matrix(1 0 0 -1 0 0)"><g fill="#000000" fill-opacity="1.0"><path d="M 0 4.63 L 0 26.34 C 0 28.9 2.07 30.97 4.63 30.97 L 595.37 30.97 C 597.93 30.97 600 28.9 600 26.34 L 600 4.63 C 600 2.07 597.93 0 595.37 0 L 4.63 0 C 2.07 0 0 2.07 0 4.63 Z" style="stroke:none"></path></g><g fill="#FFFFFF" fill-opacity="1.0"><path d="M 0.69 4.63 L 0.69 26.34 C 0.69 28.51 2.45 30.28 4.63 30.28 L 595.37 30.28 C 597.55 30.28 599.31 28.51 599.31 26.34 L 599.31 4.63 C 599.31 2.45 597.55 0.69 595.37 0.69 L 4.63 0.69 C 2.45 0.69 0.69 2.45 0.69 4.63 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 8.57)"><foreignobject height="13.84" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F8.1.p1.pic1.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.p5.pic1.1.1.1.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S3.F8.1.p1.pic1.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.p5.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_typewriter" id="S3.F8.1.p1.pic1.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.p5.pic1.1.1.1.1.1.1.1">{steps_documentation}</span></span>
+</span></foreignobject></g></g></svg>
+</span>
+<span class="ltx_para ltx_noindent" id="S3.F8.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.p6"><svg class="ltx_picture" height="68.28" id="S3.F8.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.p6.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,68.28) matrix(1 0 0 -1 0 0)"><g fill="#000000" fill-opacity="1.0"><path d="M 0 4.63 L 0 63.66 C 0 66.21 2.07 68.28 4.63 68.28 L 595.37 68.28 C 597.93 68.28 600 66.21 600 63.66 L 600 4.63 C 600 2.07 597.93 0 595.37 0 L 4.63 0 C 2.07 0 0 2.07 0 4.63 Z" style="stroke:none"></path></g><g fill="#FFFFFF" fill-opacity="1.0"><path d="M 0.69 4.63 L 0.69 46.88 L 599.31 46.88 L 599.31 4.63 C 599.31 2.45 597.55 0.69 595.37 0.69 L 4.63 0.69 C 2.45 0.69 0.69 2.45 0.69 4.63 Z" style="stroke:none"></path></g><g fill="#F2F2F2" fill-opacity="1.0"><path d="M 0.69 47.57 L 0.69 63.66 C 0.69 65.83 2.45 67.59 4.63 67.59 L 595.37 67.59 C 597.55 67.59 599.31 65.83 599.31 63.66 L 599.31 47.57 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 51.51)"><foreignobject height="12.15" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F8.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.p6.pic1.1.1.1.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S3.F8.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.p6.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S3.F8.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.p6.pic1.1.1.1.1.1.1.1">System Message</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 8.57)"><foreignobject height="30.44" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F8.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.p6.pic1.2.2.2.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S3.F8.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.p6.pic1.2.2.2.1.1.1"><span class="ltx_text ltx_font_typewriter" id="S3.F8.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.p6.pic1.2.2.2.1.1.1.1">Given the conversation above and the documentation of previous steps, who should act next? You have the following decision options: {members_names} or FINISH.</span></span>
+<span class="ltx_p" id="S3.F8.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.p6.pic1.2.2.2.1.1.2"><span class="ltx_text ltx_font_typewriter" id="S3.F8.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.p6.pic1.2.2.2.1.1.2.1">...</span></span>
+</span></foreignobject></g></g></svg>
+</span></span></foreignobject></g></g></svg>
+</div>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_block">Figure 8: </span>Example of <span class="ltx_text ltx_font_typewriter" id="S3.F8.1.2.1">Project Manager</span> prompt template. Elements in {} brackets are inputs of prompt templates.</figcaption>
+</div>
+</figure>
+<div class="ltx_para" id="S3.SS2.SSS2.p3">
+<p class="ltx_p" id="S3.SS2.SSS2.p3.1">As it is shown, prompts are composed of system messages and placeholders, such as messages in the conversation or documentation on previous steps. It is necessary to provide all inputs to the template in order to run the model.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS2.SSS3">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.2.3 </span>Tools of TRIZ Agents</h4>
+<div class="ltx_para" id="S3.SS2.SSS3.p1">
+<p class="ltx_p" id="S3.SS2.SSS3.p1.1">In the real world, team members can use various tools and knowledge bases, which is why we will provide agents with the same. All agents except <span class="ltx_text ltx_font_typewriter" id="S3.SS2.SSS3.p1.1.1">Project Manager</span> are equipped with tools. In the LangGraph framework, agent nodes have conditional connections with tool nodes since agents may or may not want to use them. Contrarily, the edge from the tool node to the agent node is non-conditional, so the right agent gets the tool’s output. Figure <a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S3.F6" title="Figure 6 ‣ 3.1.1 Implementation ‣ 3.1 Workflow ‣ 3 TRIZ AGENTS ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_tag">6</span></a> presents a worker agent node with tool nodes.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS3.p2">
+<p class="ltx_p" id="S3.SS2.SSS3.p2.1">The composition of the toolset for an agent depends on their role in the team. All sets include a web search tool, which is their elemental way of acquiring knowledge. Since <span class="ltx_text ltx_font_typewriter" id="S3.SS2.SSS3.p2.1.1">TRIZ Specialist</span> is an important team member, this agent is additionally equipped with TRIZ-oriented tools such as:</p>
+<ul class="ltx_itemize" id="S3.I2">
+<li class="ltx_item" id="S3.I2.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I2.i1.p1">
+<p class="ltx_p" id="S3.I2.i1.p1.1">TRIZ Features Tool: Return list of 39 TRIZ parameters.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I2.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I2.i2.p1">
+<p class="ltx_p" id="S3.I2.i2.p1.1">Contradiction Matrix Tool: Returns worth applying inventive principles based on improving and worsening features of the system.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I2.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I2.i3.p1">
+<p class="ltx_p" id="S3.I2.i3.p1.1">TRIZ Inventive Principles Tool: Tool returns more details about given inventive principles.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I2.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I2.i4.p1">
+<p class="ltx_p" id="S3.I2.i4.p1.1">TRIZ RAG Tool: Returns answers to agent’s queries based on TRIZ source materials, such as books, websites, Wikipedia pages, etc.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>CASE STUDY</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">To model team cooperation and evaluate the results of the proposed agentic system, we conducted a case study about the application of TRIZ for gantry crane improvement based on <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx27" title="">Luing et al., 2024</a>]</cite>. The authors of this paper thoroughly describe each step of their work. They strictly follow the TRIZ methodology. The final outcome of the ideation process consists of textual descriptions of the proposed approaches. During the problem analysis, authors identify system elements, perform CECA analysis, find physical and engineering contradictions, and apply TRIZ principles using the TRIZ Matrix. In addition, authors build graphs for analysis steps, which is again feasible using LLMs. All those steps are a great usage scenario for a team of agents. A team of predefined team members will cooperate and invent a solution for the crane improvement problem.</p>
+</div>
+<div class="ltx_para" id="S4.p2">
+<p class="ltx_p" id="S4.p2.1">It is worth mentioning the criteria for the chosen case study. First of all, the problem description is sufficiently characterized. All the intermediate steps and solutions are clearly explained, which is vital during the evaluation of results. Moreover, a case study was published in the year 2024, which means that Chat GPT-4o used in experiments was for sure not trained on this text because the data cutoff for this model is October 2023. This is extremely important since we don’t want the model to know the solution - we want the system to invent it.</p>
+</div>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>RESULTS AND DISCUSSION</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">The proposed multi-agent system simulates a discussion between team members as intended, resulting in six documents about each workflow step and one final report, which compiles those documents. As an input system message, the system receives a Human type message with textual problems description of the case study (Figure <a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.F9" title="Figure 9 ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_tag">9</span></a>). It is copied from the case study article not to omit information or add one.</p>
+</div>
+<figure class="ltx_figure" id="S5.F9"><svg class="ltx_picture ltx_centering" height="163.68" id="S5.F9.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,163.68) matrix(1 0 0 -1 0 0)"><g fill="#000000" fill-opacity="1.0"><path d="M 0 4.63 L 0 159.05 C 0 161.61 2.07 163.68 4.63 163.68 L 595.37 163.68 C 597.93 163.68 600 161.61 600 159.05 L 600 4.63 C 600 2.07 597.93 0 595.37 0 L 4.63 0 C 2.07 0 0 2.07 0 4.63 Z" style="stroke:none"></path></g><g fill="#FFFFFF" fill-opacity="1.0"><path d="M 0.69 4.63 L 0.69 142.28 L 599.31 142.28 L 599.31 4.63 C 599.31 2.45 597.55 0.69 595.37 0.69 L 4.63 0.69 C 2.45 0.69 0.69 2.45 0.69 4.63 Z" style="stroke:none"></path></g><g fill="#F2F2F2" fill-opacity="1.0"><path d="M 0.69 142.97 L 0.69 159.05 C 0.69 161.23 2.45 162.99 4.63 162.99 L 595.37 162.99 C 597.55 162.99 599.31 161.23 599.31 159.05 L 599.31 142.97 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 146.91)"><foreignobject color="#000000" height="12.15" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S5.F9.pic1.1.1.1.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S5.F9.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S5.F9.pic1.1.1.1.1.1.1.1">Input Human Message</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 8.57)"><foreignobject color="#000000" height="125.84" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S5.F9.pic1.2.2.2.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S5.F9.pic1.2.2.2.1.1.1"><span class="ltx_text ltx_font_typewriter" id="S5.F9.pic1.2.2.2.1.1.1.1">Solve the following problem: Gantry cranes find extensive application across various industries, employed to move hefty loads and dangerous substances within shipping docks, building sites, steel plants, storage facilities, and similar industrial settings. The crane should move the load fast without causing any unnecessary excessive swing at the final position. Moreover, gantry cranes which always lift excessive load may result sudden stop of the crane. The crane operators’ attempt to lift heavier loads at a faster pace has led to recurrent malfunctions, including overheating, and the increased speed has caused excessive swinging or swaying of the lifted load, posing a safety hazard.</span></span>
+</span></foreignobject></g></g></svg>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 9: </span>TRIZ Agents input message taken from case study problem description.</figcaption>
+</figure>
+<div class="ltx_para" id="S5.p2">
+<p class="ltx_p" id="S5.p2.1">It is essential to note the system’s outputs are not deterministic, which comes from the nature of LLMs <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx35" title="">Ouyang et al., 2024</a>]</cite>. That is why the results described here are generalized descriptions of how the majority of runs went.</p>
+</div>
+<div class="ltx_para" id="S5.p3">
+<p class="ltx_p" id="S5.p3.1">Another observation worth mentioning is the number of iterations in the agent graph and the number of total tokens (prompt and output tokens). By iterations in the graph, we mean the number of times any node was called. This number varied from 60 to 80 calls. Total tokens of one runtime varied from 150,000 to 250,000.</p>
+</div>
+<section class="ltx_subsection" id="S5.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.1 </span>Analysis of System’s Actions</h3>
+<section class="ltx_paragraph" id="S5.SS1.SSS0.Px1">
+<h5 class="ltx_title ltx_title_paragraph">Step 1: Defining Engineering System</h5>
+<div class="ltx_para" id="S5.SS1.SSS0.Px1.p1">
+<p class="ltx_p" id="S5.SS1.SSS0.Px1.p1.1"><span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px1.p1.1.1">Project Manager</span> prompts <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px1.p1.1.2">Mechanical Engineer</span> to identify relevant elemnts of gantry crane engineering system. This agent uses a web search tool to find relevant information and, based on that, specifies the engineering system. After that, <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px1.p1.1.3">Project Manager</span> decides to finish this step by documenting findings by <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px1.p1.1.4">Document Specialist</span>.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S5.SS1.SSS0.Px2">
+<h5 class="ltx_title ltx_title_paragraph">Step 2: Function Analysis</h5>
+<div class="ltx_para" id="S5.SS1.SSS0.Px2.p1">
+<p class="ltx_p" id="S5.SS1.SSS0.Px2.p1.1"><span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px2.p1.1.1">Project Manager</span> has at disposal the documentation from previous step. Based on that, <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px2.p1.1.2">Project Manager</span> this time asks <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px2.p1.1.3">Mechanical Engineer</span> to prepare the Function Analysis. The agent uses a web search tool to generate an analysis. Next, a <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px2.p1.1.4">Control Systems Engineer</span> is asked to do the same from the control systems engineering perspective. Like the previous agent, it uses a web search tool to generate analysis. Finally, <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px2.p1.1.5">Safety Engineer</span> is asked to evaluate the safety features and potential hazards of the system. After that, <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px2.p1.1.6">Project Manager</span> decides to move on to the next step by documentation of <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px2.p1.1.7">Documentation Specialist</span>.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S5.SS1.SSS0.Px3">
+<h5 class="ltx_title ltx_title_paragraph">Step 3: Cause and Effect Chain Analysis (CECA)</h5>
+<div class="ltx_para" id="S5.SS1.SSS0.Px3.p1">
+<p class="ltx_p" id="S5.SS1.SSS0.Px3.p1.1">Similar actions were taken by the agent while working on Cause and Effect Chain Analysis. The <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px3.p1.1.1">Control Systems Engineer</span> was called to make the analysis and used a web search tool. Then <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px3.p1.1.2">Safety Engineer</span> contributed to this step. The step ended with documentation on the <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px3.p1.1.3">Project Manager</span>’s request. Part of the conversation of step 3 was shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.F10" title="Figure 10 ‣ Step 6: Solutions ‣ 5.1 Analysis of System’s Actions ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_tag">10</span></a>.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S5.SS1.SSS0.Px4">
+<h5 class="ltx_title ltx_title_paragraph">Step 4: Engineering Contradiction (EC) and Contradiction Matrix.</h5>
+<div class="ltx_para" id="S5.SS1.SSS0.Px4.p1">
+<p class="ltx_p" id="S5.SS1.SSS0.Px4.p1.1"><span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px4.p1.1.1">Project Manager</span> asks only <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px4.p1.1.2">TRIZSpecialist</span> agent to do this task. The agent first checks the list of TRIZ features from which it can choose. Based on that, it identifies contradictions.
+The agent uses another TRIZ tool, a contradiction matrix, to find inventive principles for those contradictions. Next, it uses another tool that provides more details about contradictions, which will help find a solution.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S5.SS1.SSS0.Px5">
+<h5 class="ltx_title ltx_title_paragraph">Step 5: Physical Contradiction</h5>
+<div class="ltx_para" id="S5.SS1.SSS0.Px5.p1">
+<p class="ltx_p" id="S5.SS1.SSS0.Px5.p1.1">This step is also solely performed by <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px5.p1.1.1">TRIZ Specialist</span> by one answer only without any tool use. With this information, <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px5.p1.1.2">Project Manager</span> ended this step with a documentation request.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S5.SS1.SSS0.Px6">
+<h5 class="ltx_title ltx_title_paragraph">Step 6: Solutions</h5>
+<div class="ltx_para" id="S5.SS1.SSS0.Px6.p1">
+<p class="ltx_p" id="S5.SS1.SSS0.Px6.p1.1">Having all previous steps documented, <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px6.p1.1.1">Project Manager</span> decided to begin the last step, which was finding solutions based on identified innovative principles. In this step, an agent who contributed first was <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px6.p1.1.2">Control Systems Engineer</span>, who used a web search tool to enhance its findings. The following two agents who reviewed the proposed solutions were <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px6.p1.1.3">Safety Engineer</span> and <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px6.p1.1.4">Operations Specialist</span>. After solution propositions, <span class="ltx_text ltx_font_typewriter" id="S5.SS1.SSS0.Px6.p1.1.5">Project Manager</span> directed the end of collaborative work. This resulted in compiling all previously created documents into one final report.</p>
+</div>
+<figure class="ltx_figure" id="S5.F10">
+<div class="ltx_block ltx_minipage ltx_align_center ltx_align_middle" id="S5.F10.1" style="width:433.6pt;">
+<div class="ltx_para ltx_noindent" id="S5.F10.1.p1">
+<svg class="ltx_picture" height="453.5" id="S5.F10.1.p1.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,453.5) matrix(1 0 0 -1 0 0)"><g fill="#262626" fill-opacity="1.0"><path d="M 0 0 L 0 453.5 L 600 453.5 L 600 0 Z" style="stroke:none"></path></g><g fill="#F2F2FF" fill-opacity="1.0"><path d="M 1.97 1.97 L 1.97 451.53 L 598.03 451.53 L 598.03 1.97 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 5.91 5.91)"><foreignobject color="#000000" height="441.69" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="588.19"><span class="ltx_inline-logical-block ltx_minipage ltx_align_bottom" id="S5.F10.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6" style="width:425.1pt;">
+<span class="ltx_para ltx_noindent" id="S5.F10.1.p1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.p1"><svg class="ltx_picture" height="99.96" id="S5.F10.1.p1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.p1.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,99.96) matrix(1 0 0 -1 0 0)"><g fill="#000000" fill-opacity="1.0"><path d="M 0 4.63 L 0 95.33 C 0 97.88 2.07 99.96 4.63 99.96 L 595.37 99.96 C 597.93 99.96 600 97.88 600 95.33 L 600 4.63 C 600 2.07 597.93 0 595.37 0 L 4.63 0 C 2.07 0 0 2.07 0 4.63 Z" style="stroke:none"></path></g><g fill="#FFFFFF" fill-opacity="1.0"><path d="M 0.69 4.63 L 0.69 78.55 L 599.31 78.55 L 599.31 4.63 C 599.31 2.45 597.55 0.69 595.37 0.69 L 4.63 0.69 C 2.45 0.69 0.69 2.45 0.69 4.63 Z" style="stroke:none"></path></g><g fill="#CCCCFF" fill-opacity="1.0"><path d="M 0.69 79.24 L 0.69 95.33 C 0.69 97.5 2.45 99.26 4.63 99.26 L 595.37 99.26 C 597.55 99.26 599.31 97.5 599.31 95.33 L 599.31 79.24 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 83.18)"><foreignobject height="12.15" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S5.F10.1.p1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.p1.pic1.1.1.1.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S5.F10.1.p1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.p1.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S5.F10.1.p1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.p1.pic1.1.1.1.1.1.1.1">ProjectManager</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 8.57)"><foreignobject height="62.11" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S5.F10.1.p1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.p1.pic1.2.2.2.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S5.F10.1.p1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.p1.pic1.2.2.2.1.1.1"><span class="ltx_text ltx_font_typewriter" id="S5.F10.1.p1.pic1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.p1.pic1.2.2.2.1.1.1.1">We are now moving to the Cause and Effect Chain Analysis (CECA) step [...] ControlSystemsEngineer, could you begin by exploring the control-related issues that might be contributing to these problems? Please consider how the control systems might be leading to excessive speed or insufficient sway control, and provide your insights.</span></span>
+</span></foreignobject></g></g></svg>
+</span>
+<span class="ltx_para ltx_noindent" id="S5.F10.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2"><svg class="ltx_picture" height="68.44" id="S5.F10.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,68.44) matrix(1 0 0 -1 0 0)"><g fill="#000000" fill-opacity="1.0"><path d="M 0 4.63 L 0 63.81 C 0 66.37 2.07 68.44 4.63 68.44 L 595.37 68.44 C 597.93 68.44 600 66.37 600 63.81 L 600 4.63 C 600 2.07 597.93 0 595.37 0 L 4.63 0 C 2.07 0 0 2.07 0 4.63 Z" style="stroke:none"></path></g><g fill="#FFFFFF" fill-opacity="1.0"><path d="M 0.69 4.63 L 0.69 46.88 L 599.31 46.88 L 599.31 4.63 C 599.31 2.45 597.55 0.69 595.37 0.69 L 4.63 0.69 C 2.45 0.69 0.69 2.45 0.69 4.63 Z" style="stroke:none"></path></g><g fill="#E6CCB3" fill-opacity="1.0"><path d="M 0.69 47.57 L 0.69 63.81 C 0.69 65.98 2.45 67.75 4.63 67.75 L 595.37 67.75 C 597.55 67.75 599.31 65.98 599.31 63.81 L 599.31 47.57 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 51.51)"><foreignobject height="12.3" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S5.F10.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1.1.1.1.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S5.F10.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S5.F10.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1.1.1.1.1.1.1.1">ControlSystemEngineer</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 8.57)"><foreignobject height="30.44" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S5.F10.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1.2.2.2.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S5.F10.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1.2.2.2.1.1.1"><span class="ltx_text ltx_font_typewriter" id="S5.F10.1.p1.pic1.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.2.p2.pic1.2.2.2.1.1.1.1">Calling web search tool:
+{
+"query": "control systems for gantry cranes excessive swinging overheating"
+}
+</span></span>
+</span></foreignobject></g></g></svg>
+</span>
+<span class="ltx_para ltx_noindent" id="S5.F10.1.p1.pic1.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.p3"><svg class="ltx_picture" height="51.91" id="S5.F10.1.p1.pic1.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.p3.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,51.91) matrix(1 0 0 -1 0 0)"><g fill="#000000" fill-opacity="1.0"><path d="M 0 4.63 L 0 47.28 C 0 49.84 2.07 51.91 4.63 51.91 L 595.37 51.91 C 597.93 51.91 600 49.84 600 47.28 L 600 4.63 C 600 2.07 597.93 0 595.37 0 L 4.63 0 C 2.07 0 0 2.07 0 4.63 Z" style="stroke:none"></path></g><g fill="#FFFFFF" fill-opacity="1.0"><path d="M 0.69 4.63 L 0.69 33.04 L 599.31 33.04 L 599.31 4.63 C 599.31 2.45 597.55 0.69 595.37 0.69 L 4.63 0.69 C 2.45 0.69 0.69 2.45 0.69 4.63 Z" style="stroke:none"></path></g><g fill="#FFF2E6" fill-opacity="1.0"><path d="M 0.69 33.74 L 0.69 47.28 C 0.69 49.46 2.45 51.22 4.63 51.22 L 595.37 51.22 C 597.55 51.22 599.31 49.46 599.31 47.28 L 599.31 33.74 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 37.67)"><foreignobject height="9.61" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S5.F10.1.p1.pic1.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.p3.pic1.1.1.1.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S5.F10.1.p1.pic1.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.p3.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S5.F10.1.p1.pic1.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.p3.pic1.1.1.1.1.1.1.1">Tool</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 8.57)"><foreignobject height="16.6" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S5.F10.1.p1.pic1.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.p3.pic1.2.2.2.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S5.F10.1.p1.pic1.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.p3.pic1.2.2.2.1.1.1"><span class="ltx_text ltx_font_typewriter" id="S5.F10.1.p1.pic1.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.3.p3.pic1.2.2.2.1.1.1.1">[{
+"url": "https:journals.sag ...,
+"content": "Various attempts in controlling gantry cranes ...
+</span></span>
+</span></foreignobject></g></g></svg>
+</span>
+<span class="ltx_para ltx_noindent" id="S5.F10.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4"><svg class="ltx_picture" height="117.48" id="S5.F10.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,117.48) matrix(1 0 0 -1 0 0)"><g fill="#000000" fill-opacity="1.0"><path d="M 0 4.63 L 0 112.85 C 0 115.41 2.07 117.48 4.63 117.48 L 595.37 117.48 C 597.93 117.48 600 115.41 600 112.85 L 600 4.63 C 600 2.07 597.93 0 595.37 0 L 4.63 0 C 2.07 0 0 2.07 0 4.63 Z" style="stroke:none"></path></g><g fill="#FFFFFF" fill-opacity="1.0"><path d="M 0.69 4.63 L 0.69 95.93 L 599.31 95.93 L 599.31 4.63 C 599.31 2.45 597.55 0.69 595.37 0.69 L 4.63 0.69 C 2.45 0.69 0.69 2.45 0.69 4.63 Z" style="stroke:none"></path></g><g fill="#E6CCB3" fill-opacity="1.0"><path d="M 0.69 96.62 L 0.69 112.85 C 0.69 115.03 2.45 116.79 4.63 116.79 L 595.37 116.79 C 597.55 116.79 599.31 115.03 599.31 112.85 L 599.31 96.62 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 100.55)"><foreignobject height="12.3" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S5.F10.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1.1.1.1.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S5.F10.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S5.F10.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1.1.1.1.1.1.1.1">ControlSystemEngineer</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 8.57)"><foreignobject height="79.49" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S5.F10.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1.2.2.2.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S5.F10.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1.2.2.2.1.1.1"><span class="ltx_text ltx_font_typewriter" id="S5.F10.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1.2.2.2.1.1.1.1">Based on the information gathered [...] we can identify several control-related issues contributing to the problems of excessive swinging and overheating in gantry cranes. Here’s a detailed Cause and Effect Chain Analysis (CECA) focusing on these control aspects:</span></span>
+<span class="ltx_p" id="S5.F10.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1.2.2.2.1.1.2"><span class="ltx_text ltx_font_typewriter" id="S5.F10.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1.2.2.2.1.1.2.1">### Root Causes of Excessive Swinging and Overheating</span></span>
+<span class="ltx_p" id="S5.F10.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1.2.2.2.1.1.3"><span class="ltx_text ltx_font_typewriter" id="S5.F10.1.p1.pic1.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.4.p4.pic1.2.2.2.1.1.3.1">1. **Control System Sensitivity**:
+- **Open-loop Control Systems**: These systems are sensitive to ...</span></span>
+</span></foreignobject></g></g></svg>
+</span>
+<span class="ltx_para ltx_noindent" id="S5.F10.1.p1.pic1.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.p5"><svg class="ltx_picture" height="77.01" id="S5.F10.1.p1.pic1.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.p5.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,77.01) matrix(1 0 0 -1 0 0)"><g fill="#000000" fill-opacity="1.0"><path d="M 0 4.63 L 0 72.38 C 0 74.94 2.07 77.01 4.63 77.01 L 595.37 77.01 C 597.93 77.01 600 74.94 600 72.38 L 600 4.63 C 600 2.07 597.93 0 595.37 0 L 4.63 0 C 2.07 0 0 2.07 0 4.63 Z" style="stroke:none"></path></g><g fill="#FFFFFF" fill-opacity="1.0"><path d="M 0.69 4.63 L 0.69 55.61 L 599.31 55.61 L 599.31 4.63 C 599.31 2.45 597.55 0.69 595.37 0.69 L 4.63 0.69 C 2.45 0.69 0.69 2.45 0.69 4.63 Z" style="stroke:none"></path></g><g fill="#CCCCFF" fill-opacity="1.0"><path d="M 0.69 56.3 L 0.69 72.38 C 0.69 74.56 2.45 76.32 4.63 76.32 L 595.37 76.32 C 597.55 76.32 599.31 74.56 599.31 72.38 L 599.31 56.3 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 60.24)"><foreignobject height="12.15" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S5.F10.1.p1.pic1.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.p5.pic1.1.1.1.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S5.F10.1.p1.pic1.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.p5.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S5.F10.1.p1.pic1.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.p5.pic1.1.1.1.1.1.1.1">ProjectManager</span></span>
+</span></foreignobject></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 8.57)"><foreignobject height="39.17" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S5.F10.1.p1.pic1.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.p5.pic1.2.2.2.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S5.F10.1.p1.pic1.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.p5.pic1.2.2.2.1.1.1"><span class="ltx_text ltx_font_typewriter" id="S5.F10.1.p1.pic1.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.5.p5.pic1.2.2.2.1.1.1.1">SafetyEngineer, now that we have identified the control-related root causes of excessive swinging and overheating, let’s explore the safety implications of these issues. Please provide your insights on ...</span></span>
+</span></foreignobject></g></g></svg>
+</span>
+<span class="ltx_para ltx_noindent" id="S5.F10.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.p6"><svg class="ltx_picture" height="18.59" id="S5.F10.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.p6.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,18.59) matrix(1 0 0 -1 0 0)"><g fill="#000000" fill-opacity="1.0"><path d="M 0 4.63 L 0 13.96 C 0 16.52 2.07 18.59 4.63 18.59 L 595.37 18.59 C 597.93 18.59 600 16.52 600 13.96 L 600 4.63 C 600 2.07 597.93 0 595.37 0 L 4.63 0 C 2.07 0 0 2.07 0 4.63 Z" style="stroke:none"></path></g><g fill="#FFFFFF" fill-opacity="1.0"><path d="M 0.69 4.63 L 0.69 13.96 C 0.69 16.14 2.45 17.9 4.63 17.9 L 595.37 17.9 C 597.55 17.9 599.31 16.14 599.31 13.96 L 599.31 4.63 C 599.31 2.45 597.55 0.69 595.37 0.69 L 4.63 0.69 C 2.45 0.69 0.69 2.45 0.69 4.63 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 8.57 8.57)"><foreignobject height="1.46" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="582.87">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S5.F10.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.p6.pic1.1.1.1.1.1" style="width:421.2pt;">
+<span class="ltx_p" id="S5.F10.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.p6.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_typewriter" id="S5.F10.1.p1.pic1.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.6.p6.pic1.1.1.1.1.1.1.1">...</span></span>
+</span></foreignobject></g></g></svg>
+</span></span></foreignobject></g></g></svg>
+</div>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_block">Figure 10: </span>Example of messages in conversation between agents during Step 3.</figcaption>
+</div>
+</figure>
+</section>
+</section>
+<section class="ltx_subsection" id="S5.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.2 </span>Assessment and Discussion</h3>
+<div class="ltx_para" id="S5.SS2.p1">
+<p class="ltx_p" id="S5.SS2.p1.1">In this subsection, we will assess the actions performed by the team. We will first evaluate its performance as a team and then compare it with solutions proposed by the case study’s original research team. Two separate runs of TRIZ Agents were chosen for assessment, and their results were compiled.</p>
+</div>
+<section class="ltx_subsubsection" id="S5.SS2.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">5.2.1 </span>TRIZ Agents Actions</h4>
+<div class="ltx_para" id="S5.SS2.SSS1.p1">
+<p class="ltx_p" id="S5.SS2.SSS1.p1.1">Overall, all steps were executed, and in the end, the team proposed solutions to the problem. There were steps where the outcome was the result of interaction between multiple agents (steps: 2, 3, 6), and there were steps where only one agented contributed to the result (steps: 1, 4, 5) - not counting the manager who was only responsible for leading the discussion and not ideation. How each step was solved and who contributed to it was solely the decision of the <span class="ltx_text ltx_font_typewriter" id="S5.SS2.SSS1.p1.1.1">Project Manager</span>. It is desirable that multiple agents cooperate to solve each step because they may correct each other’s outputs. This suggests adding more critique instructions to <span class="ltx_text ltx_font_typewriter" id="S5.SS2.SSS1.p1.1.2">Project Manager</span> agent’s prompt for doubting the outputs of other agents. Another option would be replacing each worker agent with a team of agents performing one task. This would create a hierarchical teams architecture, a promising but more complex approach to agent orchestration.</p>
+</div>
+<div class="ltx_para" id="S5.SS2.SSS1.p2">
+<p class="ltx_p" id="S5.SS2.SSS1.p2.1">Another observation is that the <span class="ltx_text ltx_font_typewriter" id="S5.SS2.SSS1.p2.1.1">TRIZ Specialist</span> rarely used the RAG tool to request more information about the TRIZ methodology. Although the agent’s profiling prompt mentioned the RAG tool, it was not explicitly stated that it should be utilized at every generation, which may explain this behavior. <span class="ltx_text ltx_font_typewriter" id="S5.SS2.SSS1.p2.1.2">TRIZ Specialist</span> agent was intentionally provided with autonomy to decide whether to use external resources, implicitly allowing it to rely on its internal knowledge. Aim was to ensure that the agent follows the TRIZ methodology closely, ideally using the context of TRIZ literature. However, this autonomy caused the agent to underuse the RAG tool, as the agent often generated responses without any tool usage or with the usage of the web search tool. This outcome demonstrates one of the challenges of prompt engineering - balancing agent autonomy with consistent obedience to certain assumptions about the agent. To address this, future work will examine improving the prompts to require or encourage using RAG tools.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S5.SS2.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">5.2.2 </span>Case Study Comparison</h4>
+<div class="ltx_para" id="S5.SS2.SSS2.p1">
+<p class="ltx_p" id="S5.SS2.SSS2.p1.1">There are similarities between solutions, as shown by comparing the result to the original case study’s solution. This section will focus on comparing those two results.</p>
+</div>
+<section class="ltx_paragraph" id="S5.SS2.SSS2.Px1">
+<h5 class="ltx_title ltx_title_paragraph">Step 1: Defining Engineering System</h5>
+<div class="ltx_para" id="S5.SS2.SSS2.Px1.p1">
+<p class="ltx_p" id="S5.SS2.SSS2.Px1.p1.1">Most of the Sub/System and System Components have been found. In some, the name may be slightly different, but the object is the same. Supersystems were not as well identified. Results are compared in Table <a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.T1" title="Table 1 ‣ Step 1: Defining Engineering System ‣ 5.2.2 Case Study Comparison ‣ 5.2 Assessment and Discussion ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_tag">1</span></a>.</p>
+</div>
+<figure class="ltx_table" id="S5.T1">
+<table class="ltx_tabular ltx_align_middle" id="S5.T1.1">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S5.T1.1.1.1">
+<td class="ltx_td ltx_align_justify ltx_border_l ltx_border_r ltx_border_t" id="S5.T1.1.1.1.1" style="padding:2pt 4.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.T1.1.1.1.1.1">
+<span class="ltx_p" id="S5.T1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.1">Gantry Legs</span>, Wheel, <span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.2">Railway</span>, <span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.3">Trolley</span>, Trolley Frame,
+<span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.4">Wire Rope</span>, Motor, <span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.5">Hoist</span>, <span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.6">Hook</span>, Railway Beam, <span class="ltx_text ltx_font_bold" id="S5.T1.1.1.1.1.1.1.7">Bridge Girder</span></span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.T1.1.2.2">
+<td class="ltx_td ltx_align_justify ltx_border_b ltx_border_l ltx_border_r ltx_border_t" id="S5.T1.1.2.2.1" style="padding:2pt 4.0pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.T1.1.2.2.1.1">
+<span class="ltx_p" id="S5.T1.1.2.2.1.1.1">Air particles/dust, <span class="ltx_text ltx_font_bold" id="S5.T1.1.2.2.1.1.1.1">Workers</span>, Humidity, <span class="ltx_text ltx_font_bold" id="S5.T1.1.2.2.1.1.1.2">Thermal</span></span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 1: </span>Elements of the engineering system in the case study: the upper row represents the system components, while the lower row represents the supersystems. Elements in bold were identified by TRIZ agents.</figcaption>
+</figure>
+</section>
+<section class="ltx_paragraph" id="S5.SS2.SSS2.Px2">
+<h5 class="ltx_title ltx_title_paragraph">Step 2: Function Analysis</h5>
+<div class="ltx_para" id="S5.SS2.SSS2.Px2.p1">
+<p class="ltx_p" id="S5.SS2.SSS2.Px2.p1.1">In the case study, this step was presented using a graph showing functions as connections between elements. TRIZ Agents listed the connections. Those connections labeled as useful connections that overlap are: <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px2.p1.1.1">Trolley to Hoist (Motor)</span>, <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px2.p1.1.2">Wire Rope to Hook</span>. Connection <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px2.p1.1.3">Hoist to Wire Rope</span> was identified as useful, but case study researchers label it as insufficient and harmful. On the other hand, the connection <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px2.p1.1.4">Hoist to Load</span> was identified as harmful, which is comparable.
+The connection <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px2.p1.1.5">Environmental Conditions to Load</span> was successfully identified, as the case study analysis highlights <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px2.p1.1.6">Dust</span>, <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px2.p1.1.7">Humidity</span>, and <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px2.p1.1.8">Thermal</span> factors. However, six useful connections present in the case study were not identified. Additionally, the harmful connection between <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px2.p1.1.9">Worker and System</span> was missed by the TRIZ Agents.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S5.SS2.SSS2.Px3">
+<h5 class="ltx_title ltx_title_paragraph">Step 3: Cause and Effect Chain Analysis (CECA)</h5>
+<div class="ltx_para" id="S5.SS2.SSS2.Px3.p1">
+<p class="ltx_p" id="S5.SS2.SSS2.Px3.p1.1">case study identified two main root causes, which are <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px3.p1.1.1">the crane operator who does not follow standard operational procedure by lifting the excessive weight of load</span> and <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px3.p1.1.2">fast speed of controlling the movement of the cranes</span>. Those causes were identified by TRIZ Agents as <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px3.p1.1.3">Overloading and Rapid Movements</span>. The system identified five other root causes that are logical but do not occur in the case study.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S5.SS2.SSS2.Px4">
+<h5 class="ltx_title ltx_title_paragraph">Step 4: Engineering Contradiction (EC) and Contradiction Matrix.</h5>
+<div class="ltx_para" id="S5.SS2.SSS2.Px4.p1">
+<p class="ltx_p" id="S5.SS2.SSS2.Px4.p1.1">TRIZ Agents identified two engineering contradicitons: <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px4.p1.1.1">Speed</span> vs. <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px4.p1.1.2">Stability</span> and <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px4.p1.1.3">Load Capacity</span> vs. <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px4.p1.1.4">Safety</span>. This does not exactly overlap with contradictions from a research paper. However, TRIZ agents were not far from their solution because they identified <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px4.p1.1.5">Stability</span> instead of <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px4.p1.1.6">Object generated harmful factors</span> and <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px4.p1.1.7">Load Capacity</span> instead of <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px4.p1.1.8">Weight of stationary object</span>, which seem close enough. Inventive principles were then found based on those contradictions using the Contradiction Matrix, which is a deterministic operation, which is why there is no point in comparing those.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S5.SS2.SSS2.Px5">
+<h5 class="ltx_title ltx_title_paragraph">Step 5: Physical Contradiction</h5>
+<div class="ltx_para" id="S5.SS2.SSS2.Px5.p1">
+<p class="ltx_p" id="S5.SS2.SSS2.Px5.p1.1">Physical contradicitons were found exactly the same. Results are presented in Table <a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#S5.T2" title="Table 2 ‣ Step 5: Physical Contradiction ‣ 5.2.2 Case Study Comparison ‣ 5.2 Assessment and Discussion ‣ 5 RESULTS AND DISCUSSION ‣ TRIZ Agents: A Multi-Agent LLM Approach for TRIZ-Based Innovation"><span class="ltx_text ltx_ref_tag">2</span></a>. In the next step, TRIZ Agents derived only one, common with case study, inventive principle. This may be due to the generally scarce literature sources about physical contradictions identification compared to engineering contradictions.</p>
+</div>
+<figure class="ltx_table" id="S5.T2">
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S5.T2.1">
+<thead class="ltx_thead">
+<tr class="ltx_tr" id="S5.T2.1.1.1">
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_l ltx_border_r ltx_border_t" id="S5.T2.1.1.1.1" style="padding-top:2.5pt;padding-bottom:2.5pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.T2.1.1.1.1.1">
+<span class="ltx_p" id="S5.T2.1.1.1.1.1.1" style="width:112.7pt;"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.1.1.1.1">Contradiction</span></span>
+</span>
+</th>
+<th class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_r ltx_border_t" id="S5.T2.1.1.1.2" style="padding-top:2.5pt;padding-bottom:2.5pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.T2.1.1.1.2.1">
+<span class="ltx_p" id="S5.T2.1.1.1.2.1.1" style="width:260.2pt;"><span class="ltx_text ltx_font_bold" id="S5.T2.1.1.1.2.1.1.1">Contradictory Needs</span></span>
+</span>
+</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S5.T2.1.2.1">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t" id="S5.T2.1.2.1.1" style="padding-top:2.5pt;padding-bottom:2.5pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.T2.1.2.1.1.1">
+<span class="ltx_p" id="S5.T2.1.2.1.1.1.1" style="width:112.7pt;">Speed</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t" id="S5.T2.1.2.1.2" style="padding-top:2.5pt;padding-bottom:2.5pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.T2.1.2.1.2.1">
+<span class="ltx_p" id="S5.T2.1.2.1.2.1.1" style="width:260.2pt;">The crane must move quickly to enhance productivity, but it must also move slowly to prevent load swinging.</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr" id="S5.T2.1.3.2">
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_l ltx_border_r ltx_border_t" id="S5.T2.1.3.2.1" style="padding-top:2.5pt;padding-bottom:2.5pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.T2.1.3.2.1.1">
+<span class="ltx_p" id="S5.T2.1.3.2.1.1.1" style="width:112.7pt;">Load Capacity</span>
+</span>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_r ltx_border_t" id="S5.T2.1.3.2.2" style="padding-top:2.5pt;padding-bottom:2.5pt;">
+<span class="ltx_inline-block ltx_align_top" id="S5.T2.1.3.2.2.1">
+<span class="ltx_p" id="S5.T2.1.3.2.2.1.1" style="width:260.2pt;">The crane must lift heavy loads to improve efficiency, but it must lift lighter loads to ensure safety and prevent overheating.</span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">Table 2: </span>Physical Contradictions identified by TRIZ Agents, which overlap with case study.</figcaption>
+</figure>
+</section>
+<section class="ltx_paragraph" id="S5.SS2.SSS2.Px6">
+<h5 class="ltx_title ltx_title_paragraph">Step 6: Solutions</h5>
+<div class="ltx_para" id="S5.SS2.SSS2.Px6.p1">
+<p class="ltx_p" id="S5.SS2.SSS2.Px6.p1.1">Theoretical solutions proposed were categorized based on the specializations of the agents contributing to the ideation process. The first solution is the application of <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px6.p1.1.1">Sliding Mode Control (SMC) with Antiswing Trajectory</span>, which matches the case study’s first proposed solution. The solution proposed by case study researchers <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px6.p1.1.2">intelligent circuit breaker with essential sensors to monitor and regulate the current consumption</span> was not found by TRIZ Agents. During Step 6, the Electrical Engineering agent was not involved in collaboration, which may be the primary reason for this shortfall, as this agent could have contributed the necessary idea in the electrical domain. However, TRIZ Agents mention <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px6.p1.1.3">Thermal Management Enhancements</span>, which is in the area of the last case study solution <span class="ltx_text ltx_font_italic" id="S5.SS2.SSS2.Px6.p1.1.4">smart ventilation system with features like self-cleaning filters and sealed bearings</span>.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6 </span>CONCLUSIONS</h2>
+<section class="ltx_subsection" id="S6.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">6.1 </span>Main insights</h3>
+<div class="ltx_para" id="S6.SS1.p1">
+<p class="ltx_p" id="S6.SS1.p1.1">The study showed that it is possible to model group work on innovative problems using the TRIZ methodology with a multi-agent system based on LLMs. The outputs of the TRIZ Agents’ steps were not identical to those in the case study in every detail, but each step had commonalities. The solutions proposed by TRIZ Agents, although different from the case study, seemed logical. Of course, such multi-agent systems are still far from achieving a complete and adequate ideation process, but they can quickly produce solutions or guide real-world researchers in a promising direction.
+Another insight is that the outcome of the system strongly depends on agents’ profiling prompts. Experimenting with many prompts eventually resulted in the team following the workflow.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S6.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">6.2 </span>Limitations</h3>
+<div class="ltx_para" id="S6.SS2.p1">
+<p class="ltx_p" id="S6.SS2.p1.1">A substantial limitation of the proposed system is its lack of a feedback loop in the teams’ actions. In theory, it is possible, but the profiling prompt of <span class="ltx_text ltx_font_typewriter" id="S6.SS2.p1.1.1">Project Manager</span> does not mention doing it. The supervisor agent never directed returning to any step to refine results or try another approach. This is a severe drawback because every problem-solving process requires iterating over ideas, revisiting steps, and rethinking previous actions. The absence of such an essential component is due to the high complexity of implementing such a feature. For example, creating a loop in agentic systems carries a significant risk of causing never-ending conversations between agents. This limitation poses a promising research direction: making multi-agent systems even more similar to real-world teams.</p>
+</div>
+<div class="ltx_para" id="S6.SS2.p2">
+<p class="ltx_p" id="S6.SS2.p2.1">There are also limitations connected with LLMs properties like context window. In the discussed use case, six workflow steps were outlined. In the case of a workflow with more steps, the context window could be too small to store all documentation from previous steps. In fact, step documentation alone is a way to handle this problem because instead of a long list of messages, a summary is stored. This sparks a need for long-time agent memory, where information is available when necessary <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx19" title="">Hatalis et al., 2023</a>]</cite>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S6.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">6.3 </span>Future Work</h3>
+<div class="ltx_para" id="S6.SS3.p1">
+<p class="ltx_p" id="S6.SS3.p1.1">Studies have shown a promising and worth-exploring domain of multi-agent LLM systems. Examining how other agent orchestration architectures might perform would probably bring interesting insights. Additionally, only the TRIZ methodology is considered in the study. However, different methods, such as Lean Innovation <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx37" title="">Sehested and Sonnenberg, 2010</a>]</cite> and Design Thinking <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx5" title="">Brown et al., 2008</a>]</cite>, are worth investigating as they may work better with LLMs.</p>
+</div>
+<div class="ltx_para" id="S6.SS3.p2">
+<p class="ltx_p" id="S6.SS3.p2.1">A promising direction for further research is to compare how different prompt strategies function in a multi-agent system scenario. Refining prompts so that agents iterate over ideas, repeat, and rethink previous steps and actions could lead to substantial improvements in the system. Although this research did not focus on comparing prompts, it was surely a significant part of the implementation part because prompts drastically influenced the system’s actions. Applying an optimal prompt strategy might enhance the results.</p>
+</div>
+<div class="ltx_para" id="S6.SS3.p3">
+<p class="ltx_p" id="S6.SS3.p3.1">Another interesting field to investigate is cognitive architectures in multi-agent systems. Cognitive architectures are augmented LLMs agents with the internal flow or external sources for tasks with grounding or reasoning <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx39" title="">Sumers et al., 2024</a>]</cite>. Building cognitive agents could enable the system to learn problem descriptions. There are already interesting studies about using those concepts for enhancing decision-making <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx45" title="">Wu et al., 2024</a>]</cite> and problem-solving <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.18783v1#bib.bibx40" title="">Sun, 2024</a>]</cite>.</p>
+</div>
+</section>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">REFERENCES</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bibx1">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Adams and Tate, 2009</span>
+<span class="ltx_bibblock">
+Adams, C. and Tate, D. (2009).
+
+</span>
+<span class="ltx_bibblock">Computer-aided triz ideality and level of invention estimation using natural language processing and machine learning.
+
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_font_italic" id="bib.bibx1.1.1">Growth and Development of Computer-Aided Innovation: Third IFIP WG 5.4 Working Conference, CAI 2009, Harbin, China, August 20-21, 2009. Proceedings</span>, pages 27–37. Springer.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx2">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Arciszewski, 2016</span>
+<span class="ltx_bibblock">
+Arciszewski, T. (2016).
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx2.1.1">Inventive Engineering: Knowledge and Skills for Creative Engineers</span>.
+
+</span>
+<span class="ltx_bibblock">CRC Press, 1st edition.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx3">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Atox and Clark, 2024</span>
+<span class="ltx_bibblock">
+Atox, N. and Clark, M. (2024).
+
+</span>
+<span class="ltx_bibblock">Evaluating large language models through the lens of linguistic proficiency and world knowledge: A comparative study.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx3.1.1">Authorea Preprints</span>.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx4">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Banerjee et al., 2024</span>
+<span class="ltx_bibblock">
+Banerjee, S., Agarwal, A., and Singla, S. (2024).
+
+</span>
+<span class="ltx_bibblock">Llms will always hallucinate, and we need to live with this.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx5">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Brown et al., 2008</span>
+<span class="ltx_bibblock">
+Brown, T. et al. (2008).
+
+</span>
+<span class="ltx_bibblock">Design thinking.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx5.1.1">Harvard business review</span>, 86(6):84.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx6">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Béchard and Ayala, 2024</span>
+<span class="ltx_bibblock">
+Béchard, P. and Ayala, O. M. (2024).
+
+</span>
+<span class="ltx_bibblock">Reducing hallucination in structured outputs via retrieval-augmented generation.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx7">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Cascini and Rissone, 2004</span>
+<span class="ltx_bibblock">
+Cascini, G. and Rissone, P. (2004).
+
+</span>
+<span class="ltx_bibblock">Plastics design: integrating triz creativity and semantic knowledge portals.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx7.1.1">Journal of engineering design</span>, 15(4):405–424.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx8">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Chakrabarty et al., 2024</span>
+<span class="ltx_bibblock">
+Chakrabarty, T., Padmakumar, V., Brahman, F., and Muresan, S. (2024).
+
+</span>
+<span class="ltx_bibblock">Creativity support in the age of large language models: An empirical study involving professional writers.
+
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_font_italic" id="bib.bibx8.1.1">Proceedings of the 16th Conference on Creativity &amp; Cognition</span>, pages 132–155.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx9">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Chen et al., 2024a</span>
+<span class="ltx_bibblock">
+Chen, D., Zhang, S., Zhuang, Y., Tang, S., Liu, Q., Wang, H., and Xu, M. (2024a).
+
+</span>
+<span class="ltx_bibblock">Improving large models with small models: Lower costs and better performance.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx10">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Chen et al., 2024b</span>
+<span class="ltx_bibblock">
+Chen, L., Song, Y., Ding, S., Sun, L., Childs, P., and Zuo, H. (2024b).
+
+</span>
+<span class="ltx_bibblock">Triz-gpt: An llm-augmented method for problem-solving.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx11">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Cheng et al., 2024</span>
+<span class="ltx_bibblock">
+Cheng, Y., Zhang, C., Zhang, Z., Meng, X., Hong, S., Li, W., Wang, Z., Wang, Z., Yin, F., Zhao, J., and He, X. (2024).
+
+</span>
+<span class="ltx_bibblock">Exploring large language model based intelligent agents: Definitions, methods, and prospects.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx12">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Choinski and Chudziak, 2009</span>
+<span class="ltx_bibblock">
+Choinski, M. and Chudziak, J. A. (2009).
+
+</span>
+<span class="ltx_bibblock">Ontological learning assistant for knowledge discovery and data mining.
+
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_font_italic" id="bib.bibx12.1.1">2009 International Multiconference on Computer Science and Information Technology</span>, pages 147–155.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx13">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Chudziak and Cinkusz, 2024</span>
+<span class="ltx_bibblock">
+Chudziak, J. A. and Cinkusz, K. (2024).
+
+</span>
+<span class="ltx_bibblock">Towards llm-augmented multiagent systems for agile software engineering.
+
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_font_italic" id="bib.bibx13.1.1">The 39th IEEE/ACM International Conference on Automated Software Engineering (ASE 2024)</span>, Sacramento, CA, USA.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx14">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Cinkusz et al., 2025</span>
+<span class="ltx_bibblock">
+Cinkusz, K., Chudziak, J. A., and Niewiadomska-Szynkiewicz, E. (2025).
+
+</span>
+<span class="ltx_bibblock">Cognitive agents powered by large language models for agile software project management.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx14.1.1">Electronics</span>, 14(1).
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx15">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Czinki and Hentschel, 2016</span>
+<span class="ltx_bibblock">
+Czinki, A. and Hentschel, C. (2016).
+
+</span>
+<span class="ltx_bibblock">Solving complex problems and triz.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx15.1.1">Procedia Cirp</span>, 39:27–32.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx16">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Dorri et al., 2018</span>
+<span class="ltx_bibblock">
+Dorri, A., Kanhere, S. S., and Jurdak, R. (2018).
+
+</span>
+<span class="ltx_bibblock">Multi-agent systems: A survey.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx16.1.1">Ieee Access</span>, 6:28573–28593.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx17">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Hall et al., 2022</span>
+<span class="ltx_bibblock">
+Hall, S., Mollan, C., Pandey, V., and Mourelatos, Z. (2022).
+
+</span>
+<span class="ltx_bibblock">Triz mapping and novelty detection of engineering design patents using machine learning.
+
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_font_italic" id="bib.bibx17.1.1">International Design Engineering Technical Conferences and Computers and Information in Engineering Conference</span>, volume 86267, page V006T06A044. American Society of Mechanical Engineers.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx18">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Händler, 2023</span>
+<span class="ltx_bibblock">
+Händler, T. (2023).
+
+</span>
+<span class="ltx_bibblock">A taxonomy for autonomous llm-powered multi-agent architectures.
+
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_font_italic" id="bib.bibx18.1.1">KMIS</span>, pages 85–98.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx19">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Hatalis et al., 2023</span>
+<span class="ltx_bibblock">
+Hatalis, K., Christou, D., Myers, J., Jones, S., Lambert, K., Amos-Binks, A., Dannenhauer, Z., and Dannenhauer, D. (2023).
+
+</span>
+<span class="ltx_bibblock">Memory matters: The need to improve long-term memory in llm-agents.
+
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_font_italic" id="bib.bibx19.1.1">Proceedings of the AAAI Symposium Series</span>, volume 2, pages 277–280.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx20">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Hu et al., 2024</span>
+<span class="ltx_bibblock">
+Hu, S., Lu, C., and Clune, J. (2024).
+
+</span>
+<span class="ltx_bibblock">Automated design of agentic systems.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx21">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ilevbare et al., 2013</span>
+<span class="ltx_bibblock">
+Ilevbare, I. M., Probert, D., and Phaal, R. (2013).
+
+</span>
+<span class="ltx_bibblock">A review of triz, and its benefits and challenges in practice.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx21.1.1">Technovation</span>, 33(2-3):30–37.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx22">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Jiang and Luo, 2024</span>
+<span class="ltx_bibblock">
+Jiang, S. and Luo, J. (2024).
+
+</span>
+<span class="ltx_bibblock">Autotriz: Artificial ideation with triz and large language models.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx23">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kone et al., 2000</span>
+<span class="ltx_bibblock">
+Kone, M. T., Shimazu, A., and Nakajima, T. (2000).
+
+</span>
+<span class="ltx_bibblock">The state of the art in agent communication languages.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx23.1.1">Knowledge and Information Systems</span>, 2:259–284.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx24">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kostka and Chudziak, 2024</span>
+<span class="ltx_bibblock">
+Kostka, A. and Chudziak, J. A. (2024).
+
+</span>
+<span class="ltx_bibblock">Synergizing logical reasoning, long-term memory, and collaborative intelligence in multi-agent llm systems.
+
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_font_italic" id="bib.bibx24.1.1">Pacific Asia Conference on Language, Information and Computation (PACLIC 38)</span>, Tokyo, Japan.
+
+</span>
+<span class="ltx_bibblock">In press.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx25">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">LangGraph, 2023</span>
+<span class="ltx_bibblock">
+LangGraph (2023).
+
+</span>
+<span class="ltx_bibblock">LangGraph.
+
+</span>
+<span class="ltx_bibblock"><a class="ltx_ref ltx_url" href="https://langchain-ai.github.io/langgraph/" title="">https://langchain-ai.github.io/langgraph/</a>.
+
+</span>
+<span class="ltx_bibblock">Accessed: 10-01-2025.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx26">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Loh et al., 2006</span>
+<span class="ltx_bibblock">
+Loh, H. T., He, C., and Shen, L. (2006).
+
+</span>
+<span class="ltx_bibblock">Automatic classification of patent documents for triz users.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx26.1.1">World Patent Information</span>, 28(1):6–13.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx27">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Luing et al., 2024</span>
+<span class="ltx_bibblock">
+Luing, N. S. S., Toh, G. G., and Chau, G. H. (2024).
+
+</span>
+<span class="ltx_bibblock">Application of triz for gantry crane improvement.
+
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_font_italic" id="bib.bibx27.1.1">Journal of Physics: Conference Series</span>, volume 2772, page 012004. IOP Publishing.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx28">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Mahto, 2013</span>
+<span class="ltx_bibblock">
+Mahto, D. (2013).
+
+</span>
+<span class="ltx_bibblock">Concepts, tools and techniques of problem solving through triz: A review.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx28.1.1">International Journal of Innovative Research in Science, Engineering and Technology</span>, 2(7).
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx29">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Minaee et al., 2024</span>
+<span class="ltx_bibblock">
+Minaee, S., Mikolov, T., Nikzad, N., Chenaghlu, M., Socher, R., Amatriain, X., and Gao, J. (2024).
+
+</span>
+<span class="ltx_bibblock">Large language models: A survey.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx30">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Moehrle, 2005</span>
+<span class="ltx_bibblock">
+Moehrle, M. G. (2005).
+
+</span>
+<span class="ltx_bibblock">What is triz? from conceptual basics to a framework for research.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx30.1.1">Creativity and innovation management</span>, 14(1):3–13.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx31">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Nassar and AbouRizk, 2016</span>
+<span class="ltx_bibblock">
+Nassar, N. and AbouRizk, S. (2016).
+
+</span>
+<span class="ltx_bibblock">Introduction to techniques for resolving project performance contradictions.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx31.1.1">Journal of Construction Engineering and Management</span>, 142(8):04016027.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx32">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Oppenlaender, 2022</span>
+<span class="ltx_bibblock">
+Oppenlaender, J. (2022).
+
+</span>
+<span class="ltx_bibblock">The creativity of text-to-image generation.
+
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_font_italic" id="bib.bibx32.1.1">Proceedings of the 25th international academic mindtrek conference</span>, pages 192–202.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx33">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Orloff, 2006</span>
+<span class="ltx_bibblock">
+Orloff, M. A. (2006).
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx33.1.1">TRIZ</span>.
+
+</span>
+<span class="ltx_bibblock">Springer.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx34">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Orrù et al., 2023</span>
+<span class="ltx_bibblock">
+Orrù, G., Piarulli, A., Conversano, C., and Gemignani, A. (2023).
+
+</span>
+<span class="ltx_bibblock">Human-like problem-solving abilities in large language models using chatgpt.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx34.1.1">Frontiers in artificial intelligence</span>, 6:1199350.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx35">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ouyang et al., 2024</span>
+<span class="ltx_bibblock">
+Ouyang, S., Zhang, J. M., Harman, M., and Wang, M. (2024).
+
+</span>
+<span class="ltx_bibblock">An empirical study of the non-determinism of chatgpt in code generation.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx35.1.1">ACM Transactions on Software Engineering and Methodology</span>.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx36">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Park et al., 2023</span>
+<span class="ltx_bibblock">
+Park, J. S., O’Brien, J. C., Cai, C. J., Morris, M. R., Liang, P., and Bernstein, M. S. (2023).
+
+</span>
+<span class="ltx_bibblock">Generative agents: Interactive simulacra of human behavior.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx37">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Sehested and Sonnenberg, 2010</span>
+<span class="ltx_bibblock">
+Sehested, C. and Sonnenberg, H. (2010).
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx37.1.1">Lean innovation: a fast path from knowledge to value</span>.
+
+</span>
+<span class="ltx_bibblock">Springer Science &amp; Business Media.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx38">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Serugendo et al., 2005</span>
+<span class="ltx_bibblock">
+Serugendo, G. D. M., Gleizes, M.-P., and Karageorgos, A. (2005).
+
+</span>
+<span class="ltx_bibblock">Self-organization in multi-agent systems.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx38.1.1">The Knowledge engineering review</span>, 20(2):165–189.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx39">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Sumers et al., 2024</span>
+<span class="ltx_bibblock">
+Sumers, T. R., Yao, S., Narasimhan, K., and Griffiths, T. L. (2024).
+
+</span>
+<span class="ltx_bibblock">Cognitive architectures for language agents.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx40">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Sun, 2024</span>
+<span class="ltx_bibblock">
+Sun, R. (2024).
+
+</span>
+<span class="ltx_bibblock">Can a cognitive architecture fundamentally enhance llms? or vice versa?
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx40.1.1">arXiv preprint arXiv:2401.10444</span>.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx41">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Van Harmelen et al., 2008</span>
+<span class="ltx_bibblock">
+Van Harmelen, F., Lifschitz, V., and Porter, B. (2008).
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx41.1.1">Handbook of knowledge representation</span>.
+
+</span>
+<span class="ltx_bibblock">Elsevier.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx42">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wawer et al., 2024</span>
+<span class="ltx_bibblock">
+Wawer, M., Chudziak, J. A., and Niewiadomska-Szynkiewicz, E. (2024).
+
+</span>
+<span class="ltx_bibblock">Large language models and the elliott wave principle: A multi-agent deep learning approach to big data analysis in financial markets.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx42.1.1">Applied Sciences</span>, 14(24).
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx43">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wei et al., 2023</span>
+<span class="ltx_bibblock">
+Wei, J., Wang, X., Schuurmans, D., Bosma, M., Ichter, B., Xia, F., Chi, E., Le, Q., and Zhou, D. (2023).
+
+</span>
+<span class="ltx_bibblock">Chain-of-thought prompting elicits reasoning in large language models.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx44">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wu et al., 2023</span>
+<span class="ltx_bibblock">
+Wu, Q., Bansal, G., Zhang, J., Wu, Y., Li, B., Zhu, E., Jiang, L., Zhang, X., Zhang, S., Liu, J., Awadallah, A. H., White, R. W., Burger, D., and Wang, C. (2023).
+
+</span>
+<span class="ltx_bibblock">Autogen: Enabling next-gen llm applications via multi-agent conversation.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx45">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wu et al., 2024</span>
+<span class="ltx_bibblock">
+Wu, S., Oltramari, A., Francis, J., Giles, C. L., and Ritter, F. E. (2024).
+
+</span>
+<span class="ltx_bibblock">Cognitive llms: Toward human-like artificial intelligence by integrating cognitive architectures and large language models for manufacturing decision-making.
+
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_font_italic" id="bib.bibx45.1.1">Neurosymbolic Artificial Intelligence</span>.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx46">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Yao et al., 2023</span>
+<span class="ltx_bibblock">
+Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., and Cao, Y. (2023).
+
+</span>
+<span class="ltx_bibblock">React: Synergizing reasoning and acting in language models.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx47">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Yuan et al., 2024</span>
+<span class="ltx_bibblock">
+Yuan, R., Lin, H., Wang, Y., Tian, Z., Wu, S., Shen, T., Zhang, G., Wu, Y., Liu, C., Zhou, Z., Ma, Z., Xue, L., Wang, Z., Liu, Q., Zheng, T., Li, Y., Ma, Y., Liang, Y., Chi, X., Liu, R., Wang, Z., Li, P., Wu, J., Lin, C., Liu, Q., Jiang, T., Huang, W., Chen, W., Benetos, E., Fu, J., Xia, G., Dannenberg, R., Xue, W., Kang, S., and Guo, Y. (2024).
+
+</span>
+<span class="ltx_bibblock">Chatmusician: Understanding and generating music intrinsically with llm.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx48">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zamfirescu-Pereira et al., 2023</span>
+<span class="ltx_bibblock">
+Zamfirescu-Pereira, J., Wong, R. Y., Hartmann, B., and Yang, Q. (2023).
+
+</span>
+<span class="ltx_bibblock">Why johnny can’t prompt: how non-ai experts try (and fail) to design llm prompts.
+
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_font_italic" id="bib.bibx48.1.1">Proceedings of the 2023 CHI Conference on Human Factors in Computing Systems</span>, pages 1–21.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bibx49">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhao et al., 2023</span>
+<span class="ltx_bibblock">
+Zhao, Z., Lee, W. S., and Hsu, D. (2023).
+
+</span>
+<span class="ltx_bibblock">Large language models as commonsense knowledge for large-scale task planning.
+
+</span>
+<span class="ltx_bibblock">In Oh, A., Naumann, T., Globerson, A., Saenko, K., Hardt, M., and Levine, S., editors, <span class="ltx_text ltx_font_italic" id="bib.bibx49.1.1">Advances in Neural Information Processing Systems</span>, volume 36, pages 31967–31987. Curran Associates, Inc.
+
+</span>
+</li>
+</ul>
+</section>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Mon Jun 23 15:30:26 2025 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

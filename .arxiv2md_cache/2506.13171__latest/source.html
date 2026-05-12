@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors.</title>
+<!--Generated on Mon Jun 16 07:28:20 2025 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<meta content="
+Software Model Querying,  Agentic LLMs,  Automotive Software,  LLMs for Model-Driven Engineering
+" lang="en" name="keywords"/>
+<base href="/html/2506.13171v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S1" title="In Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">I </span><span class="ltx_text ltx_font_smallcaps">Introduction</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S2" title="In Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II </span><span class="ltx_text ltx_font_smallcaps">Related Work</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S2.SS1" title="In II Related Work ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">II-A</span> </span><span class="ltx_text ltx_font_italic">LLMs in Software and Model-Driven Engineering</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S2.SS2" title="In II Related Work ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">II-B</span> </span><span class="ltx_text ltx_font_italic">LLM Integration with Structured Software Artifacts</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S2.SS3" title="In II Related Work ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">II-C</span> </span><span class="ltx_text ltx_font_italic">Evaluation of Free-Text LLM Answers</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S3" title="In Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III </span><span class="ltx_text ltx_font_smallcaps">Methodology</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S3.SS1" title="In III Methodology ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-A</span> </span><span class="ltx_text ltx_font_italic">Research Questions</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S3.SS2" title="In III Methodology ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-B</span> </span><span class="ltx_text ltx_font_italic">Direct Prompting and Agent-Based Architecture</span></span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S3.SS2.SSS1" title="In III-B Direct Prompting and Agent-Based Architecture ‣ III Methodology ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-B</span>1 </span>Reference: Direct Full-Context Prompting</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S3.SS2.SSS2" title="In III-B Direct Prompting and Agent-Based Architecture ‣ III Methodology ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-B</span>2 </span>ReAct Architecture: Agent with File Tools</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S3.SS3" title="In III Methodology ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-C</span> </span><span class="ltx_text ltx_font_italic">LLM Selection and Configuration</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S3.SS4" title="In III Methodology ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-D</span> </span><span class="ltx_text ltx_font_italic">Question Dataset Design</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S3.SS5" title="In III Methodology ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">III-E</span> </span><span class="ltx_text ltx_font_italic">Evaluation Criteria</span></span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S3.SS5.SSS0.Px1" title="In III-E Evaluation Criteria ‣ III Methodology ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title">Per-answer scoring</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S3.SS5.SSS0.Px2" title="In III-E Evaluation Criteria ‣ III Methodology ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title">Per-fact scoring</span></a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S4" title="In Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV </span><span class="ltx_text ltx_font_smallcaps">Results and Analysis</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S4.SS1" title="In IV Results and Analysis ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-A</span> </span><span class="ltx_text ltx_font_italic">Correctness Evaluation</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S4.SS2" title="In IV Results and Analysis ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-B</span> </span><span class="ltx_text ltx_font_italic">Token Usage Comparison</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S4.SS3" title="In IV Results and Analysis ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref"><span class="ltx_text">IV-C</span> </span><span class="ltx_text ltx_font_italic">Failure Case Analysis</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S5" title="In Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">V </span><span class="ltx_text ltx_font_smallcaps">Discussion</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S6" title="In Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VI </span><span class="ltx_text ltx_font_smallcaps">Threats to Validity</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S6.SS0.SSS0.Px1" title="In VI Threats to Validity ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title">Single Model and Format</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S6.SS0.SSS0.Px2" title="In VI Threats to Validity ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title">Limited and Narrow Question Scope</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S6.SS0.SSS0.Px3" title="In VI Threats to Validity ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title">Answer Validation Limitations</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_paragraph"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S6.SS0.SSS0.Px4" title="In VI Threats to Validity ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title">Fixed Agent Parameters</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S7" title="In Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VII </span><span class="ltx_text ltx_font_smallcaps">Conclusions and Future Work</span></span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches 
+<br class="ltx_break"/><span class="ltx_note ltx_role_thanks" id="id1.id1"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">thanks: </span>
+This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors.
+</span></span></span>
+</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+Lukasz Mazur
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_font_italic" id="id2.1.id1">Chair of Robotics, Artificial</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id3.2.id2">Intelligence and Real-Time Systems</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id4.3.id3">Technical University of Munich
+<br class="ltx_break"/></span>Munich, Germany 
+<br class="ltx_break"/>lukasz.mazur@tum.de
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Nenad Petrovic
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_font_italic" id="id5.1.id1">Chair of Robotics, Artificial</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id6.2.id2">Intelligence and Real-Time Systems</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id7.3.id3">Technical University of Munich
+<br class="ltx_break"/></span>Munich, Germany 
+<br class="ltx_break"/>nenad.petrovic@tum.de
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">James Pontes Miranda
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_font_italic" id="id8.1.id1">Software and Systems Engineering</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id9.2.id2">Université Paris-Saclay</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id10.3.id3">CEA List</span>
+<br class="ltx_break"/>Palasieu, France 
+<br class="ltx_break"/>james.pontesmiranda@cea.fr
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Ansgar Radermacher
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_font_italic" id="id11.1.id1">Software and Systems Engineering</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id12.2.id2">Université Paris-Saclay</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id13.3.id3">CEA List</span>
+<br class="ltx_break"/>Palaiseau, France 
+<br class="ltx_break"/>ansgar.radermacher@cea.fr
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Robert Rasche
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_font_italic" id="id14.1.id1">Real-Time Systems, Resources,</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id15.2.id2">Model Based Software Eng.</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id16.3.id3">Tensor embedded GmbH</span>
+<br class="ltx_break"/>Pollenfeld, Germany 
+<br class="ltx_break"/>robert.rasche@tensor.gmbh
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Alois Knoll
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_font_italic" id="id17.1.id1">Chair of Robotics, Artificial</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id18.2.id2">Intelligence and Real-Time Systems</span>
+<br class="ltx_break"/><span class="ltx_text ltx_font_italic" id="id19.3.id3">Technical University of Munich
+<br class="ltx_break"/></span>Munich, Germany 
+<br class="ltx_break"/>knoll@in.tum.de
+</span></span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p" id="id20.id1">Large language models (LLMs) offer new opportunities for interacting with complex software artifacts, such as software models, through natural language. They present especially promising benefits for large software models that are difficult to grasp in their entirety, making traditional interaction and analysis approaches challenging. This paper investigates two approaches for leveraging LLMs to answer questions over software models: direct prompting, where the whole software model is provided in the context, and an agentic approach combining LLM-based agents with general-purpose file access tools. We evaluate these approaches using an Ecore metamodel designed for timing analysis and software optimization in automotive and embedded domains. Our findings show that while the agentic approach achieves accuracy comparable to direct prompting, it is significantly more efficient in terms of token usage. This efficiency makes the agentic approach particularly suitable for the automotive industry, where the large size of software models makes direct prompting infeasible, establishing LLM agents as not just a practical alternative but the only viable solution. Notably, the evaluation was conducted using small LLMs, which are more feasible to be executed locally — an essential advantage for meeting strict requirements around privacy, intellectual property protection, and regulatory compliance. Future work will investigate software models in diverse formats, explore more complex agent architectures, and extend agentic workflows to support not only querying but also modification of software models.</p>
+</div>
+<div class="ltx_keywords">
+<h6 class="ltx_title ltx_title_keywords">Index Terms: </h6>
+Software Model Querying, Agentic LLMs, Automotive Software, LLMs for Model-Driven Engineering
+
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">I </span><span class="ltx_text ltx_font_smallcaps" id="S1.1.1">Introduction</span>
+</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Software modeling is crucial in modern software engineering, particularly in safety-critical domains like automotive development, where precise models ensure compliance and reliability <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib1" title="">1</a>]</cite>. However, the increasing size and complexity of these models pose significant challenges for engineers in terms of access, understanding, and manipulation <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib2" title="">2</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">Recent advancements in large language models (LLMs) offer promising avenues to assist with complex software models, leveraging their capabilities in natural language understanding and code generation <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib3" title="">3</a>]</cite>. Despite this potential, the direct application of LLMs to structured software models, especially with formal languages like PlantUML <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib4" title="">4</a>]</cite>, remains largely unexplored <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib5" title="">5</a>]</cite>. Current research primarily focuses on unstructured text or code, overlooking the unique challenges of integrating LLMs with structured models, including format compatibility, semantic precision, and consistency. Furthermore, the efficacy of different LLM architectures, such as agentic workflows versus direct prompting, in understanding and reasoning about software models is unclear.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">This study investigates and compares agentic LLM workflows and direct full-context prompting for querying software models. We evaluate these approaches on specific, concrete questions about model structure and semantics, using a representative automotive software model.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p" id="S1.p4.1">Our contributions are twofold: an empirical comparison of LLM-based agentic and direct prompting for software model question answering, and insights into the feasibility and limitations of current LLM capabilities in this context. These findings will inform future research on advanced interactions with software models in model-driven engineering.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p" id="S1.p5.1">The paper is structured as follows: Section 2 reviews related work. Section 3 details the methodology. Section 4 presents results and analysis. Section 5 discusses findings. Section 6 addresses threats to validity, and Section 7 concludes with future work.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">II </span><span class="ltx_text ltx_font_smallcaps" id="S2.1.1">Related Work</span>
+</h2>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S2.SS1.4.1.1">II-A</span> </span><span class="ltx_text ltx_font_italic" id="S2.SS1.5.2">LLMs in Software and Model-Driven Engineering</span>
+</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.1">LLMs have increasingly been applied in various software engineering tasks, including code generation, bug detection, documentation, and summarization. Their ability to understand and generate natural language alongside programming languages makes them valuable assistants for developers across the software development lifecycle <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib3" title="">3</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p2">
+<p class="ltx_p" id="S2.SS1.p2.1">In model-driven engineering (MDE), LLMs are increasingly being explored for tasks such as model generation, validation, and transformation, aiming to improve automation and reduce manual effort <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib3" title="">3</a>]</cite>. While software models offer high-level abstractions of system designs, their structured and formal nature poses challenges for natural language models, requiring specialized input representations and reasoning strategies <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib6" title="">6</a>]</cite>. A variety of modeling standards are used across domains, including UML <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib7" title="">7</a>]</cite> and Eclipse Modeling Framework (EMF) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib8" title="">8</a>]</cite> in general software engineering, and AUTOSAR <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib9" title="">9</a>]</cite> in the automotive industry. These standards provide precise specifications of structure and behavior, which are critical in safety-critical domains governed by standards like ISO 26262, highlighting the growing need to integrate AI-assisted techniques into rigorous development processes <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib10" title="">10</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p3">
+<p class="ltx_p" id="S2.SS1.p3.1">Traditional software modeling tools provide querying, validation, and transformation capabilities to manage these complex models. EMF and specialized automotive toolchains support model editing and consistency checks <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib10" title="">10</a>]</cite><cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib11" title="">11</a>]</cite>. The integration of LLMs into such environments has the potential to enhance these tools by enabling natural language querying, automated documentation generation, and intelligent assistance during modeling. This intersection of LLM technology with established software modeling ecosystems remains an active area of exploration <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib6" title="">6</a>]</cite>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S2.SS2.4.1.1">II-B</span> </span><span class="ltx_text ltx_font_italic" id="S2.SS2.5.2">LLM Integration with Structured Software Artifacts</span>
+</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.1">Interfacing LLMs with structured software artifacts such as models, codebases, or graphs requires specialized architectural approaches. Unlike plain text, software models are inherently structured, hierarchical, and often constrained by formal metamodels, which challenges traditional LLM input paradigms <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib12" title="">12</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p2">
+<p class="ltx_p" id="S2.SS2.p2.1">One prominent technique to address these challenges is Retrieval-Augmented Generation (RAG), where external knowledge bases are queried to retrieve relevant fragments that augment the LLM’s context. This approach helps mitigate token-length constraints and context fragmentation, enabling the LLM to focus on pertinent information without being overwhelmed by the entire knowledge base <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib13" title="">13</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p3">
+<p class="ltx_p" id="S2.SS2.p3.1">Beyond retrieval-based methods, tool-augmented LLM architectures enable more sophisticated workflows. These agents can perform iterative reasoning, plan multi-step queries, and invoke external tools or APIs for accessing external data sources. Agentic approaches combine LLM capabilities with domain-specific logic and memory management, leading to improved performance on complex tasks <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib14" title="">14</a>]</cite><cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib15" title="">15</a>]</cite>. As tool usage gains popularity, emerging standards such as the Model Context Protocol (MCP) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib16" title="">16</a>]</cite> and Agent2Agent Protocol (A2A) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib17" title="">17</a>]</cite> are being developed to support scalable and interoperable agent ecosystems. MCP standardizes how agents connect to tools, APIs, and resources through structured inputs and outputs, while A2A facilitates dynamic, multimodal communication between agents, enabling collaboration, delegation, and shared task management.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p4">
+<p class="ltx_p" id="S2.SS2.p4.1">The balance between single-shot prompting and multi-turn agentic workflows also influences system capabilities. While single-shot prompts are simpler and faster, agentic workflows provide enhanced reasoning, planning, and verification, but come with higher computational costs and increased latency <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib18" title="">18</a>]</cite><cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib19" title="">19</a>]</cite>. The choice between these architectures typically depends on the task’s complexity and how well the agent’s available tools align with the task’s abstraction level.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S2.SS3.4.1.1">II-C</span> </span><span class="ltx_text ltx_font_italic" id="S2.SS3.5.2">Evaluation of Free-Text LLM Answers</span>
+</h3>
+<div class="ltx_para" id="S2.SS3.p1">
+<p class="ltx_p" id="S2.SS3.p1.1">Evaluating open-ended natural language answers from LLMs is challenging, especially when accuracy, semantic alignment, and factual grounding are essential. Traditional lexical matching metrics that focus on the overlap of n-grams (word sequences) between two texts, like BLEU and ROUGE, often fall short when evaluating the quality of responses to structured or knowledge-intensive queries because they primarily assess surface-level word sequence commonality <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib20" title="">20</a>]</cite>. While semantic similarity methods, such as bi-encoder and cross-encoder models, better capture meaning beyond lexical overlap, they still struggle with evaluating factual accuracy, logical consistency, and adherence to task-specific constraints in complex scenarios <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib21" title="">21</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p2">
+<p class="ltx_p" id="S2.SS3.p2.1">LLM-as-a-Judge methods have recently emerged as a flexible and scalable evaluation paradigm, prompting LLMs to assess the correctness, completeness, and relevance of generated answers using their own domain understanding. However, these models may still hallucinate or misjudge, limiting their reliability <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib22" title="">22</a>]</cite>. Human evaluation remains essential for ensuring validity, particularly for complex reasoning tasks, but it is resource-intensive and often requires expert reviewers to assess nuanced correctness, adherence to software engineering principles, and practical relevance <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib23" title="">23</a>]</cite>.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">III </span><span class="ltx_text ltx_font_smallcaps" id="S3.1.1">Methodology</span>
+</h2>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS1.4.1.1">III-A</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS1.5.2">Research Questions</span>
+</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">This study investigates how LLMs and agent-based architectures perform on question-answering tasks over complex software models, comparing direct full-context prompting with agentic retrieval using external tools.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p2">
+<p class="ltx_p" id="S3.SS1.p2.1"><span class="ltx_text ltx_font_italic" id="S3.SS1.p2.1.1">RQ1: How does the accuracy of an LLM-based agent that retrieves and processes parts of a large software model using external tools compare to the accuracy of a reference LLM that processes the entire model within its context window when answering model-related questions?</span></p>
+</div>
+<div class="ltx_para" id="S3.SS1.p3">
+<p class="ltx_p" id="S3.SS1.p3.1">This question targets the core trade-off between full-context access and modular, tool-assisted access. It aims to evaluate whether an LLM-based agent can still produce accurate and useful answers to domain-relevant questions despite never having a complete view of the software model at once. The answer to this question has significant implications for the feasibility of using LLM agents in real-world automotive workflows where models may be large, distributed, and subject to change.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p4">
+<p class="ltx_p" id="S3.SS1.p4.1"><span class="ltx_text ltx_font_italic" id="S3.SS1.p4.1.1">RQ2: How does the token consumption of an LLM-based agent that incrementally accesses a large software model via tool support compare to that of an LLM processing the entire model in a single pass?</span></p>
+</div>
+<div class="ltx_para" id="S3.SS1.p5">
+<p class="ltx_p" id="S3.SS1.p5.1">This question addresses the efficiency of the two approaches in terms of token usage, which is especially critical when deploying smaller LLMs with limited context windows. Smaller models are often the only viable option for local, on-premise deployment - an increasingly important requirement in the automotive industry due to strict privacy constraints, intellectual property protection, and regulatory compliance. By analyzing token consumption, we aim to understand whether agent-based strategies enable smaller, locally hosted models to work effectively with large-scale software artifacts.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS2.4.1.1">III-B</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS2.5.2">Direct Prompting and Agent-Based Architecture</span>
+</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.1">To evaluate the ability of LLMs to answer questions about complex software models, we compare two architectures: a direct LLM call serving as a reference, and a tool-augmented agent architecture. Both setups are illustrated in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S3.F1" title="Figure 1 ‣ III-B Direct Prompting and Agent-Based Architecture ‣ III Methodology ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_tag">1</span></a>, with example responses shown in Fig. <a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S3.F2" title="Figure 2 ‣ III-B Direct Prompting and Agent-Based Architecture ‣ III Methodology ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_tag">2</span></a> to demonstrate how each approach processes and answers a question.</p>
+</div>
+<figure class="ltx_figure" id="S3.F1">
+<p class="ltx_p ltx_align_center" id="S3.F1.1"><span class="ltx_text" id="S3.F1.1.1"><img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="132" id="S3.F1.1.1.g1" src="extracted/6539846/combined_reference_and_file_tools_agents_rev4.png" width="598"/></span></p>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>Evaluation setups for software model question answering. (a) Direct LLM call with full model in prompt. (b) Agent using file-access tools to retrieve relevant model parts before answering.</figcaption>
+</figure>
+<figure class="ltx_figure" id="S3.F2">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1">
+<div class="ltx_logical-block ltx_figure_panel ltx_minipage ltx_align_middle" id="S3.F2.2" style="width:433.6pt;">
+<div class="ltx_para ltx_noindent ltx_align_left" id="S3.F2.1.1.p1">
+<svg class="ltx_picture" height="38.5" id="S3.F2.1.1.p1.pic1" overflow="visible" version="1.1" width="540"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,38.5) matrix(1 0 0 -1 0 0)"><g fill="#B3B3B3" fill-opacity="1.0"><path d="M 0 8.72 L 0 29.78 C 0 34.59 3.9 38.5 8.72 38.5 L 531.28 38.5 C 536.09 38.5 540 34.59 540 29.78 L 540 8.72 C 540 3.9 536.09 0 531.28 0 L 8.72 0 C 3.9 0 0 3.9 0 8.72 Z" style="stroke:none"></path></g><g fill="#FFFFFF" fill-opacity="1.0"><path d="M 0.42 8.72 L 0.42 29.78 C 0.42 34.37 4.13 38.08 8.72 38.08 L 531.28 38.08 C 535.86 38.08 539.58 34.37 539.58 29.78 L 539.58 8.72 C 539.58 4.13 535.86 0.42 531.28 0.42 L 8.72 0.42 C 4.13 0.42 0.42 4.13 0.42 8.72 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 6.64 6.64)"><foreignobject color="#000000" height="25.21" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="526.71">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F2.1.1.p1.pic1.1.1.1.1.1" style="width:380.7pt;">
+<span class="ltx_p" id="S3.F2.1.1.p1.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S3.F2.1.1.p1.pic1.1.1.1.1.1.1.1" style="font-size:70%;">Question:
+<br class="ltx_break"/><span class="ltx_text ltx_font_medium" id="S3.F2.1.1.p1.pic1.1.1.1.1.1.1.1.1">
+What are the fields of Frequency class? Provide names and data types of only this class, don’t list fields of base classes.</span></span></span>
+</span></foreignobject></g></g></svg>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.F2.2.p1">
+<svg class="ltx_picture" height="1" id="S3.F2.2.p1.pic1" overflow="visible" version="1.1" width="600.55"><g color="#808080" fill="#808080" stroke="#808080" stroke-dasharray="3.0pt,3.0pt" stroke-dashoffset="0.0pt" stroke-width="0.4pt" transform="translate(0,1) matrix(1 0 0 -1 0 0) translate(0.28,0) translate(0,0.28)"><path d="M 0 0 L 600 0" style="fill:none"></path></g></svg>
+</div>
+</div>
+</div>
+<div class="ltx_flex_break"></div>
+<div class="ltx_flex_cell ltx_flex_size_1">
+<table class="ltx_tabular ltx_figure_panel ltx_align_top" id="S3.F2.3">
+<tr class="ltx_tr" id="S3.F2.3.1">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="S3.F2.3.1.2">
+<span class="ltx_inline-block ltx_align_top" id="S3.F2.3.1.2.1">
+<span class="ltx_p" id="S3.F2.3.1.2.1.1" style="width:15.0pt;"><span class="ltx_text ltx_font_bold" id="S3.F2.3.1.2.1.1.1" style="position:relative; bottom:70.0pt;">(a)</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_justify ltx_align_top" id="S3.F2.3.1.1">
+<span class="ltx_inline-block ltx_align_top" id="S3.F2.3.1.1.1">
+<span class="ltx_p" id="S3.F2.3.1.1.1.1" style="width:364.2pt;"><span class="ltx_inline-logical-block ltx_minipage ltx_align_top" id="S3.F2.3.1.1.1.1.1" style="width:433.6pt;">
+<span class="ltx_para ltx_noindent" id="S3.F2.3.1.1.1.1.1.p1"><svg class="ltx_picture" height="136.24" id="S3.F2.3.1.1.1.1.1.p1.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,136.24) matrix(1 0 0 -1 0 0)"><g fill="#B3B3B3" fill-opacity="1.0"><path d="M 0 8.72 L 0 127.52 C 0 132.34 3.9 136.24 8.72 136.24 L 591.28 136.24 C 596.1 136.24 600 132.34 600 127.52 L 600 8.72 C 600 3.9 596.1 0 591.28 0 L 8.72 0 C 3.9 0 0 3.9 0 8.72 Z" style="stroke:none"></path></g><g fill="#DFDFDF" fill-opacity="1.0"><path d="M 0.42 8.72 L 0.42 127.52 C 0.42 132.11 4.13 135.83 8.72 135.83 L 591.28 135.83 C 595.87 135.83 599.58 132.11 599.58 127.52 L 599.58 8.72 C 599.58 4.13 595.87 0.42 591.28 0.42 L 8.72 0.42 C 4.13 0.42 0.42 4.13 0.42 8.72 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 6.64 6.64)"><foreignobject color="#000000" height="122.96" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="586.72">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F2.3.1.1.1.1.1.p1.pic1.1.1.1.1.1" style="width:424.0pt;">
+<span class="ltx_p" id="S3.F2.3.1.1.1.1.1.p1.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S3.F2.3.1.1.1.1.1.p1.pic1.1.1.1.1.1.1.1" style="font-size:70%;">Answer:
+<br class="ltx_break"/><span class="ltx_text ltx_font_medium" id="S3.F2.3.1.1.1.1.1.p1.pic1.1.1.1.1.1.1.1.1">
+
+The Frequency class has the following fields defined directly:</span></span></span>
+<span class="ltx_p" id="S3.F2.3.1.1.1.1.1.p1.pic1.1.1.1.1.1.2"><span class="ltx_text" id="S3.F2.3.1.1.1.1.1.p1.pic1.1.1.1.1.1.2.1" style="font-size:70%;">1. name: value 
+<br class="ltx_break"/>   - data type: EDouble (double) 
+<br class="ltx_break"/>   - lowerBound: 1 
+<br class="ltx_break"/>   - defaultValueLiteral: 1000</span></span>
+<span class="ltx_p" id="S3.F2.3.1.1.1.1.1.p1.pic1.1.1.1.1.1.3"><span class="ltx_text" id="S3.F2.3.1.1.1.1.1.p1.pic1.1.1.1.1.1.3.1" style="font-size:70%;">2. name: unit 
+<br class="ltx_break"/>   - data type: FrequencyUnit (enumeration) 
+<br class="ltx_break"/>   - lowerBound: 1 
+<br class="ltx_break"/>   - defaultValueLiteral: MHz</span></span>
+</span></foreignobject></g></g></svg>
+</span></span></span>
+</span>
+</td>
+</tr>
+</table>
+</div>
+<div class="ltx_flex_break"></div>
+<div class="ltx_flex_cell ltx_flex_size_1"><svg class="ltx_picture ltx_figure_panel" height="1" id="S3.F2.pic1" overflow="visible" version="1.1" width="600.55"><g color="#808080" fill="#808080" stroke="#808080" stroke-dasharray="3.0pt,3.0pt" stroke-dashoffset="0.0pt" stroke-width="0.4pt" transform="translate(0,1) matrix(1 0 0 -1 0 0) translate(0.28,0) translate(0,0.28)"><path d="M 0 0 L 600 0" style="fill:none"></path></g></svg></div>
+<div class="ltx_flex_break"></div>
+<div class="ltx_flex_cell ltx_flex_size_1">
+<table class="ltx_tabular ltx_figure_panel ltx_align_top" id="S3.F2.10">
+<tr class="ltx_tr" id="S3.F2.10.7">
+<td class="ltx_td ltx_align_justify ltx_align_top" id="S3.F2.10.7.8">
+<span class="ltx_inline-block ltx_align_top" id="S3.F2.10.7.8.1">
+<span class="ltx_p" id="S3.F2.10.7.8.1.1" style="width:15.0pt;"><span class="ltx_text ltx_font_bold" id="S3.F2.10.7.8.1.1.1" style="position:relative; bottom:0.0pt;">(b)</span></span>
+</span>
+</td>
+<td class="ltx_td ltx_nopad_l ltx_nopad_r ltx_align_justify ltx_align_top" id="S3.F2.10.7.7">
+<span class="ltx_inline-block ltx_align_top" id="S3.F2.10.7.7.7">
+<span class="ltx_p" id="S3.F2.10.7.7.7.7" style="width:364.2pt;"><span class="ltx_inline-logical-block ltx_minipage ltx_align_top" id="S3.F2.10.7.7.7.7.7" style="width:433.6pt;">
+<span class="ltx_para ltx_noindent ltx_align_left" id="S3.F2.4.1.1.1.1.1.1.p1"><svg class="ltx_picture" height="19.42" id="S3.F2.4.1.1.1.1.1.1.p1.pic1" overflow="visible" version="1.1" width="540"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,19.42) matrix(1 0 0 -1 0 0)"><g fill="#D9D9D9" fill-opacity="1.0"><path d="M 0 8.72 L 0 10.71 C 0 15.52 3.9 19.42 8.72 19.42 L 531.28 19.42 C 536.09 19.42 540 15.52 540 10.71 L 540 8.72 C 540 3.9 536.09 0 531.28 0 L 8.72 0 C 3.9 0 0 3.9 0 8.72 Z" style="stroke:none"></path></g><g fill="#ECECEC" fill-opacity="1.0"><path d="M 0.42 8.72 L 0.42 10.71 C 0.42 15.29 4.13 19.01 8.72 19.01 L 531.28 19.01 C 535.86 19.01 539.58 15.29 539.58 10.71 L 539.58 8.72 C 539.58 4.13 535.86 0.42 531.28 0.42 L 8.72 0.42 C 4.13 0.42 0.42 4.13 0.42 8.72 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 2.38 5.35)"><foreignobject color="#000000" height="8.72" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="535.23">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F2.4.1.1.1.1.1.1.p1.pic1.1.1.1.1.1" style="width:386.8pt;">
+<span class="ltx_p" id="S3.F2.4.1.1.1.1.1.1.p1.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S3.F2.4.1.1.1.1.1.1.p1.pic1.1.1.1.1.1.1.1" style="font-size:70%;">Tool:<span class="ltx_text ltx_font_medium" id="S3.F2.4.1.1.1.1.1.1.p1.pic1.1.1.1.1.1.1.1.1"> <span class="ltx_text ltx_font_typewriter" id="S3.F2.4.1.1.1.1.1.1.p1.pic1.1.1.1.1.1.1.1.1.1">open_file root.ecore</span></span></span></span>
+</span></foreignobject></g></g></svg>
+</span>
+<span class="ltx_para ltx_noindent ltx_align_right" id="S3.F2.5.2.2.2.2.2.2.p1"><svg class="ltx_picture" height="36.61" id="S3.F2.5.2.2.2.2.2.2.p1.pic1" overflow="visible" version="1.1" width="540"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,36.61) matrix(1 0 0 -1 0 0)"><g fill="#D9D9D9" fill-opacity="1.0"><path d="M 0 8.72 L 0 27.9 C 0 32.71 3.9 36.61 8.72 36.61 L 531.28 36.61 C 536.09 36.61 540 32.71 540 27.9 L 540 8.72 C 540 3.9 536.09 0 531.28 0 L 8.72 0 C 3.9 0 0 3.9 0 8.72 Z" style="stroke:none"></path></g><g fill="#ECECEC" fill-opacity="1.0"><path d="M 0.42 8.72 L 0.42 27.9 C 0.42 32.48 4.13 36.2 8.72 36.2 L 531.28 36.2 C 535.86 36.2 539.58 32.48 539.58 27.9 L 539.58 8.72 C 539.58 4.13 535.86 0.42 531.28 0.42 L 8.72 0.42 C 4.13 0.42 0.42 4.13 0.42 8.72 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 6.64 6.64)"><foreignobject color="#000000" height="23.33" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="526.71">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F2.5.2.2.2.2.2.2.p1.pic1.1.1.1.1.1" style="width:380.7pt;">
+<span class="ltx_p" id="S3.F2.5.2.2.2.2.2.2.p1.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S3.F2.5.2.2.2.2.2.2.p1.pic1.1.1.1.1.1.1.1" style="font-size:70%;">Observation:
+<br class="ltx_break"/><span class="ltx_text ltx_font_typewriter ltx_font_medium" id="S3.F2.5.2.2.2.2.2.2.p1.pic1.1.1.1.1.1.1.1.1">... first 50 lines of the file ...</span></span></span>
+</span></foreignobject></g></g></svg>
+</span>
+<span class="ltx_para ltx_noindent ltx_align_left" id="S3.F2.6.3.3.3.3.3.3.p1"><svg class="ltx_picture" height="19.42" id="S3.F2.6.3.3.3.3.3.3.p1.pic1" overflow="visible" version="1.1" width="540"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,19.42) matrix(1 0 0 -1 0 0)"><g fill="#D9D9D9" fill-opacity="1.0"><path d="M 0 8.72 L 0 10.71 C 0 15.52 3.9 19.42 8.72 19.42 L 531.28 19.42 C 536.09 19.42 540 15.52 540 10.71 L 540 8.72 C 540 3.9 536.09 0 531.28 0 L 8.72 0 C 3.9 0 0 3.9 0 8.72 Z" style="stroke:none"></path></g><g fill="#ECECEC" fill-opacity="1.0"><path d="M 0.42 8.72 L 0.42 10.71 C 0.42 15.29 4.13 19.01 8.72 19.01 L 531.28 19.01 C 535.86 19.01 539.58 15.29 539.58 10.71 L 539.58 8.72 C 539.58 4.13 535.86 0.42 531.28 0.42 L 8.72 0.42 C 4.13 0.42 0.42 4.13 0.42 8.72 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 2.38 5.35)"><foreignobject color="#000000" height="8.72" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="535.23">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F2.6.3.3.3.3.3.3.p1.pic1.1.1.1.1.1" style="width:386.8pt;">
+<span class="ltx_p" id="S3.F2.6.3.3.3.3.3.3.p1.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S3.F2.6.3.3.3.3.3.3.p1.pic1.1.1.1.1.1.1.1" style="font-size:70%;">Tool:<span class="ltx_text ltx_font_medium" id="S3.F2.6.3.3.3.3.3.3.p1.pic1.1.1.1.1.1.1.1.1"> <span class="ltx_text ltx_font_typewriter" id="S3.F2.6.3.3.3.3.3.3.p1.pic1.1.1.1.1.1.1.1.1.1">search_file Frequency root.ecore</span></span></span></span>
+</span></foreignobject></g></g></svg>
+</span>
+<span class="ltx_para ltx_noindent ltx_align_right" id="S3.F2.7.4.4.4.4.4.4.p1"><svg class="ltx_picture" height="80.72" id="S3.F2.7.4.4.4.4.4.4.p1.pic1" overflow="visible" version="1.1" width="540"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,80.72) matrix(1 0 0 -1 0 0)"><g fill="#D9D9D9" fill-opacity="1.0"><path d="M 0 8.72 L 0 72.01 C 0 76.82 3.9 80.72 8.72 80.72 L 531.28 80.72 C 536.09 80.72 540 76.82 540 72.01 L 540 8.72 C 540 3.9 536.09 0 531.28 0 L 8.72 0 C 3.9 0 0 3.9 0 8.72 Z" style="stroke:none"></path></g><g fill="#ECECEC" fill-opacity="1.0"><path d="M 0.42 8.72 L 0.42 72.01 C 0.42 76.59 4.13 80.31 8.72 80.31 L 531.28 80.31 C 535.86 80.31 539.58 76.59 539.58 72.01 L 539.58 8.72 C 539.58 4.13 535.86 0.42 531.28 0.42 L 8.72 0.42 C 4.13 0.42 0.42 4.13 0.42 8.72 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 6.64 6.64)"><foreignobject color="#000000" height="67.44" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="526.71">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F2.7.4.4.4.4.4.4.p1.pic1.1.1.1.1.1" style="width:380.7pt;">
+<span class="ltx_p" id="S3.F2.7.4.4.4.4.4.4.p1.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S3.F2.7.4.4.4.4.4.4.p1.pic1.1.1.1.1.1.1.1" style="font-size:70%;">Observation:
+<br class="ltx_break"/><span class="ltx_text ltx_font_typewriter ltx_font_medium" id="S3.F2.7.4.4.4.4.4.4.p1.pic1.1.1.1.1.1.1.1.1">Found 8 matches for "Frequency" in root.ecore:
+<br class="ltx_break"/>...
+<br class="ltx_break"/>Line 2830: name="Frequency"&gt;
+<br class="ltx_break"/>...</span></span></span>
+</span></foreignobject></g></g></svg>
+</span>
+<span class="ltx_para ltx_noindent ltx_align_left" id="S3.F2.8.5.5.5.5.5.5.p1"><svg class="ltx_picture" height="19.32" id="S3.F2.8.5.5.5.5.5.5.p1.pic1" overflow="visible" version="1.1" width="540"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,19.32) matrix(1 0 0 -1 0 0)"><g fill="#D9D9D9" fill-opacity="1.0"><path d="M 0 8.72 L 0 10.6 C 0 15.41 3.9 19.32 8.72 19.32 L 531.28 19.32 C 536.09 19.32 540 15.41 540 10.6 L 540 8.72 C 540 3.9 536.09 0 531.28 0 L 8.72 0 C 3.9 0 0 3.9 0 8.72 Z" style="stroke:none"></path></g><g fill="#ECECEC" fill-opacity="1.0"><path d="M 0.42 8.72 L 0.42 10.6 C 0.42 15.18 4.13 18.9 8.72 18.9 L 531.28 18.9 C 535.86 18.9 539.58 15.18 539.58 10.6 L 539.58 8.72 C 539.58 4.13 535.86 0.42 531.28 0.42 L 8.72 0.42 C 4.13 0.42 0.42 4.13 0.42 8.72 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 2.38 5.35)"><foreignobject color="#000000" height="8.61" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="535.23">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F2.8.5.5.5.5.5.5.p1.pic1.1.1.1.1.1" style="width:386.8pt;">
+<span class="ltx_p" id="S3.F2.8.5.5.5.5.5.5.p1.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S3.F2.8.5.5.5.5.5.5.p1.pic1.1.1.1.1.1.1.1" style="font-size:70%;">Tool:<span class="ltx_text ltx_font_medium" id="S3.F2.8.5.5.5.5.5.5.p1.pic1.1.1.1.1.1.1.1.1"> <span class="ltx_text ltx_font_typewriter" id="S3.F2.8.5.5.5.5.5.5.p1.pic1.1.1.1.1.1.1.1.1.1">goto 2830</span></span></span></span>
+</span></foreignobject></g></g></svg>
+</span>
+<span class="ltx_para ltx_noindent ltx_align_right" id="S3.F2.9.6.6.6.6.6.6.p1"><svg class="ltx_picture" height="113.93" id="S3.F2.9.6.6.6.6.6.6.p1.pic1" overflow="visible" version="1.1" width="540"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,113.93) matrix(1 0 0 -1 0 0)"><g fill="#D9D9D9" fill-opacity="1.0"><path d="M 0 8.72 L 0 105.21 C 0 110.03 3.9 113.93 8.72 113.93 L 531.28 113.93 C 536.09 113.93 540 110.03 540 105.21 L 540 8.72 C 540 3.9 536.09 0 531.28 0 L 8.72 0 C 3.9 0 0 3.9 0 8.72 Z" style="stroke:none"></path></g><g fill="#ECECEC" fill-opacity="1.0"><path d="M 0.42 8.72 L 0.42 105.21 C 0.42 109.8 4.13 113.52 8.72 113.52 L 531.28 113.52 C 535.86 113.52 539.58 109.8 539.58 105.21 L 539.58 8.72 C 539.58 4.13 535.86 0.42 531.28 0.42 L 8.72 0.42 C 4.13 0.42 0.42 4.13 0.42 8.72 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 6.64 6.64)"><foreignobject color="#000000" height="100.65" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="526.71">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F2.9.6.6.6.6.6.6.p1.pic1.1.1.1.1.1" style="width:380.7pt;">
+<span class="ltx_p" id="S3.F2.9.6.6.6.6.6.6.p1.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S3.F2.9.6.6.6.6.6.6.p1.pic1.1.1.1.1.1.1.1" style="font-size:70%;">Observation:
+<br class="ltx_break"/><span class="ltx_text ltx_font_typewriter ltx_font_medium" id="S3.F2.9.6.6.6.6.6.6.p1.pic1.1.1.1.1.1.1.1.1">File: root.ecore (13572 lines total)
+<br class="ltx_break"/>...
+<br class="ltx_break"/>2828: &lt;eClassifiers
+<br class="ltx_break"/>2829:         xsi:type="ecore:EClass"
+<br class="ltx_break"/>2830:         name="Frequency"&gt;
+<br class="ltx_break"/>...</span></span></span>
+</span></foreignobject></g></g></svg>
+</span>
+<span class="ltx_para ltx_noindent" id="S3.F2.10.7.7.7.7.7.p1"><svg class="ltx_picture" height="138.12" id="S3.F2.10.7.7.7.7.7.p1.pic1" overflow="visible" version="1.1" width="600"><g fill="#000000" stroke="#000000" stroke-width="0.4pt" transform="translate(0,138.12) matrix(1 0 0 -1 0 0)"><g fill="#B3B3B3" fill-opacity="1.0"><path d="M 0 8.72 L 0 129.41 C 0 134.22 3.9 138.12 8.72 138.12 L 591.28 138.12 C 596.1 138.12 600 134.22 600 129.41 L 600 8.72 C 600 3.9 596.1 0 591.28 0 L 8.72 0 C 3.9 0 0 3.9 0 8.72 Z" style="stroke:none"></path></g><g fill="#DFDFDF" fill-opacity="1.0"><path d="M 0.42 8.72 L 0.42 129.41 C 0.42 133.99 4.13 137.71 8.72 137.71 L 591.28 137.71 C 595.87 137.71 599.58 133.99 599.58 129.41 L 599.58 8.72 C 599.58 4.13 595.87 0.42 591.28 0.42 L 8.72 0.42 C 4.13 0.42 0.42 4.13 0.42 8.72 Z" style="stroke:none"></path></g><g fill-opacity="1.0" transform="matrix(1.0 0.0 0.0 1.0 6.64 6.64)"><foreignobject color="#000000" height="124.84" overflow="visible" transform="matrix(1 0 0 -1 0 16.6)" width="586.72">
+<span class="ltx_inline-block ltx_minipage ltx_align_bottom" id="S3.F2.10.7.7.7.7.7.p1.pic1.1.1.1.1.1" style="width:424.0pt;">
+<span class="ltx_p" id="S3.F2.10.7.7.7.7.7.p1.pic1.1.1.1.1.1.1"><span class="ltx_text ltx_font_bold" id="S3.F2.10.7.7.7.7.7.p1.pic1.1.1.1.1.1.1.1" style="font-size:70%;">Answer:
+<br class="ltx_break"/><span class="ltx_text ltx_font_medium" id="S3.F2.10.7.7.7.7.7.p1.pic1.1.1.1.1.1.1.1.1">
+
+The Frequency class has the following fields:</span></span></span>
+<span class="ltx_p" id="S3.F2.10.7.7.7.7.7.p1.pic1.1.1.1.1.1.2"><span class="ltx_text" id="S3.F2.10.7.7.7.7.7.p1.pic1.1.1.1.1.1.2.1" style="font-size:70%;">1. name: value 
+<br class="ltx_break"/>   - type: EDouble (double precision floating point) 
+<br class="ltx_break"/>   - default value: 1000 
+<br class="ltx_break"/>   - description: The numerical value of the quantity.</span></span>
+<span class="ltx_p" id="S3.F2.10.7.7.7.7.7.p1.pic1.1.1.1.1.1.3"><span class="ltx_text" id="S3.F2.10.7.7.7.7.7.p1.pic1.1.1.1.1.1.3.1" style="font-size:70%;">2. name: unit 
+<br class="ltx_break"/>   - type: FrequencyUnit (enumeration) 
+<br class="ltx_break"/>   - default value: MHz 
+<br class="ltx_break"/>   - description: The unit of the quantity.</span></span>
+</span></foreignobject></g></g></svg>
+</span></span></span>
+</span>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>Example responses to a model-related question using (a) Direct Full-Context Prompting and (b) Agent with File Tools. The agent’s directory-related tool call is omitted for clarity.</figcaption>
+</figure>
+<section class="ltx_subsubsection" id="S3.SS2.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection"><span class="ltx_text" id="S3.SS2.SSS1.4.1.1">III-B</span>1 </span>Reference: Direct Full-Context Prompting</h4>
+<div class="ltx_para" id="S3.SS2.SSS1.p1">
+<p class="ltx_p" id="S3.SS2.SSS1.p1.1">The reference architecture represents a simple, baseline setup where the entire software model is placed directly into the LLM’s context window. The LLM is asked to answer questions in a zero-shot manner, with no examples or intermediate reasoning steps. This approach assumes the model fits into the context window of the evaluated LLM - an increasingly limiting factor for larger models, motivating the agentic approach.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS1.p2">
+<p class="ltx_p" id="S3.SS2.SSS1.p2.1">The LLM prompt in this setup utilizes the Ecore format <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib8" title="">8</a>]</cite> for the input model, primarily because it’s the native format of the tool used in our experiments. This choice streamlines the process by avoiding the need to translate the software model, even though formats like PlantUML or Mermaid <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib24" title="">24</a>]</cite> could also represent class relationships. Ecore, however, provides a more detailed and inherently tool-compatible representation. Consequently, this XML-based format requires more tokens to describe the software model than simpler, text-based syntaxes. Additionally, the prompt explicitly directs the LLM to analyze class relationships thoroughly and to rely exclusively on the provided content, assuming it is a complete and self-contained definition.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS2.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection"><span class="ltx_text" id="S3.SS2.SSS2.4.1.1">III-B</span>2 </span>ReAct Architecture: Agent with File Tools</h4>
+<div class="ltx_para" id="S3.SS2.SSS2.p1">
+<p class="ltx_p" id="S3.SS2.SSS2.p1.1">The second approach uses a tool-augmented agent architecture based on the ReAct framework <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib25" title="">25</a>]</cite>, where the LLM can choose to issue tool calls if it determines that the answer cannot be derived directly. The context window initially contains only the path to the directory with the software model files, not the model content itself. This setup allows the agent to selectively retrieve and reason over relevant parts of the model on demand.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS2.p2">
+<p class="ltx_p" id="S3.SS2.SSS2.p2.1">The agent is equipped with a set of tools adapted from the SWE-agent framework <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib26" title="">26</a>]</cite>, which simulates an IDE-like interaction by exposing a windowed view over source files. Table <a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S3.T1" title="TABLE I ‣ III-B2 ReAct Architecture: Agent with File Tools ‣ III-B Direct Prompting and Agent-Based Architecture ‣ III Methodology ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_tag">I</span></a> lists the tools available to the agent.</p>
+</div>
+<figure class="ltx_table" id="S3.T1">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">TABLE I: </span>File Tooling Capabilities in Agent-Based Architecture</figcaption>
+<table class="ltx_tabular ltx_centering ltx_align_middle" id="S3.T1.1">
+<tr class="ltx_tr" id="S3.T1.1.1">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.1.1"><span class="ltx_text ltx_font_bold" id="S3.T1.1.1.1.1">Tool Name</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T1.1.1.2"><span class="ltx_text ltx_font_bold" id="S3.T1.1.1.2.1">Description</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.2">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t" id="S3.T1.1.2.1"><span class="ltx_text ltx_font_typewriter" id="S3.T1.1.2.1.1">list_directory</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T1.1.2.2">Lists all files in a directory in a tree-style format.</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.3">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r" id="S3.T1.1.3.1"><span class="ltx_text ltx_font_typewriter" id="S3.T1.1.3.1.1">find_file</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.1.3.2">Finds all files with a given name or pattern.</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.4">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r" id="S3.T1.1.4.1"><span class="ltx_text ltx_font_typewriter" id="S3.T1.1.4.1.1">search_directory</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.1.4.2">Searches for a term across all files in the directory.</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.5">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r" id="S3.T1.1.5.1"><span class="ltx_text ltx_font_typewriter" id="S3.T1.1.5.1.1">open_file</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.1.5.2">Opens a file at a given path. Optionally scrolls to a specified line.</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.6">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r" id="S3.T1.1.6.1"><span class="ltx_text ltx_font_typewriter" id="S3.T1.1.6.1.1">scroll_up</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.1.6.2">Scrolls the open file window up by a fixed number of lines.</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.7">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r" id="S3.T1.1.7.1"><span class="ltx_text ltx_font_typewriter" id="S3.T1.1.7.1.1">scroll_down</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.1.7.2">Scrolls the open file window down by a fixed number of lines.</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.8">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r" id="S3.T1.1.8.1"><span class="ltx_text ltx_font_typewriter" id="S3.T1.1.8.1.1">go_to_line</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T1.1.8.2">Moves the window view to a specific line number in the open file.</td>
+</tr>
+<tr class="ltx_tr" id="S3.T1.1.9">
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_l ltx_border_r" id="S3.T1.1.9.1"><span class="ltx_text ltx_font_typewriter" id="S3.T1.1.9.1.1">search_file</span></td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S3.T1.1.9.2">Searches for a term within the open file (or a specified file).</td>
+</tr>
+</table>
+</figure>
+<div class="ltx_para" id="S3.SS2.SSS2.p3">
+<p class="ltx_p" id="S3.SS2.SSS2.p3.1">Although some tools (<span class="ltx_text ltx_font_typewriter" id="S3.SS2.SSS2.p3.1.1">list_directory</span>, <span class="ltx_text ltx_font_typewriter" id="S3.SS2.SSS2.p3.1.2">find_file</span>, and <span class="ltx_text ltx_font_typewriter" id="S3.SS2.SSS2.p3.1.3">search_directory</span>) are more relevant for models distributed across multiple files, they were retained for consistency and to enable the reuse of the agent with other software model datasets. For this experiment, all interactions involved a single file.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS2.p4">
+<p class="ltx_p" id="S3.SS2.SSS2.p4.1">The windowing parameters for file tools were selected empirically to balance efficiency and context completeness. A window size of 50 lines with an overlap of 2 lines was used. This configuration proved effective for the selected software model, as most type definitions could be captured within one or two windows, thereby minimizing the need for extensive scrolling. At the same time, the window size was kept small enough to maintain low token usage and avoid exceeding the LLM’s context limits during multi-step reasoning.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS2.p5">
+<p class="ltx_p" id="S3.SS2.SSS2.p5.1">The agent was allowed up to 100 iterations per question to avoid infinite loops while preserving enough flexibility for complex queries.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS2.p6">
+<p class="ltx_p" id="S3.SS2.SSS2.p6.1">The agent prompt followed a similar structure to the reference setup, stating that the software model is in Ecore format and emphasizing that the model is complete.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS3.4.1.1">III-C</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS3.5.2">LLM Selection and Configuration</span>
+</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.1">This study evaluates LLMs that support tool usage - a capability essential for agent-based workflows. While direct prompting can, in principle, use any LLM, we employed the same tool-capable models for both approaches to ensure a fair comparison. In line with the privacy and deployment constraints typical in the automotive industry, we concentrated on smaller LLMs that are more feasible to run locally or on secure, private infrastructure. All selected models belong to the latest two generations of LLM development, offering enhanced reasoning capabilities and extended context lengths. We selected GPT-4o mini, GPT-4.1 mini, and o4-mini to represent OpenAI’s current lightweight models with progressively improving architecture and performance characteristics, with o4-mini offering the strongest reasoning performance within this group. To broaden the evaluation, we also included Gemini 2.5 Flash Preview, a fast, tool-capable model from a different vendor, to assess cross-vendor performance and introduce architectural diversity. Table <a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S3.T2" title="TABLE II ‣ III-C LLM Selection and Configuration ‣ III Methodology ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_tag">II</span></a> summarizes the selected models.</p>
+</div>
+<figure class="ltx_table" id="S3.T2">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">TABLE II: </span>Language Models Used in the Experiments</figcaption>
+<table class="ltx_tabular ltx_centering ltx_align_middle" id="S3.T2.1">
+<tr class="ltx_tr" id="S3.T2.1.1">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t" id="S3.T2.1.1.1"><span class="ltx_text ltx_font_bold" id="S3.T2.1.1.1.1">Model Name</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T2.1.1.2"><span class="ltx_text ltx_font_bold" id="S3.T2.1.1.2.1">Release Date</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T2.1.1.3"><span class="ltx_text ltx_font_bold" id="S3.T2.1.1.3.1">Input Token Limit</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T2.1.1.4"><span class="ltx_text ltx_font_bold" id="S3.T2.1.1.4.1">Output Token Limit</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T2.1.1.5"><span class="ltx_text ltx_font_bold" id="S3.T2.1.1.5.1">Key Characteristics</span></td>
+</tr>
+<tr class="ltx_tr" id="S3.T2.1.2">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t" id="S3.T2.1.2.1">GPT-4o mini</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T2.1.2.2">2024-07-18</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T2.1.2.3">128,000</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T2.1.2.4">16,384</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S3.T2.1.2.5">Compact multimodal model for efficient reasoning.</td>
+</tr>
+<tr class="ltx_tr" id="S3.T2.1.3">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r" id="S3.T2.1.3.1">GPT-4.1 mini</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T2.1.3.2">2025-04-14</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T2.1.3.3">1,047,576</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T2.1.3.4">32,768</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T2.1.3.5">High-performance multimodal reasoning and coding.</td>
+</tr>
+<tr class="ltx_tr" id="S3.T2.1.4">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r" id="S3.T2.1.4.1">o4-mini</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T2.1.4.2">2025-04-16</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T2.1.4.3">200,000</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T2.1.4.4">100,000</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S3.T2.1.4.5">Lightweight model for chain-of-thought reasoning.</td>
+</tr>
+<tr class="ltx_tr" id="S3.T2.1.5">
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_l ltx_border_r" id="S3.T2.1.5.1">Gemini 2.5 Flash Preview</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S3.T2.1.5.2">2025-04-17</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S3.T2.1.5.3">1,048,576</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S3.T2.1.5.4">65,536</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S3.T2.1.5.5">Fast, multilingual reasoning and summarization.</td>
+</tr>
+</table>
+</figure>
+<div class="ltx_para" id="S3.SS3.p2">
+<p class="ltx_p" id="S3.SS3.p2.1">In all agent configurations, the temperature parameter was set to 0.0 to ensure deterministic behavior and maximize answer reproducibility. The only exception is o4-mini, where the temperature is fixed at 1.0.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS4.4.1.1">III-D</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS4.5.2">Question Dataset Design</span>
+</h3>
+<div class="ltx_para" id="S3.SS4.p1">
+<p class="ltx_p" id="S3.SS4.p1.1">As no existing datasets are tailored for evaluating LLMs on software model understanding, we constructed a small, custom dataset based on an open-source metamodel in Ecore format from INCHRON’s am2inc repository <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib27" title="">27</a>]</cite>. The am2inc tool facilitates the conversion of AMALTHEA models <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib28" title="">28</a>]</cite> into the INCHRON format, which is then utilized by chronSUITE 3.X <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib29" title="">29</a>]</cite>. AMALTHEA provides an open and unified model platform for multi-core software and hardware development. Its subsequent evolution into Eclipse APP4MC <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib28" title="">28</a>]</cite> has significantly broadened its adoption, establishing it as an essential tool for analyzing and optimizing multi-core embedded systems, particularly within automotive applications. The am2inc conversion process is crucial because it filters out extraneous information irrelevant to timing analysis, thereby streamlining the model for chronSIM’s specific focus on timing challenges <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib30" title="">30</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS4.p2">
+<p class="ltx_p" id="S3.SS4.p2.1">The selected metamodel root.ecore is substantial, defining 384 classes and consisting of 13,572 lines. When tokenized using the OpenAI tokenizer for GPT-4o, this translates to approximately 118,000 tokens. This token count highlights that while the model is considerably large and complex, it remains small enough to fit entirely within the context windows of modern LLMs - a crucial requirement for our experiments. Consequently, the selected INCHRON model serves as a representative example of real-world models used in the automotive industry for detailed timing analysis and optimization.</p>
+</div>
+<div class="ltx_para" id="S3.SS4.p3">
+<p class="ltx_p" id="S3.SS4.p3.1">A total of 20 questions were manually created to cover different reasoning and retrieval patterns, grouped into four categories:</p>
+</div>
+<div class="ltx_para" id="S3.SS4.p4">
+<ol class="ltx_enumerate" id="S3.I1">
+<li class="ltx_item" id="S3.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span>
+<div class="ltx_para" id="S3.I1.i1.p1">
+<p class="ltx_p" id="S3.I1.i1.p1.1">Direct class inspection (5 questions): 
+<br class="ltx_break"/>Require identifying only the fields (names and types) of a specified class, without considering inheritance.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span>
+<div class="ltx_para" id="S3.I1.i2.p1">
+<p class="ltx_p" id="S3.I1.i2.p1.1">Single inheritance chain (5 questions): 
+<br class="ltx_break"/>Require collecting fields from a class and its base classes along a single inheritance path.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">3.</span>
+<div class="ltx_para" id="S3.I1.i3.p1">
+<p class="ltx_p" id="S3.I1.i3.p1.1">Multiple inheritance chains (5 questions): 
+<br class="ltx_break"/>Require traversing and aggregating fields across multiple inheritance paths.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">4.</span>
+<div class="ltx_para" id="S3.I1.i4.p1">
+<p class="ltx_p" id="S3.I1.i4.p1.1">Semantic queries (5 questions): 
+<br class="ltx_break"/>Require understanding the model structure and semantics beyond keyword matching.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="ltx_para" id="S3.SS4.p5">
+<p class="ltx_p" id="S3.SS4.p5.1">This dataset enables controlled evaluation of both retrieval-based and reasoning-intensive tasks, simulating realistic software model comprehension needs in automotive software engineering workflows.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS5">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S3.SS5.4.1.1">III-E</span> </span><span class="ltx_text ltx_font_italic" id="S3.SS5.5.2">Evaluation Criteria</span>
+</h3>
+<div class="ltx_para" id="S3.SS5.p1">
+<p class="ltx_p" id="S3.SS5.p1.1">This study evaluates the performance of LLMs and agent-based architectures in answering questions about a large software model, using factual correctness as the primary metric. Factual correctness measures whether the statements in an LLM-generated answer are objectively true with respect to the software model <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib31" title="">31</a>]</cite>. It ensures that the output neither hallucinates, omits, nor misrepresents key information. In this context, the software model defines the complete scope of truth, including components, interfaces, dependencies, and structural or behavioral constructs described in the Ecore format.</p>
+</div>
+<div class="ltx_para" id="S3.SS5.p2">
+<p class="ltx_p" id="S3.SS5.p2.1">Due to the number and structure of questions, as well as the number of evaluated setups, full human evaluation was deemed impractical. Instead, LLMs were used as proxies for scoring (LLM-as-a-Judge), with manual spot-checking performed for a randomly selected subset of answers to ensure reliability. Two complementary scoring methods were used:</p>
+</div>
+<section class="ltx_paragraph" id="S3.SS5.SSS0.Px1">
+<h5 class="ltx_title ltx_title_paragraph">Per-answer scoring</h5>
+<div class="ltx_para" id="S3.SS5.SSS0.Px1.p1">
+<p class="ltx_p" id="S3.SS5.SSS0.Px1.p1.1">Each generated answer was compared against a reference answer using a binary judgment, classified as either correct or incorrect. The accuracy metric was then computed as the ratio of correct answers to total questions. Evaluations were performed using GPT-4.1 mini with a structured prompt taken from the LangSmith Hub <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib32" title="">32</a>]</cite>. The output format was constrained to structured integer responses, where a score of 1 indicated correctness and 0 indicated incorrectness.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S3.SS5.SSS0.Px2">
+<h5 class="ltx_title ltx_title_paragraph">Per-fact scoring</h5>
+<div class="ltx_para" id="S3.SS5.SSS0.Px2.p1">
+<p class="ltx_p" id="S3.SS5.SSS0.Px2.p1.1">To capture more nuanced factual alignment, we employed the <span class="ltx_text ltx_font_typewriter" id="S3.SS5.SSS0.Px2.p1.1.1">FactualCorrectness</span> metric provided by Ragas version 0.2.15 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#bib.bib33" title="">33</a>]</cite>. This metric decomposes the model output and the reference into individual claims and applies natural language inference to identify factual overlap. The same LLM model, GPT-4.1 mini, is used here to perform the inference.</p>
+</div>
+<div class="ltx_para" id="S3.SS5.SSS0.Px2.p2">
+<p class="ltx_p" id="S3.SS5.SSS0.Px2.p2.1">The evaluation returns precision, recall, and F1 scores, defined as follows:</p>
+</div>
+<div class="ltx_para" id="S3.SS5.SSS0.Px2.p3">
+<table class="ltx_equationgroup ltx_eqn_align ltx_eqn_table" id="S7.EGx1">
+<tbody id="S3.E1"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><span class="ltx_text ltx_markedasmath" id="S3.E1.2.1.1.1">Precision</span></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math alttext="\displaystyle=\frac{TP}{TP+FP}" class="ltx_Math" display="inline" id="S3.E1.m2.1"><semantics id="S3.E1.m2.1a"><mrow id="S3.E1.m2.1.1" xref="S3.E1.m2.1.1.cmml"><mi id="S3.E1.m2.1.1.2" xref="S3.E1.m2.1.1.2.cmml"></mi><mo id="S3.E1.m2.1.1.1" xref="S3.E1.m2.1.1.1.cmml">=</mo><mstyle displaystyle="true" id="S3.E1.m2.1.1.3" xref="S3.E1.m2.1.1.3.cmml"><mfrac id="S3.E1.m2.1.1.3a" xref="S3.E1.m2.1.1.3.cmml"><mrow id="S3.E1.m2.1.1.3.2" xref="S3.E1.m2.1.1.3.2.cmml"><mi id="S3.E1.m2.1.1.3.2.2" xref="S3.E1.m2.1.1.3.2.2.cmml">T</mi><mo id="S3.E1.m2.1.1.3.2.1" xref="S3.E1.m2.1.1.3.2.1.cmml">⁢</mo><mi id="S3.E1.m2.1.1.3.2.3" xref="S3.E1.m2.1.1.3.2.3.cmml">P</mi></mrow><mrow id="S3.E1.m2.1.1.3.3" xref="S3.E1.m2.1.1.3.3.cmml"><mrow id="S3.E1.m2.1.1.3.3.2" xref="S3.E1.m2.1.1.3.3.2.cmml"><mi id="S3.E1.m2.1.1.3.3.2.2" xref="S3.E1.m2.1.1.3.3.2.2.cmml">T</mi><mo id="S3.E1.m2.1.1.3.3.2.1" xref="S3.E1.m2.1.1.3.3.2.1.cmml">⁢</mo><mi id="S3.E1.m2.1.1.3.3.2.3" xref="S3.E1.m2.1.1.3.3.2.3.cmml">P</mi></mrow><mo id="S3.E1.m2.1.1.3.3.1" xref="S3.E1.m2.1.1.3.3.1.cmml">+</mo><mrow id="S3.E1.m2.1.1.3.3.3" xref="S3.E1.m2.1.1.3.3.3.cmml"><mi id="S3.E1.m2.1.1.3.3.3.2" xref="S3.E1.m2.1.1.3.3.3.2.cmml">F</mi><mo id="S3.E1.m2.1.1.3.3.3.1" xref="S3.E1.m2.1.1.3.3.3.1.cmml">⁢</mo><mi id="S3.E1.m2.1.1.3.3.3.3" xref="S3.E1.m2.1.1.3.3.3.3.cmml">P</mi></mrow></mrow></mfrac></mstyle></mrow><annotation-xml encoding="MathML-Content" id="S3.E1.m2.1b"><apply id="S3.E1.m2.1.1.cmml" xref="S3.E1.m2.1.1"><eq id="S3.E1.m2.1.1.1.cmml" xref="S3.E1.m2.1.1.1"></eq><csymbol cd="latexml" id="S3.E1.m2.1.1.2.cmml" xref="S3.E1.m2.1.1.2">absent</csymbol><apply id="S3.E1.m2.1.1.3.cmml" xref="S3.E1.m2.1.1.3"><divide id="S3.E1.m2.1.1.3.1.cmml" xref="S3.E1.m2.1.1.3"></divide><apply id="S3.E1.m2.1.1.3.2.cmml" xref="S3.E1.m2.1.1.3.2"><times id="S3.E1.m2.1.1.3.2.1.cmml" xref="S3.E1.m2.1.1.3.2.1"></times><ci id="S3.E1.m2.1.1.3.2.2.cmml" xref="S3.E1.m2.1.1.3.2.2">𝑇</ci><ci id="S3.E1.m2.1.1.3.2.3.cmml" xref="S3.E1.m2.1.1.3.2.3">𝑃</ci></apply><apply id="S3.E1.m2.1.1.3.3.cmml" xref="S3.E1.m2.1.1.3.3"><plus id="S3.E1.m2.1.1.3.3.1.cmml" xref="S3.E1.m2.1.1.3.3.1"></plus><apply id="S3.E1.m2.1.1.3.3.2.cmml" xref="S3.E1.m2.1.1.3.3.2"><times id="S3.E1.m2.1.1.3.3.2.1.cmml" xref="S3.E1.m2.1.1.3.3.2.1"></times><ci id="S3.E1.m2.1.1.3.3.2.2.cmml" xref="S3.E1.m2.1.1.3.3.2.2">𝑇</ci><ci id="S3.E1.m2.1.1.3.3.2.3.cmml" xref="S3.E1.m2.1.1.3.3.2.3">𝑃</ci></apply><apply id="S3.E1.m2.1.1.3.3.3.cmml" xref="S3.E1.m2.1.1.3.3.3"><times id="S3.E1.m2.1.1.3.3.3.1.cmml" xref="S3.E1.m2.1.1.3.3.3.1"></times><ci id="S3.E1.m2.1.1.3.3.3.2.cmml" xref="S3.E1.m2.1.1.3.3.3.2">𝐹</ci><ci id="S3.E1.m2.1.1.3.3.3.3.cmml" xref="S3.E1.m2.1.1.3.3.3.3">𝑃</ci></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E1.m2.1c">\displaystyle=\frac{TP}{TP+FP}</annotation><annotation encoding="application/x-llamapun" id="S3.E1.m2.1d">= divide start_ARG italic_T italic_P end_ARG start_ARG italic_T italic_P + italic_F italic_P end_ARG</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+<tbody id="S3.E2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><span class="ltx_text ltx_markedasmath" id="S3.E2.2.1.1.1">Recall</span></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math alttext="\displaystyle=\frac{TP}{TP+FN}" class="ltx_Math" display="inline" id="S3.E2.m2.1"><semantics id="S3.E2.m2.1a"><mrow id="S3.E2.m2.1.1" xref="S3.E2.m2.1.1.cmml"><mi id="S3.E2.m2.1.1.2" xref="S3.E2.m2.1.1.2.cmml"></mi><mo id="S3.E2.m2.1.1.1" xref="S3.E2.m2.1.1.1.cmml">=</mo><mstyle displaystyle="true" id="S3.E2.m2.1.1.3" xref="S3.E2.m2.1.1.3.cmml"><mfrac id="S3.E2.m2.1.1.3a" xref="S3.E2.m2.1.1.3.cmml"><mrow id="S3.E2.m2.1.1.3.2" xref="S3.E2.m2.1.1.3.2.cmml"><mi id="S3.E2.m2.1.1.3.2.2" xref="S3.E2.m2.1.1.3.2.2.cmml">T</mi><mo id="S3.E2.m2.1.1.3.2.1" xref="S3.E2.m2.1.1.3.2.1.cmml">⁢</mo><mi id="S3.E2.m2.1.1.3.2.3" xref="S3.E2.m2.1.1.3.2.3.cmml">P</mi></mrow><mrow id="S3.E2.m2.1.1.3.3" xref="S3.E2.m2.1.1.3.3.cmml"><mrow id="S3.E2.m2.1.1.3.3.2" xref="S3.E2.m2.1.1.3.3.2.cmml"><mi id="S3.E2.m2.1.1.3.3.2.2" xref="S3.E2.m2.1.1.3.3.2.2.cmml">T</mi><mo id="S3.E2.m2.1.1.3.3.2.1" xref="S3.E2.m2.1.1.3.3.2.1.cmml">⁢</mo><mi id="S3.E2.m2.1.1.3.3.2.3" xref="S3.E2.m2.1.1.3.3.2.3.cmml">P</mi></mrow><mo id="S3.E2.m2.1.1.3.3.1" xref="S3.E2.m2.1.1.3.3.1.cmml">+</mo><mrow id="S3.E2.m2.1.1.3.3.3" xref="S3.E2.m2.1.1.3.3.3.cmml"><mi id="S3.E2.m2.1.1.3.3.3.2" xref="S3.E2.m2.1.1.3.3.3.2.cmml">F</mi><mo id="S3.E2.m2.1.1.3.3.3.1" xref="S3.E2.m2.1.1.3.3.3.1.cmml">⁢</mo><mi id="S3.E2.m2.1.1.3.3.3.3" xref="S3.E2.m2.1.1.3.3.3.3.cmml">N</mi></mrow></mrow></mfrac></mstyle></mrow><annotation-xml encoding="MathML-Content" id="S3.E2.m2.1b"><apply id="S3.E2.m2.1.1.cmml" xref="S3.E2.m2.1.1"><eq id="S3.E2.m2.1.1.1.cmml" xref="S3.E2.m2.1.1.1"></eq><csymbol cd="latexml" id="S3.E2.m2.1.1.2.cmml" xref="S3.E2.m2.1.1.2">absent</csymbol><apply id="S3.E2.m2.1.1.3.cmml" xref="S3.E2.m2.1.1.3"><divide id="S3.E2.m2.1.1.3.1.cmml" xref="S3.E2.m2.1.1.3"></divide><apply id="S3.E2.m2.1.1.3.2.cmml" xref="S3.E2.m2.1.1.3.2"><times id="S3.E2.m2.1.1.3.2.1.cmml" xref="S3.E2.m2.1.1.3.2.1"></times><ci id="S3.E2.m2.1.1.3.2.2.cmml" xref="S3.E2.m2.1.1.3.2.2">𝑇</ci><ci id="S3.E2.m2.1.1.3.2.3.cmml" xref="S3.E2.m2.1.1.3.2.3">𝑃</ci></apply><apply id="S3.E2.m2.1.1.3.3.cmml" xref="S3.E2.m2.1.1.3.3"><plus id="S3.E2.m2.1.1.3.3.1.cmml" xref="S3.E2.m2.1.1.3.3.1"></plus><apply id="S3.E2.m2.1.1.3.3.2.cmml" xref="S3.E2.m2.1.1.3.3.2"><times id="S3.E2.m2.1.1.3.3.2.1.cmml" xref="S3.E2.m2.1.1.3.3.2.1"></times><ci id="S3.E2.m2.1.1.3.3.2.2.cmml" xref="S3.E2.m2.1.1.3.3.2.2">𝑇</ci><ci id="S3.E2.m2.1.1.3.3.2.3.cmml" xref="S3.E2.m2.1.1.3.3.2.3">𝑃</ci></apply><apply id="S3.E2.m2.1.1.3.3.3.cmml" xref="S3.E2.m2.1.1.3.3.3"><times id="S3.E2.m2.1.1.3.3.3.1.cmml" xref="S3.E2.m2.1.1.3.3.3.1"></times><ci id="S3.E2.m2.1.1.3.3.3.2.cmml" xref="S3.E2.m2.1.1.3.3.3.2">𝐹</ci><ci id="S3.E2.m2.1.1.3.3.3.3.cmml" xref="S3.E2.m2.1.1.3.3.3.3">𝑁</ci></apply></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E2.m2.1c">\displaystyle=\frac{TP}{TP+FN}</annotation><annotation encoding="application/x-llamapun" id="S3.E2.m2.1d">= divide start_ARG italic_T italic_P end_ARG start_ARG italic_T italic_P + italic_F italic_N end_ARG</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+<tbody id="S3.E3"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math alttext="\displaystyle F_{1}\ \text{score}" class="ltx_Math" display="inline" id="S3.E3.m1.1"><semantics id="S3.E3.m1.1a"><mrow id="S3.E3.m1.1.1" xref="S3.E3.m1.1.1.cmml"><msub id="S3.E3.m1.1.1.2" xref="S3.E3.m1.1.1.2.cmml"><mi id="S3.E3.m1.1.1.2.2" xref="S3.E3.m1.1.1.2.2.cmml">F</mi><mn id="S3.E3.m1.1.1.2.3" xref="S3.E3.m1.1.1.2.3.cmml">1</mn></msub><mo id="S3.E3.m1.1.1.1" lspace="0.500em" xref="S3.E3.m1.1.1.1.cmml">⁢</mo><mtext id="S3.E3.m1.1.1.3" xref="S3.E3.m1.1.1.3a.cmml">score</mtext></mrow><annotation-xml encoding="MathML-Content" id="S3.E3.m1.1b"><apply id="S3.E3.m1.1.1.cmml" xref="S3.E3.m1.1.1"><times id="S3.E3.m1.1.1.1.cmml" xref="S3.E3.m1.1.1.1"></times><apply id="S3.E3.m1.1.1.2.cmml" xref="S3.E3.m1.1.1.2"><csymbol cd="ambiguous" id="S3.E3.m1.1.1.2.1.cmml" xref="S3.E3.m1.1.1.2">subscript</csymbol><ci id="S3.E3.m1.1.1.2.2.cmml" xref="S3.E3.m1.1.1.2.2">𝐹</ci><cn id="S3.E3.m1.1.1.2.3.cmml" type="integer" xref="S3.E3.m1.1.1.2.3">1</cn></apply><ci id="S3.E3.m1.1.1.3a.cmml" xref="S3.E3.m1.1.1.3"><mtext id="S3.E3.m1.1.1.3.cmml" xref="S3.E3.m1.1.1.3">score</mtext></ci></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E3.m1.1c">\displaystyle F_{1}\ \text{score}</annotation><annotation encoding="application/x-llamapun" id="S3.E3.m1.1d">italic_F start_POSTSUBSCRIPT 1 end_POSTSUBSCRIPT score</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math alttext="\displaystyle=\frac{2\cdot\text{Precision}\cdot\text{Recall}}{\text{Precision}%
++\text{Recall}}" class="ltx_Math" display="inline" id="S3.E3.m2.1"><semantics id="S3.E3.m2.1a"><mrow id="S3.E3.m2.1.1" xref="S3.E3.m2.1.1.cmml"><mi id="S3.E3.m2.1.1.2" xref="S3.E3.m2.1.1.2.cmml"></mi><mo id="S3.E3.m2.1.1.1" xref="S3.E3.m2.1.1.1.cmml">=</mo><mstyle displaystyle="true" id="S3.E3.m2.1.1.3" xref="S3.E3.m2.1.1.3.cmml"><mfrac id="S3.E3.m2.1.1.3a" xref="S3.E3.m2.1.1.3.cmml"><mrow id="S3.E3.m2.1.1.3.2" xref="S3.E3.m2.1.1.3.2.cmml"><mn id="S3.E3.m2.1.1.3.2.2" xref="S3.E3.m2.1.1.3.2.2.cmml">2</mn><mo id="S3.E3.m2.1.1.3.2.1" lspace="0.222em" rspace="0.222em" xref="S3.E3.m2.1.1.3.2.1.cmml">⋅</mo><mtext id="S3.E3.m2.1.1.3.2.3" xref="S3.E3.m2.1.1.3.2.3a.cmml">Precision</mtext><mo id="S3.E3.m2.1.1.3.2.1a" lspace="0.222em" rspace="0.222em" xref="S3.E3.m2.1.1.3.2.1.cmml">⋅</mo><mtext id="S3.E3.m2.1.1.3.2.4" xref="S3.E3.m2.1.1.3.2.4a.cmml">Recall</mtext></mrow><mrow id="S3.E3.m2.1.1.3.3" xref="S3.E3.m2.1.1.3.3.cmml"><mtext id="S3.E3.m2.1.1.3.3.2" xref="S3.E3.m2.1.1.3.3.2a.cmml">Precision</mtext><mo id="S3.E3.m2.1.1.3.3.1" xref="S3.E3.m2.1.1.3.3.1.cmml">+</mo><mtext id="S3.E3.m2.1.1.3.3.3" xref="S3.E3.m2.1.1.3.3.3a.cmml">Recall</mtext></mrow></mfrac></mstyle></mrow><annotation-xml encoding="MathML-Content" id="S3.E3.m2.1b"><apply id="S3.E3.m2.1.1.cmml" xref="S3.E3.m2.1.1"><eq id="S3.E3.m2.1.1.1.cmml" xref="S3.E3.m2.1.1.1"></eq><csymbol cd="latexml" id="S3.E3.m2.1.1.2.cmml" xref="S3.E3.m2.1.1.2">absent</csymbol><apply id="S3.E3.m2.1.1.3.cmml" xref="S3.E3.m2.1.1.3"><divide id="S3.E3.m2.1.1.3.1.cmml" xref="S3.E3.m2.1.1.3"></divide><apply id="S3.E3.m2.1.1.3.2.cmml" xref="S3.E3.m2.1.1.3.2"><ci id="S3.E3.m2.1.1.3.2.1.cmml" xref="S3.E3.m2.1.1.3.2.1">⋅</ci><cn id="S3.E3.m2.1.1.3.2.2.cmml" type="integer" xref="S3.E3.m2.1.1.3.2.2">2</cn><ci id="S3.E3.m2.1.1.3.2.3a.cmml" xref="S3.E3.m2.1.1.3.2.3"><mtext id="S3.E3.m2.1.1.3.2.3.cmml" xref="S3.E3.m2.1.1.3.2.3">Precision</mtext></ci><ci id="S3.E3.m2.1.1.3.2.4a.cmml" xref="S3.E3.m2.1.1.3.2.4"><mtext id="S3.E3.m2.1.1.3.2.4.cmml" xref="S3.E3.m2.1.1.3.2.4">Recall</mtext></ci></apply><apply id="S3.E3.m2.1.1.3.3.cmml" xref="S3.E3.m2.1.1.3.3"><plus id="S3.E3.m2.1.1.3.3.1.cmml" xref="S3.E3.m2.1.1.3.3.1"></plus><ci id="S3.E3.m2.1.1.3.3.2a.cmml" xref="S3.E3.m2.1.1.3.3.2"><mtext id="S3.E3.m2.1.1.3.3.2.cmml" xref="S3.E3.m2.1.1.3.3.2">Precision</mtext></ci><ci id="S3.E3.m2.1.1.3.3.3a.cmml" xref="S3.E3.m2.1.1.3.3.3"><mtext id="S3.E3.m2.1.1.3.3.3.cmml" xref="S3.E3.m2.1.1.3.3.3">Recall</mtext></ci></apply></apply></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.E3.m2.1c">\displaystyle=\frac{2\cdot\text{Precision}\cdot\text{Recall}}{\text{Precision}%
++\text{Recall}}</annotation><annotation encoding="application/x-llamapun" id="S3.E3.m2.1d">= divide start_ARG 2 ⋅ Precision ⋅ Recall end_ARG start_ARG Precision + Recall end_ARG</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p" id="S3.SS5.SSS0.Px2.p3.1">where true positives (TP) refer to claims in the response that also appear in the reference. False positives (FP) are claims present in the response but not in the reference, while false negatives (FN) are claims in the reference that are missing from the response.</p>
+</div>
+<div class="ltx_para" id="S3.SS5.SSS0.Px2.p4">
+<p class="ltx_p" id="S3.SS5.SSS0.Px2.p4.1">This scoring method enables more granular insight into partially correct responses and helps differentiate between omission and hallucination errors.</p>
+</div>
+</section>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">IV </span><span class="ltx_text ltx_font_smallcaps" id="S4.1.1">Results and Analysis</span>
+</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p" id="S4.p1.1">This section presents the experimental results of direct prompting and agent-based LLM architectures for querying software models. We evaluated these methods using multiple LLM variants on a 20-question dataset, focusing on answer correctness and token efficiency.</p>
+</div>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS1.4.1.1">IV-A</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS1.5.2">Correctness Evaluation</span>
+</h3>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p" id="S4.SS1.p1.1">Table <a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S4.T3" title="TABLE III ‣ IV-A Correctness Evaluation ‣ IV Results and Analysis ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_tag">III</span></a> presents the factual correctness results of all evaluated architectures and LLMs. Overall, the direct full-context prompting setup performed better or comparably for several models. Notably, Gemini 2.5 Flash and GPT-4o mini achieved significantly higher accuracy in the reference setup compared to the agent-based configuration. Gemini 2.5 Flash reached 80% accuracy in the direct prompting, but only 40% when operating within the ReAct-based tool-augmented agent. Similarly, GPT-4o mini’s performance dropped sharply from 45% to 10%. This suggests that these models may struggle with tool-based reasoning, maintaining coherence across tool calls, or operating effectively within constrained, windowed views of the software model.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p2">
+<p class="ltx_p" id="S4.SS1.p2.1">In contrast, GPT-4.1 mini and o4-mini maintained high accuracy (90%) across both setups. Their performance was especially strong in the agent with file tools architecture, indicating better capabilities for orchestrating tool use and reasoning over partial views of the model. These results support the hypothesis that agent-based setups place greater demands on a model’s reasoning and memory capabilities, which smaller or less capable LLMs may not handle well.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p3">
+<p class="ltx_p" id="S4.SS1.p3.1">Another key observation is the precision-recall trade-off visible across models. GPT-4.1 mini in the direct prompting, for instance, achieved high recall (0.86) but low precision (0.44), implying a tendency to include more relevant information at the cost of introducing inaccuracies.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p4">
+<p class="ltx_p" id="S4.SS1.p4.1">Finally, the relatively high standard deviations in precision, recall, and F1 score across models (up to <math alttext="\pm" class="ltx_Math" display="inline" id="S4.SS1.p4.1.m1.1"><semantics id="S4.SS1.p4.1.m1.1a"><mo id="S4.SS1.p4.1.m1.1.1" xref="S4.SS1.p4.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.SS1.p4.1.m1.1b"><csymbol cd="latexml" id="S4.SS1.p4.1.m1.1.1.cmml" xref="S4.SS1.p4.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.p4.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.p4.1.m1.1d">±</annotation></semantics></math>0.36) suggest considerable variability in model performance depending on the specific question type. This highlights the importance of comprehensive evaluation across diverse question categories when assessing LLM effectiveness in model understanding tasks.</p>
+</div>
+<figure class="ltx_table" id="S4.T3">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">TABLE III: </span>Factual correctness across 20 questions for evaluated setups: Accuracy (%), Precision, Recall, F1 (mean <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.2.m1.1"><semantics id="S4.T3.2.m1.1b"><mo id="S4.T3.2.m1.1.1" xref="S4.T3.2.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.2.m1.1c"><csymbol cd="latexml" id="S4.T3.2.m1.1.1.cmml" xref="S4.T3.2.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.2.m1.1d">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.2.m1.1e">±</annotation></semantics></math> std).</figcaption>
+<table class="ltx_tabular ltx_centering ltx_align_middle" id="S4.T3.29">
+<tr class="ltx_tr" id="S4.T3.5.3">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t" id="S4.T3.5.3.4"><span class="ltx_text ltx_font_bold" id="S4.T3.5.3.4.1">Architecture</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.5.3.5"><span class="ltx_text ltx_font_bold" id="S4.T3.5.3.5.1">LLM Model</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.5.3.6"><span class="ltx_text ltx_font_bold" id="S4.T3.5.3.6.1">Correct</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.5.3.7"><span class="ltx_text ltx_font_bold" id="S4.T3.5.3.7.1">Incorrect</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.5.3.8"><span class="ltx_text ltx_font_bold" id="S4.T3.5.3.8.1">Accuracy (%)</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.3.1.1"><span class="ltx_text ltx_font_bold" id="S4.T3.3.1.1.1">Precision (<math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.3.1.1.1.m1.1"><semantics id="S4.T3.3.1.1.1.m1.1a"><mo id="S4.T3.3.1.1.1.m1.1.1" xref="S4.T3.3.1.1.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.3.1.1.1.m1.1b"><csymbol cd="latexml" id="S4.T3.3.1.1.1.m1.1.1.cmml" xref="S4.T3.3.1.1.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.3.1.1.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.3.1.1.1.m1.1d">±</annotation></semantics></math>SD)</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.4.2.2"><span class="ltx_text ltx_font_bold" id="S4.T3.4.2.2.1">Recall (<math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.4.2.2.1.m1.1"><semantics id="S4.T3.4.2.2.1.m1.1a"><mo id="S4.T3.4.2.2.1.m1.1.1" xref="S4.T3.4.2.2.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.4.2.2.1.m1.1b"><csymbol cd="latexml" id="S4.T3.4.2.2.1.m1.1.1.cmml" xref="S4.T3.4.2.2.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.4.2.2.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.4.2.2.1.m1.1d">±</annotation></semantics></math>SD)</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.5.3.3"><span class="ltx_text ltx_font_bold" id="S4.T3.5.3.3.1">F1 score (<math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.5.3.3.1.m1.1"><semantics id="S4.T3.5.3.3.1.m1.1a"><mo id="S4.T3.5.3.3.1.m1.1.1" xref="S4.T3.5.3.3.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.5.3.3.1.m1.1b"><csymbol cd="latexml" id="S4.T3.5.3.3.1.m1.1.1.cmml" xref="S4.T3.5.3.3.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.5.3.3.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.5.3.3.1.m1.1d">±</annotation></semantics></math>SD)</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.8.6">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t" id="S4.T3.8.6.4" rowspan="4"><span class="ltx_text" id="S4.T3.8.6.4.1"><span class="ltx_text" id="S4.T3.8.6.4.1.1"></span> <span class="ltx_text" id="S4.T3.8.6.4.1.2">
+<span class="ltx_tabular ltx_align_middle" id="S4.T3.8.6.4.1.2.1">
+<span class="ltx_tr" id="S4.T3.8.6.4.1.2.1.1">
+<span class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T3.8.6.4.1.2.1.1.1">Direct</span></span>
+<span class="ltx_tr" id="S4.T3.8.6.4.1.2.1.2">
+<span class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T3.8.6.4.1.2.1.2.1">Full-Context</span></span>
+<span class="ltx_tr" id="S4.T3.8.6.4.1.2.1.3">
+<span class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T3.8.6.4.1.2.1.3.1">Prompting</span></span>
+</span></span> <span class="ltx_text" id="S4.T3.8.6.4.1.3"></span></span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.8.6.5">Gemini 2.5 Flash</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.8.6.6">16</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.8.6.7">4</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.8.6.8">80.0</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.6.4.1"><span class="ltx_text ltx_framed ltx_framed_underline" id="S4.T3.6.4.1.1">0.70 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.6.4.1.1.m1.1"><semantics id="S4.T3.6.4.1.1.m1.1a"><mo id="S4.T3.6.4.1.1.m1.1.1" xref="S4.T3.6.4.1.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.6.4.1.1.m1.1b"><csymbol cd="latexml" id="S4.T3.6.4.1.1.m1.1.1.cmml" xref="S4.T3.6.4.1.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.6.4.1.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.6.4.1.1.m1.1d">±</annotation></semantics></math> 0.29</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.7.5.2"><span class="ltx_text ltx_framed ltx_framed_underline" id="S4.T3.7.5.2.1">0.91 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.7.5.2.1.m1.1"><semantics id="S4.T3.7.5.2.1.m1.1a"><mo id="S4.T3.7.5.2.1.m1.1.1" xref="S4.T3.7.5.2.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.7.5.2.1.m1.1b"><csymbol cd="latexml" id="S4.T3.7.5.2.1.m1.1.1.cmml" xref="S4.T3.7.5.2.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.7.5.2.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.7.5.2.1.m1.1d">±</annotation></semantics></math> 0.25</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.8.6.3"><span class="ltx_text ltx_framed ltx_framed_underline" id="S4.T3.8.6.3.1">0.75 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.8.6.3.1.m1.1"><semantics id="S4.T3.8.6.3.1.m1.1a"><mo id="S4.T3.8.6.3.1.m1.1.1" xref="S4.T3.8.6.3.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.8.6.3.1.m1.1b"><csymbol cd="latexml" id="S4.T3.8.6.3.1.m1.1.1.cmml" xref="S4.T3.8.6.3.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.8.6.3.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.8.6.3.1.m1.1d">±</annotation></semantics></math> 0.27</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.11.9">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.11.9.4">GPT-4.1 mini</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.11.9.5">16</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.11.9.6">4</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.11.9.7">80.0</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.9.7.1">0.44 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.9.7.1.m1.1"><semantics id="S4.T3.9.7.1.m1.1a"><mo id="S4.T3.9.7.1.m1.1.1" xref="S4.T3.9.7.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.9.7.1.m1.1b"><csymbol cd="latexml" id="S4.T3.9.7.1.m1.1.1.cmml" xref="S4.T3.9.7.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.9.7.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.9.7.1.m1.1d">±</annotation></semantics></math> 0.23</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.10.8.2">0.86 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.10.8.2.m1.1"><semantics id="S4.T3.10.8.2.m1.1a"><mo id="S4.T3.10.8.2.m1.1.1" xref="S4.T3.10.8.2.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.10.8.2.m1.1b"><csymbol cd="latexml" id="S4.T3.10.8.2.m1.1.1.cmml" xref="S4.T3.10.8.2.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.10.8.2.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.10.8.2.m1.1d">±</annotation></semantics></math> 0.30</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.11.9.3">0.56 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.11.9.3.m1.1"><semantics id="S4.T3.11.9.3.m1.1a"><mo id="S4.T3.11.9.3.m1.1.1" xref="S4.T3.11.9.3.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.11.9.3.m1.1b"><csymbol cd="latexml" id="S4.T3.11.9.3.m1.1.1.cmml" xref="S4.T3.11.9.3.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.11.9.3.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.11.9.3.m1.1d">±</annotation></semantics></math> 0.23</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.14.12">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.14.12.4">GPT-4o mini</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.14.12.5">9</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.14.12.6">11</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.14.12.7">45.0</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.12.10.1">0.53 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.12.10.1.m1.1"><semantics id="S4.T3.12.10.1.m1.1a"><mo id="S4.T3.12.10.1.m1.1.1" xref="S4.T3.12.10.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.12.10.1.m1.1b"><csymbol cd="latexml" id="S4.T3.12.10.1.m1.1.1.cmml" xref="S4.T3.12.10.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.12.10.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.12.10.1.m1.1d">±</annotation></semantics></math> 0.23</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.13.11.2">0.79 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.13.11.2.m1.1"><semantics id="S4.T3.13.11.2.m1.1a"><mo id="S4.T3.13.11.2.m1.1.1" xref="S4.T3.13.11.2.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.13.11.2.m1.1b"><csymbol cd="latexml" id="S4.T3.13.11.2.m1.1.1.cmml" xref="S4.T3.13.11.2.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.13.11.2.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.13.11.2.m1.1d">±</annotation></semantics></math> 0.28</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.14.12.3">0.61 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.14.12.3.m1.1"><semantics id="S4.T3.14.12.3.m1.1a"><mo id="S4.T3.14.12.3.m1.1.1" xref="S4.T3.14.12.3.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.14.12.3.m1.1b"><csymbol cd="latexml" id="S4.T3.14.12.3.m1.1.1.cmml" xref="S4.T3.14.12.3.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.14.12.3.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.14.12.3.m1.1d">±</annotation></semantics></math> 0.22</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.17.15">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.17.15.4">o4-mini</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.17.15.5">18</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.17.15.6">2</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.17.15.7"><span class="ltx_text ltx_framed ltx_framed_underline" id="S4.T3.17.15.7.1">90.0</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.15.13.1">0.59 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.15.13.1.m1.1"><semantics id="S4.T3.15.13.1.m1.1a"><mo id="S4.T3.15.13.1.m1.1.1" xref="S4.T3.15.13.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.15.13.1.m1.1b"><csymbol cd="latexml" id="S4.T3.15.13.1.m1.1.1.cmml" xref="S4.T3.15.13.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.15.13.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.15.13.1.m1.1d">±</annotation></semantics></math> 0.23</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.16.14.2">0.90 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.16.14.2.m1.1"><semantics id="S4.T3.16.14.2.m1.1a"><mo id="S4.T3.16.14.2.m1.1.1" xref="S4.T3.16.14.2.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.16.14.2.m1.1b"><csymbol cd="latexml" id="S4.T3.16.14.2.m1.1.1.cmml" xref="S4.T3.16.14.2.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.16.14.2.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.16.14.2.m1.1d">±</annotation></semantics></math> 0.24</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.17.15.3">0.66 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.17.15.3.m1.1"><semantics id="S4.T3.17.15.3.m1.1a"><mo id="S4.T3.17.15.3.m1.1.1" xref="S4.T3.17.15.3.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.17.15.3.m1.1b"><csymbol cd="latexml" id="S4.T3.17.15.3.m1.1.1.cmml" xref="S4.T3.17.15.3.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.17.15.3.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.17.15.3.m1.1d">±</annotation></semantics></math> 0.22</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.20.18">
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_l ltx_border_r ltx_border_t" id="S4.T3.20.18.4" rowspan="4"><span class="ltx_text" id="S4.T3.20.18.4.1"><span class="ltx_text" id="S4.T3.20.18.4.1.1"></span> <span class="ltx_text" id="S4.T3.20.18.4.1.2">
+<span class="ltx_tabular ltx_align_middle" id="S4.T3.20.18.4.1.2.1">
+<span class="ltx_tr" id="S4.T3.20.18.4.1.2.1.1">
+<span class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T3.20.18.4.1.2.1.1.1">Agent with</span></span>
+<span class="ltx_tr" id="S4.T3.20.18.4.1.2.1.2">
+<span class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T3.20.18.4.1.2.1.2.1">File Tools</span></span>
+</span></span> <span class="ltx_text" id="S4.T3.20.18.4.1.3"></span></span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.20.18.5">Gemini 2.5 Flash</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.20.18.6">8</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.20.18.7">12</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.20.18.8">40.0</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.18.16.1"><span class="ltx_text ltx_framed ltx_framed_underline" id="S4.T3.18.16.1.1">0.59 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.18.16.1.1.m1.1"><semantics id="S4.T3.18.16.1.1.m1.1a"><mo id="S4.T3.18.16.1.1.m1.1.1" xref="S4.T3.18.16.1.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.18.16.1.1.m1.1b"><csymbol cd="latexml" id="S4.T3.18.16.1.1.m1.1.1.cmml" xref="S4.T3.18.16.1.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.18.16.1.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.18.16.1.1.m1.1d">±</annotation></semantics></math> 0.36</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.19.17.2">0.68 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.19.17.2.m1.1"><semantics id="S4.T3.19.17.2.m1.1a"><mo id="S4.T3.19.17.2.m1.1.1" xref="S4.T3.19.17.2.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.19.17.2.m1.1b"><csymbol cd="latexml" id="S4.T3.19.17.2.m1.1.1.cmml" xref="S4.T3.19.17.2.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.19.17.2.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.19.17.2.m1.1d">±</annotation></semantics></math> 0.35</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T3.20.18.3">0.58 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.20.18.3.m1.1"><semantics id="S4.T3.20.18.3.m1.1a"><mo id="S4.T3.20.18.3.m1.1.1" xref="S4.T3.20.18.3.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.20.18.3.m1.1b"><csymbol cd="latexml" id="S4.T3.20.18.3.m1.1.1.cmml" xref="S4.T3.20.18.3.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.20.18.3.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.20.18.3.m1.1d">±</annotation></semantics></math> 0.36</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.23.21">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.23.21.4">GPT-4.1 mini</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.23.21.5">18</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.23.21.6">2</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.23.21.7"><span class="ltx_text ltx_framed ltx_framed_underline" id="S4.T3.23.21.7.1">90.0</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.21.19.1">0.49 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.21.19.1.m1.1"><semantics id="S4.T3.21.19.1.m1.1a"><mo id="S4.T3.21.19.1.m1.1.1" xref="S4.T3.21.19.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.21.19.1.m1.1b"><csymbol cd="latexml" id="S4.T3.21.19.1.m1.1.1.cmml" xref="S4.T3.21.19.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.21.19.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.21.19.1.m1.1d">±</annotation></semantics></math> 0.23</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.22.20.2"><span class="ltx_text ltx_framed ltx_framed_underline" id="S4.T3.22.20.2.1">0.95 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.22.20.2.1.m1.1"><semantics id="S4.T3.22.20.2.1.m1.1a"><mo id="S4.T3.22.20.2.1.m1.1.1" xref="S4.T3.22.20.2.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.22.20.2.1.m1.1b"><csymbol cd="latexml" id="S4.T3.22.20.2.1.m1.1.1.cmml" xref="S4.T3.22.20.2.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.22.20.2.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.22.20.2.1.m1.1d">±</annotation></semantics></math> 0.11</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.23.21.3"><span class="ltx_text ltx_framed ltx_framed_underline" id="S4.T3.23.21.3.1">0.61 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.23.21.3.1.m1.1"><semantics id="S4.T3.23.21.3.1.m1.1a"><mo id="S4.T3.23.21.3.1.m1.1.1" xref="S4.T3.23.21.3.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.23.21.3.1.m1.1b"><csymbol cd="latexml" id="S4.T3.23.21.3.1.m1.1.1.cmml" xref="S4.T3.23.21.3.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.23.21.3.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.23.21.3.1.m1.1d">±</annotation></semantics></math> 0.19</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.26.24">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.26.24.4">GPT-4o mini</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.26.24.5">2</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.26.24.6">18</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.26.24.7">10.0</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.24.22.1">0.19 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.24.22.1.m1.1"><semantics id="S4.T3.24.22.1.m1.1a"><mo id="S4.T3.24.22.1.m1.1.1" xref="S4.T3.24.22.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.24.22.1.m1.1b"><csymbol cd="latexml" id="S4.T3.24.22.1.m1.1.1.cmml" xref="S4.T3.24.22.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.24.22.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.24.22.1.m1.1d">±</annotation></semantics></math> 0.31</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.25.23.2">0.21 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.25.23.2.m1.1"><semantics id="S4.T3.25.23.2.m1.1a"><mo id="S4.T3.25.23.2.m1.1.1" xref="S4.T3.25.23.2.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.25.23.2.m1.1b"><csymbol cd="latexml" id="S4.T3.25.23.2.m1.1.1.cmml" xref="S4.T3.25.23.2.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.25.23.2.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.25.23.2.m1.1d">±</annotation></semantics></math> 0.35</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T3.26.24.3">0.20 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.26.24.3.m1.1"><semantics id="S4.T3.26.24.3.m1.1a"><mo id="S4.T3.26.24.3.m1.1.1" xref="S4.T3.26.24.3.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.26.24.3.m1.1b"><csymbol cd="latexml" id="S4.T3.26.24.3.m1.1.1.cmml" xref="S4.T3.26.24.3.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.26.24.3.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.26.24.3.m1.1d">±</annotation></semantics></math> 0.32</td>
+</tr>
+<tr class="ltx_tr" id="S4.T3.29.27">
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S4.T3.29.27.4">o4-mini</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S4.T3.29.27.5">18</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S4.T3.29.27.6">2</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S4.T3.29.27.7"><span class="ltx_text ltx_framed ltx_framed_underline" id="S4.T3.29.27.7.1">90.0</span></td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S4.T3.27.25.1">0.48 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.27.25.1.m1.1"><semantics id="S4.T3.27.25.1.m1.1a"><mo id="S4.T3.27.25.1.m1.1.1" xref="S4.T3.27.25.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.27.25.1.m1.1b"><csymbol cd="latexml" id="S4.T3.27.25.1.m1.1.1.cmml" xref="S4.T3.27.25.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.27.25.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.27.25.1.m1.1d">±</annotation></semantics></math> 0.36</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S4.T3.28.26.2">0.85 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.28.26.2.m1.1"><semantics id="S4.T3.28.26.2.m1.1a"><mo id="S4.T3.28.26.2.m1.1.1" xref="S4.T3.28.26.2.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.28.26.2.m1.1b"><csymbol cd="latexml" id="S4.T3.28.26.2.m1.1.1.cmml" xref="S4.T3.28.26.2.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.28.26.2.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.28.26.2.m1.1d">±</annotation></semantics></math> 0.37</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S4.T3.29.27.3">0.57 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T3.29.27.3.m1.1"><semantics id="S4.T3.29.27.3.m1.1a"><mo id="S4.T3.29.27.3.m1.1.1" xref="S4.T3.29.27.3.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T3.29.27.3.m1.1b"><csymbol cd="latexml" id="S4.T3.29.27.3.m1.1.1.cmml" xref="S4.T3.29.27.3.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T3.29.27.3.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T3.29.27.3.m1.1d">±</annotation></semantics></math> 0.35</td>
+</tr>
+</table>
+</figure>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS2.4.1.1">IV-B</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS2.5.2">Token Usage Comparison</span>
+</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">To better understand the computational footprint and processing patterns of the evaluated setups, we analyzed token usage across all models and architectures. The results are summarized in Table <a class="ltx_ref" href="https://arxiv.org/html/2506.13171v1#S4.T4" title="TABLE IV ‣ IV-B Token Usage Comparison ‣ IV Results and Analysis ‣ Querying Large Automotive Software Models: Agentic vs. Direct LLM Approaches This work has received funding from the European Chips Joint Undertaking under Framework Partnership Agreement No 101139789 (HAL4SDV) including the national funding from the German Federal Ministry of Education and Research (BMBF) under grant number 16MEE00471K. The responsibility for the content of this publication lies with the authors."><span class="ltx_text ltx_ref_tag">IV</span></a>.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p2">
+<p class="ltx_p" id="S4.SS2.p2.1">A striking, though not surprising, difference is observed in the number of prompt tokens between the direct full-context prompting and the agent with file tools. Direct prompting relies on injecting the entire software model directly into the prompt, resulting in high prompt token counts - typically ranging from 118,000 to over 137,000 tokens on average, depending on the tokenizer used. In contrast, the agent setup loads context incrementally via file tools, resulting in dramatically lower prompt usage—only about 640–780 tokens depending on the model. This demonstrates that agent-based designs are far more efficient in managing input context.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p3">
+<p class="ltx_p" id="S4.SS2.p3.1">In terms of completion tokens, which represent the size of the final answer, the values are consistently small across all setups. However, they are slightly higher in the reference setup, likely because the model has access to the entire software model upfront and can produce more detailed responses. The agent-based setups produce shorter completions, possibly due to more focused context windows available at response time.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p4">
+<p class="ltx_p" id="S4.SS2.p4.1">Reasoning token count offers insight into how models internally process queries. GPT-4.1 mini and GPT-4o mini show no reasoning tokens, suggesting they produce answers without explicit intermediate steps. In contrast, Gemini 2.5 Flash and o4-mini exhibit substantial built-in reasoning. Both models use significantly fewer reasoning tokens in the agent configuration than in direct prompting, likely due to the modular, tool-driven context limiting the need for extended internal processing.</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p5">
+<p class="ltx_p" id="S4.SS2.p5.1">Overall, these findings confirm that agent-based approaches are significantly more efficient in token usage, especially for large software models, while still enabling internal reasoning in models designed for that purpose. They also highlight that reasoning behaviors vary greatly depending on model capabilities.</p>
+</div>
+<figure class="ltx_table" id="S4.T4">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">TABLE IV: </span>Token usage across evaluated setups. Mean values with standard deviations are reported.</figcaption>
+<table class="ltx_tabular ltx_centering ltx_align_middle" id="S4.T4.36">
+<tr class="ltx_tr" id="S4.T4.4.4">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t" id="S4.T4.4.4.5"><span class="ltx_text ltx_font_bold" id="S4.T4.4.4.5.1">Architecture</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T4.4.4.6"><span class="ltx_text ltx_font_bold" id="S4.T4.4.4.6.1">LLM Model</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T4.1.1.1"><span class="ltx_text ltx_font_bold" id="S4.T4.1.1.1.1">Prompt Tokens (<math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.1.1.1.1.m1.1"><semantics id="S4.T4.1.1.1.1.m1.1a"><mo id="S4.T4.1.1.1.1.m1.1.1" xref="S4.T4.1.1.1.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.1.1.1.1.m1.1b"><csymbol cd="latexml" id="S4.T4.1.1.1.1.m1.1.1.cmml" xref="S4.T4.1.1.1.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.1.1.1.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.1.1.1.1.m1.1d">±</annotation></semantics></math>SD)</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T4.2.2.2"><span class="ltx_text ltx_font_bold" id="S4.T4.2.2.2.1">Completion Tokens (<math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.2.2.2.1.m1.1"><semantics id="S4.T4.2.2.2.1.m1.1a"><mo id="S4.T4.2.2.2.1.m1.1.1" xref="S4.T4.2.2.2.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.2.2.2.1.m1.1b"><csymbol cd="latexml" id="S4.T4.2.2.2.1.m1.1.1.cmml" xref="S4.T4.2.2.2.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.2.2.2.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.2.2.2.1.m1.1d">±</annotation></semantics></math>SD)</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T4.3.3.3"><span class="ltx_text ltx_font_bold" id="S4.T4.3.3.3.1">Reasoning Tokens (<math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.3.3.3.1.m1.1"><semantics id="S4.T4.3.3.3.1.m1.1a"><mo id="S4.T4.3.3.3.1.m1.1.1" xref="S4.T4.3.3.3.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.3.3.3.1.m1.1b"><csymbol cd="latexml" id="S4.T4.3.3.3.1.m1.1.1.cmml" xref="S4.T4.3.3.3.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.3.3.3.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.3.3.3.1.m1.1d">±</annotation></semantics></math>SD)</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T4.4.4.4"><span class="ltx_text ltx_font_bold" id="S4.T4.4.4.4.1">Total Tokens (<math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.4.4.4.1.m1.1"><semantics id="S4.T4.4.4.4.1.m1.1a"><mo id="S4.T4.4.4.4.1.m1.1.1" xref="S4.T4.4.4.4.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.4.4.4.1.m1.1b"><csymbol cd="latexml" id="S4.T4.4.4.4.1.m1.1.1.cmml" xref="S4.T4.4.4.4.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.4.4.4.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.4.4.4.1.m1.1d">±</annotation></semantics></math>SD)</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.8.8">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t" id="S4.T4.8.8.5" rowspan="4"><span class="ltx_text" id="S4.T4.8.8.5.1"><span class="ltx_text" id="S4.T4.8.8.5.1.1"></span> <span class="ltx_text" id="S4.T4.8.8.5.1.2">
+<span class="ltx_tabular ltx_align_middle" id="S4.T4.8.8.5.1.2.1">
+<span class="ltx_tr" id="S4.T4.8.8.5.1.2.1.1">
+<span class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T4.8.8.5.1.2.1.1.1">Direct</span></span>
+<span class="ltx_tr" id="S4.T4.8.8.5.1.2.1.2">
+<span class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T4.8.8.5.1.2.1.2.1">Full-Context</span></span>
+<span class="ltx_tr" id="S4.T4.8.8.5.1.2.1.3">
+<span class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T4.8.8.5.1.2.1.3.1">Prompting</span></span>
+</span></span> <span class="ltx_text" id="S4.T4.8.8.5.1.3"></span></span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T4.8.8.6">Gemini 2.5 Flash</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T4.5.5.1">137461.4 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.5.5.1.m1.1"><semantics id="S4.T4.5.5.1.m1.1a"><mo id="S4.T4.5.5.1.m1.1.1" xref="S4.T4.5.5.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.5.5.1.m1.1b"><csymbol cd="latexml" id="S4.T4.5.5.1.m1.1.1.cmml" xref="S4.T4.5.5.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.5.5.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.5.5.1.m1.1d">±</annotation></semantics></math> 6.1</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T4.6.6.2">174.7 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.6.6.2.m1.1"><semantics id="S4.T4.6.6.2.m1.1a"><mo id="S4.T4.6.6.2.m1.1.1" xref="S4.T4.6.6.2.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.6.6.2.m1.1b"><csymbol cd="latexml" id="S4.T4.6.6.2.m1.1.1.cmml" xref="S4.T4.6.6.2.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.6.6.2.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.6.6.2.m1.1d">±</annotation></semantics></math> 138.8</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T4.7.7.3">598.0 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.7.7.3.m1.1"><semantics id="S4.T4.7.7.3.m1.1a"><mo id="S4.T4.7.7.3.m1.1.1" xref="S4.T4.7.7.3.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.7.7.3.m1.1b"><csymbol cd="latexml" id="S4.T4.7.7.3.m1.1.1.cmml" xref="S4.T4.7.7.3.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.7.7.3.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.7.7.3.m1.1d">±</annotation></semantics></math> 328.8</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T4.8.8.4">138234.1 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.8.8.4.m1.1"><semantics id="S4.T4.8.8.4.m1.1a"><mo id="S4.T4.8.8.4.m1.1.1" xref="S4.T4.8.8.4.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.8.8.4.m1.1b"><csymbol cd="latexml" id="S4.T4.8.8.4.m1.1.1.cmml" xref="S4.T4.8.8.4.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.8.8.4.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.8.8.4.m1.1d">±</annotation></semantics></math> 404.4</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.12.12">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.12.12.5">GPT-4.1 mini</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.9.9.1">118776.0 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.9.9.1.m1.1"><semantics id="S4.T4.9.9.1.m1.1a"><mo id="S4.T4.9.9.1.m1.1.1" xref="S4.T4.9.9.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.9.9.1.m1.1b"><csymbol cd="latexml" id="S4.T4.9.9.1.m1.1.1.cmml" xref="S4.T4.9.9.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.9.9.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.9.9.1.m1.1d">±</annotation></semantics></math> 5.8</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.10.10.2">210.0 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.10.10.2.m1.1"><semantics id="S4.T4.10.10.2.m1.1a"><mo id="S4.T4.10.10.2.m1.1.1" xref="S4.T4.10.10.2.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.10.10.2.m1.1b"><csymbol cd="latexml" id="S4.T4.10.10.2.m1.1.1.cmml" xref="S4.T4.10.10.2.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.10.10.2.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.10.10.2.m1.1d">±</annotation></semantics></math> 129.4</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.11.11.3">0.0 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.11.11.3.m1.1"><semantics id="S4.T4.11.11.3.m1.1a"><mo id="S4.T4.11.11.3.m1.1.1" xref="S4.T4.11.11.3.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.11.11.3.m1.1b"><csymbol cd="latexml" id="S4.T4.11.11.3.m1.1.1.cmml" xref="S4.T4.11.11.3.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.11.11.3.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.11.11.3.m1.1d">±</annotation></semantics></math> 0.0</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.12.12.4">118986.0 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.12.12.4.m1.1"><semantics id="S4.T4.12.12.4.m1.1a"><mo id="S4.T4.12.12.4.m1.1.1" xref="S4.T4.12.12.4.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.12.12.4.m1.1b"><csymbol cd="latexml" id="S4.T4.12.12.4.m1.1.1.cmml" xref="S4.T4.12.12.4.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.12.12.4.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.12.12.4.m1.1d">±</annotation></semantics></math> 131.5</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.16.16">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.16.16.5">GPT-4o mini</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.13.13.1">118776.0 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.13.13.1.m1.1"><semantics id="S4.T4.13.13.1.m1.1a"><mo id="S4.T4.13.13.1.m1.1.1" xref="S4.T4.13.13.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.13.13.1.m1.1b"><csymbol cd="latexml" id="S4.T4.13.13.1.m1.1.1.cmml" xref="S4.T4.13.13.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.13.13.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.13.13.1.m1.1d">±</annotation></semantics></math> 5.8</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.14.14.2">223.7 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.14.14.2.m1.1"><semantics id="S4.T4.14.14.2.m1.1a"><mo id="S4.T4.14.14.2.m1.1.1" xref="S4.T4.14.14.2.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.14.14.2.m1.1b"><csymbol cd="latexml" id="S4.T4.14.14.2.m1.1.1.cmml" xref="S4.T4.14.14.2.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.14.14.2.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.14.14.2.m1.1d">±</annotation></semantics></math> 164.0</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.15.15.3">0.0 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.15.15.3.m1.1"><semantics id="S4.T4.15.15.3.m1.1a"><mo id="S4.T4.15.15.3.m1.1.1" xref="S4.T4.15.15.3.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.15.15.3.m1.1b"><csymbol cd="latexml" id="S4.T4.15.15.3.m1.1.1.cmml" xref="S4.T4.15.15.3.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.15.15.3.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.15.15.3.m1.1d">±</annotation></semantics></math> 0.0</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.16.16.4">118999.7 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.16.16.4.m1.1"><semantics id="S4.T4.16.16.4.m1.1a"><mo id="S4.T4.16.16.4.m1.1.1" xref="S4.T4.16.16.4.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.16.16.4.m1.1b"><csymbol cd="latexml" id="S4.T4.16.16.4.m1.1.1.cmml" xref="S4.T4.16.16.4.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.16.16.4.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.16.16.4.m1.1d">±</annotation></semantics></math> 166.5</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.20.20">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.20.20.5">o4-mini</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.17.17.1">118775.0 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.17.17.1.m1.1"><semantics id="S4.T4.17.17.1.m1.1a"><mo id="S4.T4.17.17.1.m1.1.1" xref="S4.T4.17.17.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.17.17.1.m1.1b"><csymbol cd="latexml" id="S4.T4.17.17.1.m1.1.1.cmml" xref="S4.T4.17.17.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.17.17.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.17.17.1.m1.1d">±</annotation></semantics></math> 5.8</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.18.18.2">150.3 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.18.18.2.m1.1"><semantics id="S4.T4.18.18.2.m1.1a"><mo id="S4.T4.18.18.2.m1.1.1" xref="S4.T4.18.18.2.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.18.18.2.m1.1b"><csymbol cd="latexml" id="S4.T4.18.18.2.m1.1.1.cmml" xref="S4.T4.18.18.2.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.18.18.2.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.18.18.2.m1.1d">±</annotation></semantics></math> 95.1</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.19.19.3">563.2 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.19.19.3.m1.1"><semantics id="S4.T4.19.19.3.m1.1a"><mo id="S4.T4.19.19.3.m1.1.1" xref="S4.T4.19.19.3.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.19.19.3.m1.1b"><csymbol cd="latexml" id="S4.T4.19.19.3.m1.1.1.cmml" xref="S4.T4.19.19.3.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.19.19.3.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.19.19.3.m1.1d">±</annotation></semantics></math> 291.9</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.20.20.4">119488.5 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.20.20.4.m1.1"><semantics id="S4.T4.20.20.4.m1.1a"><mo id="S4.T4.20.20.4.m1.1.1" xref="S4.T4.20.20.4.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.20.20.4.m1.1b"><csymbol cd="latexml" id="S4.T4.20.20.4.m1.1.1.cmml" xref="S4.T4.20.20.4.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.20.20.4.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.20.20.4.m1.1d">±</annotation></semantics></math> 355.2</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.24.24">
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_l ltx_border_r ltx_border_t" id="S4.T4.24.24.5" rowspan="4"><span class="ltx_text" id="S4.T4.24.24.5.1"><span class="ltx_text" id="S4.T4.24.24.5.1.1"></span> <span class="ltx_text" id="S4.T4.24.24.5.1.2">
+<span class="ltx_tabular ltx_align_middle" id="S4.T4.24.24.5.1.2.1">
+<span class="ltx_tr" id="S4.T4.24.24.5.1.2.1.1">
+<span class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T4.24.24.5.1.2.1.1.1">Agent with</span></span>
+<span class="ltx_tr" id="S4.T4.24.24.5.1.2.1.2">
+<span class="ltx_td ltx_nopad_r ltx_align_center" id="S4.T4.24.24.5.1.2.1.2.1">File Tools</span></span>
+</span></span> <span class="ltx_text" id="S4.T4.24.24.5.1.3"></span></span></td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T4.24.24.6">Gemini 2.5 Flash</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T4.21.21.1">783.3 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.21.21.1.m1.1"><semantics id="S4.T4.21.21.1.m1.1a"><mo id="S4.T4.21.21.1.m1.1.1" xref="S4.T4.21.21.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.21.21.1.m1.1b"><csymbol cd="latexml" id="S4.T4.21.21.1.m1.1.1.cmml" xref="S4.T4.21.21.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.21.21.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.21.21.1.m1.1d">±</annotation></semantics></math> 6.1</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T4.22.22.2">17.6 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.22.22.2.m1.1"><semantics id="S4.T4.22.22.2.m1.1a"><mo id="S4.T4.22.22.2.m1.1.1" xref="S4.T4.22.22.2.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.22.22.2.m1.1b"><csymbol cd="latexml" id="S4.T4.22.22.2.m1.1.1.cmml" xref="S4.T4.22.22.2.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.22.22.2.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.22.22.2.m1.1d">±</annotation></semantics></math> 6.5</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T4.23.23.3">282.5 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.23.23.3.m1.1"><semantics id="S4.T4.23.23.3.m1.1a"><mo id="S4.T4.23.23.3.m1.1.1" xref="S4.T4.23.23.3.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.23.23.3.m1.1b"><csymbol cd="latexml" id="S4.T4.23.23.3.m1.1.1.cmml" xref="S4.T4.23.23.3.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.23.23.3.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.23.23.3.m1.1d">±</annotation></semantics></math> 60.6</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" id="S4.T4.24.24.4">1083.4 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.24.24.4.m1.1"><semantics id="S4.T4.24.24.4.m1.1a"><mo id="S4.T4.24.24.4.m1.1.1" xref="S4.T4.24.24.4.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.24.24.4.m1.1b"><csymbol cd="latexml" id="S4.T4.24.24.4.m1.1.1.cmml" xref="S4.T4.24.24.4.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.24.24.4.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.24.24.4.m1.1d">±</annotation></semantics></math> 65.5</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.28.28">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.28.28.5">GPT-4.1 mini</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.25.25.1">639.3 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.25.25.1.m1.1"><semantics id="S4.T4.25.25.1.m1.1a"><mo id="S4.T4.25.25.1.m1.1.1" xref="S4.T4.25.25.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.25.25.1.m1.1b"><csymbol cd="latexml" id="S4.T4.25.25.1.m1.1.1.cmml" xref="S4.T4.25.25.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.25.25.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.25.25.1.m1.1d">±</annotation></semantics></math> 5.7</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.26.26.2">17.7 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.26.26.2.m1.1"><semantics id="S4.T4.26.26.2.m1.1a"><mo id="S4.T4.26.26.2.m1.1.1" xref="S4.T4.26.26.2.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.26.26.2.m1.1b"><csymbol cd="latexml" id="S4.T4.26.26.2.m1.1.1.cmml" xref="S4.T4.26.26.2.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.26.26.2.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.26.26.2.m1.1d">±</annotation></semantics></math> 1.4</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.27.27.3">0.0 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.27.27.3.m1.1"><semantics id="S4.T4.27.27.3.m1.1a"><mo id="S4.T4.27.27.3.m1.1.1" xref="S4.T4.27.27.3.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.27.27.3.m1.1b"><csymbol cd="latexml" id="S4.T4.27.27.3.m1.1.1.cmml" xref="S4.T4.27.27.3.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.27.27.3.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.27.27.3.m1.1d">±</annotation></semantics></math> 0.0</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.28.28.4">656.9 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.28.28.4.m1.1"><semantics id="S4.T4.28.28.4.m1.1a"><mo id="S4.T4.28.28.4.m1.1.1" xref="S4.T4.28.28.4.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.28.28.4.m1.1b"><csymbol cd="latexml" id="S4.T4.28.28.4.m1.1.1.cmml" xref="S4.T4.28.28.4.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.28.28.4.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.28.28.4.m1.1d">±</annotation></semantics></math> 5.8</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.32.32">
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.32.32.5">GPT-4o mini</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.29.29.1">642.6 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.29.29.1.m1.1"><semantics id="S4.T4.29.29.1.m1.1a"><mo id="S4.T4.29.29.1.m1.1.1" xref="S4.T4.29.29.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.29.29.1.m1.1b"><csymbol cd="latexml" id="S4.T4.29.29.1.m1.1.1.cmml" xref="S4.T4.29.29.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.29.29.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.29.29.1.m1.1d">±</annotation></semantics></math> 2.1</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.30.30.2">30.9 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.30.30.2.m1.1"><semantics id="S4.T4.30.30.2.m1.1a"><mo id="S4.T4.30.30.2.m1.1.1" xref="S4.T4.30.30.2.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.30.30.2.m1.1b"><csymbol cd="latexml" id="S4.T4.30.30.2.m1.1.1.cmml" xref="S4.T4.30.30.2.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.30.30.2.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.30.30.2.m1.1d">±</annotation></semantics></math> 4.3</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.31.31.3">0.0 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.31.31.3.m1.1"><semantics id="S4.T4.31.31.3.m1.1a"><mo id="S4.T4.31.31.3.m1.1.1" xref="S4.T4.31.31.3.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.31.31.3.m1.1b"><csymbol cd="latexml" id="S4.T4.31.31.3.m1.1.1.cmml" xref="S4.T4.31.31.3.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.31.31.3.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.31.31.3.m1.1d">±</annotation></semantics></math> 0.0</td>
+<td class="ltx_td ltx_align_center ltx_border_r" id="S4.T4.32.32.4">673.4 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.32.32.4.m1.1"><semantics id="S4.T4.32.32.4.m1.1a"><mo id="S4.T4.32.32.4.m1.1.1" xref="S4.T4.32.32.4.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.32.32.4.m1.1b"><csymbol cd="latexml" id="S4.T4.32.32.4.m1.1.1.cmml" xref="S4.T4.32.32.4.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.32.32.4.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.32.32.4.m1.1d">±</annotation></semantics></math> 3.6</td>
+</tr>
+<tr class="ltx_tr" id="S4.T4.36.36">
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S4.T4.36.36.5">o4-mini</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S4.T4.33.33.1">641.8 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.33.33.1.m1.1"><semantics id="S4.T4.33.33.1.m1.1a"><mo id="S4.T4.33.33.1.m1.1.1" xref="S4.T4.33.33.1.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.33.33.1.m1.1b"><csymbol cd="latexml" id="S4.T4.33.33.1.m1.1.1.cmml" xref="S4.T4.33.33.1.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.33.33.1.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.33.33.1.m1.1d">±</annotation></semantics></math> 6.0</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S4.T4.34.34.2">53.4 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.34.34.2.m1.1"><semantics id="S4.T4.34.34.2.m1.1a"><mo id="S4.T4.34.34.2.m1.1.1" xref="S4.T4.34.34.2.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.34.34.2.m1.1b"><csymbol cd="latexml" id="S4.T4.34.34.2.m1.1.1.cmml" xref="S4.T4.34.34.2.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.34.34.2.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.34.34.2.m1.1d">±</annotation></semantics></math> 9.4</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S4.T4.35.35.3">60.4 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.35.35.3.m1.1"><semantics id="S4.T4.35.35.3.m1.1a"><mo id="S4.T4.35.35.3.m1.1.1" xref="S4.T4.35.35.3.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.35.35.3.m1.1b"><csymbol cd="latexml" id="S4.T4.35.35.3.m1.1.1.cmml" xref="S4.T4.35.35.3.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.35.35.3.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.35.35.3.m1.1d">±</annotation></semantics></math> 40.9</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r" id="S4.T4.36.36.4">755.7 <math alttext="\pm" class="ltx_Math" display="inline" id="S4.T4.36.36.4.m1.1"><semantics id="S4.T4.36.36.4.m1.1a"><mo id="S4.T4.36.36.4.m1.1.1" xref="S4.T4.36.36.4.m1.1.1.cmml">±</mo><annotation-xml encoding="MathML-Content" id="S4.T4.36.36.4.m1.1b"><csymbol cd="latexml" id="S4.T4.36.36.4.m1.1.1.cmml" xref="S4.T4.36.36.4.m1.1.1">plus-or-minus</csymbol></annotation-xml><annotation encoding="application/x-tex" id="S4.T4.36.36.4.m1.1c">\pm</annotation><annotation encoding="application/x-llamapun" id="S4.T4.36.36.4.m1.1d">±</annotation></semantics></math> 45.4</td>
+</tr>
+</table>
+</figure>
+</section>
+<section class="ltx_subsection" id="S4.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection"><span class="ltx_text" id="S4.SS3.4.1.1">IV-C</span> </span><span class="ltx_text ltx_font_italic" id="S4.SS3.5.2">Failure Case Analysis</span>
+</h3>
+<div class="ltx_para" id="S4.SS3.p1">
+<p class="ltx_p" id="S4.SS3.p1.1">Two main categories of failures were observed during the evaluation: agent errors, which prevented the model from producing an answer, and incorrect answers, where the model made a factually inaccurate response.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p2">
+<p class="ltx_p" id="S4.SS3.p2.1">The only error type observed in the agent-based architecture was a recursive error, occurring when the number of tool-use iterations exceeded the predefined recursion limit of 100. These errors prevented the agent from producing any answer, leading to a failed attempt. Across all evaluations, recursive errors occurred 15 times when using the agent with file tools. Two of these cases were attributed to the o4-mini model. In both instances, the agent repeatedly opened the same file and interleaved file searches with opening the file at different lines, continuing this behavior until the iteration limit was reached. Some search terms appeared arbitrary or incorrectly chosen, which may point to a misunderstanding of Ecore syntax. The remaining 13 failures were observed with GPT-4o mini. In twelve of these, the agent opened a file and continuously scrolled down until it hit the iteration cap. In one case, the agent alternated between scrolling down and up while occasionally invoking <span class="ltx_text ltx_font_typewriter" id="S4.SS3.p2.1.1">find_file</span> with class names, again without arriving at a coherent answer. All such recursive errors were treated as incorrect responses and were therefore assigned a score of 0.0 in the precision, recall, and F1 score metrics.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p3">
+<p class="ltx_p" id="S4.SS3.p3.1">The main observation from the incorrect answers is that the dominant failure mode across models - especially in tasks involving class field and inheritance chain extraction - is incomplete or prematurely terminated inheritance traversal. Many agents stop after one or two inheritance levels, failing to follow the full chain and include all inherited fields, which leads to missing attributes. Another frequent issue is confusion or inconsistency in attributing fields to the correct base class, often misplacing a field’s origin in the hierarchy. Some answers are penalized due to minor factual inaccuracies, such as incorrect data types or multiplicity (e.g., treating a field as a list where it’s not explicitly typed as such in the model). In cases where class membership questions are involved (e.g., bus ports, event chain requirements), models often overgeneralize by including additional classes with semantically similar names or nearby definitions, which, while arguably plausible, deviate from the ground truth. Notably, models using file tools often exhibit partial exploration behaviors, such as navigating to a class but not scrolling to see all fields, or identifying a base class but not recursively inspecting further base classes up the inheritance chain. These patterns suggest that incorrect answers often arise not from fundamental misunderstanding but from shallow or incomplete retrieval and reasoning processes.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">V </span><span class="ltx_text ltx_font_smallcaps" id="S5.1.1">Discussion</span>
+</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">Our results reveal several essential insights. First, the reference architecture generally yields higher or comparable factual correctness for most models when the full model fits into the LLM’s context window. This outcome is intuitive since the model has complete visibility of the entire software structure at once, enabling holistic reasoning and direct fact retrieval. Notably, models such as Gemini 2.5 Flash and GPT-4o mini exhibited a significant drop in accuracy when constrained to the agent setup. This suggests that certain LLM variants may struggle with maintaining state coherence across multiple tool calls or with reasoning effectively over fragmented, partial views of the model. Moreover, analysis of incorrect answers shows that the models frequently failed to choose the most effective tool (<span class="ltx_text ltx_font_typewriter" id="S5.p1.1.1">search_file</span>) for the task, instead relying on a less efficient option (<span class="ltx_text ltx_font_typewriter" id="S5.p1.1.2">scroll_down</span>).</p>
+</div>
+<div class="ltx_para" id="S5.p2">
+<p class="ltx_p" id="S5.p2.1">In contrast, GPT-4.1 mini and o4-mini maintained robust accuracy (90%) across both architectures, highlighting the importance of advanced reasoning and memory capabilities for effective tool-assisted model comprehension. Their success in the agent setup demonstrates that an LLM capable of efficiently orchestrating the retrieval and synthesis of partial information can overcome the limitations imposed by lacking full context. However, analysis of incorrect answers suggests that accuracy could be further improved by integrating tools specifically designed for browsing software models, which better address the challenges of partial exploration, rather than relying solely on general-purpose file access tools. This insight has important practical implications for industrial workflows, where software models often exceed the size limits of even the largest available context windows.</p>
+</div>
+<div class="ltx_para" id="S5.p3">
+<p class="ltx_p" id="S5.p3.1">The observed precision-recall trade-offs provide important insights. As expected, high recall generally corresponds to higher overall accuracy in most cases, indicating that models tend to capture relevant information effectively. However, overall precision remains relatively low across models, suggesting a common tendency to include extra or occasionally inaccurate details. Striking the right balance between recall and precision is especially critical in engineering domains, where accuracy is paramount and any hallucinations or errors can mislead developers or compromise system safety.</p>
+</div>
+<div class="ltx_para" id="S5.p4">
+<p class="ltx_p" id="S5.p4.1">From an efficiency perspective, agent-based architectures dramatically reduce prompt token usage by avoiding full ingestion of large software models. This efficiency gain is crucial for enabling deployment of LLMs with smaller context windows on-premise, addressing automotive industry constraints around privacy, intellectual property protection, and regulatory compliance. Although completion tokens (the size of answers) were similar across setups, the reduction in prompt size directly translates into lower computational costs, faster response times, and the feasibility of more frequent or iterative querying.</p>
+</div>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">VI </span><span class="ltx_text ltx_font_smallcaps" id="S6.1.1">Threats to Validity</span>
+</h2>
+<section class="ltx_paragraph" id="S6.SS0.SSS0.Px1">
+<h5 class="ltx_title ltx_title_paragraph">Single Model and Format</h5>
+<div class="ltx_para" id="S6.SS0.SSS0.Px1.p1">
+<p class="ltx_p" id="S6.SS0.SSS0.Px1.p1.1">The study used a single software model in Ecore format, limited to a single file. This constrains generalizability, as other models, formats, or multi-file setups may present different challenges.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S6.SS0.SSS0.Px2">
+<h5 class="ltx_title ltx_title_paragraph">Limited and Narrow Question Scope</h5>
+<div class="ltx_para" id="S6.SS0.SSS0.Px2.p1">
+<p class="ltx_p" id="S6.SS0.SSS0.Px2.p1.1">The evaluation was based on 20 questions focused solely on structural, low-level aspects (e.g., class fields). It did not assess behavioral properties or higher-abstraction queries.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S6.SS0.SSS0.Px3">
+<h5 class="ltx_title ltx_title_paragraph">Answer Validation Limitations</h5>
+<div class="ltx_para" id="S6.SS0.SSS0.Px3.p1">
+<p class="ltx_p" id="S6.SS0.SSS0.Px3.p1.1">Extra statements generated by the LLM beyond the expected answers were not verified for correctness, which may have impacted precision and recall metrics. Additionally, the evaluation relied on LLM-based scoring methods, potentially introducing inaccuracies in answer correctness determination.</p>
+</div>
+</section>
+<section class="ltx_paragraph" id="S6.SS0.SSS0.Px4">
+<h5 class="ltx_title ltx_title_paragraph">Fixed Agent Parameters</h5>
+<div class="ltx_para" id="S6.SS0.SSS0.Px4.p1">
+<p class="ltx_p" id="S6.SS0.SSS0.Px4.p1.1">The agent used a fixed configuration (e.g., window size, iteration limits), which may have limited adaptability or performance across different tasks.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S7">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">VII </span><span class="ltx_text ltx_font_smallcaps" id="S7.1.1">Conclusions and Future Work</span>
+</h2>
+<div class="ltx_para" id="S7.p1">
+<p class="ltx_p" id="S7.p1.1">This study compared direct prompting and agent-based approaches for answering questions over software models using LLMs. The agentic approach proved effective with smaller LLMs, demonstrating that compact models possess strong tool usage and reasoning capabilities. This improvement makes sophisticated, retrieval-augmented agent workflows feasible on resource-constrained setups. The results highlight the potential of such structured approaches for interacting with large software artifacts efficiently and accurately.</p>
+</div>
+<div class="ltx_para" id="S7.p2">
+<p class="ltx_p" id="S7.p2.1">Future work will explore several directions. First, the approaches will be evaluated in a broader variety of software models and formats to assess generalizability. More complex agent architectures will be investigated to improve reasoning capabilities and task coordination, leveraging emerging standards such as MCP and A2A to enhance tool integration and agent collaboration. The question set will be expanded, including queries at different abstraction levels to probe deeper understanding. Additionally, efforts will be made to automatically generate model instances from metamodels and specifications, and to support textual modifications of software models while preserving consistency.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+M. Broy, I. H. Kruger, A. Pretschner, and C. Salzmann, “Engineering automotive
+software,” <em class="ltx_emph ltx_font_italic" id="bib.bib1.1.1">Proc. IEEE</em>, vol. 95, no. 2, pp. 356–373, Feb. 2007.
+[Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://ieeexplore.ieee.org/document/4142919</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+A. Haghighatkhah, A. Banijamali, O.-P. Pakanen, M. Oivo, and P. Kuvaja,
+“Automotive software engineering: A systematic mapping study,” <em class="ltx_emph ltx_font_italic" id="bib.bib2.1.1">J.
+Syst. Softw.</em>, vol. 128, pp. 25–55, Jun. 2017. [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://www.sciencedirect.com/science/article/pii/S0164121217300560</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+A. Fan, B. Gokkaya, M. Harman, M. Lyubarskiy, S. Sengupta, S. Yoo, and J. M.
+Zhang, “Large language models for software engineering: Survey and open
+problems,” in <em class="ltx_emph ltx_font_italic" id="bib.bib3.1.1">Proc. IEEE/ACM Int. Conf. on Softw. Eng.
+(ICSE)</em>, May 2023, pp. 31–53. [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://ieeexplore.ieee.org/abstract/document/10449667</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+“PlantUML.” [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://plantuml.com/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock">
+F. Muff and H.-G. Fill, “Limitations of ChatGPT in
+conceptual modeling: insights from experiments in metamodeling,” in
+<em class="ltx_emph ltx_font_italic" id="bib.bib5.1.1">Modellierung 2024 - Workshopband</em>.   Gesellschaft für Informatik e.V., Mar. 2024.
+[Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://dl.gi.de/handle/20.500.12116/43782</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock">
+J. Di Rocco, D. Di Ruscio, C. Di Sipio, P. T. Nguyen, and R. Rubei,
+“On the use of large language models in model-driven
+engineering,” <em class="ltx_emph ltx_font_italic" id="bib.bib6.1.1">Softw. Syst. Model.</em>, vol. 24,
+no. 3, pp. 923–948, Jun. 2025. [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://doi.org/10.1007/s10270-025-01263-8</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock">
+“Unified Modeling Language (UML) Specification Version 2.5.1.”
+[Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://www.omg.org/spec/UML/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock">
+“Eclipse Modeling Framework (EMF).” [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://eclipse.dev/emf/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock">
+“AUTOSAR (Automotive Open System Architecture).” [Online].
+Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://www.autosar.org/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock">
+K. Vinoth Kannan, “Model-based automotive software
+development,” in <em class="ltx_emph ltx_font_italic" id="bib.bib10.1.1">Automotive Embedded
+Systems: Key Technologies, Innovations, and Applications</em>,
+M. Kathiresh and R. Neelaveni, Eds.   Cham: Springer International Publishing, Apr. 2021, pp. 71–87. [Online].
+Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://doi.org/10.1007/978-3-030-59897-6_4</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock">
+D. Mosquera, M. Ruiz, O. Pastor, and J. Spielberger, “Understanding the
+landscape of software modelling assistants for MDSE tools: A systematic
+mapping,” <em class="ltx_emph ltx_font_italic" id="bib.bib11.1.1">Inf. Softw. Technol.</em>, vol. 173, p. 107492, Sep. 2024.
+[Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://www.sciencedirect.com/science/article/pii/S0950584924000971</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock">
+Y. Sui, M. Zhou, M. Zhou, S. Han, and D. Zhang, “Table meets LLM: Can
+large language models understand structured table data? A benchmark and
+empirical study,” in <em class="ltx_emph ltx_font_italic" id="bib.bib12.1.1">Proc. 17th ACM Int. Conf. Web Search
+Data Mining</em>, ser. WSDM ’24.   New
+York, NY, USA: Association for Computing Machinery, Mar. 2024, pp. 645–654.
+[Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://dl.acm.org/doi/10.1145/3616855.3635752</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock">
+Y. Gao, Y. Xiong, X. Gao, K. Jia, J. Pan, Y. Bi, Y. Dai, J. Sun, M. Wang, and
+H. Wang, “Retrieval-augmented generation for large language models: A
+survey,” Mar. 2024, arXiv:2312.10997. [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/2312.10997</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock">
+T. Sumers, S. Yao, K. Narasimhan, and T. Griffiths,
+“Cognitive architectures for language agents,”
+<em class="ltx_emph ltx_font_italic" id="bib.bib14.1.1">Trans. Mach. Learn. Res.</em>, Oct. 2023.
+[Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://openreview.net/forum?id=1i6ZCvflQJ</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock">
+B. Paranjape, S. Lundberg, S. Singh, H. Hajishirzi, L. Zettlemoyer, and M. T.
+Ribeiro, “ART: Automatic multi-step reasoning and tool-use for large
+language models,” Mar. 2023, arXiv:2303.09014. [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/2303.09014</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock">
+“Model Context Protocol.” [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://modelcontextprotocol.io/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock">
+“Agent2Agent Protocol (A2A).” [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://google-a2a.github.io/A2A/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock">
+J. Wei, X. Wang, D. Schuurmans, M. Bosma, B. Ichter, F. Xia, E. Chi, Q. V. Le,
+and D. Zhou, “Chain-of-Thought prompting elicits reasoning in large
+language models,” in <em class="ltx_emph ltx_font_italic" id="bib.bib18.1.1">Advances Neural Inf. Process. Syst.</em>,
+S. Koyejo, S. Mohamed, A. Agarwal, D. Belgrave, K. Cho, and A. Oh, Eds.,
+vol. 35.   Curran Associates, Inc., Nov.
+2022, pp. 24 824–24 837. [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://proceedings.neurips.cc/paper_files/paper/2022/file/9d5609613524ecf4f15af0f7b31abca4-Paper-Conference.pdf</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock">
+X. Wang, J. Wei, D. Schuurmans, Q. V. Le, E. H. Chi, S. Narang, A. Chowdhery,
+and D. Zhou, “Self-consistency improves chain of
+thought reasoning in language models,” in
+<em class="ltx_emph ltx_font_italic" id="bib.bib19.1.1">Proc. 11th Int. Conf. Learn. Represent.
+(ICLR)</em>, Sep. 2022. [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://openreview.net/forum?id=1PL1NIMMrw</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock">
+E. Kamalloo, N. Dziri, C. Clarke, and D. Rafiei, “Evaluating open-domain
+question answering in the era of large language models,” in <em class="ltx_emph ltx_font_italic" id="bib.bib20.1.1">Proc. 61st
+Annu. Meeting Assoc. Comput. Linguistics</em>, A. Rogers,
+J. Boyd-Graber, and N. Okazaki, Eds.   Toronto, Canada: Association for Computational Linguistics, Jul. 2023, pp.
+5591–5606. [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://aclanthology.org/2023.acl-long.307/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock">
+F. Mustafazade and P. F. Ebbinghaus, “Evaluation of semantic answer similarity
+metrics,” <em class="ltx_emph ltx_font_italic" id="bib.bib21.1.1">Int. J. Natural Lang. Comput.</em>, vol. 11, no. 3, pp. 43–57,
+Jun. 2022. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/2206.12664</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock">
+R. Wang, J. Guo, C. Gao, G. Fan, C. Y. Chong, and X. Xia, “Can LLMs replace
+human evaluators? An empirical study of LLM-as-a-Judge in software
+engineering,” Feb. 2025, arXiv:2502.06193. [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/2502.06193</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock">
+S. Badshah and H. Sajjad, “Reference-guided verdict: LLMs-as-Judges in
+automatic evaluation of free-form text,” Aug. 2024, arXiv:2408.09235.
+[Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/2408.09235</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock">
+“Mermaid.” [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://mermaid.js.org</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock">
+S. Yao, J. Zhao, D. Yu, N. Du, I. Shafran, K. R. Narasimhan, and Y. Cao,
+“ReAct: Synergizing reasoning and acting in
+language models,” in <em class="ltx_emph ltx_font_italic" id="bib.bib25.1.1">Proc. 11th Int.
+Conf. Learn. Represent. (ICLR)</em>, Sep. 2023. [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://openreview.net/forum?id=WE_vluYUL-X</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock">
+J. Yang, C. E. Jimenez, A. Wettig, K. Lieret, S. Yao, K. Narasimhan, and
+O. Press, “SWE-agent: Agent-computer interfaces
+enable automated software engineering,”
+<em class="ltx_emph ltx_font_italic" id="bib.bib26.1.1">Advances Neural Inf. Process. Syst.</em>, vol. 37,
+pp. 50 528–50 652, Dec. 2024. [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://proceedings.neurips.cc/paper_files/paper/2024/hash/5a7c947568c1b1328ccc5230172e1e7c-Abstract-Conference.html</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock">
+“INCHRON’s am2inc Ecore model.” [Online].
+Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://github.com/inchron/am2inc/blob/main/EcoreModels/root.ecore</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock">
+“Eclipse APP4MC.” [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://eclipse.dev/app4mc/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock">
+“chronSUITE from INCHRON.” [Online].
+Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://www.inchron.com/chronsuite/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock">
+“INCHRON’s APP4MC / Amalthea Importer.”
+[Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://www.inchron.com/amalthea/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_tag_bibitem">[31]</span>
+<span class="ltx_bibblock">
+Y. Wang, M. Wang, M. A. Manzoor, F. Liu, G. N. Georgiev, R. J. Das, and
+P. Nakov, “Factuality of large language models: A survey,” in <em class="ltx_emph ltx_font_italic" id="bib.bib31.1.1">Proc.
+Conf. Empirical Methods Natural Lang. Process.</em>, Y. Al-Onaizan,
+M. Bansal, and Y.-N. Chen, Eds.   Miami,
+Florida, USA: Association for Computational Linguistics, Nov. 2024, pp.
+19 519–19 529. [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://aclanthology.org/2024.emnlp-main.1088/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_tag_bibitem">[32]</span>
+<span class="ltx_bibblock">
+“LangSmith Hub Prompt: Evaluation for RAG answer accuracy vs a
+reference.” [Online]. Available:
+<span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://smith.langchain.com/hub/langchain-ai/rag-answer-vs-reference</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_tag_bibitem">[33]</span>
+<span class="ltx_bibblock">
+“Ragas.” [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://docs.ragas.io/en/v0.2.15/</span>
+</span>
+</li>
+</ul>
+</section>
+<div class="ltx_pagination ltx_role_newpage"></div>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Mon Jun 16 07:28:20 2025 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

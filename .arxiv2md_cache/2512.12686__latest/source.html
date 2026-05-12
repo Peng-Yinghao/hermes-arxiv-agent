@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI</title>
+<!--Generated on Sun Dec 14 13:31:40 2025 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/browse/0.3.4/css/arxiv-html-papers-20250916.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2512.12686v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S1" title="In Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">I </span><span class="ltx_text ltx_font_smallcaps">Introduction</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S2" title="In Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II </span><span class="ltx_text ltx_font_smallcaps">Background and Proposed Methodology</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S2.SS1" title="In II Background and Proposed Methodology ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II-A </span><span class="ltx_text ltx_font_italic">Background and Related Work</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S2.SS2" title="In II Background and Proposed Methodology ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II-B </span><span class="ltx_text ltx_font_italic">Proposed Methodology</span></span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S2.SS2.SSS1" title="In II-B Proposed Methodology ‣ II Background and Proposed Methodology ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II-B1 </span>Structured Conversation History with Database</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S2.SS2.SSS2" title="In II-B Proposed Methodology ‣ II Background and Proposed Methodology ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II-B2 </span>Dynamic User Persona via KG</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S2.SS2.SSS3" title="In II-B Proposed Methodology ‣ II Background and Proposed Methodology ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II-B3 </span>Session Level Memory for Real Time Context</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S2.SS2.SSS4" title="In II-B Proposed Methodology ‣ II Background and Proposed Methodology ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II-B4 </span>Seamless Retrieval for Context-Aware Responses</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S2.SS3" title="In II Background and Proposed Methodology ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II-C </span><span class="ltx_text ltx_font_italic">Holistic Personalization and Memory Retention</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S3" title="In Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III </span><span class="ltx_text ltx_font_smallcaps">System Architecture</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S3.SS1" title="In III System Architecture ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-A </span><span class="ltx_text ltx_font_italic">Scenario 1: New User or New Session</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S3.SS2" title="In III System Architecture ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-B </span><span class="ltx_text ltx_font_italic">Scenario 2: Repeat User with Ongoing Session</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S4" title="In Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV </span><span class="ltx_text ltx_font_smallcaps">Working Mechanism</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S4.SS1" title="In IV Working Mechanism ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV-A </span><span class="ltx_text ltx_font_italic">New User with New Session</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S4.SS2" title="In IV Working Mechanism ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV-B </span><span class="ltx_text ltx_font_italic">Repeat User with New Session</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S4.SS3" title="In IV Working Mechanism ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV-C </span><span class="ltx_text ltx_font_italic">Repeat User with Continuing Session</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S4.SS4" title="In IV Working Mechanism ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV-D </span><span class="ltx_text ltx_font_italic">Memory Update Engine</span></span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S4.SS4.SSS1" title="In IV-D Memory Update Engine ‣ IV Working Mechanism ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV-D1 </span>Session Summary Update</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S4.SS4.SSS2" title="In IV-D Memory Update Engine ‣ IV Working Mechanism ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV-D2 </span>KG Update and Semantic Retrieval</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S4.SS5" title="In IV Working Mechanism ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV-E </span><span class="ltx_text ltx_font_italic">Weight Calculation</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S5" title="In Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">V </span><span class="ltx_text ltx_font_smallcaps">Experiments</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S5.SS1" title="In V Experiments ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">V-A </span><span class="ltx_text ltx_font_italic">Datasets</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S5.SS2" title="In V Experiments ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">V-B </span><span class="ltx_text ltx_font_italic">Computational Details</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S5.SS3" title="In V Experiments ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">V-C </span><span class="ltx_text ltx_font_italic">Evaluation Setup</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S6" title="In Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VI </span><span class="ltx_text ltx_font_smallcaps">Results</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S6.SS1" title="In VI Results ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VI-A </span><span class="ltx_text ltx_font_italic">Accuracy</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S6.SS2" title="In VI Results ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VI-B </span><span class="ltx_text ltx_font_italic">Latency Evaluation</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S7" title="In Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VII </span><span class="ltx_text ltx_font_smallcaps">Conclusion</span></span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Samarth Sarin
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Lovepreet Singh
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Bhaskarjit Sarmah
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">
+  
+Dhagash Mehta
+</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p">Agentic memory is emerging as a key enabler for large language models (LLM) to maintain continuity, personalization, and long-term context in extended user interactions, critical capabilities for deploying LLMs as truly interactive and adaptive agents. Agentic memory refers to the memory that provides an LLM with agent-like persistence: the ability to retain and act upon information across conversations, similar to how a human would. We present Memoria, a modular memory framework that augments LLM-based conversational systems with persistent, interpretable, and context-rich memory. Memoria integrates two complementary components: dynamic session-level summarization and a weighted knowledge graph (KG)-based user modelling engine that incrementally captures user traits, preferences, and behavioral patterns as structured entities and relationships. This hybrid architecture enables both short-term dialogue coherence and long-term personalization while operating within the token constraints of modern LLMs. We demonstrate how Memoria enables scalable, personalized conversational artificial intelligence (AI) by bridging the gap between stateless LLM interfaces and agentic memory systems, offering a practical solution for industry applications requiring adaptive and evolving user experiences.</p>
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">I </span><span class="ltx_text ltx_font_smallcaps">Introduction</span>
+</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p">Large Language Models (LLMs)<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">chang2024survey</span>]</cite> have significantly advanced the capabilities of conversational AI, enabling human-like interactions across a broad spectrum of applications. However, most LLM-based chat systems operate without persistent memory, where each interaction is treated in isolation, discarding previous context and failing to adapt over time. This limits their ability to form coherent, context-rich, and personalized conversations.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p">Incorporating persistent memory into LLM-powered systems offers substantial business and operational value by enhancing user experience, reducing interaction friction, and enabling context-aware automation. In customer support domains, memory-equipped agents can retrieve prior user interactions, historical issues, and stated preferences, thereby improving resolution speed, reducing redundant information gathering, and fostering a more personalized dialogue experience. In domains like customer support, e-commerce, and financial advisory, memory allows faster resolutions, customized recommendations, and long-term personalization.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p">Agentic memory<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2024survey</span>]</cite> refers to the capacity of an LLM agent implementation to recall, adapt to, and reason over past interactions to simulate the behaviour of a coherent, goal-directed agent. It allows LLMs to move beyond reactive, stateless responses toward sustained, context-aware dialogues. Incorporating such memory into LLM-based systems is not only crucial for technical performance but also vital for enhancing user trust, reducing repetition, and improving long-term engagement.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p">The development of agentic memory in LLM-based systems has become a key research focus. Zhang et al.<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2024survey</span>]</cite> provide a comprehensive survey categorizing memory types (textual, parametric, structured) and operations like writing, retrieval, and forgetting, while calling for unified frameworks. A‑MEM<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">xu2025mem</span>]</cite>, inspired by Zettelkasten note-taking <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">luhmann1992communicating</span>]</cite>, introduces graph-like memory structures that link atomic notes with contextual descriptors, enabling dynamic memory evolution beyond flat storage systems.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p">On the systems side, knowledge-graph (KG)-based memory architectures have gained traction in enabling persistent, interpretable memory for conversational agents. Batching user interactions into temporal KGs, as done in Ref. <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">rasmussen2025zep</span>]</cite>, demonstrates a practical pathway for capturing evolving user states. Similarly, industrial frameworks such as LangGraph<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">langgraph2025</span>]</cite> and LlamaIndex<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">llamaindex2024</span>]</cite> have begun adopting summarization, vector retrieval, and graph-based profiling.</p>
+</div>
+<div class="ltx_para" id="S1.p6">
+<p class="ltx_p">Existing LLM memory systems address components like vector retrieval, summarization, or temporal KGs in isolation. Vector stores lack interpretability and conflict resolution, while graph-based systems struggle with recency and scalability. Few frameworks integrate both short- and long-term memory with incremental, recency-aware updates.</p>
+</div>
+<div class="ltx_para" id="S1.p7">
+<p class="ltx_p">To fill this gap, we propose Memoria, a (Python-based) memory augmentation framework that can be integrated into any LLM-driven chat interface. Memoria introduces a persistent memory layer through two complementary components: (1) dynamic chat summarization and (2) a weighted KG-based user persona engine. By combining these components, Memoria enables context retention and behavioral continuity across sessions.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">II </span><span class="ltx_text ltx_font_smallcaps">Background and Proposed Methodology</span>
+</h2>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">II-A </span><span class="ltx_text ltx_font_italic">Background and Related Work</span>
+</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p">Recent research has increasingly recognized agentic memory as a critical capability for enhancing LLM-based conversational systems. Traditional LLM deployments typically follow a stateless architecture in which each user input is processed independently, with prior interactions forgotten unless explicitly provided as input context. This design leads to repetitive, impersonal exchanges that fail to leverage historical user information. Agentic memory frameworks seek to overcome these limitations by equipping models with mechanisms to retain, retrieve, and reason over accumulated conversational histories, enabling long-term personalization and adaptive dialogue behavior. By maintaining structured memory representations such as KGs, session summaries, or retrieved interaction histories, agentic systems can evolve beyond reactive responses to support proactive, goal-aligned interactions that more closely resemble long-term human agency<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2024survey</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">xu2025mem</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">rasmussen2025zep</span>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p2">
+<p class="ltx_p">Below are various types of agentic memories crucial for a personalized conversational AI system:</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S2.SS1.p3">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Episodic Memory:</span> Episodic memory<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">tulving1972episodic</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2024survey</span>]</cite> encapsulates the agent’s ability to recall specific past interactions or events. This type of memory mirrors the autobiographical memory of humans, allowing the model to reference details such as user preferences, prior conversations, and historical decisions. For example, if a user is previously identified as an equity trader, an agent equipped with episodic memory could incorporate this information to personalize future financial updates. Such capabilities support persistent personalization and conversational continuity across sessions, both of which are critical for enhancing user engagement and interaction quality in long-term deployments.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S2.SS1.p4">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Semantic Memory:</span> Semantic memory<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">tulving1972episodic</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2024survey</span>]</cite> represents the model’s capacity to access and utilize structured, factual knowledge, including historical data, general world knowledge, domain-specific definitions, and taxonomic relationships. This type of memory allows LLM-based agents to ground their responses in verifiable information by integrating external knowledge sources such as knowledge bases, ontologies, or APIs. For instance, retrieving historical stock prices, referencing regulatory definitions, or explaining financial instruments exemplifies the application of semantic memory in financial advisory contexts. By providing access to consistent and externally validated information, semantic memory plays a foundational role in ensuring response accuracy, factual consistency, and domain correctness, particularly in high-stakes professional environments.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S2.SS1.p5">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Working Memory:</span> Working memory<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">baddeley2020working</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2024survey</span>]</cite> refers to the short-term memory capacity that supports ongoing reasoning, multi-step problem solving, and temporary information retention during active tasks. This transient memory enables LLM-based agents to maintain intermediate computations, dialogue states, and contextual dependencies across multiple conversational turns. Analogous to human cognitive working memory, it allows the model to mentally track evolving information while formulating responses. Tasks such as iterative code debugging, multi-step mathematical reasoning, dynamic planning, or conversational task decomposition all benefit from robust working memory mechanisms within LLM architectures.</p>
+</div>
+<div class="ltx_para ltx_noindent" id="S2.SS1.p6">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Parametric Memory</span>
+Parametric Memory <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2024survey</span>]</cite> refers to the knowledge encoded in the parameters of a language model during pre-training. It enables zero- and few-shot generalization by capturing patterns and facts from the training data. While useful for tasks like explaining financial concepts without external context, it is static and cannot adapt to new user-specific interactions, limiting personalization.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p7">
+<p class="ltx_p">These memory types form the foundation for agentic LLM systems. Recent work on external memory such as Retrieval Augmented Generation (RAG), summarization, and memory graphs aims to bridge short- and long-term context. Memoria builds on this by providing a developer-friendly framework that combines chat summarization, persistent logging, and KG-based user modeling.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">II-B </span><span class="ltx_text ltx_font_italic">Proposed Methodology</span>
+</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p">To overcome the limitations inherent in stateless LLM chat systems, particularly their inability to retain memory across sessions, personalize responses, or maintain coherent conversations over time, we propose <span class="ltx_text ltx_font_bold">Memoria</span>: a modular Python-based library engineered to furnish LLMs with structured and persistent memory.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p2">
+<p class="ltx_p">Memoria operates as an enhancement layer, integrating seamlessly into any LLM-driven conversational assistant architecture. Its design revolves around four core modules, each addressing a specific facet of memory and context awareness: (1) structured conversation logging, (2) dynamic user modeling, (3) real-time session summarization, and (4) context-aware retrieval. Together, these components form a unified memory framework that allows LLMs to simulate human-like memory retention and personalization. We propose solving the episodic and semantic memory capabilities of LLM applications. Our approach does not involve finetuning of an LLM, hence there is no enhancement provided in the parametric memory, and neither is there any enhancement provided by Memoria on working memory.</p>
+</div>
+<section class="ltx_subsubsection" id="S2.SS2.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">II-B1 </span>Structured Conversation History with Database</h4>
+<div class="ltx_para" id="S2.SS2.SSS1.p1">
+<p class="ltx_p">The foundational layer of Memoria is a <span class="ltx_text ltx_font_bold">structured conversation logging system</span> powered by a database. Every user interaction is persistently stored in this database with a well-defined schema that includes:</p>
+</div>
+<div class="ltx_para" id="S2.SS2.SSS1.p2">
+<ul class="ltx_itemize" id="S2.I1">
+<li class="ltx_item" id="S2.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i1.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Timestamps</span> marking the exact time of each message;</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i2.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Session identifiers</span> for differentiating between conversation instances;</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i3.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Raw message content</span> from both the user and the LLM;</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i4.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">KG triplets</span> extracted from the user messages.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i5" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i5.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Summaries</span> of conversational turns for downstream retrieval and compression; and,</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i6" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i6.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Token usage statistics</span> for monitoring efficiency and performance.</p>
+</div>
+</li>
+</ul>
+<p class="ltx_p">This structured format transforms the interaction history into a queryable and temporally indexed memory bank. By maintaining a comprehensive log of all interactions, Memoria enables the LLM to recall past user inputs even across different sessions. This persistent memory eliminates the need for users to reintroduce themselves or repeat previous inputs, thereby improving the continuity and flow of interaction. A key benefit of structured conversation is that users no longer start from scratch, and the LLM can continue conversations seamlessly across sessions. This KG is saved in form of raw triplets in the SQL database and in form of vector embeddings in a vector database along with relevant metadata used for filtering relevant set of triplets.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S2.SS2.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">II-B2 </span>Dynamic User Persona via KG</h4>
+<div class="ltx_para" id="S2.SS2.SSS2.p1">
+<p class="ltx_p">In addition to storing conversation history, Memoria constructs a <span class="ltx_text ltx_font_bold">dynamic user persona</span> by incrementally building a KG based on user interactions. This KG captures:</p>
+</div>
+<div class="ltx_para" id="S2.SS2.SSS2.p2">
+<ul class="ltx_itemize" id="S2.I2">
+<li class="ltx_item" id="S2.I2.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I2.i1.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Recurring topics</span> mentioned by the user;</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I2.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I2.i2.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">User preferences</span> inferred from conversational patterns;</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I2.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I2.i3.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Named entities</span> identified during interactions; and,</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I2.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I2.i4.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Relationships</span> and connections between various user-stated facts.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ltx_para" id="S2.SS2.SSS2.p3">
+<p class="ltx_p">The KG evolves as new messages are processed, enabling the system to emulate a growing, adaptive memory. This representation supports the generation of responses that are not only contextually accurate but also deeply personalized, based on the user’s history and interaction patterns. Some of the key benefits of this KG are that the conversations feel customized to the end user, and meaningful responses are tailored rather than generic.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S2.SS2.SSS3">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">II-B3 </span>Session Level Memory for Real Time Context</h4>
+<div class="ltx_para" id="S2.SS2.SSS3.p1">
+<p class="ltx_p">To handle short-term recall within an ongoing session, Memoria includes a session summarization module. As the conversation progresses, this module dynamically generates summaries of the dialogue, which are then used to maintain continuity in real time.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.SSS3.p2">
+<p class="ltx_p">This feature ensures that the LLM retains a coherent understanding of prior turns within the same session, crucial for multi-turn conversations where context evolves rapidly. By maintaining a live memory of the current session, Memoria mitigates context loss and allows the LLM to respond intelligently, even during extended dialogues.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S2.SS2.SSS4">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">II-B4 </span>Seamless Retrieval for Context-Aware Responses</h4>
+<div class="ltx_para" id="S2.SS2.SSS4.p1">
+<p class="ltx_p">Memoria’s retrieval module enables the LLM to recall relevant past information when a user returns after a pause, whether the gap is a few minutes or several days. This retrieval mechanism fuses two memory sources:
+(1) the <span class="ltx_text ltx_font_bold">structured conversation history</span> from the database; and, (2) the <span class="ltx_text ltx_font_bold">KG</span> constructed from prior interactions enhanced with weightage based on recency of conversations.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.SSS4.p2">
+<p class="ltx_p">By effectively combining these, the system provides the LLM with a relevant distilled context window tailored to the current prompt. This enables the conversational assistant to recall previously discussed topics, user-specific preferences, and unfinished queries, allowing the conversation to resume naturally and productively. Both approaches, i.e., session-level summary and KG generation of user persona, help to improve the episodic and semantic memory capabilities of any LLM chat application.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S2.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">II-C </span><span class="ltx_text ltx_font_italic">Holistic Personalization and Memory Retention</span>
+</h3>
+<div class="ltx_para" id="S2.SS3.p1">
+<p class="ltx_p">Each of the above four modules in Memoria is designed to be independently functional yet synergistic when combined. Collectively, they form a holistic memory architecture that supports:</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p2">
+<ul class="ltx_itemize" id="S2.I3">
+<li class="ltx_item" id="S2.I3.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I3.i1.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Personalization:</span> By modeling individual users through KGs;</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I3.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I3.i2.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Retention:</span> By persistently storing conversation history;</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I3.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I3.i3.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Continuity:</span> By linking sessions via intelligent retrieval and summarization; and,</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I3.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I3.i4.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Efficiency:</span> By reducing redundancy and unnecessary user input.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ltx_para" id="S2.SS3.p3">
+<p class="ltx_p">Memoria functions as a plug-and-play memory extension for any LLM-based conversational assistant. It redefines user experience by transforming LLMs from forgetful responders into intelligent, adaptive agents capable of learning and evolving through ongoing interactions.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p4">
+<p class="ltx_p">Memoria upgrades the LLM and user interaction paradigm from isolated exchanges to ongoing relationships and conversations that evolve, adapt, and remember.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">III </span><span class="ltx_text ltx_font_smallcaps">System Architecture</span>
+</h2>
+<figure class="ltx_figure" id="S3.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="357" id="S3.F1.g1" src="System_Architecutre_New.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>Memoria System Architecture</figcaption>
+</figure>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p">The Memoria framework is designed to function as a modular memory enhancement layer for any LLM powered conversational system. Its architecture supports dynamic memory construction and retrieval based on the user’s session status distinguishing between new and repeat users, as well as new and ongoing sessions. Figure <a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S3.F1" title="Figure 1 ‣ III System Architecture ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_tag">1</span></a> illustrates two operational scenarios that encapsulate Memoria’s working components.</p>
+</div>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">III-A </span><span class="ltx_text ltx_font_italic">Scenario 1: New User or New Session</span>
+</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p">When a user interacts with the system for the first time, Memoria does not possess any prior memory, neither a session-level summary nor a users persona KG. As shown in the upper half of Figure <a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S3.F1" title="Figure 1 ‣ III System Architecture ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_tag">1</span></a>, only the user message (A) and the system prompt (B) are passed to the LLM for response generation. No triplets (E) are involved at this point due to the absence of prior context. However, if the session is new but the user is a repeat visitor, the system augments the prompt with additional context derived from the user’s KG (E), alongside the user message and system prompt. Thus, inclusion of the KG in the prompt is conditional used only when prior user data exists from previous interactions.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p2">
+<p class="ltx_p">Once a response is generated, the key memory update engine of Memoria is activated. The system performs the following steps:</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p3">
+<ul class="ltx_itemize" id="S3.I1">
+<li class="ltx_item" id="S3.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I1.i1.p1">
+<p class="ltx_p">Extracts knowledge triplets via LLM from the user message and stores them:</p>
+<ul class="ltx_itemize" id="S3.I1.i1.I1">
+<li class="ltx_item" id="S3.I1.i1.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item"><span class="ltx_text ltx_font_bold">–</span></span>
+<div class="ltx_para" id="S3.I1.i1.I1.i1.p1">
+<p class="ltx_p">In SQL for raw representation (subject, predicate, object).</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i1.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item"><span class="ltx_text ltx_font_bold">–</span></span>
+<div class="ltx_para" id="S3.I1.i1.I1.i2.p1">
+<p class="ltx_p">In vector database as vector embeddings, along with metadata (e.g., timestamp, original sentence, user name).</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I1.i2.p1">
+<p class="ltx_p">Saves the user message and assistant response in SQL as raw messages for full traceability.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I1.i3.p1">
+<p class="ltx_p">Triggers summary generation using both the user and assistant messages via an LLM call. The resulting summary is stored against the session ID in SQL.</p>
+</div>
+</li>
+</ul>
+<p class="ltx_p">This forms the foundational memory layer for any follow-up interactions within the same session.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">III-B </span><span class="ltx_text ltx_font_italic">Scenario 2: Repeat User with Ongoing Session</span>
+</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p">In the case of a repeat user continuing an ongoing session, Memoria retrieves both:</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p2">
+<ul class="ltx_itemize" id="S3.I2">
+<li class="ltx_item" id="S3.I2.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I2.i1.p1">
+<p class="ltx_p">A session summary that encapsulates recent conversation turns.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I2.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I2.i2.p1">
+<p class="ltx_p">A set of user-specific triplets representing their KG.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I2.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I2.i3.p1">
+<p class="ltx_p">As shown in the lower half of Figure <a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S3.F1" title="Figure 1 ‣ III System Architecture ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_tag">1</span></a>, the summary and the top-K triplets (retrieved via semantic similarity from vector DB) filtered for the user basis user name are retrieved. These triplets are further weighted in real time using an exponential decay function, giving higher priority to more recent triplets, ensuring that updated preferences or contradictions are resolved contextually. The session summary and weighted triplets are ingested into the prompt and further passed into the LLM for answering the user query, considering the additional context as well.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I2.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I2.i4.p1">
+<p class="ltx_p">Following response generation, the same update mechanism applies:</p>
+<ul class="ltx_itemize" id="S3.I2.i4.I1">
+<li class="ltx_item" id="S3.I2.i4.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item"><span class="ltx_text ltx_font_bold">–</span></span>
+<div class="ltx_para" id="S3.I2.i4.I1.i1.p1">
+<p class="ltx_p">New triplets from the user query are appended to SQL and embedded in the vector database.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I2.i4.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item"><span class="ltx_text ltx_font_bold">–</span></span>
+<div class="ltx_para" id="S3.I2.i4.I1.i2.p1">
+<p class="ltx_p">The raw messages and updated session summary are saved back to SQL.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li class="ltx_item" id="S3.I2.i5" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I2.i5.p1">
+<p class="ltx_p">This iterative loop continuously enriches both the long-term persona model and short-term conversation memory.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="ltx_para" id="S3.SS2.p3">
+<p class="ltx_p">Memoria’s architecture ensures context-aware, consistent, and evolving dialogue with users while significantly reducing token overhead by avoiding full-history prompting.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">IV </span><span class="ltx_text ltx_font_smallcaps">Working Mechanism</span>
+</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p">Memoria’s architecture is designed to manage memory across diverse user interaction patterns dynamically. This section outlines how the framework handles memory operations, including chat summarization, KG updating, and persistent storage across three distinct user scenarios in detail:</p>
+</div>
+<div class="ltx_para" id="S4.p2">
+<ol class="ltx_enumerate" id="S4.I1">
+<li class="ltx_item" id="S4.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span>
+<div class="ltx_para" id="S4.I1.i1.p1">
+<p class="ltx_p">New User with New Session;</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span>
+<div class="ltx_para" id="S4.I1.i2.p1">
+<p class="ltx_p">Repeat User with New Session; and,</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">3.</span>
+<div class="ltx_para" id="S4.I1.i3.p1">
+<p class="ltx_p">Repeat User with Continuing Session.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="ltx_para" id="S4.p3">
+<p class="ltx_p">Each scenario is processed through a consistent pipeline involving summary retrieval, KG access, application response capture, memory updates, and storage.</p>
+</div>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">IV-A </span><span class="ltx_text ltx_font_italic">New User with New Session</span>
+</h3>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p">When a user interacts with the system for the first time, the following events take place:</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p2">
+<ul class="ltx_itemize" id="S4.I2">
+<li class="ltx_item" id="S4.I2.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I2.i1.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Session Check:</span> Memoria verifies that no past summary exists for the session ID since it is a new session. Therefore, the summary retrieval module returns a null response.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I2.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I2.i2.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">User Check:</span> As this is a first-time user, no associated KG exists. The KG retrieval module confirms the absence of triplets or historical preferences.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I2.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I2.i3.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Response Capture:</span> The user’s query is passed to the developer’s application, which generates a response. Both the query and the corresponding reply are captured by Memoria.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I2.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I2.i4.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Summary Generation:</span> Since no previous summary exists, a fresh session summary is constructed based on the user query and system response.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I2.i5" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I2.i5.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">KG Extraction:</span> Relevant KG triplets are extracted solely from the user’s message. These triplets are embedded as dense vectors and stored in a vector database, along with metadata such as timestamps, user name and source message references etc.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I2.i6" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I2.i6.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Follow-up Retrieval:</span> For any subsequent queries within the same session, both the generated summary and updated KG are available. These can be retrieved using Memoria’s functions and used by the application developer to augment the system or user prompt, enhancing the coherence and personalization of follow-up answers.</p>
+</div>
+</li>
+</ul>
+</div>
+<figure class="ltx_figure" id="S4.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="126" id="S4.F2.g1" src="New_Session_New_User_Big_Font.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>New User with New Session Flow</figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">IV-B </span><span class="ltx_text ltx_font_italic">Repeat User with New Session</span>
+</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p">In this case, the user has interacted with the system before, but the current session is new:</p>
+</div>
+<div class="ltx_para" id="S4.SS2.p2">
+<ul class="ltx_itemize" id="S4.I3">
+<li class="ltx_item" id="S4.I3.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I3.i1.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Session Summary:</span> As it is a new session, no prior summary is available, and the retrieval returns an empty response.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I3.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I3.i2.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">User Check:</span> Memoria identifies the user as a returning user and immediately retrieves the relevant user’s KG triplets based on similarity from previous interactions further assigned with weights (green dotted line in Figure <a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S4.F3" title="Figure 3 ‣ IV-B Repeat User with New Session ‣ IV Working Mechanism ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_tag">3</span></a>).</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I3.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I3.i3.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Prompt Augmentation:</span> The application developer has access to these triplets from the first interaction of the session itself, enabling immediate personalization based on known preferences, interests, or past topics.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I3.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I3.i4.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Memory Update:</span> As the conversation progresses, Memoria continuously updates both the session-level summary and the KG, allowing downstream interactions to benefit from enriched memory and contextual grounding.</p>
+</div>
+</li>
+</ul>
+</div>
+<figure class="ltx_figure" id="S4.F3"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="145" id="S4.F3.g1" src="Repeat_User_with_New_Session_Big_Font.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>Repeat User with New Session Flow</figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S4.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">IV-C </span><span class="ltx_text ltx_font_italic">Repeat User with Continuing Session</span>
+</h3>
+<div class="ltx_para" id="S4.SS3.p1">
+<p class="ltx_p">Here, the user is continuing within an already active session:</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p2">
+<ul class="ltx_itemize" id="S4.I4">
+<li class="ltx_item" id="S4.I4.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I4.i1.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Memory Availability:</span> Both session-level summaries and the user’s KG are readily available from the outset.</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I4.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I4.i2.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Retrieval and Prompt Construction:</span> The summary and relevant triplets, filtered and weighted (explained in the next section) are retrieved by the application and injected into the prompt to ensure deep context continuity (green dotted line in Figure <a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S4.F4" title="Figure 4 ‣ IV-C Repeat User with Continuing Session ‣ IV Working Mechanism ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_tag">4</span></a>).</p>
+</div>
+</li>
+<li class="ltx_item" id="S4.I4.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S4.I4.i3.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Enhanced Dialogue Flow:</span> With both long-term (KG) and short-term (session summary) context available, the LLM is primed to deliver highly coherent, context-aware, and personalized responses that evolve fluidly with the ongoing interaction.</p>
+</div>
+</li>
+</ul>
+</div>
+<figure class="ltx_figure" id="S4.F4"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="140" id="S4.F4.g1" src="Repeat_User_with_Repeat_Session.png" width="598"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 4: </span>Repeat User with Repeat Session Flow</figcaption>
+</figure>
+<div class="ltx_para ltx_noindent" id="S4.SS3.p3">
+<p class="ltx_p">This structured handling of different user scenarios ensures that Memoria offers scalable memory augmentation without compromising the user experience, regardless of whether the interaction is the user’s first or hundredth.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">IV-D </span><span class="ltx_text ltx_font_italic">Memory Update Engine</span>
+</h3>
+<div class="ltx_para" id="S4.SS4.p1">
+<p class="ltx_p">The core of Memoria’s memory system lies in its dual update mechanisms: one for maintaining session-level summaries and another for building a dynamic, personalized KG of the user. Both processes are tightly integrated with the LLM, ensuring that memory is not only persistently stored but also actively leveraged to support coherent and personalized conversations.</p>
+</div>
+<section class="ltx_subsubsection" id="S4.SS4.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">IV-D1 </span>Session Summary Update</h4>
+<div class="ltx_para" id="S4.SS4.SSS1.p1">
+<p class="ltx_p">Upon receiving both the user query and the assistant’s response, Memoria first evaluates whether a session-level summary already exists for the given session ID. If a prior summary is present, it is updated using the new pair of user and assistant messages through a summarization routine powered by the LLM. If no such summary exists, a new one is created by the LLM and stored in the database against the current session ID. This enables incremental construction of a coherent thread of dialogue over time. Retrieval of summaries is direct and deterministic, handled via session ID lookups through a dedicated library function that returns the current summary for any session.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S4.SS4.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">IV-D2 </span>KG Update and Semantic Retrieval</h4>
+<div class="ltx_para" id="S4.SS4.SSS2.p1">
+<p class="ltx_p">The KG component in Memoria represents a significant advancement in modeling persistent user-specific memory. Unlike the summary, the KG is constructed solely from the user’s input, excluding assistant responses, to ensure that the representation accurately reflects the user’s intent, preferences, and identity. When a user message is received, the system checks whether an existing KG is available for that user based on the username. Regardless of the graph’s prior existence, structured triplets (subject, predicate, object) are extracted from the user’s query. If the graph already exists, the new triplets are intelligently connected to existing nodes to form an evolving semantic structure; otherwise, a new graph is instantiated if not KG exists for the user and are saved in SQL database.</p>
+</div>
+<div class="ltx_para" id="S4.SS4.SSS2.p2">
+<p class="ltx_p">Each extracted triplet is embedded into a vector space and stored in a vector database along with rich metadata. This includes the source user message, the timestamp of the conversation, and raw use message etc. At the time of retrieval, the incoming user query is converted into an embedding vector, and semantic similarity is used to retrieve the top <math alttext="N" class="ltx_Math" display="inline" id="S4.SS4.SSS2.p2.m1" intent=":literal"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math> most relevant triplets. These retrieved triplets provide contextual grounding for the LLM.</p>
+</div>
+<div class="ltx_para" id="S4.SS4.SSS2.p3">
+<p class="ltx_p">To dynamically prioritize KG triplets based on their recency, we apply an <span class="ltx_text ltx_font_italic">Exponential Weighted Average (EWA)</span> scheme. This method assigns higher weights to more recent triplets, while gradually decreasing the importance of older ones. Each triplet is assigned a weight based on how recently it was derived from the user’s input messages. This approach prioritizes triplets that were mentioned more recently in the conversation, ensuring that the most up-to-date information is emphasized. It is particularly effective in resolving conflicts where the user’s latest inputs contradict earlier facts, enabling accurate memory updates and maintaining consistency in the KG. Such decay-based weighting ensures that the model emphasizes the user’s latest preferences and facts, which is critical in adapting to evolving contexts.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S4.SS5">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">IV-E </span><span class="ltx_text ltx_font_italic">Weight Calculation</span>
+</h3>
+<div class="ltx_para" id="S4.SS5.p1">
+<p class="ltx_p">For each triplet <math alttext="i" class="ltx_Math" display="inline" id="S4.SS5.p1.m1" intent=":literal"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>, we compute its raw weight <math alttext="w_{i}" class="ltx_Math" display="inline" id="S4.SS5.p1.m2" intent=":literal"><semantics><msub><mi>w</mi><mi>i</mi></msub><annotation encoding="application/x-tex">w_{i}</annotation></semantics></math> using the following exponential decay function:</p>
+</div>
+<div class="ltx_para" id="S4.SS5.p2">
+<table class="ltx_equation ltx_eqn_table" id="S4.E1">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="w_{i}=e^{-a\cdot x_{i}}" class="ltx_Math" display="block" id="S4.E1.m1" intent=":literal"><semantics><mrow><msub><mi>w</mi><mi>i</mi></msub><mo>=</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>a</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><msub><mi>x</mi><mi>i</mi></msub></mrow></mrow></msup></mrow><annotation encoding="application/x-tex">w_{i}=e^{-a\cdot x_{i}}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">where <math alttext="a&gt;0" class="ltx_Math" display="inline" id="S4.SS5.p2.m1" intent=":literal"><semantics><mrow><mi>a</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">a&gt;0</annotation></semantics></math> is the <span class="ltx_text ltx_font_bold">decay rate</span> that controls how quickly the weight decreases over time, and <math alttext="x_{i}" class="ltx_Math" display="inline" id="S4.SS5.p2.m2" intent=":literal"><semantics><msub><mi>x</mi><mi>i</mi></msub><annotation encoding="application/x-tex">x_{i}</annotation></semantics></math> is the <span class="ltx_text ltx_font_bold">number of minutes</span> between the current time and the creation date-time of triplet <math alttext="i" class="ltx_Math" display="inline" id="S4.SS5.p2.m3" intent=":literal"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.
+The values of <math alttext="x" class="ltx_Math" display="inline" id="S4.SS5.p2.m4" intent=":literal"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math> representing the number of minutes between the current time and the creation time of a triplet are normalized to lie within the interval <math alttext="[0,1]" class="ltx_Math" display="inline" id="S4.SS5.p2.m5" intent=":literal"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math>. This normalization step is crucial to ensure numerical stability and meaningful contribution of older triplets in the exponential weighting process.</p>
+</div>
+<div class="ltx_para" id="S4.SS5.p3">
+<p class="ltx_p">Without normalization, large values of <math alttext="x" class="ltx_Math" display="inline" id="S4.SS5.p3.m1" intent=":literal"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math> (which occur when the triplet originates from significantly older conversations) would lead to the exponential term <math alttext="e^{-\alpha x}" class="ltx_Math" display="inline" id="S4.SS5.p3.m2" intent=":literal"><semantics><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>α</mi><mo lspace="0em" rspace="0em">​</mo><mi>x</mi></mrow></mrow></msup><annotation encoding="application/x-tex">e^{-\alpha x}</annotation></semantics></math> approaching zero. This would diminish the influence of otherwise important past interactions and effectively remove them from the model’s context.</p>
+</div>
+<div class="ltx_para" id="S4.SS5.p4">
+<p class="ltx_p">By applying min-max normalization across all triplets:</p>
+<table class="ltx_equation ltx_eqn_table" id="S4.Ex1">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="x_{\text{norm}}=\frac{x-x_{\min}}{x_{\max}-x_{\min}}," class="ltx_Math" display="block" id="S4.Ex1.m1" intent=":literal"><semantics><mrow><mrow><msub><mi>x</mi><mtext>norm</mtext></msub><mo>=</mo><mfrac><mrow><mi>x</mi><mo>−</mo><msub><mi>x</mi><mi>min</mi></msub></mrow><mrow><msub><mi>x</mi><mi>max</mi></msub><mo>−</mo><msub><mi>x</mi><mi>min</mi></msub></mrow></mfrac></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">x_{\text{norm}}=\frac{x-x_{\min}}{x_{\max}-x_{\min}},</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">we ensure that the exponential decay remains sensitive to relative recency, while preventing extreme suppression of older triplet weights. This allows the system to retain a soft memory of long-past interactions, especially when no newer, conflicting information exists.</p>
+</div>
+<div class="ltx_para" id="S4.SS5.p5">
+<p class="ltx_p">A higher value of <math alttext="a" class="ltx_Math" display="inline" id="S4.SS5.p5.m1" intent=":literal"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math> results in a steeper decay, meaning older triplets lose influence more rapidly. Conversely, smaller values of <math alttext="a" class="ltx_Math" display="inline" id="S4.SS5.p5.m2" intent=":literal"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math> produce a gentler decay curve.</p>
+</div>
+<div class="ltx_para" id="S4.SS5.p6">
+<p class="ltx_p">To ensure that the weights are comparable and sum to <math alttext="1" class="ltx_Math" display="inline" id="S4.SS5.p6.m1" intent=":literal"><semantics><mn>1</mn><annotation encoding="application/x-tex">1</annotation></semantics></math>, we normalize them across all retrieved triplets. The normalized weight <math alttext="\tilde{w}_{i}" class="ltx_Math" display="inline" id="S4.SS5.p6.m2" intent=":literal"><semantics><msub><mover accent="true"><mi>w</mi><mo>~</mo></mover><mi>i</mi></msub><annotation encoding="application/x-tex">\tilde{w}_{i}</annotation></semantics></math> is computed as:</p>
+</div>
+<div class="ltx_para" id="S4.SS5.p7">
+<table class="ltx_equation ltx_eqn_table" id="S4.E2">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\tilde{w}_{i}=\frac{w_{i}}{\sum_{j=1}^{N}w_{j}}=\frac{e^{-a\cdot x_{i}}}{\sum_{j=1}^{N}e^{-a\cdot x_{j}}}," class="ltx_Math" display="block" id="S4.E2.m1" intent=":literal"><semantics><mrow><mrow><msub><mover accent="true"><mi>w</mi><mo>~</mo></mover><mi>i</mi></msub><mo>=</mo><mfrac><msub><mi>w</mi><mi>i</mi></msub><mrow><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></msubsup><msub><mi>w</mi><mi>j</mi></msub></mrow></mfrac><mo>=</mo><mfrac><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>a</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><msub><mi>x</mi><mi>i</mi></msub></mrow></mrow></msup><mrow><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></msubsup><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>a</mi><mo lspace="0.222em" rspace="0.222em">⋅</mo><msub><mi>x</mi><mi>j</mi></msub></mrow></mrow></msup></mrow></mfrac></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\tilde{w}_{i}=\frac{w_{i}}{\sum_{j=1}^{N}w_{j}}=\frac{e^{-a\cdot x_{i}}}{\sum_{j=1}^{N}e^{-a\cdot x_{j}}},</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">where <math alttext="N" class="ltx_Math" display="inline" id="S4.SS5.p7.m1" intent=":literal"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math> is the total number of retrieved triplets. This normalization ensures that:</p>
+<table class="ltx_equation ltx_eqn_table" id="S4.E3">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\sum_{i=1}^{N}\tilde{w}_{i}=1" class="ltx_Math" display="block" id="S4.E3.m1" intent=":literal"><semantics><mrow><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></munderover><msub><mover accent="true"><mi>w</mi><mo>~</mo></mover><mi>i</mi></msub></mrow><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\sum_{i=1}^{N}\tilde{w}_{i}=1</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div class="ltx_para" id="S4.SS5.p8">
+<p class="ltx_p">These normalized weights are attached to their corresponding triplets when retrieved from the vector database. During prompt construction, they guide the LLM to prioritize triplets with higher weights, i.e., more recent and likely more relevant knowledge, thereby enhancing personalization and factual accuracy in the conversation. If conflicting triplets are retrieved, this weighting system enables the model to resolve discrepancies in favor of the most current knowledge, having higher weights.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">V </span><span class="ltx_text ltx_font_smallcaps">Experiments</span>
+</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p">To evaluate Memoria against existing agentic memory systems, we compare its performance with A‑Mem <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">xu2025mem</span>]</cite>, a recently-proposed framework that organizes memory notes via principles inspired by the Zettelkasten method. A‑Mem automatically generates structured memory entries with contextual descriptions, tags, and embeddings, then dynamically links new memories to related historical entries and evolves its memory graph over time.</p>
+</div>
+<section class="ltx_subsection" id="S5.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">V-A </span><span class="ltx_text ltx_font_italic">Datasets</span>
+</h3>
+<div class="ltx_para" id="S5.SS1.p1">
+<p class="ltx_p">For experimental evaluation, we utilized the LongMemEvals dataset<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">wu2024longmemeval</span>]</cite>, which is designed to benchmark memory-augmented language model systems in realistic business-oriented settings. The dataset contains long-form conversations paired with targeted questions, challenging the model’s ability to retain and utilize contextual information along with ground truth answers for evaluation. On average, each conversation spans approximately 115,000 tokens, sufficiently large to test the boundaries of context retention while still falling within the token limits of current frontier LLMs<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">rasmussen2025zep</span>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S5.SS1.p2">
+<p class="ltx_p">LongMemEvals includes six distinct question types: (1) single-session-user, (2) single-session-assistant, (3) single-session-preference, (4) multi-session, (5) knowledge-update, and (6) temporal-reasoning. These categories represent various aspects of agentic memory and contextual reasoning. However, for this work, we restrict our analysis to the knowledge-update and single-session-user categories, as they align most closely with the core capabilities of Memoria. The dataset file used is longmemeval_s available under LongMemEvals huggingface <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">longmemeval2024</span>]</cite>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S5.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">V-B </span><span class="ltx_text ltx_font_italic">Computational Details</span>
+</h3>
+<div class="ltx_para" id="S5.SS2.p1">
+<p class="ltx_p">To align with the design goal of accessibility and open-source availability, Memoria has been implemented to operate entirely without reliance on external or proprietary databases. By default, the framework uses an on-premise SQLite3 database for storing raw user conversations, generated summaries, and associated metadata. For semantic representation of user traits and preferences, KG triplets are embedded and stored in a local instance of ChromaDB<span class="ltx_note ltx_role_footnote" id="footnote1"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note">1</span>https://docs.trychroma.com/docs/overview/introduction</span></span></span>, enabling vector-based retrieval with metadata support.</p>
+</div>
+<div class="ltx_para" id="S5.SS2.p2">
+<p class="ltx_p">We employ OpenAI’s text-embedding-ada-002 model to generate embeddings for triplet storage and semantic similarity-based retrieval. The underlying language model used for generation and reasoning tasks is GPT-4.1-mini. During retrieval, we apply semantic top-<math alttext="K" class="ltx_Math" display="inline" id="S5.SS2.p2.m1" intent=":literal"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math> matching with <math alttext="K=20" class="ltx_Math" display="inline" id="S5.SS2.p2.m2" intent=":literal"><semantics><mrow><mi>K</mi><mo>=</mo><mn>20</mn></mrow><annotation encoding="application/x-tex">K=20</annotation></semantics></math>, and assign temporal weights to retrieved triplets using an exponential decay function with a decay rate <math alttext="\alpha" class="ltx_Math" display="inline" id="S5.SS2.p2.m3" intent=":literal"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>=0.02, prioritizing recent interactions.</p>
+</div>
+<div class="ltx_para" id="S5.SS2.p3">
+<p class="ltx_p">The experiments were conducted without the need for high-performance or GPU-backed computational hardware due to the use of closed-source LLMs accessed via API endpoints, hence the system remains lightweight, cost-effective, and deployable in resource-constrained environments.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S5.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">V-C </span><span class="ltx_text ltx_font_italic">Evaluation Setup</span>
+</h3>
+<div class="ltx_para" id="S5.SS3.p1">
+<p class="ltx_p">We evaluated both Memoria and A-Mem on LongMemEvals’s <span class="ltx_text ltx_font_typewriter">single-session-user</span> and <span class="ltx_text ltx_font_typewriter">knowledge-update</span> subsets using GPT‑4.1‑mini as the LLM.</p>
+</div>
+<div class="ltx_para" id="S5.SS3.p2">
+<p class="ltx_p">To provide a fair comparison, we executed two versions of A‑Mem:</p>
+</div>
+<div class="ltx_para" id="S5.SS3.p3">
+<ol class="ltx_enumerate" id="S5.I1">
+<li class="ltx_item" id="S5.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span>
+<div class="ltx_para" id="S5.I1.i1.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Default A‑Mem</span>: Cloned the official repository <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">agiresearch_amem</span>]</cite> and ran experiments using its standard configuration, which employs the all-MiniLM-L6-v2 <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">reimers-2020-allMiniLM-L6-v2</span>]</cite> embedding model from SentenceTransformers.</p>
+</div>
+</li>
+<li class="ltx_item" id="S5.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span>
+<div class="ltx_para" id="S5.I1.i2.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Modified A‑Mem</span>: Updated the A‑Mem embedding component by replacing the default model with OpenAI’s text-embedding-ada-002, aligning with Memoria’s embedding strategy to have a direct comparison with Memoria, though no other changes were made.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="ltx_para" id="S5.SS3.p4">
+<p class="ltx_p">Memoria was tested using text-embedding-ada-002, with identical downstream configurations (GPT‑4.1‑mini, top‑20 retrieval, decay rate <math alttext="\alpha=0.02" class="ltx_Math" display="inline" id="S5.SS3.p4.m1" intent=":literal"><semantics><mrow><mi>α</mi><mo>=</mo><mn>0.02</mn></mrow><annotation encoding="application/x-tex">\alpha=0.02</annotation></semantics></math>).</p>
+</div>
+<div class="ltx_para" id="S5.SS3.p5">
+<p class="ltx_p">For a fair comparison, both Memoria and A‑Mem were configured to retrieve the same number of triplets/ messages (K = 20) in both the experiments that is, the default embedder (SentenceTransformers all-MiniLM-L6-v2) and modified version (OpenAI text-embedding-ada-002). A‑Mem does not implement a decay mechanism thus no weighting while Memoria applies its exponential decay-based weighting, a feature unique to our system.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">VI </span><span class="ltx_text ltx_font_smallcaps">Results</span>
+</h2>
+<div class="ltx_para" id="S6.p1">
+<p class="ltx_p">This section presents a comparative analysis of Memoria and A-Mem on the LongMemEval dataset, evaluating accuracy, token usage and latency performance.</p>
+</div>
+<section class="ltx_subsection" id="S6.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">VI-A </span><span class="ltx_text ltx_font_italic">Accuracy</span>
+</h3>
+<div class="ltx_para" id="S6.SS1.p1">
+<p class="ltx_p">Table <a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S6.T1" title="TABLE I ‣ VI-A Accuracy ‣ VI Results ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_tag">I</span></a> presents the performance comparison across four different approaches on two categories from the LongMemEvals dataset: <span class="ltx_text ltx_font_typewriter">single-session-user</span> and <span class="ltx_text ltx_font_typewriter">knowledge-update</span>. The evaluated methods include: (1) <span class="ltx_text ltx_font_bold">Full Context</span>, where the LLM is prompted without memory augmentation, (2) <span class="ltx_text ltx_font_bold">Memoria</span>, our proposed framework with summarization and KG retrieval, (3) <span class="ltx_text ltx_font_bold">A‑Mem (ST)</span>, the original A‑Mem setup using SentenceTransformers, and (4) <span class="ltx_text ltx_font_bold">A‑Mem (OpenAI)</span>, a modified A‑Mem configuration using OpenAI embeddings. All experiments were conducted using GPT-4.1-mini as the language model backend and evaluated with ground truth using LLM as a judge.</p>
+</div>
+<figure class="ltx_table" id="S6.T1">
+<div class="ltx_inline-block ltx_align_center ltx_transformed_outer" style="width:172.5pt;height:15.5pt;vertical-align:-6.7pt;"><span class="ltx_transformed_inner" style="transform:translate(-120.6pt,10.8pt) scale(0.416981294090257,0.416981294090257) ;">
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_column ltx_th_row ltx_border_l ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold">Type</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold">Full Conversation</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold">A-Mem (ST)</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold">A-Mem (OA)</span></th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold">Memoria</span></th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_l ltx_border_r ltx_border_t">Single-Session</th>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">85.7%</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">78.5%</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">84.2%</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold">87.1%</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_l ltx_border_r">Knowledge-Update</th>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r">78.2%</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r">76.2%</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r">79.4%</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r"><span class="ltx_text ltx_font_bold">80.8%</span></td>
+</tr>
+</tbody>
+</table>
+</span></div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">TABLE I: </span>Accuracy Comparison Across Memory Strategies</figcaption>
+</figure>
+<div class="ltx_para" id="S6.SS1.p2">
+<p class="ltx_p">The results in Table <a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S6.T1" title="TABLE I ‣ VI-A Accuracy ‣ VI Results ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_tag">I</span></a> highlight Memoria’s superior performance over both variants of A-Mem using SentenceTransformers (ST) and OpenAI (OA) embeddings across both Single-Session and Knowledge-Update scenarios. While full-context prompting performs reasonably well, it scales poorly due to latency and token cost. Memoria, by contrast, achieves the highest accuracy in both categories while significantly reducing prompt length by leveraging a weighted KG.</p>
+</div>
+<div class="ltx_para" id="S6.SS1.p3">
+<p class="ltx_p">In our experiments, Memoria outperforms A-Mem by using recency-aware weighting for knowledge triplets. Unlike A-Mem’s unweighted retrieval, Memoria applies exponential decay to prioritize recent user inputs, resolve contradictions and emphasize updated information. This ensures coherent, up-to-date responses across sessions.</p>
+</div>
+<div class="ltx_para" id="S6.SS1.p4">
+<p class="ltx_p">By combining structured long-term memory with adaptive prioritization, Memoria demonstrates that intelligent memory curation—rather than exhaustive recall—is a more effective and scalable strategy for memory-augmented LLMs.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S6.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">VI-B </span><span class="ltx_text ltx_font_italic">Latency Evaluation</span>
+</h3>
+<div class="ltx_para" id="S6.SS2.p1">
+<p class="ltx_p">In addition to accuracy-based evaluations, we conducted a latency test to assess the end-to-end execution time for processing the complete evaluation dataset. This dataset comprises a total of <math alttext="148" class="ltx_Math" display="inline" id="S6.SS2.p1.m1" intent=":literal"><semantics><mn>148</mn><annotation encoding="application/x-tex">148</annotation></semantics></math> data points, with <math alttext="70" class="ltx_Math" display="inline" id="S6.SS2.p1.m2" intent=":literal"><semantics><mn>70</mn><annotation encoding="application/x-tex">70</annotation></semantics></math> samples under the <span class="ltx_text ltx_font_typewriter">single-session-user</span> category and <math alttext="78" class="ltx_Math" display="inline" id="S6.SS2.p1.m3" intent=":literal"><semantics><mn>78</mn><annotation encoding="application/x-tex">78</annotation></semantics></math> under the <span class="ltx_text ltx_font_typewriter">knowledge-update</span> category.</p>
+</div>
+<div class="ltx_para" id="S6.SS2.p2">
+<p class="ltx_p">We compare two approaches:</p>
+<ol class="ltx_enumerate" id="S6.I1">
+<li class="ltx_item" id="S6.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span>
+<div class="ltx_para" id="S6.I1.i1.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Baseline Approach (Full Context Prompting)</span>: In this setup, the entire historical conversation is appended to the prompt along with the current question. The LLM is then queried to generate an answer based on this complete conversational context.</p>
+</div>
+</li>
+<li class="ltx_item" id="S6.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span>
+<div class="ltx_para" id="S6.I1.i2.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Memoria-Augmented Approach</span>: In this setup, only the current question is provided to the system. The response time is calculated by aggregating the execution times of individual Memoria components, which include:</p>
+<ul class="ltx_itemize" id="S6.I1.i2.I1">
+<li class="ltx_item" id="S6.I1.i2.I0.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S6.I1.i2.I0.i1.p1">
+<p class="ltx_p">Retrieval of relevant KG triplets,</p>
+</div>
+</li>
+<li class="ltx_item" id="S6.I1.i2.I0.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S6.I1.i2.I0.i2.p1">
+<p class="ltx_p">Computation of semantic similarity and filtering,</p>
+</div>
+</li>
+<li class="ltx_item" id="S6.I1.i2.I0.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S6.I1.i2.I0.i3.p1">
+<p class="ltx_p">Calculation of exponential decay-based weights for each triplet,</p>
+</div>
+</li>
+<li class="ltx_item" id="S6.I1.i2.I0.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S6.I1.i2.I0.i4.p1">
+<p class="ltx_p">Construction of the prompt using the weighted triplets,</p>
+</div>
+</li>
+<li class="ltx_item" id="S6.I1.i2.I0.i5" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S6.I1.i2.I0.i5.p1">
+<p class="ltx_p">Final inference time from the LLM based on this constructed prompt.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<figure class="ltx_table" id="S6.T2">
+<div class="ltx_inline-block ltx_align_center ltx_transformed_outer" style="width:172.5pt;height:56.4pt;vertical-align:-26.9pt;"><span class="ltx_transformed_inner" style="transform:translate(-81.4pt,26.6pt) scale(0.514498088613496,0.514498088613496) ;">
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_l ltx_border_r ltx_border_t">Approach</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">Question Type</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">Inference Time</th>
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_border_r ltx_border_t">Avg. Token length</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">Full Context</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">single-session-user</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">391 secs</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">115K</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r">Memoria</td>
+<td class="ltx_td ltx_align_center ltx_border_r">single-session-user</td>
+<td class="ltx_td ltx_align_center ltx_border_r">260 secs</td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text ltx_font_bold">398</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r">A-Mem (ST)</td>
+<td class="ltx_td ltx_align_center ltx_border_r">single-session-user</td>
+<td class="ltx_td ltx_align_center ltx_border_r">290 secs</td>
+<td class="ltx_td ltx_align_center ltx_border_r">958</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r">A-Mem (OA)</td>
+<td class="ltx_td ltx_align_center ltx_border_r">single-session-user</td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text ltx_font_bold">252 secs</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r">934</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">Full Context</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">knowledge-update</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">522 secs</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">115K</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r">Memoria</td>
+<td class="ltx_td ltx_align_center ltx_border_r">knowledge-update</td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text ltx_font_bold">320 secs</span></td>
+<td class="ltx_td ltx_align_center ltx_border_r"><span class="ltx_text ltx_font_bold">400</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r">A-Mem (ST)</td>
+<td class="ltx_td ltx_align_center ltx_border_r">knowledge-update</td>
+<td class="ltx_td ltx_align_center ltx_border_r">364 secs</td>
+<td class="ltx_td ltx_align_center ltx_border_r">933</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_l ltx_border_r">A-Mem (OA)</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r">knowledge-update</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r">328 secs</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r">928</td>
+</tr>
+</tbody>
+</table>
+</span></div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">TABLE II: </span>Inference and Token Length Comparison Results between Full Context and Memoria.</figcaption>
+</figure>
+<div class="ltx_para" id="S6.SS2.p3">
+<p class="ltx_p">Table <a class="ltx_ref" href="https://arxiv.org/html/2512.12686v1#S6.T2" title="TABLE II ‣ VI-B Latency Evaluation ‣ VI Results ‣ Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI"><span class="ltx_text ltx_ref_tag">II</span></a> presents the inference time and average prompt token length for different memory strategies across the two evaluated question types. Full-context prompting, while contextually rich, incurs the highest latency up to 522 seconds and processes over 115,000 tokens per query, resulting in substantial computational and monetary overhead. In contrast, Memoria reduces average token length to under 400 tokens by retrieving only a curated set of weighted KG triplets and session summaries, achieving up to 38.7% reduction in latency compared to full context prompting.</p>
+</div>
+<div class="ltx_para" id="S6.SS2.p4">
+<p class="ltx_p">Even though A-Mem variants offer good reductions in latency and prompt size compared to full context, their unweighted retrieval mechanism leads to less precise memory usage and higher average token lengths (900+ tokens) as it retrieves raw user messages for context. Memoria’s modular memory operations and recency-aware triplet weighting preserve contextual fidelity while remaining cost-efficient and scalable, particularly as session histories grow longer.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S7">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">VII </span><span class="ltx_text ltx_font_smallcaps">Conclusion</span>
+</h2>
+<div class="ltx_para" id="S7.p1">
+<p class="ltx_p">We propose an agentic memory framework, called Memoria, for personalized conversational AI. By enabling structured and persistent memory, Memoria allows LLMs to recall, reason, and act upon past interactions, leading to more personalized and coherent conversations. This addresses the statelessness problem commonly seen in traditional LLM deployments.</p>
+</div>
+<div class="ltx_para" id="S7.p2">
+<p class="ltx_p">We will be releasing the library soon as an open-source Python package, built for seamless integration into existing infrastructures.</p>
+</div>
+<div class="ltx_para" id="S7.p3">
+<p class="ltx_p">Future work will expand Memoria’s evaluation in key system dimensions, including memory footprint growth, retrieval latency under load, and KG quality metrics. We also aim to extend its use to broader agentic systems such as retrieval-based recommenders and productivity tools. By modularizing its components, Memoria can support advanced memory tasks like temporal reasoning, user preference tracking, and multisessioncoherence across diverse applications.</p>
+</div>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Sun Dec 14 13:31:40 2025 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

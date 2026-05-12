@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance</title>
+<!--Generated on Tue Aug 12 09:18:48 2025 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.8.2.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.8.2.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.0.8.2.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2508.08774v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S1" title="In Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Related Works</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S1.SS1" title="In 1 Related Works ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1.1 </span>Context-aware AR Assistant</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S1.SS2" title="In 1 Related Works ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1.2 </span>Multimodal Scene Graph Generation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S1.SS3" title="In 1 Related Works ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1.3 </span>Memory-Augmented Agent</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S2" title="In Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Scenario Setup and Memory Construction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S3" title="In Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Memory-augmented AR Agent Framework</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S3.SS1" title="In 3 Memory-augmented AR Agent Framework ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Framework Overview</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S3.SS2" title="In 3 Memory-augmented AR Agent Framework ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Unified Representation: Scene Graph</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S3.SS2.SSS1" title="In 3.2 Unified Representation: Scene Graph ‣ 3 Memory-augmented AR Agent Framework ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2.1 </span>Motivation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S3.SS2.SSS2" title="In 3.2 Unified Representation: Scene Graph ‣ 3 Memory-augmented AR Agent Framework ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2.2 </span>Scene Graph Representation</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S3.SS3" title="In 3 Memory-augmented AR Agent Framework ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Perception Module</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S3.SS4" title="In 3 Memory-augmented AR Agent Framework ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.4 </span>Memory Module</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S3.SS5" title="In 3 Memory-augmented AR Agent Framework ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.5 </span>Spatiotemporal Reasoning Module</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S3.SS5.SSS1" title="In 3.5 Spatiotemporal Reasoning Module ‣ 3 Memory-augmented AR Agent Framework ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.5.1 </span>Task Intent Inference</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S3.SS5.SSS2" title="In 3.5 Spatiotemporal Reasoning Module ‣ 3 Memory-augmented AR Agent Framework ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.5.2 </span>Task Progress Tracking</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S3.SS5.SSS3" title="In 3.5 Spatiotemporal Reasoning Module ‣ 3 Memory-augmented AR Agent Framework ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.5.3 </span>Action Planning</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S3.SS6" title="In 3 Memory-augmented AR Agent Framework ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.6 </span>Actuator Module</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S4" title="In Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Implementation Roadmap and Evaluation Strategy</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S4.SS1" title="In 4 Implementation Roadmap and Evaluation Strategy ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>System Components for Implementation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S4.SS2" title="In 4 Implementation Roadmap and Evaluation Strategy ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Evaluation Plan</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S5" title="In Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Potential Target Application and Use Cases</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S5.SS1" title="In 5 Potential Target Application and Use Cases ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.1 </span>Target Application: Memory-Assisted Cooking Recall</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S5.SS2" title="In 5 Potential Target Application and Use Cases ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5.2 </span>Potential Use Cases</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S6" title="In Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Conclusion</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<div class="ltx_para" id="p1">
+<span class="ltx_ERROR undefined">\onlineid</span>
+<p class="ltx_p">0
+<span class="ltx_ERROR undefined">\vgtccategory</span>Research
+<span class="ltx_ERROR undefined">\vgtcinsertpkg</span>
+</p>
+</div>
+<h1 class="ltx_title ltx_title_document">Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Dongwook Choi
+<br class="ltx_break"/><span class="ltx_text" style="font-size:70%;">Language &amp; AGI Lab
+<br class="ltx_break"/>Yonsei University </span>
+</span><span class="ltx_author_notes">e-mail: dwchoi0610@gmail.com</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Taeyoon Kwon
+<br class="ltx_break"/><span class="ltx_text" style="font-size:70%;">Language &amp; AGI Lab
+<br class="ltx_break"/>Yonsei University </span>
+</span><span class="ltx_author_notes">e-mail: kwonconnor101@yonsei.ac.kr</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Dongil Yang
+<br class="ltx_break"/><span class="ltx_text" style="font-size:70%;">Language &amp; AGI Lab
+<br class="ltx_break"/>Yonsei University </span>
+</span><span class="ltx_author_notes">e-mail: wingu@yonsei.ac.kr</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Hyojun Kim
+<br class="ltx_break"/><span class="ltx_text" style="font-size:70%;">Language &amp; AGI Lab
+<br class="ltx_break"/>Yonsei University </span>
+</span><span class="ltx_author_notes">e-mail: magichjkim12@gmail.com</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Jinyoung Yeo
+<br class="ltx_break"/><span class="ltx_text" style="font-size:70%;">Language &amp; AGI Lab
+<br class="ltx_break"/>Yonsei University
+</span>
+</span><span class="ltx_author_notes">e-mail: jinyeo@yonsei.ac.kr (correspondence)</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p">Augmented Reality (AR) systems are increasingly integrating foundation models, such as Multimodal Large Language Models (MLLMs), to provide more context-aware and adaptive user experiences.
+This integration has led to the development of AR agents to support intelligent, goal-directed interactions in real-world environments.
+While current AR agents effectively support immediate tasks, they struggle with complex multi-step scenarios that require understanding and leveraging user’s long-term experiences and preferences.
+This limitation stems from their inability to capture, retain, and reason over historical user interactions in spatiotemporal contexts.
+To address these challenges, we propose a conceptual framework for memory-augmented AR agents that can provide personalized task assistance by learning from and adapting to user-specific experiences over time.
+Our framework consists of four interconnected modules: (1) Perception Module for multimodal sensor processing, (2) Memory Module for persistent spatiotemporal experience storage, (3) Spatiotemporal Reasoning Module for synthesizing past and present contexts, and (4) Actuator Module for effective AR communication.
+We further present an implementation roadmap, a future evaluation strategy, a potential target application and use cases to demonstrate the practical applicability of our framework across diverse domains.
+We aim for this work to motivate future research toward developing more intelligent AR systems that can effectively bridge user’s interaction history with adaptive, context-aware task assistance.</p>
+</div>
+<div class="ltx_classification">
+<h6 class="ltx_title ltx_title_classification">keywords: </h6>Mixed/augmented reality, augmented reality agents, personalized assistance, large language models, multimodal learning, memory-augmented systems, spatiotemporal reasoning.
+</div>
+<div class="ltx_para" id="p2">
+<p class="ltx_p">Introduction</p>
+</div>
+<div class="ltx_para" id="p3">
+<p class="ltx_p">Augmented Reality (AR) is an innovative technology that enhances the real world with virtual content aligned in 3D space, enabling users to perceive and interact with both physical and digital elements simultaneously <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib2" title="">2</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib33" title="">33</a>]</cite>.
+Conventional AR systems primarily focus on leveraging contextual cues—such as user’s gaze, mobility, and interaction context—to provide relevant and adaptive augmented content to the real world through Head-Mounted Displays (HMDs) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib8" title="">8</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib13" title="">13</a>]</cite>.
+Building on this foundation, there is a growing interest in integrating Generative AI into AR systems to support more context-aware and adaptive user experiences <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib4" title="">4</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib9" title="">9</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib42" title="">42</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="p4">
+<p class="ltx_p">Such AI integration has become feasible due to the advancement of foundation models—such as Large Language Models (LLMs) and Multimodal LLMs (MLLMs)—which show exceptional capabilities in commonsense reasoning, multimodal understanding, and adaptive decision-making capabilities.
+Thereby, these foundation models are being increasingly utilized as autonomous agents capable of decision-making and environmental interaction, as demonstrated in applications ranging from web navigation agents <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib5" title="">5</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib17" title="">17</a>]</cite> to embodied robotics agents <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib1" title="">1</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib11" title="">11</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib26" title="">26</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib59" title="">59</a>]</cite>.
+Following this approach, in the AR domain, recent research has explored AR agents that leverage foundation models to support more intelligent and goal-directed interaction <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib4" title="">4</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib9" title="">9</a>]</cite>.
+These AR agents excel at grounding real-time visual contexts with language instructions, allowing them to interpret and act upon complex scenarios <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib36" title="">36</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib50" title="">50</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib51" title="">51</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="p5">
+<p class="ltx_p">However, as shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S0.F1" title="Figure 1 ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_tag">1</span></a>, while current AR agents are effective in supporting immediate tasks, they fall short in capturing and reusing users’ long-term experiences <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib14" title="">14</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib27" title="">27</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib52" title="">52</a>]</cite>.
+As a result, they struggle to assist with complex multi-step task contexts grounded in personal experience (<span class="ltx_text ltx_font_italic">e.g.</span>, reproducing a user’s cooking routine with ingredient-specific preferences or organizing items based on prior user-defined storage configurations), which limits their ability to provide truly personalized and contextually relevant assistance that builds upon users’ historical interactions and preferences.
+Therefore, we argue that <span class="ltx_text ltx_font_bold">memory-augmented AR agents</span> are essential for providing personalized assistance by recalling, reasoning over, and adapting to user-specific experiences.
+Yet, designing memory-augmented AR agents introduces several key challenges: multimodal perception under uncertainty, persistent memory management, spatiotemporal reasoning, and effective action presentation in AR environments.</p>
+</div>
+<figure class="ltx_figure" id="S0.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_square" height="664" id="S0.F1.g1" src="x1.png" width="664"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>A motivating example of a user asking an AR agent for guidance based on a prior organization experience.
+The agent fails to leverage user-specific memory, revealing a key limitation of current AR systems and underscoring the need for memory-augmented AR agents that support personalized task assistance.</figcaption>
+</figure>
+<div class="ltx_para" id="p6">
+<p class="ltx_p">To address these challenges, we propose a conceptual framework for memory-augmented AR agents that support personalized task assistance, organized around four interconnected modules.
+(1) Perception Module: comprehensive processing and integration of multimodal sensor information to generate structured representations of the user’s current context.
+(2) Memory Module: persistent preservation of spatiotemporal user experiences in procedural formats, enabling contextual retrieval beyond simple linguistic matching to incorporate spatial configurations and behavioral patterns.
+(3) Spatiotemporal Reasoning Module: synthesis of past experiences with current observations to recognize procedural states, track multi-step task progress, and infer next-step guidance while resolving noisy or partial perception through contextual alignment.
+(4) Actuator Module: effective communication and execution of agent decisions within the AR environment.
+This framework emphasizes the functional roles and interactions of these modules, offering a foundation for building agents that adapt to user-specific routines, spatial configurations, and task sequences.</p>
+</div>
+<div class="ltx_para" id="p7">
+<p class="ltx_p">To summarize, this paper presents a conceptual framework for memory-augmented AR agents, proposing a modular approach to address current limitations in personalized task assistance.
+Our contributions include: (1) identifying key design challenges of memory-augmented AR agents, (2) establishing a comprehensive framework supported by an implementation roadmap and evaluation strategy, and (3) demonstrating potential use cases for future applications.</p>
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Related Works</h2>
+<section class="ltx_subsection" id="S1.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">1.1 </span>Context-aware AR Assistant</h3>
+<div class="ltx_para" id="S1.SS1.p1">
+<p class="ltx_p">AR systems have long aimed to assist users by interpreting and responding to contextual information in real-world environments.
+Early context-aware AR systems relied on predefined markers <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib24" title="">24</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib28" title="">28</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib54" title="">54</a>]</cite>, geolocation <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib41" title="">41</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib44" title="">44</a>]</cite>, or simple object detection <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib18" title="">18</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib23" title="">23</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib32" title="">32</a>]</cite> to trigger contextual responses.
+While these systems could recognize specific objects or locations and overlay relevant information, they lacked a sophisticated understanding of dynamic environmental conditions or user states.
+With the advent of large-scale foundation models, modern context-aware AR assistants increasingly integrate LLMs and MLLMs to enable more intelligent and adaptive support. These systems can provide knowledge grounded in observed objects and scenes <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib9" title="">9</a>]</cite>, give proactive assists <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib27" title="">27</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib52" title="">52</a>]</cite>, and generate procedural guidance tailored to task progress <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib4" title="">4</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib36" title="">36</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib50" title="">50</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib51" title="">51</a>]</cite>.
+Collectively, these studies illustrate how AR assistants have evolved to incorporate multimodal understanding and proactive assistance.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S1.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">1.2 </span>Multimodal Scene Graph Generation</h3>
+<div class="ltx_para" id="S1.SS2.p1">
+<p class="ltx_p">Scene graphs have emerged as a powerful abstraction for representing complex environments by unifying multimodal perceptual input. Recent advances in Multimodal Scene Graph Generation (MSGG) extend this abstraction beyond static 2D scenes by incorporating temporal cues, 3D geometric reasoning, and language understanding <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib7" title="">7</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib12" title="">12</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib57" title="">57</a>]</cite>. These works enable richer representations that are particularly well suited for interactive and dynamic settings like AR.
+In the 3D domain, scene graphs built from point cloud data allow for more precise spatial grounding, while transformer-based architectures enhance the modeling of complex relational structures across modalities <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib30" title="">30</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib40" title="">40</a>]</cite>. Open-vocabulary frameworks further support adaptation to real-world environments without predefined label constraints <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib25" title="">25</a>]</cite>. Additionally, recent research has explored scene graphs as interfaces for reasoning within LLMs, demonstrating their potential as shared representations for downstream tasks <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib53" title="">53</a>]</cite>.
+These works highlight the effectiveness of scene graphs as a unified, interpretable, and extensible structure for multimodal integration and reasoning, motivating their use in adaptive AR systems.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S1.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">1.3 </span>Memory-Augmented Agent</h3>
+<div class="ltx_para" id="S1.SS3.p1">
+<p class="ltx_p">Recent advances in memory-augmented agents have enabled more adaptive and context-aware interactions across various domains  <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib43" title="">43</a>]</cite>.
+In Embodied agents, research primarily focuses on maintaining structured episodic memories and semantic contexts to support complex and interactive tasks <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib26" title="">26</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib48" title="">48</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib58" title="">58</a>]</cite>. Especially, <cite class="ltx_cite ltx_citemacro_citet">Kwon et al. [<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib26" title="">26</a>]</cite> highlights the importance of distinguishing and utilizing user-specific semantic knowledge and routine patterns for effective personalized assistance.
+Web and GUI-based agents leverage memory specifically designed to retain personalized user data, interaction history, and individual user preferences <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib3" title="">3</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib49" title="">49</a>]</cite>.
+Recent AR research has investigated memory-augmented systems for delivering contextual assistance in real-time environments <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib14" title="">14</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib27" title="">27</a>]</cite>.
+Typical systems provide personalized assistance by recognizing immediate user contexts and recalling recent interactions through AR glasses.
+However, their focus remains on short-term interactions, offering limited support when users seek to reproduce complex, personalized routines grounded in long-term experiences.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Scenario Setup and Memory Construction</h2>
+<div class="ltx_para" id="S2.p1">
+<p class="ltx_p">We consider a two-phase interaction scenario between the user and the AR system.
+In the first phase, the user records their everyday activities (<span class="ltx_text ltx_font_italic">e.g.</span>, cooking a recipe or organizing a space) using an AR glass, then the user names each recording with a personalized title, such as “<span class="ltx_text ltx_font_italic">Mom’s Chicken Stew Recipe</span>”.
+These titled recordings are later transformed into structured, task-relevant memory representations via offline processing of egocentric video and associated sensor data (<span class="ltx_text ltx_font_italic">e.g.</span>, hand pose, audio) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib21" title="">21</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib29" title="">29</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib45" title="">45</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S2.p2">
+<p class="ltx_p">In the second phase, when the user returns to the same location (<span class="ltx_text ltx_font_italic">e.g.</span>, say, standing once again in front of their kitchen counter) and verbally specifies which episode to recall, which initiates the retrieval process.
+The titles of retrieved previously recorded episodes can appear as a subtle overlay in the user’s view, offering them a chance to recall their past approach.
+Once the user selects the memory, AR system uses the recorded episode as a reference to assess the user’s current action and environment, tracking their progress and suggesting the next step.
+Instead of suggesting a common next step, the system provides assistance based on the user’s past experience, using visual or audio cues.
+For example, when preparing ingredients for a meal—as in the previously saved episode titled “<span class="ltx_text ltx_font_italic">Mom’s Chicken Stew Recipe</span>”—the AR display may indicate precisely which item to use next or how it was previously handled, based on how the user prepared the dish before.
+In this way, the system helps the user recall and follow their own personalized workflow with context-aware assistance.</p>
+</div>
+<figure class="ltx_figure" id="S2.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="488" id="S2.F2.g1" src="x2.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>A two-phase conceptual framework for personalized memory-augmented AR agents. User experiences are recorded and encoded as scene graphs during the Recording phase. In the Recall phase, AR agents leverage these graphs to provide personalized guidance (<span class="ltx_text ltx_font_italic">e.g.</span>, highlighting the pot and saying “Add the onion…”) as the user prepares a personal recipe such as <span class="ltx_text ltx_font_italic">Mom’s Chicken Stew</span>.</figcaption>
+</figure>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Memory-augmented AR Agent Framework</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p">To enable personalized task assistance in real-world environments, we propose a memory-augmented AR assistant framework that leverages user’s past experiences in physical environments.</p>
+</div>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1 </span>Framework Overview</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p">As illustrated in Figure <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S2.F2" title="Figure 2 ‣ 2 Scenario Setup and Memory Construction ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_tag">2</span></a>, our framework operates over a two-phase interaction.
+In the Recording phase, users record everyday activities using AR glasses; these recordings are later transformed offline into structured, task-relevant memory representations and stored as episodic memory.
+In the Recall phase, the following four interconnected modules work together to provide personalized assistance grounded in episodic memory: <span class="ltx_text ltx_font_bold">(1) Perception Module</span>, for understanding and structuring the current user’s context by processing multimodal sensory inputs; <span class="ltx_text ltx_font_bold">(2) Memory Module</span>, for maintaining and organizing previously stored episodic memories as retrievable references; <span class="ltx_text ltx_font_bold">(3) Spatiotemporal Reasoning Module</span>, for aligning current context with past experiences to infer user goals, estimate task progress, and suggest context-aware next steps to support assistance; and <span class="ltx_text ltx_font_bold">(4) Actuator Module</span>, for deciding and providing user-facing assistance grounded in the plan and current context.
+Together, these components form a closed-loop system that continuously adapts to the user’s behavior and task environment.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2 </span>Unified Representation: Scene Graph</h3>
+<section class="ltx_subsubsection" id="S3.SS2.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.2.1 </span>Motivation</h4>
+<div class="ltx_para" id="S3.SS2.SSS1.p1">
+<p class="ltx_p">To support adaptive assistance in complex AR environments, we adopt the <span class="ltx_text ltx_font_bold">scene graph</span> as a unified, structured representation of the user’s surroundings.
+Scene graphs provide a flexible abstraction that integrates multimodal perceptual information—such as objects, spatial layouts, actions, and interactions—into a coherent structure.
+Also, serving as a shared data representation across all of the modules, scene graphs promote consistent communication and reduce the overhead of modality-specific integration.
+Moreover, recent work <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib53" title="">53</a>]</cite> demonstrates that LLMs are capable of understanding and reasoning over scene graphs, supporting our design choice.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS2.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.2.2 </span>Scene Graph Representation</h4>
+<div class="ltx_para" id="S3.SS2.SSS2.p1">
+<p class="ltx_p">We represent the user’s surroundings at timestep <math alttext="t" class="ltx_Math" display="inline" id="S3.SS2.SSS2.p1.m1"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math> using a dynamic scene graph <math alttext="G_{t}=(V_{t},E_{t})" class="ltx_Math" display="inline" id="S3.SS2.SSS2.p1.m2"><semantics><mrow><msub><mi>G</mi><mi>t</mi></msub><mo>=</mo><mrow><mo stretchy="false">(</mo><msub><mi>V</mi><mi>t</mi></msub><mo>,</mo><msub><mi>E</mi><mi>t</mi></msub><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">G_{t}=(V_{t},E_{t})</annotation></semantics></math>, where nodes <math alttext="v_{i}\in V_{t}" class="ltx_Math" display="inline" id="S3.SS2.SSS2.p1.m3"><semantics><mrow><msub><mi>v</mi><mi>i</mi></msub><mo>∈</mo><msub><mi>V</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">v_{i}\in V_{t}</annotation></semantics></math> denote entities such as objects, user hands, actions, and UI elements.
+Each node is associated with multimodal features <math alttext="f_{i}" class="ltx_Math" display="inline" id="S3.SS2.SSS2.p1.m4"><semantics><msub><mi>f</mi><mi>i</mi></msub><annotation encoding="application/x-tex">f_{i}</annotation></semantics></math> derived from egocentric visual input, gaze, hand pose, and speech, capturing both its type and its context in the current scene.
+Directed edges <math alttext="e_{ij}\in E_{t}" class="ltx_Math" display="inline" id="S3.SS2.SSS2.p1.m5"><semantics><mrow><msub><mi>e</mi><mrow><mi>i</mi><mo lspace="0em" rspace="0em">​</mo><mi>j</mi></mrow></msub><mo>∈</mo><msub><mi>E</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">e_{ij}\in E_{t}</annotation></semantics></math> may represent observed physical interactions (<span class="ltx_text ltx_font_italic">e.g.</span>, grasping, next to), inferred attentional cues (<span class="ltx_text ltx_font_italic">e.g.</span>, attending to, looking at), or planned guidance relations (<span class="ltx_text ltx_font_italic">e.g.</span>, find, notify, to be grasped).</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3 </span>Perception Module</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p">The perception module constructs a structured representation of the user’s current surroundings based on multimodal sensory inputs.
+At each timestep, the system captures egocentric data from the AR glasses, including visual scenes, hand pose, gaze direction, and audio signals such as speech.
+The module integrates them to generate a unified scene graph representation of the current context.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p2">
+<p class="ltx_p">This is achieved by leveraging recent advances in MLLMs, which have demonstrated the capability to generate scene graph structures directly from complex, multimodal inputs. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib21" title="">21</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib29" title="">29</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib45" title="">45</a>]</cite>
+By employing these models, the perception module translates raw sensory observations into structured entities, spatial relations, and interaction cues—forming the basis for downstream modules.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.4 </span>Memory Module</h3>
+<div class="ltx_para" id="S3.SS4.p1">
+<p class="ltx_p">The memory module stores structured representations of the user’s past task experiences.
+Each memory consists of a sequence of scene graphs constructed from previously recorded experiences, capturing key object interactions, spatial layouts, and procedural steps.
+These structured experiences are later referenced by the Spatiotemporal Reasoning module, which support goal-directed assistance, enabling the system to guide the user through tasks based on their own prior workflows.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS5">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.5 </span>Spatiotemporal Reasoning Module</h3>
+<div class="ltx_para" id="S3.SS5.p1">
+<p class="ltx_p">We define the Spatiotemporal Reasoning module as consisting of three core components: (1) <span class="ltx_text ltx_font_italic">Task Intent Inference</span>, (2) <span class="ltx_text ltx_font_italic">Task Progress Tracking</span>, and (3) <span class="ltx_text ltx_font_italic">Action Planning</span>.</p>
+</div>
+<section class="ltx_subsubsection" id="S3.SS5.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.5.1 </span>Task Intent Inference</h4>
+<div class="ltx_para" id="S3.SS5.SSS1.p1">
+<p class="ltx_p">This component analyzes a stored memory episode—represented as a temporal sequence of scene graphs—to infer the user’s original task intent and their personalized procedure for completing it.
+By examining the temporal sequence of user interactions, it identifies key sub-goals, intermediate steps, and habitual action patterns that define the user’s approach.
+This enables the agent to align current behavior with personalized task representations and support user-specific task execution.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS5.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.5.2 </span>Task Progress Tracking</h4>
+<div class="ltx_para" id="S3.SS5.SSS2.p1">
+<p class="ltx_p">This component tracks the user’s progress within an ongoing task by analyzing sequential egocentric observations represented as scene graphs, which are continuously streamed from the perception module.
+Rather than recognizing isolated actions, it interprets short-term behavioral patterns—maintained in working memory—and aligns them with expected procedural steps drawn from previously stored memories.
+By comparing current activity to personalized task flows, the module identifies the user’s current stage and ensures continuous guidance.
+It distinguishes meaningful task-related actions from short-term off-task behaviors—such as answering a phone call or briefly stepping away—so that the system avoids false deviations and maintains reliable progress tracking even in noisy, real-world situations.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS5.SSS3">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">3.5.3 </span>Action Planning</h4>
+<div class="ltx_para" id="S3.SS5.SSS3.p1">
+<p class="ltx_p">This component determines plausible next steps by reasoning over the current user context—represented as a scene graph from the <span class="ltx_text ltx_font_italic">Task Progress Tracking</span> component—and the user’s personalized task plan—retrieved and interpreted from stored task memories via the <span class="ltx_text ltx_font_italic">Task Intent Inference</span> component.
+It operates by constructing or modifying a scene graph that encodes the intended guidance for the user, including required actions or interventions.
+This updated representation is then passed to the Actuator module.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S3.SS6">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.6 </span>Actuator Module</h3>
+<div class="ltx_para" id="S3.SS6.p1">
+<p class="ltx_p">The Actuator module determines the final action to assist the user and presents it through appropriate modalities.
+Based on the output scene graph from the Spatiotemporal Reasoning module, it selects the most relevant instruction or intervention to support task completion.
+The module ensures that assistance is grounded in the current execution context by filtering out actions that are infeasible or irrelevant, considering commonsense constraints and the availability of supporting tools (<span class="ltx_text ltx_font_italic">e.g.</span>, object-level highlighting, brief on-screen tips, or voice-based cues) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib55" title="">55</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib56" title="">56</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S3.SS6.p2">
+<p class="ltx_p">Recent work has demonstrated that LLMs can not only interpret multimodal context but also operate external tools and interfaces to provide assistance in situated environments <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib35" title="">35</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib37" title="">37</a>]</cite>.
+Inspired by these capabilities, our Actuator similarly interprets the scene graph to decide both what assistance to provide and how to execute it—choosing the most appropriate modality based on the user’s current execution context.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Implementation Roadmap and Evaluation Strategy</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p">To make the proposed memory-augmented AR agent framework, as shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#S2.F2" title="Figure 2 ‣ 2 Scenario Setup and Memory Construction ‣ Designing Memory-Augmented AR Agents for Spatiotemporal Reasoning in Personalized Task Assistance"><span class="ltx_text ltx_ref_tag">2</span></a>, more implementable and practically grounded, we outline a high-level roadmap to implement and evaluate a memory-augmented AR agent.</p>
+</div>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1 </span>System Components for Implementation</h3>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p">Each module of the proposed framework is instantiated using AR development tools and existing foundation models.
+In particular, we set the base simulation engine with Unity, enabling the generation of an effective AR environment,
+with GPT-4o-realtime <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib19" title="">19</a>]</cite> serving as the primary reasoning and planning backbone across the system.
+The Perception Module employs SAM2 <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib38" title="">38</a>]</cite> for object and region detection, and processes multimodal inputs (<span class="ltx_text ltx_font_italic">e.g.</span>, gaze trajectories, hand poses, speech transcripts) through the primary backbone.
+Considering deployment environments, this module may alternatively utilize open-source MLLMs fine-tuned on the Ego4D-EASG dataset <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib39" title="">39</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p2">
+<p class="ltx_p">During memory construction, recorded episodes are converted into temporal sequences of scene graphs using the same scene graph construction pipeline as in the Perception Module.
+These are embedded with text-embedding models <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib34" title="">34</a>]</cite> and stored in a vector database (<span class="ltx_text ltx_font_italic">e.g.</span>, FAISS <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib10" title="">10</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib47" title="">47</a>]</cite>) together with structured metadata including episode titles, timestamps, and locations.
+At the start of the recall phase, the most relevant episode is retrieved and loaded into working memory.
+The Spatiotemporal Reasoning Module aligns the current scene graph with recalled memory entities, tracks task progress, and generates action plans.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.p3">
+<p class="ltx_p">The Actuator Module receives an action plan in the form of a scene graph and parses it to determine the required interactions.
+The backbone model is employed to accurately identify target objects or regions in the scene <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib55" title="">55</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib56" title="">56</a>]</cite>.
+It then calls predefined actuation functions in Unity to execute the corresponding actions within the AR environment.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2 </span>Evaluation Plan</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p">A user study is conducted to evaluate the system’s ability to provide effective and context-aware guidance in real-world tasks.
+Evaluation metrics include: (1) Task Completion Rate, defined as the proportion of steps successfully completed with the provided guidance;
+(2) Task Completion Time, the total time required to complete each task; (3) NASA Task Load Index (NASA-TLX) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib16" title="">16</a>]</cite>, measuring user workload across cognitive and physical dimensions; and (4) a User Satisfaction Survey assessing perceived usefulness, naturalness, and reliability of the system.
+For comparison, participants are divided into two distinct user groups: (a) memory-augmented AR guidance, where the system provides personalized recall and context-aware instructions, and (b) Text-only AR guidance, where the AR glasses display fixed recipe instructions as on-screen text.
+This design enables capturing both the objective task performance benefits and the subjective user experience improvements afforded by the proposed memory-augmented AR agent.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Potential Target Application and Use Cases</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p">We present an initial target application followed by several potential use cases, demonstrating how our memory-augmented AR agent can be applied across diverse personalized, context-aware tasks.</p>
+</div>
+<section class="ltx_subsection" id="S5.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.1 </span>Target Application: Memory-Assisted Cooking Recall</h3>
+<div class="ltx_para" id="S5.SS1.p1">
+<p class="ltx_p">As an initial prototype, we have chosen the domain of personalized cooking assistance, a task that naturally benefits from combining past user experiences with real-time perception and guidance <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib31" title="">31</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib46" title="">46</a>]</cite>.
+Users often modify recipes and cooking flows based on personal tastes and habits—such as skipping marination or prepping all ingredients before heating the stove.
+Our system can recall these personalized workflows and provide context-aware prompts, helping users follow their own preferred cooking style consistently.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S5.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">5.2 </span>Potential Use Cases</h3>
+<div class="ltx_para" id="S5.SS2.p1">
+<p class="ltx_p">We identify three representative scenarios where memory-augmented AR agents can provide tangible benefits:</p>
+</div>
+<div class="ltx_para" id="S5.SS2.p2">
+<ul class="ltx_itemize" id="S5.I1">
+<li class="ltx_item" id="S5.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S5.I1.i1.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Routinely Organizing Household Items</span> —From seasonal clothing storage to kitchen layout, users develop implicit organizational logic that’s easily forgotten over time.
+The agent retrieves previous configurations and helps restore or adapt personalized systems with minimal friction.</p>
+</div>
+</li>
+<li class="ltx_item" id="S5.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S5.I1.i2.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Repeating Personalized Health Training</span> —In physical rehab or yoga, users find routines that best suit their bodies.
+By recording motion, setup, and pacing, the agent enables faithful repetition of these effective sessions—especially when reinitiating after breaks.
+This direction aligns with recent efforts <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib22" title="">22</a>]</cite>, which explore AR-based support for personalized home fitness.</p>
+</div>
+</li>
+<li class="ltx_item" id="S5.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S5.I1.i3.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Repeating a Personalized Experiment</span> —Researchers often revisit past experiments with minor changes.
+Remembering exact setups is difficult without detailed notes.
+The agent references past layouts and sequences—like reagent order or labeling quirks—to support reproducibility and reduce error.
+Recent work has also explored AR-based support for laboratory training and experimental guidance <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib15" title="">15</a>, <a class="ltx_ref" href="https://arxiv.org/html/2508.08774v1#bib.bib20" title="">20</a>]</cite>, reinforcing the relevance of such systems for improving safety and procedural accuracy.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6 </span>Conclusion</h2>
+<div class="ltx_para" id="S6.p1">
+<p class="ltx_p">In this paper, we propose a conceptual framework for designing memory-augmented AR agents capable of providing personalized assistance through iterative perception and reasoning.
+By structuring user interactions into scene graph memories and aligning them with real-time context, our system supports adaptive guidance grounded in user-specific workflows.
+We hope this work stimulates further research into personalized, memory-augmented AR systems that bridge interaction history with context-aware task assistance.</p>
+</div>
+<div class="ltx_acknowledgements">
+<h6 class="ltx_title ltx_title_acknowledgements">Acknowledgements.</h6>
+This work was supported by STEAM R&amp;D Project, NRF, Korea (RS-2024-00454458).
+ 
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ahn et al. [2022]</span>
+<span class="ltx_bibblock">
+Michael Ahn, Anthony Brohan, Noah Brown, Yevgen Chebotar, Omar Cortes, Byron David, Chelsea Finn, Chuyuan Fu, Keerthana Gopalakrishnan, Karol Hausman, et al.
+
+</span>
+<span class="ltx_bibblock">Do as i can, not as i say: Grounding language in robotic affordances.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2204.01691</em>, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Azuma [1997]</span>
+<span class="ltx_bibblock">
+Ronald T Azuma.
+
+</span>
+<span class="ltx_bibblock">A survey of augmented reality.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Presence: teleoperators &amp; virtual environments</em>, 6(4):355–385, 1997.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Cai et al. [2025]</span>
+<span class="ltx_bibblock">
+Hongru Cai, Yongqi Li, Wenjie Wang, Fengbin Zhu, Xiaoyu Shen, Wenjie Li, and Tat-Seng Chua.
+
+</span>
+<span class="ltx_bibblock">Large language models empowered personalized web agents.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the ACM on Web Conference 2025</em>, pages 198–215, 2025.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Castelo et al. [2023]</span>
+<span class="ltx_bibblock">
+Sonia Castelo, Joao Rulff, Erin McGowan, Bea Steers, Guande Wu, Shaoyu Chen, Iran Roman, Roque Lopez, Ethan Brewer, Chen Zhao, et al.
+
+</span>
+<span class="ltx_bibblock">Argus: Visualization of ai-assisted task guidance in ar.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">IEEE Transactions on Visualization and Computer Graphics</em>, 30(1):1313–1323, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Chae et al. [2024]</span>
+<span class="ltx_bibblock">
+Hyungjoo Chae, Namyoung Kim, Kai Tzu-iunn Ong, Minju Gwak, Gwanwoo Song, Jihoon Kim, Sunghwan Kim, Dongha Lee, and Jinyoung Yeo.
+
+</span>
+<span class="ltx_bibblock">Web agents with world models: Learning and leveraging environment dynamics in web navigation.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2410.13232</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Chae et al. [2025]</span>
+<span class="ltx_bibblock">
+Hyungjoo Chae, Sunghwan Kim, Junhee Cho, Seungone Kim, Seungjun Moon, Gyeom Hwangbo, Dongha Lim, Minjin Kim, Yeonjun Hwang, Minju Gwak, et al.
+
+</span>
+<span class="ltx_bibblock">Web-shepherd: Advancing prms for reinforcing web agents.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2505.15277</em>, 2025.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Cong et al. [2021]</span>
+<span class="ltx_bibblock">
+Yuren Cong, Wentong Liao, Hanno Ackermann, Bodo Rosenhahn, and Michael Ying Yang.
+
+</span>
+<span class="ltx_bibblock">Spatial-temporal transformer for dynamic scene graph generation.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the IEEE/CVF international conference on computer vision</em>, pages 16372–16382, 2021.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Davari and Bowman [2024]</span>
+<span class="ltx_bibblock">
+Shakiba Davari and Doug A Bowman.
+
+</span>
+<span class="ltx_bibblock">Towards context-aware adaptation in extended reality: A design space for xr interfaces and an adaptive placement strategy.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2411.02607</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Dogan et al. [2024]</span>
+<span class="ltx_bibblock">
+Mustafa Doga Dogan, Eric J Gonzalez, Karan Ahuja, Ruofei Du, Andrea Colaço, Johnny Lee, Mar Gonzalez-Franco, and David Kim.
+
+</span>
+<span class="ltx_bibblock">Augmented object intelligence with xr-objects.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the 37th Annual ACM Symposium on User Interface Software and Technology</em>, pages 1–15, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Douze et al. [2024]</span>
+<span class="ltx_bibblock">
+Matthijs Douze, Alexandr Guzhva, Chengqi Deng, Jeff Johnson, Gergely Szilvasy, Pierre-Emmanuel Mazaré, Maria Lomeli, Lucas Hosseini, and Hervé Jégou.
+
+</span>
+<span class="ltx_bibblock">The faiss library.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2401.08281</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Driess et al. [2023]</span>
+<span class="ltx_bibblock">
+Danny Driess, Fei Xia, Mehdi SM Sajjadi, Corey Lynch, Aakanksha Chowdhery, Ayzaan Wahid, Jonathan Tompson, Quan Vuong, Tianhe Yu, Wenlong Huang, et al.
+
+</span>
+<span class="ltx_bibblock">Palm-e: An embodied multimodal language model.
+
+</span>
+<span class="ltx_bibblock">2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Feng et al. [2023]</span>
+<span class="ltx_bibblock">
+Mingtao Feng, Haoran Hou, Liang Zhang, Zijie Wu, Yulan Guo, and Ajmal Mian.
+
+</span>
+<span class="ltx_bibblock">3d spatial multimodal knowledge accumulation for scene graph prediction in point cloud.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em>, pages 9182–9191, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Grubert et al. [2016]</span>
+<span class="ltx_bibblock">
+Jens Grubert, Tobias Langlotz, Stefanie Zollmann, and Holger Regenbrecht.
+
+</span>
+<span class="ltx_bibblock">Towards pervasive augmented reality: Context-awareness in augmented reality.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">IEEE transactions on visualization and computer graphics</em>, 23(6):1706–1724, 2016.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Haddad et al. [2025]</span>
+<span class="ltx_bibblock">
+Raphaël A El Haddad, Zeyu Wang, Yeonsu Shin, Ranyi Liu, Yuntao Wang, and Chun Yu.
+
+</span>
+<span class="ltx_bibblock">Ar secretary agent: Real-time memory augmentation via llm-powered augmented reality glasses.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2505.11888</em>, 2025.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Hallmann et al. [2023]</span>
+<span class="ltx_bibblock">
+Jona Hallmann, Carsten Stechert, and Syed Imad-Uddin Ahmed.
+
+</span>
+<span class="ltx_bibblock">Supporting student laboratory experiments with augmented reality experience.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Proceedings of the Design Society</em>, 3:3235–3244, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Hart and Staveland [1988]</span>
+<span class="ltx_bibblock">
+Sandra G Hart and Lowell E Staveland.
+
+</span>
+<span class="ltx_bibblock">Development of nasa-tlx (task load index): Results of empirical and theoretical research.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Advances in psychology</em>, volume 52, pages 139–183. Elsevier, 1988.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">He et al. [2024]</span>
+<span class="ltx_bibblock">
+Hongliang He, Wenlin Yao, Kaixin Ma, Wenhao Yu, Yong Dai, Hongming Zhang, Zhenzhong Lan, and Dong Yu.
+
+</span>
+<span class="ltx_bibblock">Webvoyager: Building an end-to-end web agent with large multimodal models.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2401.13919</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Hu et al. [2020]</span>
+<span class="ltx_bibblock">
+Mingwei Hu, Dongdong Weng, Feng Chen, and Yongtian Wang.
+
+</span>
+<span class="ltx_bibblock">Object detecting augmented reality system.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">2020 IEEE 20th International Conference on Communication Technology (ICCT)</em>, pages 1432–1438. IEEE, 2020.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Hurst et al. [2024]</span>
+<span class="ltx_bibblock">
+Aaron Hurst, Adam Lerer, Adam P Goucher, Adam Perelman, Aditya Ramesh, Aidan Clark, AJ Ostrow, Akila Welihinda, Alan Hayes, Alec Radford, et al.
+
+</span>
+<span class="ltx_bibblock">Gpt-4o system card.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2410.21276</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ismael et al. [2024]</span>
+<span class="ltx_bibblock">
+Muhannad Ismael, Roderick McCall, Fintan McGee, Ilyasse Belkacem, Mickaël Stefas, Joan Baixauli, and Didier Arl.
+
+</span>
+<span class="ltx_bibblock">Acceptance of augmented reality for laboratory safety training: methodology and an evaluation study.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Frontiers in Virtual Reality</em>, 5:1322543, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ji et al. [2020]</span>
+<span class="ltx_bibblock">
+Jingwei Ji, Ranjay Krishna, Li Fei-Fei, and Juan Carlos Niebles.
+
+</span>
+<span class="ltx_bibblock">Action genome: Actions as compositions of spatio-temporal scene graphs.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the IEEE/CVF conference on computer vision and pattern recognition</em>, pages 10236–10247, 2020.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Jo et al. [2023]</span>
+<span class="ltx_bibblock">
+Hye-Young Jo, Laurenz Seidel, Michel Pahud, Mike Sinclair, and Andrea Bianchi.
+
+</span>
+<span class="ltx_bibblock">Flowar: How different augmented reality visualizations of online fitness videos support flow for at-home yoga exercises.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the 2023 CHI Conference on Human Factors in Computing Systems</em>, pages 1–17, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kästner et al. [2021]</span>
+<span class="ltx_bibblock">
+Linh Kästner, Leon Eversberg, Marina Mursa, and Jens Lambrecht.
+
+</span>
+<span class="ltx_bibblock">Integrative object and pose to task detection for an augmented-reality-based human assistance system using neural networks.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">2020 IEEE Eighth International Conference on Communications and Electronics (ICCE)</em>, pages 332–337. IEEE, 2021.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kato and Billinghurst [1999]</span>
+<span class="ltx_bibblock">
+Hirokazu Kato and Mark Billinghurst.
+
+</span>
+<span class="ltx_bibblock">Marker tracking and hmd calibration for a video-based augmented reality conferencing system.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings 2nd IEEE and ACM International Workshop on Augmented Reality (IWAR’99)</em>, pages 85–94. IEEE, 1999.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Koch et al. [2024]</span>
+<span class="ltx_bibblock">
+Sebastian Koch, Narunas Vaskevicius, Mirco Colosi, Pedro Hermosilla, and Timo Ropinski.
+
+</span>
+<span class="ltx_bibblock">Open3dsg: Open-vocabulary 3d scene graphs from point clouds with queryable objects and open-set relationships.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em>, pages 14183–14193, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kwon et al. [2025]</span>
+<span class="ltx_bibblock">
+Taeyoon Kwon, Dongwook Choi, Sunghwan Kim, Hyojun Kim, Seungjun Moon, Beong-woo Kwak, Kuan-Hao Huang, and Jinyoung Yeo.
+
+</span>
+<span class="ltx_bibblock">Embodied agents meet personalization: Exploring memory utilization for personalized assistance.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2505.16348</em>, 2025.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Li et al. [2025]</span>
+<span class="ltx_bibblock">
+Chenyi Li, Guande Wu, Gromit Yeuk-Yin Chan, Dishita Gdi Turakhia, Sonia Castelo Quispe, Dong Li, Leslie Welch, Claudio Silva, and Jing Qian.
+
+</span>
+<span class="ltx_bibblock">Satori: Towards proactive ar assistant with belief-desire-intention user modeling.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems</em>, pages 1–24, 2025.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Liu and Tanaka [2021]</span>
+<span class="ltx_bibblock">
+Boyang Liu and Jiro Tanaka.
+
+</span>
+<span class="ltx_bibblock">Virtual marker technique to enhance user interactions in a marker-based ar system.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Applied Sciences</em>, 11(10):4379, 2021.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Liu et al. [2020]</span>
+<span class="ltx_bibblock">
+Chenchen Liu, Yang Jin, Kehan Xu, Guoqiang Gong, and Yadong Mu.
+
+</span>
+<span class="ltx_bibblock">Beyond short-term snippet: Video relation detection with spatio-temporal global context.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the IEEE/CVF conference on computer vision and pattern recognition</em>, pages 10840–10849, 2020.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Lv et al. [2024]</span>
+<span class="ltx_bibblock">
+Changsheng Lv, Mengshi Qi, Xia Li, Zhengyuan Yang, and Huadong Ma.
+
+</span>
+<span class="ltx_bibblock">Sgformer: Semantic graph transformer for point cloud-based 3d scene graph generation.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the AAAI Conference on Artificial Intelligence</em>, volume 38, pages 4035–4043, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Majil et al. [2022]</span>
+<span class="ltx_bibblock">
+Isaias Majil, Mau-Tsuen Yang, and Sophia Yang.
+
+</span>
+<span class="ltx_bibblock">Augmented reality based interactive cooking guide.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Sensors</em>, 22(21):8290, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Malta et al. [2021]</span>
+<span class="ltx_bibblock">
+Ana Malta, Mateus Mendes, and Torres Farinha.
+
+</span>
+<span class="ltx_bibblock">Augmented reality maintenance assistant using yolov5.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Applied Sciences</em>, 11(11):4758, 2021.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Milgram and Kishino [1994]</span>
+<span class="ltx_bibblock">
+Paul Milgram and Fumio Kishino.
+
+</span>
+<span class="ltx_bibblock">A taxonomy of mixed reality visual displays.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">IEICE TRANSACTIONS on Information and Systems</em>, 77(12):1321–1329, 1994.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib34">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Neelakantan et al. [2022]</span>
+<span class="ltx_bibblock">
+Arvind Neelakantan, Tao Xu, Raul Puri, Alec Radford, Jesse Michael Han, Jerry Tworek, Qiming Yuan, Nikolas Tezak, Jong Wook Kim, Chris Hallacy, et al.
+
+</span>
+<span class="ltx_bibblock">Text and code embeddings by contrastive pre-training.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2201.10005</em>, 2022.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib35">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Patil et al. [2024]</span>
+<span class="ltx_bibblock">
+Shishir G Patil, Tianjun Zhang, Xin Wang, and Joseph E Gonzalez.
+
+</span>
+<span class="ltx_bibblock">Gorilla: Large language model connected with massive apis.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Advances in Neural Information Processing Systems</em>, 37:126544–126565, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib36">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Pei et al. [2024]</span>
+<span class="ltx_bibblock">
+Jiahuan Pei, Irene Viola, Haochen Huang, Junxiao Wang, Moonisa Ahsan, Fanghua Ye, Jiang Yiming, Yao Sai, Di Wang, Zhumin Chen, et al.
+
+</span>
+<span class="ltx_bibblock">Autonomous workflow for multimodal fine-grained training assistants towards mixed reality.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2405.13034</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib37">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Qin et al. [2023]</span>
+<span class="ltx_bibblock">
+Yujia Qin, Shihao Liang, Yining Ye, Kunlun Zhu, Lan Yan, Yaxi Lu, Yankai Lin, Xin Cong, Xiangru Tang, Bill Qian, et al.
+
+</span>
+<span class="ltx_bibblock">Toolllm: Facilitating large language models to master 16000+ real-world apis.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2307.16789</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib38">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ravi et al. [2024]</span>
+<span class="ltx_bibblock">
+Nikhila Ravi, Valentin Gabeur, Yuan-Ting Hu, Ronghang Hu, Chaitanya Ryali, Tengyu Ma, Haitham Khedr, Roman Rädle, Chloe Rolland, Laura Gustafson, et al.
+
+</span>
+<span class="ltx_bibblock">Sam 2: Segment anything in images and videos.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2408.00714</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib39">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Rodin et al. [2024]</span>
+<span class="ltx_bibblock">
+Ivan Rodin, Antonino Furnari, Kyle Min, Subarna Tripathi, and Giovanni Maria Farinella.
+
+</span>
+<span class="ltx_bibblock">Action scene graphs for long-form understanding of egocentric videos.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em>, pages 18622–18632, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib40">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Sarkar et al. [2025]</span>
+<span class="ltx_bibblock">
+Sayan Deb Sarkar, Ondrej Miksik, Marc Pollefeys, Daniel Barath, and Iro Armeni.
+
+</span>
+<span class="ltx_bibblock">Crossover: 3d scene cross-modal alignment.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the Computer Vision and Pattern Recognition Conference</em>, pages 8985–8994, 2025.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib41">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Shea et al. [2017]</span>
+<span class="ltx_bibblock">
+Ryan Shea, Di Fu, Andy Sun, Chao Cai, Xiaoqiang Ma, Xiaoyi Fan, Wei Gong, and Jiangchuan Liu.
+
+</span>
+<span class="ltx_bibblock">Location-based augmented reality with pervasive smartphone sensors: Inside and beyond pokemon go!
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">IEEE Access</em>, 5:9619–9631, 2017.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib42">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Shi et al. [2025]</span>
+<span class="ltx_bibblock">
+Jingyu Shi, Rahul Jain, Seunggeun Chi, Hyungjun Doh, Hyung-gun Chi, Alexander J Quinn, and Karthik Ramani.
+
+</span>
+<span class="ltx_bibblock">Caring-ai: Towards authoring context-aware augmented reality instruction through generative artificial intelligence.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems</em>, pages 1–23, 2025.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib43">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Sumers et al. [2023]</span>
+<span class="ltx_bibblock">
+Theodore Sumers, Shunyu Yao, Karthik Narasimhan, and Thomas Griffiths.
+
+</span>
+<span class="ltx_bibblock">Cognitive architectures for language agents.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Transactions on Machine Learning Research</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib44">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Takacs et al. [2008]</span>
+<span class="ltx_bibblock">
+Gabriel Takacs, Vijay Chandrasekhar, Natasha Gelfand, Yingen Xiong, Wei-Chao Chen, Thanos Bismpigiannis, Radek Grzeszczuk, Kari Pulli, and Bernd Girod.
+
+</span>
+<span class="ltx_bibblock">Outdoors augmented reality on mobile phone using loxel-based visual feature organization.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the 1st ACM international conference on Multimedia information retrieval</em>, pages 427–434, 2008.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib45">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Teng et al. [2021]</span>
+<span class="ltx_bibblock">
+Yao Teng, Limin Wang, Zhifeng Li, and Gangshan Wu.
+
+</span>
+<span class="ltx_bibblock">Target adaptive context aggregation for video scene graph generation.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the IEEE/CVF International Conference on Computer Vision</em>, pages 13688–13697, 2021.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib46">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Vir and Madinei [2024]</span>
+<span class="ltx_bibblock">
+Rithik Vir and Parsa Madinei.
+
+</span>
+<span class="ltx_bibblock">Archef: An ios-based augmented reality cooking assistant powered by multimodal gemini llm.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2412.00627</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib47">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wang et al. [2024a]</span>
+<span class="ltx_bibblock">
+Jianguo Wang, Eric Hanson, Guoliang Li, Yannis Papakonstantinou, Harsha Simhadri, and Charles Xie.
+
+</span>
+<span class="ltx_bibblock">Vector databases: What’s really new and what’s next?(vldb 2024 panel).
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Proceedings of the VLDB Endowment</em>, 17(12):4505–4506, 2024a.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib48">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wang et al. [2024b]</span>
+<span class="ltx_bibblock">
+Zixuan Wang, Bo Yu, Junzhe Zhao, Wenhao Sun, Sai Hou, Shuai Liang, Xing Hu, Yinhe Han, and Yiming Gan.
+
+</span>
+<span class="ltx_bibblock">Karma: Augmenting embodied ai agents with long-and-short term memory systems.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2409.14908</em>, 2024b.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib49">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wang et al. [2024c]</span>
+<span class="ltx_bibblock">
+Zora Zhiruo Wang, Jiayuan Mao, Daniel Fried, and Graham Neubig.
+
+</span>
+<span class="ltx_bibblock">Agent workflow memory.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2409.07429</em>, 2024c.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib50">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wu et al. [2024]</span>
+<span class="ltx_bibblock">
+Guande Wu, Jing Qian, Sonia Castelo Quispe, Shaoyu Chen, João Rulff, and Claudio Silva.
+
+</span>
+<span class="ltx_bibblock">Artist: Automated text simplification for task guidance in augmented reality.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the 2024 CHI Conference on Human Factors in Computing Systems</em>, pages 1–24, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib51">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Xu et al. [2024]</span>
+<span class="ltx_bibblock">
+Fang Xu, Tri Nguyen, and Jing Du.
+
+</span>
+<span class="ltx_bibblock">Augmented reality for maintenance tasks with chatgpt for automated text-to-action.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Journal of Construction Engineering and Management</em>, 150(4):04024015, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib52">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Yang et al. [2025a]</span>
+<span class="ltx_bibblock">
+Bufang Yang, Yunqi Guo, Lilin Xu, Zhenyu Yan, Hongkai Chen, Guoliang Xing, and Xiaofan Jiang.
+
+</span>
+<span class="ltx_bibblock">Socialmind: Llm-based proactive ar social assistive system with human-like perception for in-situ live interactions.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies</em>, 9(1):1–30, 2025a.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib53">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Yang et al. [2025b]</span>
+<span class="ltx_bibblock">
+Dongil Yang, Minjin Kim, Sunghwan Kim, Beong-woo Kwak, Minjun Park, Jinseok Hong, Woontack Woo, and Jinyoung Yeo.
+
+</span>
+<span class="ltx_bibblock">Llm meets scene graph: Can large language models understand and generate scene graphs? a benchmark and empirical study.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2505.19510</em>, 2025b.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib54">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zauner et al. [2003]</span>
+<span class="ltx_bibblock">
+Jürgen Zauner, Michael Haller, Alexander Brandl, and Werner Hartman.
+
+</span>
+<span class="ltx_bibblock">Authoring of a mixed reality assembly instructor for hierarchical structures.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">The Second IEEE and ACM International Symposium on Mixed and Augmented Reality, 2003. Proceedings.</em>, pages 237–246. IEEE, 2003.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib55">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al. [2024]</span>
+<span class="ltx_bibblock">
+Zhiyuan Zhang, DongDong Chen, and Jing Liao.
+
+</span>
+<span class="ltx_bibblock">Sgedit: Bridging llm with text2image generative model for scene graph-based image editing.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2410.11815</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib56">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zheng et al. [2024]</span>
+<span class="ltx_bibblock">
+Kaizhi Zheng, Xiaotong Chen, Xuehai He, Jing Gu, Linjie Li, Zhengyuan Yang, Kevin Lin, Jianfeng Wang, Lijuan Wang, and Xin Eric Wang.
+
+</span>
+<span class="ltx_bibblock">Editroom: Llm-parameterized graph diffusion for composable 3d room layout editing.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic">arXiv preprint arXiv:2410.12836</em>, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib57">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhou et al. [2024]</span>
+<span class="ltx_bibblock">
+Zijian Zhou, Zheng Zhu, Holger Caesar, and Miaojing Shi.
+
+</span>
+<span class="ltx_bibblock">Openpsg: Open-set panoptic scene graph generation via large multimodal models.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">European Conference on Computer Vision</em>, pages 199–215. Springer, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib58">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhu et al. [2024]</span>
+<span class="ltx_bibblock">
+Yichen Zhu, Zhicai Ou, Xiaofeng Mou, and Jian Tang.
+
+</span>
+<span class="ltx_bibblock">Retrieval-augmented embodied agents.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition</em>, pages 17985–17995, 2024.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib59">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zitkovich et al. [2023]</span>
+<span class="ltx_bibblock">
+Brianna Zitkovich, Tianhe Yu, Sichun Xu, Peng Xu, Ted Xiao, Fei Xia, Jialin Wu, Paul Wohlhart, Stefan Welker, Ayzaan Wahid, et al.
+
+</span>
+<span class="ltx_bibblock">Rt-2: Vision-language-action models transfer web knowledge to robotic control.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic">Conference on Robot Learning</em>, pages 2165–2183. PMLR, 2023.
+
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Tue Aug 12 09:18:48 2025 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

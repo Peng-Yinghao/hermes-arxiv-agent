@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>An LLM-based multi-agent framework for agile effort estimation</title>
+<!--Generated on Wed Sep 17 23:20:11 2025 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/browse/0.3.4/css/arxiv-html-papers-20250916.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2509.14483v1/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S1" title="In An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">I </span><span class="ltx_text ltx_font_smallcaps">Introduction</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S2" title="In An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II </span><span class="ltx_text ltx_font_smallcaps">Approach</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S2.SS1" title="In II Approach ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II-A </span><span class="ltx_text ltx_font_italic">Architectural overview</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S2.SS2" title="In II Approach ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II-B </span><span class="ltx_text ltx_font_italic">Long-term memory</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S2.SS3" title="In II Approach ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II-C </span><span class="ltx_text ltx_font_italic">Short-term memory</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S2.SS4" title="In II Approach ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II-D </span><span class="ltx_text ltx_font_italic">Action and communication</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S2.SS5" title="In II Approach ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II-E </span><span class="ltx_text ltx_font_italic">Prototype implementation</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3" title="In An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III </span><span class="ltx_text ltx_font_smallcaps">Evaluation</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.SS1" title="In III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-A </span><span class="ltx_text ltx_font_bold">RQ1: Effectiveness of <span class="ltx_text ltx_font_italic">SEEAgent</span> in estimating user stories</span></span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.SS1.SSS1" title="In III-A RQ1: Effectiveness of SEEAgent in estimating user stories ‣ III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-A1 </span>Dataset</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.SS1.SSS2" title="In III-A RQ1: Effectiveness of SEEAgent in estimating user stories ‣ III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-A2 </span>Baselines</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.SS1.SSS3" title="In III-A RQ1: Effectiveness of SEEAgent in estimating user stories ‣ III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-A3 </span>Implementation configurations</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.SS1.SSS4" title="In III-A RQ1: Effectiveness of SEEAgent in estimating user stories ‣ III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-A4 </span>Evaluation metrics</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.SS1.SSS5" title="In III-A RQ1: Effectiveness of SEEAgent in estimating user stories ‣ III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-A5 </span>Results</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.SS2" title="In III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-B </span><span class="ltx_text ltx_font_bold">RQ2: Human-AI collaboration</span></span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.SS2.SSS1" title="In III-B RQ2: Human-AI collaboration ‣ III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-B1 </span>Experimental design and procedures</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.SS2.SSS2" title="In III-B RQ2: Human-AI collaboration ‣ III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-B2 </span>Implementation configurations</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.SS2.SSS3" title="In III-B RQ2: Human-AI collaboration ‣ III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-B3 </span>Post-session survey</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.SS2.SSS4" title="In III-B RQ2: Human-AI collaboration ‣ III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-B4 </span>Results</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.SS3" title="In III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-C </span><span class="ltx_text ltx_font_italic">Threats to validity</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S4" title="In An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV </span><span class="ltx_text ltx_font_smallcaps">Related work</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S5" title="In An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">V </span><span class="ltx_text ltx_font_smallcaps">Conclusions and future work</span></span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">An LLM-based multi-agent framework for agile effort estimation</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Thanh-Long Bui
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Hoa Khanh Dam
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Rashina Hoda
+</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p">Effort estimation is a crucial activity in agile software development, where teams collaboratively review, discuss, and estimate the effort required to complete user stories in a product backlog. Current practices in agile effort estimation heavily rely on subjective assessments, leading to inaccuracies and inconsistencies in the estimates. While recent machine learning-based methods show promising accuracy, they cannot explain or justify their estimates and lack the capability to interact with human team members. Our paper fills this significant gap by leveraging the powerful capabilities of Large Language Models (LLMs). We propose a novel LLM-based multi-agent framework for agile estimation that not only can produce estimates, but also can coordinate, communicate and discuss with human developers and other agents to reach a consensus. Evaluation results on a real-life dataset show that our approach outperforms state-of-the-art techniques across all evaluation metrics in the majority of the cases. Our human study with software development practitioners also demonstrates an overwhelmingly positive experience in collaborating with our agents in agile effort estimation.</p>
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">I </span><span class="ltx_text ltx_font_smallcaps">Introduction</span>
+</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p">Effort estimation is an important aspect of software project management, especially in the planning and monitoring stages. Its accuracy may significantly impact project outcomes – underestimating effort can lead to missed deadlines and budget overruns, while overestimating can reduce resource efficiency and diminish an organisation’s competitive edge <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib1" title="">1</a>]</cite>. In modern agile software development, software is built through incremental releases and iterative cycles, each of which requires the completion of a number of <em class="ltx_emph ltx_font_italic">user stories</em>. As a result, the focus has shifted towards estimating the effort required to complete individual user stories rather than the entire project. It is now standard practice for agile teams to review and estimate each user story in the product backlog, enabling them to plan, prioritise and deliver value efficiently <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib2" title="">2</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p">At present, agile teams mostly rely on experience, subjective assessments, and consensus to estimate user stories (e.g. planning poker <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib3" title="">3</a>]</cite>, T-shirt sizing and dot voting). However, these techniques can result in significant inaccuracies, and more notably, inconsistencies across different estimates, even within the same project and the same team <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib4" title="">4</a>]</cite>. Recent approaches (e.g. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib5" title="">5</a>, <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib6" title="">6</a>, <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib7" title="">7</a>, <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib8" title="">8</a>, <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib9" title="">9</a>]</cite>) have proposed a range of artificial intelligence (AI) models that can learn from a team’s previous estimates and predict the effort for new user stories. Positive results from those approaches suggest that it is possible to build an AI-enabled prediction system to support agile teams in estimating user stories, enabling them to be consistent in their estimates.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p">However, those existing approaches suffer from several major limitations. Most of them are inherent “black box” models, and do not provide <span class="ltx_text ltx_font_italic">explanation</span> for their estimates. Thus, it is difficult for agile teams to understand them and interpret their estimation. In addition, current agile estimation practices (such as the widely-used Planning Poker <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib3" title="">3</a>]</cite> method) are <span class="ltx_text ltx_font_italic">consensus-based</span>: each team member provides an estimate and a consensus estimate is reached after several rounds of discussions and re-estimation. The purpose here is not only to produce an estimate, but also to promote team conversation and collaboration, leverage the cross-disciplinary nature of agile teams, and help uncover hidden complexities or overlooked aspects of the work. Existing AI-driven estimation approaches lack these important capabilities. They are <em class="ltx_emph ltx_font_italic">not</em> able to justify their estimates, and <em class="ltx_emph ltx_font_italic">cannot</em> participate in discussions with human developers to reach an agreed-upon estimate. These critical limitations have resulted in industry reluctance to adopt or deploy them in practice <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib10" title="">10</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p">This paper aims to address the above limitations by proposing a multi-agent framework for agile estimation. We leverage the recent powerful LLM technologies to build a <em class="ltx_emph ltx_font_italic">new</em> class of LLM-based agents for agile effort estimation (hereafter called <span class="ltx_text ltx_font_bold">S</span>oftware <span class="ltx_text ltx_font_bold">E</span>ffort <span class="ltx_text ltx_font_bold">E</span>stimation <span class="ltx_text ltx_font_bold">Agent</span> or <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> for short). Each <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> is capable of not only estimating user stories but also providing justification for its estimates. LLMs often suffer from <em class="ltx_emph ltx_font_italic">hallucinations</em> where the generated information appears plausible but incorrect. To address this problem, we propose a combination of prompt engineering and fine-tuning methods to enrich our agent with knowledge specific to the context of a project through its past user stories. In addition, each agent in our framework can be further enhanced with knowledge specific to its expertise. For example, the front-end agent is enriched with UX knowledge while the back-end agent is with back-end and database code. Thus, our multi-agent approach can combine diverse expertise to lead to more realistic estimates through considering multiple angles of a user story.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p">Another key <span class="ltx_text ltx_font_italic">novelty</span> of our approach is that our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> can coordinate and communicate with other agents and human developers in an agile estimation process – this is a significant departure from the existing approaches. In our multi-agent framework, each individual <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> and human team member can share their perspectives and assumptions on the complexities of a user story before providing their own estimate. If the estimates differ widely, the agents and human team members can discuss the reasons behind the differences. Based on these discussions, our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> is then able to re-estimate, resulting in a more informed and consensus-based estimate. This may improve the accuracy and reliability of effort estimates by leveraging collective team knowledge and reducing biases. Furthermore, through enabling human-AI collaboration, our approach helps agile teams facilitate conversation, uncover hidden insights, and build team consensus – a key purpose of agile effort estimation.</p>
+</div>
+<div class="ltx_para" id="S1.p6">
+<p class="ltx_p">We evaluate <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> on two aspects: (i) its accuracy compared to prior state-of-the-art (SOTA) deep learning approaches for estimating user stories; and (ii) how well it works with human developers in the agile estimation process. In terms of accuracy, we used the same dataset and benchmarks as in the SOTA approaches, and the results show our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> outperforms SOTA in the majority of the cases. With respect to collaborating with humans, we conducted a human study where participants were asked to work with our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span> to estimate user stories for a given software project. Feedback from the participants shows a strong positive experience working effectively with our agents. The participants found that the use of our agents benefit development teams to reach consensus, and bridge the knowledge gap and promote communication between team members. Overall, the participants agreed that they trust our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> and would recommend using it in practice.</p>
+</div>
+<div class="ltx_para" id="S1.p7">
+<p class="ltx_p">The structure of the paper is as follows. We present the details of <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> in Section <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S2" title="II Approach ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_tag">II</span></a>. The experimental setup and results are reported in Section <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3" title="III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_tag">III</span></a>. Related work is discussed in Section <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S4" title="IV Related work ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_tag">IV</span></a>. Finally, we conclude this paper and outline future work in Section <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S5" title="V Conclusions and future work ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_tag">V</span></a>.</p>
+</div>
+<figure class="ltx_figure" id="S1.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="471" id="S1.F1.g1" src="x1.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>Architecture and example conversations between <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span> and humans</figcaption>
+</figure>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">II </span><span class="ltx_text ltx_font_smallcaps">Approach</span>
+</h2>
+<div class="ltx_para" id="S2.p1">
+<p class="ltx_p">We propose <span class="ltx_text ltx_font_bold">S</span>oftware <span class="ltx_text ltx_font_bold">E</span>ffort <span class="ltx_text ltx_font_bold">E</span>stimation <span class="ltx_text ltx_font_bold">Agent</span> (<span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span>), a new agentic framework designed for aiding agile teams in the process of effort estimation and sprint planning <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib3" title="">3</a>]</cite>. <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> aims not only to provide accurate and consistent estimates, but also to facilitate informational interactions with agile team members through offering insights and relevant project information beyond mere numerical predictions.</p>
+</div>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">II-A </span><span class="ltx_text ltx_font_italic">Architectural overview</span>
+</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p">We formulate the problem of agile estimation as predicting the effort <math alttext="E" class="ltx_Math" display="inline" id="S2.SS1.p1.m1" intent=":literal"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math> (often expressed in terms of <em class="ltx_emph ltx_font_italic">story points</em>) required to implement a user story described by a natural language specification <math alttext="Q" class="ltx_Math" display="inline" id="S2.SS1.p1.m2" intent=":literal"><semantics><mi>Q</mi><annotation encoding="application/x-tex">Q</annotation></semantics></math>. Let <math alttext="\mathcal{D}=\{(Q_{i},E_{i})\}_{i=1}^{n}" class="ltx_Math" display="inline" id="S2.SS1.p1.m3" intent=":literal"><semantics><mrow><mi class="ltx_font_mathcaligraphic">𝒟</mi><mo>=</mo><msubsup><mrow><mo stretchy="false">{</mo><mrow><mo stretchy="false">(</mo><msub><mi>Q</mi><mi>i</mi></msub><mo>,</mo><msub><mi>E</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup></mrow><annotation encoding="application/x-tex">\mathcal{D}=\{(Q_{i},E_{i})\}_{i=1}^{n}</annotation></semantics></math> denote a historical dataset of previously estimated user stories and their associated efforts. Given a new user story <math alttext="Q^{\prime}" class="ltx_Math" display="inline" id="S2.SS1.p1.m4" intent=":literal"><semantics><msup><mi>Q</mi><mo>′</mo></msup><annotation encoding="application/x-tex">Q^{\prime}</annotation></semantics></math>, the objective is to estimate the required effort <math alttext="\hat{E}" class="ltx_Math" display="inline" id="S2.SS1.p1.m5" intent=":literal"><semantics><mover accent="true"><mi>E</mi><mo>^</mo></mover><annotation encoding="application/x-tex">\hat{E}</annotation></semantics></math> such that <math alttext="\hat{E}\approx E^{\prime}" class="ltx_Math" display="inline" id="S2.SS1.p1.m6" intent=":literal"><semantics><mrow><mover accent="true"><mi>E</mi><mo>^</mo></mover><mo>≈</mo><msup><mi>E</mi><mo>′</mo></msup></mrow><annotation encoding="application/x-tex">\hat{E}\approx E^{\prime}</annotation></semantics></math>, where <math alttext="E^{\prime}" class="ltx_Math" display="inline" id="S2.SS1.p1.m7" intent=":literal"><semantics><msup><mi>E</mi><mo>′</mo></msup><annotation encoding="application/x-tex">E^{\prime}</annotation></semantics></math> is the unknown true story points.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p2">
+<p class="ltx_p">Each <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> <math alttext="\mathcal{A}_{i}" class="ltx_Math" display="inline" id="S2.SS1.p2.m1" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">𝒜</mi><mi>i</mi></msub><annotation encoding="application/x-tex">\mathcal{A}_{i}</annotation></semantics></math> (see Figure <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S1.F1" title="Figure 1 ‣ I Introduction ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_tag">1</span></a>) operates as an autonomous entity tasked with deriving an effort estimate <math alttext="\hat{E}" class="ltx_Math" display="inline" id="S2.SS1.p2.m2" intent=":literal"><semantics><mover accent="true"><mi>E</mi><mo>^</mo></mover><annotation encoding="application/x-tex">\hat{E}</annotation></semantics></math> for a given user story <math alttext="Q^{\prime}" class="ltx_Math" display="inline" id="S2.SS1.p2.m3" intent=":literal"><semantics><msup><mi>Q</mi><mo>′</mo></msup><annotation encoding="application/x-tex">Q^{\prime}</annotation></semantics></math>. Internally, <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> features a modular architecture comprising four principal components: short-term memory, long-term memory, action module, and communication manager. The agent interacts with the software development environment through multiple means: (i) learns knowledge about projects through fine-tuning <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib11" title="">11</a>]</cite> or in-context learning on historical user story datasets <math alttext="D" class="ltx_Math" display="inline" id="S2.SS1.p2.m4" intent=":literal"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>; (ii) generates estimations for new user stories <math alttext="Q^{\prime}" class="ltx_Math" display="inline" id="S2.SS1.p2.m5" intent=":literal"><semantics><msup><mi>Q</mi><mo>′</mo></msup><annotation encoding="application/x-tex">Q^{\prime}</annotation></semantics></math>; and (iii) communicates with human practitioners and other agents using its action module. This architecture enables <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> to maintain relevant information, learn from past estimates, and provide informed effort estimates while facilitating interaction with development team members and peer agents.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p3">
+<p class="ltx_p">The internal reasoning process of an agent unfolds over multiple phases, influenced by both local knowledge and peer interactions. Given a user story <math alttext="Q^{\prime}" class="ltx_Math" display="inline" id="S2.SS1.p3.m1" intent=":literal"><semantics><msup><mi>Q</mi><mo>′</mo></msup><annotation encoding="application/x-tex">Q^{\prime}</annotation></semantics></math>, the agent retrieves relevant information from both memory modules. In short-term memory <math alttext="\mathcal{M}_{s}" class="ltx_Math" display="inline" id="S2.SS1.p3.m2" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">ℳ</mi><mi>s</mi></msub><annotation encoding="application/x-tex">\mathcal{M}_{s}</annotation></semantics></math>, the agent stores the user story <math alttext="Q^{\prime}" class="ltx_Math" display="inline" id="S2.SS1.p3.m3" intent=":literal"><semantics><msup><mi>Q</mi><mo>′</mo></msup><annotation encoding="application/x-tex">Q^{\prime}</annotation></semantics></math>, conversation history <math alttext="H" class="ltx_Math" display="inline" id="S2.SS1.p3.m4" intent=":literal"><semantics><mi>H</mi><annotation encoding="application/x-tex">H</annotation></semantics></math>, and peer estimates <math alttext="\hat{E}_{j}" class="ltx_Math" display="inline" id="S2.SS1.p3.m5" intent=":literal"><semantics><msub><mover accent="true"><mi>E</mi><mo>^</mo></mover><mi>j</mi></msub><annotation encoding="application/x-tex">\hat{E}_{j}</annotation></semantics></math>. From long-term memory <math alttext="\mathcal{M}_{l}" class="ltx_Math" display="inline" id="S2.SS1.p3.m6" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">ℳ</mi><mi>l</mi></msub><annotation encoding="application/x-tex">\mathcal{M}_{l}</annotation></semantics></math>, the agent draws relevant examples, patterns, or rationale stored in its latent space.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p4">
+<p class="ltx_p">We follow the Planning Poker practice in agile, where estimating a user story is often conducted in multiple rounds of discussions. At each round <math alttext="t" class="ltx_Math" display="inline" id="S2.SS1.p4.m1" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>, the agent computes its updated effort estimate <math alttext="\hat{E}^{(t)}" class="ltx_Math" display="inline" id="S2.SS1.p4.m2" intent=":literal"><semantics><msup><mover accent="true"><mi>E</mi><mo>^</mo></mover><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></msup><annotation encoding="application/x-tex">\hat{E}^{(t)}</annotation></semantics></math> based on three components:</p>
+<ul class="ltx_itemize" id="S2.I1">
+<li class="ltx_item" id="S2.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i1.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Initial prompt reasoning:</span> The agent uses <math alttext="\mathcal{M}_{l}" class="ltx_Math" display="inline" id="S2.I1.i1.p1.m1" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">ℳ</mi><mi>l</mi></msub><annotation encoding="application/x-tex">\mathcal{M}_{l}</annotation></semantics></math> to analyse <math alttext="Q^{\prime}" class="ltx_Math" display="inline" id="S2.I1.i1.p1.m2" intent=":literal"><semantics><msup><mi>Q</mi><mo>′</mo></msup><annotation encoding="application/x-tex">Q^{\prime}</annotation></semantics></math> and determines whether clarification questions are needed before making an estimate.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i2.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Contextual feedback integration:</span> For <math alttext="t&gt;0" class="ltx_Math" display="inline" id="S2.I1.i2.p1.m1" intent=":literal"><semantics><mrow><mi>t</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">t&gt;0</annotation></semantics></math>, the agent observes peer predictions <math alttext="\{\hat{E}_{j}^{(t-1)}\}_{j\neq i}" class="ltx_Math" display="inline" id="S2.I1.i2.p1.m2" intent=":literal"><semantics><msub><mrow><mo stretchy="false">{</mo><msubsup><mover accent="true"><mi>E</mi><mo>^</mo></mover><mi>j</mi><mrow><mo stretchy="false">(</mo><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></msubsup><mo stretchy="false">}</mo></mrow><mrow><mi>j</mi><mo>≠</mo><mi>i</mi></mrow></msub><annotation encoding="application/x-tex">\{\hat{E}_{j}^{(t-1)}\}_{j\neq i}</annotation></semantics></math> and prior conversation trace <math alttext="H^{(t-1)}" class="ltx_Math" display="inline" id="S2.I1.i2.p1.m3" intent=":literal"><semantics><msup><mi>H</mi><mrow><mo stretchy="false">(</mo><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></msup><annotation encoding="application/x-tex">H^{(t-1)}</annotation></semantics></math>, then uses <math alttext="\mathcal{M}_{l}" class="ltx_Math" display="inline" id="S2.I1.i2.p1.m4" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">ℳ</mi><mi>l</mi></msub><annotation encoding="application/x-tex">\mathcal{M}_{l}</annotation></semantics></math> to analyse them and determines if additional clarification questions are needed before updating its estimate.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I1.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I1.i3.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">Effort generation:</span> Based on available information and clarifications, the estimate is derived:</p>
+<table class="ltx_equation ltx_eqn_table" id="S2.Ex1">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\hat{E}_{i}^{(t)}=\mathcal{M}_{l}(\cdot|Q^{\prime},\mathcal{M}_{s},\{\hat{E}_{j}^{(t-1)}\}_{j\neq i},H^{(t-1)})" class="ltx_math_unparsed" display="block" id="S2.Ex1.m1" intent=":literal"><semantics><mrow><msubsup><mover accent="true"><mi>E</mi><mo>^</mo></mover><mi>i</mi><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></msubsup><mo>=</mo><msub><mi class="ltx_font_mathcaligraphic">ℳ</mi><mi>l</mi></msub><mrow><mo stretchy="false">(</mo><mo lspace="0em" rspace="0em">⋅</mo><mo fence="false" rspace="0.167em" stretchy="false">|</mo><msup><mi>Q</mi><mo>′</mo></msup><mo>,</mo><msub><mi class="ltx_font_mathcaligraphic">ℳ</mi><mi>s</mi></msub><mo>,</mo><msub><mrow><mo stretchy="false">{</mo><msubsup><mover accent="true"><mi>E</mi><mo>^</mo></mover><mi>j</mi><mrow><mo stretchy="false">(</mo><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></msubsup><mo stretchy="false">}</mo></mrow><mrow><mi>j</mi><mo>≠</mo><mi>i</mi></mrow></msub><mo>,</mo><msup><mi>H</mi><mrow><mo stretchy="false">(</mo><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\hat{E}_{i}^{(t)}=\mathcal{M}_{l}(\cdot|Q^{\prime},\mathcal{M}_{s},\{\hat{E}_{j}^{(t-1)}\}_{j\neq i},H^{(t-1)})</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+</tr></tbody>
+</table>
+</div>
+</li>
+</ul>
+</div>
+<div class="ltx_para" id="S2.SS1.p5">
+<p class="ltx_p">The agent continues this process until convergence is detected across participants or the maximum round limit <math alttext="r" class="ltx_Math" display="inline" id="S2.SS1.p5.m1" intent=":literal"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> is reached.</p>
+</div>
+<div class="ltx_para" id="S2.SS1.p6">
+<p class="ltx_p">This architecture allows agent behaviour to be explainable and auditable, with the communication trace and reasoning process offering insight into how <math alttext="\hat{E}_{i}^{(t)}" class="ltx_Math" display="inline" id="S2.SS1.p6.m1" intent=":literal"><semantics><msubsup><mover accent="true"><mi>E</mi><mo>^</mo></mover><mi>i</mi><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></msubsup><annotation encoding="application/x-tex">\hat{E}_{i}^{(t)}</annotation></semantics></math> was derived. We will now discuss the major components of our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> architecture in detail.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">II-B </span><span class="ltx_text ltx_font_italic">Long-term memory</span>
+</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p">The long-term memory component, with reasoning capabilities powered by general-purpose LLMs, serves as the central information processing unit. It pertains to project-specific knowledge and general world knowledge. Given the stateless nature of language models <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib12" title="">12</a>]</cite>, the information in long-term memory is prone to being outdated, necessitating continual updates. To address this, the process of enriching the module with the latest information about the project must be routinely updated through fine-tuning using newly estimated user stories. This continuous refinement ensures that it remains aligned with evolving project requirements. Furthermore, the integration of fresh information helps the agent to be aware of changes and provide more informed and context-aware responses, thereby making them more useful in supporting human practitioners in agile estimation sessions.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p2">
+<p class="ltx_p">Story point estimation is inherently project-relative <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib5" title="">5</a>]</cite>, with identical user stories potentially receiving different effort estimations across development teams. Therefore, to accommodate this variability, our approach adapts the base LLM model through two modes: fine-tuning for established projects with sufficient historical data, and in-context learning <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib13" title="">13</a>]</cite> for new projects. The fine-tuning process is detailed below, while the in-context learning process is discussed in Section <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S2.SS3" title="II-C Short-term memory ‣ II Approach ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_tag">II-C</span></a>.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p3">
+<p class="ltx_p">Large model fine-tuning is computationally costly and requires a substantial amount of data and computational resources. Due to the constraint of computation resources, we leveraged parameter-efficient fine-tuning (PEFT) techniques (e.g. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib14" title="">14</a>, <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib11" title="">11</a>, <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib15" title="">15</a>, <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib16" title="">16</a>, <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib17" title="">17</a>]</cite>). Specifically, we employed Low-rank Adaptation (LoRA) <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib11" title="">11</a>]</cite> to adjust the chosen base model’s weights. LoRA introduces new trainable parameters in the form of low-rank decomposition matrices to the attention layers and freezes the pre-trained model weights. This allows the model to learn project-specific information while drastically reducing the number of trainable parameters. To further reduce the computation requirements, we applied QLoRA <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib18" title="">18</a>]</cite>, 4-bit quantisation in combination with LoRA. QLoRA compresses the model weight precision from BF16 to NF4, helping reduce the memory usage four times, in theory, without significantly impacting the performance of the model.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p4">
+<p class="ltx_p">In this study, we employed the <span class="ltx_text ltx_font_italic">Llama-3.1-8B-Instruct</span> model as our base model. After LoRA is applied to the model, 20,971,520 additional parameters are introduced while the original 8 billion parameters are frozen. These newly introduced parameters are then updated through the Supervised Fine-tuning (SFT) technique <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib19" title="">19</a>]</cite> trained on historical user stories with ground-truth estimates. SFT allows the model to learn downstream tasks by training it on labelled input-output pairs relevant to the tasks. The input will be a structured prompt containing a user story, and its story point will be the output.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p5">
+<p class="ltx_p">The effectiveness of fine-tuning relies on the quality and design of the prompt used during training. Since our objective is to teach the base model to estimate story points for agile effort estimation, we crafted a prompt that closely resembles how a human practitioner would respond to such queries. The prompt is structured following a conversation format with clearly separated system instructions, user input (the user story), and assistant answer (the estimated story points). This structure enables the model to learn the semantic relationship between a user story and its corresponding numerical estimate while preserving the conversational context essential for agent and human interactions.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p6">
+<p class="ltx_p">The system message sets the context by assigning a specific role to the model: an expert software development effort estimator. The user message presents the user story, and the assistant message entails a succinct response, making it easier for the model to learn from examples. Through training with this prompt structure across multiple examples with varying story complexities and associated effort points, the model gradually learns to associate different types of user stories with appropriate effort levels. The complete prompt format used for fine-tuning is shown in Listing <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#LST1" title="Listing 1 ‣ II-B Long-term memory ‣ II Approach ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_tag">1</span></a>.</p>
+</div>
+<figure class="ltx_float ltx_lstlisting" id="LST1">
+<div class="ltx_listing ltx_lstlisting ltx_framed ltx_framed_rectangle ltx_listing">
+<div class="ltx_listing_data"><a download="" href="data:text/plain;base64,W3N5c3RlbV0KWW91IGFyZSBhbiBleHBlcnQgc29mdHdhcmUgZGV2ZWxvcG1lbnQgZWZmb3J0IGVzdGltYXRvci4gR2l2ZW4gYSBzb2Z0d2FyZSBkZXZlbG9wbWVudCBpc3N1ZSBzdW1tYXJ5LCBwcmVkaWN0IHRoZSBlZmZvcnQgaW4gc3RvcnkgcG9pbnRzLgoKW3VzZXJdCiMjIyBTdW1tYXJ5Ogp7e1VTRVIgU1RPUll9fQoKW2Fzc2lzdGFudF0KTXkgZXN0aW1hdGVkIHN0b3J5IHBvaW50IGlzOiB7e0VTVElNQVRFRCBQT0lOVH19">⬇</a></div>
+<div class="ltx_listingline" id="lstnumberx1">
+<span class="ltx_text ltx_font_typewriter" style="font-size:80%;">[</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">system</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">]</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx2">
+<span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">You</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">are</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">an</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">expert</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">software</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">development</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">effort</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">estimator</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">.</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">Given</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">a</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">software</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">development</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">issue</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">summary</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">,</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">predict</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">the</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">effort</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">in</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">story</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">points</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">.</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx3">
+</div>
+<div class="ltx_listingline" id="lstnumberx4">
+<span class="ltx_text ltx_font_typewriter" style="font-size:80%;">[</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">user</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">]</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx5">
+<span class="ltx_text ltx_font_typewriter" style="font-size:80%;">###</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">Summary</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">:</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx6">
+<span class="ltx_text ltx_font_typewriter" style="font-size:80%;">{{</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">USER</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">STORY</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">}}</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx7">
+</div>
+<div class="ltx_listingline" id="lstnumberx8">
+<span class="ltx_text ltx_font_typewriter" style="font-size:80%;">[</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">assistant</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">]</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx9">
+<span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">My</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">estimated</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">story</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">point</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">is</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">:</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">{{</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">ESTIMATED</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">POINT</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">}}</span>
+</div>
+</div>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_float">Listing 1: </span>Prompt for fine-tuning model</figcaption>
+</figure>
+</section>
+<section class="ltx_subsection" id="S2.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">II-C </span><span class="ltx_text ltx_font_italic">Short-term memory</span>
+</h3>
+<div class="ltx_para" id="S2.SS3.p1">
+<p class="ltx_p">Short-term memory functions as immediate information storage for an estimation session. It maintains a context consisting of a development role, recently received messages, reasoning states, and relevant project artifacts. All these data are structured following the ReAct <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib20" title="">20</a>]</cite> prompting template. This template leverages interleaving explicit thoughts, proposed actions, and observations, making the agent’s thought process auditable and traceable. Furthermore, using this prompting technique allows the agent to carry out autonomous decision-making and action-taking capabilities imposed by the implemented language model.</p>
+</div>
+<figure class="ltx_float ltx_lstlisting" id="LST2">
+<div class="ltx_listing ltx_lst_numbers_left ltx_lstlisting ltx_framed ltx_framed_rectangle ltx_listing">
+<div class="ltx_listing_data"><a download="" href="data:text/plain;base64,e3tST0xFLVBMQVkgUFJPTVBUfX0KCllvdSBhcmUgYW4gYWdlbnQgdGhhdCBwYXJ0aWNpcGF0ZXMgaW4gYSBwbGFubmluZyBwb2tlciBzZXNzaW9uIHdpdGggb3RoZXIgYWdlbnRzIGFuZCBodW1hbiBwbGF5ZXJzLgoKIyMgQWN0aW9ucwpZb3UgaGF2ZSBhY2Nlc3MgdG8gYWN0aW9ucyB0aGF0IHlvdSBjYW4gdXNlLiBUaGluayBjYXJlZnVsbHkgYWJvdXQgd2hpY2ggYWN0aW9ucyB0byB1c2UuCgpBdmFpbGFibGUgYWN0aW9uczoKe3tBQ1RJT05TIERFU0NSSVBUSU9OfX0KCiMjIElucHV0IGZvcm1hdApZb3Ugd2lsbCByZWNlaXZlIGdhbWUgc3RhdGUgYW5kIGNoYXQgaGlzdG9yeSB1cGRhdGVzLgoKIyMgT3V0cHV0IGZvcm1hdApBbHdheXMgZm9sbG93IHRoaXMgZm9ybWF0OgoKVGhvdWdodDogeW91ciByZWFzb25pbmcgYWJvdXQgd2hhdCB0byBkbyBuZXh0CkFjdGlvbjogdGhlX2FjdGlvbl9uYW1lCkFjdGlvbiBJbnB1dDoge3sicGFyYW0xIjogInZhbHVlMSIsICJwYXJhbTIiOiAidmFsdWUyIn19CgojIyBQbGFubmluZyBwb2tlciBydWxlcwp7e0dBTUUgUlVMRX19CgojIyBTdHJhdGVneQpZb3Ugb2JqZWN0aXZlIGlzIHRvIGNvbW11bmljYXRlIHZpYSBjaGF0IHdpdGggb3RoZXIgcGxheWVycyB0byBjb21lIHVwIHdpdGggdGhlIGJlc3QgZXN0aW1hdGlvbiBmb3IgdGhlIGdpdmVuIHVzZXIgc3RvcnkuIEZvciBiZXR0ZXIgZXN0aW1hdGlvbiwgeW91IHNob3VsZCBiYXNlIHlvdXIgZXN0aW1hdGlvbiBvbiB0aGUgcGFzdCB1c2VyIHN0b3JpZXMgYW5kIHNpbWlsYXIgdXNlciBzdG9yaWVzLgoKSW4gdGhlIGZpcnN0IHJvdW5kLCB5b3UgY2FuIGVpdGhlciBtYWtlIGFuIGVzdGltYXRpb24gb3IgYXNrIHF1ZXN0aW9ucyB0byBjbGFyaWZ5IHRoZSB1c2VyIHN0b3J5LiBGb3IgdGhlIGZvbGxvd2luZyByb3VuZHMsIHlvdSBzaG91bGQganVzdGlmeSB5b3VyIGVzdGltYXRpb24gYmFzZWQgb24gc2ltaWxhciB1c2VyIHN0b3JpZXMgYW5kIGNvbnNpZGVyIG90aGVycycgZXN0aW1hdGlvbnMuCgojIyBQYXN0IHVzZXIgc3RvcmllcwpGb3IgcmVmZXJlbmNlLCB5b3UgY2FuIHVzZSB0aGUgZm9sbG93aW5nIHBhc3QgdXNlciBzdG9yaWVzIHRvIGhlbHAgeW91IG1ha2UgeW91ciBlc3RpbWF0aW9uOgoKe3tQQVNUIFVTRVIgU1RPUklFU319CgojIyBVc2VyIHN0b3J5IHRvIGJlIGVzdGltYXRlZAp7e1VTRVIgU1RPUll9fQo=">⬇</a></div>
+<div class="ltx_listingline" id="lstnumberx10">
+<span class="ltx_tag ltx_tag_listingline">1</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">{{</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">ROLE</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">-</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">PLAY</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">PROMPT</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">}}</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx11">
+<span class="ltx_tag ltx_tag_listingline">2</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx12">
+<span class="ltx_tag ltx_tag_listingline">3</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">You</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">are</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">an</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">agent</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">that</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">participates</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">in</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">a</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">planning</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">poker</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">session</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">with</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">other</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">agents</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">and</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">human</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">players</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">.</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx13">
+<span class="ltx_tag ltx_tag_listingline">4</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx14">
+<span class="ltx_tag ltx_tag_listingline">5</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">##</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">Actions</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx15">
+<span class="ltx_tag ltx_tag_listingline">6</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">You</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">have</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">access</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">to</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">actions</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">that</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">you</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">can</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">use</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">.</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">Think</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">carefully</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">about</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">which</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">actions</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">to</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">use</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">.</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx16">
+<span class="ltx_tag ltx_tag_listingline">7</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx17">
+<span class="ltx_tag ltx_tag_listingline">8</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">Available</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">actions</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">:</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx18">
+<span class="ltx_tag ltx_tag_listingline">9</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">{{</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">ACTIONS</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">DESCRIPTION</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">}}</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx19">
+<span class="ltx_tag ltx_tag_listingline">10</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx20">
+<span class="ltx_tag ltx_tag_listingline">11</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">##</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">Input</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">format</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx21">
+<span class="ltx_tag ltx_tag_listingline">12</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">You</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">will</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">receive</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">game</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">state</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">and</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">chat</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">history</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">updates</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">.</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx22">
+<span class="ltx_tag ltx_tag_listingline">13</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx23">
+<span class="ltx_tag ltx_tag_listingline">14</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">##</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">Output</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">format</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx24">
+<span class="ltx_tag ltx_tag_listingline">15</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">Always</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">follow</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">this</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">format</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">:</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx25">
+<span class="ltx_tag ltx_tag_listingline">16</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx26">
+<span class="ltx_tag ltx_tag_listingline">17</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">Thought</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">:</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">your</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">reasoning</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">about</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">what</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">to</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">do</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">next</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx27">
+<span class="ltx_tag ltx_tag_listingline">18</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">Action</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">:</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">the_action_name</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx28">
+<span class="ltx_tag ltx_tag_listingline">19</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">Action</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">Input</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">:</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">{{"</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">param1</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">":</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">"</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">value1</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">",</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">"</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">param2</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">":</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">"</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">value2</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">"}}</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx29">
+<span class="ltx_tag ltx_tag_listingline">20</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx30">
+<span class="ltx_tag ltx_tag_listingline">21</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">##</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">Planning</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">poker</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">rules</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx31">
+<span class="ltx_tag ltx_tag_listingline">22</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">{{</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">GAME</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">RULE</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">}}</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx32">
+<span class="ltx_tag ltx_tag_listingline">23</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx33">
+<span class="ltx_tag ltx_tag_listingline">24</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">##</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">Strategy</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx34">
+<span class="ltx_tag ltx_tag_listingline">25</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">You</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">objective</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">is</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">to</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">communicate</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">via</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">chat</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">with</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">other</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">players</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">to</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">come</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">up</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">with</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">the</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">best</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">estimation</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">for</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">the</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">given</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">user</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">story</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">.</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">For</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">better</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">estimation</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">,</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">you</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">should</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">base</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">your</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">estimation</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">on</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">the</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">past</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">user</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">stories</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">and</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">similar</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">user</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">stories</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">.</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx35">
+<span class="ltx_tag ltx_tag_listingline">26</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx36">
+<span class="ltx_tag ltx_tag_listingline">27</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">In</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">the</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">first</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">round</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">,</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">you</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">can</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">either</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">make</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">an</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">estimation</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">or</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">ask</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">questions</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">to</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">clarify</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">the</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">user</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">story</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">.</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">For</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">the</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">following</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">rounds</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">,</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">you</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">should</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">justify</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">your</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">estimation</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">based</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">on</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">similar</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">user</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">stories</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">and</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">consider</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">others</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">’</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">estimations</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">.</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx37">
+<span class="ltx_tag ltx_tag_listingline">28</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx38">
+<span class="ltx_tag ltx_tag_listingline">29</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">##</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">Past</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">user</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">stories</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx39">
+<span class="ltx_tag ltx_tag_listingline">30</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">For</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">reference</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">,</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">you</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">can</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">use</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">the</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">following</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">past</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">user</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">stories</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">to</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">help</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">you</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">make</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">your</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">estimation</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">:</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx40">
+<span class="ltx_tag ltx_tag_listingline">31</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx41">
+<span class="ltx_tag ltx_tag_listingline">32</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">{{</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">PAST</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">USER</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">STORIES</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">}}</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx42">
+<span class="ltx_tag ltx_tag_listingline">33</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx43">
+<span class="ltx_tag ltx_tag_listingline">34</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">##</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">User</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">story</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">to</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">be</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">estimated</span>
+</div>
+<div class="ltx_listingline" id="lstnumberx44">
+<span class="ltx_tag ltx_tag_listingline">35</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">{{</span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">USER</span><span class="ltx_text ltx_lst_space ltx_font_typewriter" style="font-size:80%;"> </span><span class="ltx_text ltx_lst_identifier ltx_font_typewriter" style="font-size:80%;">STORY</span><span class="ltx_text ltx_font_typewriter" style="font-size:80%;">}}</span>
+</div>
+</div>
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_float">Listing 2: </span>SEEAgent system prompt</figcaption>
+</figure>
+<div class="ltx_para" id="S2.SS3.p2">
+<p class="ltx_p">The system prompt of <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> in Listing <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#LST2" title="Listing 2 ‣ II-C Short-term memory ‣ II Approach ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_tag">2</span></a> comprises several sections:</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p3">
+<ul class="ltx_itemize" id="S2.I2">
+<li class="ltx_item" id="S2.I2.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I2.i1.p1">
+<p class="ltx_p">Line 1-3: The role-play prompt assigns specific profiles in software development to an agent, influencing the agent’s responses to match the desired expertise. This role-play configuration consists of two principal elements: a dynamic software development expertise profile configured during agent initialisation, and a static profile defining <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span>’s fundamental purpose as a planning poker session participant.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I2.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I2.i2.p1">
+<p class="ltx_p">Line 5-19: The prompt uses the ReAct prompting technique <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib20" title="">20</a>]</cite> through dedicated sections for actions, input specifications, and output formatting.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I2.i3" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I2.i3.p1">
+<p class="ltx_p">Line 21-27: To ensure appropriate agent behaviour within the designed planning poker environment, dedicated sections detail the operational rules and strategic guidelines. These sections provide the necessary behavioural constraints and decision-making frameworks.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I2.i4" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I2.i4.p1">
+<p class="ltx_p">Line 29-32: Our approach includes an optional in-context learning component through the incorporation of past user stories, providing an alternative approach when LLM fine-tuning is not feasible or when the project is in its early stage and the number of past user stories with ground-truths is limited.</p>
+</div>
+</li>
+<li class="ltx_item" id="S2.I2.i5" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S2.I2.i5.p1">
+<p class="ltx_p">Line 34-35: The final section details the target user story designated for effort estimation.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS4">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">II-D </span><span class="ltx_text ltx_font_italic">Action and communication</span>
+</h3>
+<div class="ltx_para" id="S2.SS4.p1">
+<p class="ltx_p">The grounding of an <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> is conducted in part by its Action module, which enables it to interact with the software development environment. The Action module acts as an intermediary between the internal of the agent, the reasoning engine, and the environment. This module is integral to <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span>’s ability to elicit information and respond to stakeholders, ensuring efficient communication with human practitioners and other agents. The action module defines two primitive interaction actions: (a) <math alttext="chat" class="ltx_Math" display="inline" id="S2.SS4.p1.m1" intent=":literal"><semantics><mrow><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>h</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow><annotation encoding="application/x-tex">chat</annotation></semantics></math>, allowing the agent to provide justifications, engage in collaborative dialogue, and articulate reasoning processes; (b) <math alttext="make\_estimation" class="ltx_Math" display="inline" id="S2.SS4.p1.m2" intent=":literal"><semantics><mrow><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>k</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi mathvariant="normal">_</mi><mo lspace="0em" rspace="0em">​</mo><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>s</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>i</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><mi>a</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi><mo lspace="0em" rspace="0em">​</mo><mi>i</mi><mo lspace="0em" rspace="0em">​</mo><mi>o</mi><mo lspace="0em" rspace="0em">​</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">make\_estimation</annotation></semantics></math>, allowing the agent to commit to an estimation. The input interfaces of these actions are concisely predefined to ensure the tool-use capability of LLMs can efficiently use them.</p>
+</div>
+<div class="ltx_para" id="S2.SS4.p2">
+<p class="ltx_p">The Communication Manager serves as the main interface for managing external communication. The centralised message aggregation method implemented by this module handles communications from the environment, e.g. human practitioners and other <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span>, and pre-processes them before passing them into the short-term memory. This module ensures operational coherence by systematically coordinating messages between external sources and the internal mechanisms of an agent. The role of this module is necessary as it provides a structured and meaningful stream of information that allows the agent to communicate effectively.</p>
+</div>
+<figure class="ltx_figure" id="S2.F2"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_portrait" height="1037" id="S2.F2.g1" src="x2.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>Communication protocol of <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> in an agile estimation session based on the Agile Planning Poker style</figcaption>
+</figure>
+<div class="ltx_para" id="S2.SS4.p3">
+<p class="ltx_p">The communication protocol of <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span>, illustrated in Figure <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S2.F2" title="Figure 2 ‣ II-D Action and communication ‣ II Approach ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_tag">2</span></a>, follows a structured communication flow between multiple internal components. The protocol differentiates between the first round and the subsequent rounds of interaction. On initiation of the first round, the Communication Manager aggregates players’ information and message content into a structured prompt, whereas in subsequent rounds, the Communication Manager incorporates prior round estimations. This structured prompt is passed into long-term memory, enabling the agent to reason and determine its next action – whether to make an estimate or facilitate discussion. The agent then enters a loop of discussion with the players, and estimates are refined until the round concludes.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS5">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">II-E </span><span class="ltx_text ltx_font_italic">Prototype implementation</span>
+</h3>
+<div class="ltx_para" id="S2.SS5.p1">
+<p class="ltx_p">We have implemented our framework in a platform for human developers and <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span> to work together in estimating user stories for a given software project. The platform consists of a back-end server, which is responsible for orchestrating the agile Planning Poker estimation session mechanics and real-time updates. This component relies on the WebSocket protocol <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib21" title="">21</a>]</cite> to establish bidirectional communication with the Agent server and front-end. The protocol enables real-time broadcasting of participant actions across all connected clients. The Agent server functions as the centralised management system for <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span>. This component is responsible for agent initiation and establishing WebSocket-based communication with the back-end server. Upon initialisation, each agent is configured with a specific role-play prompt. The system allows for flexible model selection to be used as the long-term memory, with the <span class="ltx_text ltx_font_italic">gpt-4o-mini</span> as the default one.</p>
+</div>
+<figure class="ltx_figure" id="S2.F3">
+<p class="ltx_p ltx_align_center"><span class="ltx_text ltx_framed ltx_framed_rectangle" style="--ltx-border-color:#000000;">
+<img alt="Refer to caption" class="ltx_graphics ltx_img_landscape" height="600" id="S2.F3.g1" src="x3.png" width="830"/></span></p>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>Screenshot of the front-end for human players</figcaption>
+</figure>
+<div class="ltx_para" id="S2.SS5.p2">
+<p class="ltx_p">The front-end is implemented as a web-based graphical user interface that facilitates human-AI interaction in a typical agile estimation based on the widely used Planning Poker method. Figure <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S2.F3" title="Figure 3 ‣ II-E Prototype implementation ‣ II Approach ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_tag">3</span></a> illustrates the interface presented to the users. The middle column contains a card showing the active estimation round and the current user story being estimated. A roster where the active estimator is visually distinguished through a black border indication. Positioned at the bottom of the central panel, there is a Fibonacci sequence for point allocation. In the left panel, users are presented with past user stories of a software project developed for the human study. A text-based search box is included for quickly finding the stories that the agents refer to. The right panel incorporates a real-time chat interface, facilitating message exchange between human participants and agents.</p>
+</div>
+<div class="ltx_para" id="S2.SS5.p3">
+<p class="ltx_p">More details of our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> platform can be found at: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_font_italic ltx_ref_self">https://figshare.com/s/bb33c350859802b071ea</span>.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">III </span><span class="ltx_text ltx_font_smallcaps">Evaluation</span>
+</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p">Our evaluation aims to demonstrate the predictive performance of a single <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> against state-of-the-art techniques for agile effort estimation. We also examine how these agents synergise within human teams in a designed environment through a comprehensive human study. This dual approach allows us to assess both estimation accuracy and practical adoption factors of our framework. The research questions we aim to answer are:</p>
+</div>
+<div class="ltx_para" id="S3.p2">
+<ul class="ltx_itemize" id="S3.I1">
+<li class="ltx_item" id="S3.I1.i1" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I1.i1.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">RQ1:</span> <span class="ltx_text ltx_font_italic">How accurate is <span class="ltx_text ltx_font_bold">SEEAgent</span> in estimating user stories compared to state-of-the-art (SOTA) techniques?</span></p>
+</div>
+<div class="ltx_para" id="S3.I1.i1.p2">
+<p class="ltx_p">Our agent architecture relies on long-term memory as the source to produce the estimations; hence, it is critical to validate whether it can churn out accurate effort estimates. Accurate estimates are vital for the agent’s effectiveness in planning sessions as they build credibility in team discussions and enable the agent to meaningfully contribute to the conversation. To evaluate this integral component, we compare our approach against the most recent deep learning approaches, namely: Deep-SE <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib5" title="">5</a>]</cite>, GPT2SP <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib8" title="">8</a>]</cite>, and Fine-SE <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib9" title="">9</a>]</cite>. The same evaluation metrics (mean absolute error, mean magnitude of relative error, and performance indicator) and datasets in the SOTA approaches are used for a fair comparison. This question is essential to ensure our architectural choice of using LLMs for estimation is valid.</p>
+</div>
+</li>
+<li class="ltx_item" id="S3.I1.i2" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span>
+<div class="ltx_para" id="S3.I1.i2.p1">
+<p class="ltx_p"><span class="ltx_text ltx_font_bold">RQ2:</span> <span class="ltx_text ltx_font_italic">How do human agile developers perceive <span class="ltx_text ltx_font_bold">SEEAgent</span> in working with our <span class="ltx_text ltx_font_bold">SEEAgents</span> in agile effort estimation?</span></p>
+</div>
+<div class="ltx_para" id="S3.I1.i2.p2">
+<p class="ltx_p">For AI agents to be effective collaborators, they must be accepted and trusted by development teams. Therefore, understanding how human practitioners perceive and interact with our agents within an effort estimation environment is vital – it reveals the benefits, challenges, and improvement areas where the agents might possess. To answer this question, we conduct a human study with software development professionals, letting them interact with agents in a designed environment and then collect their feedback through a mixed-format survey. This human-centred evaluation provides us with insights into the practical viability of our approach and guide improvements for real-world adoption.</p>
+</div>
+</li>
+</ul>
+</div>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">III-A </span><span class="ltx_text ltx_font_bold">RQ1: Effectiveness of <span class="ltx_text ltx_font_italic">SEEAgent</span> in estimating user stories</span>
+</h3>
+<section class="ltx_subsubsection" id="S3.SS1.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">III-A1 </span>Dataset</h4>
+<div class="ltx_para" id="S3.SS1.SSS1.p1">
+<p class="ltx_p">We used a publicly available dataset from the Fine-SE paper <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib9" title="">9</a>]</cite>. In the paper, the authors trained and evaluated their approach on a dataset with 17 industrial projects and four open-source software projects. To allow direct comparison with their approach and ensure reproducibility, we utilised their publicly available dataset of four open-source projects: Mesos (ME), Data Management (DM), Talend Data Quality (TD), and Usergrid (US). The data was mined from the Jira issue tracking system of where these projects are managed. The statistical descriptions of the project are presented in Table <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.T1" title="TABLE I ‣ III-A1 Dataset ‣ III-A RQ1: Effectiveness of SEEAgent in estimating user stories ‣ III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_tag">I</span></a>.</p>
+</div>
+<figure class="ltx_table" id="S3.T1">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">TABLE I: </span>Statistical description of the open-source projects</figcaption>
+<table class="ltx_tabular ltx_centering ltx_align_middle">
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">Project</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">No. stories</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t" colspan="5">Story points</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_border_l ltx_border_r"></td>
+<td class="ltx_td ltx_border_r"></td>
+<td class="ltx_td ltx_align_center ltx_border_t">Min</td>
+<td class="ltx_td ltx_align_center ltx_border_t">Max</td>
+<td class="ltx_td ltx_align_center ltx_border_t">Mean</td>
+<td class="ltx_td ltx_align_center ltx_border_t">Median</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">Std</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r ltx_border_t">DM</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">4,320</td>
+<td class="ltx_td ltx_align_center ltx_border_t">0</td>
+<td class="ltx_td ltx_align_center ltx_border_t">195</td>
+<td class="ltx_td ltx_align_center ltx_border_t">7.91</td>
+<td class="ltx_td ltx_align_center ltx_border_t">3</td>
+<td class="ltx_td ltx_align_center ltx_border_r ltx_border_t">16</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r">ME</td>
+<td class="ltx_td ltx_align_right ltx_border_r">414</td>
+<td class="ltx_td ltx_align_center">1</td>
+<td class="ltx_td ltx_align_center">13</td>
+<td class="ltx_td ltx_align_center">3.93</td>
+<td class="ltx_td ltx_align_center">3</td>
+<td class="ltx_td ltx_align_center ltx_border_r">2.6</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r">TD</td>
+<td class="ltx_td ltx_align_right ltx_border_r">73</td>
+<td class="ltx_td ltx_align_center">0.5</td>
+<td class="ltx_td ltx_align_center">40</td>
+<td class="ltx_td ltx_align_center">8.25</td>
+<td class="ltx_td ltx_align_center">8</td>
+<td class="ltx_td ltx_align_center ltx_border_r">7.4</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_l ltx_border_r">US</td>
+<td class="ltx_td ltx_align_right ltx_border_r">100</td>
+<td class="ltx_td ltx_align_center">1</td>
+<td class="ltx_td ltx_align_center">8</td>
+<td class="ltx_td ltx_align_center">3.31</td>
+<td class="ltx_td ltx_align_center">3</td>
+<td class="ltx_td ltx_align_center ltx_border_r">1.2</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_l ltx_border_r ltx_border_t">Total</td>
+<td class="ltx_td ltx_align_right ltx_border_b ltx_border_r ltx_border_t">4,907</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_t">-</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_t">-</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_t">-</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_t">-</td>
+<td class="ltx_td ltx_align_center ltx_border_b ltx_border_r ltx_border_t">-</td>
+</tr>
+</table>
+</figure>
+</section>
+<section class="ltx_subsubsection" id="S3.SS1.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">III-A2 </span>Baselines</h4>
+<div class="ltx_para" id="S3.SS1.SSS2.p1">
+<p class="ltx_p">In part of the study, we experiment with two variants of <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span>: one utilised the base <span class="ltx_text ltx_font_italic">Llama-3.1-8B-instruct</span> model, and another implemented a fine-tuned version of the same model for the SEE task. LLMs have demonstrated significant abilities to understand the semantics in natural language, making them potential candidates for tasks involving the understanding of textual information in software tasks. While the base model <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> leverages the general knowledge encoded in its parameters, the fine-tuned variant combines this foundational knowledge with project-specific insights gained through additional training on SEE-specific data.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.SSS2.p2">
+<p class="ltx_p">In addition, we compare the performance of our approach against state-of-the-art techniques in agile effort estimation, including Fine-SE <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib9" title="">9</a>]</cite>, GPT2SP <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib8" title="">8</a>]</cite>, and Deep-SE <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib5" title="">5</a>]</cite>. Deep-SE established the initial adoption of deep learning for SEE when it introduced a hybrid architecture combining Long Short-term Memory (LSTM) networks with Recurrent Highway Networks (RHN). GPT2SP extended the GPT-2 architecture to generate point estimates. Most recently, Fine-SE employed BERT <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib22" title="">22</a>]</cite> to extract semantics features from user stories, integrating these with neural networks to produce effort estimates. We have replicated the evaluation of those approaches based on the code they provided.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS1.SSS3">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">III-A3 </span>Implementation configurations</h4>
+<div class="ltx_para" id="S3.SS1.SSS3.p1">
+<p class="ltx_p">In this experiment, we focus solely on evaluating the long-term memory component of <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span>, comparing the accuracy of two variants: one using the base <span class="ltx_text ltx_font_italic">Llama-3.1-8B-instruct</span> model, and another using its fine-tuned version for the SEE task. We evaluate <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> in this standalone configuration to ensure a fair comparison, since <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span>’s full architecture offers additional capabilities through multi-agent communication and interactive refinement. We deliberately isolate the core estimation component to maintain equivalent testing conditions with previous approaches. This controlled setup enables direct performance comparison on the same metrics and datasets used.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.SSS3.p2">
+<p class="ltx_p">For each project in our dataset, we performed separate fine-tuning of the base LLM model. We utilised the Unsloth library <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib23" title="">23</a>]</cite> for this process as it supports the QLoRA fine-tuning technique. To ensure fair comparison with results from the Fine-SE paper, we maintained the same train-test split ratios and data distribution as used in their published implementation. The fine-tuning process was consistent across all projects: we configured the loading of the model into memory with the following parameters: <span class="ltx_text ltx_markedasmath ltx_font_italic">max_sequence_length</span> is set to 2048 tokens; the LoRA rank was set to 8 with an equal scaling factor to maintain a balance between the model capacity and new knowledge introduction. For training, we configured the epoch to 10 with a learning rate of <span class="ltx_text ltx_font_italic">2e-4</span>. The training processes were conducted using Google Colab’s A100 GPU infrastructure.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS1.SSS4">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">III-A4 </span>Evaluation metrics</h4>
+<div class="ltx_para" id="S3.SS1.SSS4.p1">
+<p class="ltx_p">We use the same evaluation metrics, i.e. mean absolute error (MAE), mean magnitude of relative error (MMRE), and performance indicator (PRED), as in a prior work <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib9" title="">9</a>]</cite>. MAE measures the average of absolute differences between predicted and ground truth estimation. It intuitively captures the proposed model’s average error margin across the whole test set.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.SSS4.p2">
+<table class="ltx_equation ltx_eqn_table" id="S3.E1">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\text{MAE}=\frac{1}{n}\sum_{i=1}^{n}|y_{i}-\hat{y}_{i}|" class="ltx_Math" display="block" id="S3.E1.m1" intent=":literal"><semantics><mrow><mtext>MAE</mtext><mo>=</mo><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><mo lspace="0em" rspace="0em">​</mo><mrow><munderover><mo movablelimits="false" rspace="0em">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><mo stretchy="false">|</mo><mrow><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msub><mover accent="true"><mi>y</mi><mo>^</mo></mover><mi>i</mi></msub></mrow><mo stretchy="false">|</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">\text{MAE}=\frac{1}{n}\sum_{i=1}^{n}|y_{i}-\hat{y}_{i}|</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div class="ltx_para" id="S3.SS1.SSS4.p3">
+<p class="ltx_p">where <math alttext="y_{i}" class="ltx_Math" display="inline" id="S3.SS1.SSS4.p3.m1" intent=":literal"><semantics><msub><mi>y</mi><mi>i</mi></msub><annotation encoding="application/x-tex">y_{i}</annotation></semantics></math> and <math alttext="\hat{y}_{i}" class="ltx_Math" display="inline" id="S3.SS1.SSS4.p3.m2" intent=":literal"><semantics><msub><mover accent="true"><mi>y</mi><mo>^</mo></mover><mi>i</mi></msub><annotation encoding="application/x-tex">\hat{y}_{i}</annotation></semantics></math> are the ground truth estimation and the predicted estimation, respectively. <math alttext="n" class="ltx_Math" display="inline" id="S3.SS1.SSS4.p3.m3" intent=":literal"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> is the number of instances in the test set.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.SSS4.p4">
+<p class="ltx_p">MMRE computes the average magnitude of the relative error between the predicted and ground-truth estimations. It presents the relative normalised magnitude of error made by the model on the given projects, which is ideal for comparison across multiple projects of different estimation units systems.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.SSS4.p5">
+<table class="ltx_equation ltx_eqn_table" id="S3.E2">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\text{MMRE}=\frac{1}{n}\sum_{i=1}^{n}\frac{|y_{i}-\hat{y}_{i}|}{y_{i}}" class="ltx_Math" display="block" id="S3.E2.m1" intent=":literal"><semantics><mrow><mtext>MMRE</mtext><mo>=</mo><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><mo lspace="0em" rspace="0em">​</mo><mrow><munderover><mo movablelimits="false">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mfrac><mrow><mo stretchy="false">|</mo><mrow><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msub><mover accent="true"><mi>y</mi><mo>^</mo></mover><mi>i</mi></msub></mrow><mo stretchy="false">|</mo></mrow><msub><mi>y</mi><mi>i</mi></msub></mfrac></mrow></mrow></mrow><annotation encoding="application/x-tex">\text{MMRE}=\frac{1}{n}\sum_{i=1}^{n}\frac{|y_{i}-\hat{y}_{i}|}{y_{i}}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div class="ltx_para" id="S3.SS1.SSS4.p6">
+<p class="ltx_p">PRED(50) examines the percentage of predictions that fall within 50% of ground truth estimation values. It offers a practical insight by showing how often the model achieves a certain level of accuracy, highlighting the model’s ability to make estimations within a threshold of acceptable error margin (50%).</p>
+</div>
+<div class="ltx_para" id="S3.SS1.SSS4.p7">
+<table class="ltx_equation ltx_eqn_table" id="S3.E3">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="\text{PRED}(50)=\frac{1}{n}\sum_{i=1}^{n}\begin{cases}1,&amp;\text{if }\frac{|y_{i}-\hat{y}_{i}|}{y_{i}}\leq 0.50\\
+0,&amp;\text{otherwise}\end{cases}" class="ltx_Math" display="block" id="S3.E3.m1" intent=":literal"><semantics><mrow><mrow><mtext>PRED</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mn>50</mn><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><mo lspace="0em" rspace="0em">​</mo><mrow><munderover><mo movablelimits="false" rspace="0em">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><mn>1</mn><mo>,</mo></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mrow><mtext>if </mtext><mo lspace="0em" rspace="0em">​</mo><mstyle displaystyle="false"><mfrac><mrow><mo stretchy="false">|</mo><mrow><msub><mi>y</mi><mi>i</mi></msub><mo>−</mo><msub><mover accent="true"><mi>y</mi><mo>^</mo></mover><mi>i</mi></msub></mrow><mo stretchy="false">|</mo></mrow><msub><mi>y</mi><mi>i</mi></msub></mfrac></mstyle></mrow><mo>≤</mo><mn>0.50</mn></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><mrow><mn>0</mn><mo>,</mo></mrow></mtd><mtd class="ltx_align_left" columnalign="left"><mtext>otherwise</mtext></mtd></mtr></mtable></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">\text{PRED}(50)=\frac{1}{n}\sum_{i=1}^{n}\begin{cases}1,&amp;\text{if }\frac{|y_{i}-\hat{y}_{i}|}{y_{i}}\leq 0.50\\
+0,&amp;\text{otherwise}\end{cases}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS1.SSS5">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">III-A5 </span>Results</h4>
+<figure class="ltx_table" id="S3.T2">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">TABLE II: </span>Benchmark results of <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> vs baselines</figcaption><div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1">
+<table class="ltx_tabular ltx_centering ltx_figure_panel ltx_align_middle">
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_t">Proj</td>
+<td class="ltx_td ltx_align_left ltx_border_t">Approach</td>
+<td class="ltx_td ltx_align_right ltx_border_t">MAE</td>
+<td class="ltx_td ltx_align_right ltx_border_t">MMRE</td>
+<td class="ltx_td ltx_align_right ltx_border_t">PRED(50)</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_t">DM</td>
+<td class="ltx_td ltx_align_left ltx_border_t">Deep-SE</td>
+<td class="ltx_td ltx_align_right ltx_border_t">4.786</td>
+<td class="ltx_td ltx_align_right ltx_border_t">3.118</td>
+<td class="ltx_td ltx_align_right ltx_border_t">0.315</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td"></td>
+<td class="ltx_td ltx_align_left">GPT2SP</td>
+<td class="ltx_td ltx_align_right">4.303</td>
+<td class="ltx_td ltx_align_right">1.900</td>
+<td class="ltx_td ltx_align_right">0.362</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td"></td>
+<td class="ltx_td ltx_align_left">Fine-SE</td>
+<td class="ltx_td ltx_align_right">4.628</td>
+<td class="ltx_td ltx_align_right">1.739</td>
+<td class="ltx_td ltx_align_right">0.264</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td"></td>
+<td class="ltx_td ltx_align_left"><math alttext="\textit{{SEEAgent}}_{\text{base model}}" class="ltx_Math" display="inline" id="S3.T2.m1" intent=":literal"><semantics><msub><mtext class="ltx_mathvariant_bold-italic">SEEAgent</mtext><mtext>base model</mtext></msub><annotation encoding="application/x-tex">\textit{{SEEAgent}}_{\text{base model}}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_right">17.053</td>
+<td class="ltx_td ltx_align_right">11.698</td>
+<td class="ltx_td ltx_align_right">0.157</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td"></td>
+<td class="ltx_td ltx_align_left"><math alttext="\textit{{SEEAgent}}_{\text{fine-tuned}}" class="ltx_Math" display="inline" id="S3.T2.m2" intent=":literal"><semantics><msub><mtext class="ltx_mathvariant_bold-italic">SEEAgent</mtext><mtext>fine-tuned</mtext></msub><annotation encoding="application/x-tex">\textit{{SEEAgent}}_{\text{fine-tuned}}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_right"><span class="ltx_text ltx_font_bold">4.251</span></td>
+<td class="ltx_td ltx_align_right"><span class="ltx_text ltx_font_bold">1.491</span></td>
+<td class="ltx_td ltx_align_right"><span class="ltx_text ltx_font_bold">0.383</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_t">ME</td>
+<td class="ltx_td ltx_align_left ltx_border_t">Deep-SE</td>
+<td class="ltx_td ltx_align_right ltx_border_t">1.382</td>
+<td class="ltx_td ltx_align_right ltx_border_t">0.489</td>
+<td class="ltx_td ltx_align_right ltx_border_t">0.687</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td"></td>
+<td class="ltx_td ltx_align_left">GPT2SP</td>
+<td class="ltx_td ltx_align_right">1.583</td>
+<td class="ltx_td ltx_align_right">0.629</td>
+<td class="ltx_td ltx_align_right">0.578</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td"></td>
+<td class="ltx_td ltx_align_left">Fine-SE</td>
+<td class="ltx_td ltx_align_right">1.395</td>
+<td class="ltx_td ltx_align_right">0.449</td>
+<td class="ltx_td ltx_align_right">0.723</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td"></td>
+<td class="ltx_td ltx_align_left"><math alttext="\textit{{SEEAgent}}_{\text{base model}}" class="ltx_Math" display="inline" id="S3.T2.m3" intent=":literal"><semantics><msub><mtext class="ltx_mathvariant_bold-italic">SEEAgent</mtext><mtext>base model</mtext></msub><annotation encoding="application/x-tex">\textit{{SEEAgent}}_{\text{base model}}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_right">7.398</td>
+<td class="ltx_td ltx_align_right">2.463</td>
+<td class="ltx_td ltx_align_right">0.108</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td"></td>
+<td class="ltx_td ltx_align_left"><math alttext="\textit{{SEEAgent}}_{\text{fine-tuned}}" class="ltx_Math" display="inline" id="S3.T2.m4" intent=":literal"><semantics><msub><mtext class="ltx_mathvariant_bold-italic">SEEAgent</mtext><mtext>fine-tuned</mtext></msub><annotation encoding="application/x-tex">\textit{{SEEAgent}}_{\text{fine-tuned}}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_right"><span class="ltx_text ltx_font_bold">1.217</span></td>
+<td class="ltx_td ltx_align_right"><span class="ltx_text ltx_font_bold">0.414</span></td>
+<td class="ltx_td ltx_align_right"><span class="ltx_text ltx_font_bold">0.747</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_t">TD</td>
+<td class="ltx_td ltx_align_left ltx_border_t">Deep-SE</td>
+<td class="ltx_td ltx_align_right ltx_border_t"><span class="ltx_text ltx_font_bold">4.215</span></td>
+<td class="ltx_td ltx_align_right ltx_border_t">1.121</td>
+<td class="ltx_td ltx_align_right ltx_border_t"><span class="ltx_text ltx_font_bold">0.533</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td"></td>
+<td class="ltx_td ltx_align_left">GPT2SP</td>
+<td class="ltx_td ltx_align_right">5.736</td>
+<td class="ltx_td ltx_align_right">2.231</td>
+<td class="ltx_td ltx_align_right">0.400</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td"></td>
+<td class="ltx_td ltx_align_left">Fine-SE</td>
+<td class="ltx_td ltx_align_right">4.659</td>
+<td class="ltx_td ltx_align_right"><span class="ltx_text ltx_font_bold">0.755</span></td>
+<td class="ltx_td ltx_align_right">0.400</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td"></td>
+<td class="ltx_td ltx_align_left"><math alttext="\textit{{SEEAgent}}_{\text{base model}}" class="ltx_Math" display="inline" id="S3.T2.m5" intent=":literal"><semantics><msub><mtext class="ltx_mathvariant_bold-italic">SEEAgent</mtext><mtext>base model</mtext></msub><annotation encoding="application/x-tex">\textit{{SEEAgent}}_{\text{base model}}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_right">7.133</td>
+<td class="ltx_td ltx_align_right">1.382</td>
+<td class="ltx_td ltx_align_right">0.467</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td"></td>
+<td class="ltx_td ltx_align_left"><math alttext="\textit{{SEEAgent}}_{\text{fine-tuned}}" class="ltx_Math" display="inline" id="S3.T2.m6" intent=":literal"><semantics><msub><mtext class="ltx_mathvariant_bold-italic">SEEAgent</mtext><mtext>fine-tuned</mtext></msub><annotation encoding="application/x-tex">\textit{{SEEAgent}}_{\text{fine-tuned}}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_right">5.133</td>
+<td class="ltx_td ltx_align_right">1.456</td>
+<td class="ltx_td ltx_align_right">0.333</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_t">US</td>
+<td class="ltx_td ltx_align_left ltx_border_t">Deep-SE</td>
+<td class="ltx_td ltx_align_right ltx_border_t">0.618</td>
+<td class="ltx_td ltx_align_right ltx_border_t">0.163</td>
+<td class="ltx_td ltx_align_right ltx_border_t">0.850</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td"></td>
+<td class="ltx_td ltx_align_left">GPT2SP</td>
+<td class="ltx_td ltx_align_right">0.447</td>
+<td class="ltx_td ltx_align_right">0.120</td>
+<td class="ltx_td ltx_align_right">0.950</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td"></td>
+<td class="ltx_td ltx_align_left">Fine-SE</td>
+<td class="ltx_td ltx_align_right">1.826</td>
+<td class="ltx_td ltx_align_right">0.541</td>
+<td class="ltx_td ltx_align_right">0.150</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td"></td>
+<td class="ltx_td ltx_align_left"><math alttext="\textit{{SEEAgent}}_{\text{base model}}" class="ltx_Math" display="inline" id="S3.T2.m7" intent=":literal"><semantics><msub><mtext class="ltx_mathvariant_bold-italic">SEEAgent</mtext><mtext>base model</mtext></msub><annotation encoding="application/x-tex">\textit{{SEEAgent}}_{\text{base model}}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_right">11.300</td>
+<td class="ltx_td ltx_align_right">2.797</td>
+<td class="ltx_td ltx_align_right">0.050</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_border_b"></td>
+<td class="ltx_td ltx_align_left ltx_border_b"><math alttext="\textit{{SEEAgent}}_{\text{fine-tuned}}" class="ltx_Math" display="inline" id="S3.T2.m8" intent=":literal"><semantics><msub><mtext class="ltx_mathvariant_bold-italic">SEEAgent</mtext><mtext>fine-tuned</mtext></msub><annotation encoding="application/x-tex">\textit{{SEEAgent}}_{\text{fine-tuned}}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_right ltx_border_b"><span class="ltx_text ltx_font_bold">0.350</span></td>
+<td class="ltx_td ltx_align_right ltx_border_b"><span class="ltx_text ltx_font_bold">0.085</span></td>
+<td class="ltx_td ltx_align_right ltx_border_b"><span class="ltx_text ltx_font_bold">1.000</span></td>
+</tr>
+</table>
+</div>
+<div class="ltx_flex_break"></div>
+<div class="ltx_flex_cell ltx_flex_size_1">
+<table class="ltx_tabular ltx_centering ltx_figure_panel ltx_minipage ltx_align_middle" style="width:345.0pt;">
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">
+<sup class="ltx_sup"><span class="ltx_text" style="font-size:80%;">1</span></sup><span class="ltx_text" style="font-size:80%;"> The lower of MSE and MMRE, the better.</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">
+<sup class="ltx_sup"><span class="ltx_text" style="font-size:80%;">2</span></sup><span class="ltx_text" style="font-size:80%;"> For PRED(50), a higher value is better.</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left">
+<sup class="ltx_sup"><span class="ltx_text" style="font-size:80%;">3</span></sup><span class="ltx_text" style="font-size:80%;"> The best results on evaluation measures are highlighted in bold.</span>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</figure>
+<div class="ltx_para" id="S3.SS1.SSS5.p1">
+<p class="ltx_p">The benchmark results (see Table <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.T2" title="TABLE II ‣ III-A5 Results ‣ III-A RQ1: Effectiveness of SEEAgent in estimating user stories ‣ III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_tag">II</span></a>) between <math alttext="\textit{{SEEAgent}}_{\text{base model}}" class="ltx_Math" display="inline" id="S3.SS1.SSS5.p1.m1" intent=":literal"><semantics><msub><mtext class="ltx_mathvariant_bold-italic">SEEAgent</mtext><mtext>base model</mtext></msub><annotation encoding="application/x-tex">\textit{{SEEAgent}}_{\text{base model}}</annotation></semantics></math> and <math alttext="\textit{{SEEAgent}}_{\text{fine-tuned}}" class="ltx_Math" display="inline" id="S3.SS1.SSS5.p1.m2" intent=":literal"><semantics><msub><mtext class="ltx_mathvariant_bold-italic">SEEAgent</mtext><mtext>fine-tuned</mtext></msub><annotation encoding="application/x-tex">\textit{{SEEAgent}}_{\text{fine-tuned}}</annotation></semantics></math> reveal remarkable performance differences across all projects. For the DM project, the base model shows considerable deviation with an MAE of 17.053 and MMRE of 11.698, whereas the fine-tuned version substantially reduces these errors to 4.251 and 1.491, respectively. In the ME project, the fine-tuned variant improved MAE by 83.55% (from 7.398 to 1.217) and MMRE by 83.18% (from 2.463 to 0.414). The most improvement is observed in the US project, where fine-tuning reduces MAE from 11.3 to 0.35 and MMRE from 2.797 to 0.085. In terms of the PRED(50) metric, the fine-tuned model achieves notably higher scores across all projects, with 591% improvement in ME (from 0.108 to 0.747) and a 20-fold increase for US (from 0.05 to 1). These consistent improvements across the projects strongly suggest that the fine-tuning process successfully enabled the model to learn project-specific effort estimation patterns.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.SSS5.p2">
+<p class="ltx_p">When comparing against the current state-of-the-art (SOTA) approaches, <math alttext="\textit{{SEEAgent}}_{\text{fine-tuned}}" class="ltx_Math" display="inline" id="S3.SS1.SSS5.p2.m1" intent=":literal"><semantics><msub><mtext class="ltx_mathvariant_bold-italic">SEEAgent</mtext><mtext>fine-tuned</mtext></msub><annotation encoding="application/x-tex">\textit{{SEEAgent}}_{\text{fine-tuned}}</annotation></semantics></math> outperforms in three out of four projects.
+In the DM project, our fine-tuned agent achieves up to 16.63% improvement over the second-best results across the evaluation metrics, notably reducing the MMRE from 1.739 down to 1.491.
+Regarding the ME project, our approach yields superior results across all metrics (MAE: 1.217, MMRE: 0.414, PRED(50): 0.747), outperforming Deep-SE (1.382, 0.489, 0.687), GPT2SP (1.583, 0.629, 0.578), and Fine-SE (1.395, 0.449, 0.723).
+For the US project, our fine-tuned agent achieves notable performance with the lowest MAE (0.350) and MMRE (0.085) among all approaches while having the perfect PRED(50) score.
+As for the TD project, our approach (MAE: 5.133, MMRE: 1.456, PRED(50): 0.333) outperforms GPT2SP across all metrics, but still leaves room for improvement compared to Deep-SE (MAE: 4.108, PRED(50): 0.438) and Fine-SE (MMRE: 0.692).
+</p>
+</div>
+<figure class="ltx_table" id="S3.T3">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">TABLE III: </span>Comparison Between Approaches Using Wilcoxon Test and <math alttext="\hat{A}_{12}" class="ltx_Math" display="inline" id="S3.T3.m2" intent=":literal"><semantics><msub><mover accent="true"><mi>A</mi><mo>^</mo></mover><mn>12</mn></msub><annotation encoding="application/x-tex">\hat{A}_{12}</annotation></semantics></math> Effect Size (in Brackets)</figcaption>
+<table class="ltx_tabular ltx_centering ltx_align_middle">
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_r ltx_border_t">
+<span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> vs</td>
+<td class="ltx_td ltx_align_right ltx_border_t">Deep-SE</td>
+<td class="ltx_td ltx_align_right ltx_border_t">GPT2SP</td>
+<td class="ltx_td ltx_align_right ltx_border_t">Fine-SE</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_r ltx_border_t">DM</td>
+<td class="ltx_td ltx_align_right ltx_border_t">
+<math alttext="&lt;" class="ltx_Math" display="inline" id="S3.T3.m3" intent=":literal"><semantics><mo>&lt;</mo><annotation encoding="application/x-tex">&lt;</annotation></semantics></math>0.001 [0.59]</td>
+<td class="ltx_td ltx_align_right ltx_border_t">0.061 [0.53]</td>
+<td class="ltx_td ltx_align_right ltx_border_t">0.007 [0.55]</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_r">ME</td>
+<td class="ltx_td ltx_align_right">0.028 [0.65]</td>
+<td class="ltx_td ltx_align_right">0.042 [0.63]</td>
+<td class="ltx_td ltx_align_right">0.032 [0.67]</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_r">TD</td>
+<td class="ltx_td ltx_align_right">0.095 [0.27]</td>
+<td class="ltx_td ltx_align_right">0.359 [0.73]</td>
+<td class="ltx_td ltx_align_right">0.524 [0.40]</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_b ltx_border_r">US</td>
+<td class="ltx_td ltx_align_right ltx_border_b">
+<math alttext="&lt;" class="ltx_Math" display="inline" id="S3.T3.m4" intent=":literal"><semantics><mo>&lt;</mo><annotation encoding="application/x-tex">&lt;</annotation></semantics></math>0.001 [0.95]</td>
+<td class="ltx_td ltx_align_right ltx_border_b">0.002 [0.90]</td>
+<td class="ltx_td ltx_align_right ltx_border_b">
+<math alttext="&lt;" class="ltx_Math" display="inline" id="S3.T3.m5" intent=":literal"><semantics><mo>&lt;</mo><annotation encoding="application/x-tex">&lt;</annotation></semantics></math>0.001 [0.95]</td>
+</tr>
+</table>
+</figure>
+<div class="ltx_para" id="S3.SS1.SSS5.p3">
+<p class="ltx_p">Table <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.T3" title="TABLE III ‣ III-A5 Results ‣ III-A RQ1: Effectiveness of SEEAgent in estimating user stories ‣ III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_tag">III</span></a> presents the results of the Wilcoxon test (along with Vargha-Delaney <math alttext="\hat{A}_{12}" class="ltx_Math" display="inline" id="S3.SS1.SSS5.p3.m1" intent=":literal"><semantics><msub><mover accent="true"><mi>A</mi><mo>^</mo></mover><mn>12</mn></msub><annotation encoding="application/x-tex">\hat{A}_{12}</annotation></semantics></math> effect size) to measure the statistical significance of <math alttext="\textit{{SEEAgent}}_{\text{fine-tuned}}" class="ltx_Math" display="inline" id="S3.SS1.SSS5.p3.m2" intent=":literal"><semantics><msub><mtext class="ltx_mathvariant_bold-italic">SEEAgent</mtext><mtext>fine-tuned</mtext></msub><annotation encoding="application/x-tex">\textit{{SEEAgent}}_{\text{fine-tuned}}</annotation></semantics></math> against the SOTA approaches. Using the alpha level <math alttext="\alpha" class="ltx_Math" display="inline" id="S3.SS1.SSS5.p3.m3" intent=":literal"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> of 0,05, our approach displays the strongest results in the US project, demonstrating statistical significance (p <math alttext="&lt;" class="ltx_Math" display="inline" id="S3.SS1.SSS5.p3.m4" intent=":literal"><semantics><mo>&lt;</mo><annotation encoding="application/x-tex">&lt;</annotation></semantics></math> 0.001) and a large effect size (0.9 to 0.95) compared to all other approaches. Performance in DM and ME projects shows moderate improvements with small to medium effect sizes (0.53 to 0.67), while results in the TD project indicate no significant improvements.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">III-B </span><span class="ltx_text ltx_font_bold">RQ2: Human-AI collaboration</span>
+</h3>
+<section class="ltx_subsubsection" id="S3.SS2.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">III-B1 </span>Experimental design and procedures</h4>
+<div class="ltx_para" id="S3.SS2.SSS1.p1">
+<p class="ltx_p">We conducted a human user study using a mixed-format survey approach that combines interactive prototype evaluation with subsequent data collection through a survey incorporating both structured (quantitative) and open-ended (qualitative) response formats. The study was approved by our university’s Human Research Ethics Committee (approval number 2025/015).</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS1.p2">
+<p class="ltx_p">There are 12 participants recruited through professional networks within academic and industry settings, utilising a purposive sampling approach to ensure participants possessed relevant software development experience. To maintain ethical standards and minimise potential bias, all prospective participants were explicitly informed that their participation was voluntary and their decision to participate or decline would not affect their professional or personal relationships with the researchers.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS1.p3">
+<p class="ltx_p">The participants are asked to join a session in which they work collaboratively with some other human participants and <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span> to estimate user stories for a given software project. We chose a small, simplified e-commerce software project (namely <span class="ltx_text ltx_font_italic">eShope</span>) which has functionalities (e.g. log in, log out, shopping cart, order, etc.) that are familiar to all the participants. The <span class="ltx_text ltx_font_italic">eShope</span> project consists of 33 user stories written based on the Connextra format <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib24" title="">24</a>]</cite> and containing several acceptance criteria. Details of this project can be found at <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_font_italic ltx_ref_self">https://figshare.com/s/592bb84543653d80a515</span>.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS1.p4">
+<p class="ltx_p">Each estimation session involves six participants: three human developers, two <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span> with different development roles, and a human product owner (the first author) who presents the user stories and guides the session. During each session, participants will estimate various user stories of the <span class="ltx_text ltx_font_italic">eShope</span> application. The estimation session is designed to last approximately 30 minutes. Participants are then asked to complete a survey that consists of 12 Likert-scale questions and two open-ended questions.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS1.p5">
+<p class="ltx_p">The estimation session is designed based on the agile Planning Poker method (also known as Scrum Poker), a collaborative estimation technique widely used by agile teams in the industry <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib3" title="">3</a>]</cite>. The process begins with the product owner introducing a user story that requires estimation. The participants (<em class="ltx_emph ltx_font_italic">including both <span class="ltx_text ltx_font_bold">SEEAgents</span> and human developers</em>) then discuss the details of the story, ensuring everyone understands the requirements and scope. Each participant will then provide their estimate in story points. Next, the estimates are compared. If all estimates are the same, indicating consensus, the team moves to the next story. However, if there is a difference in estimates, the participants provide justifications for their estimates, and a group discussion follows to address any misunderstandings or differing perspectives. After this discussion, the participants re-estimate the story. This cycle of discussion and re-estimation continues until the team reaches a consensus. The process ensures that the team reaches a shared understanding of the story’s requirements and agrees on the estimated effort.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS2.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">III-B2 </span>Implementation configurations</h4>
+<div class="ltx_para" id="S3.SS2.SSS2.p1">
+<p class="ltx_p">Since the number of user stories of <span class="ltx_text ltx_font_italic">eShope</span> is limited, instead of fine-tuning the long-term memory of <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span>, we opted for the option of using in-context learning <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib13" title="">13</a>]</cite>. This method incorporates a small number of ground-truth samples directly into the short-term memory. This approach enables us to leverage the model’s existing capabilities while contextually adapting to the project-specific knowledge without extensive training data. We used the <span class="ltx_text ltx_font_italic">gpt-4o-mini</span> model from OpenAI as the long-term memory for <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> as it provides a good balance between response time and reasoning ability.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS2.p2">
+<p class="ltx_p">We implemented two variants of <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> with role-play prompting following research demonstrating that LLMs can effectively embody specialised technical roles. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib25" title="">25</a>]</cite>. Each variant was initialised with either front-end development or back-end development expertise. This is achieved by establishing a role in agents’ short-term memory when initiating them: <span class="ltx_text ltx_font_italic">You are a </span>{<span class="ltx_text ltx_font_italic">role</span>}<span class="ltx_text ltx_font_italic"> developer agent</span>. This methodology is backed by empirical evidence <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib25" title="">25</a>]</cite> suggesting that role-play prompting helps models maintain consistent domain expertise and generates more effective domain-specific reasoning compared to without the prompt. The role-specific agents exhibited different technical perspectives aligned with their assigned development domains, enabling the study participants to gather insights from complementary areas of software engineering expertise.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S3.SS2.SSS3">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">III-B3 </span>Post-session survey</h4>
+<div class="ltx_para" id="S3.SS2.SSS3.p1">
+<p class="ltx_p">We designed a mixed-format survey (see Table <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.T4" title="TABLE IV ‣ III-B3 Post-session survey ‣ III-B RQ2: Human-AI collaboration ‣ III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_tag">IV</span></a>) to gain a holistic view of human practitioners’ perception and acceptance toward <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span>. The survey has a structured questionnaire that assesses multiple aspects of <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span>, including its ability to facilitate consensus, bridge knowledge gaps, identify risks, ease of use, and quality of collaboration with human developers. The survey also evaluated practitioners’ sentiment towards the usage of <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span> in SEE, including their trust in the agents’ estimations, willingness to rely on and recommend such systems. This survey helps evaluate both the practical utility and adoption potential of <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span> in SEE contexts. The quantitative analysis was complemented by qualitative data from open questions, which helps explore perceived benefits, challenges, and potential improvements to better agent design in software development environments.</p>
+</div>
+<figure class="ltx_table" id="S3.T4">
+<figcaption class="ltx_caption"><span class="ltx_tag ltx_tag_table">TABLE IV: </span>Human Study Questionnaire</figcaption><div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1">
+<table class="ltx_tabular ltx_centering ltx_figure_panel ltx_align_middle">
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_l ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold">ID</span></td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t">
+<span class="ltx_inline-block ltx_align_top">
+<span class="ltx_p" style="width:213.4pt;"><span class="ltx_text ltx_font_bold">Question</span></span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_l ltx_border_r ltx_border_t" colspan="2"><span class="ltx_text ltx_font_bold">Perceptions of <span class="ltx_text ltx_font_italic">SEEAgents</span></span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_l ltx_border_r ltx_border_t">Q1<sup class="ltx_sup">‡</sup>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t">
+<span class="ltx_inline-block ltx_align_top">
+<span class="ltx_p" style="width:213.4pt;">The AI agent’s estimations helped us reach consensus efficiently</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_l ltx_border_r">Q2<sup class="ltx_sup">‡</sup>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r">
+<span class="ltx_inline-block ltx_align_top">
+<span class="ltx_p" style="width:213.4pt;">I think AI agents can bridge knowledge gaps between team members</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_l ltx_border_r">Q3<sup class="ltx_sup">‡</sup>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r">
+<span class="ltx_inline-block ltx_align_top">
+<span class="ltx_p" style="width:213.4pt;">I think the AI agent brought valuable insights into potential risks</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_l ltx_border_r">Q4<sup class="ltx_sup">‡</sup>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r">
+<span class="ltx_inline-block ltx_align_top">
+<span class="ltx_p" style="width:213.4pt;">Learning to work with the AI agent was easy for me</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_l ltx_border_r">Q5<sup class="ltx_sup">‡</sup>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r">
+<span class="ltx_inline-block ltx_align_top">
+<span class="ltx_p" style="width:213.4pt;">I think collaborating with the AI agent felt natural</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_l ltx_border_r">Q6<sup class="ltx_sup">‡</sup>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r">
+<span class="ltx_inline-block ltx_align_top">
+<span class="ltx_p" style="width:213.4pt;">I find the AI agents’ responses were clear and understandable</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_l ltx_border_r">Q7<sup class="ltx_sup">‡</sup>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r">
+<span class="ltx_inline-block ltx_align_top">
+<span class="ltx_p" style="width:213.4pt;">My opinion of AI in SEE has become more positive</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_l ltx_border_r">Q8<sup class="ltx_sup">‡</sup>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r">
+<span class="ltx_inline-block ltx_align_top">
+<span class="ltx_p" style="width:213.4pt;">I believe AI in SEE could benefit teams</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_l ltx_border_r">Q9<sup class="ltx_sup">‡</sup>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r">
+<span class="ltx_inline-block ltx_align_top">
+<span class="ltx_p" style="width:213.4pt;">I think the AI agent can be a substitute for an expert</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_l ltx_border_r">Q10<sup class="ltx_sup">‡</sup>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r">
+<span class="ltx_inline-block ltx_align_top">
+<span class="ltx_p" style="width:213.4pt;">I would be comfortable relying on AI agent’s estimations</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_l ltx_border_r">Q11<sup class="ltx_sup">‡</sup>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r">
+<span class="ltx_inline-block ltx_align_top">
+<span class="ltx_p" style="width:213.4pt;">I am more likely to recommend using AI agents</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_l ltx_border_r">Q12<sup class="ltx_sup">‡</sup>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r">
+<span class="ltx_inline-block ltx_align_top">
+<span class="ltx_p" style="width:213.4pt;">I would trust the estimations provided by the AI agent</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_l ltx_border_r ltx_border_t" colspan="2"><span class="ltx_text ltx_font_bold">Open-ended Questions</span></td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_l ltx_border_r ltx_border_t">Q13<sup class="ltx_sup">*</sup>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t">
+<span class="ltx_inline-block ltx_align_top">
+<span class="ltx_p" style="width:213.4pt;">Based on your experience, what are your thoughts on the potential benefits and challenges of using AI agents in software effort estimation?</span>
+</span>
+</td>
+</tr>
+<tr class="ltx_tr">
+<td class="ltx_td ltx_align_left ltx_border_b ltx_border_l ltx_border_r">Q14<sup class="ltx_sup">*</sup>
+</td>
+<td class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_r">
+<span class="ltx_inline-block ltx_align_top">
+<span class="ltx_p" style="width:213.4pt;">What suggestions do you have for improving the design or functionality of the AI agents to enhance their usefulness and effectiveness in estimation sessions?</span>
+</span>
+</td>
+</tr>
+</table>
+</div>
+<div class="ltx_flex_break"></div>
+<div class="ltx_flex_cell ltx_flex_size_1">
+<p class="ltx_p ltx_figure_panel ltx_minipage ltx_align_center ltx_align_middle" style="width:433.6pt;"><sup class="ltx_sup"><span class="ltx_text" style="font-size:80%;">‡</span></sup><span class="ltx_text" style="font-size:80%;"> Likert scale: <math alttext="\circ" class="ltx_Math" display="inline" id="S3.T4.m1" intent=":literal"><semantics><mo>∘</mo><annotation encoding="application/x-tex">\circ</annotation></semantics></math> Strongly disagree, <math alttext="\circ" class="ltx_Math" display="inline" id="S3.T4.m2" intent=":literal"><semantics><mo>∘</mo><annotation encoding="application/x-tex">\circ</annotation></semantics></math> Somewhat disagree, <math alttext="\circ" class="ltx_Math" display="inline" id="S3.T4.m3" intent=":literal"><semantics><mo>∘</mo><annotation encoding="application/x-tex">\circ</annotation></semantics></math> Neutral, <math alttext="\circ" class="ltx_Math" display="inline" id="S3.T4.m4" intent=":literal"><semantics><mo>∘</mo><annotation encoding="application/x-tex">\circ</annotation></semantics></math> Somewhat agree, <math alttext="\circ" class="ltx_Math" display="inline" id="S3.T4.m5" intent=":literal"><semantics><mo>∘</mo><annotation encoding="application/x-tex">\circ</annotation></semantics></math> Strongly agree 
+<br class="ltx_break"/><sup class="ltx_sup">*</sup> Open-ended questions.
+<br class="ltx_break"/><sup class="ltx_sup">**</sup> The term “AI” and “AI agent” refer to <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span>.</span></p>
+</div>
+</div>
+</figure>
+</section>
+<section class="ltx_subsubsection" id="S3.SS2.SSS4">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">III-B4 </span>Results</h4>
+<figure class="ltx_figure" id="S3.F4"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="271" id="S3.F4.g1" src="x4.png" width="830"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 4: </span>Survey results</figcaption>
+</figure>
+<div class="ltx_para" id="S3.SS2.SSS4.p1">
+<p class="ltx_p">Figure <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#S3.F4" title="Figure 4 ‣ III-B4 Results ‣ III-B RQ2: Human-AI collaboration ‣ III Evaluation ‣ An LLM-based multi-agent framework for agile effort estimation"><span class="ltx_text ltx_ref_tag">4</span></a> presents the participants’ responses to Questions 1–12 in our survey after they completed an agile estimation session with our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span>. We categorise the findings into three key dimensions: operational effectiveness, user experience, and user trust. These dimensions help understand the impact and potential of <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span> in collaborating with human developers in agile effort estimation.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS4.p2">
+<p class="ltx_p">In terms of operational effectiveness, more than half (66.7%) of the respondents agreed that the agents’ estimations helped reach consensus more efficiently (Q1). Similarly, 58.3% believe that the agents bridged knowledge gaps between the team members (Q2). Comparably, 58.3% of the participants recognised the agents’ capability to shed insights into potential risks (Q3). These results suggest that our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span> address some inherent challenges in agile effort estimation, particularly in terms of collective decision-making and knowledge gap management.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS4.p3">
+<p class="ltx_p">In addition, the results demonstrate a positive user experience with our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span>, with half of the participants finding it easy learning to work with the agents (Q4). It is also important to note that a significant proportion (83.3%) of the participants felt natural when working with the agents’ natural (Q5) and found that the agents’ responses were clear and understandable (Q6). The positive experience with our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span> has helped form a positive view towards using AI in agile effort estimation (83.3% of agreement for Q7). These results suggest that the <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span> have successfully achieved a high level of intuitiveness that could greatly facilitate their adoption in practice. The positive user experience also implies that a well-designed AI agent system can effectively mitigate professional scepticism and hesitancy toward AI adoption.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS4.p4">
+<p class="ltx_p">In terms of user trust, all of the participants believed that <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> would benefit agile teams in effort estimation (Q8). While only one third of them thought that the agent can fully substitute an expert (Q9), 75% of the participants did not object to relying on the agent’s estimations (Q10). The result also shows that more than half of the participants trusted <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span>’s estimations (Q12) and would recommend using it in practice (Q11). These results suggested that, while their utility is universally acknowledged, there remains a preference for human oversight in essential decision-making processes. This indicates that successful adoption strategies should place emphasis on humans as decision makers and AI agents as supportive collaborators.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS4.p5">
+<p class="ltx_p">Our analysis of the responses for the open-ended questions (Q13 and Q14) also offers further insights and confirms the positive experience of the participants in collaborating with our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span>. They found that the agents “<span class="ltx_text ltx_font_italic">give us rational feedback and opinions</span>” and “<span class="ltx_text ltx_font_italic">benefit development teams to reach consensus</span>”. Many participants found the agents are useful in the agile effort estimation session since they “<span class="ltx_text ltx_font_italic">bridge knowledge gap between team members (frontend vs backend dev, new vs old team members)</span>” and promote communication between team members. The participants were also impressed with how our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span> used past user stories to estimate new user stories since “<span class="ltx_text ltx_font_italic">it can help the team not only estimate the user stories correctly but also see the related issues arising when implementing these sorts of features in the past</span>”.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.SSS4.p6">
+<p class="ltx_p">The participants also suggested several improvements to <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span> such as leveraging “<em class="ltx_emph ltx_font_italic">not only the user stories but also the source code and infrastructure</em>”. They also suggested integrating <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> with existing agile tools such as Jira, Trello and supporting voice communication (instead of only chat messaging) with human developers. We will develop these new features into <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span> as part of our future work.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">III-C </span><span class="ltx_text ltx_font_italic">Threats to validity</span>
+</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p">Our selection of the foundational LLM of our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> poses an internal threat. Different LLMs may exhibit different reasoning capabilities, which might affect the agent’s behaviour in estimating user stories and collaborating with human agile team members to reach a consensus estimate. We have mitigated this threat by designing <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span>’s architecture such that it does not depend on any specific LLM. In addition, we have also experimented with two widely used foundational LLMs (Meta’s Llama and OpenAI’s GPT models). Future work would involve integrating other LLMs and investigating their impact on the performance of our agents in the agile estimation context. In addition, our replication of the SOTA baselines strictly followed the description provided in their work, however we acknowledge that the environment we set up might be different from their original environment. To mitigate this threat, we used the same dataset and maintained consistent experimental settings across all comparisons to ensure fair evaluation.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p2">
+<p class="ltx_p">A key external threat to our human study resides in the limited sample size of 12 participants. This relatively small number of participants may not be fully representative of the broader software development community, limiting the generalisation of our study. However, we note that recruiting participants to join live collaborative estimation sessions is significantly challenging since it takes significant time and effort. This sample size of human study is also common in the software engineering literature. The result has shown the effectiveness of our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span> in collaborating with human developers in agile effort estimation. Insight from this study will help us attract the community’s interest and extend it to a larger number of participants.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">IV </span><span class="ltx_text ltx_font_smallcaps">Related work</span>
+</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p">Agile effort estimation has been attracting significant interest in recent years. A range of machine learning-based techniques have been proposed to estimate user stories using the knowledge learnt from past user stories in the same project. One common approach is processing the description of a user story into a set of learning features (e.g. TF-IDF features as in <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib6" title="">6</a>]</cite>). Other approaches also explore the use of developer-related features (e.g. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib7" title="">7</a>]</cite>) to improve the estimation accuracy, or employ clustering techniques to group similar issues and use this as the basis for estimation <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib26" title="">26</a>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S4.p2">
+<p class="ltx_p">Deep learning approaches are also widely explored to tackle the problem since the seminal work of Choetkiertikul <em class="ltx_emph ltx_font_italic">et al.</em> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib5" title="">5</a>]</cite>, which leverages Long Short-Term Memory (LSTM) networks and Recurrent Highway Networks (RHN) to generate semantic features from user story descriptions and use them for estimation. In 2022, Ahmad and Ibrahim used only LSTM <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib27" title="">27</a>]</cite> for SEE and yielded better accuracy over traditional approaches.
+Fu and Tantithamthavorn <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib8" title="">8</a>]</cite> introduced GPT2SP, a transformer-based architecture by employs pre-trained language models and results in superior accuracy over previous methods. In 2023, Kassem <em class="ltx_emph ltx_font_italic">et al.</em> <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib28" title="">28</a>]</cite> developed a Deep Attention Neural Network that uses the attention mechanism to capture relative word importance in issue descriptions. A recent approach called Fine-SE <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib9" title="">9</a>]</cite> explored the idea of combining expert features with semantic features to produce better estimations. While these approaches have shown promising results in terms of accuracy, they operate as black-box models that do not explain their estimation nor participate in team discussion, an important aspect of agile effort estimation. Our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> framework leverages LLMs to create agents that not only provide estimates but also provide relevant justifications. Furthermore, they can communicate with human practitioners and provide different perspectives on a user story, similar to how cross-functional agile teams operate in practice.</p>
+</div>
+<div class="ltx_para" id="S4.p3">
+<p class="ltx_p">Recent research in LLM-based agents has demonstrated their capability to autonomously solve complex and human-like tasks <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib29" title="">29</a>, <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib30" title="">30</a>]</cite>. Inspired by those breakthroughs, a range of approaches have been recently proposed to develop LLM-based agents for performing software engineering tasks such as requirement elicitation (e.g. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib31" title="">31</a>]</cite>), code generation (e.g. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib32" title="">32</a>, <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib33" title="">33</a>]</cite>), quality assurance (e.g. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib34" title="">34</a>, <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib35" title="">35</a>]</cite>) and software development (e.g. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib36" title="">36</a>, <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib37" title="">37</a>]</cite>). Tao et al. <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib36" title="">36</a>]</cite> used LLM agents to simulate planning discussions for software tasks before the commencement of coding activities. Recent studies <cite class="ltx_cite ltx_citemacro_cite">[<a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib38" title="">38</a>, <a class="ltx_ref" href="https://arxiv.org/html/2509.14483v1#bib.bib39" title="">39</a>]</cite> have demonstrated promising results of multi-agent systems in emulating agile software development workflows, where agents collectively simulate the roles and interactions inherent in agile methodologies. While prior research has shown the effectiveness of LLM-based multi-agent systems in various project management contexts, there remains a gap regarding their application in agile effort estimation. Our work distinguishes itself by studying not only the quantitative accuracy of estimations, but also understanding the human-AI interaction dynamics and practitioners’ perceptions of AI agents in the context of a collaborative effort estimation scenario.</p>
+</div>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">V </span><span class="ltx_text ltx_font_smallcaps">Conclusions and future work</span>
+</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p">In the paper, we have proposed <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span>, an LLM-based multi-agent framework which is capable of not only estimating user stories accurately but also coordinating, communicating and discussing with human developers to reach an agreed-upon estimate. Our approach represents a significant departure from the prior state-of-the-art machine learning-based techniques in agile estimation, which <em class="ltx_emph ltx_font_italic">cannot</em> even explain nor justify their estimates.
+Results from a rigorous human study have shown that our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgents</span> can engage in meaningful discussions with human practitioners, make accurate estimation on user stories and provide useful justification. The participants found that our agents help them reach consensus more efficiently, bridge the knowledge gap, and bring valuable insights into potential risks. The participants also agreed that they would trust our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> and recommend using it in practice.</p>
+</div>
+<div class="ltx_para" id="S5.p2">
+<p class="ltx_p">Feedback from the participants also provide several avenues for our future work such as enriching <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span>’s knowledge with source code and infrastructure data, or integrating it with existing agile project management tools such as JIRA. We will also incorporate voice interaction capability into <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> to facilitate more natural communication with humans. Our future work also involves expanding the human study significantly into the commercial domain to bring our <span class="ltx_text ltx_font_bold ltx_font_italic">SEEAgent</span> to the wider agile software development communities.</p>
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock">
+R. J. Leach, “Software cost estimation,” in <em class="ltx_emph ltx_font_italic">Wiley Encyclopedia of Electrical and Electronics Engineering</em>. John Wiley &amp; Sons, Ltd. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://onlinelibrary.wiley.com/doi/abs/10.1002/047134608X.W6939</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock">
+M. Pozenel, L. Fürst, D. Vavpoti, and T. Hovelja, “Agile effort estimation: Comparing the accuracy and efficiency of planning poker, bucket system, and affinity estimation methods,” vol. abs/2401.16152. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://api.semanticscholar.org/CorpusID:264598156</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock">
+J. Grenning, “Planning poker or how to avoid analysis paralysis while release planning,” <em class="ltx_emph ltx_font_italic">Hawthorn Woods: Renaissance Software Consulting</em>, vol. 3, pp. 22–23, 2002.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock">
+M. Usman, E. Mendes, F. Weidt, and R. Britto, “Effort estimation in agile software development: a systematic literature review,” in <em class="ltx_emph ltx_font_italic">Proceedings of the 10th International Conference on Predictive Models in Software Engineering</em>, ser. PROMISE ’14. New York, NY, USA: Association for Computing Machinery, 2014, p. 82–91. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://doi.org/10.1145/2639490.2639503</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock">
+M. Choetkiertikul, H. K. Dam, T. Tran, T. Pham, A. Ghose, and T. Menzies, “A deep learning model for estimating story points,” vol. 45, no. 7, pp. 637–656, conference Name: IEEE Transactions on Software Engineering. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://ieeexplore.ieee.org/document/8255666/?arnumber=8255666</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock">
+S. Porru, A. Murgia, S. Demeyer, M. Marchesi, and R. Tonelli, “Estimating story points from issue reports,” in <em class="ltx_emph ltx_font_italic">Proceedings of the The 12th International Conference on Predictive Models and Data Analytics in Software Engineering</em>. ACM, pp. 1–10. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://dl.acm.org/doi/10.1145/2972958.2972959</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock">
+E. Scott and D. Pfahl, “Using developers’ features to estimate story points,” in <em class="ltx_emph ltx_font_italic">Proceedings of the 2018 International Conference on Software and System Process</em>. ACM, pp. 106–110. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://dl.acm.org/doi/10.1145/3202710.3203160</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock">
+M. Fu and C. Tantithamthavorn, “GPT2sp: A transformer-based agile story point estimation approach,” vol. 49, no. 2, pp. 611–625, conference Name: IEEE Transactions on Software Engineering. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://ieeexplore.ieee.org/document/9732669/?arnumber=9732669</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock">
+Y. Li, Z. Ren, Z. Wang, L. Yang, L. Dong, C. Zhong, and H. Zhang, “Fine-SE: Integrating Semantic Features and Expert Features for Software Effort Estimation,” in <em class="ltx_emph ltx_font_italic">Proceedings of the IEEE/ACM 46th International Conference on Software Engineering</em>. ACM, pp. 1–12. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://dl.acm.org/doi/10.1145/3597503.3623349</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock">
+A. Mohammad and B. Chirchir, “Challenges of Integrating Artificial Intelligence in Software Project Planning: A Systematic Literature Review,” vol. 4, no. 3, pp. 555–571. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://www.mdpi.com/2673-6470/4/3/28</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock">
+E. J. Hu, Y. Shen, P. Wallis, Z. Allen-Zhu, Y. Li, S. Wang, L. Wang, and W. Chen, “LoRA: Low-Rank Adaptation of Large Language Models.” [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://openreview.net/forum?id=nZeVKeeFYf9</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock">
+T. R. Sumers, S. Yao, K. Narasimhan, and T. L. Griffiths. Cognitive Architectures for Language Agents. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/2309.02427</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock">
+T. Brown, B. Mann, N. Ryder, M. Subbiah, J. D. Kaplan, P. Dhariwal, A. Neelakantan, P. Shyam, G. Sastry, A. Askell, S. Agarwal, A. Herbert-Voss, G. Krueger, T. Henighan, R. Child, A. Ramesh, D. Ziegler, J. Wu, C. Winter, C. Hesse, M. Chen, E. Sigler, M. Litwin, S. Gray, B. Chess, J. Clark, C. Berner, S. McCandlish, A. Radford, I. Sutskever, and D. Amodei, “Language models are few-shot learners,” in <em class="ltx_emph ltx_font_italic">Advances in Neural Information Processing Systems</em>, H. Larochelle, M. Ranzato, R. Hadsell, M. Balcan, and H. Lin, Eds., vol. 33. Curran Associates, Inc., pp. 1877–1901.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock">
+J. Pfeiffer, I. Vulić, I. Gurevych, and S. Ruder, “MAD-X: An Adapter-Based Framework for Multi-Task Cross-Lingual Transfer,” in <em class="ltx_emph ltx_font_italic">Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)</em>, B. Webber, T. Cohn, Y. He, and Y. Liu, Eds. Association for Computational Linguistics, pp. 7654–7673. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://aclanthology.org/2020.emnlp-main.617/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock">
+N. Houlsby, A. Giurgiu, S. Jastrzebski, B. Morrone, Q. de Laroussilhe, A. Gesmundo, M. Attariyan, and S. Gelly. Parameter-Efficient Transfer Learning for NLP. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/1902.00751</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock">
+J. He, C. Zhou, X. Ma, T. Berg-Kirkpatrick, and G. Neubig. Towards a Unified View of Parameter-Efficient Transfer Learning. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/2110.04366</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock">
+X. L. Li and P. Liang. Prefix-Tuning: Optimizing Continuous Prompts for Generation. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/2101.00190</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock">
+T. Dettmers, A. Pagnoni, A. Holtzman, and L. Zettlemoyer, “QLoRA: Efficient finetuning of quantized llms,” in <em class="ltx_emph ltx_font_italic">Advances in Neural Information Processing Systems</em>, A. Oh, T. Naumann, A. Globerson, K. Saenko, M. Hardt, and S. Levine, Eds., vol. 36. Curran Associates, Inc., pp. 10 088–10 115.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock">
+L. Ouyang, J. Wu, X. Jiang, D. Almeida, C. L. Wainwright, P. Mishkin, C. Zhang, S. Agarwal, K. Slama, A. Ray, J. Schulman, J. Hilton, F. Kelton, L. Miller, M. Simens, A. Askell, P. Welinder, P. Christiano, J. Leike, and R. Lowe. Training language models to follow instructions with human feedback. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/2203.02155</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock">
+S. Yao, J. Zhao, D. Yu, N. Du, I. Shafran, K. Narasimhan, and Y. Cao, “ReAct: Synergizing reasoning and acting in language models,” in <em class="ltx_emph ltx_font_italic">International Conference on Learning Representations (ICLR)</em>, 2023.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock">
+A. Melnikov and I. Fette, “The WebSocket Protocol.” [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://datatracker.ietf.org/doc/rfc6455</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock">
+J. Devlin, M.-W. Chang, K. Lee, and K. Toutanova. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/1810.04805</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock">
+M. H. Daniel Han and U. team, “Unsloth,” 2023. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://github.com/unslothai/unsloth</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock">
+J. M. E. v. d. W. Garm Lucassen, Fabiano Dalpiaz and S. Brinkkemper, “The use and effectiveness of user stories in practice,” in <em class="ltx_emph ltx_font_italic">Requirements Engineering: Foundation for Software Quality</em>, M. Daneva and O. Pastor, Eds. Springer International Publishing, pp. 205–222.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock">
+A. Kong, S. Zhao, H. Chen, Q. Li, Y. Qin, R. Sun, X. Zhou, E. Wang, and X. Dong, “Better Zero-Shot Reasoning with Role-Play Prompting,” in <em class="ltx_emph ltx_font_italic">Proceedings of the 2024 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers)</em>, K. Duh, H. Gomez, and S. Bethard, Eds. Association for Computational Linguistics, pp. 4099–4113. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://aclanthology.org/2024.naacl-long.228/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock">
+V. Tawosi, A. Al-Subaihin, and F. Sarro, “Investigating the effectiveness of clustering for story point estimation,” in <em class="ltx_emph ltx_font_italic">2022 IEEE International Conference on Software Analysis, Evolution and Reengineering (SANER)</em>, pp. 827–838, ISSN: 1534-5351. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://ieeexplore.ieee.org/document/9825830/?arnumber=9825830</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock">
+F. B. Ahmad and L. M. Ibrahim, “Software development effort estimation techniques using long short term memory,” in <em class="ltx_emph ltx_font_italic">2022 International Conference on Computer Science and Software Engineering (CSASE)</em>, pp. 182–187. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://ieeexplore.ieee.org/document/9759751/?arnumber=9759751</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock">
+H. Kassem, K. Mahar, and A. A. Saad, “Story point estimation using issue reports with deep attention neural network,” vol. 17, no. 1, p. 230104. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://www.e-informatyka.pl/index.php/einformatica/volumes/volume-2023/issue-1/article-4/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock">
+Q. Wu, G. Bansal, J. Zhang, Y. Wu, B. Li, E. E. Zhu, L. Jiang, X. Zhang, S. Zhang, A. Awadallah, R. W. White, D. Burger, and C. Wang, “AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation.” [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://www.microsoft.com/en-us/research/publication/autogen-enabling-next-gen-llm-applications-via-multi-agent-conversation-framework/</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock">
+G. Li, H. Hammoud, H. Itani, D. Khizbullin, and B. Ghanem, “CAMEL: Communicative Agents for ”Mind” Exploration of Large Language Model Society,” vol. 36, pp. 51 991–52 008.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_tag_bibitem">[31]</span>
+<span class="ltx_bibblock">
+M. Ataei, H. Cheong, D. Grandi, Y. Wang, N. Morris, and A. Tessier. Elicitron: An LLM Agent-Based Simulation Framework for Design Requirements Elicitation. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/2404.16045</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_tag_bibitem">[32]</span>
+<span class="ltx_bibblock">
+J. Li, H. Le, Y. Zhou, C. Xiong, S. Savarese, and D. Sahoo. CodeTree: Agent-guided Tree Search for Code Generation with Large Language Models. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/2411.04329</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_tag_bibitem">[33]</span>
+<span class="ltx_bibblock">
+H. Nhat Phan, T. N. Nguyen, P. X. Nguyen, and N. D. Q. Bui, “HyperAgent: Generalist Software Engineering Agents to Solve Coding Tasks at Scale,” p. arXiv:2409.16299. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://ui.adsabs.harvard.edu/abs/2024arXiv240916299N/abstract</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib34">
+<span class="ltx_tag ltx_tag_bibitem">[34]</span>
+<span class="ltx_bibblock">
+G. Deng, Y. Liu, V. Mayoral-Vilches, P. Liu, Y. Li, Y. Xu, T. Zhang, Y. Liu, M. Pinzger, and S. Rass, “PENTESTGPT: Evaluating and harnessing large language models for automated penetration testing,” in <em class="ltx_emph ltx_font_italic">Proceedings of the 33rd USENIX Conference on Security Symposium</em>, ser. SEC ’24. USENIX Association, pp. 847–864.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib35">
+<span class="ltx_tag ltx_tag_bibitem">[35]</span>
+<span class="ltx_bibblock">
+J. Yoon, R. Feldt, and S. Yoo, “Intent-Driven Mobile GUI Testing with Autonomous Large Language Model Agents,” in <em class="ltx_emph ltx_font_italic">2024 IEEE Conference on Software Testing, Verification and Validation (ICST)</em>, pp. 129–139. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://ieeexplore.ieee.org/document/10638557</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib36">
+<span class="ltx_tag ltx_tag_bibitem">[36]</span>
+<span class="ltx_bibblock">
+W. Tao, Y. Zhou, Y. Wang, W. Zhang, H. Zhang, and Y. Cheng, “MAGIS: LLM-Based Multi-Agent Framework for GitHub Issue Resolution,” vol. 37, pp. 51 963–51 993.
+
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib37">
+<span class="ltx_tag ltx_tag_bibitem">[37]</span>
+<span class="ltx_bibblock">
+S. Hong, M. Zhuge, J. Chen, X. Zheng, Y. Cheng, J. Wang, C. Zhang, Z. Wang, S. K. S. Yau, Z. Lin, L. Zhou, C. Ran, L. Xiao, C. Wu, and J. Schmidhuber, “MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework.” [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://openreview.net/forum?id=VtmBAGCN7o</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib38">
+<span class="ltx_tag ltx_tag_bibitem">[38]</span>
+<span class="ltx_bibblock">
+S. Zhang, Z. Xing, R. Guo, F. Xu, L. Chen, Z. Zhang, X. Zhang, Z. Feng, and Z. Zhuang, “Empowering Agile-Based Generative Software Development through Human-AI Teamwork.” [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">https://dl.acm.org/doi/10.1145/3702987</span>
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib39">
+<span class="ltx_tag ltx_tag_bibitem">[39]</span>
+<span class="ltx_bibblock">
+M. H. Nguyen, T. P. Chau, P. X. Nguyen, and N. D. Q. Bui. AgileCoder: Dynamic Collaborative Agents for Software Development based on Agile Methodology. [Online]. Available: <span class="ltx_ref ltx_nolink ltx_url ltx_font_typewriter ltx_ref_self">http://arxiv.org/abs/2406.11912</span>
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Wed Sep 17 23:20:11 2025 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

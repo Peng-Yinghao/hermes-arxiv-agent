@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations</title>
+<!--Generated on Fri Apr 18 07:47:00 2025 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/ar5iv-fonts.0.7.9.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/browse/0.3.4/css/latexml_styles.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<meta content="LLM-based agents,  user behavior simulation,  recommendations" lang="en" name="keywords"/>
+<base href="/html/2502.13843v2/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S1" title="In AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S2" title="In AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Preliminaries</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S2.SS1" title="In 2. Preliminaries ‣ AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.1 </span>AgentCF</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S2.SS2" title="In 2. Preliminaries ‣ AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2.2 </span>Limitations of AgentCF</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S3" title="In AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>AgentCF++</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S3.SS1" title="In 3. AgentCF++ ‣ AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.1 </span>Memory Architecture</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S3.SS2" title="In 3. AgentCF++ ‣ AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.2 </span>Inference Phase</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S3.SS3" title="In 3. AgentCF++ ‣ AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3.3 </span>Update Phase</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S4" title="In AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Experiments</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection">
+<a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S4.SS1" title="In 4. Experiments ‣ AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1 </span>Settings</span></a>
+<ol class="ltx_toclist ltx_toclist_subsection">
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S4.SS1.SSS1" title="In 4.1. Settings ‣ 4. Experiments ‣ AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1.1 </span>Datasets</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S4.SS1.SSS2" title="In 4.1. Settings ‣ 4. Experiments ‣ AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1.2 </span>Evaluation</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsubsection"><a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S4.SS1.SSS3" title="In 4.1. Settings ‣ 4. Experiments ‣ AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.1.3 </span>Baselines</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S4.SS2" title="In 4. Experiments ‣ AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4.2 </span>Overall Performance</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S5" title="In AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Related Work</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S6" title="In AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Conclusions</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line ltx_leqno">
+<h1 class="ltx_title ltx_title_document">AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Jiahao Liu
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0002-5654-5902" title="ORCID identifier">0000-0002-5654-5902</a></span>
+</span></span>
+<span class="ltx_author_before">, </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Shengkang Gu
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0009-0006-7033-0162" title="ORCID identifier">0009-0006-7033-0162</a></span>
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_affiliation_institution" id="id1.1.id1">Fudan University</span><span class="ltx_text ltx_affiliation_city" id="id2.2.id2">Shanghai</span><span class="ltx_text ltx_affiliation_country" id="id3.3.id3">China</span>
+</span>
+<span class="ltx_contact ltx_role_email"><a href="mailto:jiahaoliu21@m.fudan.edu.cn">jiahaoliu21@m.fudan.edu.cn</a>
+</span>
+<span class="ltx_contact ltx_role_email"><a href="mailto:gusk24@m.fudan.edu.cn">gusk24@m.fudan.edu.cn</a>
+</span></span></span>
+<span class="ltx_author_before">, </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Dongsheng Li
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0003-3103-8442" title="ORCID identifier">0000-0003-3103-8442</a></span>
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_affiliation_institution" id="id4.1.id1">Microsoft Research Asia</span><span class="ltx_text ltx_affiliation_city" id="id5.2.id2">Shanghai</span><span class="ltx_text ltx_affiliation_country" id="id6.3.id3">China</span>
+</span>
+<span class="ltx_contact ltx_role_email"><a href="mailto:dongshengli@fudan.edu.cn">dongshengli@fudan.edu.cn</a>
+</span></span></span>
+<span class="ltx_author_before">, </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Guangping Zhang
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0009-0001-9853-8268" title="ORCID identifier">0009-0001-9853-8268</a></span>
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_affiliation_institution" id="id7.1.id1">Fudan University</span><span class="ltx_text ltx_affiliation_city" id="id8.2.id2">Shanghai</span><span class="ltx_text ltx_affiliation_country" id="id9.3.id3">China</span>
+</span>
+<span class="ltx_contact ltx_role_email"><a href="mailto:gpzhang20@fudan.edu.cn">gpzhang20@fudan.edu.cn</a>
+</span></span></span>
+<span class="ltx_author_before">, </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Mingzhe Han
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0002-4911-6093" title="ORCID identifier">0000-0002-4911-6093</a></span>
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_affiliation_institution" id="id10.1.id1">Fudan University</span><span class="ltx_text ltx_affiliation_city" id="id11.2.id2">Shanghai</span><span class="ltx_text ltx_affiliation_country" id="id12.3.id3">China</span>
+</span>
+<span class="ltx_contact ltx_role_email"><a href="mailto:mzhan22@m.fudan.edu.cn">mzhan22@m.fudan.edu.cn</a>
+</span></span></span>
+<span class="ltx_author_before">, </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Hansu Gu
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0002-1426-3210" title="ORCID identifier">0000-0002-1426-3210</a></span>
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_affiliation_institution" id="id13.1.id1">Independent</span><span class="ltx_text ltx_affiliation_city" id="id14.2.id2">Seattle</span><span class="ltx_text ltx_affiliation_country" id="id15.3.id3">United States</span>
+</span>
+<span class="ltx_contact ltx_role_email"><a href="mailto:hansug@acm.org">hansug@acm.org</a>
+</span></span></span>
+<span class="ltx_author_before">, </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Peng Zhang
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0002-9109-4625" title="ORCID identifier">0000-0002-9109-4625</a></span>
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_affiliation_institution" id="id16.1.id1">Fudan University</span><span class="ltx_text ltx_affiliation_city" id="id17.2.id2">Shanghai</span><span class="ltx_text ltx_affiliation_country" id="id18.3.id3">China</span>
+</span>
+<span class="ltx_contact ltx_role_email"><a href="mailto:zhangpeng_@fudan.edu.cn">zhangpeng_@fudan.edu.cn</a>
+</span></span></span>
+<span class="ltx_author_before">, </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Tun Lu
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0002-6633-4826" title="ORCID identifier">0000-0002-6633-4826</a></span>
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_affiliation_institution" id="id19.1.id1">Fudan University</span><span class="ltx_text ltx_affiliation_city" id="id20.2.id2">Shanghai</span><span class="ltx_text ltx_affiliation_country" id="id21.3.id3">China</span>
+</span>
+<span class="ltx_contact ltx_role_email"><a href="mailto:lutun@fudan.edu.cn">lutun@fudan.edu.cn</a>
+</span></span></span>
+<span class="ltx_author_before">, </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Li Shang
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0003-3944-7531" title="ORCID identifier">0000-0003-3944-7531</a></span>
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_affiliation_institution" id="id22.1.id1">Fudan University</span><span class="ltx_text ltx_affiliation_city" id="id23.2.id2">Shanghai</span><span class="ltx_text ltx_affiliation_country" id="id24.3.id3">China</span>
+</span>
+<span class="ltx_contact ltx_role_email"><a href="mailto:lishang@fudan.edu.cn">lishang@fudan.edu.cn</a>
+</span></span></span>
+<span class="ltx_author_before"> and </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Ning Gu
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_orcid"><a class="ltx_ref" href="https://orcid.org/0000-0002-2915-974X" title="ORCID identifier">0000-0002-2915-974X</a></span>
+<span class="ltx_contact ltx_role_affiliation"><span class="ltx_text ltx_affiliation_institution" id="id25.1.id1">Fudan University</span><span class="ltx_text ltx_affiliation_city" id="id26.2.id2">Shanghai</span><span class="ltx_text ltx_affiliation_country" id="id27.3.id3">China</span>
+</span>
+<span class="ltx_contact ltx_role_email"><a href="mailto:ninggu@fudan.edu.cn">ninggu@fudan.edu.cn</a>
+</span></span></span>
+</div>
+<div class="ltx_dates">(2025)</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract.</h6>
+<p class="ltx_p" id="id28.id1">LLM-based user agents, which simulate user interaction behavior, are emerging as a promising approach to enhancing recommender systems.
+In real-world scenarios, users’ interactions often exhibit cross-domain characteristics and are influenced by others.
+However, the memory design in current methods causes user agents to introduce significant irrelevant information during decision-making in cross-domain scenarios and makes them unable to recognize the influence of other users’ interactions, such as popularity factors.
+To tackle this issue, we propose a dual-layer memory architecture combined with a two-step fusion mechanism.
+This design avoids irrelevant information during decision-making while ensuring effective integration of cross-domain preferences.
+We also introduce the concepts of interest groups and group-shared memory to better capture the influence of popularity factors on users with similar interests.
+Comprehensive experiments validate the effectiveness of AgentCF++.
+Our code is available at <a class="ltx_ref ltx_url ltx_font_typewriter" href="https://github.com/jhliu0807/AgentCF-plus" title="">https://github.com/jhliu0807/AgentCF-plus</a>.</p>
+</div>
+<div class="ltx_keywords">LLM-based agents, user behavior simulation, recommendations
+</div>
+<span class="ltx_note ltx_note_frontmatter ltx_role_journalyear" id="id1"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">journalyear: </span>2025</span></span></span><span class="ltx_note ltx_note_frontmatter ltx_role_copyright" id="id2"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">copyright: </span>acmlicensed</span></span></span><span class="ltx_note ltx_note_frontmatter ltx_role_conference" id="id3"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">conference: </span>Proceedings of the 48th International ACM SIGIR Conference on Research and Development in Information Retrieval; July 13–18, 2025; Padua, Italy</span></span></span><span class="ltx_note ltx_note_frontmatter ltx_role_booktitle" id="id4"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">booktitle: </span>Proceedings of the 48th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR ’25), July 13–18, 2025, Padua, Italy</span></span></span><span class="ltx_note ltx_note_frontmatter ltx_role_doi" id="id5"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">doi: </span>10.1145/3726302.3730161</span></span></span><span class="ltx_note ltx_note_frontmatter ltx_role_isbn" id="id6"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">isbn: </span>979-8-4007-1592-1/2025/07</span></span></span><span class="ltx_note ltx_note_frontmatter ltx_role_ccs" id="id7"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">ccs: </span>Information systems Recommender systems</span></span></span>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1. </span>Introduction</h2>
+<figure class="ltx_figure" id="S1.F1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="166" id="S1.F1.g1" src="x1.png" width="805"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1. </span>(a) The memory propagation process in AgentCF. (b) An example illustrating AgentCF’s limitations in modeling user behavior influenced by popularity factors. (c) Illustration of why modeling popularity factors is necessary for accurately simulating user behavior. (d) Overview of the proposed AgentCF++ model, highlighting its improvements over AgentCF.</figcaption>
+</figure>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p" id="S1.p1.1">Recommender systems play a pivotal role in the dissemination of information today <cite class="ltx_cite ltx_citemacro_citep">(Ricci et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib33" title="">2010</a>; Xia et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib46" title="">2022</a>; Liu et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib23" title="">2023b</a>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib26" title="">d</a>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib21" title="">a</a>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib24" title="">c</a>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib25" title="">2024</a>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib22" title="">2022</a>; Li et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib19" title="">2024</a>)</cite>.
+However, their development is hindered by challenges in effectively understanding user behavior <cite class="ltx_cite ltx_citemacro_citep">(Shani and Gunawardana, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib34" title="">2011</a>)</cite>.
+One promising approach to overcoming these challenges is the reliable simulation of user interaction behavior in a controlled, privacy-preserving manner, thereby improving recommender systems by offering insights into user preferences and system performance <cite class="ltx_cite ltx_citemacro_citep">(Zhang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib50" title="">2024e</a>)</cite>.
+Recent advancements in large language models (LLMs), renowned for their capabilities in understanding, reasoning, and generating content <cite class="ltx_cite ltx_citemacro_citep">(Zhao et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib57" title="">2023</a>)</cite>, have inspired significant efforts to develop LLM-based agents <cite class="ltx_cite ltx_citemacro_citep">(Wang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib41" title="">2024a</a>)</cite>.
+These agents often incorporate memory modules <cite class="ltx_cite ltx_citemacro_citep">(Zhang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib55" title="">2024b</a>)</cite>, utilize external tools <cite class="ltx_cite ltx_citemacro_citep">(Yuan et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib47" title="">2024</a>)</cite>, and engage in advanced reasoning <cite class="ltx_cite ltx_citemacro_citep">(Huang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib15" title="">2024</a>)</cite>, enabling them to exhibit emergent human-like behaviors <cite class="ltx_cite ltx_citemacro_citep">(Park et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib30" title="">2023</a>)</cite>.
+In this context, researchers have begun investigating the potential of LLM-based agents to simulate user interaction behavior in the field of recommender systems <cite class="ltx_cite ltx_citemacro_citep">(Wang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib42" title="">2024c</a>; Zhang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib49" title="">2024c</a>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib52" title="">d</a>; Shu et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib38" title="">2024</a>; Cai et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib4" title="">2024</a>; Zhang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib56" title="">2024f</a>)</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p" id="S1.p2.1">Accurately representing user preferences is crucial for a user agent to realistically simulate user behavior.
+While various terms are used across studies, this paper uniformly refers to these preferences as being stored in <span class="ltx_text ltx_font_italic" id="S1.p2.1.1">memory</span>.
+In real-world scenarios, users’ interactions with recommender systems often exhibit cross-domain characteristics <cite class="ltx_cite ltx_citemacro_citep">(Zang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib48" title="">2022</a>)</cite>.
+Additionally, individual behaviors are frequently influenced by those of others <cite class="ltx_cite ltx_citemacro_citep">(Huang and Chen, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib13" title="">2006</a>)</cite>.
+For instance, popularity-related factors suggest that even in the absence of explicit social networks, such influences can be inferred from interaction graphs and propagated through interaction paths <cite class="ltx_cite ltx_citemacro_citep">(Zhang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib54" title="">2021</a>)</cite>.
+However, the current memory design causes the user agent to exhibit two significant limitations:
+<span class="ltx_text ltx_font_bold" id="S1.p2.1.2">First</span>, user preferences from multiple domains are mixed into a single memory.
+However, only a portion of the preferences is relevant to decision-making in the target domain, leading the user agent to process a considerable amount of irrelevant information.
+<span class="ltx_text ltx_font_bold" id="S1.p2.1.3">Second</span>, memory construction relies exclusively on individual user interactions, neglecting how external factors, such as popularity influences, shape user preferences.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p" id="S1.p3.1">In this paper, we present <span class="ltx_text ltx_font_bold" id="S1.p3.1.1">AgentCF++</span>, an enhanced version of AgentCF <cite class="ltx_cite ltx_citemacro_citep">(Zhang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib52" title="">2024d</a>)</cite>.
+Our approach introduces a <span class="ltx_text ltx_font_italic" id="S1.p3.1.2">dual-layer memory architecture</span> comprising <span class="ltx_text ltx_font_italic" id="S1.p3.1.3">domain-separated memory</span> and <span class="ltx_text ltx_font_italic" id="S1.p3.1.4">domain-fused memory</span>, designed to prioritize target-domain-relevant information in decision-making for cross-domain scenarios.
+To refine this architecture, we propose an attention-inspired <span class="ltx_text ltx_font_italic" id="S1.p3.1.5">two-step fusion mechanism</span>.
+This mechanism first identifies valuable cross-domain knowledge pertinent to the target domain and then integrates these critical preferences.
+Furthermore, we introduce the concept of <span class="ltx_text ltx_font_italic" id="S1.p3.1.6">interest groups</span> and propose a <span class="ltx_text ltx_font_italic" id="S1.p3.1.7">group-shared memory mechanism</span> to facilitate the transfer of popularity effects within the same interest group.
+By utilizing interest groups, we ensure that a user’s behavior impacts only those with similar interests, effectively preventing the spread of popularity effects to unrelated users.
+Our experimental results on five cross-domain datasets demonstrate the effectiveness of the proposed modules.</p>
+</div>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2. </span>Preliminaries</h2>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.1. </span>AgentCF</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p" id="S2.SS1.p1.1">Unlike previous studies <cite class="ltx_cite ltx_citemacro_citep">(Wang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib42" title="">2024c</a>; Zhang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib49" title="">2024c</a>; Shu et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib38" title="">2024</a>; Cai et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib4" title="">2024</a>; Zhang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib56" title="">2024f</a>)</cite> that consider only users as agents, AgentCF <cite class="ltx_cite ltx_citemacro_citep">(Zhang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib52" title="">2024d</a>)</cite> treats both users and items as agents.
+Each user agent is equipped with a memory to store individual preferences, while each item agent maintains a memory to track the interest levels of users with varying preferences towards it.
+At each step, leveraging LLMs for decision-making and reflection, these agents autonomously interact, compare their actions with real-world data, and collaboratively adjust their memories to better align with observed behaviors.
+As illustrated in Figure <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S1.F1" title="Figure 1 ‣ 1. Introduction ‣ AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_tag">1</span></a>(a), user and item memories gradually propagate over time through interactions, embodying the principles of collaborative filtering.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">2.2. </span>Limitations of AgentCF</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p" id="S2.SS2.p1.1">AgentCF employs a single memory for each user agent and item agent.
+In cross-domain scenarios, the propagation process integrates information from multiple domains into the memory of each user and item.
+On one hand, the mixing of cross-domain preferences in the user agent may introduce noise, thereby complicating decision-making on target domain.
+On the other hand, such intermingling may cause the item agent to lose its original domain characteristics.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p2">
+<p class="ltx_p" id="S2.SS2.p2.8">Additionally, while AgentCF employs collaborative filtering to capture the influence of others’ interactions, memory updates for user and item agents occur only during direct interactions, limiting its capacity to comprehensively model how popularity factors shape user behavior.
+To illustrate this limitation, consider the following example.
+Figure <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S1.F1" title="Figure 1 ‣ 1. Introduction ‣ AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_tag">1</span></a>(b) visualizes user-item interaction dynamics using a timestamped bipartite graph.
+At <math alttext="t_{1}" class="ltx_Math" display="inline" id="S2.SS2.p2.1.m1.1"><semantics id="S2.SS2.p2.1.m1.1a"><msub id="S2.SS2.p2.1.m1.1.1" xref="S2.SS2.p2.1.m1.1.1.cmml"><mi id="S2.SS2.p2.1.m1.1.1.2" xref="S2.SS2.p2.1.m1.1.1.2.cmml">t</mi><mn id="S2.SS2.p2.1.m1.1.1.3" xref="S2.SS2.p2.1.m1.1.1.3.cmml">1</mn></msub><annotation-xml encoding="MathML-Content" id="S2.SS2.p2.1.m1.1b"><apply id="S2.SS2.p2.1.m1.1.1.cmml" xref="S2.SS2.p2.1.m1.1.1"><csymbol cd="ambiguous" id="S2.SS2.p2.1.m1.1.1.1.cmml" xref="S2.SS2.p2.1.m1.1.1">subscript</csymbol><ci id="S2.SS2.p2.1.m1.1.1.2.cmml" xref="S2.SS2.p2.1.m1.1.1.2">𝑡</ci><cn id="S2.SS2.p2.1.m1.1.1.3.cmml" type="integer" xref="S2.SS2.p2.1.m1.1.1.3">1</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS2.p2.1.m1.1c">t_{1}</annotation><annotation encoding="application/x-llamapun" id="S2.SS2.p2.1.m1.1d">italic_t start_POSTSUBSCRIPT 1 end_POSTSUBSCRIPT</annotation></semantics></math>, Alice, Bob, and Carl purchase outdoor activity items; at <math alttext="t_{2}" class="ltx_Math" display="inline" id="S2.SS2.p2.2.m2.1"><semantics id="S2.SS2.p2.2.m2.1a"><msub id="S2.SS2.p2.2.m2.1.1" xref="S2.SS2.p2.2.m2.1.1.cmml"><mi id="S2.SS2.p2.2.m2.1.1.2" xref="S2.SS2.p2.2.m2.1.1.2.cmml">t</mi><mn id="S2.SS2.p2.2.m2.1.1.3" xref="S2.SS2.p2.2.m2.1.1.3.cmml">2</mn></msub><annotation-xml encoding="MathML-Content" id="S2.SS2.p2.2.m2.1b"><apply id="S2.SS2.p2.2.m2.1.1.cmml" xref="S2.SS2.p2.2.m2.1.1"><csymbol cd="ambiguous" id="S2.SS2.p2.2.m2.1.1.1.cmml" xref="S2.SS2.p2.2.m2.1.1">subscript</csymbol><ci id="S2.SS2.p2.2.m2.1.1.2.cmml" xref="S2.SS2.p2.2.m2.1.1.2">𝑡</ci><cn id="S2.SS2.p2.2.m2.1.1.3.cmml" type="integer" xref="S2.SS2.p2.2.m2.1.1.3">2</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS2.p2.2.m2.1c">t_{2}</annotation><annotation encoding="application/x-llamapun" id="S2.SS2.p2.2.m2.1d">italic_t start_POSTSUBSCRIPT 2 end_POSTSUBSCRIPT</annotation></semantics></math>, Bob and Carl buy rain gear; at <math alttext="t_{3}" class="ltx_Math" display="inline" id="S2.SS2.p2.3.m3.1"><semantics id="S2.SS2.p2.3.m3.1a"><msub id="S2.SS2.p2.3.m3.1.1" xref="S2.SS2.p2.3.m3.1.1.cmml"><mi id="S2.SS2.p2.3.m3.1.1.2" xref="S2.SS2.p2.3.m3.1.1.2.cmml">t</mi><mn id="S2.SS2.p2.3.m3.1.1.3" xref="S2.SS2.p2.3.m3.1.1.3.cmml">3</mn></msub><annotation-xml encoding="MathML-Content" id="S2.SS2.p2.3.m3.1b"><apply id="S2.SS2.p2.3.m3.1.1.cmml" xref="S2.SS2.p2.3.m3.1.1"><csymbol cd="ambiguous" id="S2.SS2.p2.3.m3.1.1.1.cmml" xref="S2.SS2.p2.3.m3.1.1">subscript</csymbol><ci id="S2.SS2.p2.3.m3.1.1.2.cmml" xref="S2.SS2.p2.3.m3.1.1.2">𝑡</ci><cn id="S2.SS2.p2.3.m3.1.1.3.cmml" type="integer" xref="S2.SS2.p2.3.m3.1.1.3">3</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS2.p2.3.m3.1c">t_{3}</annotation><annotation encoding="application/x-llamapun" id="S2.SS2.p2.3.m3.1d">italic_t start_POSTSUBSCRIPT 3 end_POSTSUBSCRIPT</annotation></semantics></math>, Carl purchases camping equipment.
+Under the AgentCF framework, Alice, who ceases interactions after <math alttext="t_{1}" class="ltx_Math" display="inline" id="S2.SS2.p2.4.m4.1"><semantics id="S2.SS2.p2.4.m4.1a"><msub id="S2.SS2.p2.4.m4.1.1" xref="S2.SS2.p2.4.m4.1.1.cmml"><mi id="S2.SS2.p2.4.m4.1.1.2" xref="S2.SS2.p2.4.m4.1.1.2.cmml">t</mi><mn id="S2.SS2.p2.4.m4.1.1.3" xref="S2.SS2.p2.4.m4.1.1.3.cmml">1</mn></msub><annotation-xml encoding="MathML-Content" id="S2.SS2.p2.4.m4.1b"><apply id="S2.SS2.p2.4.m4.1.1.cmml" xref="S2.SS2.p2.4.m4.1.1"><csymbol cd="ambiguous" id="S2.SS2.p2.4.m4.1.1.1.cmml" xref="S2.SS2.p2.4.m4.1.1">subscript</csymbol><ci id="S2.SS2.p2.4.m4.1.1.2.cmml" xref="S2.SS2.p2.4.m4.1.1.2">𝑡</ci><cn id="S2.SS2.p2.4.m4.1.1.3.cmml" type="integer" xref="S2.SS2.p2.4.m4.1.1.3">1</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS2.p2.4.m4.1c">t_{1}</annotation><annotation encoding="application/x-llamapun" id="S2.SS2.p2.4.m4.1d">italic_t start_POSTSUBSCRIPT 1 end_POSTSUBSCRIPT</annotation></semantics></math>, is still assumed to engage in outdoor activities, despite worsening weather conditions at <math alttext="t_{2}" class="ltx_Math" display="inline" id="S2.SS2.p2.5.m5.1"><semantics id="S2.SS2.p2.5.m5.1a"><msub id="S2.SS2.p2.5.m5.1.1" xref="S2.SS2.p2.5.m5.1.1.cmml"><mi id="S2.SS2.p2.5.m5.1.1.2" xref="S2.SS2.p2.5.m5.1.1.2.cmml">t</mi><mn id="S2.SS2.p2.5.m5.1.1.3" xref="S2.SS2.p2.5.m5.1.1.3.cmml">2</mn></msub><annotation-xml encoding="MathML-Content" id="S2.SS2.p2.5.m5.1b"><apply id="S2.SS2.p2.5.m5.1.1.cmml" xref="S2.SS2.p2.5.m5.1.1"><csymbol cd="ambiguous" id="S2.SS2.p2.5.m5.1.1.1.cmml" xref="S2.SS2.p2.5.m5.1.1">subscript</csymbol><ci id="S2.SS2.p2.5.m5.1.1.2.cmml" xref="S2.SS2.p2.5.m5.1.1.2">𝑡</ci><cn id="S2.SS2.p2.5.m5.1.1.3.cmml" type="integer" xref="S2.SS2.p2.5.m5.1.1.3">2</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS2.p2.5.m5.1c">t_{2}</annotation><annotation encoding="application/x-llamapun" id="S2.SS2.p2.5.m5.1d">italic_t start_POSTSUBSCRIPT 2 end_POSTSUBSCRIPT</annotation></semantics></math>.
+Similarly, Bob shows no interest at <math alttext="t_{3}" class="ltx_Math" display="inline" id="S2.SS2.p2.6.m6.1"><semantics id="S2.SS2.p2.6.m6.1a"><msub id="S2.SS2.p2.6.m6.1.1" xref="S2.SS2.p2.6.m6.1.1.cmml"><mi id="S2.SS2.p2.6.m6.1.1.2" xref="S2.SS2.p2.6.m6.1.1.2.cmml">t</mi><mn id="S2.SS2.p2.6.m6.1.1.3" xref="S2.SS2.p2.6.m6.1.1.3.cmml">3</mn></msub><annotation-xml encoding="MathML-Content" id="S2.SS2.p2.6.m6.1b"><apply id="S2.SS2.p2.6.m6.1.1.cmml" xref="S2.SS2.p2.6.m6.1.1"><csymbol cd="ambiguous" id="S2.SS2.p2.6.m6.1.1.1.cmml" xref="S2.SS2.p2.6.m6.1.1">subscript</csymbol><ci id="S2.SS2.p2.6.m6.1.1.2.cmml" xref="S2.SS2.p2.6.m6.1.1.2">𝑡</ci><cn id="S2.SS2.p2.6.m6.1.1.3.cmml" type="integer" xref="S2.SS2.p2.6.m6.1.1.3">3</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS2.p2.6.m6.1c">t_{3}</annotation><annotation encoding="application/x-llamapun" id="S2.SS2.p2.6.m6.1d">italic_t start_POSTSUBSCRIPT 3 end_POSTSUBSCRIPT</annotation></semantics></math>, failing to account for the improved weather conditions.
+This indicates that, within the AgentCF framework, users’ memories remain static in the absence of additional interactions.
+In practice, however, even without further direct participation, Alice might infer the weather changes at <math alttext="t_{2}" class="ltx_Math" display="inline" id="S2.SS2.p2.7.m7.1"><semantics id="S2.SS2.p2.7.m7.1a"><msub id="S2.SS2.p2.7.m7.1.1" xref="S2.SS2.p2.7.m7.1.1.cmml"><mi id="S2.SS2.p2.7.m7.1.1.2" xref="S2.SS2.p2.7.m7.1.1.2.cmml">t</mi><mn id="S2.SS2.p2.7.m7.1.1.3" xref="S2.SS2.p2.7.m7.1.1.3.cmml">2</mn></msub><annotation-xml encoding="MathML-Content" id="S2.SS2.p2.7.m7.1b"><apply id="S2.SS2.p2.7.m7.1.1.cmml" xref="S2.SS2.p2.7.m7.1.1"><csymbol cd="ambiguous" id="S2.SS2.p2.7.m7.1.1.1.cmml" xref="S2.SS2.p2.7.m7.1.1">subscript</csymbol><ci id="S2.SS2.p2.7.m7.1.1.2.cmml" xref="S2.SS2.p2.7.m7.1.1.2">𝑡</ci><cn id="S2.SS2.p2.7.m7.1.1.3.cmml" type="integer" xref="S2.SS2.p2.7.m7.1.1.3">2</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS2.p2.7.m7.1c">t_{2}</annotation><annotation encoding="application/x-llamapun" id="S2.SS2.p2.7.m7.1d">italic_t start_POSTSUBSCRIPT 2 end_POSTSUBSCRIPT</annotation></semantics></math> and <math alttext="t_{3}" class="ltx_Math" display="inline" id="S2.SS2.p2.8.m8.1"><semantics id="S2.SS2.p2.8.m8.1a"><msub id="S2.SS2.p2.8.m8.1.1" xref="S2.SS2.p2.8.m8.1.1.cmml"><mi id="S2.SS2.p2.8.m8.1.1.2" xref="S2.SS2.p2.8.m8.1.1.2.cmml">t</mi><mn id="S2.SS2.p2.8.m8.1.1.3" xref="S2.SS2.p2.8.m8.1.1.3.cmml">3</mn></msub><annotation-xml encoding="MathML-Content" id="S2.SS2.p2.8.m8.1b"><apply id="S2.SS2.p2.8.m8.1.1.cmml" xref="S2.SS2.p2.8.m8.1.1"><csymbol cd="ambiguous" id="S2.SS2.p2.8.m8.1.1.1.cmml" xref="S2.SS2.p2.8.m8.1.1">subscript</csymbol><ci id="S2.SS2.p2.8.m8.1.1.2.cmml" xref="S2.SS2.p2.8.m8.1.1.2">𝑡</ci><cn id="S2.SS2.p2.8.m8.1.1.3.cmml" type="integer" xref="S2.SS2.p2.8.m8.1.1.3">3</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S2.SS2.p2.8.m8.1c">t_{3}</annotation><annotation encoding="application/x-llamapun" id="S2.SS2.p2.8.m8.1d">italic_t start_POSTSUBSCRIPT 3 end_POSTSUBSCRIPT</annotation></semantics></math> by observing Bob’s and Carl’s actions.
+This underscores the need for user agents to update their memories not only through their own interactions with item agents but also in response to interactions by other user agents.
+In essence, a user’s memory should evolve dynamically, even without direct participation—a critical capability currently missing in the AgentCF framework.</p>
+</div>
+<div class="ltx_para" id="S2.SS2.p3">
+<p class="ltx_p" id="S2.SS2.p3.3"><span class="ltx_text ltx_font_bold" id="S2.SS2.p3.3.1">Clarification.</span>
+As shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S1.F1" title="Figure 1 ‣ 1. Introduction ‣ AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_tag">1</span></a>(c), user behavior (<math alttext="Y" class="ltx_Math" display="inline" id="S2.SS2.p3.1.m1.1"><semantics id="S2.SS2.p3.1.m1.1a"><mi id="S2.SS2.p3.1.m1.1.1" xref="S2.SS2.p3.1.m1.1.1.cmml">Y</mi><annotation-xml encoding="MathML-Content" id="S2.SS2.p3.1.m1.1b"><ci id="S2.SS2.p3.1.m1.1.1.cmml" xref="S2.SS2.p3.1.m1.1.1">𝑌</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.SS2.p3.1.m1.1c">Y</annotation><annotation encoding="application/x-llamapun" id="S2.SS2.p3.1.m1.1d">italic_Y</annotation></semantics></math>) is influenced by both user preferences (<math alttext="X" class="ltx_Math" display="inline" id="S2.SS2.p3.2.m2.1"><semantics id="S2.SS2.p3.2.m2.1a"><mi id="S2.SS2.p3.2.m2.1.1" xref="S2.SS2.p3.2.m2.1.1.cmml">X</mi><annotation-xml encoding="MathML-Content" id="S2.SS2.p3.2.m2.1b"><ci id="S2.SS2.p3.2.m2.1.1.cmml" xref="S2.SS2.p3.2.m2.1.1">𝑋</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.SS2.p3.2.m2.1c">X</annotation><annotation encoding="application/x-llamapun" id="S2.SS2.p3.2.m2.1d">italic_X</annotation></semantics></math>) and popularity factors (<math alttext="P" class="ltx_Math" display="inline" id="S2.SS2.p3.3.m3.1"><semantics id="S2.SS2.p3.3.m3.1a"><mi id="S2.SS2.p3.3.m3.1.1" xref="S2.SS2.p3.3.m3.1.1.cmml">P</mi><annotation-xml encoding="MathML-Content" id="S2.SS2.p3.3.m3.1b"><ci id="S2.SS2.p3.3.m3.1.1.cmml" xref="S2.SS2.p3.3.m3.1.1">𝑃</ci></annotation-xml><annotation encoding="application/x-tex" id="S2.SS2.p3.3.m3.1c">P</annotation><annotation encoding="application/x-llamapun" id="S2.SS2.p3.3.m3.1d">italic_P</annotation></semantics></math>).
+Unlike debiasing approaches, which seek to model user preferences by removing the effects of popularity factors <cite class="ltx_cite ltx_citemacro_citep">(Ge et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib9" title="">2024</a>; Chen et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib5" title="">2023</a>)</cite>, user behavior simulation aims to model user behavior.
+Therefore, in user behavior simulation, popularity factors are not a nuisance to be mitigated but a critical factor to be explicitly modeled.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3. </span>AgentCF++</h2>
+<div class="ltx_para" id="S3.p1">
+<p class="ltx_p" id="S3.p1.1">Similar to AgentCF, AgentCF++ simulates interactions between user agents and item agents from multiple domains and performs reflection during this process to update the memories of both sides, thereby aligning with user behavior.</p>
+</div>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.1. </span>Memory Architecture</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p" id="S3.SS1.p1.1">AgentCF++ employs a similar memory architecture to AgentCF for the item agent, using a single memory to record the interest levels of users with various preferences towards it.
+Initially, the item’s memory is seeded with its side information.
+However, AgentCF++ has meticulously designed the memory architecture for the user agent to enhance its functionality.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p2">
+<p class="ltx_p" id="S3.SS1.p2.1">Firstly, each user agent in AgentCF++ is equipped with a <span class="ltx_text ltx_font_bold" id="S3.SS1.p2.1.1">dual-layer memory architecture</span>.
+Specifically, each user agent maintains two types of memory for <span class="ltx_text ltx_font_bold" id="S3.SS1.p2.1.2">each domain</span>:
+(1) <span class="ltx_text ltx_font_bold" id="S3.SS1.p2.1.3">Domain-separated memory</span> retains the user’s preferences specific to a single domain.
+(2) <span class="ltx_text ltx_font_bold" id="S3.SS1.p2.1.4">Domain-fused memory</span> also stores preferences within a particular domain but integrates domain-separated memories from other domains.
+Initially, both memories are empty.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p3">
+<p class="ltx_p" id="S3.SS1.p3.1">Additionally, each user agent is assigned to several <span class="ltx_text ltx_font_bold" id="S3.SS1.p3.1.1">interest groups</span> through the following process:
+(1) <span class="ltx_text ltx_font_italic" id="S3.SS1.p3.1.2">Building user-tag relationships</span>: The user agent’s domain-fused memory is processed by an LLM to derive a set of interest tags representing the user’s preferences.
+(2) <span class="ltx_text ltx_font_italic" id="S3.SS1.p3.1.3">Merging synonymous tags</span>: The LLM transforms all tags into embedding vectors, which are then grouped into clusters based on semantic similarity using a K-means clustering algorithm.
+Each cluster corresponds to a specific area of interest, encompassing tags with high semantic similarity.
+(3) <span class="ltx_text ltx_font_italic" id="S3.SS1.p3.1.4">Refining interest groups</span>: The LLM synthesizes the tags in each cluster to generate a consolidated interest group name.
+Ultimately, only the largest few interest groups are retained, collectively covering the majority of the user’s interests.
+AgentCF++ periodically re-segments the interest groups to ensure they reflect any updates in user preferences.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p4">
+<p class="ltx_p" id="S3.SS1.p4.1">Each interest group is equipped with a <span class="ltx_text ltx_font_bold" id="S3.SS1.p4.1.1">group-shared memory</span>, enabling all user agents within the group to collaboratively access shared information.
+The shared memory is of fixed size, designed to store the recent interaction history of its associated users.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.2. </span>Inference Phase</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p" id="S3.SS2.p1.14">We assume that the current interaction is <math alttext="(u,i,d)" class="ltx_Math" display="inline" id="S3.SS2.p1.1.m1.3"><semantics id="S3.SS2.p1.1.m1.3a"><mrow id="S3.SS2.p1.1.m1.3.4.2" xref="S3.SS2.p1.1.m1.3.4.1.cmml"><mo id="S3.SS2.p1.1.m1.3.4.2.1" stretchy="false" xref="S3.SS2.p1.1.m1.3.4.1.cmml">(</mo><mi id="S3.SS2.p1.1.m1.1.1" xref="S3.SS2.p1.1.m1.1.1.cmml">u</mi><mo id="S3.SS2.p1.1.m1.3.4.2.2" xref="S3.SS2.p1.1.m1.3.4.1.cmml">,</mo><mi id="S3.SS2.p1.1.m1.2.2" xref="S3.SS2.p1.1.m1.2.2.cmml">i</mi><mo id="S3.SS2.p1.1.m1.3.4.2.3" xref="S3.SS2.p1.1.m1.3.4.1.cmml">,</mo><mi id="S3.SS2.p1.1.m1.3.3" xref="S3.SS2.p1.1.m1.3.3.cmml">d</mi><mo id="S3.SS2.p1.1.m1.3.4.2.4" stretchy="false" xref="S3.SS2.p1.1.m1.3.4.1.cmml">)</mo></mrow><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.1.m1.3b"><vector id="S3.SS2.p1.1.m1.3.4.1.cmml" xref="S3.SS2.p1.1.m1.3.4.2"><ci id="S3.SS2.p1.1.m1.1.1.cmml" xref="S3.SS2.p1.1.m1.1.1">𝑢</ci><ci id="S3.SS2.p1.1.m1.2.2.cmml" xref="S3.SS2.p1.1.m1.2.2">𝑖</ci><ci id="S3.SS2.p1.1.m1.3.3.cmml" xref="S3.SS2.p1.1.m1.3.3">𝑑</ci></vector></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.1.m1.3c">(u,i,d)</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.1.m1.3d">( italic_u , italic_i , italic_d )</annotation></semantics></math>, where <math alttext="u" class="ltx_Math" display="inline" id="S3.SS2.p1.2.m2.1"><semantics id="S3.SS2.p1.2.m2.1a"><mi id="S3.SS2.p1.2.m2.1.1" xref="S3.SS2.p1.2.m2.1.1.cmml">u</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.2.m2.1b"><ci id="S3.SS2.p1.2.m2.1.1.cmml" xref="S3.SS2.p1.2.m2.1.1">𝑢</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.2.m2.1c">u</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.2.m2.1d">italic_u</annotation></semantics></math> represents a user agent, <math alttext="i" class="ltx_Math" display="inline" id="S3.SS2.p1.3.m3.1"><semantics id="S3.SS2.p1.3.m3.1a"><mi id="S3.SS2.p1.3.m3.1.1" xref="S3.SS2.p1.3.m3.1.1.cmml">i</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.3.m3.1b"><ci id="S3.SS2.p1.3.m3.1.1.cmml" xref="S3.SS2.p1.3.m3.1.1">𝑖</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.3.m3.1c">i</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.3.m3.1d">italic_i</annotation></semantics></math> represents an item agent, and <math alttext="d" class="ltx_Math" display="inline" id="S3.SS2.p1.4.m4.1"><semantics id="S3.SS2.p1.4.m4.1a"><mi id="S3.SS2.p1.4.m4.1.1" xref="S3.SS2.p1.4.m4.1.1.cmml">d</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.4.m4.1b"><ci id="S3.SS2.p1.4.m4.1.1.cmml" xref="S3.SS2.p1.4.m4.1.1">𝑑</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.4.m4.1c">d</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.4.m4.1d">italic_d</annotation></semantics></math> denotes the domain of <math alttext="i" class="ltx_Math" display="inline" id="S3.SS2.p1.5.m5.1"><semantics id="S3.SS2.p1.5.m5.1a"><mi id="S3.SS2.p1.5.m5.1.1" xref="S3.SS2.p1.5.m5.1.1.cmml">i</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.5.m5.1b"><ci id="S3.SS2.p1.5.m5.1.1.cmml" xref="S3.SS2.p1.5.m5.1.1">𝑖</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.5.m5.1c">i</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.5.m5.1d">italic_i</annotation></semantics></math>.
+First, a negative sample <math alttext="j" class="ltx_Math" display="inline" id="S3.SS2.p1.6.m6.1"><semantics id="S3.SS2.p1.6.m6.1a"><mi id="S3.SS2.p1.6.m6.1.1" xref="S3.SS2.p1.6.m6.1.1.cmml">j</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.6.m6.1b"><ci id="S3.SS2.p1.6.m6.1.1.cmml" xref="S3.SS2.p1.6.m6.1.1">𝑗</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.6.m6.1c">j</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.6.m6.1d">italic_j</annotation></semantics></math> is selected from the domain <math alttext="d" class="ltx_Math" display="inline" id="S3.SS2.p1.7.m7.1"><semantics id="S3.SS2.p1.7.m7.1a"><mi id="S3.SS2.p1.7.m7.1.1" xref="S3.SS2.p1.7.m7.1.1.cmml">d</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.7.m7.1b"><ci id="S3.SS2.p1.7.m7.1.1.cmml" xref="S3.SS2.p1.7.m7.1.1">𝑑</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.7.m7.1c">d</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.7.m7.1d">italic_d</annotation></semantics></math>.
+Then, <math alttext="u" class="ltx_Math" display="inline" id="S3.SS2.p1.8.m8.1"><semantics id="S3.SS2.p1.8.m8.1a"><mi id="S3.SS2.p1.8.m8.1.1" xref="S3.SS2.p1.8.m8.1.1.cmml">u</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.8.m8.1b"><ci id="S3.SS2.p1.8.m8.1.1.cmml" xref="S3.SS2.p1.8.m8.1.1">𝑢</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.8.m8.1c">u</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.8.m8.1d">italic_u</annotation></semantics></math> receives the memories of <math alttext="i" class="ltx_Math" display="inline" id="S3.SS2.p1.9.m9.1"><semantics id="S3.SS2.p1.9.m9.1a"><mi id="S3.SS2.p1.9.m9.1.1" xref="S3.SS2.p1.9.m9.1.1.cmml">i</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.9.m9.1b"><ci id="S3.SS2.p1.9.m9.1.1.cmml" xref="S3.SS2.p1.9.m9.1.1">𝑖</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.9.m9.1c">i</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.9.m9.1d">italic_i</annotation></semantics></math> and <math alttext="j" class="ltx_Math" display="inline" id="S3.SS2.p1.10.m10.1"><semantics id="S3.SS2.p1.10.m10.1a"><mi id="S3.SS2.p1.10.m10.1.1" xref="S3.SS2.p1.10.m10.1.1.cmml">j</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.10.m10.1b"><ci id="S3.SS2.p1.10.m10.1.1.cmml" xref="S3.SS2.p1.10.m10.1.1">𝑗</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.10.m10.1c">j</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.10.m10.1d">italic_j</annotation></semantics></math> and is tasked with identifying the positive sample while explaining its reasoning.
+To mitigate potential position bias, in which LLMs tend to favor earlier options, <math alttext="j" class="ltx_Math" display="inline" id="S3.SS2.p1.11.m11.1"><semantics id="S3.SS2.p1.11.m11.1a"><mi id="S3.SS2.p1.11.m11.1.1" xref="S3.SS2.p1.11.m11.1.1.cmml">j</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.11.m11.1b"><ci id="S3.SS2.p1.11.m11.1.1.cmml" xref="S3.SS2.p1.11.m11.1.1">𝑗</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.11.m11.1c">j</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.11.m11.1d">italic_j</annotation></semantics></math> is deliberately placed before <math alttext="i" class="ltx_Math" display="inline" id="S3.SS2.p1.12.m12.1"><semantics id="S3.SS2.p1.12.m12.1a"><mi id="S3.SS2.p1.12.m12.1.1" xref="S3.SS2.p1.12.m12.1.1.cmml">i</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.12.m12.1b"><ci id="S3.SS2.p1.12.m12.1.1.cmml" xref="S3.SS2.p1.12.m12.1.1">𝑖</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.12.m12.1c">i</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.12.m12.1d">italic_i</annotation></semantics></math>.
+Note that <math alttext="u" class="ltx_Math" display="inline" id="S3.SS2.p1.13.m13.1"><semantics id="S3.SS2.p1.13.m13.1a"><mi id="S3.SS2.p1.13.m13.1.1" xref="S3.SS2.p1.13.m13.1.1.cmml">u</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.13.m13.1b"><ci id="S3.SS2.p1.13.m13.1.1.cmml" xref="S3.SS2.p1.13.m13.1.1">𝑢</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.13.m13.1c">u</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.13.m13.1d">italic_u</annotation></semantics></math>’s decisions depend simultaneously on both domain-separated memory and domain-fused memory within domain <math alttext="d" class="ltx_Math" display="inline" id="S3.SS2.p1.14.m14.1"><semantics id="S3.SS2.p1.14.m14.1a"><mi id="S3.SS2.p1.14.m14.1.1" xref="S3.SS2.p1.14.m14.1.1.cmml">d</mi><annotation-xml encoding="MathML-Content" id="S3.SS2.p1.14.m14.1b"><ci id="S3.SS2.p1.14.m14.1.1.cmml" xref="S3.SS2.p1.14.m14.1.1">𝑑</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p1.14.m14.1c">d</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p1.14.m14.1d">italic_d</annotation></semantics></math>, as well as on the group-shared memories it can access.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p2">
+<p class="ltx_p" id="S3.SS2.p2.4"><span class="ltx_text ltx_font_bold" id="S3.SS2.p2.4.1">Discussion.</span>
+The dual-layer memory architecture includes a domain-separated memory and a domain-fused memory corresponding to each domain.
+With this memory enhancement, only information relevant to the target domain is utilized during decision-making, effectively reducing noise in cross-domain scenarios.
+On the other hand, the sharing mechanism allows user behavior to influence related users without directly updating their individual memories, incorporating the influence of popularity factors into preferences modeling.
+For instance, in the scenario depicted in Figure <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S1.F1" title="Figure 1 ‣ 1. Introduction ‣ AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_tag">1</span></a>(b), Bob and Carl insert the behavior of purchasing rain gear into the memory shared with Alice at <math alttext="t_{2}" class="ltx_Math" display="inline" id="S3.SS2.p2.1.m1.1"><semantics id="S3.SS2.p2.1.m1.1a"><msub id="S3.SS2.p2.1.m1.1.1" xref="S3.SS2.p2.1.m1.1.1.cmml"><mi id="S3.SS2.p2.1.m1.1.1.2" xref="S3.SS2.p2.1.m1.1.1.2.cmml">t</mi><mn id="S3.SS2.p2.1.m1.1.1.3" xref="S3.SS2.p2.1.m1.1.1.3.cmml">2</mn></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.1.m1.1b"><apply id="S3.SS2.p2.1.m1.1.1.cmml" xref="S3.SS2.p2.1.m1.1.1"><csymbol cd="ambiguous" id="S3.SS2.p2.1.m1.1.1.1.cmml" xref="S3.SS2.p2.1.m1.1.1">subscript</csymbol><ci id="S3.SS2.p2.1.m1.1.1.2.cmml" xref="S3.SS2.p2.1.m1.1.1.2">𝑡</ci><cn id="S3.SS2.p2.1.m1.1.1.3.cmml" type="integer" xref="S3.SS2.p2.1.m1.1.1.3">2</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.1.m1.1c">t_{2}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.1.m1.1d">italic_t start_POSTSUBSCRIPT 2 end_POSTSUBSCRIPT</annotation></semantics></math>.
+At <math alttext="t_{3}" class="ltx_Math" display="inline" id="S3.SS2.p2.2.m2.1"><semantics id="S3.SS2.p2.2.m2.1a"><msub id="S3.SS2.p2.2.m2.1.1" xref="S3.SS2.p2.2.m2.1.1.cmml"><mi id="S3.SS2.p2.2.m2.1.1.2" xref="S3.SS2.p2.2.m2.1.1.2.cmml">t</mi><mn id="S3.SS2.p2.2.m2.1.1.3" xref="S3.SS2.p2.2.m2.1.1.3.cmml">3</mn></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.2.m2.1b"><apply id="S3.SS2.p2.2.m2.1.1.cmml" xref="S3.SS2.p2.2.m2.1.1"><csymbol cd="ambiguous" id="S3.SS2.p2.2.m2.1.1.1.cmml" xref="S3.SS2.p2.2.m2.1.1">subscript</csymbol><ci id="S3.SS2.p2.2.m2.1.1.2.cmml" xref="S3.SS2.p2.2.m2.1.1.2">𝑡</ci><cn id="S3.SS2.p2.2.m2.1.1.3.cmml" type="integer" xref="S3.SS2.p2.2.m2.1.1.3">3</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.2.m2.1c">t_{3}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.2.m2.1d">italic_t start_POSTSUBSCRIPT 3 end_POSTSUBSCRIPT</annotation></semantics></math>, Carl adds the behavior of purchasing camping gear into the memory shared with both Alice and Carl.
+This results in Alice’s willingness to go outdoors decreasing at <math alttext="t_{2}" class="ltx_Math" display="inline" id="S3.SS2.p2.3.m3.1"><semantics id="S3.SS2.p2.3.m3.1a"><msub id="S3.SS2.p2.3.m3.1.1" xref="S3.SS2.p2.3.m3.1.1.cmml"><mi id="S3.SS2.p2.3.m3.1.1.2" xref="S3.SS2.p2.3.m3.1.1.2.cmml">t</mi><mn id="S3.SS2.p2.3.m3.1.1.3" xref="S3.SS2.p2.3.m3.1.1.3.cmml">2</mn></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.3.m3.1b"><apply id="S3.SS2.p2.3.m3.1.1.cmml" xref="S3.SS2.p2.3.m3.1.1"><csymbol cd="ambiguous" id="S3.SS2.p2.3.m3.1.1.1.cmml" xref="S3.SS2.p2.3.m3.1.1">subscript</csymbol><ci id="S3.SS2.p2.3.m3.1.1.2.cmml" xref="S3.SS2.p2.3.m3.1.1.2">𝑡</ci><cn id="S3.SS2.p2.3.m3.1.1.3.cmml" type="integer" xref="S3.SS2.p2.3.m3.1.1.3">2</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.3.m3.1c">t_{2}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.3.m3.1d">italic_t start_POSTSUBSCRIPT 2 end_POSTSUBSCRIPT</annotation></semantics></math> and increasing at time <math alttext="t_{3}" class="ltx_Math" display="inline" id="S3.SS2.p2.4.m4.1"><semantics id="S3.SS2.p2.4.m4.1a"><msub id="S3.SS2.p2.4.m4.1.1" xref="S3.SS2.p2.4.m4.1.1.cmml"><mi id="S3.SS2.p2.4.m4.1.1.2" xref="S3.SS2.p2.4.m4.1.1.2.cmml">t</mi><mn id="S3.SS2.p2.4.m4.1.1.3" xref="S3.SS2.p2.4.m4.1.1.3.cmml">3</mn></msub><annotation-xml encoding="MathML-Content" id="S3.SS2.p2.4.m4.1b"><apply id="S3.SS2.p2.4.m4.1.1.cmml" xref="S3.SS2.p2.4.m4.1.1"><csymbol cd="ambiguous" id="S3.SS2.p2.4.m4.1.1.1.cmml" xref="S3.SS2.p2.4.m4.1.1">subscript</csymbol><ci id="S3.SS2.p2.4.m4.1.1.2.cmml" xref="S3.SS2.p2.4.m4.1.1.2">𝑡</ci><cn id="S3.SS2.p2.4.m4.1.1.3.cmml" type="integer" xref="S3.SS2.p2.4.m4.1.1.3">3</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S3.SS2.p2.4.m4.1c">t_{3}</annotation><annotation encoding="application/x-llamapun" id="S3.SS2.p2.4.m4.1d">italic_t start_POSTSUBSCRIPT 3 end_POSTSUBSCRIPT</annotation></semantics></math>, reflecting real-world patterns where user behavior is influenced by trends and popularity factors.
+Note that we segment users based on their interests rather than the similarity of their interaction history, to more precisely identify populations influenced by popularity factors.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">3.3. </span>Update Phase</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p" id="S3.SS3.p1.15">The memories are updated using a reflection mechanism <cite class="ltx_cite ltx_citemacro_citep">(Shinn et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib37" title="">2024</a>; Madaan et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib27" title="">2024</a>; Pan et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib29" title="">2023</a>)</cite>.
+Specifically:
+(1) According to the results of the inference phase, <math alttext="u" class="ltx_Math" display="inline" id="S3.SS3.p1.1.m1.1"><semantics id="S3.SS3.p1.1.m1.1a"><mi id="S3.SS3.p1.1.m1.1.1" xref="S3.SS3.p1.1.m1.1.1.cmml">u</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.1.m1.1b"><ci id="S3.SS3.p1.1.m1.1.1.cmml" xref="S3.SS3.p1.1.m1.1.1">𝑢</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.1.m1.1c">u</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.1.m1.1d">italic_u</annotation></semantics></math> updates its domain-separated memory in domain <math alttext="d" class="ltx_Math" display="inline" id="S3.SS3.p1.2.m2.1"><semantics id="S3.SS3.p1.2.m2.1a"><mi id="S3.SS3.p1.2.m2.1.1" xref="S3.SS3.p1.2.m2.1.1.cmml">d</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.2.m2.1b"><ci id="S3.SS3.p1.2.m2.1.1.cmml" xref="S3.SS3.p1.2.m2.1.1">𝑑</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.2.m2.1c">d</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.2.m2.1d">italic_d</annotation></semantics></math> using the memories of <math alttext="i" class="ltx_Math" display="inline" id="S3.SS3.p1.3.m3.1"><semantics id="S3.SS3.p1.3.m3.1a"><mi id="S3.SS3.p1.3.m3.1.1" xref="S3.SS3.p1.3.m3.1.1.cmml">i</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.3.m3.1b"><ci id="S3.SS3.p1.3.m3.1.1.cmml" xref="S3.SS3.p1.3.m3.1.1">𝑖</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.3.m3.1c">i</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.3.m3.1d">italic_i</annotation></semantics></math> and <math alttext="j" class="ltx_Math" display="inline" id="S3.SS3.p1.4.m4.1"><semantics id="S3.SS3.p1.4.m4.1a"><mi id="S3.SS3.p1.4.m4.1.1" xref="S3.SS3.p1.4.m4.1.1.cmml">j</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.4.m4.1b"><ci id="S3.SS3.p1.4.m4.1.1.cmml" xref="S3.SS3.p1.4.m4.1.1">𝑗</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.4.m4.1c">j</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.4.m4.1d">italic_j</annotation></semantics></math>.
+This step enables <math alttext="u" class="ltx_Math" display="inline" id="S3.SS3.p1.5.m5.1"><semantics id="S3.SS3.p1.5.m5.1a"><mi id="S3.SS3.p1.5.m5.1.1" xref="S3.SS3.p1.5.m5.1.1.cmml">u</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.5.m5.1b"><ci id="S3.SS3.p1.5.m5.1.1.cmml" xref="S3.SS3.p1.5.m5.1.1">𝑢</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.5.m5.1c">u</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.5.m5.1d">italic_u</annotation></semantics></math> to learn what it like and dislike from the latest interaction.
+(2) We propose a <span class="ltx_text ltx_font_bold" id="S3.SS3.p1.15.1">two-step fusion mechanism</span> to effectively integrate information from multiple domains.
+Firstly, <math alttext="u" class="ltx_Math" display="inline" id="S3.SS3.p1.6.m6.1"><semantics id="S3.SS3.p1.6.m6.1a"><mi id="S3.SS3.p1.6.m6.1.1" xref="S3.SS3.p1.6.m6.1.1.cmml">u</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.6.m6.1b"><ci id="S3.SS3.p1.6.m6.1.1.cmml" xref="S3.SS3.p1.6.m6.1.1">𝑢</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.6.m6.1c">u</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.6.m6.1d">italic_u</annotation></semantics></math> extracts preferences related to the target domain <math alttext="d" class="ltx_Math" display="inline" id="S3.SS3.p1.7.m7.1"><semantics id="S3.SS3.p1.7.m7.1a"><mi id="S3.SS3.p1.7.m7.1.1" xref="S3.SS3.p1.7.m7.1.1.cmml">d</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.7.m7.1b"><ci id="S3.SS3.p1.7.m7.1.1.cmml" xref="S3.SS3.p1.7.m7.1.1">𝑑</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.7.m7.1c">d</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.7.m7.1d">italic_d</annotation></semantics></math> from domain-separated memories of other domains.
+Then, <math alttext="u" class="ltx_Math" display="inline" id="S3.SS3.p1.8.m8.1"><semantics id="S3.SS3.p1.8.m8.1a"><mi id="S3.SS3.p1.8.m8.1.1" xref="S3.SS3.p1.8.m8.1.1.cmml">u</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.8.m8.1b"><ci id="S3.SS3.p1.8.m8.1.1.cmml" xref="S3.SS3.p1.8.m8.1.1">𝑢</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.8.m8.1c">u</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.8.m8.1d">italic_u</annotation></semantics></math> updates its domain-fused memory in domain <math alttext="d" class="ltx_Math" display="inline" id="S3.SS3.p1.9.m9.1"><semantics id="S3.SS3.p1.9.m9.1a"><mi id="S3.SS3.p1.9.m9.1.1" xref="S3.SS3.p1.9.m9.1.1.cmml">d</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.9.m9.1b"><ci id="S3.SS3.p1.9.m9.1.1.cmml" xref="S3.SS3.p1.9.m9.1.1">𝑑</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.9.m9.1c">d</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.9.m9.1d">italic_d</annotation></semantics></math> based on the extracted preferences.
+(3) <math alttext="i" class="ltx_Math" display="inline" id="S3.SS3.p1.10.m10.1"><semantics id="S3.SS3.p1.10.m10.1a"><mi id="S3.SS3.p1.10.m10.1.1" xref="S3.SS3.p1.10.m10.1.1.cmml">i</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.10.m10.1b"><ci id="S3.SS3.p1.10.m10.1.1.cmml" xref="S3.SS3.p1.10.m10.1.1">𝑖</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.10.m10.1c">i</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.10.m10.1d">italic_i</annotation></semantics></math> and <math alttext="j" class="ltx_Math" display="inline" id="S3.SS3.p1.11.m11.1"><semantics id="S3.SS3.p1.11.m11.1a"><mi id="S3.SS3.p1.11.m11.1.1" xref="S3.SS3.p1.11.m11.1.1.cmml">j</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.11.m11.1b"><ci id="S3.SS3.p1.11.m11.1.1.cmml" xref="S3.SS3.p1.11.m11.1.1">𝑗</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.11.m11.1c">j</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.11.m11.1d">italic_j</annotation></semantics></math> update their item memories using <math alttext="u" class="ltx_Math" display="inline" id="S3.SS3.p1.12.m12.1"><semantics id="S3.SS3.p1.12.m12.1a"><mi id="S3.SS3.p1.12.m12.1.1" xref="S3.SS3.p1.12.m12.1.1.cmml">u</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.12.m12.1b"><ci id="S3.SS3.p1.12.m12.1.1.cmml" xref="S3.SS3.p1.12.m12.1.1">𝑢</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.12.m12.1c">u</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.12.m12.1d">italic_u</annotation></semantics></math>’s domain-fused memory in domain <math alttext="d" class="ltx_Math" display="inline" id="S3.SS3.p1.13.m13.1"><semantics id="S3.SS3.p1.13.m13.1a"><mi id="S3.SS3.p1.13.m13.1.1" xref="S3.SS3.p1.13.m13.1.1.cmml">d</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.13.m13.1b"><ci id="S3.SS3.p1.13.m13.1.1.cmml" xref="S3.SS3.p1.13.m13.1.1">𝑑</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.13.m13.1c">d</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.13.m13.1d">italic_d</annotation></semantics></math>.
+In this step, <math alttext="i" class="ltx_Math" display="inline" id="S3.SS3.p1.14.m14.1"><semantics id="S3.SS3.p1.14.m14.1a"><mi id="S3.SS3.p1.14.m14.1.1" xref="S3.SS3.p1.14.m14.1.1.cmml">i</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.14.m14.1b"><ci id="S3.SS3.p1.14.m14.1.1.cmml" xref="S3.SS3.p1.14.m14.1.1">𝑖</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.14.m14.1c">i</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.14.m14.1d">italic_i</annotation></semantics></math> learns which user preferences it appeals to, while <math alttext="j" class="ltx_Math" display="inline" id="S3.SS3.p1.15.m15.1"><semantics id="S3.SS3.p1.15.m15.1a"><mi id="S3.SS3.p1.15.m15.1.1" xref="S3.SS3.p1.15.m15.1.1.cmml">j</mi><annotation-xml encoding="MathML-Content" id="S3.SS3.p1.15.m15.1b"><ci id="S3.SS3.p1.15.m15.1.1.cmml" xref="S3.SS3.p1.15.m15.1.1">𝑗</ci></annotation-xml><annotation encoding="application/x-tex" id="S3.SS3.p1.15.m15.1c">j</annotation><annotation encoding="application/x-llamapun" id="S3.SS3.p1.15.m15.1d">italic_j</annotation></semantics></math> learns which user preferences it does not appeal to.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p2">
+<p class="ltx_p" id="S3.SS3.p2.1"><span class="ltx_text ltx_font_bold" id="S3.SS3.p2.1.1">Discussion.</span>
+Figure <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S1.F1" title="Figure 1 ‣ 1. Introduction ‣ AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_tag">1</span></a>(d) illustrates the process of update phase.
+The two-step fusion mechanism implicitly incorporates the idea of the attention mechanism, ensuring that the domain-fused memory effectively integrates preferences from other domains while retaining only preferences relevant to the corresponding domain.
+Specifically, in the first step, only preferences related to the target domain are extracted, akin to the computation of attention scores.
+In the second step, the extracted preferences from different domains are integrated, akin to the weighted aggregation process in the attention mechanism.
+Additionally, with the aid of the reflection mechanism, the cyclic updates of item memory, domain-separated memory, and domain-fused memory enable all memories to achieve self-improvement.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4. </span>Experiments</h2>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.1. </span>Settings</h3>
+<section class="ltx_subsubsection" id="S4.SS1.SSS1">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">4.1.1. </span>Datasets</h4>
+<div class="ltx_para" id="S4.SS1.SSS1.p1">
+<p class="ltx_p" id="S4.SS1.SSS1.p1.2">We experimented with the Amazon review dataset <cite class="ltx_cite ltx_citemacro_citep">(Hou et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib11" title="">2024a</a>)</cite>.
+We constructed the cross-domain datasets <span class="ltx_text ltx_font_italic" id="S4.SS1.SSS1.p1.2.1">Cross-1</span>—<span class="ltx_text ltx_font_italic" id="S4.SS1.SSS1.p1.2.2">Cross-5</span> by combining data from the Books, CDs, Movies, and Games domains, selecting 3 or 4 domains for each dataset.
+Then, we retained interaction records with ratings <math alttext="\geq 4" class="ltx_Math" display="inline" id="S4.SS1.SSS1.p1.1.m1.1"><semantics id="S4.SS1.SSS1.p1.1.m1.1a"><mrow id="S4.SS1.SSS1.p1.1.m1.1.1" xref="S4.SS1.SSS1.p1.1.m1.1.1.cmml"><mi id="S4.SS1.SSS1.p1.1.m1.1.1.2" xref="S4.SS1.SSS1.p1.1.m1.1.1.2.cmml"></mi><mo id="S4.SS1.SSS1.p1.1.m1.1.1.1" xref="S4.SS1.SSS1.p1.1.m1.1.1.1.cmml">≥</mo><mn id="S4.SS1.SSS1.p1.1.m1.1.1.3" xref="S4.SS1.SSS1.p1.1.m1.1.1.3.cmml">4</mn></mrow><annotation-xml encoding="MathML-Content" id="S4.SS1.SSS1.p1.1.m1.1b"><apply id="S4.SS1.SSS1.p1.1.m1.1.1.cmml" xref="S4.SS1.SSS1.p1.1.m1.1.1"><geq id="S4.SS1.SSS1.p1.1.m1.1.1.1.cmml" xref="S4.SS1.SSS1.p1.1.m1.1.1.1"></geq><csymbol cd="latexml" id="S4.SS1.SSS1.p1.1.m1.1.1.2.cmml" xref="S4.SS1.SSS1.p1.1.m1.1.1.2">absent</csymbol><cn id="S4.SS1.SSS1.p1.1.m1.1.1.3.cmml" type="integer" xref="S4.SS1.SSS1.p1.1.m1.1.1.3">4</cn></apply></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.SSS1.p1.1.m1.1c">\geq 4</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.SSS1.p1.1.m1.1d">≥ 4</annotation></semantics></math> and timestamps spanning six months, from October 2021 to March 2022.
+We further filtered the data to include only records of users who interacted across multiple domains and had <math alttext="\geq" class="ltx_Math" display="inline" id="S4.SS1.SSS1.p1.2.m2.1"><semantics id="S4.SS1.SSS1.p1.2.m2.1a"><mo id="S4.SS1.SSS1.p1.2.m2.1.1" xref="S4.SS1.SSS1.p1.2.m2.1.1.cmml">≥</mo><annotation-xml encoding="MathML-Content" id="S4.SS1.SSS1.p1.2.m2.1b"><geq id="S4.SS1.SSS1.p1.2.m2.1.1.cmml" xref="S4.SS1.SSS1.p1.2.m2.1.1"></geq></annotation-xml><annotation encoding="application/x-tex" id="S4.SS1.SSS1.p1.2.m2.1c">\geq</annotation><annotation encoding="application/x-llamapun" id="S4.SS1.SSS1.p1.2.m2.1d">≥</annotation></semantics></math> 10 total interactions.
+Following AgentCF, we randomly sampled 100 users to minimize API call expenses.
+Next, we sorted these interaction records chronologically and split them into training, validation, and test sets with an 8:1:1 ratio.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S4.SS1.SSS2">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">4.1.2. </span>Evaluation</h4>
+<div class="ltx_para" id="S4.SS1.SSS2.p1">
+<p class="ltx_p" id="S4.SS1.SSS2.p1.1">For each ground truth item, we randomly sample 9 items from the same domain that the user has not interacted with to construct the candidate set.
+The user agent is then tasked with ranking these items, and the ranking performance is measured using NDCG and MRR.
+We report the average results over 5 runs.</p>
+</div>
+</section>
+<section class="ltx_subsubsection" id="S4.SS1.SSS3">
+<h4 class="ltx_title ltx_title_subsubsection">
+<span class="ltx_tag ltx_tag_subsubsection">4.1.3. </span>Baselines</h4>
+<div class="ltx_para" id="S4.SS1.SSS3.p1">
+<p class="ltx_p" id="S4.SS1.SSS3.p1.1">We used two traditional recommendation models, BPR-MF <cite class="ltx_cite ltx_citemacro_citep">(Rendle et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib32" title="">2012</a>)</cite> and SASRec <cite class="ltx_cite ltx_citemacro_citep">(Kang and McAuley, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib17" title="">2018</a>)</cite>, as well as four training-free methods, Pop, LLMSeqSim <cite class="ltx_cite ltx_citemacro_citep">(Harte et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib10" title="">2023</a>)</cite>, LLMRank <cite class="ltx_cite ltx_citemacro_citep">(Hou et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib12" title="">2024b</a>)</cite>, and AgentCF <cite class="ltx_cite ltx_citemacro_citep">(Zhang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib52" title="">2024d</a>)</cite>, as baseline methods for comparison.
+Specifically, Pop ranks candidates based on item popularity, LLMSeqSim evaluates candidates by measuring their similarity to the user’s interaction history, and LLMRank employs an LLM as a zero-shot ranker to prioritize candidate items.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.SSS3.p2">
+<p class="ltx_p" id="S4.SS1.SSS3.p2.1">We compared solely with AgentCF, omitting other LLM-based user agent methods.
+Our goal is to demonstrate that the proposed module enhances AgentCF.
+Performance differences with other methods may stem from differing agent construction paradigms, making it challenging to attribute improvements directly to the proposed module.
+On the other hand, they all construct memory directly through the user’s interaction history, which can, to some extent, be considered equivalent to LLMRank.</p>
+</div>
+<div class="ltx_para" id="S4.SS1.SSS3.p3">
+<p class="ltx_p" id="S4.SS1.SSS3.p3.1">We also designed three ablation variants for AgentCF++:
+(1) <span class="ltx_text ltx_font_italic" id="S4.SS1.SSS3.p3.1.1">AgentCF + dual</span>: Extends AgentCF with only the dual-layer memory architecture.
+(2) <span class="ltx_text ltx_font_italic" id="S4.SS1.SSS3.p3.1.2">AgentCF + shared</span>: Extends AgentCF with only interest groups and group-shared memory.
+(3) <span class="ltx_text ltx_font_italic" id="S4.SS1.SSS3.p3.1.3">AgentCF++ w/o group</span>: Users are grouped based on their full interaction history rather than their interests.
+The other components, including treating users as agents, treating items as agents, the automatic interaction process, and the reflection mechanism, have already been validated as effective by AgentCF.
+Therefore, these components were not included in the ablation study.</p>
+</div>
+</section>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">4.2. </span>Overall Performance</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p" id="S4.SS2.p1.1">As shown in Table <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#S4.T1" title="Table 1 ‣ 4.2. Overall Performance ‣ 4. Experiments ‣ AgentCF++: Memory-enhanced LLM-based Agents for Popularity-aware Cross-domain Recommendations"><span class="ltx_text ltx_ref_tag">1</span></a>, on cross-domain datasets, AgentCF achieves comparable performance to training-free methods such as LLMRank but fails to surpass traditional recommendation models like SASRec.
+This suggests that traditional models inherently capture popularity factors and cross-domain collaborative information through their training mechanisms, giving them a clear advantage over LLM-based user agents in predicting user behavior.
+Encouragingly, the proposed AgentCF++ consistently outperforms both its ablation variants and all baselines. Moreover, the ablation variants consistently outperform AgentCF, further validating the effectiveness of the proposed modules.
+Notably, <span class="ltx_text ltx_font_italic" id="S4.SS2.p1.1.1">AgentCF++ w/o group</span> performs not only worse than AgentCF++ but also worse than <span class="ltx_text ltx_font_italic" id="S4.SS2.p1.1.2">AgentCF + dual</span>, further underscoring the importance of dividing users into interest groups.
+This indicates that assigning users to groups based on their full interaction history is too coarse, allowing the popularity factor to influence unrelated users, introducing noise, and ultimately reducing accuracy.</p>
+</div>
+<figure class="ltx_table" id="S4.T1">
+<figcaption class="ltx_caption" style="font-size:80%;"><span class="ltx_tag ltx_tag_table">Table 1. </span>Overall performance. Due to space constraints, we only report MRR results. NDCG results, available in the repository, lead to consistent conclusions.</figcaption>
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle" id="S4.T1.3">
+<tbody class="ltx_tbody">
+<tr class="ltx_tr" id="S4.T1.3.1.1">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S4.T1.3.1.1.1"><span class="ltx_text" id="S4.T1.3.1.1.1.1" style="font-size:80%;">Method</span></th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.1.1.2"><span class="ltx_text" id="S4.T1.3.1.1.2.1" style="font-size:80%;">Cross-1</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.1.1.3"><span class="ltx_text" id="S4.T1.3.1.1.3.1" style="font-size:80%;">Cross-2</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.1.1.4"><span class="ltx_text" id="S4.T1.3.1.1.4.1" style="font-size:80%;">Cross-3</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.1.1.5"><span class="ltx_text" id="S4.T1.3.1.1.5.1" style="font-size:80%;">Cross-4</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.1.1.6"><span class="ltx_text" id="S4.T1.3.1.1.6.1" style="font-size:80%;">Cross-5</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.3.2.2">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S4.T1.3.2.2.1"><span class="ltx_text" id="S4.T1.3.2.2.1.1" style="font-size:80%;">BPR-MF</span></th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.2.2.2"><span class="ltx_text" id="S4.T1.3.2.2.2.1" style="font-size:80%;">0.2949</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.2.2.3"><span class="ltx_text" id="S4.T1.3.2.2.3.1" style="font-size:80%;">0.2959</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.2.2.4"><span class="ltx_text" id="S4.T1.3.2.2.4.1" style="font-size:80%;">0.3114</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.2.2.5"><span class="ltx_text" id="S4.T1.3.2.2.5.1" style="font-size:80%;">0.3012</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.2.2.6"><span class="ltx_text" id="S4.T1.3.2.2.6.1" style="font-size:80%;">0.3127</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.3.3.3">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S4.T1.3.3.3.1"><span class="ltx_text" id="S4.T1.3.3.3.1.1" style="font-size:80%;">SASRec</span></th>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.3.3.2"><span class="ltx_text" id="S4.T1.3.3.3.2.1" style="font-size:80%;">0.3463</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.3.3.3"><span class="ltx_text" id="S4.T1.3.3.3.3.1" style="font-size:80%;">0.3154</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.3.3.4"><span class="ltx_text" id="S4.T1.3.3.3.4.1" style="font-size:80%;">0.3828</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.3.3.5"><span class="ltx_text" id="S4.T1.3.3.3.5.1" style="font-size:80%;">0.3118</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.3.3.6"><span class="ltx_text" id="S4.T1.3.3.3.6.1" style="font-size:80%;">0.3687</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.3.4.4">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S4.T1.3.4.4.1"><span class="ltx_text" id="S4.T1.3.4.4.1.1" style="font-size:80%;">Pop</span></th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.4.4.2"><span class="ltx_text" id="S4.T1.3.4.4.2.1" style="font-size:80%;">0.2589</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.4.4.3"><span class="ltx_text" id="S4.T1.3.4.4.3.1" style="font-size:80%;">0.2817</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.4.4.4"><span class="ltx_text" id="S4.T1.3.4.4.4.1" style="font-size:80%;">0.3094</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.4.4.5"><span class="ltx_text" id="S4.T1.3.4.4.5.1" style="font-size:80%;">0.2954</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.4.4.6"><span class="ltx_text" id="S4.T1.3.4.4.6.1" style="font-size:80%;">0.3089</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.3.5.5">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S4.T1.3.5.5.1"><span class="ltx_text" id="S4.T1.3.5.5.1.1" style="font-size:80%;">LLMSeqSim</span></th>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.5.5.2"><span class="ltx_text" id="S4.T1.3.5.5.2.1" style="font-size:80%;">0.2646</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.5.5.3"><span class="ltx_text" id="S4.T1.3.5.5.3.1" style="font-size:80%;">0.2549</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.5.5.4"><span class="ltx_text" id="S4.T1.3.5.5.4.1" style="font-size:80%;">0.3101</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.5.5.5"><span class="ltx_text" id="S4.T1.3.5.5.5.1" style="font-size:80%;">0.2959</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.5.5.6"><span class="ltx_text" id="S4.T1.3.5.5.6.1" style="font-size:80%;">0.3124</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.3.6.6">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S4.T1.3.6.6.1"><span class="ltx_text" id="S4.T1.3.6.6.1.1" style="font-size:80%;">LLMRank</span></th>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.6.6.2"><span class="ltx_text" id="S4.T1.3.6.6.2.1" style="font-size:80%;">0.3268</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.6.6.3"><span class="ltx_text" id="S4.T1.3.6.6.3.1" style="font-size:80%;">0.2730</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.6.6.4"><span class="ltx_text" id="S4.T1.3.6.6.4.1" style="font-size:80%;">0.3106</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.6.6.5"><span class="ltx_text" id="S4.T1.3.6.6.5.1" style="font-size:80%;">0.2970</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.6.6.6"><span class="ltx_text" id="S4.T1.3.6.6.6.1" style="font-size:80%;">0.3308</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.3.7.7">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S4.T1.3.7.7.1"><span class="ltx_text" id="S4.T1.3.7.7.1.1" style="font-size:80%;">AgentCF</span></th>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.7.7.2"><span class="ltx_text" id="S4.T1.3.7.7.2.1" style="font-size:80%;">0.3284</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.7.7.3"><span class="ltx_text" id="S4.T1.3.7.7.3.1" style="font-size:80%;">0.2681</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.7.7.4"><span class="ltx_text" id="S4.T1.3.7.7.4.1" style="font-size:80%;">0.3114</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.7.7.5"><span class="ltx_text" id="S4.T1.3.7.7.5.1" style="font-size:80%;">0.3032</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.7.7.6"><span class="ltx_text" id="S4.T1.3.7.7.6.1" style="font-size:80%;">0.3480</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.3.8.8">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S4.T1.3.8.8.1"><span class="ltx_text ltx_font_bold" id="S4.T1.3.8.8.1.1" style="font-size:80%;">AgentCF++</span></th>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.8.8.2"><span class="ltx_text ltx_font_bold" id="S4.T1.3.8.8.2.1" style="font-size:80%;">0.3537</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.8.8.3"><span class="ltx_text ltx_font_bold" id="S4.T1.3.8.8.3.1" style="font-size:80%;">0.3176</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.8.8.4"><span class="ltx_text ltx_font_bold" id="S4.T1.3.8.8.4.1" style="font-size:80%;">0.3989</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.8.8.5"><span class="ltx_text ltx_font_bold" id="S4.T1.3.8.8.5.1" style="font-size:80%;">0.3321</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.8.8.6"><span class="ltx_text ltx_font_bold" id="S4.T1.3.8.8.6.1" style="font-size:80%;">0.3837</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.3.9.9">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r ltx_border_t" id="S4.T1.3.9.9.1"><span class="ltx_text ltx_font_italic" id="S4.T1.3.9.9.1.1" style="font-size:80%;">AgentCF + dual</span></th>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.9.9.2"><span class="ltx_text" id="S4.T1.3.9.9.2.1" style="font-size:80%;">0.3495</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.9.9.3"><span class="ltx_text" id="S4.T1.3.9.9.3.1" style="font-size:80%;">0.2962</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.9.9.4"><span class="ltx_text" id="S4.T1.3.9.9.4.1" style="font-size:80%;">0.3581</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.9.9.5"><span class="ltx_text" id="S4.T1.3.9.9.5.1" style="font-size:80%;">0.3139</span></td>
+<td class="ltx_td ltx_align_center ltx_border_t" id="S4.T1.3.9.9.6"><span class="ltx_text" id="S4.T1.3.9.9.6.1" style="font-size:80%;">0.3581</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.3.10.10">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_r" id="S4.T1.3.10.10.1"><span class="ltx_text ltx_font_italic" id="S4.T1.3.10.10.1.1" style="font-size:80%;">AgentCF + shared</span></th>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.10.10.2"><span class="ltx_text" id="S4.T1.3.10.10.2.1" style="font-size:80%;">0.3488</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.10.10.3"><span class="ltx_text" id="S4.T1.3.10.10.3.1" style="font-size:80%;">0.2777</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.10.10.4"><span class="ltx_text" id="S4.T1.3.10.10.4.1" style="font-size:80%;">0.3190</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.10.10.5"><span class="ltx_text" id="S4.T1.3.10.10.5.1" style="font-size:80%;">0.3147</span></td>
+<td class="ltx_td ltx_align_center" id="S4.T1.3.10.10.6"><span class="ltx_text" id="S4.T1.3.10.10.6.1" style="font-size:80%;">0.3689</span></td>
+</tr>
+<tr class="ltx_tr" id="S4.T1.3.11.11">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_row ltx_border_b ltx_border_r" id="S4.T1.3.11.11.1"><span class="ltx_text ltx_font_italic" id="S4.T1.3.11.11.1.1" style="font-size:80%;">AgentCF++ w/o group</span></th>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S4.T1.3.11.11.2"><span class="ltx_text" id="S4.T1.3.11.11.2.1" style="font-size:80%;">0.3415</span></td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S4.T1.3.11.11.3"><span class="ltx_text" id="S4.T1.3.11.11.3.1" style="font-size:80%;">0.2724</span></td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S4.T1.3.11.11.4"><span class="ltx_text" id="S4.T1.3.11.11.4.1" style="font-size:80%;">0.3181</span></td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S4.T1.3.11.11.5"><span class="ltx_text" id="S4.T1.3.11.11.5.1" style="font-size:80%;">0.3126</span></td>
+<td class="ltx_td ltx_align_center ltx_border_b" id="S4.T1.3.11.11.6"><span class="ltx_text" id="S4.T1.3.11.11.6.1" style="font-size:80%;">0.3549</span></td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5. </span>Related Work</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p" id="S5.p1.1">LLM-based agents in recommender systems can be broadly divided into two categories.
+The first category focuses on <span class="ltx_text ltx_font_bold" id="S5.p1.1.1">recommendation agents</span> that leverage LLMs to generate or improve recommendations <cite class="ltx_cite ltx_citemacro_citep">(Shi et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib36" title="">2024</a>; Zhang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib53" title="">2023</a>; Huang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib14" title="">2023</a>; Wang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib44" title="">2023a</a>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib45" title="">2024b</a>; Zhao et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib58" title="">2024</a>; Zhang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib51" title="">2024a</a>)</cite>.
+The second category explores <span class="ltx_text ltx_font_bold" id="S5.p1.1.2">user agents</span> that leverage LLMs to simulate user behavior.
+While some studies focus on simulating user dialogues in conversational recommendation <cite class="ltx_cite ltx_citemacro_citep">(Zhu et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib60" title="">2024b</a>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib59" title="">a</a>; Kim et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib18" title="">2024</a>; Friedman et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib7" title="">2023</a>; Wang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib43" title="">2023b</a>)</cite>, our emphasis is on simulating user interaction behavior.
+RecAgent <cite class="ltx_cite ltx_citemacro_citep">(Wang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib42" title="">2024c</a>)</cite> and Agent4Rec <cite class="ltx_cite ltx_citemacro_citep">(Zhang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib49" title="">2024c</a>)</cite> employ LLM-based agents, incorporating user profiles, memory, and action modules, to simulate interactions with recommender systems.
+RAH <cite class="ltx_cite ltx_citemacro_citep">(Shu et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib38" title="">2024</a>)</cite> places LLM-based multi-agents between users and recommender systems, serving both as recommendation agents and as proxies for user interactions.
+FLOW <cite class="ltx_cite ltx_citemacro_citep">(Cai et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib4" title="">2024</a>)</cite> facilitates collaboration between recommendation agents and user agents by establishing a feedback loop.
+<cite class="ltx_cite ltx_citemacro_citet">Zhang et al<span class="ltx_text">.</span> (<a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib56" title="">2024f</a>)</cite> integrate explicit user preferences, LLM-driven sentiment analysis, a human engagement model, and a statistical framework to robustly simulate user interactions.
+AgentCF <cite class="ltx_cite ltx_citemacro_citep">(Zhang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib52" title="">2024d</a>)</cite> proposes a novel approach, conceptualizing users and items as agents and employing a collaborative learning strategy to optimize them simultaneously.</p>
+</div>
+<div class="ltx_para" id="S5.p2">
+<p class="ltx_p" id="S5.p2.1">Several studies have highlighted LLMs’ generalization capabilities in <span class="ltx_text ltx_font_bold" id="S5.p2.1.1">cross-domain recommendation</span> <cite class="ltx_cite ltx_citemacro_citep">(Bao et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib3" title="">2023</a>; Bai et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib2" title="">2024</a>; Shen et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib35" title="">2024</a>; Vajjala et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib40" title="">2024</a>; Petruzzelli et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib31" title="">2024</a>; Tang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib39" title="">2023</a>)</cite> and explored <span class="ltx_text ltx_font_bold" id="S5.p2.1.2">popularity bias</span> in LLM-based recommenders <cite class="ltx_cite ltx_citemacro_citep">(Jiang et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib16" title="">2024</a>; Lichtenberg et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib20" title="">2024</a>; Gao et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib8" title="">2024</a>; Ortega et al<span class="ltx_text">.</span>, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib28" title="">2024</a>; Deldjoo, <a class="ltx_ref" href="https://arxiv.org/html/2502.13843v2#bib.bib6" title="">2024</a>)</cite>.
+These works mainly use LLMs as recommenders, not for simulating user behavior.
+Importantly, we emphasize the need to explicitly model popularity factors when simulating user behavior, rather than merely reducing their influence.</p>
+</div>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6. </span>Conclusions</h2>
+<div class="ltx_para" id="S6.p1">
+<p class="ltx_p" id="S6.p1.1">We propose AgentCF++, which consists of:
+(1) a dual-layer memory architecture and a two-step fusion mechanism that allow the user agent to avoid introducing irrelevant in cross-domain scenarios;
+(2) the concept of interest groups and a shared memory mechanism that captures the influence of popularity among users with similar interests.
+Comprehensive experiments demonstrate the effectiveness of AgentCF++.
+In the future, we aim to adapt these designs to other LLM-based user agent frameworks.</p>
+</div>
+<div class="ltx_acknowledgements">
+<h6 class="ltx_title ltx_title_acknowledgements">Acknowledgements.</h6>
+This work is supported by National Natural Science Foundation of China (NSFC) under the Grant No. 62172106. Peng Zhang is a faculty of School of Computer Science, Fudan University. Tun Lu is a faculty of School of Computer Science, Shanghai Key Laboratory of Data Science, Fudan Institute on Aging, MOE Laboratory for National Development and Intelligent Governance, and Shanghai Institute of Intelligent Electronics &amp; Systems, Fudan University.
+
+</div>
+</section>
+<section class="ltx_bibliography" id="bib">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+<ul class="ltx_biblist">
+<li class="ltx_bibitem" id="bib.bib1">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">(1)</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib2">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Bai et al<span class="ltx_text" id="bib.bib2.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Zhuoxi Bai, Ning Wu, Fengyu Cai, Xinyi Zhu, and Yun Xiong. 2024.
+
+</span>
+<span class="ltx_bibblock">Aligning Large Language Model with Direct Multi-Preference Optimization for Recommendation. In <em class="ltx_emph ltx_font_italic" id="bib.bib2.3.1">Proceedings of the 33rd ACM International Conference on Information and Knowledge Management</em>. 76–86.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib3">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Bao et al<span class="ltx_text" id="bib.bib3.2.2.1">.</span> (2023)</span>
+<span class="ltx_bibblock">
+Keqin Bao, Jizhi Zhang, Yang Zhang, Wenjie Wang, Fuli Feng, and Xiangnan He. 2023.
+
+</span>
+<span class="ltx_bibblock">Tallrec: An effective and efficient tuning framework to align large language model with recommendation. In <em class="ltx_emph ltx_font_italic" id="bib.bib3.3.1">Proceedings of the 17th ACM Conference on Recommender Systems</em>. 1007–1014.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib4">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Cai et al<span class="ltx_text" id="bib.bib4.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Shihao Cai, Jizhi Zhang, Keqin Bao, Chongming Gao, and Fuli Feng. 2024.
+
+</span>
+<span class="ltx_bibblock">FLOW: A Feedback LOop FrameWork for Simultaneously Enhancing Recommendation and User Agents.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib4.3.1">arXiv preprint arXiv:2410.20027</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib5">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Chen et al<span class="ltx_text" id="bib.bib5.2.2.1">.</span> (2023)</span>
+<span class="ltx_bibblock">
+Jiawei Chen, Hande Dong, Xiang Wang, Fuli Feng, Meng Wang, and Xiangnan He. 2023.
+
+</span>
+<span class="ltx_bibblock">Bias and debias in recommender system: A survey and future directions.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib5.3.1">ACM Transactions on Information Systems</em> 41, 3 (2023), 1–39.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib6">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Deldjoo (2024)</span>
+<span class="ltx_bibblock">
+Yashar Deldjoo. 2024.
+
+</span>
+<span class="ltx_bibblock">Understanding biases in chatgpt-based recommender systems: Provider fairness, temporal stability, and recency.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib6.1.1">ACM Transactions on Recommender Systems</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib7">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Friedman et al<span class="ltx_text" id="bib.bib7.2.2.1">.</span> (2023)</span>
+<span class="ltx_bibblock">
+Luke Friedman, Sameer Ahuja, David Allen, Zhenning Tan, Hakim Sidahmed, Changbo Long, Jun Xie, Gabriel Schubiner, Ajay Patel, Harsh Lara, et al<span class="ltx_text" id="bib.bib7.3.1">.</span> 2023.
+
+</span>
+<span class="ltx_bibblock">Leveraging large language models in conversational recommender systems.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib7.4.1">arXiv preprint arXiv:2305.07961</em> (2023).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib8">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Gao et al<span class="ltx_text" id="bib.bib8.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Chongming Gao, Ruijun Chen, Shuai Yuan, Kexin Huang, Yuanqing Yu, and Xiangnan He. 2024.
+
+</span>
+<span class="ltx_bibblock">SPRec: Leveraging Self-Play to Debias Preference Alignment for Large Language Model-based Recommendations.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib8.3.1">arXiv preprint arXiv:2412.09243</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib9">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ge et al<span class="ltx_text" id="bib.bib9.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Yingqiang Ge, Shuchang Liu, Zuohui Fu, Juntao Tan, Zelong Li, Shuyuan Xu, Yunqi Li, Yikun Xian, and Yongfeng Zhang. 2024.
+
+</span>
+<span class="ltx_bibblock">A survey on trustworthy recommender systems.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib9.3.1">ACM Transactions on Recommender Systems</em> 3, 2 (2024), 1–68.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib10">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Harte et al<span class="ltx_text" id="bib.bib10.2.2.1">.</span> (2023)</span>
+<span class="ltx_bibblock">
+Jesse Harte, Wouter Zorgdrager, Panos Louridas, Asterios Katsifodimos, Dietmar Jannach, and Marios Fragkoulis. 2023.
+
+</span>
+<span class="ltx_bibblock">Leveraging large language models for sequential recommendation. In <em class="ltx_emph ltx_font_italic" id="bib.bib10.3.1">Proceedings of the 17th ACM Conference on Recommender Systems</em>. 1096–1102.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib11">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Hou et al<span class="ltx_text" id="bib.bib11.2.2.1">.</span> (2024a)</span>
+<span class="ltx_bibblock">
+Yupeng Hou, Jiacheng Li, Zhankui He, An Yan, Xiusi Chen, and Julian McAuley. 2024a.
+
+</span>
+<span class="ltx_bibblock">Bridging language and items for retrieval and recommendation.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib11.3.1">arXiv preprint arXiv:2403.03952</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib12">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Hou et al<span class="ltx_text" id="bib.bib12.2.2.1">.</span> (2024b)</span>
+<span class="ltx_bibblock">
+Yupeng Hou, Junjie Zhang, Zihan Lin, Hongyu Lu, Ruobing Xie, Julian McAuley, and Wayne Xin Zhao. 2024b.
+
+</span>
+<span class="ltx_bibblock">Large language models are zero-shot rankers for recommender systems. In <em class="ltx_emph ltx_font_italic" id="bib.bib12.3.1">European Conference on Information Retrieval</em>. Springer, 364–381.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib13">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Huang and Chen (2006)</span>
+<span class="ltx_bibblock">
+Jen-Hung Huang and Yi-Fen Chen. 2006.
+
+</span>
+<span class="ltx_bibblock">Herding in online product choice.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib13.1.1">Psychology &amp; Marketing</em> 23, 5 (2006), 413–428.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib14">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Huang et al<span class="ltx_text" id="bib.bib14.2.2.1">.</span> (2023)</span>
+<span class="ltx_bibblock">
+Xu Huang, Jianxun Lian, Yuxuan Lei, Jing Yao, Defu Lian, and Xing Xie. 2023.
+
+</span>
+<span class="ltx_bibblock">Recommender ai agent: Integrating large language models for interactive recommendations.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib14.3.1">arXiv preprint arXiv:2308.16505</em> (2023).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib15">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Huang et al<span class="ltx_text" id="bib.bib15.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Xu Huang, Weiwen Liu, Xiaolong Chen, Xingmei Wang, Hao Wang, Defu Lian, Yasheng Wang, Ruiming Tang, and Enhong Chen. 2024.
+
+</span>
+<span class="ltx_bibblock">Understanding the planning of LLM agents: A survey.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib15.3.1">arXiv preprint arXiv:2402.02716</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib16">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Jiang et al<span class="ltx_text" id="bib.bib16.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Meng Jiang, Keqin Bao, Jizhi Zhang, Wenjie Wang, Zhengyi Yang, Fuli Feng, and Xiangnan He. 2024.
+
+</span>
+<span class="ltx_bibblock">Item-side Fairness of Large Language Model-based Recommendation System. In <em class="ltx_emph ltx_font_italic" id="bib.bib16.3.1">Proceedings of the ACM on Web Conference 2024</em>. 4717–4726.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib17">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kang and McAuley (2018)</span>
+<span class="ltx_bibblock">
+Wang-Cheng Kang and Julian McAuley. 2018.
+
+</span>
+<span class="ltx_bibblock">Self-attentive sequential recommendation. In <em class="ltx_emph ltx_font_italic" id="bib.bib17.1.1">2018 IEEE international conference on data mining (ICDM)</em>. IEEE, 197–206.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib18">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Kim et al<span class="ltx_text" id="bib.bib18.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Sunghwan Kim, Tongyoung Kim, Kwangwook Seo, Jinyoung Yeo, and Dongha Lee. 2024.
+
+</span>
+<span class="ltx_bibblock">Stop Playing the Guessing Game! Target-free User Simulation for Evaluating Conversational Recommender Systems.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib18.3.1">arXiv preprint arXiv:2411.16160</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib19">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Li et al<span class="ltx_text" id="bib.bib19.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Dongsheng Li, Jianxun Lian, Le Zhang, Kan Ren, Tun Lu, Tao Wu, and Xing Xie. 2024.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib19.3.1">Recommender Systems: Frontiers and Practices</em>.
+
+</span>
+<span class="ltx_bibblock">Springer Nature.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib20">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Lichtenberg et al<span class="ltx_text" id="bib.bib20.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Jan Malte Lichtenberg, Alexander Buchholz, and Pola Schwöbel. 2024.
+
+</span>
+<span class="ltx_bibblock">Large language models as recommender systems: A study of popularity bias.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib20.3.1">arXiv preprint arXiv:2406.01285</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib21">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Liu et al<span class="ltx_text" id="bib.bib21.2.2.1">.</span> (2023a)</span>
+<span class="ltx_bibblock">
+Jiahao Liu, Dongsheng Li, Hansu Gu, Tun Lu, Jiongran Wu, Peng Zhang, Li Shang, and Ning Gu. 2023a.
+
+</span>
+<span class="ltx_bibblock">Recommendation unlearning via matrix correction.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib21.3.1">arXiv preprint arXiv:2307.15960</em> (2023).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib22">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Liu et al<span class="ltx_text" id="bib.bib22.2.2.1">.</span> (2022)</span>
+<span class="ltx_bibblock">
+Jiahao Liu, Dongsheng Li, Hansu Gu, Tun Lu, Peng Zhang, and Ning Gu. 2022.
+
+</span>
+<span class="ltx_bibblock">Parameter-free dynamic graph embedding for link prediction.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib22.3.1">Advances in Neural Information Processing Systems</em> 35 (2022), 27623–27635.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib23">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Liu et al<span class="ltx_text" id="bib.bib23.2.2.1">.</span> (2023b)</span>
+<span class="ltx_bibblock">
+Jiahao Liu, Dongsheng Li, Hansu Gu, Tun Lu, Peng Zhang, Li Shang, and Ning Gu. 2023b.
+
+</span>
+<span class="ltx_bibblock">Personalized graph signal processing for collaborative filtering. In <em class="ltx_emph ltx_font_italic" id="bib.bib23.3.1">Proceedings of the ACM Web Conference 2023</em>. 1264–1272.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib24">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Liu et al<span class="ltx_text" id="bib.bib24.2.2.1">.</span> (2023c)</span>
+<span class="ltx_bibblock">
+Jiahao Liu, Dongsheng Li, Hansu Gu, Tun Lu, Peng Zhang, Li Shang, and Ning Gu. 2023c.
+
+</span>
+<span class="ltx_bibblock">Triple structural information modelling for accurate, explainable and interactive recommendation. In <em class="ltx_emph ltx_font_italic" id="bib.bib24.3.1">Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information Retrieval</em>. 1086–1095.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib25">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Liu et al<span class="ltx_text" id="bib.bib25.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Jiahao Liu, Yiyang Shao, Peng Zhang, Dongsheng Li, Hansu Gu, Chao Chen, Longzhi Du, Tun Lu, and Ning Gu. 2024.
+
+</span>
+<span class="ltx_bibblock">Filtering Discomforting Recommendations with Large Language Models.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib25.3.1">arXiv preprint arXiv:2410.05411</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib26">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Liu et al<span class="ltx_text" id="bib.bib26.2.2.1">.</span> (2023d)</span>
+<span class="ltx_bibblock">
+Sijia Liu, Jiahao Liu, Hansu Gu, Dongsheng Li, Tun Lu, Peng Zhang, and Ning Gu. 2023d.
+
+</span>
+<span class="ltx_bibblock">Autoseqrec: Autoencoder for efficient sequential recommendation. In <em class="ltx_emph ltx_font_italic" id="bib.bib26.3.1">Proceedings of the 32nd ACM International Conference on Information and Knowledge Management</em>. 1493–1502.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib27">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Madaan et al<span class="ltx_text" id="bib.bib27.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Aman Madaan, Niket Tandon, Prakhar Gupta, Skyler Hallinan, Luyu Gao, Sarah Wiegreffe, Uri Alon, Nouha Dziri, Shrimai Prabhumoye, Yiming Yang, et al<span class="ltx_text" id="bib.bib27.3.1">.</span> 2024.
+
+</span>
+<span class="ltx_bibblock">Self-refine: Iterative refinement with self-feedback.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib27.4.1">Advances in Neural Information Processing Systems</em> 36 (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib28">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ortega et al<span class="ltx_text" id="bib.bib28.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Gustavo Mendonça Ortega, Rodrigo Ferrari de Souza, and Marcelo Garcia Manzato. 2024.
+
+</span>
+<span class="ltx_bibblock">Evaluating zero-shot large language models recommenders on popularity bias and unfairness: a comparative approach to traditional algorithms.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib28.3.1">Anais Estendidos</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib29">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Pan et al<span class="ltx_text" id="bib.bib29.2.2.1">.</span> (2023)</span>
+<span class="ltx_bibblock">
+Liangming Pan, Michael Saxon, Wenda Xu, Deepak Nathani, Xinyi Wang, and William Yang Wang. 2023.
+
+</span>
+<span class="ltx_bibblock">Automatically correcting large language models: Surveying the landscape of diverse self-correction strategies.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib29.3.1">arXiv preprint arXiv:2308.03188</em> (2023).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib30">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Park et al<span class="ltx_text" id="bib.bib30.2.2.1">.</span> (2023)</span>
+<span class="ltx_bibblock">
+Joon Sung Park, Joseph O’Brien, Carrie Jun Cai, Meredith Ringel Morris, Percy Liang, and Michael S Bernstein. 2023.
+
+</span>
+<span class="ltx_bibblock">Generative agents: Interactive simulacra of human behavior. In <em class="ltx_emph ltx_font_italic" id="bib.bib30.3.1">Proceedings of the 36th annual acm symposium on user interface software and technology</em>. 1–22.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib31">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Petruzzelli et al<span class="ltx_text" id="bib.bib31.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Alessandro Petruzzelli, Cataldo Musto, Lucrezia Laraspata, Ivan Rinaldi, Marco de Gemmis, Pasquale Lops, and Giovanni Semeraro. 2024.
+
+</span>
+<span class="ltx_bibblock">Instructing and prompting large language models for explainable cross-domain recommendations. In <em class="ltx_emph ltx_font_italic" id="bib.bib31.3.1">Proceedings of the 18th ACM Conference on Recommender Systems</em>. 298–308.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib32">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Rendle et al<span class="ltx_text" id="bib.bib32.2.2.1">.</span> (2012)</span>
+<span class="ltx_bibblock">
+Steffen Rendle, Christoph Freudenthaler, Zeno Gantner, and Lars Schmidt-Thieme. 2012.
+
+</span>
+<span class="ltx_bibblock">BPR: Bayesian personalized ranking from implicit feedback.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib32.3.1">arXiv preprint arXiv:1205.2618</em> (2012).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib33">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Ricci et al<span class="ltx_text" id="bib.bib33.2.2.1">.</span> (2010)</span>
+<span class="ltx_bibblock">
+Francesco Ricci, Lior Rokach, and Bracha Shapira. 2010.
+
+</span>
+<span class="ltx_bibblock">Introduction to recommender systems handbook.
+
+</span>
+<span class="ltx_bibblock">In <em class="ltx_emph ltx_font_italic" id="bib.bib33.3.1">Recommender systems handbook</em>. Springer, 1–35.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib34">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Shani and Gunawardana (2011)</span>
+<span class="ltx_bibblock">
+Guy Shani and Asela Gunawardana. 2011.
+
+</span>
+<span class="ltx_bibblock">Evaluating recommendation systems.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib34.1.1">Recommender systems handbook</em> (2011), 257–297.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib35">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Shen et al<span class="ltx_text" id="bib.bib35.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Tingjia Shen, Hao Wang, Jiaqing Zhang, Sirui Zhao, Liangyue Li, Zulong Chen, Defu Lian, and Enhong Chen. 2024.
+
+</span>
+<span class="ltx_bibblock">Exploring User Retrieval Integration towards Large Language Models for Cross-Domain Sequential Recommendation.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib35.3.1">arXiv preprint arXiv:2406.03085</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib36">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Shi et al<span class="ltx_text" id="bib.bib36.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Wentao Shi, Xiangnan He, Yang Zhang, Chongming Gao, Xinyue Li, Jizhi Zhang, Qifan Wang, and Fuli Feng. 2024.
+
+</span>
+<span class="ltx_bibblock">Large language models are learnable planners for long-term recommendation. In <em class="ltx_emph ltx_font_italic" id="bib.bib36.3.1">Proceedings of the 47th International ACM SIGIR Conference on Research and Development in Information Retrieval</em>. 1893–1903.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib37">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Shinn et al<span class="ltx_text" id="bib.bib37.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Noah Shinn, Federico Cassano, Ashwin Gopinath, Karthik Narasimhan, and Shunyu Yao. 2024.
+
+</span>
+<span class="ltx_bibblock">Reflexion: Language agents with verbal reinforcement learning.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib37.3.1">Advances in Neural Information Processing Systems</em> 36 (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib38">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Shu et al<span class="ltx_text" id="bib.bib38.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Yubo Shu, Haonan Zhang, Hansu Gu, Peng Zhang, Tun Lu, Dongsheng Li, and Ning Gu. 2024.
+
+</span>
+<span class="ltx_bibblock">RAH! RecSys–Assistant–Human: A Human-Centered Recommendation Framework With LLM Agents.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib38.3.1">IEEE Transactions on Computational Social Systems</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib39">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Tang et al<span class="ltx_text" id="bib.bib39.2.2.1">.</span> (2023)</span>
+<span class="ltx_bibblock">
+Zuoli Tang, Zhaoxin Huan, Zihao Li, Xiaolu Zhang, Jun Hu, Chilin Fu, Jun Zhou, and Chenliang Li. 2023.
+
+</span>
+<span class="ltx_bibblock">One model for all: Large language models are domain-agnostic recommendation systems.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib39.3.1">arXiv preprint arXiv:2310.14304</em> (2023).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib40">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Vajjala et al<span class="ltx_text" id="bib.bib40.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Ajay Krishna Vajjala, Dipak Meher, Ziwei Zhu, and David S Rosenblum. 2024.
+
+</span>
+<span class="ltx_bibblock">Cross-Domain Recommendation Meets Large Language Models.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib40.3.1">arXiv preprint arXiv:2411.19862</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib41">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wang et al<span class="ltx_text" id="bib.bib41.2.2.1">.</span> (2024a)</span>
+<span class="ltx_bibblock">
+Lei Wang, Chen Ma, Xueyang Feng, Zeyu Zhang, Hao Yang, Jingsen Zhang, Zhiyuan Chen, Jiakai Tang, Xu Chen, Yankai Lin, et al<span class="ltx_text" id="bib.bib41.3.1">.</span> 2024a.
+
+</span>
+<span class="ltx_bibblock">A survey on large language model based autonomous agents.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib41.4.1">Frontiers of Computer Science</em> 18, 6 (2024), 186345.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib42">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wang et al<span class="ltx_text" id="bib.bib42.2.2.1">.</span> (2024c)</span>
+<span class="ltx_bibblock">
+Lei Wang, Jingsen Zhang, Hao Yang, Zhi-Yuan Chen, Jiakai Tang, Zeyu Zhang, Xu Chen, Yankai Lin, Hao Sun, Ruihua Song, et al<span class="ltx_text" id="bib.bib42.3.1">.</span> 2024c.
+
+</span>
+<span class="ltx_bibblock">User Behavior Simulation with Large Language Model-based Agents for Recommender Systems.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib42.4.1">ACM Transactions on Information Systems</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib43">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wang et al<span class="ltx_text" id="bib.bib43.2.2.1">.</span> (2023b)</span>
+<span class="ltx_bibblock">
+Xiaolei Wang, Xinyu Tang, Wayne Xin Zhao, Jingyuan Wang, and Ji-Rong Wen. 2023b.
+
+</span>
+<span class="ltx_bibblock">Rethinking the evaluation for conversational recommendation in the era of large language models.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib43.3.1">arXiv preprint arXiv:2305.13112</em> (2023).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib44">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wang et al<span class="ltx_text" id="bib.bib44.2.2.1">.</span> (2023a)</span>
+<span class="ltx_bibblock">
+Yancheng Wang, Ziyan Jiang, Zheng Chen, Fan Yang, Yingxue Zhou, Eunah Cho, Xing Fan, Xiaojiang Huang, Yanbin Lu, and Yingzhen Yang. 2023a.
+
+</span>
+<span class="ltx_bibblock">Recmind: Large language model powered agent for recommendation.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib44.3.1">arXiv preprint arXiv:2308.14296</em> (2023).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib45">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wang et al<span class="ltx_text" id="bib.bib45.2.2.1">.</span> (2024b)</span>
+<span class="ltx_bibblock">
+Zhefan Wang, Yuanqing Yu, Wendi Zheng, Weizhi Ma, and Min Zhang. 2024b.
+
+</span>
+<span class="ltx_bibblock">Multi-Agent Collaboration Framework for Recommender Systems.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib45.3.1">arXiv preprint arXiv:2402.15235</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib46">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Xia et al<span class="ltx_text" id="bib.bib46.2.2.1">.</span> (2022)</span>
+<span class="ltx_bibblock">
+Jiafeng Xia, Dongsheng Li, Hansu Gu, Jiahao Liu, Tun Lu, and Ning Gu. 2022.
+
+</span>
+<span class="ltx_bibblock">FIRE: Fast incremental recommendation with graph signal processing. In <em class="ltx_emph ltx_font_italic" id="bib.bib46.3.1">Proceedings of the ACM Web Conference 2022</em>. 2360–2369.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib47">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Yuan et al<span class="ltx_text" id="bib.bib47.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Siyu Yuan, Kaitao Song, Jiangjie Chen, Xu Tan, Yongliang Shen, Ren Kan, Dongsheng Li, and Deqing Yang. 2024.
+
+</span>
+<span class="ltx_bibblock">Easytool: Enhancing llm-based agents with concise tool instruction.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib47.3.1">arXiv preprint arXiv:2401.06201</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib48">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zang et al<span class="ltx_text" id="bib.bib48.2.2.1">.</span> (2022)</span>
+<span class="ltx_bibblock">
+Tianzi Zang, Yanmin Zhu, Haobing Liu, Ruohan Zhang, and Jiadi Yu. 2022.
+
+</span>
+<span class="ltx_bibblock">A survey on cross-domain recommendation: taxonomies, methods, and future directions.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib48.3.1">ACM Transactions on Information Systems</em> 41, 2 (2022), 1–39.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib49">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al<span class="ltx_text" id="bib.bib49.2.2.1">.</span> (2024c)</span>
+<span class="ltx_bibblock">
+An Zhang, Yuxin Chen, Leheng Sheng, Xiang Wang, and Tat-Seng Chua. 2024c.
+
+</span>
+<span class="ltx_bibblock">On generative agents in recommendation. In <em class="ltx_emph ltx_font_italic" id="bib.bib49.3.1">Proceedings of the 47th international ACM SIGIR conference on research and development in Information Retrieval</em>. 1807–1817.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib50">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al<span class="ltx_text" id="bib.bib50.2.2.1">.</span> (2024e)</span>
+<span class="ltx_bibblock">
+Guangping Zhang, Dongsheng Li, Hansu Gu, Tun Lu, Li Shang, and Ning Gu. 2024e.
+
+</span>
+<span class="ltx_bibblock">Simulating News Recommendation Ecosystems for Insights and Implications.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib50.3.1">IEEE Transactions on Computational Social Systems</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib51">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al<span class="ltx_text" id="bib.bib51.2.2.1">.</span> (2024a)</span>
+<span class="ltx_bibblock">
+Jizhi Zhang, Keqin Bao, Wenjie Wang, Yang Zhang, Wentao Shi, Wanhong Xu, Fuli Feng, and Tat-Seng Chua. 2024a.
+
+</span>
+<span class="ltx_bibblock">Prospect Personalized Recommendation on Large Language Model-based Agent Platform.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib51.3.1">arXiv preprint arXiv:2402.18240</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib52">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al<span class="ltx_text" id="bib.bib52.2.2.1">.</span> (2024d)</span>
+<span class="ltx_bibblock">
+Junjie Zhang, Yupeng Hou, Ruobing Xie, Wenqi Sun, Julian McAuley, Wayne Xin Zhao, Leyu Lin, and Ji-Rong Wen. 2024d.
+
+</span>
+<span class="ltx_bibblock">Agentcf: Collaborative learning with autonomous language agents for recommender systems. In <em class="ltx_emph ltx_font_italic" id="bib.bib52.3.1">Proceedings of the ACM on Web Conference 2024</em>. 3679–3689.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib53">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al<span class="ltx_text" id="bib.bib53.2.2.1">.</span> (2023)</span>
+<span class="ltx_bibblock">
+Junjie Zhang, Ruobing Xie, Yupeng Hou, Xin Zhao, Leyu Lin, and Ji-Rong Wen. 2023.
+
+</span>
+<span class="ltx_bibblock">Recommendation as instruction following: A large language model empowered recommendation approach.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib53.3.1">ACM Transactions on Information Systems</em> (2023).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib54">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al<span class="ltx_text" id="bib.bib54.2.2.1">.</span> (2021)</span>
+<span class="ltx_bibblock">
+Yao Zhang, Yun Xiong, Dongsheng Li, Caihua Shan, Kan Ren, and Yangyong Zhu. 2021.
+
+</span>
+<span class="ltx_bibblock">Cope: Modeling continuous propagation and evolution on interaction graph. In <em class="ltx_emph ltx_font_italic" id="bib.bib54.3.1">Proceedings of the 30th ACM International Conference on Information &amp; Knowledge Management</em>. 2627–2636.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib55">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al<span class="ltx_text" id="bib.bib55.2.2.1">.</span> (2024b)</span>
+<span class="ltx_bibblock">
+Zeyu Zhang, Xiaohe Bo, Chen Ma, Rui Li, Xu Chen, Quanyu Dai, Jieming Zhu, Zhenhua Dong, and Ji-Rong Wen. 2024b.
+
+</span>
+<span class="ltx_bibblock">A survey on the memory mechanism of large language model based agents.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib55.3.1">arXiv preprint arXiv:2404.13501</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib56">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhang et al<span class="ltx_text" id="bib.bib56.2.2.1">.</span> (2024f)</span>
+<span class="ltx_bibblock">
+Zijian Zhang, Shuchang Liu, Ziru Liu, Rui Zhong, Qingpeng Cai, Xiangyu Zhao, Chunxu Zhang, Qidong Liu, and Peng Jiang. 2024f.
+
+</span>
+<span class="ltx_bibblock">LLM-Powered User Simulator for Recommender System.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib56.3.1">arXiv preprint arXiv:2412.16984</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib57">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhao et al<span class="ltx_text" id="bib.bib57.2.2.1">.</span> (2023)</span>
+<span class="ltx_bibblock">
+Wayne Xin Zhao, Kun Zhou, Junyi Li, Tianyi Tang, Xiaolei Wang, Yupeng Hou, Yingqian Min, Beichen Zhang, Junjie Zhang, Zican Dong, et al<span class="ltx_text" id="bib.bib57.3.1">.</span> 2023.
+
+</span>
+<span class="ltx_bibblock">A survey of large language models.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib57.4.1">arXiv preprint arXiv:2303.18223</em> (2023).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib58">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhao et al<span class="ltx_text" id="bib.bib58.2.2.1">.</span> (2024)</span>
+<span class="ltx_bibblock">
+Yuyue Zhao, Jiancan Wu, Xiang Wang, Wei Tang, Dingxian Wang, and Maarten de Rijke. 2024.
+
+</span>
+<span class="ltx_bibblock">Let me do it for you: Towards llm empowered recommendation via tool learning. In <em class="ltx_emph ltx_font_italic" id="bib.bib58.3.1">Proceedings of the 47th International ACM SIGIR Conference on Research and Development in Information Retrieval</em>. 1796–1806.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib59">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhu et al<span class="ltx_text" id="bib.bib59.2.2.1">.</span> (2024a)</span>
+<span class="ltx_bibblock">
+Lixi Zhu, Xiaowen Huang, and Jitao Sang. 2024a.
+
+</span>
+<span class="ltx_bibblock">How Reliable is Your Simulator? Analysis on the Limitations of Current LLM-based User Simulators for Conversational Recommendation. In <em class="ltx_emph ltx_font_italic" id="bib.bib59.3.1">Companion Proceedings of the ACM on Web Conference 2024</em>. 1726–1732.
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+<li class="ltx_bibitem" id="bib.bib60">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Zhu et al<span class="ltx_text" id="bib.bib60.2.2.1">.</span> (2024b)</span>
+<span class="ltx_bibblock">
+Lixi Zhu, Xiaowen Huang, and Jitao Sang. 2024b.
+
+</span>
+<span class="ltx_bibblock">A LLM-based Controllable, Scalable, Human-Involved User Simulator Framework for Conversational Recommender Systems.
+
+</span>
+<span class="ltx_bibblock"><em class="ltx_emph ltx_font_italic" id="bib.bib60.3.1">arXiv preprint arXiv:2405.08035</em> (2024).
+
+</span>
+<span class="ltx_bibblock">
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Fri Apr 18 07:47:00 2025 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>

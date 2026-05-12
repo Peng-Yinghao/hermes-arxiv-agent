@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+<title>Agentic Meta-Orchestrator for Multi-task Copilots</title>
+<!--Generated on Wed Nov  5 05:01:16 2025 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="/static/browse/0.3.4/css/arxiv-html-papers-20250916.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+<script src="/static/browse/0.3.4/js/addons_new.js"></script>
+<script src="/static/browse/0.3.4/js/feedbackOverlay.js"></script>
+<base href="/html/2510.22781v2/"/></head>
+<body>
+<nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S1" title="In Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">I </span><span class="ltx_text ltx_font_smallcaps">Introduction</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S2" title="In Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II </span><span class="ltx_text ltx_font_smallcaps">Related Work</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S2.SS1" title="In II Related Work ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II-A </span><span class="ltx_text ltx_font_italic">Task Distribution and Semantic Learning-to-rank</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S2.SS2" title="In II Related Work ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II-B </span><span class="ltx_text ltx_font_italic">Multi-task Learning</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S2.SS3" title="In II Related Work ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II-C </span><span class="ltx_text ltx_font_italic">Agentic Workflow</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S3" title="In Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III </span><span class="ltx_text ltx_font_smallcaps">Proposed Agentic Meta-orchestrator</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S3.SS1" title="In III Proposed Agentic Meta-orchestrator ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-A </span><span class="ltx_text ltx_font_italic">Agentic Orchestrator of Top-k Selections</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S3.SS2" title="In III Proposed Agentic Meta-orchestrator ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-B </span><span class="ltx_text ltx_font_italic">LoRA Arms</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S3.SS3" title="In III Proposed Agentic Meta-orchestrator ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III-C </span><span class="ltx_text ltx_font_italic">Meta Planning</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S4" title="In Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV </span><span class="ltx_text ltx_font_smallcaps">Production Use Case Experiments</span></span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S4.SS1" title="In IV Production Use Case Experiments ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV-A </span><span class="ltx_text ltx_font_italic">M365 E-Commerce Copilot</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S4.SS2" title="In IV Production Use Case Experiments ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV-B </span><span class="ltx_text ltx_font_italic">Code Compliance Copilot</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S4.SS3" title="In IV Production Use Case Experiments ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV-C </span><span class="ltx_text ltx_font_italic">Experimental Results</span></span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S5" title="In Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">V </span><span class="ltx_text ltx_font_smallcaps">Extension to Hierarchical Text Classification Results</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S6" title="In Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VI </span><span class="ltx_text ltx_font_smallcaps">Limitations</span></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S7" title="In Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VII </span><span class="ltx_text ltx_font_smallcaps">Conclusion</span></span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Agentic Meta-Orchestrator for Multi-task Copilots</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">1<sup class="ltx_sup">st</sup> Xiaofeng Zhu
+</span><span class="ltx_author_notes">The open-source version of this work was performed independently following the Xiaofeng’s employment, without corporate affiliation.</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">2<sup class="ltx_sup">nd</sup> Yunshen Zhou
+</span></span>
+</div>
+<div class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p">Microsoft Copilot suites serve as the universal entry point for various agents skilled in handling important tasks, ranging from assisting a customer with product purchases to detecting vulnerabilities in corporate programming code. Each agent can be powered by language models, software engineering operations, such as database retrieval, and internal &amp; external knowledge. The repertoire of a copilot can expand dynamically with new agents. This requires a robust orchestrator that can distribute tasks from user prompts to the right agents.
+In this work, we propose an Agentic Meta-orchestrator (AMO) for handling multiple tasks and scalable agents in copilot services, which can provide both natural language and action responses. We will also demonstrate the planning that leverages meta-learning, i.e., a trained decision tree model for deciding the best inference strategy among various agents/models. We showcase the effectiveness of our AMO through two production use cases: Microsoft 365 (M365) E-Commerce Copilot and code compliance copilot. M365 E-Commerce Copilot advertises Microsoft products to external customers to promote sales success. The M365 E-Commerce Copilot provides up-to-date product information and connects to multiple agents, such as relational databases and human customer support. The code compliance copilot scans the internal DevOps code to detect known and new compliance issues in pull requests (PR).</p>
+</div>
+<section class="ltx_section" id="S1">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">I </span><span class="ltx_text ltx_font_smallcaps">Introduction</span>
+</h2>
+<div class="ltx_para" id="S1.p1">
+<p class="ltx_p">Microsoft copilots are designed to handle multiple work tasks by coordinating large language models (LLMs) <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">dubey2024llama3herdmodels</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">abdin2024phi3technicalreporthighly</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">mohamadi2023chatgptagegenerativeai</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">Dong_2022</span>]</cite>, Microsoft 365 productivity apps, and more. LLMs are impressive at handling general tasks, such as drafting documents, question answering, and summarization. Due to data compliance and boundaries, fine-tuning of customer data with web-based LLMs, such as ChatGPT, can be prohibited. Therefore, keeping the knowledge of an LLM up-to-date can be challenging.</p>
+</div>
+<figure class="ltx_figure" id="S1.F1">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_figure_panel ltx_img_square" height="491" id="S1.F1.g1" src="images/AI-laptops.png" width="459"/></div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>Product Recommendation from ChatGPT</figcaption><div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1">
+<p class="ltx_p ltx_figure_panel ltx_align_center">ChatGPT failed to provide detailed or up-to-date information</p>
+</div>
+</div>
+</figure>
+<div class="ltx_para" id="S1.p2">
+<p class="ltx_p">Figure <a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S1.F1" title="Figure 1 ‣ I Introduction ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_tag">1</span></a>
+shows a ChatGPT laptop recommendation to a user who plans to train machine learning models. It is easy to find that ChatGPT nicely shows options of ASUS, HP, and Apple models but with outdated information. For example, in 2024 the newest model for an Apple Macbook uses M4 chip instead of M2 shown by ChatGPT, and the prices for ASUS and HP laptops are also different from what are shown online. An E-Commerce Copilot customized for Apple Inc. likely aims to advocate for Apple products instead of ASUS or HP’s. In addition, the copilot needs to always fetch the latest information of products, such as pricing, model configurations during promotion seasons.</p>
+</div>
+<div class="ltx_para" id="S1.p3">
+<p class="ltx_p">In contrast, our E-Commerce Copilot shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S4.F8" title="Figure 8 ‣ IV-B Code Compliance Copilot ‣ IV Production Use Case Experiments ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_tag">8</span></a> can timely obtain the latest pricing information based on geographic locations (different countries have different prices and currencies for the same product). Moreover, depending on the context or different users, we provide customized responses (for the same question) for different user interactions. Figure <a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S4.F6" title="Figure 6 ‣ IV-B Code Compliance Copilot ‣ IV Production Use Case Experiments ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_tag">6</span></a> provides product information related to Outlook as the customer is reviewing the package details. Figure <a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S4.F7" title="Figure 7 ‣ IV-B Code Compliance Copilot ‣ IV Production Use Case Experiments ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_tag">7</span></a> demonstrates that our E-comerce copilot understands the context in which the customer is asking if filling the text field on the left side using an Outlook email address is necessary, and it is able to interpret multi-turn messages well. Not surprisingly, Figure <a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S4.F9" title="Figure 9 ‣ IV-B Code Compliance Copilot ‣ IV Production Use Case Experiments ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_tag">9</span></a> shows that a standalone ChatGPT is not capable of providing such customization. This issue also occurs in multiple industries, such as instant airline and hotel pricing.
+We relieve the proposed Agentic Meta-orchestrator (AMO) behind the scene in this work. This method not only works on Microsoft products but also can be easily applied to other multi-agent AI systems in various industries.</p>
+</div>
+<div class="ltx_para" id="S1.p4">
+<p class="ltx_p">To provide a customized in-domain assistant for Microsoft customers, language agents can neatly extend the generalizability of LLMs in private domains <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">10.1145/3627673.3679105</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">yao2024tau</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">Wang_2024</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">zhou2023agentsopensourceframeworkautonomous</span>]</cite> and connect with applications, knowledge graphs, databases, other copilots, etc. The explosion of adapting various agents in particular tasks or domains poses challenges for 1) an effective orchestrator that decomposes tasks from user prompts and assigns them to growing agents, 2) efficient deployment of the foundation model and agents, and 3) inference planning among agents, e.g., which agents should be used next, and what messages can be shared across agents.</p>
+</div>
+<div class="ltx_para" id="S1.p5">
+<p class="ltx_p">Regarding the first challenge, we propose a trained multi-level rating learning-to-rank model (with graded relevance) to orchestrate the prompts to the right agents, which is generally taken as a hierarchical text classification problem <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2024teleclass</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">vaswani2023attentionneed</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">chen2019bert</span>]</cite>. The agents can be “ask for price”, “compare products”, “contact human customer support”, etc. as in our M365 E-Commerce Copilot, and can be ”encoding character issue”, ”new character issue” as in the code compliance copilot. An orchestrator can be at the copilot level, e.g., it selects the right plugins <span class="ltx_note ltx_role_footnote" id="footnote1"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note">1</span>https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/orchestrator</span></span></span> with agents, and it can select the right models based on the business intents of user prompts. As the number of agents continues to grow, the use of a text classification model <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">liu2019robertarobustlyoptimizedbert</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">devlin-etal-2019-bert</span>]</cite> can have difficulties in scalability, and the cosine similarity method can struggle when the descriptions of agents have overlaps or when user prompts are ambiguous.</p>
+</div>
+<div class="ltx_para" id="S1.p6">
+<p class="ltx_p">Regarding the second challenge, we propose a memory-efficient inference framework, LoRA<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">hu2021loralowrankadaptationlarge</span>]</cite> arms, where each arm handles one task. Hosting multiple LLMs requires substantial memory<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">vyas2024autonomousindustrialcontrolusing</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2024chainbuddyaiagentgenerating</span>]</cite>. Inspired by the LoRA framework, we share the base LLM model among tasks and train LoRA weights for individual tasks.</p>
+</div>
+<div class="ltx_para" id="S1.p7">
+<p class="ltx_p">Regarding the third challenge, we propose a novel meta-learning<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">lee-etal-2022-meta</span>]</cite> decision tree model that trains the best inference model combinations and orderings for different prompts. The well-known successful framework, retrieval-augmented generation (RAG), is a simplified two-step inference planning based on human heuristics that can be taken as a web search agent and LLM question-answering agent. When a complex copilot service is composed of multiple agents and combinations of skills/models, how we effectively choose an inference strategy for individual user prompts requires a meta-learning approach. Current planning strategies, such as AutoGen<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">dibia2024autogen</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">porsdam2024autogen</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">wuautogen</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">zhu2023autogen</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">wu2023autogen</span>]</cite>, CrewAI, and TaskWeaver<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">barbarroxa2024benchmarking</span>]</cite>, rely on agentic workflows and task-specific prompts, which are generally based on cognitive architectures<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">sumers2023cognitive</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">ghosal2025doesthinkinghelpunderstanding</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">deng2025simura</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">kang2024self</span>]</cite>.</p>
+</div>
+<div class="ltx_para" id="S1.p8">
+<p class="ltx_p">We summarize our contributions as follows.
+<br class="ltx_break"/>1) We convert the hierarchical text classification to a multi-level relevance rating semantic learning-to-rank task taking natural language descriptions of labels instead of using a softmax, which is challenging to scale up when new agents/classes are added in.
+<br class="ltx_break"/>2) We can locate top-k based on individual user prompts by adjusting the ranking position of the ”separator” class or candidate document.
+<br class="ltx_break"/>3) We productize LoRA arms for efficient inference of multiple tasks. Each arm comes from an independent LoRA fine-tuning, which contributes to the scalability and flexibility of complex AI systems, such as copilots. 
+<br class="ltx_break"/>4) We present a meta-learning model for identifying the optimal inference planning given various combinations of task-specific agents/models. Our independently developed, non-corporate code and data used in Section <a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S5" title="V Extension to Hierarchical Text Classification Results ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_tag">V</span></a> are made publicly available <span class="ltx_note ltx_role_footnote" id="footnote2"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_tag ltx_tag_note">2</span>https://github.com/XiaofengZhu/AMO</span></span></span> for research purposes, without implementing any patented methods or systems.</p>
+</div>
+<figure class="ltx_figure" id="S1.F2">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape" height="958" id="S1.F2.g1" src="images/sRank.png" width="2279"/></div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span>Agentic Orchestrator</figcaption><div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1">
+<p class="ltx_p ltx_figure_panel ltx_align_center">Hierarchical text classification is a multi-level rating learning-to-rank task</p>
+</div>
+</div>
+</figure>
+</section>
+<section class="ltx_section" id="S2">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">II </span><span class="ltx_text ltx_font_smallcaps">Related Work</span>
+</h2>
+<section class="ltx_subsection" id="S2.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">II-A </span><span class="ltx_text ltx_font_italic">Task Distribution and Semantic Learning-to-rank</span>
+</h3>
+<div class="ltx_para" id="S2.SS1.p1">
+<p class="ltx_p">LLMs have been attempted in few-shot text classification tasks<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">li-etal-2024-pdameta</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang-etal-2022-prompt-based</span>]</cite> and few-shot learning-to-rank models<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">qin-etal-2024-large</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">jiang-etal-2023-llm</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">guo2022rankdnnlearningrankfewshot</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">sinhababu2024fewshotpromptingpairwiseranking</span>]</cite></p>
+</div>
+<div class="ltx_para" id="S2.SS1.p2">
+<p class="ltx_p">Previous studies have shown that learning-to-rank can be used explicitly and implicitly in various language tasks <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">10.1145/3543873.3584621</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">karpukhin-etal-2020-dense</span>]</cite>. However, they were limited to binary ratings. We apply semantic learning to rank to multi-level rating scenarios. We utilize the natural description of classification labels as the learning-to-rank “candidate documents”, different from the <math alttext="0" class="ltx_Math" display="inline" id="S2.SS1.p2.m1" intent=":literal"><mn>0</mn></math> to <math alttext="n" class="ltx_Math" display="inline" id="S2.SS1.p2.m2" intent=":literal"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> classes using one-hot encoding in softmax.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">II-B </span><span class="ltx_text ltx_font_italic">Multi-task Learning</span>
+</h3>
+<div class="ltx_para" id="S2.SS2.p1">
+<p class="ltx_p">Multi-task learners generally share a common module <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang-etal-2023-survey</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">chen2019bert</span>]</cite>.
+Previous studies, such as MT-DNN<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">bhattacharjee2022multendtoendmultitasklearning</span>]</cite> and MulT<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">liu2019multi</span>]</cite> have focused on training multiple tasks at the same time by sampling one task at a time using a neural network with shared layers and task-specific layers.
+This method can suffer performance drops in subsets of tasks, and it is not easy to efficiently update models based on individual task requirements. The authors of <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">stickland2019bert</span>]</cite> proposed projected attention layers (PALs) in parallel to each layer for BERT <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">devlin-etal-2019-bert</span>]</cite>, which learns task-specific information in the additional parameters. The idea is similar to LoRA, which uses low-rank matrices to reduce the number of parameters for attention in task-specific layers. However, when we update the training data for one task, the performance of other tasks also changes, which is not good for updating the models, especially considering in many cases in industry we want to update the model for one task without affecting the performance for other tasks.
+We show that we achieve impressive individual and end-to-end task performance leveraging LoRA fine-tuning and inference memory optimization in Sections <a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S3.SS2" title="III-B LoRA Arms ‣ III Proposed Agentic Meta-orchestrator ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_tag">III-B</span></a> - <a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S3.SS3" title="III-C Meta Planning ‣ III Proposed Agentic Meta-orchestrator ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_tag">III-C</span></a> and <a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S4.SS3" title="IV-C Experimental Results ‣ IV Production Use Case Experiments ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_tag">IV-C</span></a>.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S2.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">II-C </span><span class="ltx_text ltx_font_italic">Agentic Workflow</span>
+</h3>
+<div class="ltx_para" id="S2.SS3.p1">
+<p class="ltx_p">Unlike chain of thoughts<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">wei2023chainofthoughtpromptingelicitsreasoning</span>]</cite>, tree of thoughts <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">yao2024tree</span>]</cite>, or tree search <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">light2024strategistlearningstrategicskills</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">yu2024exactteachingaiagents</span>]</cite> that address LLM inference planning, our meta-learning planning strategy is a trained model of models/agents.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p2">
+<p class="ltx_p">A well-known cognitive heuristics RAG <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">edge2024localglobalgraphrag</span>]</cite> plans a knowledge retrieval then LLM generation. Although great reinforcement learning approaches, for example, React <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">yao2022react</span>]</cite> and Reflection <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">shinn2023reflexionlanguageagentsverbal</span>]</cite>, and Self-critic <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">saunders2022selfcritiquingmodelsassistinghuman</span>]</cite> have been attempted for complex systems, how we quickly update the planning when new agents are added remains an open problem. Our proposed AMO novelly solves this problem of continually adding new agents.</p>
+</div>
+<div class="ltx_para" id="S2.SS3.p3">
+<p class="ltx_p">Another good cognitive heuristic is ensemble modeling. Each record is processed by the same models using bagging, stacking, etc. Our AMO, in contrast, teaches the methodology of training a model <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">ha-etal-2023-meta</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">10.5555/3600270.3602999</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">chen-etal-2022-meta</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang-etal-2022-prompt-based</span>]</cite> and is Conversable; agents can share information with each other.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S3">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">III </span><span class="ltx_text ltx_font_smallcaps">Proposed Agentic Meta-orchestrator</span>
+</h2>
+<section class="ltx_subsection" id="S3.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">III-A </span><span class="ltx_text ltx_font_italic">Agentic Orchestrator of Top-k Selections</span>
+</h3>
+<div class="ltx_para" id="S3.SS1.p1">
+<p class="ltx_p">Let us assume that there are three task-specific agents available for a copilot to orchestrate user prompts to. Training a multi-class text classification model is an intuitive approach. However, we deal with a growing number of agents that are added to copilots on a regular basis. For example, copilot partners can request for on-boarding their new agents of handling tasks in private domains, e.g., creating a new PowerPoint deck, checking order status, adding a user to a purchased subscription, etc.
+It is not user-friendly to have newly added agents wait until a new fine-tuned model that includes this class is available to route user prompts to them. In addition, it is uneasy to choose the cutoff top-k value if we search based on key words or sentence embeddings.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p2">
+<p class="ltx_p">Therefore, we design an orchestrator that can seamlessly take new agents on the basis of their agent/class labels. Figure <a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S1.F2" title="Figure 2 ‣ I Introduction ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_tag">2</span></a> demonstrates that we convert agent/class descriptions to semantic embeddings offline and use them to train a listwise multi-level learning-to-rank model <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">10.1145/1963405.1963459</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">chen-etal-2020-hierarchical</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">10.1145/3336191.3371814</span>]</cite>. The model targets higher relatedness prediction scores for agents that are ranked higher than others. In particular, when there is only one correct item in a ranking list or classification group, such as ‘[0, 1, 0, 0]’, the gradients of ListMLE-style loss functions and Softmax are equivalent. However, the former is more applicable to multi-level ratings or hierarchical classes. The user prompt and the agents use the same embedding model, which is generic. We were able to achieve stable performance using BERT and Sentence Transformers as the foundation models, even more stable than using softmax classification trained for all classes.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p3">
+<p class="ltx_p">Each batch contains the trainable embedding of <math alttext="q" class="ltx_Math" display="inline" id="S3.SS1.p3.m1" intent=":literal"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math> a user prompt, fixed embeddings of <math alttext="D^{q}=\{d\}" class="ltx_Math" display="inline" id="S3.SS1.p3.m2" intent=":literal"><semantics><mrow><msup><mi>D</mi><mi>q</mi></msup><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>d</mi><mo stretchy="false">}</mo></mrow></mrow><annotation encoding="application/x-tex">D^{q}=\{d\}</annotation></semantics></math> the set of candidate agent descriptions associated with <math alttext="q" class="ltx_Math" display="inline" id="S3.SS1.p3.m3" intent=":literal"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>, which can differ in batches, and <math alttext="R(D^{q})=\{r(d)\}" class="ltx_Math" display="inline" id="S3.SS1.p3.m4" intent=":literal"><semantics><mrow><mrow><mi>R</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msup><mi>D</mi><mi>q</mi></msup><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">}</mo></mrow></mrow><annotation encoding="application/x-tex">R(D^{q})=\{r(d)\}</annotation></semantics></math> the relatedness rating for <math alttext="D^{q}" class="ltx_Math" display="inline" id="S3.SS1.p3.m5" intent=":literal"><semantics><msup><mi>D</mi><mi>q</mi></msup><annotation encoding="application/x-tex">D^{q}</annotation></semantics></math>, ranging over all real numbers (showing that the previous study in <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">10.1145/3336191.3371814</span>]</cite> can be generalized).
+We maximize the likelihood of selecting a document or class <math alttext="d" class="ltx_Math" display="inline" id="S3.SS1.p3.m6" intent=":literal"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math> from <math alttext="c" class="ltx_Math" display="inline" id="S3.SS1.p3.m7" intent=":literal"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math> = <math alttext="d\cup\tilde{s}" class="ltx_Math" display="inline" id="S3.SS1.p3.m8" intent=":literal"><semantics><mrow><mi>d</mi><mo>∪</mo><mover accent="true"><mi>s</mi><mo>~</mo></mover></mrow><annotation encoding="application/x-tex">d\cup\tilde{s}</annotation></semantics></math>:</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p4">
+<table class="ltx_equation ltx_eqn_table" id="S3.E1">
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math alttext="P(d)=\frac{exp(f(d))}{exp(f(d))+\sum_{d^{\prime}\in\tilde{s}}exp(f(d^{\prime}))}." class="ltx_Math" display="block" id="S3.E1.m1" intent=":literal"><semantics><mrow><mrow><mrow><mi>P</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mfrac><mrow><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>x</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><mrow><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>x</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo rspace="0.055em">+</mo><mrow><msub><mo>∑</mo><mrow><msup><mi>d</mi><mo>′</mo></msup><mo>∈</mo><mover accent="true"><mi>s</mi><mo>~</mo></mover></mrow></msub><mrow><mi>e</mi><mo lspace="0em" rspace="0em">​</mo><mi>x</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>f</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msup><mi>d</mi><mo>′</mo></msup><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></mfrac></mrow><mo lspace="0em">.</mo></mrow><annotation encoding="application/x-tex">P(d)=\frac{exp(f(d))}{exp(f(d))+\sum_{d^{\prime}\in\tilde{s}}exp(f(d^{\prime}))}.</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right" rowspan="1"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div class="ltx_para ltx_noindent" id="S3.SS1.p5">
+<p class="ltx_p">The rating of every document in <math alttext="\tilde{s}" class="ltx_Math" display="inline" id="S3.SS1.p5.m1" intent=":literal"><semantics><mover accent="true"><mi>s</mi><mo>~</mo></mover><annotation encoding="application/x-tex">\tilde{s}</annotation></semantics></math> is less than <math alttext="r(d)" class="ltx_Math" display="inline" id="S3.SS1.p5.m2" intent=":literal"><semantics><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">r(d)</annotation></semantics></math><cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">10.1145/3336191.3371814</span>]</cite>. We finalize our general learning to rank loss function uRank loss by adding a weight factor of <math alttext="2^{r(d)}-1" class="ltx_Math" display="inline" id="S3.SS1.p5.m3" intent=":literal"><semantics><mrow><msup><mn>2</mn><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">)</mo></mrow></mrow></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{r(d)}-1</annotation></semantics></math>. We list and answer the following core questions accordingly.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p6">
+<p class="ltx_p">1) <span class="ltx_text ltx_font_bold">What are class hierarchies?
+<br class="ltx_break"/></span>The semantics of real-world agents carry hierarchies. For example, for an E-Commerce Copilot, it detects the business intents of user prompts and only continues processing intents that are related to the company’s products, then routes the prompts to the desire categories varying from Office products, Azure products, Xbox, etc.
+In addition, high-level copilots generally have limited data access to private domains.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p7">
+<p class="ltx_p">2) <span class="ltx_text ltx_font_bold">What are the limitations of the classical softmax multi-class text classification?
+<br class="ltx_break"/></span>The labels of a three-class classification model can be represented as <math alttext="[0,1,0]" class="ltx_Math" display="inline" id="S3.SS1.p7.m1" intent=":literal"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0,1,0]</annotation></semantics></math>. When the fourth class comes in, we need to extend the labels to e.g., <math alttext="[0,0,1,0]" class="ltx_Math" display="inline" id="S3.SS1.p7.m2" intent=":literal"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0,0,1,0]</annotation></semantics></math>. Therefore, we generally need to train a new multi-class text classification model when a new class appears.
+Moreover, the <math alttext="0-1" class="ltx_Math" display="inline" id="S3.SS1.p7.m3" intent=":literal"><semantics><mrow><mn>0</mn><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0-1</annotation></semantics></math> labeling system assumes that all classes are independent, which ignores the semantics of the class labels and the connections between the labels and the training texts. Such limitations impact the scalability of copilots as they continually onboard new agents.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p8">
+<p class="ltx_p">3) <span class="ltx_text ltx_font_bold">How can we use learning-to-rank to orchestrate a growing number of agents?</span></p>
+</div>
+<div class="ltx_para" id="S3.SS1.p9">
+<p class="ltx_p">As we have learned about the limitation of the sofmax text classification, we utilize agent/class descriptions, such as “ask for price,” as the “candidates” and train a learning-to-rank model to select top-k agents given a user prompt. All user prompts may share the same or different number of agent/class descriptions. A learning-to-rank model can support this flexibility.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p10">
+<p class="ltx_p">4) <span class="ltx_text ltx_font_bold">How can we define a multi-level rating?
+<br class="ltx_break"/></span>Agent ratings are defined by hierarchical levels and relatedness to user prompts. For instance, for a user prompt “How much is M365 Business Standard annual subscription?” the ratings of agents “Ask for Price”, “Microsoft products”, “Separator Class”, “Compare Products”, “Non-Microsoft Products” are <math alttext="\{2,1,0,-1,-2\}" class="ltx_Math" display="inline" id="S3.SS1.p10.m1" intent=":literal"><semantics><mrow><mo stretchy="false">{</mo><mn>2</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo>,</mo><mrow><mo>−</mo><mn>2</mn></mrow><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{2,1,0,-1,-2\}</annotation></semantics></math>, where the higher the positive rating the agent is more related to the user prompt, the lower the negative rating the agent is less related to the user prompt. “Separator Class” uses “other Microsoft product matters” as the agent description.
+For a different user prompt ”What apps are included in M365 Business Standard?” the ratings of agents “Separator Class”, “Microsoft Products”, “Ask for Price”, “Compare Products”, “Non-Microsoft Products” are <math alttext="\{2,1,0,0,-1\}" class="ltx_Math" display="inline" id="S3.SS1.p10.m2" intent=":literal"><semantics><mrow><mo stretchy="false">{</mo><mn>2</mn><mo>,</mo><mn>1</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mrow><mo>−</mo><mn>1</mn></mrow><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{2,1,0,0,-1\}</annotation></semantics></math> based on their natural semantic hierarchies.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p11">
+<p class="ltx_p">5) <span class="ltx_text ltx_font_bold">How can we choose the top-k agents/agents based on user prompts?
+<br class="ltx_break"/></span>We add a “Separator Class” that indicates a class that is not defined in current categories. The learning-to-rank model maps the Separator Class to the top-k position, i.e., the placeholder Separator Class itself and agents/classes that are ranked below this Separator Class are not relevant to the user prompts.</p>
+</div>
+<div class="ltx_para" id="S3.SS1.p12">
+<p class="ltx_p">6) <span class="ltx_text ltx_font_bold">Why do we choose multi-level rating learning-to-rank over text generation?
+<br class="ltx_break"/></span>Recent studies have good experiments in LLM-based few-shot text classification. Though LLMs consider semantics of class labels, LLM generations can be more creative than we need, i.e., they do not guarantee that the outputs contain the defined class labels. We have compared with this approach and detailed the differences in Table <a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S4.T1" title="TABLE I ‣ IV-B Code Compliance Copilot ‣ IV Production Use Case Experiments ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_tag">I</span></a>. Moreover, due to the token limit for LLM we may not feed enough few-shot examples into the prompt, leading to poor performance.</p>
+</div>
+<figure class="ltx_figure" id="S3.F3">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape" height="740" id="S3.F3.g1" src="images/LoRA-Arms.png" width="2095"/></div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 3: </span>LoRA Arms of Handling Multiple Tasks</figcaption><div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1">
+<p class="ltx_p ltx_figure_panel ltx_align_center">LoRA-Arms are trained independently during fine-tuning and can be used simultaneously during inference.</p>
+</div>
+</div>
+</figure>
+<figure class="ltx_figure" id="S3.F4">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape" height="659" id="S3.F4.g1" src="images/Meta-Learner.png" width="2086"/></div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 4: </span>A Meta-learning Decision Tree Model, in which Each Node is a Language Agent or Model</figcaption><div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1">
+<p class="ltx_p ltx_figure_panel ltx_align_center">The green path shows the inference planning for “How much is M365 Business Standard Annual Subscription?” utilizing “Business Intent”, “Multi-turn Message”, “Product Recognition”, “Database” and “Ask for Price” agents</p>
+</div>
+</div>
+</figure>
+</section>
+<section class="ltx_subsection" id="S3.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">III-B </span><span class="ltx_text ltx_font_italic">LoRA Arms</span>
+</h3>
+<div class="ltx_para" id="S3.SS2.p1">
+<p class="ltx_p">One major issue of leveraging multiple agents/models at the inference stage is memory consumption. Hosting a service with multiple LLMs fine-tuned from the same foundation model causes memory usage waste.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p2">
+<p class="ltx_p">Slightly different from LoRA memory optimization that subtracts the old LoRA weights and then adds the LoRA weights of the new task in the study by Hu et al. <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">hu2021loralowrankadaptationlarge</span>]</cite>, we support multiple LoRA arms during inference at the same time, as shown in Figure <a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S3.F3" title="Figure 3 ‣ III-A Agentic Orchestrator of Top-k Selections ‣ III Proposed Agentic Meta-orchestrator ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_tag">3</span></a>. They share the same LLM memory as long as the compute resources allow.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p3">
+<p class="ltx_p">The user prompts are passed to agents, either sequentially or asynchronously in parallel. When the same foundational models make sequential LLM calls or perform inference across multiple LLMs fine-tuned from the same base model, it can lead to significant waste of compute resources—particularly memory consumption—which directly impacts the scalability of the overall systems or copilots.</p>
+</div>
+<div class="ltx_para" id="S3.SS2.p4">
+<p class="ltx_p">Core tasks in our copilots include (implicit) product entity recognition, reflection of consuming long-term and short-term memory/context in multi-turn messages of a chat conversation. Each was trained and predicted using a LoRA arm. This is essential for supporting multiple application programming interface (API) services that share the foundation models in memory, which are used in different downstream workloads.</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S3.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">III-C </span><span class="ltx_text ltx_font_italic">Meta Planning</span>
+</h3>
+<div class="ltx_para" id="S3.SS3.p1">
+<p class="ltx_p">Instead of responding solely to cognitive heuristics, we have a meta-learning decision (tree) model to decide on the best inference planning paths for user prompts. Training inputs are user prompts, their end-to-end copilot responses, and various models for agent-specific tasks. The inference planning includes the combination and ordering of agents, e.g. only using Phi-3.5<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">abdin2024phi3technicalreporthighly</span>]</cite> or going through product recognition agent, database agents, etc. Slightly different from classical decision trees, we allow visiting the same nodes and paths several times by enabling retries during the inference stage. Then default paths, e.g., human customer service pop-up windows, and pre-calibrated messages, will be triggered.</p>
+</div>
+<div class="ltx_para" id="S3.SS3.p2">
+<p class="ltx_p">Figure <a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S3.F4" title="Figure 4 ‣ III-A Agentic Orchestrator of Top-k Selections ‣ III Proposed Agentic Meta-orchestrator ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_tag">4</span></a> shows the meta-learning decision (tree) model for our copilots. Each node is an AI language agent, and the orchestrator assigns the current user prompt to complete certain tasks. The planning decisions of the Meta-learner need to be actionable, e.g., proceeding with an exact agent with specific settings, such as English and U.S. The node can be whether a Microsoft product entity, such as Teams Essential, Microsoft 365 Business Premium, is recognized by the product recognition agent, and how many product entities are detected. AMO includes BERT, Phi-3.5 and their task-specific LoRA arms. The planning paths are deterministic during the interactions with customers after we learn the best actions from the training data. Therefore, reinforcement learning<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">deng2025simura</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">jha2024neural</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">hou2504thinkprune</span>]</cite> was not the focus of our current study.</p>
+</div>
+</section>
+</section>
+<section class="ltx_section" id="S4">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">IV </span><span class="ltx_text ltx_font_smallcaps">Production Use Case Experiments</span>
+</h2>
+<div class="ltx_para" id="S4.p1">
+<p class="ltx_p">We zoom in on the two production copilot services: M365 E-Commerce Copilot and Code Compliance Copilot. We have conducted benchmarking experiments for the agent orchestration task for the two copilots, and the multi-task handling for the M365 E-Commerce Copilot. In the end, we compare with AutoGen, a prompt workflow engine with different agents designed for our tasks. The gains of AMO over standalone LLMs—Fine-tuned Phi-3.5 and ChatGPT-4o—reflect the impact of the proposed agentic orchestrator and planning. The improvement of AMO over AutoGen demonstrates the effectiveness of AMO’s meta planning compared to LLM planning and context understanding in multi-turn conversations.</p>
+</div>
+<section class="ltx_subsection" id="S4.SS1">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">IV-A </span><span class="ltx_text ltx_font_italic">M365 E-Commerce Copilot</span>
+</h3>
+<div class="ltx_para" id="S4.SS1.p1">
+<p class="ltx_p">M365 E-Commerce Copilot helps Microsoft customers choose the right products and technical configurations. The dataset contains around <math alttext="30k" class="ltx_Math" display="inline" id="S4.SS1.p1.m1" intent=":literal"><semantics><mrow><mn>30</mn><mo lspace="0em" rspace="0em">​</mo><mi>k</mi></mrow><annotation encoding="application/x-tex">30k</annotation></semantics></math> user prompts with labeled agent classes, such as “Ask for Price”, “Non-Microsoft Products”, “Contact Human Support Agents”, and labeled product entities, e.g., “Teams Essential”, “Excel.”</p>
+</div>
+</section>
+<section class="ltx_subsection" id="S4.SS2">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">IV-B </span><span class="ltx_text ltx_font_italic">Code Compliance Copilot</span>
+</h3>
+<div class="ltx_para" id="S4.SS2.p1">
+<p class="ltx_p">Code Compliance Copilot scans every PR of internal corporate M365 product code DevOps to make sure that the code changes are compliant, particularly related to Chinese character GB compliance issues. In addition to discovered GB issues, we hope to continue monitoring and identifying new undiscovered GB issues. Therefore, we have hierarchical classes, e.g., GB issue, non-GB issue, GB display issue, GB encoding issue, etc.</p>
+</div>
+<figure class="ltx_figure" id="S4.F5">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape" height="544" id="S4.F5.g1" src="images/growing-agents.png" width="2394"/></div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 5: </span>Classification F-1 with Growing Agents</figcaption><div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1">
+<p class="ltx_p ltx_figure_panel ltx_align_center">Our agentic orchestrator remains stable, while BERT performance drops rapidly</p>
+</div>
+</div>
+</figure>
+<figure class="ltx_table" id="S4.T1">
+<div class="ltx_flex_figure ltx_flex_table">
+<div class="ltx_flex_cell ltx_flex_size_1">
+<div class="ltx_inline-block ltx_figure_panel ltx_align_center ltx_transformed_outer" style="width:498.0pt;height:70.7pt;vertical-align:-33.0pt;"><span class="ltx_transformed_inner" style="transform:translate(-13.1pt,1.9pt) scale(0.95,0.95) ;">
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row" colspan="5">M365 E-Commerce Copilot Dataset</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t">Models</th>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">ROUGE-L</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">BERTScore</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">Agent Orchestration Classification F-1</td>
+<td class="ltx_td ltx_align_right ltx_border_t">Product Recognition F-1</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t">AMO</th>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold">9.67</span></td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold">5.35</span></td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold">15.93</span></td>
+<td class="ltx_td ltx_align_right ltx_border_t"><span class="ltx_text ltx_font_bold">26.69</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t">Fine-tuned Phi-3.5</th>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">2.41</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">-2.33</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">8.34</td>
+<td class="ltx_td ltx_align_right ltx_border_t">8.05</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t">ChatGPT-4o</th>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">-24.91</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">-35.89</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">-13.67</td>
+<td class="ltx_td ltx_align_right ltx_border_t">-3.95</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_r ltx_border_t">AutoGen</th>
+<td class="ltx_td ltx_align_right ltx_border_b ltx_border_r ltx_border_t">-3.00</td>
+<td class="ltx_td ltx_align_right ltx_border_b ltx_border_r ltx_border_t">-4.51</td>
+<td class="ltx_td ltx_align_right ltx_border_b ltx_border_r ltx_border_t">-2.82</td>
+<td class="ltx_td ltx_align_right ltx_border_b ltx_border_t">-5.11</td>
+</tr>
+</tbody>
+</table>
+</span></div>
+</div>
+<div class="ltx_flex_break"></div>
+<div class="ltx_flex_cell ltx_flex_size_1">
+<div class="ltx_inline-block ltx_figure_panel ltx_align_center ltx_transformed_outer" style="width:383.3pt;height:70.7pt;vertical-align:-33.0pt;"><span class="ltx_transformed_inner" style="transform:translate(-10.1pt,1.9pt) scale(0.95,0.95) ;">
+<table class="ltx_tabular ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row" colspan="4">Code Compliance Copilot Dataset</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t">Models</th>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">ROUGE-L</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">BERTScore</td>
+<td class="ltx_td ltx_align_right ltx_border_t">Agent Orchestration Classification F-1</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t">AMO</th>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold">26.13</span></td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold">30.60</span></td>
+<td class="ltx_td ltx_align_right ltx_border_t"><span class="ltx_text ltx_font_bold">31.02</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t">Fine-tuned Phi-3.5</th>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">16.67</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">11.52</td>
+<td class="ltx_td ltx_align_right ltx_border_t">12.33</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t">ChatGPT-4o</th>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">-28.80</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">-20.45</td>
+<td class="ltx_td ltx_align_right ltx_border_t">1.92</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_r ltx_border_t">AutoGen</th>
+<td class="ltx_td ltx_align_right ltx_border_b ltx_border_r ltx_border_t">-8.94</td>
+<td class="ltx_td ltx_align_right ltx_border_b ltx_border_r ltx_border_t">-5.58</td>
+<td class="ltx_td ltx_align_right ltx_border_b ltx_border_t">10.55</td>
+</tr>
+</tbody>
+</table>
+</span></div>
+</div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">TABLE I: </span>Performance Gains(%) of End-to-end M365 E-commerce and Code Compliance Copilots</figcaption>
+</figure>
+<figure class="ltx_figure" id="S4.F6">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape" height="486" id="S4.F6.g1" src="images/cart-copilot-outlook-product.png" width="975"/></div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 6: </span>Product Information Response from our M365 E-Commerce Copilot</figcaption><div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1">
+<p class="ltx_p ltx_figure_panel ltx_align_center">Our E-Commerce Copilot provides tailored responses to user prompt “Do I have to use Outlook?” based on the web page information and shopping status.</p>
+</div>
+</div>
+</figure>
+<figure class="ltx_figure" id="S4.F7">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_figure_panel ltx_img_landscape" height="215" id="S4.F7.g1" src="images/cart-copilot-outlook-input-field.png" width="707"/></div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 7: </span>Technical Assistance Response from our M365 E-Commerce Copilot</figcaption><div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1">
+<p class="ltx_p ltx_figure_panel ltx_align_center">Our E-Commerce Copilot provides tailored responses to user prompt ”Do I have to use Outlook?” given that the user is filling in a requested email address.</p>
+</div>
+</div>
+</figure>
+<figure class="ltx_figure" id="S4.F8"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_img_landscape" height="335" id="S4.F8.g1" src="images/Screenshot_cart_assistant_demo.png" width="669"/>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 8: </span>Up-to-date Pricing Response from our M365 E-Commerce Copilot</figcaption>
+</figure>
+<figure class="ltx_figure" id="S4.F9">
+<div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1"><img alt="Refer to caption" class="ltx_graphics ltx_centering ltx_figure_panel ltx_img_square" height="371" id="S4.F9.g1" src="images/chatgpt-outlook.png" width="381"/></div>
+</div>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 9: </span>General response from ChatGPT</figcaption><div class="ltx_flex_figure">
+<div class="ltx_flex_cell ltx_flex_size_1">
+<p class="ltx_p ltx_figure_panel ltx_align_center">ChatGPT failed to provide scenario-specific answers to user prompt ”Do I have to use Outlook?”</p>
+</div>
+</div>
+</figure>
+</section>
+<section class="ltx_subsection" id="S4.SS3">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">IV-C </span><span class="ltx_text ltx_font_italic">Experimental Results</span>
+</h3>
+<div class="ltx_para" id="S4.SS3.p1">
+<p class="ltx_p">We conduct experiments of classification tasks using our proposed agentic orchestrator, BERT, Fine-tuned Phi-3.5, ChatGPT-4o, BM 25 + Sentence Transformer<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">reimers2019sentencebertsentenceembeddingsusing</span>]</cite> for a growing number of agents in Table <a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S4.F5" title="Figure 5 ‣ IV-B Code Compliance Copilot ‣ IV Production Use Case Experiments ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_tag">5</span></a>. After we train agentic orchestrator, BERT, Phi-3.5 models using 9 out of 13 classes for the M365 E-Commerce Copilot data set and 5 out of 10 classes for the code compliance copilot data set, we inference them on the test data adding 5 new agents one by one. Our agentic orchestrator performs better than Phi-3.5, ChatGPT-4o models indicate that it is more reasonable to treat multi-label or hierarchical text classification as a multi-level rating learning-to-rank task than a generation task.</p>
+</div>
+<div class="ltx_para" id="S4.SS3.p2">
+<p class="ltx_p">We show the superior end-to-end performance of ROUGE-L <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">lin-2004-rouge</span>]</cite>, BERTScore<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2020bertscoreevaluatingtextgeneration</span>]</cite>, and the F-1 measures of multiple tasks using our proposed AMO, Fine-tuned Phi-3.5, ChatGPT-4o, and AutoGen against the baseline of our corporate GPT-3.5 Turbo model in Table <a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S4.T1" title="TABLE I ‣ IV-B Code Compliance Copilot ‣ IV Production Use Case Experiments ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_tag">I</span></a>.</p>
+</div>
+<figure class="ltx_table" id="S4.T2">
+<table class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_center ltx_th ltx_th_column ltx_th_row" colspan="4">Amazon Product Review Dataset</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t">Models</th>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">Level-1 Accuracy</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">Level-2 Accuracy</td>
+<td class="ltx_td ltx_align_right ltx_border_t">Level-3 Accuracy</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t">Extension for Agentic Orchestrator</th>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold">0.96</span></td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t"><span class="ltx_text ltx_font_bold">0.85</span></td>
+<td class="ltx_td ltx_align_right ltx_border_t"><span class="ltx_text ltx_font_bold">0.83</span></td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t">Supervised Text Classifiers</th>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">0.95</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">0.81</td>
+<td class="ltx_td ltx_align_right ltx_border_t">0.72</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_r ltx_border_t">ChatGPT-4</th>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">0.90</td>
+<td class="ltx_td ltx_align_right ltx_border_r ltx_border_t">0.75</td>
+<td class="ltx_td ltx_align_right ltx_border_t">0.66</td>
+</tr>
+<tr class="ltx_tr">
+<th class="ltx_td ltx_align_left ltx_th ltx_th_row ltx_border_b ltx_border_r ltx_border_t">Phi-4</th>
+<td class="ltx_td ltx_align_right ltx_border_b ltx_border_r ltx_border_t">0.87</td>
+<td class="ltx_td ltx_align_right ltx_border_b ltx_border_r ltx_border_t">0.71</td>
+<td class="ltx_td ltx_align_right ltx_border_b ltx_border_t">0.59</td>
+</tr>
+</tbody>
+</table>
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">TABLE II: </span>Hierarchical Text Classification Accuracy</figcaption>
+</figure>
+</section>
+</section>
+<section class="ltx_section" id="S5">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">V </span><span class="ltx_text ltx_font_smallcaps">Extension to Hierarchical Text Classification Results</span>
+</h2>
+<div class="ltx_para" id="S5.p1">
+<p class="ltx_p">To demonstrate why we chose uRank loss as the objective function instead of classification loss functions in our proposed agentic orchestrator, we combined uRank with an MPNet Sentence Transformer <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">song2020mpnet</span>]</cite> and applied this combination to a hierarchical text classification <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">aly2019hierarchical</span>]</cite> data set<span class="ltx_note ltx_role_footnote" id="footnote3"><sup class="ltx_note_mark">3</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">3</sup><span class="ltx_tag ltx_tag_note">3</span>https://www.kaggle.com/datasets/kashnitsky/hierarchical-text-classification</span></span></span>. This Amazon product review dataset contains 40k training records and 10k validation records. There are structured classes of three-levels: 6 “level 1” classes, 64 “level 2” classes, and 464 “level 3” classes, which inherit semantic hierarchies of relevance ratings. In table <a class="ltx_ref" href="https://arxiv.org/html/2510.22781v2#S4.T2" title="TABLE II ‣ IV-C Experimental Results ‣ IV Production Use Case Experiments ‣ Agentic Meta-Orchestrator for Multi-task Copilots"><span class="ltx_text ltx_ref_tag">II</span></a>, we report the superior results of our experimental setup compared to popular supervised text classifiers using transformers <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">meng2019weakly</span>]</cite>, sequence generation few-shot learners<span class="ltx_note ltx_role_footnote" id="footnote4"><sup class="ltx_note_mark">4</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">4</sup><span class="ltx_tag ltx_tag_note">4</span>https://github.com/microsoft/autogen</span></span></span> using Phi-4 model<span class="ltx_note ltx_role_footnote" id="footnote5"><sup class="ltx_note_mark">5</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">5</sup><span class="ltx_tag ltx_tag_note">5</span>https://huggingface.co/microsoft/phi-4</span></span></span> and ChatGPT 4. For sequence generation of few-shots learners, we use the RAG method, which retrieves top-20 related records in training data using embeddings generated by the same Sentence Transformer for fair comparison. While text classifiers require three or more separate models for the three levels, and the sequence generation few-shot learners require multiple LLM calls by design, the levels of classes contribute to the data argumentation of our agentic orchestrator extension. It was interesting to find that, for text classification tasks, the uRank objective function and even the classical softmax-style text classifiers generally outperformed few-shot approaches using LLMs.</p>
+</div>
+</section>
+<section class="ltx_section" id="S6">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">VI </span><span class="ltx_text ltx_font_smallcaps">Limitations</span>
+</h2>
+<div class="ltx_para" id="S6.p1">
+<p class="ltx_p">Incorporation with online learning leveraging reinforcement learning is an interesting area that we did not focus on for the current production release phases. In particular, we hope that our copilots can take deterministic and consistent actions per user prompts and interactions. Additional signals, such as user interaction, can be leveraged for multi-modal inputs.</p>
+</div>
+</section>
+<section class="ltx_section" id="S7">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">VII </span><span class="ltx_text ltx_font_smallcaps">Conclusion</span>
+</h2>
+<div class="ltx_para" id="S7.p1">
+<p class="ltx_p">We have proposed AMO that can orchestrate user prompts to the best agents and can resolve the uncertain top k selections for production autonomy. We have independent LoRA fine-tuning processes for various tasks, and the trained LoRA weights are used for those tasks while sharing the orignal base model during the inference stage. Finally, we demonstrate the efficiency of our meta-learning planner, selecting different inference strategies based on user prompts. We have shown the method is effective in Microsoft Copilot cases such as M365 E-Commerce Copilot and code compliance copilot. This architecture can also be extended to any multi-agent AI systems in various industries such as travel, online merchant, etc. We plan to explore reinforcement learning fine-tuning and choosing different arms <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">cruz2023reinforcementlearningfinetuninglanguage</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">10.1145/3546790.3546804</span>]</cite>, reasoning and actions among collaborative intelligence<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">10.5555/3635637.3663215</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">zhang2024raftadaptinglanguagemodel</span>]</cite>, federate learning at the copilot level <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">10.1145/3664650</span>]</cite>.</p>
+</div>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Wed Nov  5 05:01:16 2025 by <a class="ltx_LaTeXML_logo" href="http://dlmf.nist.gov/LaTeXML/"><span style="letter-spacing:-0.2em; margin-right:0.1em;">L<span class="ltx_font_smallcaps" style="position:relative; bottom:2.2pt;">a</span>T<span class="ltx_font_smallcaps" style="font-size:120%;position:relative; bottom:-0.2ex;">e</span></span><span style="font-size:90%; position:relative; bottom:-0.2ex;">XML</span><img alt="Mascot Sammy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg=="/></a>
+</div></footer>
+</div>
+</body>
+</html>
