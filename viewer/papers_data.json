@@ -23,7 +23,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "Proceedings of the Sixth European Workshop on Machine Learning and Systems",
       "pdf_url": "https://arxiv.org/pdf/2604.10352",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2603.29890",
@@ -143,7 +143,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "IEEE International Conference on Acoustics, Speech, and Signal Processing",
       "pdf_url": "https://arxiv.org/pdf/2603.11126",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2602.04813",
@@ -163,7 +163,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "IEEE Access",
       "pdf_url": "https://arxiv.org/pdf/2602.04813",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2601.18642",
@@ -183,7 +183,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "IEEE International Conference on Acoustics, Speech, and Signal Processing",
       "pdf_url": "https://arxiv.org/pdf/2601.18642",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2512.12686",
@@ -203,7 +203,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "International Conference on AI-ML-Systems",
       "pdf_url": "https://arxiv.org/pdf/2512.12686",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2510.22781",
@@ -223,7 +223,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "2025 IEEE International Conference on Data Mining Workshops (ICDMW)",
       "pdf_url": "https://arxiv.org/pdf/2510.22781",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2509.14483",
@@ -243,7 +243,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "International Conference on Automated Software Engineering",
       "pdf_url": "https://arxiv.org/pdf/2509.14483",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2509.09734",
@@ -283,7 +283,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "2025 IEEE International Symposium on Mixed and Augmented Reality Adjunct (ISMAR-Adjunct)",
       "pdf_url": "https://arxiv.org/pdf/2508.08774",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2508.00400",
@@ -303,7 +303,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "2025 IEEE/CVF International Conference on Computer Vision Workshops (ICCVW)",
       "pdf_url": "https://arxiv.org/pdf/2508.00400",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2507.23633",
@@ -323,7 +323,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "European Conference on Artificial Intelligence",
       "pdf_url": "https://arxiv.org/pdf/2507.23633",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2507.22925",
@@ -343,7 +343,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "Conference of the European Chapter of the Association for Computational Linguistics",
       "pdf_url": "https://arxiv.org/pdf/2507.22925",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2507.21354",
@@ -363,7 +363,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "Annual Meeting of the Cognitive Science Society",
       "pdf_url": "https://arxiv.org/pdf/2507.21354",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2507.01378",
@@ -383,7 +383,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "IEEE Open Journal of Vehicular Technology",
       "pdf_url": "https://arxiv.org/pdf/2507.01378",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2506.21605",
@@ -443,7 +443,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "International Conference on Agents and Artificial Intelligence",
       "pdf_url": "https://arxiv.org/pdf/2506.18783",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2506.15741",
@@ -483,7 +483,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "ACM Symposium on User Interface Software and Technology",
       "pdf_url": "https://arxiv.org/pdf/2506.14159",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2506.13171",
@@ -503,7 +503,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "2025 2nd International Generative AI and Computational Language Modelling Conference (GACLM)",
       "pdf_url": "https://arxiv.org/pdf/2506.13171",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2506.06326",
@@ -623,7 +623,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "European Conference on Artificial Intelligence",
       "pdf_url": "https://arxiv.org/pdf/2504.19413",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2504.10147",
@@ -643,7 +643,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "ACM Transactions on Information Systems",
       "pdf_url": "https://arxiv.org/pdf/2504.10147",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2504.01495",
@@ -663,7 +663,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "Proceedings of the ACM on Software Engineering",
       "pdf_url": "https://arxiv.org/pdf/2504.01495",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2503.23804",
@@ -703,7 +703,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "ACM Transactions on Intelligent Systems and Technology",
       "pdf_url": "https://arxiv.org/pdf/2503.22458",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2503.12434",
@@ -723,7 +723,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "ACM Computing Surveys",
       "pdf_url": "https://arxiv.org/pdf/2503.12434",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2503.11733",
@@ -783,7 +783,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "Annual International ACM SIGIR Conference on Research and Development in Information Retrieval",
       "pdf_url": "https://arxiv.org/pdf/2502.13843",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2502.13172",
@@ -863,7 +863,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
       "pdf_url": "https://arxiv.org/pdf/2501.07278",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2501.01702",
@@ -1563,7 +1563,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "EMNLP 2025",
       "pdf_url": "https://arxiv.org/pdf/2503.21760",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2502.16090",
@@ -1623,7 +1623,7 @@
       "peer_reviewed": "✓ 同行评议",
       "peer_venue": "2025 IEEE Conference on Secure and Trustworthy Machine Learning (SaTML)",
       "pdf_url": "https://arxiv.org/pdf/2501.11739",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2605.06601",
