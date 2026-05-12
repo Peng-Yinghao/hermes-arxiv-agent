@@ -9,6 +9,7 @@ const STORAGE_SUMMARIES = "hermes-arxiv-agent:summaries";
 const STORAGE_TOKEN = "hermes-arxiv-agent:gh-token";
 const REPO_OWNER = "Peng-Yinghao";
 const REPO_NAME = "hermes-arxiv-agent";
+const LOCAL_BACKEND = "http://localhost:8765";
 const DELETED_PATH = "deleted_ids.txt";
 const SUMMARY_PATH = "viewer/summaries_edited.json";
 let ghToken = "";
@@ -289,6 +290,47 @@ function renderCards(papers) {
           } finally {
             reviewBtn.disabled = false;
             reviewBtn.textContent = "🤖 精读";
+          }
+        });
+      }
+    }
+
+    // Request‑review button — trigger local backend to generate review
+    const reqBtn = node.querySelector(".req-review-btn");
+    if (reqBtn) {
+      if (p.has_review) {
+        reqBtn.style.display = "none";
+      } else {
+        // Check current status first
+        checkReviewStatus(p.arxiv_id).then(status => {
+          if (status === "queued" || status === "generating") {
+            reqBtn.textContent = "⏳ 生成中";
+            reqBtn.disabled = true;
+            pollUntilDone(p.arxiv_id, reqBtn);
+          }
+        });
+        reqBtn.addEventListener("click", async () => {
+          reqBtn.disabled = true;
+          reqBtn.textContent = "⏳";
+          try {
+            const resp = await fetch(`${LOCAL_BACKEND}/api/request-review`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ arxiv_id: p.arxiv_id }),
+            });
+            const data = await resp.json();
+            if (data.status === "queued" || data.status === "already_queued") {
+              showToast(data.message || "精读请求已接收", "info");
+              reqBtn.textContent = "⏳ 生成中";
+              pollUntilDone(p.arxiv_id, reqBtn);
+            } else {
+              throw new Error(data.error || "未知错误");
+            }
+          } catch (err) {
+            console.error("Review request error:", err);
+            showToast("请求失败: " + (err.message || err), "error");
+            reqBtn.disabled = false;
+            reqBtn.textContent = "🔍 请求精读";
           }
         });
       }
@@ -731,4 +773,63 @@ function renderMarkdown(md) {
   });
 
   return html;
+}
+
+// ── Review request helpers ──
+async function checkReviewStatus(arxivId) {
+  try {
+    const resp = await fetch(`${LOCAL_BACKEND}/api/review-status/${arxivId}`);
+    if (!resp.ok) return "unknown";
+    const data = await resp.json();
+    return data.status || "unknown";
+  } catch {
+    return "offline";
+  }
+}
+
+function pollUntilDone(arxivId, btn) {
+  let attempts = 0;
+  const maxAttempts = 120; // 10 minutes at 5s intervals
+  const interval = setInterval(async () => {
+    attempts++;
+    const status = await checkReviewStatus(arxivId);
+    if (status === "generating" || status === "queued") {
+      btn.textContent = "⏳ 生成中";
+      return;
+    }
+    if (status === "completed") {
+      clearInterval(interval);
+      showToast(`✓ 「${arxivId}」精读完成！刷新可查看`, "success");
+      btn.textContent = "✓ 已完成";
+      btn.style.borderColor = "#059669";
+      btn.style.background = "#ecfdf5";
+      btn.style.color = "#047857";
+      // Refresh data after short delay to pick up has_review
+      setTimeout(async () => {
+        await loadPapers();
+        applyFilter();
+      }, 2000);
+      return;
+    }
+    if (status === "error") {
+      clearInterval(interval);
+      showToast(`✗ 「${arxivId}」生成失败`, "error");
+      btn.disabled = false;
+      btn.textContent = "🔍 请求精读";
+      return;
+    }
+    if (status === "offline" && attempts > 3) {
+      clearInterval(interval);
+      showToast("⚠ 本地后端未启动，无法查看状态", "error");
+      btn.disabled = false;
+      btn.textContent = "🔍 请求精读";
+      return;
+    }
+    if (attempts >= maxAttempts) {
+      clearInterval(interval);
+      showToast("⏰ 生成超时，请稍后刷新页面查看", "error");
+      btn.disabled = false;
+      btn.textContent = "🔍 请求精读";
+    }
+  }, 5000);
 }
