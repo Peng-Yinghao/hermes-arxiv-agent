@@ -1,10 +1,30 @@
 {
   "count": 87,
   "crawled_date_min": "2026-05-08",
-  "crawled_date_max": "2026-05-11",
+  "crawled_date_max": "2026-05-12",
   "published_date_min": "2023-03-20",
   "published_date_max": "Mon,",
   "papers": [
+    {
+      "arxiv_id": "2605.05583",
+      "title": "Belief Memory: Agent Memory Under Partial Observability",
+      "authors": "Junfeng Liao, Qizhou Wang, Jianing Zhu, Bo Du, Rui Yan, Xiuying Chen",
+      "affiliations": "未找到单位信息",
+      "published_date": "",
+      "categories": "cs.CL",
+      "abstract": "LLM agents that operate over long context depend on external memory to accumulate knowledge. Existing methods store each observation as a single deterministic conclusion, introducing self-reinforcing error by discarding uncertainty. We propose BeliefMem, which shifts the memory paradigm to retaining multiple candidate conclusions with probabilities updated via Noisy-OR rules. At retrieval, all candidates surface with probabilities, keeping alternatives visible to the agent. Empirical evaluations on LoCoMo and ALFWorld show BeliefMem achieves the best average performance, remarkably outperforming well-known baselines. Probabilistic memory produces substantial gains and explores a new direction for agent memory in partially observable environments.",
+      "summary_cn": "本文提出Belief Memory框架，针对LLM智能体在部分可观测环境下长期记忆的确定性偏差问题，将观测信息存储为概率化信念而非单一结论。该方法使智能体能够保留不确定性，在新证据出现时动态修正先前判断，从而避免自强化错误，提升长期决策的鲁棒性与记忆可靠性。",
+      "pdf_filename": "2605.05583.pdf",
+      "crawled_date": "2026-05-12",
+      "notes": "",
+      "scene": "通用/其他",
+      "form": "结构化",
+      "mem_type": "检索型",
+      "peer_reviewed": "",
+      "peer_venue": "",
+      "pdf_url": "https://arxiv.org/pdf/2605.05583",
+      "has_review": false
+    },
     {
       "arxiv_id": "2605.08060",
       "title": "The Memory Curse: How Expanded Recall Erodes Cooperative Intent in LLM Agents",
@@ -1503,26 +1523,6 @@
       "peer_reviewed": "",
       "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2605.05716",
-      "has_review": false
-    },
-    {
-      "arxiv_id": "2605.05583",
-      "title": "Belief Memory: Agent Memory Under Partial Observability",
-      "authors": "Junfeng Liao, Qizhou Wang, Jianing Zhu, Bo Du, Rui Yan, Xiuying Chen",
-      "affiliations": "未找到单位信息",
-      "published_date": "",
-      "categories": "cs.CL",
-      "abstract": "LLM agents that operate over long context depend on external memory to accumulate knowledge. Existing methods store each observation as a single deterministic conclusion, introducing self-reinforcing error by discarding uncertainty. We propose BeliefMem, which shifts the memory paradigm to retaining multiple candidate conclusions with probabilities updated via Noisy-OR rules. At retrieval, all candidates surface with probabilities, keeping alternatives visible to the agent. Empirical evaluations on LoCoMo and ALFWorld show BeliefMem achieves the best average performance, remarkably outperforming well-known baselines. Probabilistic memory produces substantial gains and explores a new direction for agent memory in partially observable environments.",
-      "summary_cn": "提出BeliefMem，将代理记忆范式从单一确定性结论转向保留多个候选结论及其概率，通过Noisy-OR规则更新。检索时所有候选方案与其概率一同展示，保持不确定性可见。在LoCoMo和ALFWorld上达到最佳平均性能，开辟了部分可观测环境中概率记忆的新方向。",
-      "pdf_filename": "2605.05583.pdf",
-      "crawled_date": "2026-05-08",
-      "notes": "",
-      "scene": "通用/其他",
-      "form": "结构化",
-      "mem_type": "检索型",
-      "peer_reviewed": "",
-      "peer_venue": "",
-      "pdf_url": "https://arxiv.org/pdf/2605.05583",
       "has_review": false
     },
     {
