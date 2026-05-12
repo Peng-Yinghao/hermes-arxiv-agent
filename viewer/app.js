@@ -1,12 +1,16 @@
 let allPapers = [];
 let favorites = new Set();
 let deleted = new Set();
+let editedSummaries = {};
+let currentEditPaper = null;
 const STORAGE_FAVORITES = "hermes-arxiv-agent:favorites";
 const STORAGE_DELETED = "hermes-arxiv-agent:deleted";
+const STORAGE_SUMMARIES = "hermes-arxiv-agent:summaries";
 const STORAGE_TOKEN = "hermes-arxiv-agent:gh-token";
 const REPO_OWNER = "Peng-Yinghao";
 const REPO_NAME = "hermes-arxiv-agent";
 const DELETED_PATH = "deleted_ids.txt";
+const SUMMARY_PATH = "viewer/summaries_edited.json";
 let ghToken = "";
 
 // ── Storage helpers ──
@@ -30,6 +34,16 @@ function loadToken() {
 function saveToken(t) {
   ghToken = t;
   window.localStorage.setItem(STORAGE_TOKEN, t);
+}
+
+function loadSummaries() {
+  try {
+    const raw = window.localStorage.getItem(STORAGE_SUMMARIES);
+    editedSummaries = raw ? JSON.parse(raw) : {};
+  } catch { editedSummaries = {}; }
+}
+function saveSummaries() {
+  window.localStorage.setItem(STORAGE_SUMMARIES, JSON.stringify(editedSummaries));
 }
 
 function isFavorite(id) { return favorites.has(String(id)); }
@@ -92,6 +106,32 @@ async function deleteViaGitHub(arxivId) {
   if (sha) body.sha = sha;
   await githubApi(DELETED_PATH, "PUT", body);
   return { action: "deleted" };
+}
+
+async function saveSummaryViaGitHub(arxivId, summary) {
+  // 1) Read current summaries_edited.json
+  let sha = "", content = "";
+  try {
+    const data = await githubApi(SUMMARY_PATH, "GET");
+    sha = data.sha;
+    content = atob(data.content.replace(/\n/g, ""));
+  } catch (e) {
+    // File might not exist — create fresh
+    content = "{}";
+  }
+
+  // 2) Merge new summary
+  let summaries = {};
+  try { summaries = JSON.parse(content || "{}"); } catch { summaries = {}; }
+  summaries[arxivId] = summary;
+  const newContent = JSON.stringify(summaries, null, 2);
+
+  const body = {
+    message: `edit: update summary_cn for ${arxivId}`,
+    content: btoa(unescape(encodeURIComponent(newContent))),
+  };
+  if (sha) body.sha = sha;
+  await githubApi(SUMMARY_PATH, "PUT", body);
 }
 
 // ── Token setup modal ──
@@ -254,6 +294,18 @@ function renderCards(papers) {
       }
     }
 
+    // Edit summary button
+    const editBtn = node.querySelector(".edit-btn");
+    if (editBtn) {
+      editBtn.addEventListener("click", () => {
+        currentEditPaper = p;
+        document.getElementById("editModalTitle").textContent = p.title || p.arxiv_id;
+        document.getElementById("editTextarea").value = editedSummaries[p.arxiv_id] || p.summary_cn || "";
+        document.getElementById("editModal").style.display = "flex";
+        document.body.style.overflow = "hidden";
+      });
+    }
+
     node.querySelector(".meta").textContent =
       `抓取: ${text(p.crawled_date)||"-"} | 发表: ${text(p.published_date)||"-"}\n作者: ${text(p.authors)||"-"}`;
 
@@ -265,7 +317,7 @@ function renderCards(papers) {
       tags.appendChild(span);
     });
 
-    node.querySelector(".summary-cn").textContent = text(p.summary_cn) || "未提供";
+    node.querySelector(".summary-cn").textContent = editedSummaries[p.arxiv_id] || text(p.summary_cn) || "未提供";
     node.querySelector(".abstract").textContent = text(p.abstract) || "未提供";
 
     // Classification tags
@@ -368,6 +420,7 @@ async function init() {
   allPapers = payload.papers || [];
   loadFavorites();
   loadDeleted();
+  loadSummaries();
 
   document.getElementById("metaText").textContent =
     `收录 ${payload.count||allPapers.length} 篇 | 抓取区间 ${payload.crawled_date_min||"-"} ~ ${payload.crawled_date_max||"-"}`;
