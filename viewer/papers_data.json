@@ -1403,7 +1403,7 @@
       "peer_reviewed": "Yes",
       "peer_venue": "ACM Transactions on Information Systems",
       "pdf_url": "https://arxiv.org/pdf/2404.13501",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2402.02716",
@@ -1423,7 +1423,7 @@
       "peer_reviewed": "否",
       "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2402.02716",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2310.08560",
@@ -1443,7 +1443,7 @@
       "peer_reviewed": "否",
       "peer_venue": "",
       "pdf_url": "https://arxiv.org/pdf/2310.08560",
-      "has_review": false
+      "has_review": true
     },
     {
       "arxiv_id": "2309.02427",
