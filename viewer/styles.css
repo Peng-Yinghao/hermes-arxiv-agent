@@ -764,3 +764,77 @@ summary {
   border-radius: 8px; background: #fff; cursor: pointer; font-size: 13px;
 }
 .review-modal-foot .btn:hover { background: #f9fafb; }
+
+/* ── Edit modal ── */
+.edit-modal {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 2700;
+  display: flex; align-items: center; justify-content: center;
+}
+.edit-modal-box {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 640px; width: 92%;
+  max-height: 85vh;
+  display: flex; flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.edit-modal-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 24px; border-bottom: 1px solid #e5e7eb;
+  font-size: 18px; font-weight: 700;
+  background: linear-gradient(135deg, #fef3c7, #e0f2fe);
+  border-radius: 16px 16px 0 0;
+}
+.edit-modal-close {
+  background: none; border: none; font-size: 28px;
+  cursor: pointer; color: #9ca3af; line-height: 1;
+}
+.edit-modal-close:hover { color: #111; }
+.edit-modal-body {
+  flex: 1; display: flex; padding: 16px;
+}
+.edit-modal-body textarea {
+  width: 100%; min-height: 200px;
+  padding: 14px; border: 1px solid #d1d5db;
+  border-radius: 10px; font: inherit; font-size: 14px;
+  line-height: 1.7; resize: vertical;
+}
+.edit-modal-body textarea:focus {
+  outline: none; border-color: #eab308;
+  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.15);
+}
+.edit-modal-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 24px; border-top: 1px solid #e5e7eb;
+  gap: 8px;
+}
+.edit-modal-foot .btn {
+  padding: 8px 16px; border: 1px solid #d1d5db;
+  border-radius: 8px; background: #fff; cursor: pointer; font-size: 13px;
+}
+.edit-modal-foot .btn:hover { background: #f9fafb; }
+.edit-modal-foot .btn-primary {
+  border-color: transparent; color: #042f2e;
+  background: linear-gradient(135deg, #2dd4bf, #facc15);
+  font-weight: 700;
+}
+.edit-hint {
+  font-size: 12px; color: #999;
+}
+
+/* ── Edit button ── */
+.edit-btn {
+  border: 1px solid #e0e7ff;
+  background: #eef2ff;
+  color: #4338ca;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px; cursor: pointer;
+  transition: all 0.15s;
+}
+.edit-btn:hover {
+  border-color: #6366f1; color: #3730a3;
+  background: #e0e7ff;
+}

@@ -482,6 +482,7 @@ async function init() {
     if (e.key === "Escape") {
       if (document.getElementById("reviewModal").style.display === "flex") hideReviewModal();
       else if (document.getElementById("mdModal").style.display === "flex") hideMarkdownModal();
+      else if (document.getElementById("editModal").style.display === "flex") hideEditModal();
     }
   });
 
@@ -508,6 +509,47 @@ async function init() {
     }
   });
 
+  // Edit modal handlers
+  document.getElementById("editModalClose").addEventListener("click", hideEditModal);
+  document.getElementById("editModal").addEventListener("click", e => {
+    if (e.target === document.getElementById("editModal")) hideEditModal();
+  });
+  document.getElementById("editSaveLocalBtn").addEventListener("click", () => {
+    if (!currentEditPaper) return;
+    const val = document.getElementById("editTextarea").value.trim();
+    editedSummaries[currentEditPaper.arxiv_id] = val || "";
+    saveSummaries();
+    hideEditModal();
+    applyFilter();
+    showToast("✓ 已保存到本地", "success");
+  });
+  document.getElementById("editSaveGHBtn").addEventListener("click", async () => {
+    if (!currentEditPaper) return;
+    if (!ghToken) {
+      showTokenSetup((hasToken) => {
+        if (hasToken) document.getElementById("editSaveGHBtn").click();
+      });
+      return;
+    }
+    const btn = document.getElementById("editSaveGHBtn");
+    btn.disabled = true;
+    btn.textContent = "⏳ 保存中...";
+    try {
+      const val = document.getElementById("editTextarea").value.trim();
+      editedSummaries[currentEditPaper.arxiv_id] = val || "";
+      saveSummaries();
+      await saveSummaryViaGitHub(currentEditPaper.arxiv_id, val);
+      hideEditModal();
+      applyFilter();
+      showToast("✓ 已保存并同步到 GitHub", "success");
+    } catch (err) {
+      showToast(`保存失败: ${err.message}`, "error");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "☁️ 保存并同步";
+    }
+  });
+
   // Show token hint if not set
   if (!ghToken) {
     const hint = document.createElement("div");
@@ -524,6 +566,13 @@ async function init() {
 init().catch(err => {
   document.getElementById("summary").textContent = err.message;
 });
+
+function hideEditModal() {
+  const m = document.getElementById("editModal");
+  if (m) { m.style.display = "none"; }
+  document.body.style.overflow = "";
+  currentEditPaper = null;
+}
 
 // ── Markdown modal ──
 let currentMdPaper = null;
