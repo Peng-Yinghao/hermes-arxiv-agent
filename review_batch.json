@@ -1,29 +1,5 @@
 [
   {
-    "arxiv_id": "2509.14483",
-    "text": "---\ntitle: \"An LLM-based multi-agent framework for agile effort estimation\"\nurl: \"https://arxiv.org/abs/2509.14483\"\nsections: 22\n---"
-  },
-  {
-    "arxiv_id": "2510.22781",
-    "text": "---\ntitle: \"Agentic Meta-Orchestrator for Multi-task Copilots\"\nurl: \"https://arxiv.org/abs/2510.22781\"\nsections: 16\n---"
-  },
-  {
-    "arxiv_id": "2512.12686",
-    "text": "---\ntitle: \"Memoria: A Scalable Agentic Memory Framework for Personalized Conversational AI\"\nurl: \"https://arxiv.org/abs/2512.12686\"\nsections: 28\n---"
-  },
-  {
-    "arxiv_id": "2601.18642",
-    "text": "---\ntitle: \"FadeMem: Biologically-Inspired Forgetting for Efficient Agent Memory\"\nurl: \"https://arxiv.org/abs/2601.18642\"\nsections: 13\n---"
-  },
-  {
-    "arxiv_id": "2602.04813",
-    "text": "---\ntitle: \"Agentic AI in Healthcare & Medicine: A Seven-Dimensional Taxonomy for Empirical Evaluation of LLM-based Agents\"\nurl: \"https://arxiv.org/abs/2602.04813\"\nsections: 51\n---"
-  },
-  {
-    "arxiv_id": "2603.11126",
-    "text": "---\ntitle: \"Enhancing Value Alignment of LLMs with Multi-agent system and Combinatorial Fusion\"\nurl: \"https://arxiv.org/abs/2603.11126\"\nsections: 5\n---"
-  },
-  {
     "arxiv_id": "2604.10352",
     "text": "---\ntitle: \"ClawVM : Harness-Managed Virtual Memory for Stateful Tool-Using LLM Agents\"\nurl: \"https://arxiv.org/abs/2604.10352\"\nsections: 42\n---"
   }
