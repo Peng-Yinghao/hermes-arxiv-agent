@@ -138,6 +138,7 @@
       </div>
       <div class="card-actions">
         <button class="favorite-btn" type="button" aria-label="收藏">☆ 收藏</button>
+        <button class="edit-btn" type="button" aria-label="编辑中文总结" title="编辑中文总结">✏️ 编辑</button>
         <button class="md-btn" type="button" aria-label="Markdown全文" title="查看全文 Markdown (arxiv2md)">MD</button>
         <button class="review-btn" type="button" aria-label="AI精读" title="AI 精读分析（不同 LLM 生成）">🤖 精读</button>
       </div>
@@ -180,6 +181,25 @@
       <div class="review-modal-foot">
         <button id="reviewCopyBtn" class="btn">📋 复制精读</button>
         <button id="reviewRawBtn" class="btn">查看源码</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="edit-modal" id="editModal" style="display:none">
+    <div class="edit-modal-box">
+      <div class="edit-modal-head">
+        <span id="editModalTitle"></span>
+        <button id="editModalClose" class="edit-modal-close">&times;</button>
+      </div>
+      <div class="edit-modal-body">
+        <textarea id="editTextarea" placeholder="输入中文总结..."></textarea>
+      </div>
+      <div class="edit-modal-foot">
+        <span class="edit-hint">💡 修改后自动保存，刷新页面后生效</span>
+        <div>
+          <button id="editSaveLocalBtn" class="btn">💾 保存到本地</button>
+          <button id="editSaveGHBtn" class="btn btn-primary">☁️ 保存并同步</button>
+        </div>
       </div>
     </div>
   </div>
